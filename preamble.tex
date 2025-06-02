@@ -2,39 +2,15 @@
 % !TeX root = main.tex
 % !TEX program = pdflatex
 
-% Requeiredd packages and settings for Tufte book style
-
-\usepackage{fancyhdr} % Encabezados y pies de página personalizados
-\usepackage{fontenc} % Codificación de fuentes
-\usepackage[T1]{fontenc} % Codificación de fuentes para caracteres especiales
-\usepackage[utf8]{inputenc} % Codificación de entrada UTF-8
-\usepackage{geometry} % Configuración de márgenes y diseño
-\usepackage{xcolor} % Colores
-\usepackage{xifthen} % Condicionales para LaTeX
-\usepackage{graphicx} % Incluir gráficos
-\usepackage{eso-pic} % Añadir contenido a la portada
-\usepackage{layout}
-\usepackage{lipsum} % Texto de ejemplo
-\usepackage{pdfpages}
-%\usepackage{url}
 
 % Paquetes adicionales
-%\usepackage{polyglossia}      % Idiomas
-%\setmainlanguage{spanish}     % Lenguaje principal
 \usepackage[spanish]{babel} % Idioma español
-%\usepackage[utf8]{inputenc} % Codificación de caracteres
 \usepackage{booktabs} % Tablas de calidad profesional
-%\usepackage{lipsum} % Texto de ejemplo
+\usepackage{lipsum} % Texto de ejemplo
 %\usepackage{microtype} % Mejoras tipográficas
 \usepackage{csquotes} % Recomendado por biblatex con babel/polyglossia
-% Ensure required packages are loaded for title page
-%\usepackage{soul} % Highlighting and text decoration
-%\usepackage{titlesec} % Section title formatting (if needed)
-%\usepackage{makeidx} % Índices
-%\usepackage{bookmark}
-
+\usepackage{pdfpages}
 \usepackage{tikz}
-%\usepackage{tcolorbox} % Para cajas de texto
 
 % Configuración de márgenes y diseño
 \geometry{
@@ -49,15 +25,20 @@ textheight=700pt, % Ajusta la altura del texto 650 original
 footskip=40pt,
 }
 
-% configuraciion de fuente sanserif para todo el documento
-\renewcommand{\familydefault}{\sfdefault} % Cambia la familia global
-\renewcommand{\rmdefault}{\sfdefault} % Cambia la familia de fuente a sans-serif
-\usepackage{cmbright} % Fuente sans-serif moderna
-%\usepackage{helvet} % Fuente Helvetica (opcional)
 
+% Fuente sans-serif moderna
+\usepackage{cmbright} % Fuente matematica moderna
+% o 
+%\usepackage{tgpagella}
+%\usepackage{sfmath} 
+
+% Configuraciion de fuente sanserif para todo el documento
+\renewcommand*\familydefault{\sfdefault} % Cambia la familia global
+\renewcommand{\rmdefault}{\sfdefault} % Cambia la familia de fuente a sans-serif
+ 
 
 \usepackage{amsmath, amsfonts, mathtools, amsthm, amssymb} % Paquetes de matemáticas
-\usepackage{mathrsfs} % Para fuentes matemáticas adicionales
+%\usepackage{mathrsfs} % Para fuentes matemáticas adicionales
 
 % Definimos el estilo myplain
 \fancypagestyle{myplain}{

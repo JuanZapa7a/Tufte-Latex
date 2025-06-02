@@ -1,0 +1,142 @@
+% Tufte-Latex/preamble.tex
+% !TeX root = main.tex
+% !TEX program = pdflatex
+
+% Requeiredd packages and settings for Tufte book style
+
+\usepackage{fancyhdr} % Encabezados y pies de página personalizados
+\usepackage{fontenc} % Codificación de fuentes
+\usepackage[T1]{fontenc} % Codificación de fuentes para caracteres especiales
+\usepackage[utf8]{inputenc} % Codificación de entrada UTF-8
+\usepackage{geometry} % Configuración de márgenes y diseño
+\usepackage{xcolor} % Colores
+\usepackage{xifthen} % Condicionales para LaTeX
+\usepackage{graphicx} % Incluir gráficos
+\usepackage{eso-pic} % Añadir contenido a la portada
+\usepackage{layout}
+\usepackage{lipsum} % Texto de ejemplo
+\usepackage{pdfpages}
+%\usepackage{url}
+
+% Paquetes adicionales
+%\usepackage{polyglossia}      % Idiomas
+%\setmainlanguage{spanish}     % Lenguaje principal
+\usepackage[spanish]{babel} % Idioma español
+%\usepackage[utf8]{inputenc} % Codificación de caracteres
+\usepackage{booktabs} % Tablas de calidad profesional
+%\usepackage{lipsum} % Texto de ejemplo
+%\usepackage{microtype} % Mejoras tipográficas
+\usepackage{csquotes} % Recomendado por biblatex con babel/polyglossia
+% Ensure required packages are loaded for title page
+%\usepackage{soul} % Highlighting and text decoration
+%\usepackage{titlesec} % Section title formatting (if needed)
+%\usepackage{makeidx} % Índices
+%\usepackage{bookmark}
+
+\usepackage{tikz}
+%\usepackage{tcolorbox} % Para cajas de texto
+
+% Configuración de márgenes y diseño
+\geometry{
+paperwidth=210mm,
+paperheight=297mm,
+left=42pt,
+top=72pt,
+textwidth=320pt,
+marginparsep=20pt,
+marginparwidth=180pt,
+textheight=700pt, % Ajusta la altura del texto 650 original
+footskip=40pt,
+}
+
+% configuraciion de fuente sanserif para todo el documento
+\renewcommand{\familydefault}{\sfdefault} % Cambia la familia global
+\renewcommand{\rmdefault}{\sfdefault} % Cambia la familia de fuente a sans-serif
+\usepackage{cmbright} % Fuente sans-serif moderna
+%\usepackage{helvet} % Fuente Helvetica (opcional)
+
+
+\usepackage{amsmath, amsfonts, mathtools, amsthm, amssymb} % Paquetes de matemáticas
+\usepackage{mathrsfs} % Para fuentes matemáticas adicionales
+
+% Definimos el estilo myplain
+\fancypagestyle{myplain}{
+  \fancyhf{} % limpiar encabezados y pies
+  \ifthenelse{\boolean{@tufte@twoside}}%
+    {% two-side
+      \fancyhead[LE]{\rightmark}
+      \fancyhead[RO]{\MakeUppercase{\thechapter. ~\leftmark}}
+      \fancyheadoffset[LE,RO]{-\marginparsep+20pt}
+      \fancyfoot[LE,RO]{\thepage}
+      \fancyfootoffset[LE,RO]{-\marginparsep+20pt}
+    }%
+    {% one-side
+      \fancyhead[RE,RO]{\smallcaps{\newlinetospace{\plaintitle}}\quad\thepage}
+    }%
+}
+
+% Enganchamos en \mainmatter
+\let\oldmainmatter\mainmatter
+\renewcommand{\mainmatter}{%
+  \oldmainmatter
+  \pagestyle{myplain}%
+}
+
+% También para los capítulos en el mainmatter
+\let\oldchapter\chapter
+\renewcommand{\chapter}{%
+  \cleardoublepage
+  \pagestyle{myplain}
+  \oldchapter
+}
+
+
+%Configuracion aspecto del titulo del capítulo
+\usepackage{titlesec}
+\usepackage{titletoc} % Carga el paquete helper
+\usepackage{fmtcount} % Para formatear números en texto
+\titleformat{\chapter}[display]
+{\bfseries\Large\sf}
+{\filleft
+\textsl{\MakeUppercase{\chaptertitlename}} \expandafter\textsl\expandafter{\NUMBERstring{chapter}}
+}
+{1.5ex}
+{\LARGE\rmfamily
+\titlerule
+\vspace*{1.1ex}%
+\filright}
+[\vspace*{1.1ex}%
+\titlerule]
+
+
+\setcounter{secnumdepth}{1} % Profundidad de numeración de secciones (1 para capítulos, 2 para secciones, etc.)
+\setcounter{tocdepth}{1} % Profundidad del índice (1 para capítulos, 2 para secciones, etc.)
+
+\newcommand{\monthyear}{\ifcase\month\or January\or February\or March\or April\or May\or June\or July\or August\or September\or October\or November\or December\fi\space\number\year} % A command to print the current month and year
+
+
+\addto\captionsspanish{ % Traducciones de términos comunes
+  \renewcommand{\tablename}{Tabla} % Nombre de tablas y no cuadros
+  \renewcommand{\listtablename}{Índice de tablas}
+}
+
+\usepackage{graphicx}
+\DeclareGraphicsRule{.pspdftex}{pdf}{.pdftex}{}
+\usepackage{grffile} % Permite nombres de archivos con espacios y caracteres especiales
+\graphicspath{{./} {imagenes/}{~/OneDrive/TexPlantillas}} % Ruta de búsqueda para imágenes
+
+% Metadatos para PDF
+\usepackage{hyperref}
+\hypersetup{
+  pdftitle={Ejemplo completo de tufte-book},
+  pdfauthor={John Doe},
+  pdfsubject={LaTeX, tufte-book},
+  pdfkeywords={latex, tufte, ejemplo, libro},
+  bookmarksnumbered=true,
+  bookmarksopen=true,
+  pdfstartview={FitH},
+  colorlinks=true,
+  linkcolor=MidnightBlue,
+  citecolor=ForestGreen,
+  urlcolor=RubineRed,
+}

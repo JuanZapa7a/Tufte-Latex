@@ -1,0 +1,44 @@
+% !TeX root = main.tex
+% !TEX program = pdflatex
+% !BIB program = bibtex
+% !TEX encoding = UTF-8 Unicode
+
+% mi-libro-tufte/
+% │
+% ├── main.tex            # Archivo principal
+% ├── preamble.tex        # Preámbulo con configuraciones
+% ├── capitulo1.tex       # Capítulo 1
+% ├── capitulo2.tex       # Capítulo 2
+% ├── frontmatter.tex     # Material preliminar
+% ├── backmatter.tex      # Apéndices, bibliografía
+% └── imagenes/           # Directorio para imágenes
+%     ├── figura1.pdf
+%     └── diagrama.pdf
+
+
+
+\documentclass[symmetric,twoside,justified]{tufte-book} 
+%\documentclass[a4paper,sfsidenotes,notitlepage,justified,nobib]{tufte-book}
+% Use the tufte-book class which in turn uses the tufte-common class
+\hypersetup{colorlinks} % Comment this line if you don't wish to have colored links
+
+% Cargar el preámbulo
+\input{preamble}
+
+\begin{document}
+
+% Material preliminar (portada, dedicatoria, agradecimientos)
+\input{frontmatter}
+
+% Capítulos principales
+\mainmatter
+% También para los capítulos en el mainmatter
+\input{chapter1}
+\input{chapter2}
+
+% Material final (apéndices, bibliografía)
+\input{backmatter}
+
+\cleardoublepage
+\includepdf[pages=-]{./imagenes/UPC-40x297-A4vert.pdf}
+\end{document}

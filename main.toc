@@ -1,0 +1,24 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {chapter}{\numberline {1}Introducción}{11}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Contextualización del Cáncer}{11}{section.1.1}%
+\contentsline {subsection}{Definición General del Cáncer}{11}{subsection*.4}%
+\contentsline {subsection}{Impacto Mundial del Cáncer: Epidemiología y Tendencias Globales}{11}{subsection*.5}%
+\contentsline {paragraph}{short}{11}{paragraph*.6}%
+\contentsline {paragraph}{short}{11}{paragraph*.7}%
+\contentsline {subsection}{Supervivencia y Mortalidad por Cáncer}{12}{subsection*.8}%
+\contentsline {paragraph}{short}{12}{paragraph*.9}%
+\contentsline {paragraph}{short}{12}{paragraph*.10}%
+\contentsline {subsection}{Estadísticas del Cáncer en España}{12}{subsection*.11}%
+\contentsline {paragraph}{Casos nuevos diagnosticados anualmente}{12}{paragraph*.12}%
+\contentsline {paragraph}{Tipos más frecuentes de cáncer en España}{13}{paragraph*.13}%
+\contentsline {subsection}{Factores Influyentes en la Incidencia del Cáncer}{13}{subsection*.14}%
+\contentsline {paragraph}{Factores demográficos}{13}{paragraph*.15}%
+\contentsline {paragraph}{Factores de riesgo asociados al estilo de vida}{13}{paragraph*.16}%
+\contentsline {subsection}{Importancia de la Detección Temprana y el Tratamiento}{14}{subsection*.17}%
+\contentsline {subsection}{Avances en la Investigación y Tratamiento del Cáncer}{14}{subsection*.18}%
+\contentsline {section}{\numberline {1.2}Conclusiones}{14}{section.1.2}%
+\contentsline {chapter}{\numberline {2}Elementos matemáticos y tipográficos}{19}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Ecuaciones en el estilo Tufte}{19}{section.2.1}%
+\contentsline {subsection}{Ejemplo de figura completa}{19}{subsection*.19}%
+\contentsline {chapter}{Bibliograf\'{\i }a}{23}{appendix*.20}%
+\contentsfinish 

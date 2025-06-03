@@ -1,13 +1,19 @@
-\begin{thebibliography}{8}
+\begin{thebibliography}{10}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
-\bibitem[Allemani et~al.(2018)Allemani, Matsuda, Di~Carlo, Harewood, Matz, Nikšić, Bonaventure, Valkov, Johnson, Estève, et~al.]{allemani2018global}
-Claudia Allemani, Tomohiro Matsuda, Veronica Di~Carlo, Rosalind Harewood, Mia Matz, Maja Nikšić, Audrey Bonaventure, Myroslav Valkov, Christopher~J Johnson, Jacques Estève, et~al.
-\newblock Global surveillance of trends in cancer survival 2000–14 (concord-3): analysis of individual records for 37·5 million patients diagnosed with one of 18 cancers from 322 population-based registries in 71 countries.
+\bibitem[Allemani et~al.(2018)Allemani, Matsuda, Di~Carlo, Harewood, Matz,
+  Nikšić, Bonaventure, Valkov, Johnson, Estève, et~al.]{allemani2018global}
+Claudia Allemani, Tomohiro Matsuda, Veronica Di~Carlo, Rosalind Harewood, Mia
+  Matz, Maja Nikšić, Audrey Bonaventure, Myroslav Valkov, Christopher~J
+  Johnson, Jacques Estève, et~al.
+\newblock Global surveillance of trends in cancer survival 2000–14
+  (concord-3): analysis of individual records for 37·5 million patients
+  diagnosed with one of 18 cancers from 322 population-based registries in 71
+  countries.
 \newblock \emph{The Lancet}, 391\penalty0 (10125):\penalty0 1023--1075, 2018.
 \newblock \doi{10.1016/S0140-6736(17)33326-3}.
 
@@ -16,8 +22,10 @@ Organización~Mundial de~la Salud.
 \newblock Cáncer.
 \newblock \url{https://www.who.int/es/health-topics/cancer}, 2025.
 
-\bibitem[de~Oncología Médica~(SEOM) and de~Registros~de Cáncer~(REDECAN)(2025)]{SEOM2025}
-Sociedad~Española de~Oncología Médica~(SEOM) and Red~Española de~Registros~de Cáncer~(REDECAN).
+\bibitem[de~Oncología Médica~(SEOM) and de~Registros~de
+  Cáncer~(REDECAN)(2025)]{SEOM2025}
+Sociedad~Española de~Oncología Médica~(SEOM) and Red~Española
+  de~Registros~de Cáncer~(REDECAN).
 \newblock Las cifras del cáncer en españa 2025.
 \newblock \emph{SEOM}, 2025.
 \newblock Disponible en: \url{https://seom.org/prensa/el-cancer-en-cifras}.
@@ -27,33 +35,69 @@ Grupo de~trabajo~del PAPPS.
 \newblock Recomendaciones de prevención del cáncer. actualización 2024.
 \newblock \emph{Atención Primaria}, 56\penalty0 (S1):\penalty0 1--10, 2024.
 \newblock \doi{10.1016/j.aprim.2024.102701}.
-\newblock URL \url{https://www.elsevier.es/es-revista-atencion-primaria-27-articulo-recomendaciones-prevencion-del-cancer-actualizacion-S0212656724002701}.
+\newblock URL
+  \url{https://www.elsevier.es/es-revista-atencion-primaria-27-articulo-
+  recomendaciones-prevencion-del-cancer-actualizacion- S0212656724002701}.
+\newblock Consultado el 1 de junio de 2025.
 
 \bibitem[del Cáncer~(NCI)(2021)]{cancer_risk_factors}
 Instituto~Nacional del Cáncer~(NCI).
 \newblock Factores de riesgo: Edad.
 \newblock \emph{Instituto Nacional del Cáncer}, 2021.
-\newblock Disponible en: \url{https://www.cancer.gov/espanol/cancer/causas-prevencion/riesgo/edad}.
+\newblock Disponible en:
+  \url{https://www.cancer.gov/espanol/cancer/causas-prevencion/riesgo/edad}.
 
-\bibitem[Ferlay et~al.(2020)Ferlay, Ervik, Lam, Colombet, Mery, Piñeros, Znaor, Soerjomataram, and Bray]{globocan2020}
-J.~Ferlay, M.~Ervik, F.~Lam, M.~Colombet, L.~Mery, M.~Piñeros, A.~Znaor, I.~Soerjomataram, and F.~Bray.
+\bibitem[Ferlay et~al.(2020)Ferlay, Ervik, Lam, Colombet, Mery, Piñeros,
+  Znaor, Soerjomataram, and Bray]{globocan2020}
+J.~Ferlay, M.~Ervik, F.~Lam, M.~Colombet, L.~Mery, M.~Piñeros, A.~Znaor,
+  I.~Soerjomataram, and F.~Bray.
 \newblock Global cancer observatory: Cancer today.
 \newblock \url{https://gco.iarc.fr/today}, 2020.
 \newblock Available at: \url{https://gco.iarc.fr/today}.
 
-\bibitem[Sung et~al.(2021)Sung, Ferlay, Siegel, Laversanne, Soerjomataram, Jemal, and Bray]{Sung2021}
-Hyuna Sung, Jacques Ferlay, Rebecca~L. Siegel, Mathieu Laversanne, Isabelle Soerjomataram, Ahmedin Jemal, and Freddie Bray.
-\newblock Global cancer statistics 2020: Globocan estimates of incidence and mortality worldwide for 36 cancers in 185 countries.
-\newblock \emph{CA: A Cancer Journal for Clinicians}, 71\penalty0 (3):\penalty0 209--249, 2021.
+\bibitem[Knudsen et~al.(2023)Knudsen, Zauber, Rutter, Peterse, Meester, van
+  Ravesteyn, Lansdorp-Vogelaar, and Kuntz]{usptf2023cancer}
+Amy~B. Knudsen, Ann~G. Zauber, Carolyn~M. Rutter, Eline~F. Peterse,
+  Reinier~G.S. Meester, Nicolien~T. van Ravesteyn, Iris Lansdorp-Vogelaar, and
+  Karen~M. Kuntz.
+\newblock Estimated cancer deaths prevented with increased use of cancer
+  screening.
+\newblock \emph{JAMA Network Open}, 6\penalty0 (1):\penalty0 e2252241, 2023.
+\newblock \doi{10.1001/jamanetworkopen.2022.52241}.
+\newblock URL
+  \url{https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2812260}.
+
+\bibitem[Restrepo et~al.(1988)Restrepo, Correa, Haenszel, Brinton, and
+  Franco]{restrepo1988relacion}
+Helena Espinosa~de Restrepo, Pelayo Correa, William Haenszel, Louise~A.
+  Brinton, and Argemiro Franco.
+\newblock Relación del tabaquismo con cánceres de vías respiratorias,
+  digestivas y urinarias: Estudio de casos y testigos.
+\newblock \emph{Boletín de la Oficina Sanitaria Panamericana}, 105\penalty0
+  (3):\penalty0 221--231, 1988.
+\newblock URL \url{https://iris.paho.org/handle/10665.2/17817}.
+
+\bibitem[Sung et~al.(2021)Sung, Ferlay, Siegel, Laversanne, Soerjomataram,
+  Jemal, and Bray]{Sung2021}
+Hyuna Sung, Jacques Ferlay, Rebecca~L. Siegel, Mathieu Laversanne, Isabelle
+  Soerjomataram, Ahmedin Jemal, and Freddie Bray.
+\newblock Global cancer statistics 2020: Globocan estimates of incidence and
+  mortality worldwide for 36 cancers in 185 countries.
+\newblock \emph{CA: A Cancer Journal for Clinicians}, 71\penalty0 (3):\penalty0
+  209--249, 2021.
 \newblock \doi{10.3322/caac.21660}.
-\newblock URL \url{https://acsjournals.onlinelibrary.wiley.com/doi/10.3322/caac.21660}.
+\newblock URL
+  \url{https://acsjournals.onlinelibrary.wiley.com/doi/10.3322/caac.21660}.
 
 \bibitem[Zhou et~al.(2024)Zhou, Zhang, Wang, and Li]{Zhou2024}
 Y.~Zhou, L.~Zhang, X.~Wang, and M.~Li.
-\newblock Global burden of cancer and associated risk factors in 204 countries and territories, 1990–2019: a systematic analysis.
-\newblock \emph{Journal of Hematology and Oncology}, 17\penalty0 (1):\penalty0 1--15, 2024.
+\newblock Global burden of cancer and associated risk factors in 204 countries
+  and territories, 1990–2019: a systematic analysis.
+\newblock \emph{Journal of Hematology and Oncology}, 17\penalty0 (1):\penalty0
+  1--15, 2024.
 \newblock \doi{10.1186/s13045-024-01640-8}.
-\newblock URL \url{https://jhoonline.biomedcentral.com/articles/10.1186/s13045-024-01640-8}.
+\newblock URL
+  \url{https://jhoonline.biomedcentral.com/articles/10.1186/s13045-024-01640-8}.
 \newblock Consultado el 1 de junio de 2025.
 
 \end{thebibliography}

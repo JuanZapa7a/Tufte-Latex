@@ -21,5 +21,5 @@
 \contentsline {chapter}{\numberline {2}Elementos matemáticos y tipográficos}{15}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Ecuaciones en el estilo Tufte}{15}{section.2.1}%
 \contentsline {subsection}{Ejemplo de figura completa}{15}{subsection*.20}%
-\contentsline {chapter}{Bibliograf\'{\i }a}{19}{appendix*.21}%
+\contentsline {chapter}{Bibliograf\'{\i }a}{17}{appendix*.21}%
 \contentsfinish 

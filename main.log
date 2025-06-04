@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.6.3)  3 JUN 2025 19:09
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.6.3)  4 JUN 2025 14:35
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/home/juan/OneDrive/Students/Tufte-Latex/main
-(/home/juan/OneDrive/Students/Tufte-Latex/main.tex
+**/home/juan/Documentos/Tufte-Latex/main
+(/home/juan/Documentos/Tufte-Latex/main.tex
 LaTeX2e <2025-06-01>
 L3 programming layer <2025-05-26>
 (./tufte-book.cls
@@ -504,7 +504,12 @@ Package microtype Info: Loading configuration file microtype.cfg.
 File: microtype.cfg 2025/02/11 v3.2a microtype main configuration file (RS)
 )
 LaTeX Info: Redefining \microtypesetup on input line 3065.
-) (/usr/local/texlive/2025/texmf-dist/tex/latex/csquotes/csquotes.sty
+)
+
+Package microtype Warning: `footnote' is not an admissible value for option
+(microtype)                `disable'. Assuming `false'.
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/csquotes/csquotes.sty
 Package: csquotes 2024-04-04 v5.2o context-sensitive quotations (JAW)
 \csq@reset=\count333
 \csq@gtype=\count334
@@ -927,9 +932,9 @@ Package: fcnumparser 2017/06/15
 Package: grffile 2019/11/11 v2.1 Extended file name support for graphics (legacy)
 Package grffile Info: This package is an empty stub for compatibility on input line 40.
 )
-Package hyperref Info: Option `bookmarksnumbered' set `true' on input line 125.
-Package hyperref Info: Option `bookmarksopen' set `true' on input line 125.
-Package hyperref Info: Option `colorlinks' set `true' on input line 125.
+Package hyperref Info: Option `bookmarksnumbered' set `true' on input line 138.
+Package hyperref Info: Option `bookmarksopen' set `true' on input line 138.
+Package hyperref Info: Option `colorlinks' set `true' on input line 138.
 )
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
@@ -943,25 +948,25 @@ Package babel Info: 'spanish' activates 'spanish' shorthands.
 )
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-Package hyperref Info: Link coloring ON on input line 26.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+Package hyperref Info: Link coloring ON on input line 27.
  (./main.out) (./main.out)
 \@outlinefile=\write4
 \openout4 = `main.out'.
@@ -1002,18 +1007,18 @@ Package hyperref Info: Link coloring ON on input line 26.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 \langwohyphens=\language91
-LaTeX Info: Redefining \microtypecontext on input line 26.
-Package microtype Info: Applying patch `item' on input line 26.
-Package microtype Info: Applying patch `toc' on input line 26.
-Package microtype Info: Applying patch `eqnum' on input line 26.
+LaTeX Info: Redefining \microtypecontext on input line 27.
+Package microtype Info: Applying patch `item' on input line 27.
+Package microtype Info: Applying patch `toc' on input line 27.
+Package microtype Info: Applying patch `eqnum' on input line 27.
 
-Package microtype Warning: Unable to apply patch `footnote' on input line 26.
+Package microtype Warning: Unable to apply patch `footnote' on input line 27.
 
-Package microtype Info: Applying patch `verbatim' on input line 26.
-LaTeX Info: Redefining \microtypesetup on input line 26.
+Package microtype Info: Applying patch `verbatim' on input line 27.
+LaTeX Info: Redefining \microtypesetup on input line 27.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
-Package microtype Info: Using default protrusion set `alltext'.
+Package microtype Info: Using protrusion set `basicmath'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `alltext-nott'.
@@ -1021,7 +1026,7 @@ Package microtype Info: Using default expansion set `alltext-nott'.
 LaTeX Warning: Command \showhyphens   has changed.
                Check if current package is valid.
 
-LaTeX Info: Redefining \showhyphens on input line 26.
+LaTeX Info: Redefining \showhyphens on input line 27.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
@@ -1048,8 +1053,8 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
  (/usr/local/texlive/2025/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-LaTeX Info: Redefining \. on input line 26.
-LaTeX Info: Redefining \% on input line 26.
+LaTeX Info: Redefining \. on input line 27.
+LaTeX Info: Redefining \% on input line 27.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/pdflscape/pdflscape.sty
 Package: pdflscape 2022-10-27 v0.13 Display of landscape pages in PDF
  (/usr/local/texlive/2025/texmf-dist/tex/latex/pdflscape/pdflscape-nometadata.sty
@@ -1091,49 +1096,6 @@ Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-
-
-LaTeX Font Warning: Font shape `T1/cmbr/m/sc' undefined
-(Font)              using `T1/cmbr/m/n' instead on input line 36.
-
-LaTeX Font Info:    Calculating math sizes for size <32> on input line 36.
-LaTeX Font Info:    Trying to load font information for OT1+cmbr on input line 36.
-(/usr/local/texlive/2025/texmf-dist/tex/latex/cmbright/ot1cmbr.fd
-File: ot1cmbr.fd 2005/04/13 v8.1 (WaS)
-)
-Package microtype Info: Loading generic protrusion settings for font family
-(microtype)             `cmbr' (encoding: OT1).
-(microtype)             For optimal results, create family-specific settings.
-(microtype)             See the microtype manual for details.
-LaTeX Font Info:    Trying to load font information for OML+cmbrm on input line 36.
- (/usr/local/texlive/2025/texmf-dist/tex/latex/cmbright/omlcmbrm.fd
-File: omlcmbrm.fd 2005/04/13 v8.1 (WaS)
-)
-LaTeX Font Info:    Trying to load font information for OMS+cmbrs on input line 36.
- (/usr/local/texlive/2025/texmf-dist/tex/latex/cmbright/omscmbrs.fd
-File: omscmbrs.fd 2005/04/13 v8.1 (WaS)
-)
-LaTeX Font Info:    Trying to load font information for OMX+zplm on input line 36.
- (/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/omxzplm.fd
-File: omxzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMX/zplm.
-)
-LaTeX Font Info:    Trying to load font information for OT1+zplm on input line 36.
- (/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/ot1zplm.fd
-File: ot1zplm.fd 2002/09/08 Fontinst v1.914 font definitions for OT1/zplm.
-)
-Package microtype Info: Loading generic protrusion settings for font family
-(microtype)             `zplm' (encoding: OT1).
-(microtype)             For optimal results, create family-specific settings.
-(microtype)             See the microtype manual for details.
- (/usr/local/texlive/2025/texmf-dist/tex/latex/microtype/mt-msa.cfg
-File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
-) (/usr/local/texlive/2025/texmf-dist/tex/latex/microtype/mt-msb.cfg
-File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
-)
-Overfull \hbox (0.10193pt too wide) in paragraph at lines 36--36
-\T1/cmbr/m/n/32/50ls (-20) Segmentación y Cla-si-fi-ca-ción 
- []
-
 LaTeX Font Info:    Font shape `T1/cmbr/m/it' in size <14> not available
 (Font)              Font shape `T1/cmbr/m/sl' tried instead on input line 36.
 
@@ -1152,10 +1114,6 @@ LaTeX Font Info:    Trying to load font information for TS1+cmbr on input line 4
  (/usr/local/texlive/2025/texmf-dist/tex/latex/cmbright/ts1cmbr.fd
 File: ts1cmbr.fd 2005/04/13 v8.1 (WaS)
 )
-Package microtype Info: Loading generic protrusion settings for font family
-(microtype)             `cmbr' (encoding: TS1).
-(microtype)             For optimal results, create family-specific settings.
-(microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `T1/cmbr/m/it' in size <10> not available
 (Font)              Font shape `T1/cmbr/m/sl' tried instead on input line 59.
 
@@ -1172,14 +1130,12 @@ LaTeX Font Info:    Font shape `T1/cmbr/m/it' in size <10> not available
 
 ]
 LaTeX Font Info:    Font shape `T1/cmbr/b/n' in size <10> not available
-(Font)              Font shape `T1/cmbr/bx/n' tried instead on input line 79.
+(Font)              Font shape `T1/cmbr/bx/n' tried instead on input line 80.
 LaTeX Font Info:    Font shape `T1/cmbr/b/n' in size <12> not available
-(Font)              Font shape `T1/cmbr/bx/n' tried instead on input line 79.
+(Font)              Font shape `T1/cmbr/bx/n' tried instead on input line 80.
  (./main.toc
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
-LaTeX Font Info:    Font shape `T1/cmbr/m/it' in size <14.4> not available
-(Font)              Font shape `T1/cmbr/m/sl' tried instead on input line 2.
 LaTeX Font Info:    Font shape `T1/cmbr/m/it' in size <12> not available
 (Font)              Font shape `T1/cmbr/m/sl' tried instead on input line 3.
 )
@@ -1188,9 +1144,7 @@ LaTeX Font Info:    Font shape `T1/cmbr/m/it' in size <12> not available
 
 
 
-[5
-
-]
+[5]
 
 [6
 
@@ -1203,9 +1157,7 @@ LaTeX Info: Redefining \% on input line 1.
 
 
 
-[7
-
-]
+[7]
 
 [8
 
@@ -1218,9 +1170,7 @@ LaTeX Info: Redefining \% on input line 1.
 
 )
 
-[9
-
-]
+[9]
 
 [10
 
@@ -1228,6 +1178,34 @@ LaTeX Info: Redefining \% on input line 1.
 Cap\'{\i }tulo 1.
 (/usr/local/texlive/2025/texmf-dist/tex/latex/fmtcount/fc-spanish.def
 File: fc-spanish.def 2016/01/12
+)
+LaTeX Font Info:    Trying to load font information for OT1+cmbr on input line 9.
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/cmbright/ot1cmbr.fd
+File: ot1cmbr.fd 2005/04/13 v8.1 (WaS)
+)
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `cmbr' (encoding: OT1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+LaTeX Font Info:    Trying to load font information for OML+cmbrm on input line 9.
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/cmbright/omlcmbrm.fd
+File: omlcmbrm.fd 2005/04/13 v8.1 (WaS)
+)
+LaTeX Font Info:    Trying to load font information for OMS+cmbrs on input line 9.
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/cmbright/omscmbrs.fd
+File: omscmbrs.fd 2005/04/13 v8.1 (WaS)
+)
+LaTeX Font Info:    Trying to load font information for OMX+zplm on input line 9.
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/omxzplm.fd
+File: omxzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMX/zplm.
+)
+LaTeX Font Info:    Trying to load font information for OT1+zplm on input line 9.
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/ot1zplm.fd
+File: ot1zplm.fd 2002/09/08 Fontinst v1.914 font definitions for OT1/zplm.
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/microtype/mt-msa.cfg
+File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/microtype/mt-msb.cfg
+File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 
 LaTeX Warning: Marginpar on page 11 moved.
@@ -1238,11 +1216,6 @@ LaTeX Font Info:    Trying to load font information for T1+cmtl on input line 14
 (/usr/local/texlive/2025/texmf-dist/tex/latex/cmbright/t1cmtl.fd
 File: t1cmtl.fd 2005/04/13 v8.1 (WaS)
 )
-Package microtype Info: Loading generic protrusion settings for font family
-(microtype)             `cmtl' (encoding: T1).
-(microtype)             For optimal results, create family-specific settings.
-(microtype)             See the microtype manual for details.
-
 
 LaTeX Warning: Marginpar on page 11 moved.
 
@@ -1252,9 +1225,12 @@ LaTeX Warning: Marginpar on page 11 moved.
 LaTeX Font Info:    Font shape `T1/cmbr/m/it' in size <8> not available
 (Font)              Font shape `T1/cmbr/m/sl' tried instead on input line 26.
 
+LaTeX Font Warning: Font shape `T1/cmbr/m/sc' undefined
+(Font)              using `T1/cmbr/m/n' instead on input line 26.
+
+
 
 [11
-
 
 ]
 
@@ -1334,25 +1310,13 @@ LaTeX Info: Redefining \. on input line 4.
 LaTeX Info: Redefining \% on input line 4.
 [14]
 Cap\'{\i }tulo 2.
-)
+) (./backmatter.tex
 
 [15
 
-
 ]
-Underfull \vbox (badness 10000) has occurred while \output is active []
 
-
-
-LaTeX Info: Redefining \. on input line 36.
-LaTeX Info: Redefining \% on input line 36.
-[16] (./backmatter.tex
-
-LaTeX Info: Redefining \. on input line 4.
-LaTeX Info: Redefining \% on input line 4.
-[17]
-
-[18
+[16
 
 ] (./main.bbl
 pdfTeX warning (ext4): destination with the same identifier (name{cite.allemani2018global}) has been already used, duplicate ignored
@@ -1406,8 +1370,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{cite.usptf2023
 l.67 ...dorp-Vogelaar, and Kuntz]{usptf2023cancer}
                                                   
 
-[19
-
+[17
 
 ]
 pdfTeX warning (ext4): destination with the same identifier (name{cite.Mukherjee2010}) has been already used, duplicate ignored
@@ -1441,36 +1404,36 @@ pdfTeX warning (ext4): destination with the same identifier (name{cite.Zhou2024}
 l.108 ...2024)Zhou, Zhang, Wang, and Li]{Zhou2024}
                                                   )
 
-[20])
-<./imagenes/UPC-40x297-A4vert.pdf, id=240, 597.23125pt x 845.1575pt>
+[18])
+<./imagenes/UPC-40x297-A4vert.pdf, id=231, 597.23125pt x 845.1575pt>
 File: ./imagenes/UPC-40x297-A4vert.pdf Graphic file (type pdf)
 <use ./imagenes/UPC-40x297-A4vert.pdf>
-Package pdftex.def Info: ./imagenes/UPC-40x297-A4vert.pdf  used on input line 42.
+Package pdftex.def Info: ./imagenes/UPC-40x297-A4vert.pdf  used on input line 44.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
-<./imagenes/UPC-40x297-A4vert.pdf, id=242, page=1, 597.23125pt x 845.1575pt>
+<./imagenes/UPC-40x297-A4vert.pdf, id=233, page=1, 597.23125pt x 845.1575pt>
 File: ./imagenes/UPC-40x297-A4vert.pdf Graphic file (type pdf)
 <use ./imagenes/UPC-40x297-A4vert.pdf, page 1>
-Package pdftex.def Info: ./imagenes/UPC-40x297-A4vert.pdf , page1 used on input line 42.
+Package pdftex.def Info: ./imagenes/UPC-40x297-A4vert.pdf , page1 used on input line 44.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 File: ./imagenes/UPC-40x297-A4vert.pdf Graphic file (type pdf)
 <use ./imagenes/UPC-40x297-A4vert.pdf, page 1>
-Package pdftex.def Info: ./imagenes/UPC-40x297-A4vert.pdf , page1 used on input line 42.
+Package pdftex.def Info: ./imagenes/UPC-40x297-A4vert.pdf , page1 used on input line 44.
 (pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
 File: ./imagenes/UPC-40x297-A4vert.pdf Graphic file (type pdf)
 <use ./imagenes/UPC-40x297-A4vert.pdf, page 1>
-Package pdftex.def Info: ./imagenes/UPC-40x297-A4vert.pdf , page1 used on input line 42.
+Package pdftex.def Info: ./imagenes/UPC-40x297-A4vert.pdf , page1 used on input line 44.
 (pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
 File: ./imagenes/UPC-40x297-A4vert.pdf Graphic file (type pdf)
 <use ./imagenes/UPC-40x297-A4vert.pdf, page 1>
-Package pdftex.def Info: ./imagenes/UPC-40x297-A4vert.pdf , page1 used on input line 42.
+Package pdftex.def Info: ./imagenes/UPC-40x297-A4vert.pdf , page1 used on input line 44.
 (pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
 
 
 File: ./imagenes/UPC-40x297-A4vert.pdf Graphic file (type pdf)
 <use ./imagenes/UPC-40x297-A4vert.pdf, page 1>
-Package pdftex.def Info: ./imagenes/UPC-40x297-A4vert.pdf , page1 used on input line 42.
+Package pdftex.def Info: ./imagenes/UPC-40x297-A4vert.pdf , page1 used on input line 44.
 (pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
-[21
+[19
 
 
 
@@ -1490,18 +1453,18 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 474507A070239A7687A274B09AE61F01;1234.
  ) 
 Here is how much of TeX's memory you used:
- 31033 strings out of 467892
- 564069 string characters out of 5434150
- 1142616 words of memory out of 5000000
- 58571 multiletter control sequences out of 15000+600000
- 683170 words of font info for 296 fonts, out of 8000000 for 9000
+ 30935 strings out of 467892
+ 562474 string characters out of 5434150
+ 1142599 words of memory out of 5000000
+ 58507 multiletter control sequences out of 15000+600000
+ 674448 words of font info for 258 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 97i,17n,96p,1340b,763s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 97i,17n,96p,1379b,705s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/hfbright/hfbr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/hfbright/hfbr8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/hfbright/hfbrmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/hfbright/hfbrmi8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/hfbright/hfbrsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/hfbright/hfbrsy8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbmo10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbmo8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbmr17.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbmr8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbtl10.pfb>
-Output written on main.pdf (21 pages, 244060 bytes).
+Output written on main.pdf (19 pages, 237877 bytes).
 PDF statistics:
- 335 PDF objects out of 1000 (max. 8388607)
- 263 compressed objects within 3 object streams
- 65 named destinations out of 1000 (max. 500000)
- 78929 words of extra memory for PDF output out of 89155 (max. 10000000)
+ 327 PDF objects out of 1000 (max. 8388607)
+ 257 compressed objects within 3 object streams
+ 63 named destinations out of 1000 (max. 500000)
+ 63569 words of extra memory for PDF output out of 74296 (max. 10000000)
 

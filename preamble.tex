@@ -8,11 +8,13 @@
 \usepackage{booktabs} % Tablas de calidad profesional
 \usepackage{lipsum} % Texto de ejemplo
 \usepackage{microtype} % Mejoras tipográficas
+\UseMicrotypeSet[protrusion]{basicmath} % Ejemplo de configuración habitual
+\microtypesetup{disable=footnote}
 \usepackage{csquotes} % Recomendado por biblatex con babel/polyglossia
 \usepackage{pdfpages}
 \usepackage{tikz}
 \usepackage{xurl}
-%\usepackage{breakurl}
+
 
 % Configuración de márgenes y diseño
 \geometry{
@@ -65,13 +67,13 @@ footskip=40pt,
   \pagestyle{myplain}%
 }
 
-% También para los capítulos en el mainmatter
-\let\oldchapter\chapter
-\renewcommand{\chapter}{%
-  \cleardoublepage
-  \pagestyle{myplain}
-  \oldchapter
-}
+% % También para los capítulos en el mainmatter
+% \let\oldchapter\chapter
+% \renewcommand{\chapter}{%
+%   \cleardoublepage
+%   \pagestyle{myplain}
+%   \oldchapter
+% }
 
 
 %Configuracion aspecto del titulo del capítulo
@@ -90,6 +92,17 @@ footskip=40pt,
 \filright}
 [\vspace*{1.1ex}%
 \titlerule]
+
+
+
+\titlecontents{chapter}
+  [0pt] % Indent
+  {\bfseries\Large\sf} % Format
+  {\addvspace{0.5ex}{\MakeUppercase{\chaptertitlename}}~\thecontentslabel  \addvspace{0.5ex}} % Numbering format
+  {\addvspace{0.5ex}} % Above code
+  {\hfill\contentspage} % Page number format
+  [\addvspace{0.5ex}] % Space after
+
 
 
 \setcounter{secnumdepth}{1} % Profundidad de numeración de secciones (1 para capítulos, 2 para secciones, etc.)

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.6.3)  4 JUN 2025 14:42
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.6.3)  4 JUN 2025 19:37
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1304,19 +1304,50 @@ $[]$[]\T1/cmbr/m/sc/8 (+20) National Com-prehen-si-ve Can-cer Net-work
 
 LaTeX Warning: Marginpar on page 14 moved.
 
+
+
+LaTeX Info: Redefining \. on input line 99.
+LaTeX Info: Redefining \% on input line 99.
+[14]
+
+LaTeX Info: Redefining \. on input line 115.
+LaTeX Info: Redefining \% on input line 115.
+[15]
+<imagenes/campomagnetico.png, id=196, 512.1534pt x 223.5552pt>
+File: imagenes/campomagnetico.png Graphic file (type png)
+<use imagenes/campomagnetico.png>
+Package pdftex.def Info: imagenes/campomagnetico.png  used on input line 131.
+(pdftex.def)             Requested size: 180.0pt x 78.56955pt.
+
+Overfull \hbox (1.8789pt too wide) in paragraph at lines 130--133
+ [] 
+ []
+
+
+
+LaTeX Info: Redefining \. on input line 153.
+LaTeX Info: Redefining \% on input line 153.
+[16 <./imagenes/campomagnetico.png>]
+<imagenes/Relaxation-rates-of-longitudinal-magnetization-1-T1-and-transverse-magnetization-1-T2.png, id=204, 853.1875pt x 318.18875pt>
+File: imagenes/Relaxation-rates-of-longitudinal-magnetization-1-T1-and-transverse-magnetization-1-T2.png Graphic file (type png)
+<use imagenes/Relaxation-rates-of-longitudinal-magnetization-1-T1-and-transverse-magnetization-1-T2.png>
+Package pdftex.def Info: imagenes/Relaxation-rates-of-longitudinal-magnetization-1-T1-and-transverse-magnetization-1-T2.png  used on input line 161.
+(pdftex.def)             Requested size: 320.0pt x 119.34476pt.
 ) (./chapter2.tex
 
 LaTeX Info: Redefining \. on input line 4.
 LaTeX Info: Redefining \% on input line 4.
-[14]
+[17 <./imagenes/Relaxation-rates-of-longitudinal-magnetization-1-T1-and-transverse-magnetization-1-T2.png>]
+
+[18
+
+]
 Cap\'{\i }tulo 2.
 ) (./backmatter.tex
 
-[15
+[19]
 
-]
-
-[16
+[20
 
 ] (./main.bbl
 pdfTeX warning (ext4): destination with the same identifier (name{cite.allemani2018global}) has been already used, duplicate ignored
@@ -1370,7 +1401,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{cite.usptf2023
 l.67 ...dorp-Vogelaar, and Kuntz]{usptf2023cancer}
                                                   
 
-[17
+[21
 
 ]
 pdfTeX warning (ext4): destination with the same identifier (name{cite.Mukherjee2010}) has been already used, duplicate ignored
@@ -1404,13 +1435,13 @@ pdfTeX warning (ext4): destination with the same identifier (name{cite.Zhou2024}
 l.108 ...2024)Zhou, Zhang, Wang, and Li]{Zhou2024}
                                                   )
 
-[18])
-<./imagenes/UPC-40x297-A4vert.pdf, id=231, 597.23125pt x 845.1575pt>
+[22])
+<./imagenes/UPC-40x297-A4vert.pdf, id=262, 597.23125pt x 845.1575pt>
 File: ./imagenes/UPC-40x297-A4vert.pdf Graphic file (type pdf)
 <use ./imagenes/UPC-40x297-A4vert.pdf>
 Package pdftex.def Info: ./imagenes/UPC-40x297-A4vert.pdf  used on input line 44.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
-<./imagenes/UPC-40x297-A4vert.pdf, id=233, page=1, 597.23125pt x 845.1575pt>
+<./imagenes/UPC-40x297-A4vert.pdf, id=264, page=1, 597.23125pt x 845.1575pt>
 File: ./imagenes/UPC-40x297-A4vert.pdf Graphic file (type pdf)
 <use ./imagenes/UPC-40x297-A4vert.pdf, page 1>
 Package pdftex.def Info: ./imagenes/UPC-40x297-A4vert.pdf , page1 used on input line 44.
@@ -1433,7 +1464,7 @@ File: ./imagenes/UPC-40x297-A4vert.pdf Graphic file (type pdf)
 <use ./imagenes/UPC-40x297-A4vert.pdf, page 1>
 Package pdftex.def Info: ./imagenes/UPC-40x297-A4vert.pdf , page1 used on input line 44.
 (pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
-[19
+[23
 
 
 
@@ -1450,21 +1481,21 @@ L3 programming layer <2025-05-26>
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 474507A070239A7687A274B09AE61F01;1234.
+(rerunfilecheck)             Checksum: C365B59340343F16E84300F98B1F4C4C;1234.
  ) 
 Here is how much of TeX's memory you used:
- 30935 strings out of 467892
- 562474 string characters out of 5434150
+ 30986 strings out of 467892
+ 563983 string characters out of 5434150
  1142599 words of memory out of 5000000
- 58507 multiletter control sequences out of 15000+600000
- 674448 words of font info for 258 fonts, out of 8000000 for 9000
+ 58533 multiletter control sequences out of 15000+600000
+ 675306 words of font info for 266 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 97i,17n,96p,1379b,705s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 97i,17n,96p,1429b,705s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/hfbright/hfbr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/hfbright/hfbr8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/hfbright/hfbrmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/hfbright/hfbrmi8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/hfbright/hfbrsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/hfbright/hfbrsy8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbmo10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbmo8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbmr17.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbmr8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbtl10.pfb>
-Output written on main.pdf (19 pages, 237877 bytes).
+Output written on main.pdf (23 pages, 343455 bytes).
 PDF statistics:
- 327 PDF objects out of 1000 (max. 8388607)
- 257 compressed objects within 3 object streams
- 63 named destinations out of 1000 (max. 500000)
- 63569 words of extra memory for PDF output out of 74296 (max. 10000000)
+ 358 PDF objects out of 1000 (max. 8388607)
+ 280 compressed objects within 3 object streams
+ 72 named destinations out of 1000 (max. 500000)
+ 63579 words of extra memory for PDF output out of 74296 (max. 10000000)
 

@@ -18,8 +18,13 @@
 \contentsline {subsection}{Avances en la Investigación y Tratamiento del Cáncer}{13}{subsection*.18}%
 \contentsline {section}{\numberline {1.2}La Planificación Quirúrgica en Oncología}{13}{section.1.2}%
 \contentsline {subsection}{Concepto General de la Planificación Quirúrgica}{13}{subsection*.19}%
-\contentsline {chapter}{\numberline {2}Elementos matemáticos y tipográficos}{15}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Ecuaciones en el estilo Tufte}{15}{section.2.1}%
-\contentsline {subsection}{Ejemplo de figura completa}{15}{subsection*.20}%
-\contentsline {chapter}{Bibliograf\'{\i }a}{17}{appendix*.21}%
+\contentsline {subsection}{El Papel Crucial de la Imagen Médica en la Planificación Quirúrgica}{14}{subsection*.20}%
+\contentsline {paragraph}{Técnicas y modalidades principales en imagen médica}{14}{paragraph*.21}%
+\contentsline {paragraph}{Criterios de selección de modalidad según tipo de cáncer y localización}{15}{paragraph*.22}%
+\contentsline {subsection}{Resonancia Magnética: Técnica de imagen fundamental en planificación quirúrgica}{16}{subsection*.23}%
+\contentsline {paragraph}{Fundamentos técnicos de la RM}{16}{paragraph*.24}%
+\contentsline {chapter}{\numberline {2}Elementos matemáticos y tipográficos}{19}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Ecuaciones en el estilo Tufte}{19}{section.2.1}%
+\contentsline {subsection}{Ejemplo de figura completa}{19}{subsection*.25}%
+\contentsline {chapter}{Bibliograf\'{\i }a}{21}{appendix*.26}%
 \contentsfinish 

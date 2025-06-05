@@ -1,4 +1,4 @@
-\begin{thebibliography}{16}
+\begin{thebibliography}{23}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -11,12 +11,32 @@ Claudia Allemani, Tomohiro Matsuda, Veronica Di~Carlo, Rosalind Harewood, Mia Ma
 \newblock \emph{The Lancet}, 391\penalty0 (10125):\penalty0 1023--1075, 2018.
 \newblock \doi{10.1016/S0140-6736(17)33326-3}.
 
+\bibitem[Autor(Año)]{image_guided_cancer_surgery}
+Nombre Autor.
+\newblock Image-guided cancer surgery: a narrative review.
+\newblock \emph{Journal Name}, Volumen\penalty0 (Número):\penalty0 Páginas, Año.
+\newblock \doi{DOI}.
+
 \bibitem[Birkmeyer and Dimick(2012)]{Birkmeyer2012}
 John~D. Birkmeyer and Justin~B. Dimick.
 \newblock Understanding the volume-outcome relationship in surgery.
 \newblock \emph{The American Journal of Surgery}, 204:\penalty0 541--546, 2012.
 \newblock \doi{10.1016/j.amjsurg.2012.07.012}.
 \newblock Relación entre planificación, experiencia quirúrgica y resultados.
+
+\bibitem[Bortot et~al.(2023)Bortot, Mangogna, Di~Lorenzo, Stabile, Ricci, and Biffi]{Bortot2023}
+Barbara Bortot, Alessandro Mangogna, Giovanni Di~Lorenzo, Guglielmo Stabile, Giuseppe Ricci, and Stefania Biffi.
+\newblock Image-guided cancer surgery: a narrative review on imaging modalities and emerging nanotechnology strategies.
+\newblock \emph{Journal of Nanobiotechnology}, 21\penalty0 (1):\penalty0 155, 2023.
+\newblock \doi{10.1186/s12951-023-01926-y}.
+\newblock URL \url{https://jnanobiotechnology.biomedcentral.com/articles/10.1186/s12951-023-01926-y}.
+
+\bibitem[Czernin et~al.(2014)Czernin, Allen-Auerbach, Nathanson, and Herrmann]{PETCTOncology2014}
+J~Czernin, M~Allen-Auerbach, D~Nathanson, and K.~Herrmann.
+\newblock Pet/ct in oncology: Current status and perspectives.
+\newblock \emph{Journal Name}, Volume\penalty0 (Issue):\penalty0 Page numbers, 2014.
+\newblock \doi{10.1007/s40134-013-0016-x}.
+\newblock URL \url{https://pmc.ncbi.nlm.nih.gov/articles/PMC4034170/}.
 
 \bibitem[de~la Salud(2025)]{WHO2025}
 Organización~Mundial de~la Salud.
@@ -43,6 +63,13 @@ Instituto~Nacional del Cáncer~(NCI).
 \newblock \emph{Instituto Nacional del Cáncer}, 2021.
 \newblock Disponible en: \url{https://www.cancer.gov/espanol/cancer/causas-prevencion/riesgo/edad}.
 
+\bibitem[Fang et~al.(2022)Fang, Xiong, Yuan, Lei, Yuan, Luo, Zhou, Min, Zhang, Tu, and Duan]{Fang2022}
+Xiang Fang, Yan Xiong, Fang Yuan, Senlin Lei, Dechao Yuan, Yi~Luo, Yong Zhou, Li~Min, Wenli Zhang, Chongqi Tu, and Hong Duan.
+\newblock Preoperative planning using three-dimensional multimodality imaging for soft tissue sarcoma of the axilla: A pilot study.
+\newblock \emph{Cancers}, 14\penalty0 (13):\penalty0 3185, 2022.
+\newblock \doi{10.3390/cancers14133185}.
+\newblock URL \url{https://doi.org/10.3390/cancers14133185}.
+
 \bibitem[Ferlay et~al.(2020)Ferlay, Ervik, Lam, Colombet, Mery, Piñeros, Znaor, Soerjomataram, and Bray]{globocan2020}
 J.~Ferlay, M.~Ervik, F.~Lam, M.~Colombet, L.~Mery, M.~Piñeros, A.~Znaor, I.~Soerjomataram, and F.~Bray.
 \newblock Global cancer observatory: Cancer today.
@@ -64,6 +91,13 @@ Douglas Hanahan and Robert~A. Weinberg.
 \newblock URL \url{https://doi.org/10.1158/2159-8290.CD-21-1059}.
 \newblock Revisión clave sobre los avances en la comprensión del cáncer y terapias dirigidas.
 
+\bibitem[Hung et~al.(2021)Hung, Griffith, Antonio, and Ahuja]{Hung2021}
+E.H. Hung, J.F. Griffith, G.E. Antonio, and A.T. Ahuja.
+\newblock Ultrasonography of superficial soft-tissue masses.
+\newblock \emph{Radiology}, 299\penalty0 (1):\penalty0 e1--e12, 2021.
+\newblock \doi{10.1148/radiol.211101}.
+\newblock URL \url{https://pubs.rsna.org/doi/abs/10.1148/radiol.211101}.
+
 \bibitem[Knudsen et~al.(2023)Knudsen, Zauber, Rutter, Peterse, Meester, van Ravesteyn, Lansdorp-Vogelaar, and Kuntz]{usptf2023cancer}
 Amy~B. Knudsen, Ann~G. Zauber, Carolyn~M. Rutter, Eline~F. Peterse, Reinier~G.S. Meester, Nicolien~T. van Ravesteyn, Iris Lansdorp-Vogelaar, and Karen~M. Kuntz.
 \newblock Estimated cancer deaths prevented with increased use of cancer screening.
@@ -84,6 +118,19 @@ National Comprehensive Cancer~Network (NCCN).
 \newblock Technical report, NCCN, 2023.
 \newblock URL \url{https://www.nccn.org/guidelines/}.
 \newblock Guías estándar para planificación quirúrgica en cáncer.
+
+\bibitem[of~Breast Imaging~(EUSOBI)(2019)]{ESOBI2019}
+European~Society of~Breast Imaging~(EUSOBI).
+\newblock Image-guided breast biopsy and localisation: recommendations for information to women and referring physicians.
+\newblock \emph{Insights into Imaging}, 10\penalty0 (1):\penalty0 1--10, 2019.
+\newblock \doi{10.1186/s13244-019-0803-x}.
+\newblock URL \url{https://insightsimaging.springeropen.com/articles/10.1186/s13244-019-0803-x}.
+
+\bibitem[Patiño-Zarco et~al.(2018)Patiño-Zarco, Enrique-Rojas~Marin, Moctezuma-Velasco, Neyra-Ortiz, and Medina-Villaseñor]{imagenologia_cancer}
+M~Patiño-Zarco, C~Enrique-Rojas~Marin, C~Moctezuma-Velasco, E~Neyra-Ortiz, and E.~A. Medina-Villaseñor.
+\newblock Imagenología en cáncer. diferentes técnicas diagnósticas de imagen en cáncer.
+\newblock \emph{Casos y Revisiones de Salud}, 1\penalty0 (0):\penalty0 56--66, 2018.
+\newblock URL \url{https://cyrs.zaragoza.unam.mx/wp-content/Contenido/Volumenes/V0N1/9Imagenologiaencancer_Diferentestecnicasdeimagendiagnosticasencancer.pdf}.
 
 \bibitem[Restrepo et~al.(1988)Restrepo, Correa, Haenszel, Brinton, and Franco]{restrepo1988relacion}
 Helena Espinosa~de Restrepo, Pelayo Correa, William Haenszel, Louise~A. Brinton, and Argemiro Franco.

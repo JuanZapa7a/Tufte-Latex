@@ -49,8 +49,8 @@ footskip=40pt,
   \fancyhf{} % limpiar encabezados y pies
   \ifthenelse{\boolean{@tufte@twoside}}%
     {% two-side
-      \fancyhead[LE]{\rightmark}
-      \fancyhead[RO]{\MakeUppercase{\thechapter. ~\leftmark}}
+      \fancyhead[RO]{\rightmark}
+      \fancyhead[LE]{\MakeUppercase{\thechapter. ~\leftmark}}
       \fancyheadoffset[LE,RO]{-\marginparsep+20pt}
       \fancyfoot[LE,RO]{\thepage}
       \fancyfootoffset[LE,RO]{-\marginparsep+20pt}
@@ -81,7 +81,7 @@ footskip=40pt,
 \titleformat{\chapter}[display]
 {\bfseries\Large\sf}
 {\filleft
-\MakeUppercase{\chaptertitlename}}{\NUMBERstring{chapter}}
+\MakeUppercase{\chaptertitlename}{\NUMBERstring{chapter}}
 }
 {1.5ex}
 {\LARGE\rmfamily

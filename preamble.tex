@@ -75,15 +75,13 @@ footskip=40pt,
 %   \oldchapter
 % }
 
-
 %Configuracion aspecto del titulo del capítulo
-\usepackage{titlesec}
-\usepackage{titletoc} % Carga el paquete helper
+\usepackage{titlesec,titletoc} % Carga el paquete helper
 \usepackage{fmtcount} % Para formatear números en texto
 \titleformat{\chapter}[display]
 {\bfseries\Large\sf}
 {\filleft
-\textsl{\MakeUppercase{\chaptertitlename}} \expandafter\textsl\expandafter{\NUMBERstring{chapter}}
+\MakeUppercase{\chaptertitlename}}{\NUMBERstring{chapter}}
 }
 {1.5ex}
 {\LARGE\rmfamily

@@ -7,9 +7,9 @@
 \usepackage[spanish]{babel} % Idioma español
 \usepackage{booktabs} % Tablas de calidad profesional
 \usepackage{lipsum} % Texto de ejemplo
-\usepackage{microtype} % Mejoras tipográficas
-\UseMicrotypeSet[protrusion]{basicmath} % Ejemplo de configuración habitual
-\microtypesetup{disable=footnote}
+%\usepackage{microtype} % Mejoras tipográficas
+%\UseMicrotypeSet[protrusion]{basicmath} % Ejemplo de configuración habitual
+%\microtypesetup{disable=footnote}
 \usepackage{csquotes} % Recomendado por biblatex con babel/polyglossia
 \usepackage{pdfpages}
 \usepackage{tikz}
@@ -81,7 +81,7 @@ footskip=40pt,
 \titleformat{\chapter}[display]
 {\bfseries\Large\sf}
 {\filleft
-\MakeUppercase{\chaptertitlename}{\NUMBERstring{chapter}}
+\MakeUppercase{\chaptertitlename}{~\Huge\NUMBERstring{chapter}}
 }
 {1.5ex}
 {\LARGE\rmfamily

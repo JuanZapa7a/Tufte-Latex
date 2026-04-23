@@ -5,7 +5,7 @@
 
 \section{El Sistema de Medida de Ingeniería}\label{sec:sistema-medida}
 
-Un sistema de instrumentación no es solo un sensor; es una cadena de bloques que transforma una variable física en una información útil~\cite{WHO2025}. Esta cadena incluye:
+Un sistema de instrumentación no es solo un sensor; es una cadena de bloques que transforma una variable física en una información útil~\cite{WHO2025}. Esta cadena como semuestra en la Figura \ref{fig:cadena_instrumentacion} incluye:
 
 \begin{itemize}
   \item Mundo Físico: La magnitud a medir (temperatura, presión, flujo, etc.).
@@ -15,6 +15,27 @@ Un sistema de instrumentación no es solo un sensor; es una cadena de bloques qu
   \item Procesamiento y Presentación: Microcontrolador/PC y visualización. 
 \end{itemize}
 
+\begin{marginfigure}
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}[node distance=2.5cm, auto, >=stealth, font=\footnotesize,block/.style={draw, rectangle, minimum height=3em, minimum width=3em, align=center, thick}]
+    \node [block, fill=blue!20] (phys) {Magnitud\\Física $x(t)$};
+    \node [block, fill=red!20, right of=phys] (sens) {Sensor /\\Transductor};
+    \node [block, fill=green!20, below of=sens,node distance=2cm] (cond) {Acondic.\\de Señal};
+    \node [block, fill=cyan!20, below of=cond, node distance=2cm] (daq) {DAQ\\(ADC)};
+    \node [block, fill=blue!20, left of=daq] (proc) {Procesado /\\PC};
+    
+    \draw [->] (phys) -- (sens);
+    \draw [->] (sens) -- node[right] {$\Delta V, \Delta R$} (cond);
+    \draw [->] (cond) -- node[right] {$0-5V$} (daq);
+    \draw [->] (daq) -- node[above] {Digital} (proc);
+    
+    \node[left of=cond, node distance=3.2cm] (noise) {Ruido /Interferencias};
+    \draw [->, red, dashed] (noise) -- (cond);
+    \end{tikzpicture}
+    \caption{Cadena de Instrumentación: Desde la magnitud física hasta la información útil. La magnitud fisica se transforma en una señal eléctrica mediante un sensor o transductor. La señal eléctrica se acondiciona para mejorar la calidad de la señal y se transforma en digital. La señal digital se adquiere mediante un sistema de adquisición. La información digital se procesa y se presenta.}\label{fig:cadena_instrumentacion}
+\end{marginfigure}
+
 Incidir en que el eslabón más débil de la cadena determina la precisión de todo el sistema. Un sistema de medida es tan bueno como su componente más impreciso.
 
 Un sistema de instrumentación moderno es una cadena de transferencia de energía e información. Cada etapa introduce una degradación de la señal (ruido) y una incertidumbre asociada.
@@ -22,67 +43,100 @@ Bloques Funcionales
 \begin{enumerate}
     \item Transductor/Sensor: Interfaz con el mundo físico. Convierte la magnitud física $x(t)$ (temperatura, presión) en una señal eléctrica $s(t)$
     \item Acondicionador de Señal: Mejora la calidad de la señal (amplificación, filtrado, linealización, aislamiento). Su objetivo es maximizar la relación señal-ruido (SNR).
-    \item Sistema de Adquisición (DAQ): Compuesto por el S&H (Sample and Hold) y el ADC. Realiza la discretización en tiempo y amplitud.
+    \item Sistema de Adquisición (DAQ): Compuesto por el S\&H (Sample and Hold) y el ADC. Realiza la discretización en tiempo y amplitud.
     \item Procesado y Control: Algoritmos de corrección, promediado y protocolos de comunicación (USB, Ethernet, CAN).
 \end{enumerate}
 
-% \begin{figure}[ht]
-%     \centering
-%     \begin{tikzpicture}[node distance=2.5cm, auto, >=stealth]
-%       \node [block] (phys) {Magnitud\\Física $x(t)$};
-%       \node [block, right of=phys] (sens) {Sensor /\\Transductor};
-%       \node [block, right of=sens] (cond) {Acondic.\\de Señal};
-%       \node [block, right of=cond] (daq) {DAQ\\(ADC)};
-%       \node [block, right of=daq] (proc) {Procesado /\\PC};
-      
-%       \draw [->] (phys) -- (sens);
-%       \draw [->] (sens) -- node[above] {$\Delta V, \Delta R$} (cond);
-%       \draw [->] (cond) -- node[above] {$0-5V$} (daq);
-%       \draw [->] (daq) -- node[above] {Digital} (proc);
-      
-%       \node[below of=cond, node distance=1.2cm] (noise) {Ruido / Interferencias};
-%       \draw [->, red, dashed] (noise) -- (cond);
 
-%     \end{tikzpicture}
-%     \caption{Cadena de Instrumentación: Desde la magnitud física hasta la información útil.}
-%     \label{fig:cadena_instrumentacion}
-% \end{figure}
-% \begin{figure}[ht]
-%     \centering
-%     \begin{tikzpicture}[node distance=2.5cm, auto, >=stealth, every node/.style={inner sep=0pt}]
-%       \node [block] (phys) {Magnitud\\Física $x(t)$};
-%       \node [block, right of=phys] (sens) {Sensor /\\Transductor};
-%       \node [block, right of=sens] (cond) {Acondic.\\de Señal};
-%       \node [block, right of=cond] (daq) {DAQ\\(ADC)};
-%       \node [block, right of=daq] (proc) {Procesado /\\PC};
-      
-%       \draw [->] (phys) -- (sens);
-%       \draw [->] (sens) -- node[above] {$\Delta V, \Delta R$} (cond);
-%       \draw [->] (cond) -- node[above] {$0-5V$} (daq);
-%       \draw [->] (daq) -- node[above] {Digital} (proc);
-      
-%       \node[below of=cond, node distance=1.2cm] (noise) {Ruido / Interferencias};
-%       \draw [->, red, dashed] (noise) -- (cond);
-      
-%     \end{tikzpicture}
-%     \caption{Cadena de Instrumentación: Desde la magnitud física hasta la información útil.}
-%     \label{fig:cadena_instrumentacion}
-% \end{figure}
 
-\section{Terminología según el VIM (Vocabulario Internacional de Metrología)}
-\label{sec:terminologia-vim}
 
-Es vital que se utilice la terminología profesional:
+\section{Terminología según el VIM (Vocabulario Internacional de Metrología)}\label{sec:terminologia-vim}
+
+Es vital que se utilice la terminología profesional, especialmente en un contexto académico y técnico. El VIM (Vocabulario Internacional de Metrología) proporciona definiciones estandarizadas para términos clave en metrología. A continuación se presentan las definiciones más relevantes para este curso:
 
 \begin{itemize}
-  \item \textbf{Magnitud}: Propiedad física que se puede medir (ej. Temperatura, Longitud).
-  \item \textbf{Medida}: Proceso de asignar un valor numérico a una magnitud.
+  \item \textbf{Magnitud}: Propiedad física que se puede medir (ej. Temperatura, Longitud). La magnitud es la característica física que se desea medir, como la temperatura, la presión o la longitud. Es una propiedad cuantificable del mundo físico que puede ser representada por un número y una unidad. 
+  \item \textbf{Medida}: Proceso de asignar un valor numérico a una magnitud. La figura~\ref{fig:error_medida} ilustra la relación entre magnitud, valor verdadero y valor medido.
+    \begin{marginfigure}
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}[scale=1, transform shape, font=\footnotesize]
+    % Eje horizontal
+    \draw[->] (-3,0) -- (3,0) node[right] {$x$};
+    \foreach \x in {-2,-1,0,1,2}
+        \draw (\x,0.1) -- (\x,-0.1) node[below] {$\x$};
+    
+    % Valor verdadero (centro)
+    \draw[thick, green!60!black] (0,0.5) -- (0,-0.5);
+    \node[green!60!black, above] at (0,0.75) {Valor Verdadero ($V_v$)};
+    \node[green!60!black] at (0,-0.7) {$0$};
+    
+    % Valor medido (a la derecha)
+    \draw[thick, blue!60!black] (1.5,0.5) -- (1.5,-0.5);
+    \node[blue!60!black, above] at (1.5,0.45) {Valor Medido ($V_m$)};
+    \node[blue!60!black] at (1.5,-0.7) {$1.5$};
+    
+    % Flecha de error
+    \draw[->, red, thick] (0,0) -- (1.5,0);
+    \node[red, above] at (0.75,0.1) {Error ($e$)};
+    
+    % Fórmula del error
+    \node[red] at (0.75,-1.2) {$e = V_m - V_v = 1.5$};
+    \end{tikzpicture}
+    \caption{Representación del Error de Medida: diferencia entre el valor medido y el valor verdadero. El error puede ser positivo o negativo. El error es la diferencia entre el valor medido y el valor verdadero. }\label{fig:error_medida}
+    \end{marginfigure}
   \item \textbf{Valor Verdadero}: Valor ideal sin errores (inaccesible en la práctica).
   \item \textbf{Valor Medido}: Resultado obtenido del proceso de medida.
   \item \textbf{Error de Medida}: Diferencia entre el valor medido y el valor verdadero o de referencia. $e = V_{\text{med}} - V_{\text{ref}}$
-  \item \textbf{Exactitud (Accuracy)}: Grado de concordancia entre el valor medido y el valor verdadero.
-  \item \textbf{Precisión (Precision)}: Grado de concordancia entre resultados repetidos.
-  \item \textbf{Resolución}: Mínimo cambio detectable por el sistema de medida. Ejemplo: En un ADC de \SI{10}{bits} con rango \SI{0}{V} a \SI{5}{V}, la resolución es \SI{5}{V}/$2^{10}$ bits  \(\approx\) \SI{0.05}{V/\bit}.
+  \item \textbf{Exactitud (Accuracy)}: Grado de concordancia entre el valor medido y el valor verdadero. La figura~\ref{fig:acc_prec} ilustra la relación entre exactitud y precisión.
+    \begin{marginfigure}
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}
+
+    % Diana arriba Izquierda: Alta Precisión, Baja Exactitud
+    \draw[thick] (0,0) circle (1cm);
+    \draw[thick] (0,0) circle (0.6cm);
+    \draw[thick] (0,0) circle (0.2cm);
+    \node at (0,-1.3) {NO Exacto, Preciso};
+    \foreach \i in {1,...,10}
+        \fill[red] (0.5+0.1*rand, 0.5+0.1*rand) circle (2pt);
+
+    %Diana arriba Derecha: Baja precisión, Baja Exactitud
+    \begin{scope}[xshift=3cm]
+        \draw[thick] (0,0) circle (1cm);
+        \draw[thick] (0,0) circle (0.6cm);
+        \draw[thick] (0,0) circle (0.2cm);        
+        \node at (0,-1.3) {NO Exacto, NO Preciso};        
+        \foreach \i in {1,...,10}
+            \fill[orange] (rand, rand) circle (2pt);
+    \end{scope}
+
+    % Diana abajo Izquierda: Alta Exactitud, Baja Precisión
+    \begin{scope}[yshift=-3cm]
+        \draw[thick] (0,0) circle (1cm);
+        \draw[thick] (0,0) circle (0.6cm);
+        \draw[thick] (0,0) circle (0.2cm);
+        \node at (0,-1.3) {Exacto, NO Preciso};
+        \foreach \i in {1,...,10}
+            \fill[blue] (0.3*rand+0.05*rand, 0.3*rand+0.05*rand) circle (2pt);
+    \end{scope}
+
+    % Diana abajo Derecha: Alta Exactitud, Alta Precisión
+    \begin{scope}[xshift=3cm, yshift=-3cm]
+        \draw[thick] (0,0) circle (1cm);
+        \draw[thick] (0,0) circle (0.6cm);
+        \draw[thick] (0,0) circle (0.2cm);
+        \node at (0,-1.3) {Exacto, Preciso};
+        \foreach \i in {1,...,10}
+            \fill[green] (0.05*rand, 0.05*rand) circle (2pt);
+    \end{scope}
+\end{tikzpicture}
+    \caption{Relación entre Exactitud y Precisión. Un sistema puede ser preciso pero no exacto (resultados con baja dispersión -consistentes- pero promedio incorrecto), o exacto pero no preciso (resultados con promedio correcto pero alta dispersión -inconsistentes-). En general, un sistema es preciso y exacto al mismo tiempo cuando se cumplen ambas condiciones simultaneamente promedio correcto y baja dispersion. El peor de los casos es que el sistema no sea preciso ni exacto al mismo tiempo lo que trae como consecuencia un promedio incorrecto y alta dispersion e implica un mayor riesgo de error.}\label{fig:acc_prec}
+    \end{marginfigure}
+  \item \textbf{Precisión (Precision)}: Grado de concordancia entre resultados repetidos. 
+  \item \textbf{Veracidad (Trueness)}: Grado de concordancia entre la media de muchas medidas y el valor verdadero. 
+  \item \textbf{Resolución (Resolution)}: Mínimo cambio detectable por el sistema de medida. Ejemplo: En un ADC de \SI{10}{bits} con rango \SI{0}{V} a \SI{5}{V}, la resolución es \SI{5}{V}/$2^{10}$ bits  \(\approx\) \SI{0.05}{V/\bit}.
   \item \textbf{Sensibilidad}: Relación entre el cambio en la salida y el cambio en la magnitud medida.Pendiente de la curva de transferencia ($S = \frac{\Delta \text{Output}}{\Delta \text{Input}}$).
   \item \textbf{Linealidad}: Grado en que la salida es proporcional a la entrada.
   \item \textbf{Repetibilidad}: Capacidad de obtener el mismo resultado bajo las mismas condiciones.
@@ -93,3 +147,145 @@ Es vital que se utilice la terminología profesional:
 \end{itemize}
 
 
+
+
+
+
+
+\section{Modelo de Error Total}\label{sec:modelo_error}
+
+Es fundamental distinguir entre los términos que definen la calidad de la medida como se muestra en la Tabla~\ref{tab:terminos_metrologicos}. La exactitud está relacionado con el error total (sistemático + aleatorio), la veracidad solo con el error sistemático, la precisión solo con el error aleatorio, y la resolución con el umbral de ruido o cuantificación del sistema. 
+
+\begin{table}[htbp]
+    \centering
+    \caption{Comparativa de términos metrológicos. Exactitud se refiere a la cercanía al valor verdadero, precisión a la consistencia entre medidas repetidas, veracidad a la cercanía de la media de muchas medidas al valor verdadero, y resolución al mínimo cambio detectable por el sistema. Veracidad y Precisión no es lo mismo. Veracidad refiere a la cercanía de la media de muchas medidas al valor verdadero, mientras que Precisión se refiere a la cercanía entre medidas independientes repetidas. Por último Resolución es el mínimo cambio detectable por el sistema.}\label{tab:terminos_metrologicos}
+    \begin{tabular}{l p{0.37\columnwidth} p{0.37\columnwidth}}
+        \toprule
+        \textbf{Término} & \textbf{Definición} & \textbf{Relación con el Error} \\
+       \midrule
+        Exactitud & Proximidad al valor verdadero. & Error Sistemático + Aleatorio. \\
+        %\midrule
+        Veracidad & Proximidad de la media de muchas medidas al valor verdadero. & Error Sistemático únicamente. \\
+        %\midrule
+        Precisión & Proximidad entre medidas independientes repetidas. & Error Aleatorio únicamente. \\
+        %\midrule
+        Resolución & Mínimo incremento detectable por el sistema. & Umbral de ruido / Cuantificación. \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+Un error sistemático es un sesgo constante que desvía las mediciones en una dirección, mientras que un error aleatorio es una variación impredecible que afecta la consistencia de las mediciones. La resolución determina el mínimo cambio detectable por el sistema, lo que afecta la capacidad de distinguir entre valores cercanos.
+
+Un ejemplo clásico, como se ilustra en la Figura~\ref{fig:ejemplo_balanza}, es el de una balanza que siempre marca \SI{0.5}{kg} más de lo que realmente pesa (error sistemático), y además tiene fluctuaciones de \SI{0.1}{kg} debido a vibraciones (error aleatorio). La exactitud de la balanza se ve afectada por ambos errores, la veracidad solo por el error sistemático, la precisión solo por el error aleatorio, y la resolución por el umbral de ruido o cuantificación del sistema.
+
+\begin{marginfigure}
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}[scale=0.9, transform shape, font=\tiny]
+    % Eje horizontal
+    \draw[->] (-1,0) -- (5,0) node[right] {Masa (kg)};
+    \foreach \x in {0,1,2,3,4}
+        \draw (\x,0.1) -- (\x,-0.1) node[below] {$\x$};
+    
+    % Valor verdadero (en 2 kg)
+    \draw[thick, green!60!black] (2,1) -- (2,-0.8);
+    \node[green!60!black, above, font=\tiny] at (2,1.2) {Valor Verdadero};
+    \node[green!60!black] at (2,-1) {$2.0$\,kg};
+    
+    % Error sistemático (desplazamiento de 0.5 kg)
+    \draw[thick, orange!70!black, dashed] (2.5,1) -- (2.5,-0.8);
+    \node[orange!70!black, above, font=\tiny] at (2.5,1.2) {Error Sistemático};
+    \node[orange!70!black] at (2.5,-1) {$+0.5$\,kg};
+    
+    % Flecha de error sistemático
+    \draw[<->, orange, thick] (2,0.8) -- (2.5,0.8) node[midway, above, font=\tiny] {$e_{sys}$};
+    
+    % Puntos de medición con error aleatorio (alrededor de 2.5)
+    \foreach \x/\y in {0/-0.1, 0.05/0.15, -0.08/0.05, 0.03/-0.12, -0.05/0.08}
+        \fill[blue] (2.5+\x, \y) circle (1pt);
+    
+    % Media de las mediciones
+    \draw[thick, blue!60!black] (2.5,0.5) -- (2.5,-0.3);
+    \node[blue!60!black, above, font=\tiny] at (2.5,0.7) {Media Medida};
+    \node[blue!60!black] at (2.5,-0.5) {$2.5$\,kg};
+    
+    % Error total
+    \draw[<->, red, thick] (2,0.3) -- (2.5,0.3) node[midway, above, font=\tiny] {$e_{total}$};
+    
+    % Leyenda
+    % \node[anchor=north west, font=\tiny] at (-0.8,-1.5) {
+    %     \begin{tabular}{l}
+    %     \textcolor{green!60!black}{\bullet} Valor Verdadero: 2.0 kg\\
+    %     \textcolor{orange!70!black}{\bullet} Error Sistemático: +0.5 kg\\
+    %     \textcolor{blue!60!black}{\bullet} Error Aleatorio: ±0.1 kg\\
+    %     \textcolor{red}{\bullet} Error Total: +0.5 kg
+    %     \end{tabular}
+    % };
+    \end{tikzpicture}
+    \caption{Ejemplo de errores en una balanza: valor verdadero 2.0 kg, error sistemático de +0.5 kg (desplazamiento constante), y error aleatorio de ±0.1 kg (fluctuaciones).}\label{fig:ejemplo_balanza}
+\end{marginfigure}
+
+
+El error total en una medición se modela como la suma de dos componentes:
+
+\begin{equation}
+    E = E_{\text{sist}} + \epsilon
+\end{equation}
+
+donde $E_{\text{sist}}$ es el error sistemático (sesgo constante o predecible)
+y $\epsilon$ es el error aleatorio (fluctuaciones temporales)
+
+
+Los errores sistemáticos y aleatorios tienen características distintas:
+
+\begin{description}
+    \item[Errores Sistemáticos ($E_{\text{sist}}$)]: Permanecen constantes o varían de forma predecible. Afectan a la veracidad del sistema.
+        \begin{itemize}
+            \item \textbf{Offset}: Desplazamiento del cero (error de lectura cuando la entrada es cero).
+            \item \textbf{Ganancia}: Error en la pendiente de la curva de transferencia.
+            \item \textbf{No linealidad}: Desviación respecto a la relación lineal ideal.
+        \end{itemize}
+    \item[Errores Aleatorios ($\epsilon$)]: Debidos a fluctuaciones temporales (ruido térmico, electromagnético). Afectan a la precisión del sistema. Se reducen mediante el promediado de $N$ muestras:
+        \begin{equation}
+            \bar{x} = \frac{1}{N} \sum_{i=1}^{N} x_i \quad \Rightarrow \quad \sigma_{\bar{x}} = \frac{\sigma}{\sqrt{N}}
+        \end{equation}
+        donde $\sigma$ es la desviación estándar y $\sigma_{\bar{x}}$ es la incertidumbre de la media.
+\end{description}
+
+\section{Evaluación de la Incertidumbre (Guía GUM)}
+
+La incertidumbre es el parámetro que caracteriza la dispersión de los valores que podrían ser atribuidos a la magnitud. La Guía GUM (Guide to the Expression of Uncertainty in Measurement) establece dos tipos de evaluación de la incertidumbre:
+
+\begin{enumerate}
+    \item \textbf{Evaluación Tipo A}: Basada en el análisis estadístico de los datos experimentales (repetibilidad, desviación estándar).
+    \item \textbf{Evaluación Tipo B}: Basada en la información disponible (especificaciones del fabricante, experiencia previa, etc.).
+\end{enumerate}
+
+\subsection{Evaluación Tipo A (Estadística)}
+
+Dada una serie de $n$ lecturas $x_i$, se pueden calcular:
+
+\begin{enumerate}
+  \item Valor medio:Es la media aritmética de las mediciones, que proporciona una estimación del valor central de los datos.
+    \[
+    x_{\bar{}} = \frac{1}{n} \sum x_i
+    \]
+  \item Desviación típica: Es una medida de la dispersión de las mediciones alrededor del valor medio, indicando cuánto varían las mediciones entre sí.
+    \[
+    s(x) = \sqrt{\frac{1}{n-1} \sum (x_i - x_{\bar{}})^2}
+    \]
+  \item Incertidumbre típica:Es una medida de la incertidumbre asociada a la media de las mediciones, que se reduce al aumentar el número de mediciones, reflejando la mejora en la precisión del sistema de medida.
+    \[
+    u_A = s(x) \sqrt{n}
+    \]
+\end{enumerate}
+
+Estos valores se utilizan para evaluar la incertidumbre de la medida. La incertidumbre típica $u_A$ representa la dispersión de las medidas alrededor del valor medio, y se reduce al aumentar el número de mediciones $n$. La evaluación tipo A es fundamental para entender la precisión de un sistema de medida a través del análisis estadístico de los datos obtenidos experimentalmente. 
+
+\subsection{Evaluación Tipo B (Hojas de datos)}
+
+Se basa en la distribución de probabilidad asumida para el error indicado por el fabricante. Por ejemplo, si el error se indica como $\pm 0.5\%$ con una distribución uniforme, la incertidumbre tipo B se calcula como:
+\[
+u_B = \frac{0.5\%}{\sqrt{3}}
+\]  
+]

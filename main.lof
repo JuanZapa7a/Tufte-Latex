@@ -1,4 +1,8 @@
 \babel@toc {spanish}{}\relax 
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Cadena de Instrumentación: Desde la magnitud física hasta la información útil. La magnitud fisica se transforma en una señal eléctrica mediante un sensor o transductor. La señal eléctrica se acondiciona para mejorar la calidad de la señal y se transforma en digital. La señal digital se adquiere mediante un sistema de adquisición. La información digital se procesa y se presenta.}}{13}{figure.1.1}%
+\contentsline {figure}{\numberline {1.2}{\ignorespaces Representación del Error de Medida: diferencia entre el valor medido y el valor verdadero. El error puede ser positivo o negativo. El error es la diferencia entre el valor medido y el valor verdadero. }}{14}{figure.1.2}%
+\contentsline {figure}{\numberline {1.3}{\ignorespaces Relación entre Exactitud y Precisión. Un sistema puede ser preciso pero no exacto (resultados con baja dispersión -consistentes- pero promedio incorrecto), o exacto pero no preciso (resultados con promedio correcto pero alta dispersión -inconsistentes-). En general, un sistema es preciso y exacto al mismo tiempo cuando se cumplen ambas condiciones simultaneamente promedio correcto y baja dispersion. El peor de los casos es que el sistema no sea preciso ni exacto al mismo tiempo lo que trae como consecuencia un promedio incorrecto y alta dispersion e implica un mayor riesgo de error.}}{14}{figure.1.3}%
+\contentsline {figure}{\numberline {1.4}{\ignorespaces Ejemplo de errores en una balanza: valor verdadero 2.0 kg, error sistemático de +0.5 kg (desplazamiento constante), y error aleatorio de ±0.1 kg (fluctuaciones).}}{15}{figure.1.4}%
 \addvspace {10\p@ }
 \contentsfinish 

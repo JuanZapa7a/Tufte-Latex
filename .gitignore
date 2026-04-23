@@ -1,0 +1,30 @@
+# Ignorar archivos de compilación
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.brf
+*.fls
+*.log
+*.out
+*.run.xml
+*.synctex.gz
+
+# Ignorar archivos temporales
+*.bak
+*.dvi
+*.fdb_latexmk
+*.fls
+*.gz
+*.idx
+*.ind
+*.lof
+*.lot
+*.nav
+*.snm
+*.synctex.gz
+*.toc
+
+# Ignorar directorios
+/build/
+/out/

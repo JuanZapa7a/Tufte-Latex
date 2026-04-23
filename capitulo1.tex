@@ -3,9 +3,10 @@
 
 \chapter{Metrología y Caracterización de Sistemas de Medida}
 
-\section{El Sistema de Medida de Ingeniería}
-\label{sec:sistema-medida}
+\section{El Sistema de Medida de Ingeniería}\label{sec:sistema-medida}
+
 Un sistema de instrumentación no es solo un sensor; es una cadena de bloques que transforma una variable física en una información útil~\cite{WHO2025}. Esta cadena incluye:
+
 \begin{itemize}
   \item Mundo Físico: La magnitud a medir (temperatura, presión, flujo, etc.).
   \item Sensor/Transductor: Convierte la magnitud física en eléctrica (ej. Resistencia, Voltaje).
@@ -15,6 +16,58 @@ Un sistema de instrumentación no es solo un sensor; es una cadena de bloques qu
 \end{itemize}
 
 Incidir en que el eslabón más débil de la cadena determina la precisión de todo el sistema. Un sistema de medida es tan bueno como su componente más impreciso.
+
+Un sistema de instrumentación moderno es una cadena de transferencia de energía e información. Cada etapa introduce una degradación de la señal (ruido) y una incertidumbre asociada.
+Bloques Funcionales
+\begin{enumerate}
+    \item Transductor/Sensor: Interfaz con el mundo físico. Convierte la magnitud física $x(t)$ (temperatura, presión) en una señal eléctrica $s(t)$
+    \item Acondicionador de Señal: Mejora la calidad de la señal (amplificación, filtrado, linealización, aislamiento). Su objetivo es maximizar la relación señal-ruido (SNR).
+    \item Sistema de Adquisición (DAQ): Compuesto por el S&H (Sample and Hold) y el ADC. Realiza la discretización en tiempo y amplitud.
+    \item Procesado y Control: Algoritmos de corrección, promediado y protocolos de comunicación (USB, Ethernet, CAN).
+\end{enumerate}
+
+% \begin{figure}[ht]
+%     \centering
+%     \begin{tikzpicture}[node distance=2.5cm, auto, >=stealth]
+%       \node [block] (phys) {Magnitud\\Física $x(t)$};
+%       \node [block, right of=phys] (sens) {Sensor /\\Transductor};
+%       \node [block, right of=sens] (cond) {Acondic.\\de Señal};
+%       \node [block, right of=cond] (daq) {DAQ\\(ADC)};
+%       \node [block, right of=daq] (proc) {Procesado /\\PC};
+      
+%       \draw [->] (phys) -- (sens);
+%       \draw [->] (sens) -- node[above] {$\Delta V, \Delta R$} (cond);
+%       \draw [->] (cond) -- node[above] {$0-5V$} (daq);
+%       \draw [->] (daq) -- node[above] {Digital} (proc);
+      
+%       \node[below of=cond, node distance=1.2cm] (noise) {Ruido / Interferencias};
+%       \draw [->, red, dashed] (noise) -- (cond);
+
+%     \end{tikzpicture}
+%     \caption{Cadena de Instrumentación: Desde la magnitud física hasta la información útil.}
+%     \label{fig:cadena_instrumentacion}
+% \end{figure}
+% \begin{figure}[ht]
+%     \centering
+%     \begin{tikzpicture}[node distance=2.5cm, auto, >=stealth, every node/.style={inner sep=0pt}]
+%       \node [block] (phys) {Magnitud\\Física $x(t)$};
+%       \node [block, right of=phys] (sens) {Sensor /\\Transductor};
+%       \node [block, right of=sens] (cond) {Acondic.\\de Señal};
+%       \node [block, right of=cond] (daq) {DAQ\\(ADC)};
+%       \node [block, right of=daq] (proc) {Procesado /\\PC};
+      
+%       \draw [->] (phys) -- (sens);
+%       \draw [->] (sens) -- node[above] {$\Delta V, \Delta R$} (cond);
+%       \draw [->] (cond) -- node[above] {$0-5V$} (daq);
+%       \draw [->] (daq) -- node[above] {Digital} (proc);
+      
+%       \node[below of=cond, node distance=1.2cm] (noise) {Ruido / Interferencias};
+%       \draw [->, red, dashed] (noise) -- (cond);
+      
+%     \end{tikzpicture}
+%     \caption{Cadena de Instrumentación: Desde la magnitud física hasta la información útil.}
+%     \label{fig:cadena_instrumentacion}
+% \end{figure}
 
 \section{Terminología según el VIM (Vocabulario Internacional de Metrología)}
 \label{sec:terminologia-vim}
@@ -26,14 +79,17 @@ Es vital que se utilice la terminología profesional:
   \item \textbf{Medida}: Proceso de asignar un valor numérico a una magnitud.
   \item \textbf{Valor Verdadero}: Valor ideal sin errores (inaccesible en la práctica).
   \item \textbf{Valor Medido}: Resultado obtenido del proceso de medida.
-  \item \textbf{Error de Medida}: Diferencia entre el valor medido y el valor verdadero.
+  \item \textbf{Error de Medida}: Diferencia entre el valor medido y el valor verdadero o de referencia. $e = V_{\text{med}} - V_{\text{ref}}$
   \item \textbf{Exactitud (Accuracy)}: Grado de concordancia entre el valor medido y el valor verdadero.
   \item \textbf{Precisión (Precision)}: Grado de concordancia entre resultados repetidos.
-  \item \textbf{Resolución}: Mínimo cambio detectable por el sistema de medida. Ejemplo: En un ADC de 10 bits con rango 0-5V, la resolución es 5V/1024 ≈ 4.88mV.
-
-      
-
-.
-  \item \textbf{Sensibilidad}: Relación entre el cambio en la salida y el cambio en la magnitud medida.
+  \item \textbf{Resolución}: Mínimo cambio detectable por el sistema de medida. Ejemplo: En un ADC de \SI{10}{bits} con rango \SI{0}{V} a \SI{5}{V}, la resolución es \SI{5}{V}/$2^{10}$ bits  \(\approx\) \SI{0.05}{V/\bit}.
+  \item \textbf{Sensibilidad}: Relación entre el cambio en la salida y el cambio en la magnitud medida.Pendiente de la curva de transferencia ($S = \frac{\Delta \text{Output}}{\Delta \text{Input}}$).
+  \item \textbf{Linealidad}: Grado en que la salida es proporcional a la entrada.
+  \item \textbf{Repetibilidad}: Capacidad de obtener el mismo resultado bajo las mismas condiciones.
+  \item \textbf{Reproducibilidad}: Capacidad de obtener resultados similares bajo condiciones diferentes (operadores, equipos, etc.).
+  \item \textbf{Calibración}: Proceso de ajustar el sistema de medida para minimizar errores, comparándolo con un estándar de referencia.
+  \item \textbf{Trazabilidad}: Capacidad de relacionar las mediciones con estándares internacionales a través de una cadena documentada de calibraciones.
+  \item \textbf{Incertidumbre de Medida}: Rango dentro del cual se espera que se encuentre el valor verdadero con un nivel de confianza específico. Se expresa como $U = k \cdot u_c$, donde $u_c$ es la incertidumbre combinada y $k$ es el factor de cobertura (ej. $k=2$ para aproximadamente 95\% de confianza).
 \end{itemize}
+
 

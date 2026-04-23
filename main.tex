@@ -15,7 +15,9 @@
 %     ├── figura1.pdf
 %     └── diagrama.pdf
 
-\documentclass[symmetric,twoside,justified]{tufte-book} 
+\documentclass[symmetric,twoside,justified]{tufte-book}
+\PassOptionsToPackage{footmisc}{tufte-book} % Disable footnote settings in tufte-common
+% ... 
 %\documentclass[a4paper,sfsidenotes,notitlepage,justified,nobib]{tufte-book}
 % Use the tufte-book class which in turn uses the tufte-common class
 \hypersetup{colorlinks} % Comment this line if you don't wish to have colored links

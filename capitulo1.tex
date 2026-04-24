@@ -5,7 +5,7 @@
 
 \section{El Sistema de Medida de Ingeniería}\label{sec:sistema-medida}
 
-Un sistema de instrumentación no es solo un sensor; es una cadena de bloques que transforma una variable física en una información útil~\cite{WHO2025}. Esta cadena como semuestra en la Figura \ref{fig:cadena_instrumentacion} incluye:
+Un sistema de instrumentación no es solo un sensor; es una cadena de bloques que transforma una variable física en una información útil~\cite{WHO2025}. Esta cadena como se ilustra en la Figura~\ref{fig:cadena_instrumentacion} incluye:
 
 \begin{itemize}
   \item Mundo Físico: La magnitud a medir (temperatura, presión, flujo, etc.).
@@ -18,7 +18,7 @@ Un sistema de instrumentación no es solo un sensor; es una cadena de bloques qu
 \begin{marginfigure}
     \centering
     \shorthandoff{>}
-    \begin{tikzpicture}[node distance=2.5cm, auto, >=stealth, font=\footnotesize,block/.style={draw, rectangle, minimum height=3em, minimum width=3em, align=center, thick}]
+    \begin{tikzpicture}[node distance=2.5cm, auto, >=stealth,,block/.style={draw, rectangle, minimum height=3em, minimum width=3em, align=center, thick}]
     \node [block, fill=blue!20] (phys) {Magnitud\\Física $x(t)$};
     \node [block, fill=red!20, right of=phys] (sens) {Sensor /\\Transductor};
     \node [block, fill=green!20, below of=sens,node distance=2cm] (cond) {Acondic.\\de Señal};
@@ -38,17 +38,13 @@ Un sistema de instrumentación no es solo un sensor; es una cadena de bloques qu
 
 Incidir en que el eslabón más débil de la cadena determina la precisión de todo el sistema. Un sistema de medida es tan bueno como su componente más impreciso.
 
-Un sistema de instrumentación moderno es una cadena de transferencia de energía e información. Cada etapa introduce una degradación de la señal (ruido) y una incertidumbre asociada.
-Bloques Funcionales
+Un sistema de instrumentación moderno es una cadena de transferencia de energía e información. El efecto de carga, el sensor extrae energía del sistema físico (temperatura, presión, flujo, etc.), afecta a la magnitud fisica $x(t)$ proporcionando ruido.  Cada etapa introduce una degradación de la señal (ruido) y una incertidumbre asociada. La cadena de instrumentación se compone de bloques de bloques funcionales:
 \begin{enumerate}
     \item Transductor/Sensor: Interfaz con el mundo físico. Convierte la magnitud física $x(t)$ (temperatura, presión) en una señal eléctrica $s(t)$
     \item Acondicionador de Señal: Mejora la calidad de la señal (amplificación, filtrado, linealización, aislamiento). Su objetivo es maximizar la relación señal-ruido (SNR).
     \item Sistema de Adquisición (DAQ): Compuesto por el S\&H (Sample and Hold) y el ADC. Realiza la discretización en tiempo y amplitud.
     \item Procesado y Control: Algoritmos de corrección, promediado y protocolos de comunicación (USB, Ethernet, CAN).
 \end{enumerate}
-
-
-
 
 \section{Terminología según el VIM (Vocabulario Internacional de Metrología)}\label{sec:terminologia-vim}
 
@@ -141,7 +137,7 @@ Es vital que se utilice la terminología profesional, especialmente en un contex
   \item \textbf{Linealidad}: Grado en que la salida es proporcional a la entrada.
   \item \textbf{Repetibilidad}: Capacidad de obtener el mismo resultado bajo las mismas condiciones.
   \item \textbf{Reproducibilidad}: Capacidad de obtener resultados similares bajo condiciones diferentes (operadores, equipos, etc.).
-  \item \textbf{Calibración}: Proceso de ajustar el sistema de medida para minimizar errores, comparándolo con un estándar de referencia.
+  \item \textbf{Calibración}: Proceso de ajustar el sistema de medida para minimizar errores, comparándolo con un estándar de referencia. Calibrar es solo comparar con un patrón (ver el error), mientras que Ajustar es actuar sobre el instrumento para que mida bien.
   \item \textbf{Trazabilidad}: Capacidad de relacionar las mediciones con estándares internacionales a través de una cadena documentada de calibraciones.
   \item \textbf{Incertidumbre de Medida}: Rango dentro del cual se espera que se encuentre el valor verdadero con un nivel de confianza específico. Se expresa como $U = k \cdot u_c$, donde $u_c$ es la incertidumbre combinada y $k$ es el factor de cobertura (ej. $k=2$ para aproximadamente 95\% de confianza).
 \end{itemize}
@@ -181,7 +177,7 @@ Un ejemplo clásico, como se ilustra en la Figura~\ref{fig:ejemplo_balanza}, es 
 \begin{marginfigure}
     \centering
     \shorthandoff{>}
-    \begin{tikzpicture}[scale=0.9, transform shape, font=\tiny]
+    \begin{tikzpicture}[scale=0.9, transform shape]
     % Eje horizontal
     \draw[->] (-1,0) -- (5,0) node[right] {Masa (kg)};
     \foreach \x in {0,1,2,3,4}
@@ -189,13 +185,13 @@ Un ejemplo clásico, como se ilustra en la Figura~\ref{fig:ejemplo_balanza}, es 
     
     % Valor verdadero (en 2 kg)
     \draw[thick, green!60!black] (2,1) -- (2,-0.8);
-    \node[green!60!black, above, font=\tiny] at (2,1.2) {Valor Verdadero};
-    \node[green!60!black] at (2,-1) {$2.0$\,kg};
+    \node[green!60!black, above] at (1,1) {Valor Verdadero};
+    \node[green!60!black] at (2,-1.1) {$2.0$\,kg};
     
     % Error sistemático (desplazamiento de 0.5 kg)
     \draw[thick, orange!70!black, dashed] (2.5,1) -- (2.5,-0.8);
-    \node[orange!70!black, above, font=\tiny] at (2.5,1.2) {Error Sistemático};
-    \node[orange!70!black] at (2.5,-1) {$+0.5$\,kg};
+    \node[orange!70!black, above] at (3.5,1) {Error Sistemático};
+    \node[orange!70!black] at (2.5,-.9) {$+0.5$\,kg};
     
     % Flecha de error sistemático
     \draw[<->, orange, thick] (2,0.8) -- (2.5,0.8) node[midway, above, font=\tiny] {$e_{sys}$};
@@ -206,7 +202,7 @@ Un ejemplo clásico, como se ilustra en la Figura~\ref{fig:ejemplo_balanza}, es 
     
     % Media de las mediciones
     \draw[thick, blue!60!black] (2.5,0.5) -- (2.5,-0.3);
-    \node[blue!60!black, above, font=\tiny] at (2.5,0.7) {Media Medida};
+    \node[blue!60!black, above] at (3.5,0.3) {Media Medida};
     \node[blue!60!black] at (2.5,-0.5) {$2.5$\,kg};
     
     % Error total
@@ -252,7 +248,7 @@ Los errores sistemáticos y aleatorios tienen características distintas:
         donde $\sigma$ es la desviación estándar y $\sigma_{\bar{x}}$ es la incertidumbre de la media.
 \end{description}
 
-\section{Evaluación de la Incertidumbre (Guía GUM)}
+\section{Evaluación de la Incertidumbre (Guía GUM)}\label{sec:incertidumbre}
 
 La incertidumbre es el parámetro que caracteriza la dispersión de los valores que podrían ser atribuidos a la magnitud. La Guía GUM (Guide to the Expression of Uncertainty in Measurement) establece dos tipos de evaluación de la incertidumbre:
 
@@ -261,31 +257,176 @@ La incertidumbre es el parámetro que caracteriza la dispersión de los valores 
     \item \textbf{Evaluación Tipo B}: Basada en la información disponible (especificaciones del fabricante, experiencia previa, etc.).
 \end{enumerate}
 
-\subsection{Evaluación Tipo A (Estadística)}
+\subsection{Evaluación Tipo A (Estadística)}\label{sec:eval_tipoA}
 
 Dada una serie de $n$ lecturas $x_i$, se pueden calcular:
 
 \begin{enumerate}
-  \item Valor medio:Es la media aritmética de las mediciones, que proporciona una estimación del valor central de los datos.
-    \[
-    x_{\bar{}} = \frac{1}{n} \sum x_i
-    \]
-  \item Desviación típica: Es una medida de la dispersión de las mediciones alrededor del valor medio, indicando cuánto varían las mediciones entre sí.
-    \[
-    s(x) = \sqrt{\frac{1}{n-1} \sum (x_i - x_{\bar{}})^2}
-    \]
-  \item Incertidumbre típica:Es una medida de la incertidumbre asociada a la media de las mediciones, que se reduce al aumentar el número de mediciones, reflejando la mejora en la precisión del sistema de medida.
-    \[
-    u_A = s(x) \sqrt{n}
-    \]
+  \item \textbf{Valor medio}: $\bar{x} = \frac{1}{n} \sum x_i$. Es el mejor estimador del valor verdadero.
+  \item \textbf{Desviación típica ($s$)}: Indica la dispersión de las medidas individuales.
+    \[ s(x) = \sqrt{\frac{1}{n-1} \sum (x_i - \bar{x})^2} \]
+  \item \textbf{Incertidumbre típica ($u_A$)}: Representa la dispersión de la media. A diferencia de la desviación típica, esta \textbf{disminuye} al aumentar el número de medidas.
+    \[ u_A = \frac{s(x)}{\sqrt{n}} \]
 \end{enumerate}
 
 Estos valores se utilizan para evaluar la incertidumbre de la medida. La incertidumbre típica $u_A$ representa la dispersión de las medidas alrededor del valor medio, y se reduce al aumentar el número de mediciones $n$. La evaluación tipo A es fundamental para entender la precisión de un sistema de medida a través del análisis estadístico de los datos obtenidos experimentalmente. 
 
-\subsection{Evaluación Tipo B (Hojas de datos)}
+\subsection{Evaluación Tipo B (Hojas de datos)}\label{sec:eval_tipoB}
 
-Se basa en la distribución de probabilidad asumida para el error indicado por el fabricante. Por ejemplo, si el error se indica como $\pm 0.5\%$ con una distribución uniforme, la incertidumbre tipo B se calcula como:
+Se basa en la distribución de probabilidad asumida para el error indicado por el fabricante, como se ilustra en la Figura~\ref{fig:distribuciones_tipoB} y en la Tabla~\ref{tab:distribuciones_tipoB}. Por ejemplo, si el error se indica como $a = \pm 0.5\%$ con una distribución uniforme, la incertidumbre tipo B se calcula como:
 \[
 u_B = \frac{0.5\%}{\sqrt{3}}
 \]  
+Si el error se indica con una distribución triangular, la incertidumbre tipo B se calcula como:
+\[
+u_B = \frac{0.5\%}{\sqrt{6}}
+\]
+Si el error se indica con una distribución normal, la incertidumbre tipo B se calcula como:
+\[
+u_B = \frac{0.5\%}{1}
+\]  
+\begin{marginfigure}[-30em]
+    \centering
+    \begin{tikzpicture}
+      \shorthandoff{>}
+    % Distribución Rectangular
+    \draw[->] (-1.5,0) -- (1.5,0) node[right] {$x$};
+    \draw[blue, thick] (-1,0) -- (-1,1) -- (1,1) -- (1,0);
+    \node at (0,1.2) {Rectangular (Uniforme) $u_B = \frac{a}{\sqrt{3}}$};
+    
+    % Distribución triangular
+    \begin{scope}[yshift=-2cm]
+        \draw[->] (-1.5,0) -- (1.5,0) node[right] {$x$};
+        \draw[orange, thick] (-1,0) -- (0,1) -- (1,0);
+        \node at (0,1.2) {Triangular $u_B = \frac{a}{\sqrt{6}}$};
+    \end{scope}
+
+    % Distribución Normal
+    \begin{scope}[yshift=-4cm]
+        \draw[->] (-2,0) -- (2,0) node[right] {$x$};
+        \draw[red, thick, smooth, domain=-1.8:1.8] plot (\x, {exp(-(\x)^2/0.5)});
+        \node at (0,1.2) {Normal (Gaussiana) $u_B = \frac{a}{s}$};
+    \end{scope}
+\end{tikzpicture}
+\caption{Ejemplos de distribuciones de probabilidad para la evaluación tipo B de la incertidumbre. La distribución rectangular (uniforme) se utiliza cuando el error es igualmente probable dentro de un rango, la distribución triangular se utiliza cuando el error es más probable cerca del valor central, y la distribución normal se utiliza cuando el error sigue una distribución gaussiana. En la distribución gaussiana s es la desviación típica.}\label{fig:distribuciones_tipoB}
+\end{marginfigure}
+
+
+
+\begin{table}[ht]
+\centering
+\caption{Distribución de probabilidad para la evaluación tipo B de la incertidumbre. La distribución normal se utiliza cuando el error sigue una distribución gaussiana. En la distribución gaussiana s es la desviación típica. En la distribución triangular se utiliza cuando el error es más probable cerca del valor central y en la distribución rectangular se utiliza cuando el error es igualmente probable dentro de un rango.}\label{tab:distribuciones_tipoB}
+\begin{tabular}{l p{0.5\linewidth} p{0.2\linewidth}}
+\toprule
+\textbf{Distribución} & \textbf{Cuándo usarla} & \textbf{Cálculo de $U_B$} \\
+\midrule
+Rectangular & El error es igualmente probable dentro de un rango. & $u = a/\sqrt{3}$ \\
+\midrule
+Triangular & El error es más probable cerca del valor central.  & $u = a/\sqrt{6}$ \\
+\midrule
+Normal & El error sigue una distribución gaussiana. & $u = a/s$ \\
+\bottomrule
+\end{tabular}
+
+\end{table}
+
+\subsection{Propagación de la Incertidumbre (Guía GUM)}\label{sec:propagacion}
+
+La propagación de la incertidumbre se realiza utilizando la fórmula de propagación de errores para funciones de varias variables. Si la magnitud final $y$ depende de varias variables de entrada $x_i$, la incertidumbre de $y$ se calcula como:
+\[
+u_c(y) = \sqrt{\sum_{i=1}^{n} \left( \frac{\partial y}{\partial x_i} u_i \right)^2}
+\]
+donde $u_i$ es la incertidumbre de cada variable de entrada $x_i$. En términos generales, si se tiene una función $f(x_1, x_2, ..., x_n)$ que depende de varias variables de entrada $x_i$, la incertidumbre de la variable de salida $y$ se calcula como:
+\[
+u_c(f) = \sqrt{\sum_{i=1}^{n} \left( \frac{\partial f}{\partial x_i} u_i \right)^2}
+\]    
+donde $f$ es la función que relaciona las variables de entrada $x_i$ con la variable de salida, $u_i$ es la incertidumbre de cada variable de entrada,y $u_c(f)$ es la incertidumbre combinada de la variable de salida. Se denominan coeficientes de sensibilidad a las derivadas parciales $\frac{\partial f}{\partial x_i}$, que indican cómo la incertidumbre de cada variable de entrada afecta la incertidumbre de la variable de salida.
+
+Esta fórmula se utiliza para calcular la incertidumbre total de una medición que depende de varias variables, teniendo en cuenta las incertidumbres individuales de cada variable de entrada y cómo estas afectan la variable de salida a través de sus derivadas parciales. La propagación de la incertidumbre es fundamental para evaluar la calidad de las mediciones en sistemas de medida complejos donde la salida depende de múltiples variables de entrada, permitiendo así una evaluación más precisa de la incertidumbre total asociada a la medición. \marginnote{
+    \textbf{Ejemplo: Método Voltio-Amperimétrico} \\
+    Medimos una resistencia $R$ mediante el método voltio-amperimétrico mediante $V$ e $I$:
+    \begin{itemize}
+        \item $V = 10.00 \pm 0.05$ V
+        \item $I = 2.00 \pm 0.01$ A
+    \end{itemize}
+    \begin{enumerate}
+      \item Cálculo de $R$ e $I$:
+      \[ R = \frac{V}{I} \]
+      \[ R = \frac{10}{2} = 5.00 \, \Omega \]
+      \item Cálculo de las derivadas parciales (coeficientes de sensibilidad):
+      \[ \frac{\partial R}{\partial V} = \frac{1}{I} = \frac{1}{2} = 0.5 \Omega/V \]
+      \[ \frac{\partial R}{\partial I} = -\frac{V}{I^2} = -\frac{10}{2^2} = -2.5 \Omega/A \]
+      \item Cálculo de la incertidumbre combinada:
+      \[ u_c(R) = \sqrt{\left( \frac{\partial R}{\partial V} u_V \right)^2 + \left( \frac{\partial R}{\partial I} u_I \right)^2} \]
+      \[ u_c(R) = \sqrt{\left( 0.5 \times 0.05 \right)^2 + \left( -2.5 \times 0.01  \right)^2} \]
+      \[ u_c(R) = \sqrt{\left( 0.025 \right)^2 + \left( -0.025 \right)^2} \]
+      \[ u_c(R) = \sqrt{0.000625 + 0.000625} \]
+      \[ u_c(R) = \sqrt{0.00125} \approx 0.0354 \, \Omega \]
+      \[ U = k \times u_c(R) = 2 \times 0.0354 = 0.0708\, \Omega \]
+      \item Resultado final:
+      $R = 5.00 \pm 0.071 \, \Omega$ (con un nivel de confianza del 95\% si se utiliza un factor de cobertura $k=2$).  
+    \end{enumerate}
+} 
+
+La incertidumbre combinada se obtiene mediante la raíz cuadrada de la suma de los cuadrados de las incertidumbres individuales ponderadas. Este procedimiento es el estándar propuesto por la guía GUM para variables no correlacionadas. En casos donde las variables de entrada están correlacionadas, se deben incluir términos adicionales que consideren la covarianza entre las variables. La fórmula general para la propagación de la incertidumbre en el caso de variables correlacionadas es:
+\[
+u_c(f) = \sqrt{\sum_{i=1}^{n} \left( \frac{\partial f}{\partial x_i} u_i \right)^2 + 2 \sum_{i=1}^{n} \sum_{j=i+1}^{n} \frac{\partial f}{\partial x_i} \frac{\partial f}{\partial x_j} u_i u_j}
+\]
+donde el segundo término incluye la covarianza entre las variables de entrada $x_i$ y $x_j$. En la práctica, es común asumir que las variables de entrada son independientes (no correlacionadas), lo que simplifica la fórmula a la versión sin términos de covarianza. Sin embargo, en situaciones donde existe una correlación significativa entre las variables de entrada, es crucial considerar estos términos adicionales para obtener una estimación precisa de la incertidumbre total.
+
+\subsection{Incertidumbre Expandida (Guía GUM)}
+
+La incertidumbre expandida se utiliza para proporcionar un intervalo de confianza alrededor del valor medido, indicando el rango dentro del cual se espera que se encuentre el valor verdadero con un nivel de confianza específico. Se calcula multiplicando la incertidumbre combinada por un factor de cobertura $k$:
+\[U = k \cdot u_c
+\]
+El factor de cobertura $k$ depende del nivel de confianza deseado y de la distribución de la incertidumbre. Para una distribución normal, los valores comunes de $k$ son:
+\begin{itemize}
+    \item $k = 1$ para aproximadamente el 68\% (68.27\%) de confianza.
+    \item $k = 2$ para aproximadamente el 95\% (95.45\%) de confianza.
+    \item $k = 3$ para aproximadamente el 99.7\% (99.73\%) de confianza.
+\end{itemize}
+La incertidumbre expandida proporciona una forma de comunicar la incertidumbre de una medición de manera más comprensible para los usuarios finales, indicando el rango dentro del cual se espera que se encuentre el valor verdadero con un nivel de confianza específico. Es importante destacar que la incertidumbre expandida no es una medida de la precisión o exactitud del sistema de medida, sino una forma de expresar la incertidumbre de la medición en términos de un intervalo de confianza. La elección del factor de cobertura $k$ debe basarse en el nivel de confianza deseado y en la distribución de la incertidumbre, y es fundamental para garantizar que la incertidumbre expandida proporcione una representación precisa de la incertidumbre de la medición. Como se ilustra en la Figura~\ref{fig:intervalos_confianza}, el factor de cobertura $k$ determina el nivel de confianza asociado a la incertidumbre expandida, con áreas sombreadas que representan los intervalos de confianza correspondientes a diferentes valores de $k$.
+\begin{marginfigure}[-15em]
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}[
+    %every node/.style={},
+    declare function={gauss(\x,\mu,\sig)=1/(\sig*sqrt(2*pi))*exp(-((\x-\mu)^2)/(2*\sig^2));}
 ]
+    \begin{axis}[
+        no markers, domain=-4:4, samples=100,
+        axis lines=left, xlabel=$x$, ylabel=$P(x)$,
+        every axis y label/.style={at=(current axis.above origin),anchor=south},
+        every axis x label/.style={at=(current axis.right of origin),anchor=west},
+        height=5cm, width=1.2\linewidth,
+        xtick={-3,-2, -1, 0, 1, 2, 3},
+        xticklabels={$-3\sigma$, $-2\sigma$, $-\sigma$, $\mu$, $\sigma$, $2\sigma$, $3\sigma$},
+        ytick=\empty,
+        enlargelimits=false, clip=false, axis on top,
+        grid = none
+    ]
+    
+    % Área k=2 (95%)
+    \addplot [fill=blue!10, domain=-2:2] {gauss(x, 0, 1)} \closedcycle;
+    % Área k=1 (68%)
+    \addplot [fill=blue!30, domain=-1:1] {gauss(x, 0, 1)} \closedcycle;
+    
+    % Curva principal
+    \addplot [thick,cyan!50!black] {gauss(x, 0, 1)};
+
+    % Anotaciones
+    \node[anchor=north] at (axis cs: 0, 0.2) {68\% ($k=1$)};
+    \draw[<->, >=stealth] (axis cs: -2, 0.05) -- node[below] {95\% de confianza ($k=2$)} (axis cs: 2, 0.05);
+
+    \end{axis}
+\end{tikzpicture}
+\caption{Figura que ilustra la relación entre el factor de cobertura $k$ y el nivel de confianza en una distribución normal. El área sombreada en azul claro representa el intervalo de confianza del 95\% (correspondiente a $k=2$), mientras que el área sombreada en azul más oscuro representa el intervalo de confianza del 68\% (correspondiente a $k=1$). La curva principal muestra la distribución normal estándar con media $\mu$ y desviación estándar $\sigma$. El factor $k=2$ asume que el numero de medidas independientes, $n$, es grande (n $\gg$ 30), si $n$ es pequeño se usa la $t$-Student. }\label{fig:intervalos_confianza}
+\end{marginfigure}
+
+Significa que si realizamos una medición y calculamos la incertidumbre combinada $u_c$, podemos proporcionar un intervalo de confianza alrededor del valor medido utilizando la incertidumbre expandida $U$. Por ejemplo, si medimos una resistencia y obtenemos un valor de $R = 100 \, \Omega$ con una incertidumbre combinada de $u_c = 2 \, \Omega$, y queremos proporcionar un intervalo de confianza del 95\%, podemos calcular la incertidumbre expandida como $U = 2 \cdot u_c = 4 \, \Omega$. Esto nos permite comunicar que el valor verdadero de la resistencia se encuentra dentro del rango de $96 \, \Omega$ a $104 \, \Omega$ con un nivel de confianza del 95\%. La incertidumbre expandida es una herramienta esencial para comunicar la calidad de las mediciones y proporcionar a los usuarios finales una comprensión clara de la incertidumbre asociada a los resultados de las mediciones.
+
+En este punto final de la discusión es necesario aclarar la diferencia entre lo que hace el sensor que mide y lo que sabemos nosotros, usando las mediciones independientes, $n$. Por ejemplo, si medimos un voltaje 10 veces, $n=10$, cada medida individual $x_i$ será distinta  debido al ruido aleatorio. la dispersión de esas medidas individuales se representa mediante la desviación típica $s(x)$, representa el ruido intrínseco del sistema. por mucho que se aumente $n$, la desviación típica $s(x)$ no disminuye, es una propiedad del sistema. 
+
+Sin embargo, la incertidumbre típica $u_A$ representa la dispersión de la media de las medidas, y esta sí disminuye al aumentar el número de medidas $n$, ya que se calcula como $u_A = \frac{s(x)}{\sqrt{n}}$. Al promediar, los errores aleatorios (positivos y negativos) tienden a cancelarse. Por eso, cuantas más muestras $n$, más estrecha es la distribución de la media y más 'seguros'   estamos del resultado. Esto significa que al aumentar el número de medidas independientes, podemos reducir la incertidumbre asociada a la media de las medidas, lo que nos permite obtener una estimación más precisa del valor verdadero. 
+
+En resumen, el sensor mide con una desviación típica $s(x)$ que representa el ruido intrínseco del sistema, mientras que nosotros podemos reducir la incertidumbre de la media de las medidas aumentando el número de mediciones independientes $n$, lo que se refleja en la disminución de la incertidumbre típica $u_A$.

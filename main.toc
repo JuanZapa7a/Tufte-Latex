@@ -6,5 +6,7 @@
 \contentsline {section}{\numberline {1.4}Evaluación de la Incertidumbre (Guía GUM)}{15}{section.1.4}%
 \contentsline {subsection}{Evaluación Tipo A (Estadística)}{16}{subsection*.4}%
 \contentsline {subsection}{Evaluación Tipo B (Hojas de datos)}{16}{subsection*.5}%
-\contentsline {chapter}{Bibliograf\'{\i }a}{17}{appendix*.6}%
+\contentsline {subsection}{Propagación de la Incertidumbre (Guía GUM)}{16}{subsection*.6}%
+\contentsline {subsection}{Incertidumbre Expandida (Guía GUM)}{17}{subsection*.7}%
+\contentsline {chapter}{Bibliograf\'{\i }a}{19}{appendix*.8}%
 \contentsfinish 

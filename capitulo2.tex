@@ -1,0 +1,247 @@
+% !TeX root = main.tex
+% !TEX program = pdflatex
+
+\chapter{Características de los Sistemas de Medida}
+
+
+En este capítulo se analiza el comportamiento de los sistemas de instrumentación desde dos perspectivas: la \textbf{estática}, que describe la relación entrada-salida cuando la magnitud es constante o varía lentamente, y la \textbf{dinámica}, que estudia la respuesta temporal y frecuencial ante cambios rápidos de la magnitud física.
+
+
+\section{Características Estáticas}\label{sec:caract_estaticas}
+
+Las características estáticas describen el rendimiento de un instrumento cuando la magnitud medida $x$ no varía con el tiempo o lo hace de forma tan lenta que los efectos de inercia o retardos son despreciables. En este régimen, la salida $y$ del sistema se puede modelar como una función de la entrada $x$: $y = f(x)$.
+
+\subsection{Curva de Calibración y Sensibilidad}
+
+La función de transferencia o curva de calibración relaciona la salida $y$ con la entrada $x$: $y = f(x)$. En un sistema ideal, esta relación es lineal: $y = mx + b$, donde $m$ es la pendiente y $b$ el offset u ordenada en el origen del sistema de coordenadas. Sin embargo, en la práctica, los sensores presentan no linealidades, lo que se refleja en una curva de calibración que puede ser polinómica o incluso más compleja.
+
+\begin{itemize}
+    \item \textbf{Sensibilidad ($S$)}: Es la pendiente de la curva de calibración. 
+    \[ S(x) = \frac{dy}{dx} \]
+    Si el sistema es lineal, la sensibilidad es constante. En sistemas no lineales (como un termistor NTC, \textit{nonlinear termistor coefficient}), la sensibilidad depende del punto de operación.
+    
+    \item \textbf{Resolución}: Es el incremento más pequeño de la entrada que produce un cambio perceptible en la salida. En instrumentación digital, suele estar limitada por el número de bits del convertidor analógico digital (\textit{analog to digital converter}, ADC) y el ruido.
+\end{itemize}
+
+Esta característica es fundamental para entender la precisión y el rango de operación de un sensor, así como para diseñar sistemas de control que utilicen estas mediciones. Por ejemplo, un sensor con alta sensibilidad puede ser adecuado para medir pequeñas variaciones, pero podría saturarse o ser más susceptible al ruido en rangos más amplios. Por otro lado, un sensor con baja sensibilidad puede ser más robusto frente a perturbaciones, pero podría no ser capaz de detectar cambios sutiles en la magnitud medida. Por ello, la elección del sensor adecuado depende del contexto de aplicación y de los requisitos específicos de medición.
+
+En cuanto a la resolución, es importante considerar que un sistema con alta resolución no garantiza una medición precisa si el ruido es significativo, ya que el ruido puede enmascarar las pequeñas variaciones que el sistema es capaz de detectar. Por ejemplo, en un sistema de adquisición de datos con un ADC de 12 bits y un rango de entrada de 0 a 10 V, la resolución teórica sería de aproximadamente 2.44 mV por bit. Sin embargo, si el ruido del sistema es del orden de varios milivoltios, la resolución efectiva se verá reducida, ya que las pequeñas variaciones en la entrada podrían no ser distinguibles debido al ruido.
+
+\subsection{Linealidad y Ajuste por Mínimos Cuadrados}
+
+En ingeniería, siempre preferimos sistemas lineales de la forma $y = mx + b$, ya que facilitan el procesado posterior. Sin embargo, los sensores reales presentan desviaciones. Para obtener la "mejor recta" que representa a un sensor en el laboratorio, utilizamos el \textbf{Método de los Mínimos Cuadrados}, comose muestra en la Figura~\ref{fig:minimos_cuadrados}.
+\begin{marginfigure}[-30em]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            width=\linewidth,
+            height=5cm,
+            xlabel={$x$ (Entrada)},
+            ylabel={$y$ (Salida)},
+            font=\scriptsize,
+            axis lines=left,
+            scatter/classes={a={mark=o,draw=blue}},
+            legend style={at={(0.5,-0.3)},anchor=north,legend columns=-1}
+        ]
+            % Puntos experimentales
+            \addplot[scatter,only marks,scatter src=explicit symbolic]
+                table[meta=label] {
+                    x y label
+                    1 1.2 a
+                    2 2.8 a
+                    3 3.1 a
+                    4 4.9 a
+                    5 5.2 a
+                };
+            % Recta de ajuste
+            \addplot[thick, red, domain=0:5.5] {1.05*x + 0.1};
+            
+            % Línea de error (ejemplo)
+            \draw[dashed, gray] (axis cs:3, 3.1) -- (axis cs:3, 3.25);
+            \node[right, font=\tiny] at (axis cs:3, 3.15) {$e_i$};
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Ajuste lineal por mínimos cuadrados. La recta minimiza la distancia vertical al cuadrado de cada punto experimental.}\label{fig:minimos_cuadrados}
+\end{marginfigure}
+
+Dado un conjunto de $n$ pares de medidas $(x_i, y_i)$, buscamos la recta que minimiza la suma de los cuadrados de los residuos ($e_i$). El residuo para cada punto es la diferencia entre la salida medida $y_i$ y la salida predicha por la recta de ajuste $mx_i + b$:
+\[ e_i = y_i - (mx_i + b) \]
+
+El objetivo es encontrar los coeficientes $m$ y $b$ que minimizan la suma de los cuadrados de los residuos:
+\[ \sum_{i=1}^n e_i^2 = \sum_{i=1}^n (y_i - (mx_i + b))^2 = \sum_{i=1}^n (y_i - mx_i - b)^2 \]
+
+Para obtener la mejor representación lineal de los datos obtenidos en el laboratorio, utilizamos el \textbf{Método de los Mínimos Cuadrados}.\marginnote[-25em]{
+\textbf{Derivación de Mínimos Cuadrados:} \\
+La demostración de estas fórmulas se basa en la minimización de la función de error, que es la suma de los cuadrados de los residuos. Al derivar esta función con respecto a $m$ y $b$ y establecer las derivadas iguales a cero, se obtienen las fórmulas mencionadas para $m$ y $b$. Este proceso asegura que se encuentra el punto mínimo de la función de error, lo que corresponde a la mejor recta de ajuste para los datos experimentales.
+
+Para minimizar la función de error cuadrático $E(m, b) = \sum_{i=1}^n (y_i - mx_i - b)^2$, buscamos el punto donde las derivadas parciales se anulan:
+
+\begin{enumerate}
+    \item $\frac{\partial E}{\partial m} = -2\sum x_i (y_i - mx_i - b) = 0$
+    \item $\frac{\partial E}{\partial b} = -2\sum (y_i - mx_i - b) = 0$
+\end{enumerate}
+
+Reorganizando términos (Ecuaciones Normales):
+\begin{equation} \label{eq:normal1}
+    m\sum x_i^2 + b\sum x_i = \sum x_i y_i
+\end{equation}
+\begin{equation} \label{eq:normal2}
+    m\sum x_i + nb = \sum y_i
+\end{equation}
+
+Despejando $b$ de (\ref{eq:normal2}):
+\[ b = \frac{\sum y_i - m\sum x_i}{n} = \bar{y} - m\bar{x} \]
+
+Sustituyendo $b$ en (\ref{eq:normal1}) y resolviendo para $m$:
+\begin{equation} \label{eq:m_final}
+    m = \frac{n\sum x_i y_i - \sum x_i \sum y_i}{n\sum x_i^2 - (\sum x_i)^2}
+\end{equation}
+
+Estas expresiones permiten calcular la recta de mejor ajuste para cualquier conjunto de datos experimentales.
+} Este método garantiza que la recta de ajuste $y = mx + b$ minimice la suma de los cuadrados de las distancias verticales (residuos) de cada punto experimental a la recta. Las fórmulas para calcular la pendiente ($m$) y la ordenada en el origen ($b$) son:
+
+\begin{equation} \label{eq:m_final}
+    m = \frac{n \sum\limits_{i=1}^n x_i y_i - \left(\sum\limits_{i=1}^n x_i\right) \left(\sum\limits_{i=1}^n y_i\right)}{n \sum\limits_{i=1}^n x_i^2 - \left(\sum\limits_{i=1}^n x_i\right)^2}
+\end{equation}
+
+\begin{equation} \label{eq:b_final}
+    b = \bar{y} - m\bar{x} = \frac{\sum\limits_{i=1}^n y_i - m \sum\limits_{i=1}^n x_i}{n}
+\end{equation}
+donde $n$ es el número de pares de medidas $(x_i, y_i)$, y $\bar{x}, \bar{y}$ son las medias aritméticas de las muestras. 
+
+
+
+
+En la Tabla \ref{tab:datos_ejemplo} del siguiente ejemplo se muestra un conjunto de $n=5$ pares de medidas $(x_i, y_i)$ y la recta de ajuste encontrada por el Método de los Mínimos Cuadrados. La recta de ajuste es la que minimiza la suma de los cuadrados de los residuos.
+
+\begin{margintable}
+    \centering
+    \footnotesize
+    \begin{tabular}{c c}
+        \toprule
+        $x_i$ (bar) & $y_i$ (V) \\
+        \midrule
+        0 & 0.1 \\
+        1 & 1.2 \\
+        2 & 1.9 \\
+        3 & 3.1 \\
+        4 & 3.9 \\
+        \bottomrule
+        \\
+    \end{tabular}
+    \caption{Datos experimentales del sensor. Se muestra un conjunto de $n=5$ pares de medidas $(x_i, y_i)$ y la recta de ajuste encontrada por el Método de los Mínimos Cuadrados.}
+    \label{tab:datos_ejemplo}
+\end{margintable}
+
+Para aplicar las fórmulas de mínimos cuadrados, calculamos primero las sumatorias necesarias:
+\begin{itemize}
+    \item $\sum x_i = 10$
+    \item $\sum y_i = 10.2$
+    \item $\sum x_i^2 = 0 + 1 + 4 + 9 + 16 = 30$
+    \item $\sum x_i y_i = (0\cdot 0.1) + (1\cdot 1.2) + (2\cdot 1.9) + (3\cdot 3.1) + (4\cdot 3.9) = 29.9$
+\end{itemize}
+
+Sustituyendo en las expresiones de la pendiente ($m$) y la ordenada en el origen ($b$):
+\begin{equation}
+    m = \frac{5(29.9) - (10)(10.2)}{5(30) - (10)^2} = \frac{149.5 - 102}{150 - 100} = \mathbf{0.95}
+\end{equation}
+\begin{equation}
+    b = \frac{10.2}{5} - 0.95\left(\frac{10}{5}\right) = 2.04 - 1.9 = \mathbf{0.14}
+\end{equation}
+
+La recta de ajuste resultante es \textbf{$y = 0.95x + 0.14$}.
+\begin{marginfigure}
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            width=\linewidth,
+            height=5cm,
+            xlabel={$x$ (bar)},
+            ylabel={$y$ (V)},
+            font=\scriptsize,
+            grid=both,
+            grid style={line width=.1pt, draw=gray!10},
+            major grid style={line width=.2pt,draw=gray!30},
+            axis lines=left,
+            xmin=-0.5, xmax=4.5,
+            ymin=0, ymax=4.5
+        ]
+            % Puntos experimentales
+            \addplot[
+                only marks,
+                mark=*,
+                blue,
+                mark size=1.5pt
+            ] coordinates {
+                (0, 0.1)
+                (1, 1.2)
+                (2, 1.9)
+                (3, 3.1)
+                (4, 3.9)
+            };
+            
+            % Recta de ajuste: y = 0.95x + 0.14
+            \addplot[
+                thick,
+                red,
+                domain=0:4
+            ] {0.95*x + 0.14};
+            
+            \legend{Exp., Ajuste}
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Representación de los puntos y la recta de ajuste calculada.}
+    \label{fig:grafico_ejemplo}
+\end{marginfigure}
+
+
+
+
+
+Una vez calculados estos parámetros, el \textbf{Error de No Linealidad}  se puede evaluar analizando el residuo máximo entre los valores medidos y los valores predichos por la recta de ajuste. El Error de No Linealidad se define como la máxima desviación de los puntos experimentales respecto a la recta de ajuste, expresado normalmente como porcentaje sobre el fondo de escala (\textit{Full Scale}, FS):
+
+\begin{equation}
+    \epsilon_{lin} = \frac{|y_i - (mx_i + b)|_{max}}{y_{max} - y_{min}} \times 100\%
+\end{equation}
+para el ejemplo anterior, el error de no linealidad se calcularía evaluando el residuo máximo entre los valores medidos y los valores predichos por la recta de ajuste, y luego dividiendo por el rango total de salida ($y_{max} - y_{min}$) para obtener un porcentaje.
+
+\begin{itemize}
+    \item \textbf{Error de No Linealidad}: Máxima desviación de los puntos experimentales respecto a la recta de ajuste, expresado normalmente como porcentaje sobre el fondo de escala (\textit{Full Scale}, FS).
+    \item \textbf{Error de Histeresis}: Máxima diferencia en la salida para un mismo valor de entrada según el sentido de la variación (ascendente o descendente).
+\end{itemize}
+
+
+\section{Características Dinámicas}\label{sec:caract_dinamicas} 
+
+Existen diferentes formas de definir la recta de referencia:
+\begin{enumerate}
+    \item \textbf{Linealidad de terminales}: Recta que une el origen y el punto máximo.
+    \item \textbf{Linealidad a través de cero}: Obliga a que $b=0$.
+    \item \textbf{Mejor recta de ajuste}: La obtenida por mínimos cuadrados (la más común).
+\end{enumerate}
+
+\subsection{Histéresis y Repetibilidad}
+
+Un sistema presenta \textbf{histéresis} cuando la salida depende de la dirección en la que se alcanza la entrada (ascendente o descendente).
+
+\begin{marginfigure}
+    \centering
+    \begin{tikzpicture}
+      \shorthandoff{>}
+        \draw[->] (0,0) -- (2.5,0) node[right, font=\tiny] {$x$};
+        \draw[->] (0,0) -- (0,2.5) node[above, font=\tiny] {$y$};
+        % Curva ascendente
+        \draw[blue, thick, ->] (0.2,0.2) .. controls (1,0.8) .. (2,2);
+        % Curva descendente
+        \draw[red, thick, ->] (2,2) .. controls (1.2,1.4) .. (0.2,0.2);
+        \node[blue, font=\tiny] at (0.5,1) {asc.};
+        \node[red, font=\tiny] at (1.5,1.2) {desc.};
+    \end{tikzpicture}
+    \caption{Efecto de histéresis. Es común en sensores magnéticos y mecánicos debido a la fricción o deformación elástica.}\label{fig:histeresis}
+\end{marginfigure}
+
+\begin{itemize}
+    \item \textbf{Histéresis}: Máxima diferencia en la salida para un mismo valor de entrada según el sentido de la variación.
+    \item \textbf{Banda de Muerta}: Rango de valores de entrada que no producen cambio en la salida (típico en reductores mecánicos).
+    \item \textbf{Repetibilidad}: Capacidad del sensor de entregar la misma salida al aplicar la misma entrada varias veces en periodos cortos de tiempo.
+\end{itemize}

@@ -8,5 +8,11 @@
 \contentsline {subsection}{Evaluación Tipo B (Hojas de datos)}{16}{subsection*.5}%
 \contentsline {subsection}{Propagación de la Incertidumbre (Guía GUM)}{16}{subsection*.6}%
 \contentsline {subsection}{Incertidumbre Expandida (Guía GUM)}{17}{subsection*.7}%
-\contentsline {chapter}{Bibliograf\'{\i }a}{19}{appendix*.8}%
+\contentsline {chapter}{\numberline {2}Características de los Sistemas de Medida}{19}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Características Estáticas}{19}{section.2.1}%
+\contentsline {subsection}{Curva de Calibración y Sensibilidad}{19}{subsection*.8}%
+\contentsline {subsection}{Linealidad y Ajuste por Mínimos Cuadrados}{20}{subsection*.9}%
+\contentsline {section}{\numberline {2.2}Características Dinámicas}{21}{section.2.2}%
+\contentsline {subsection}{Histéresis y Repetibilidad}{21}{subsection*.10}%
+\contentsline {chapter}{Bibliograf\'{\i }a}{23}{appendix*.11}%
 \contentsfinish 

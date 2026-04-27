@@ -68,11 +68,13 @@ Dado un conjunto de $n$ pares de medidas $(x_i, y_i)$, buscamos la recta que min
 \[ e_i = y_i - (mx_i + b) \]
 
 El objetivo es encontrar los coeficientes $m$ y $b$ que minimizan la suma de los cuadrados de los residuos:
-\[ \sum_{i=1}^n e_i^2 = \sum_{i=1}^n (y_i - (mx_i + b))^2 = \sum_{i=1}^n (y_i - mx_i - b)^2 \]
+\begin{equation} 
+    \sum_{i=1}^n e_i^2 = \sum_{i=1}^n (y_i - (mx_i + b))^2 = \sum_{i=1}^n (y_i - mx_i - b)^2
+\end{equation}\label{eq:error_cuadratico}
 
-Para obtener la mejor representación lineal de los datos obtenidos en el laboratorio, utilizamos el \textbf{Método de los Mínimos Cuadrados}.\marginnote[-25em]{
-\textbf{Derivación de Mínimos Cuadrados:} \\
-La demostración de estas fórmulas se basa en la minimización de la función de error, que es la suma de los cuadrados de los residuos. Al derivar esta función con respecto a $m$ y $b$ y establecer las derivadas iguales a cero, se obtienen las fórmulas mencionadas para $m$ y $b$. Este proceso asegura que se encuentra el punto mínimo de la función de error, lo que corresponde a la mejor recta de ajuste para los datos experimentales.
+Para obtener la mejor representación lineal de los datos obtenidos en el laboratorio, utilizamos el \textbf{Método de los Mínimos Cuadrado}.\marginnote[-17em]{
+\textbf{ Método de los Mínimos Cuadrados: $m$ y $b$} \\
+La demostración de la Ecuación \ref{eq:m_final} y \ref{eq:b_final} se basa en la minimización de la función de error cuadratico proporcionada por la Ecuación \ref{eq:error_cuadratico}, que es la suma de los cuadrados de los residuos. Al derivar esta función con respecto a $m$ y $b$ y establecer las derivadas iguales a cero, se obtienen las fórmulas mencionadas para $m$ y $b$. Este proceso asegura que se encuentra el punto mínimo de la función de error, lo que corresponde a la mejor recta de ajuste para los datos experimentales.
 
 Para minimizar la función de error cuadrático $E(m, b) = \sum_{i=1}^n (y_i - mx_i - b)^2$, buscamos el punto donde las derivadas parciales se anulan:
 

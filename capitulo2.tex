@@ -151,7 +151,7 @@ Sustituyendo en las expresiones de la pendiente ($m$) y la ordenada en el origen
     b = \frac{10.2}{5} - 0.95\left(\frac{10}{5}\right) = 2.04 - 1.9 = \mathbf{0.14}
 \end{equation}
 
-La recta de ajuste resultante es \textbf{$y = 0.95x + 0.14$}.
+La recta de ajuste resultante es \textbf{$y = 0.95x + 0.14$} y está representada en la Figura~\ref{fig:grafico_ejemplo}.
 \begin{marginfigure}
     \centering
     \begin{tikzpicture}
@@ -165,7 +165,7 @@ La recta de ajuste resultante es \textbf{$y = 0.95x + 0.14$}.
             grid style={line width=.1pt, draw=gray!10},
             major grid style={line width=.2pt,draw=gray!30},
             axis lines=left,
-            xmin=-0.5, xmax=4.5,
+            xmin=0, xmax=4.5,
             ymin=0, ymax=4.5
         ]
             % Puntos experimentales
@@ -192,30 +192,122 @@ La recta de ajuste resultante es \textbf{$y = 0.95x + 0.14$}.
             \legend{Exp., Ajuste}
         \end{axis}
     \end{tikzpicture}
-    \caption{Representación de los puntos y la recta de ajuste calculada.}
-    \label{fig:grafico_ejemplo}
+    \caption{Representación de los puntos y la recta de ajuste calculada por el Método de los Mínimos Cuadrados.}\label{fig:grafico_ejemplo}
 \end{marginfigure}
 
-
-
-
-
+\subsection{Error de No Linealidad} \label{sec:error_no_linealidad}
 Una vez calculados estos parámetros, el \textbf{Error de No Linealidad}  se puede evaluar analizando el residuo máximo entre los valores medidos y los valores predichos por la recta de ajuste. El Error de No Linealidad se define como la máxima desviación de los puntos experimentales respecto a la recta de ajuste, expresado normalmente como porcentaje sobre el fondo de escala (\textit{Full Scale}, FS):
 
 \begin{equation}
     \epsilon_{lin} = \frac{|y_i - (mx_i + b)|_{max}}{y_{max} - y_{min}} \times 100\%
 \end{equation}
-para el ejemplo anterior, el error de no linealidad se calcularía evaluando el residuo máximo entre los valores medidos y los valores predichos por la recta de ajuste, y luego dividiendo por el rango total de salida ($y_{max} - y_{min}$) para obtener un porcentaje.
+para el ejemplo anterior, el error de no linealidad se calcularía evaluando el residuo máximo entre los valores medidos ($y_i$) y los valores predichos por la recta de ajuste ($mx_i + b$), y luego dividiendo por el rango total de salida ($y_{max} - y_{min}$) para obtener un porcentaje. Por lo tanto, el error de no linealidad se puede expresar como:
 
+\begin{equation}
+    \epsilon_{lin} = \frac{\max_i |y_i - (0.95x_i + 0.14)|}{3.9 - 0.1} \times 100\%
+\end{equation}
+donde $y_{max} = 3.9$ V y $y_{min} = 0.1$ V son los valores máximo y mínimo de la salida respectivamente. Este cálculo proporciona una medida cuantitativa de la desviación máxima de los puntos experimentales respecto a la recta de ajuste, lo que es crucial para evaluar la precisión del sensor en su rango de operación. Como $y_i$ valen 0.1, 1.2, 1.9, 3.1 y 3.9 V para $x_i$ igual a 0, 1, 2, 3 y 4 bar respectivamente, se evaluaría el residuo para cada punto y se identificaría el máximo para calcular el error de no linealidad. Así tenemos que el error de no linealidad se calcula evaluando el residuo para cada punto:
 \begin{itemize}
-    \item \textbf{Error de No Linealidad}: Máxima desviación de los puntos experimentales respecto a la recta de ajuste, expresado normalmente como porcentaje sobre el fondo de escala (\textit{Full Scale}, FS).
-    \item \textbf{Error de Histeresis}: Máxima diferencia en la salida para un mismo valor de entrada según el sentido de la variación (ascendente o descendente).
+    \item Para $x_0 = 0$ bar: $|0.1 - (0.95\cdot 0 + 0.14)| = |0.1 - 0.14| = 0.04$ V
+    \item Para $x_1 = 1$ bar: $|1.2 - (0.95\cdot 1 + 0.14)| = |1.2 - 1.09               | = 0.11$ V
+    \item Para $x_2 = 2$ bar: $|1.9 - (0.95\    cdot 2 + 0.14)| = |1.9 - 2.04| = 0.14$ V
+    \item Para $x_3 = 3$ bar: $|3.1 - (0.95\cdot 3 + 0.14)| = |3.1 - 2.85| = 0.19$ V    
+    \item Para $x_4 = 4$ bar: $|3.9 - (0.95\cdot 4 + 0.14)| = |3.9 - 3.64| = 0.21$ V
 \end{itemize}
+Por lo tanto, el residuo máximo es $0.21$ V para $x_4 = 4$ bar. Finalmente, el error de no linealidad se calcula como:
+\begin{equation}
+    \epsilon_{lin} = \frac{0.21}{3.9 - 0.1} \times 100\% \approx 5.38\%
+\end{equation}
+Esto indica que el error de no linealidad del sensor es aproximadamente del 5.38\% del fondo de escala, lo que proporciona una medida cuantitativa de la desviación máxima de los puntos experimentales respecto a la recta de ajuste, y es crucial para evaluar la precisión del sensor en su rango de operación. Un error de no linealidad del 5.38\% puede ser considerado aceptable o inaceptable dependiendo de los requisitos específicos de la aplicación para la cual se está utilizando el sensor. En aplicaciones donde se requiere alta precisión, este nivel de no linealidad podría ser problemático, mientras que en aplicaciones más tolerantes a la imprecisión, podría ser perfectamente adecuado. Por lo tanto, es importante evaluar este error en el contexto de la aplicación específica para determinar si el sensor cumple con los requisitos de precisión necesarios.
+
+\subsection{Error de Histeresis}
+
+
+Además, el \textbf{Error de Histeresis} se puede evaluar comparando las salidas para un mismo valor de entrada según el sentido de la variación (ascendente o descendente). Este error se define como la máxima diferencia en la salida para un mismo valor de entrada según el sentido de la variación, y se expresa también como porcentaje sobre el fondo de escala:
+
+\begin{equation}    
+    \epsilon_{his} = \frac{|y_{asc} - y_{desc}|_{max}}{y_{max} - y_{min}} \times 100\%
+\end{equation}
+donde $y_{asc}$ y $y_{desc}$ son las salidas correspondientes a un mismo valor de entrada durante la variación ascendente y descendente respectivamente. Este cálculo proporciona una medida cuantitativa de la diferencia máxima en la salida para un mismo valor de entrada según el sentido de la variación, lo que es fundamental para evaluar la estabilidad y confiabilidad del sensor en aplicaciones donde se esperan cambios frecuentes en la magnitud medida.
+
+
+% \begin{itemize}
+%     \item \textbf{Error de No Linealidad}: Máxima desviación de los puntos experimentales respecto a la recta de ajuste, expresado normalmente como porcentaje sobre el fondo de escala (\textit{Full Scale}, FS).
+%     \item \textbf{Error de Histeresis}: Máxima diferencia en la salida para un mismo valor de entrada según el sentido de la variación (ascendente o descendente).
+% \end{itemize}
 
 
 \section{Características Dinámicas}\label{sec:caract_dinamicas} 
 
-Existen diferentes formas de definir la recta de referencia:
+%que son las caracteristicas dinamicas y diferencia con las estaticas
+Las características dinámicas describen el comportamiento de un sistema de medida cuando la magnitud física varía con el tiempo. A diferencia de las características estáticas, que se centran en la relación entre entrada y salida en condiciones de equilibrio o variaciones lentas, las características dinámicas analizan cómo el sistema responde a cambios rápidos en la magnitud medida, incluyendo aspectos como la velocidad de respuesta, la estabilidad y la capacidad para seguir señales de alta frecuencia.
+
+\subsection{Recta de Referencia}
+%que es la recta de referencia y como se define.
+
+La recta de referencia es una linea que une el origen del sistema de coordenadas con el punto máximo de la salida. Esta recta se utiliza como una referencia para evaluar la linealidad y el comportamiento dinámico del sistema de medida. La elección de la recta de referencia es crucial, ya que puede influir en la interpretación de las características dinámicas del sensor, como la histéresis y la repetibilidad.
+
+%ejemplo grafico de la recta de referencia y como se define.Dibujar una serie de puntos experimentales que no sean muy lineales y luego dibujar la recta de ajuste y la recta de referencia que los une. Explicar que esta recta se utiliza para evaluar la linealidad y el comportamiento dinámico del sistema de medida.
+\begin{marginfigure}
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            width=\linewidth,
+            height=5cm,
+            xlabel={$x$ (bar)},
+            ylabel={$y$ (V)},
+            %font=\scriptsize,
+            grid=both,
+            grid style={line width=.1pt, draw=gray!10},
+            major grid style={line width=.2pt,draw=gray!30},
+            minor grid style={line width=.1pt,draw=gray!10},
+            axis lines=left,
+            every axis y label/.style={at=(current axis.above origin),anchor=south},
+            every axis x label/.style={at=(current axis.right of origin),anchor=west},
+            xmin=0, xmax=4.5,
+            ymin=0, ymax=4.5,
+            xtick={0,1,2,3,4},
+            ytick={0,1,2,3,4},    
+            xticklabels={$0$,$1$,$2$,$3$,$4$},
+            yticklabels={$0$,$1$,$2$,$3$,$4$},
+            enlargelimits=false, clip=false, axis on top,
+            legend style={at={(0.75,0.5)}, anchor=north, legend columns=1},
+        ]
+            % Puntos experimentales
+            \addplot[
+                only marks,
+                mark=*,
+                blue,
+                mark size=1.5pt
+            ] coordinates {
+                (0, 0.1)
+                (1, 1.2)
+                (2, 1.9)
+                (3, 3.1)
+                (4, 3.9)
+            };
+            
+            % Recta de ajuste: y = 0.95x + 0.14
+            \addplot[
+                thick,
+                red,
+                domain=0:4
+            ] {0.95*x + 0.14};
+            
+            % Recta de referencia: y = x
+            \addplot[
+                thick,
+                dashed,
+                gray,
+                domain=0:4
+            ] {x};
+            \legend{Exp., Ajuste, Ref.}           
+        \end{axis}
+        ]        
+    \end{tikzpicture}
+    \end{marginfigure}
+
+Existen diferentes formas de definir la recta de referencia. La recta de referencia puede ser elegida basada en las siguientes características dinámicas:
 \begin{enumerate}
     \item \textbf{Linealidad de terminales}: Recta que une el origen y el punto máximo.
     \item \textbf{Linealidad a través de cero}: Obliga a que $b=0$.

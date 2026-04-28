@@ -8,7 +8,7 @@
 \contentsline {figure}{\numberline {1.6}{\ignorespaces Figura que ilustra la relación entre el factor de cobertura $k$ y el nivel de confianza en una distribución normal. El área sombreada en azul claro representa el intervalo de confianza del 95\% (correspondiente a $k=2$), mientras que el área sombreada en azul más oscuro representa el intervalo de confianza del 68\% (correspondiente a $k=1$). La curva principal muestra la distribución normal estándar con media $\mu $ y desviación estándar $\sigma $. El factor $k=2$ asume que el numero de medidas independientes, $n$, es grande (n $\gg $ 30), si $n$ es pequeño se usa la $t$-Student. }}{18}{figure.1.6}%
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Ajuste lineal por mínimos cuadrados. La recta minimiza la distancia vertical al cuadrado de cada punto experimental.}}{20}{figure.2.1}%
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Representación de los puntos y la recta de ajuste calculada.}}{21}{figure.2.2}%
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Efecto de histéresis. Es común en sensores magnéticos y mecánicos debido a la fricción o deformación elástica.}}{21}{figure.2.3}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Representación de los puntos y la recta de ajuste calculada por el Método de los Mínimos Cuadrados.}}{21}{figure.2.2}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Efecto de histéresis. Es común en sensores magnéticos y mecánicos debido a la fricción o deformación elástica.}}{23}{figure.2.3}%
 \addvspace {10\p@ }
 \contentsfinish 

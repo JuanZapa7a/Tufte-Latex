@@ -10,5 +10,7 @@
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Ajuste lineal por mínimos cuadrados. La recta minimiza la distancia vertical al cuadrado de cada punto experimental.}}{20}{figure.2.1}%
 \contentsline {figure}{\numberline {2.2}{\ignorespaces Representación de los puntos y la recta de ajuste calculada por el Método de los Mínimos Cuadrados.}}{21}{figure.2.2}%
 \contentsline {figure}{\numberline {2.3}{\ignorespaces Efecto de histéresis. Es común en sensores magnéticos y mecánicos debido a la fricción o deformación elástica.}}{23}{figure.2.3}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Ejemplo de banda de muerta. Es común en sistemas mecánicos con fricción o en sensores que requieren una fuerza mínima para activar la salida.}}{23}{figure.2.4}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Ejemplo de repetibilidad. Un sensor con buena repetibilidad producirá resultados consistentes bajo las mismas condiciones de prueba.}}{23}{figure.2.5}%
 \addvspace {10\p@ }
 \contentsfinish 

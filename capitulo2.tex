@@ -38,7 +38,7 @@ En ingeniería, siempre preferimos sistemas lineales de la forma $y = mx + b$, y
             height=5cm,
             xlabel={$x$ (Entrada)},
             ylabel={$y$ (Salida)},
-            font=\scriptsize,
+            %font=\small,
             axis lines=left,
             scatter/classes={a={mark=o,draw=blue}},
             legend style={at={(0.5,-0.3)},anchor=north,legend columns=-1}
@@ -110,8 +110,6 @@ Estas expresiones permiten calcular la recta de mejor ajuste para cualquier conj
     b = \bar{y} - m\bar{x} = \frac{\sum\limits_{i=1}^n y_i - m \sum\limits_{i=1}^n x_i}{n}
 \end{equation}
 donde $n$ es el número de pares de medidas $(x_i, y_i)$, y $\bar{x}, \bar{y}$ son las medias aritméticas de las muestras. 
-
-
 
 
 En la Tabla \ref{tab:datos_ejemplo} del siguiente ejemplo se muestra un conjunto de $n=5$ pares de medidas $(x_i, y_i)$ y la recta de ajuste encontrada por el Método de los Mínimos Cuadrados. La recta de ajuste es la que minimiza la suma de los cuadrados de los residuos.
@@ -302,21 +300,23 @@ La recta de referencia es una linea que une el origen del sistema de coordenadas
                 domain=0:4
             ] {x};
             \legend{Exp., Ajuste, Ref.}           
-        \end{axis}
-        ]        
+        \end{axis}       
     \end{tikzpicture}
-    \end{marginfigure}
+\end{marginfigure}
 
-Existen diferentes formas de definir la recta de referencia. La recta de referencia puede ser elegida basada en las siguientes características dinámicas:
-\begin{enumerate}
-    \item \textbf{Linealidad de terminales}: Recta que une el origen y el punto máximo.
-    \item \textbf{Linealidad a través de cero}: Obliga a que $b=0$.
-    \item \textbf{Mejor recta de ajuste}: La obtenida por mínimos cuadrados (la más común).
-\end{enumerate}
+% Como se define la recta de referencia. existen varias formas?
+% la recta de referencia es una linea que une el origen del sistema de coordenadas con el punto máximo de la salida.
 
-\subsection{Histéresis y Repetibilidad}
+% Existen diferentes formas de definir la recta de referencia. La recta de referencia puede ser elegida basada en las siguientes características dinámicas:
+% \begin{enumerate}
+%     \item \textbf{Linealidad de terminales}: Recta que une el origen y el punto máximo.
+%     \item \textbf{Linealidad a través de cero}: Obliga a que $b=0$.
+%     \item \textbf{Mejor recta de ajuste}: La obtenida por mínimos cuadrados (la más común).
+% \end{enumerate}
 
-Un sistema presenta \textbf{histéresis} cuando la salida depende de la dirección en la que se alcanza la entrada (ascendente o descendente).
+\subsection{Histéresis y Repetibilidad}\label{sec:histeresis_repetibilidad}
+
+Un sistema presenta \textbf{histéresis} cuando la salida depende de la dirección en la que se alcanza la entrada (ascendente o descendente). Por ejemplo, si se aumenta la entrada $x$ desde un valor bajo hasta un valor alto, la salida $y$ puede seguir una curva diferente a la que se obtiene al disminuir $x$ desde el valor alto hasta el valor bajo. Esto se debe a que el sistema puede tener memoria o inercia, lo que provoca que la salida no solo dependa del valor actual de la entrada, sino también de su historia reciente. La histéresis es común en sensores magnéticos y mecánicos debido a la fricción o deformación elástica. En la Figura~\ref{fig:histeresis} se muestra un ejemplo gráfico del efecto de histéresis, donde la curva azul representa la variación ascendente de la entrada y la curva roja representa la variación descendente. La diferencia entre ambas curvas para el mismo rango de valores de entrada es una manifestación clara de la histéresis en el sistema. \marginnote[-8.4em]{\textbf{Ejemplo de histéresis.}Un ejemplo típico de histéresis es el comportamiento de un motor de paso, donde la velocidad de rotación puede variar dependiendo de la dirección en la que se mueve el eje. Otro ejemplo típico de histéresis es el comportamiento de un termistor NTC\ , donde la resistencia varía con la temperatura, pero la respuesta puede diferir dependiendo de si la temperatura está aumentando o disminuyendo, lo que es una manifestación de histéresis térmica.}
 
 \begin{marginfigure}
     \centering
@@ -334,8 +334,54 @@ Un sistema presenta \textbf{histéresis} cuando la salida depende de la direcci�
     \caption{Efecto de histéresis. Es común en sensores magnéticos y mecánicos debido a la fricción o deformación elástica.}\label{fig:histeresis}
 \end{marginfigure}
 
-\begin{itemize}
-    \item \textbf{Histéresis}: Máxima diferencia en la salida para un mismo valor de entrada según el sentido de la variación.
-    \item \textbf{Banda de Muerta}: Rango de valores de entrada que no producen cambio en la salida (típico en reductores mecánicos).
-    \item \textbf{Repetibilidad}: Capacidad del sensor de entregar la misma salida al aplicar la misma entrada varias veces en periodos cortos de tiempo.
-\end{itemize}
+%banda de Muerta
+
+El \textbf{banda de muerta} es un fenómeno relacionado con la histéresis, donde existe un rango de valores de entrada que no produce ningún cambio en la salida. Esto es común en sistemas mecánicos con fricción o en sensores que requieren una fuerza mínima para activar la salida. Por ejemplo, en un reductor mecánico, puede haber una banda de muerta debido a la fricción interna, lo que significa que pequeñas variaciones en la entrada no se traducen en cambios en la salida hasta que se supera un umbral específico. En la Figura~\ref{fig:banda_muerta} se muestra un ejemplo gráfico de una banda de muerta, donde la curva azul representa la respuesta del sistema a variaciones de entrada. En el rango marcado como "Banda de Muerta", la salida permanece constante a pesar de las variaciones en la entrada, lo que ilustra claramente este fenómeno. \marginnote[0em]{\textbf{Ejemplo de banda de muerta.}Un ejemplo típico de banda de muerta es el comportamiento de un reductor mecánico, donde puede haber una banda de muerta debido a la fricción interna, lo que significa que pequeñas variaciones en la entrada no se traducen en cambios en la salida hasta que se supera un umbral específico. Otro ejemplo típico de banda de muerta es el comportamiento de un sensor de presión, donde puede haber una banda de muerta debido a la necesidad de superar una presión mínima para activar la salida del sensor.}
+
+\begin{marginfigure}
+    \centering
+    \begin{tikzpicture}
+      \shorthandoff{>}
+        \draw[->] (0,0) -- (2.5,0) node[right, font=\tiny] {$x$};
+        \draw[->] (0,0) -- (0,2.5) node[above, font=\tiny] {$y$};
+        % Curva con banda de muerta
+        \draw[blue, thick] (0.2,0.2) -- (1,0.2) -- (1.5,1.5) -- (2,2);
+        % Banda de muerta
+        \draw[dashed, red] (1,0.2) -- (1.5,1.5);
+        \node[red, font=\tiny] at (1.25,0.8) {Banda de Muerta};
+    \end{tikzpicture}
+    \caption{Ejemplo de banda de muerta. Es común en sistemas mecánicos con fricción o en sensores que requieren una fuerza mínima para activar la salida.}\label{fig:banda_muerta}
+\end{marginfigure}
+
+La \textbf{repetibilidad} es la capacidad de un sensor para entregar la misma salida al aplicar la misma entrada varias veces en periodos cortos de tiempo. Un sensor con buena repetibilidad producirá resultados consistentes bajo las mismas condiciones de prueba, lo que es crucial para aplicaciones donde se requiere alta precisión y confiabilidad. La repetibilidad se puede evaluar realizando múltiples mediciones con el mismo valor de entrada y analizando la variación en las salidas obtenidas. Un sensor con alta repetibilidad tendrá una desviación estándar baja en sus mediciones, lo que indica que las salidas son consistentes y confiables. En la Figura~\ref{fig:repetibilidad} se muestra un ejemplo gráfico de repetibilidad, donde se realizan varias mediciones con el mismo valor de entrada. La dispersión de los puntos alrededor de la media indica el nivel de repetibilidad del sensor, siendo una dispersión menor indicativa de una mejor repetibilidad. \marginnote[0em]{\textbf{Ejemplo de repetibilidad.}Un ejemplo típico de repetibilidad es el comportamiento de un sensor de temperatura, donde se espera que el sensor entregue la misma salida para la misma temperatura en múltiples mediciones realizadas en periodos cortos de tiempo. Otro ejemplo típico de repetibilidad es el comportamiento de un sensor de presión, donde se espera que el sensor entregue la misma salida para la misma presión en múltiples mediciones realizadas en periodos cortos de tiempo.} 
+
+\begin{marginfigure}
+    \centering
+    \begin{tikzpicture}
+      \shorthandoff{>}
+        \draw[->] (0,0) -- (2.5,0) node[right, font=\tiny] {$x$};
+        \draw[->] (0,0) -- (0,2.5) node[above, font=\tiny] {$y$};
+        % Puntos de repetibilidad
+        \addplot[
+            only marks,
+            mark=*,
+            blue,
+            mark size=1.5pt
+        ] coordinates {
+            (1, 1.9)
+            (1, 2.0)
+            (1, 1.8)
+            (1, 2.1)
+            (1, 1.95)
+        };
+        \node[blue, font=\tiny] at (1.5,2) {Repetibilidad};
+    \end{tikzpicture}
+    \caption{Ejemplo de repetibilidad. Un sensor con buena repetibilidad producirá resultados consistentes bajo las mismas condiciones de prueba.}\label{fig:repetibilidad}
+\end{marginfigure}
+
+
+% \begin{itemize}
+%     \item \textbf{Histéresis}: Máxima diferencia en la salida para un mismo valor de entrada según el sentido de la variación.
+%     \item \textbf{Banda de Muerta}: Rango de valores de entrada que no producen cambio en la salida (típico en reductores mecánicos).
+%     \item \textbf{Repetibilidad}: Capacidad del sensor de entregar la misma salida al aplicar la misma entrada varias veces en periodos cortos de tiempo.
+% \end{itemize}

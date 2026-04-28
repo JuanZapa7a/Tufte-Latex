@@ -16,6 +16,6 @@
 \contentsline {subsection}{Error de Histeresis}{22}{subsection*.11}%
 \contentsline {section}{\numberline {2.2}Características Dinámicas}{22}{section.2.2}%
 \contentsline {subsection}{Recta de Referencia}{22}{subsection*.12}%
-\contentsline {subsection}{Histéresis y Repetibilidad}{23}{subsection*.13}%
+\contentsline {subsection}{Histéresis y Repetibilidad}{22}{subsection*.13}%
 \contentsline {chapter}{Bibliograf\'{\i }a}{25}{appendix*.14}%
 \contentsfinish 

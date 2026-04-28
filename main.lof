@@ -9,8 +9,11 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Ajuste lineal por mínimos cuadrados. La recta minimiza la distancia vertical al cuadrado de cada punto experimental.}}{20}{figure.2.1}%
 \contentsline {figure}{\numberline {2.2}{\ignorespaces Representación de los puntos y la recta de ajuste calculada por el Método de los Mínimos Cuadrados.}}{21}{figure.2.2}%
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Efecto de histéresis. Es común en sensores magnéticos y mecánicos debido a la fricción o deformación elástica.}}{23}{figure.2.3}%
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Ejemplo de banda de muerta. Es común en sistemas mecánicos con fricción o en sensores que requieren una fuerza mínima para activar la salida.}}{23}{figure.2.4}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Efecto de histéresis. Es común en sensores magnéticos y mecánicos debido a la fricción o deformación elástica.}}{22}{figure.2.3}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Ejemplo de banda de muerta. Es común en sistemas mecánicos con fricción o en sensores que requieren una fuerza mínima para activar la salida.}}{22}{figure.2.4}%
 \contentsline {figure}{\numberline {2.5}{\ignorespaces Ejemplo de repetibilidad. Un sensor con buena repetibilidad producirá resultados consistentes bajo las mismas condiciones de prueba.}}{23}{figure.2.5}%
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Respuesta al escalón de un sistema de orden 0. La salida sigue a la entrada instantáneamente sin retardo ni error dinámico.}}{23}{figure.2.6}%
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Respuesta al escalón de un sistema de 1er orden. La curva azul representa la salida $y(t)$ que se aproxima a su valor final $K \cdot x(t)$ de manera exponencial, y las líneas punteadas indican el tiempo $\tau $ necesario para que la salida alcance el \SI {63.2}{\percent } de su valor final. }}{24}{figure.2.7}%
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Respuesta al escalón de un sistema de segundo orden. Las curvas representan las salidas $y(t)$ que puedes presentar oscilaciones dependiendo del valor del factor de amortiguamiento $\zeta $. En este caso, se muestra un sistema subamortiguado ($\zeta < 1$) donde la salida oscila antes de estabilizarse en su valor final; un sistema críticamente amortiguado ($\zeta = 1$) donde la salida alcanza su valor final sin oscilar; y un sistema sobreamortiguado ($\zeta > 1$) donde la salida se aproxima a su valor final de manera exponencial sin oscilar.}}{24}{figure.2.8}%
 \addvspace {10\p@ }
 \contentsfinish 

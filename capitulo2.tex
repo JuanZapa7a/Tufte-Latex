@@ -1,6 +1,14 @@
 % !TeX root = main.tex
 % !TEX program = pdflatex
 
+%Este capitulo debe tener las siguientes seections:
+%Características de los Sistemas de Medida
+%Características Estáticas
+%Características Dinámicas
+%Recta de Referencia
+%Histéresis y Repetibilidad
+
+
 \chapter{Características de los Sistemas de Medida}
 
 
@@ -116,7 +124,7 @@ En la Tabla \ref{tab:datos_ejemplo} del siguiente ejemplo se muestra un conjunto
 
 \begin{margintable}
     \centering
-    \footnotesize
+    %\footnotesize
     \begin{tabular}{c c}
         \toprule
         $x_i$ (bar) & $y_i$ (V) \\
@@ -218,15 +226,7 @@ Por lo tanto, el residuo máximo es $0.21$ V para $x_4 = 4$ bar. Finalmente, el 
 \end{equation}
 Esto indica que el error de no linealidad del sensor es aproximadamente del 5.38\% del fondo de escala, lo que proporciona una medida cuantitativa de la desviación máxima de los puntos experimentales respecto a la recta de ajuste, y es crucial para evaluar la precisión del sensor en su rango de operación. Un error de no linealidad del 5.38\% puede ser considerado aceptable o inaceptable dependiendo de los requisitos específicos de la aplicación para la cual se está utilizando el sensor. En aplicaciones donde se requiere alta precisión, este nivel de no linealidad podría ser problemático, mientras que en aplicaciones más tolerantes a la imprecisión, podría ser perfectamente adecuado. Por lo tanto, es importante evaluar este error en el contexto de la aplicación específica para determinar si el sensor cumple con los requisitos de precisión necesarios.
 
-\subsection{Error de Histeresis}
 
-
-Además, el \textbf{Error de Histeresis} se puede evaluar comparando las salidas para un mismo valor de entrada según el sentido de la variación (ascendente o descendente). Este error se define como la máxima diferencia en la salida para un mismo valor de entrada según el sentido de la variación, y se expresa también como porcentaje sobre el fondo de escala:
-
-\begin{equation}    
-    \epsilon_{his} = \frac{|y_{asc} - y_{desc}|_{max}}{y_{max} - y_{min}} \times 100\%
-\end{equation}
-donde $y_{asc}$ y $y_{desc}$ son las salidas correspondientes a un mismo valor de entrada durante la variación ascendente y descendente respectivamente. Este cálculo proporciona una medida cuantitativa de la diferencia máxima en la salida para un mismo valor de entrada según el sentido de la variación, lo que es fundamental para evaluar la estabilidad y confiabilidad del sensor en aplicaciones donde se esperan cambios frecuentes en la magnitud medida.
 
 
 % \begin{itemize}
@@ -235,10 +235,7 @@ donde $y_{asc}$ y $y_{desc}$ son las salidas correspondientes a un mismo valor d
 % \end{itemize}
 
 
-\section{Características Dinámicas}\label{sec:caract_dinamicas} 
 
-%que son las caracteristicas dinamicas y diferencia con las estaticas
-Las características dinámicas describen el comportamiento de un sistema de medida cuando la magnitud física varía con el tiempo. A diferencia de las características estáticas, que se centran en la relación entre entrada y salida en condiciones de equilibrio o variaciones lentas, las características dinámicas analizan cómo el sistema responde a cambios rápidos en la magnitud medida, incluyendo aspectos como la velocidad de respuesta, la estabilidad y la capacidad para seguir señales de alta frecuencia.
 
 \subsection{Recta de Referencia}
 %que es la recta de referencia y como se define.
@@ -336,7 +333,7 @@ Un sistema presenta \textbf{histéresis} cuando la salida depende de la direcci�
 
 %banda de Muerta
 
-El \textbf{banda de muerta} es un fenómeno relacionado con la histéresis, donde existe un rango de valores de entrada que no produce ningún cambio en la salida. Esto es común en sistemas mecánicos con fricción o en sensores que requieren una fuerza mínima para activar la salida. Por ejemplo, en un reductor mecánico, puede haber una banda de muerta debido a la fricción interna, lo que significa que pequeñas variaciones en la entrada no se traducen en cambios en la salida hasta que se supera un umbral específico. En la Figura~\ref{fig:banda_muerta} se muestra un ejemplo gráfico de una banda de muerta, donde la curva azul representa la respuesta del sistema a variaciones de entrada. En el rango marcado como "Banda de Muerta", la salida permanece constante a pesar de las variaciones en la entrada, lo que ilustra claramente este fenómeno. \marginnote[0em]{\textbf{Ejemplo de banda de muerta.}Un ejemplo típico de banda de muerta es el comportamiento de un reductor mecánico, donde puede haber una banda de muerta debido a la fricción interna, lo que significa que pequeñas variaciones en la entrada no se traducen en cambios en la salida hasta que se supera un umbral específico. Otro ejemplo típico de banda de muerta es el comportamiento de un sensor de presión, donde puede haber una banda de muerta debido a la necesidad de superar una presión mínima para activar la salida del sensor.}
+El \textbf{banda de muerta} es un fenómeno relacionado con la histéresis, donde existe un rango de valores de entrada que no produce ningún cambio en la salida. Esto es común en sistemas mecánicos con fricción o en sensores que requieren una fuerza mínima para activar la salida. Por ejemplo, en un reductor mecánico, puede haber una banda de muerta debido a la fricción interna, lo que significa que pequeñas variaciones en la entrada no se traducen en cambios en la salida hasta que se supera un umbral específico. En la Figura~\ref{fig:banda_muerta} se muestra un ejemplo gráfico de una banda de muerta, donde la curva azul representa la respuesta del sistema a variaciones de entrada. En el rango marcado como "Banda de Muerta", la salida permanece constante a pesar de las variaciones en la entrada, lo que ilustra claramente este fenómeno. \marginnote[-1em]{\textbf{Ejemplo de banda de muerta.}Un ejemplo típico de banda de muerta es el comportamiento de un reductor mecánico, donde puede haber una banda de muerta debido a la fricción interna, lo que significa que pequeñas variaciones en la entrada no se traducen en cambios en la salida hasta que se supera un umbral específico. Otro ejemplo típico de banda de muerta es el comportamiento de un sensor de presión, donde puede haber una banda de muerta debido a la necesidad de superar una presión mínima para activar la salida del sensor.}
 
 \begin{marginfigure}
     \centering
@@ -353,7 +350,26 @@ El \textbf{banda de muerta} es un fenómeno relacionado con la histéresis, dond
     \caption{Ejemplo de banda de muerta. Es común en sistemas mecánicos con fricción o en sensores que requieren una fuerza mínima para activar la salida.}\label{fig:banda_muerta}
 \end{marginfigure}
 
-La \textbf{repetibilidad} es la capacidad de un sensor para entregar la misma salida al aplicar la misma entrada varias veces en periodos cortos de tiempo. Un sensor con buena repetibilidad producirá resultados consistentes bajo las mismas condiciones de prueba, lo que es crucial para aplicaciones donde se requiere alta precisión y confiabilidad. La repetibilidad se puede evaluar realizando múltiples mediciones con el mismo valor de entrada y analizando la variación en las salidas obtenidas. Un sensor con alta repetibilidad tendrá una desviación estándar baja en sus mediciones, lo que indica que las salidas son consistentes y confiables. En la Figura~\ref{fig:repetibilidad} se muestra un ejemplo gráfico de repetibilidad, donde se realizan varias mediciones con el mismo valor de entrada. La dispersión de los puntos alrededor de la media indica el nivel de repetibilidad del sensor, siendo una dispersión menor indicativa de una mejor repetibilidad. \marginnote[0em]{\textbf{Ejemplo de repetibilidad.}Un ejemplo típico de repetibilidad es el comportamiento de un sensor de temperatura, donde se espera que el sensor entregue la misma salida para la misma temperatura en múltiples mediciones realizadas en periodos cortos de tiempo. Otro ejemplo típico de repetibilidad es el comportamiento de un sensor de presión, donde se espera que el sensor entregue la misma salida para la misma presión en múltiples mediciones realizadas en periodos cortos de tiempo.} 
+La \textbf{repetibilidad} es la capacidad de un sensor para entregar la misma salida al aplicar la misma entrada varias veces en periodos cortos de tiempo. Un sensor con buena repetibilidad producirá resultados consistentes bajo las mismas condiciones de prueba, lo que es crucial para aplicaciones donde se requiere alta precisión y confiabilidad. La repetibilidad se puede evaluar realizando múltiples mediciones con el mismo valor de entrada y analizando la variación en las salidas obtenidas. Un sensor con alta repetibilidad tendrá una desviación estándar baja en sus mediciones, lo que indica que las salidas son consistentes y confiables. En la Figura~\ref{fig:repetibilidad} se muestra un ejemplo gráfico de repetibilidad, donde se realizan varias mediciones con el mismo valor de entrada. La dispersión de los puntos alrededor de la media indica el nivel de repetibilidad del sensor, siendo una dispersión menor indicativa de una mejor repetibilidad. \marginnote[1em]{\textbf{Ejemplo de repetibilidad.}Un ejemplo típico de repetibilidad es el comportamiento de un sensor de temperatura, donde se espera que el sensor entregue la misma salida para la misma temperatura en múltiples mediciones realizadas en periodos cortos de tiempo. Otro ejemplo típico de repetibilidad es el comportamiento de un sensor de presión, donde se espera que el sensor entregue la misma salida para la misma presión en múltiples mediciones realizadas en periodos cortos de tiempo.} 
+
+% \begin{margintable}
+%     \centering
+%     %\footnotesize
+%     \begin{tabular}{c c}
+%         \toprule
+%         Medición (20 ºC) & Salida (V) \\
+%         \midrule
+%         1 & 2.0 \\
+%         2 & 1.9 \\
+%         3 & 2.1 \\
+%         4 & 2.0 \\
+%         5 & 1.95 \\
+%         \bottomrule
+%         \\
+%     \end{tabular}
+%     \caption{Ejemplo de repetibilidad. Se muestran varias mediciones con el mismo valor de entrada y la variación en las salidas obtenidas para evaluar la repetibilidad del sensor.}
+%     \label{tab:repetibilidad}
+% \end{margintable}
 
 \begin{marginfigure}
     \centering
@@ -361,27 +377,186 @@ La \textbf{repetibilidad} es la capacidad de un sensor para entregar la misma sa
       \shorthandoff{>}
         \draw[->] (0,0) -- (2.5,0) node[right, font=\tiny] {$x$};
         \draw[->] (0,0) -- (0,2.5) node[above, font=\tiny] {$y$};
-        % Puntos de repetibilidad
-        \addplot[
-            only marks,
-            mark=*,
-            blue,
-            mark size=1.5pt
-        ] coordinates {
-            (1, 1.9)
-            (1, 2.0)
-            (1, 1.8)
-            (1, 2.1)
-            (1, 1.95)
-        };
-        \node[blue, font=\tiny] at (1.5,2) {Repetibilidad};
+        % Puntos de repetibilidad dibujados con node como puntos azules 
+        \node[blue] at (1.5,2.1) {*};
+        \node[blue] at (1.5,2.0) {*};
+        \node[blue] at (1.5,1.9) {*};
+        \node[blue] at (1.5,2.1) {*};
+        \node[blue] at (1.5,2.05) {*};
+        \node[blue] at (1.5,1.95) {*};        
+        \node[blue] at (1.5,2.5) {Repetibilidad};
     \end{tikzpicture}
     \caption{Ejemplo de repetibilidad. Un sensor con buena repetibilidad producirá resultados consistentes bajo las mismas condiciones de prueba.}\label{fig:repetibilidad}
 \end{marginfigure}
 
+\subsection{Error de Histeresis}
 
-% \begin{itemize}
-%     \item \textbf{Histéresis}: Máxima diferencia en la salida para un mismo valor de entrada según el sentido de la variación.
-%     \item \textbf{Banda de Muerta}: Rango de valores de entrada que no producen cambio en la salida (típico en reductores mecánicos).
-%     \item \textbf{Repetibilidad}: Capacidad del sensor de entregar la misma salida al aplicar la misma entrada varias veces en periodos cortos de tiempo.
-% \end{itemize}
+
+Además, el \textbf{Error de Histeresis} se puede evaluar comparando las salidas para un mismo valor de entrada según el sentido de la variación (ascendente o descendente). Este error se define como la máxima diferencia en la salida para un mismo valor de entrada según el sentido de la variación, y se expresa también como porcentaje sobre el fondo de escala:
+
+\begin{equation}    
+    \epsilon_{his} = \frac{|y_{asc} - y_{desc}|_{max}}{y_{max} - y_{min}} \times 100\%
+\end{equation}
+donde $y_{asc}$ y $y_{desc}$ son las salidas correspondientes a un mismo valor de entrada durante la variación ascendente y descendente respectivamente. Este cálculo proporciona una medida cuantitativa de la diferencia máxima en la salida para un mismo valor de entrada según el sentido de la variación, lo que es fundamental para evaluar la estabilidad y confiabilidad del sensor en aplicaciones donde se esperan cambios frecuentes en la magnitud medida.
+
+\section{Características Dinámicas}\label{sec:caract_dinamicas} 
+
+%que son las caracteristicas dinamicas y diferencia con las estaticas
+Las características dinámicas describen el comportamiento de un sistema de medida cuando la magnitud física varía con el tiempo. A diferencia de las características estáticas, que se centran en la relación entre entrada y salida en condiciones de equilibrio o variaciones lentas, las características dinámicas analizan cómo el sistema responde a cambios rápidos en la magnitud medida, incluyendo aspectos como la velocidad de respuesta, la estabilidad y la capacidad para seguir señales de alta frecuencia.
+
+Las características dinámicas analizan la respuesta del sistema cuando la entrada $x(t)$ varía rápidamente. Matemáticamente, se modelan mediante una ecuación diferencial lineal de coeficientes constantes:
+
+\begin{equation}
+    a_n \frac{d^n y}{dt^n} + \dots + a_1 \frac{dy}{dt} + a_0 y = b_m \frac{d^m x}{dt^m} + \dots + b_0 x
+\end{equation}
+
+\subsection{Sistema de Orden 0}
+Un sistema de orden 0 es un sensor ideal. La salida sigue a la entrada instantáneamente sin retardo ni error dinámico como se muestra en la Figura~\ref{fig:orden_0}. Su ecuación es:
+\[ y(t) = K \cdot x(t) \]
+donde $K$ es una constante de ganancia. La sensibilidad estática $K     = b_0/a_0$ es la sensibilidad estática.
+%Figura de larespuesta escalon de un sistema de orden 0, que es una linea recta que sigue a la entrada sin retardo ni error dinamico.
+\begin{marginfigure}
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[ 
+            width=\linewidth, height=4.5cm,
+            xlabel={$t$}, ylabel={$y(t)$},
+            font=\scriptsize,
+            axis lines=left,
+            ymin=0, ymax=1.5,
+            every axis y label/.style={at=(current axis.above origin),anchor=south},
+            every axis x label/.style={at=(current axis.right of origin),anchor=west},
+            %xtick={1}, %xticklabels={$\tau$},
+            ytick={1,1.01}, yticklabels={K}
+        ]
+           % ENTRADA (Escalón en t=0)
+            \addplot[thick, red, dashed, domain=0:4] {1.01};
+            %\addlegendentry{Entrada $x(t)$}
+
+            % SALIDA (Orden 0: Sigue instantáneamente)
+            % Usamos una línea sólida azul justo encima
+            \addplot[thick, blue, domain=0:4] {1};
+            %\addlegendentry{Salida $y(t)$}
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Respuesta al escalón de un sistema de orden 0. La salida sigue a la entrada instantáneamente sin retardo ni error dinámico.}\label{fig:orden_0}
+\end{marginfigure}
+
+\subsection{Sistema de Primer Orden}
+Corresponde a sensores con almacenamiento de energía (ej. capacidad térmica de un termómetro o condensador en un circuito). En este caso la salida $y(t)$ depende de la entrada $x(t)$ y de la constante de tiempo $\tau$. Matemáticamente, se modela mediante una ecuación diferencial lineal de primer orden. Su ecuación es:
+\[ \tau \frac{dy(t)}{dt} + y(t) = K \cdot x(t) \]
+donde $K$ es una constante de ganancia. La sensibilidad estática $K = b_0/a_0$ es la sensibilidad estática. En la Figura~\ref{fig:primer_orden} se muestra la respuesta al escalón de un sistema de primer orden. La respuesta al escalón de un sistema de primer orden es una curva exponencial que se aproxima a un valor final $K \cdot x(t)$ con una constante de tiempo $\tau$ que es un parámetro crucial que define la rapidez del sensor, ya que determina cuánto tiempo tarda la salida en responder a un cambio en la entrada. Un valor de $\tau$ más pequeño indica una respuesta más rápida, mientras que un valor de $\tau$ más grande indica una respuesta más lenta. \marginnote[-15em]{\textbf{Constante de Tiempo ($\tau$):} Es el parámetro que define la rapidez del sensor. Representa el tiempo necesario para que la salida alcance el \SI{63.2}{\percent} de su valor final ante un escalón.
+}
+
+% Figura que muestra el escalon en rojo y en azul la respuesta al escalon de un sistema de primer orden, que es una curva exponencial que se aproxima a un valor final $K \cdot x(t)$ con una constante de tiempo $\tau$ que determina la rapidez de la respuesta. Las líneas punteadas indican el tiempo $\tau$ necesario para que la salida alcance el \SI{63.2}{\percent} de su valor final. La constante de tiempo $\tau$ es un parámetro crucial que define la rapidez del sensor, ya que determina cuánto tiempo tarda la salida en responder a un cambio en la entrada. Un valor de $\tau$ más pequeño indica una respuesta más rápida, mientras que un valor de $\tau$ más grande indica una respuesta más lenta.
+\begin{marginfigure}[-12em]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            width=\linewidth, height=4.5cm,
+            xlabel={$t$}, ylabel={$y(t)$},
+            %font=\scriptsize,
+            %rango del eje y es 0 a 2
+            ymin=0, ymax=1.5,
+            axis lines=left,
+            every axis y label/.style={at=(current axis.above origin),anchor=south},
+            every axis x label/.style={at=(current axis.right of origin),anchor=west},
+            xtick={1}, xticklabels={$\tau$},
+            ytick={0.63, 1}, yticklabels={0.63K, K}
+        ]
+            % Dibujar la curva azul expomnencial de la respuesta al escalón
+            \addplot[thick, blue, domain=0:4, samples=50] {1-exp(-x)};
+            % Dibujar líneas punteadas para indicar el tiempo $\tau$ y el valor 0.63K
+            % Líneas punteadas de la constante de tiempo
+            \draw[dashed, gray] (axis cs:1,0) -- (axis cs:1,0.632);
+            \draw[dashed, gray] (axis cs:0,0.632) -- (axis cs:1,0.632);
+            \addplot[thick, red, dashed, domain=0:4] {1};
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Respuesta al escalón de un sistema de 1er orden. La curva azul representa la salida $y(t)$ que se aproxima a su valor final $K \cdot x(t)$ de manera exponencial, y las líneas punteadas indican el tiempo $\tau$ necesario para que la salida alcance el \SI{63.2}{\percent} de su valor final. }\label{fig:primer_orden}
+\end{marginfigure}
+
+\subsection{Sistema de Segundo Orden}\label{sec:segundo_orden}
+Corresponde a sensores con almacenamiento de energía y oscilaciones (ej. un sistema mecánico con masa, resorte y amortiguador). En este caso la salida $y(t)$ depende de la entrada $x(t)$, la constante de tiempo $\tau$ y el factor de amortiguamiento $\zeta$. Matemáticamente, se modela mediante una ecuación diferencial lineal de segundo orden. Su ecuación es:
+\[ \frac{d^2 y(t)}{dt^2} + 2\zeta \omega_n \frac{dy(t)}{dt} + \omega_n^2 y(t) = K \cdot x(t) \]
+donde $\omega_n$ es la frecuencia natural del sistema y $\zeta$ es el factor de amortiguamiento. La sensibilidad estática $K = b_0/a_0$ es la sensibilidad estática. En la Figura~\ref{fig:segundo_orden} se muestra la respuesta al escalón de un sistema de segundo orden. La respuesta al escalón de un sistema de segundo orden puede presentar oscilaciones dependiendo del valor del factor de amortiguamiento $\zeta$. Si $\zeta < 1$, el sistema es subamortiguado y la salida oscila antes de estabilizarse en su valor final. Si $\zeta = 1$, el sistema es críticamente amortiguado y la salida alcanza su valor final sin oscilar. Si $\zeta > 1$, el sistema es sobreamortiguado y la salida se aproxima a su valor final de manera            exponencial. La frecuencia natural $\omega_n$ también influye en la rapidez de la respuesta, siendo una frecuencia más alta indicativa de una respuesta más rápida. \marginnote[-17em]{\textbf{Factor de Amortiguamiento ($\zeta$):} Es un parámetro que determina el tipo de respuesta del sistema. Si $\zeta < 1$, el sistema es subamortiguado y presenta oscilaciones. Si $\zeta = 1$, el sistema es críticamente amortiguado y alcanza su valor final sin oscilar. Si $\zeta > 1$, el sistema es sobreamortiguado y se aproxima a su valor final de manera exponencial sin oscilar.
+}
+
+% Figura que muestra el escalon en rojo y en azul la respuesta al escalon de un sistema de segundo orden, que puede presentar oscilaciones dependiendo del valor del factor de amortiguamiento $\zeta$. Si $\zeta < 1$, el sistema es subamortiguado y la salida oscila antes de estabilizarse en su valor final. Si $\zeta = 1$, el sistema es críticamente amortiguado y la salida alcanza su valor final sin oscilar. Si $\zeta > 1$, el sistema es sobreamortiguado y la salida se aproxima a su valor final de manera exponencial sin oscilar. La frecuencia natural $\omega_n$ también influye en la rapidez de la respuesta, siendo una frecuencia más alta indicativa de una respuesta más rápida.
+\begin{marginfigure}[-10em]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            width=\linewidth, height=4.5cm,
+            xlabel={$t$}, ylabel={$y(t)$},
+            %font=\scriptsize,
+            ymin=0, ymax=1.5, xmin=0, xmax=6,
+            axis lines=left,
+            % IMPORTANTE: Usar radianes para las funciones trigonométricas
+            trig format plots=rad, 
+            every axis y label/.style={at=(current axis.above origin),anchor=south},
+            every axis x label/.style={at=(current axis.right of origin),anchor=west},
+            % Etiquetas correctas para 2º orden
+            xtick=\empty,
+            ytick={1, 1.36}, yticklabels={$K$, $y_{max}$},
+            legend style={at={(1,0.1)}, anchor=south east, font=\tiny, cells={anchor=west}}
+        ]
+            % 1. ESCALÓN DE ENTRADA
+            \addplot[thick, red, dashed, domain=0:6] {1};
+            \addlegendentry{Entrada}
+
+            % 2. SUBAMORTIGUADO (zeta = 0.3, wn = 3) - CORRECTO
+            \addplot[thick, blue, domain=0:6, samples=200] 
+                {1 - exp(-0.9*x) * (cos(2.86*x) + 0.314*sin(2.86*x))};
+            \addlegendentry{$\zeta < 1$}
+            
+            % Marcador de Sobreoscilación para el azul
+            \draw[dotted, gray] (axis cs:0,1.36) -- (axis cs:1.1,1.36);
+            \node[anchor=south, font=\tiny, blue] at (axis cs:1.1, 1.36) {$M_p$};
+
+            % 3. CRÍTICAMENTE AMORTIGUADO (zeta = 1, wn = 3)
+            % Fórmula: y(t) = 1 - (1 + wn*t)*exp(-wn*t)
+            \addplot[thick, green!60!black, domain=0:6, samples=100] 
+                {1 - (1 + 3*x)*exp(-3*x)};
+            \addlegendentry{$\zeta = 1$}
+            
+            % 4. SOBREAMORTIGUADO (zeta = 2, wn = 3)
+            % Fórmula: suma de dos exponenciales reales
+            \addplot[thick, orange, domain=0:6, samples=100] 
+                {1 - 1.077*exp(-0.804*x) + 0.077*exp(-11.19*x)};
+            \addlegendentry{$\zeta > 1$}
+
+            % Línea de valor final
+            \draw[dashed, gray] (axis cs:0,1) -- (axis cs:6,1);
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Respuesta al escalón de un sistema de segundo orden. Las curvas representan las salidas $y(t)$ que puedes presentar oscilaciones dependiendo del valor del factor de amortiguamiento $\zeta$. En este caso, se muestra un sistema subamortiguado ($\zeta < 1$) donde la salida oscila antes de estabilizarse en su valor final; un sistema críticamente amortiguado ($\zeta = 1$) donde la salida alcanza su valor final sin oscilar; y un sistema sobreamortiguado ($\zeta > 1$) donde la salida se aproxima a su valor final de manera exponencial sin oscilar.}\label{fig:segundo_orden}
+\end{marginfigure}
+
+En el caso de un sistema de segundo orden subamortiguado, la ecuación que gobierna la respuesta al escalón es:
+\begin{equation}
+    y(t) = K \left( 1 - e^{-\zeta \omega_n t} \left( \cos(\omega_d t) + \frac{\zeta}{\sqrt{1-\zeta^2}} \sin(\omega_d t) \right) \right)
+\end{equation}
+donde $\omega_d = \omega_n \sqrt{1-\zeta^2}$ es la frecuencia de oscilación amortiguada. En esta ecuación, el término $e^{-\zeta \omega_n t}$ representa la envolvente de decaimiento de las oscilaciones, mientras que la combinación de las funciones trigonométricas describe la naturaleza oscilatoria del sistema. La sobreoscilación máxima $M_p$ se puede calcular como:
+\begin{equation}
+    M_p = e^{-\frac{\pi \zeta}{\sqrt{1-\zeta^2}}}
+\end{equation}
+que representa la máxima desviación de la salida respecto al valor final durante las oscilaciones. La frecuencia de oscilación amortiguada $\omega_d$ también influye en la rapidez de las oscilaciones, siendo una frecuencia más alta indicativa de oscilaciones más rápidas. En resumen, la respuesta al escalón de un sistema de segundo orden subamortiguado se caracteriza por una combinación de un crecimiento exponencial amortiguado y oscilaciones sinusoidales, donde la magnitud de la sobreoscilación y la frecuencia de las oscilaciones dependen del factor de amortiguamiento $\zeta$ y la frecuencia natural $\omega_n$ del sistema.
+
+En el caso de un sistema de segundo orden críticamente amortiguado, la ecuación que gobierna la respuesta al escalón es:
+\begin{equation}
+    y(t) = K \left( 1 - (1 + \omega_n t) e^{-\omega_n t} \right)
+\end{equation}
+donde $\omega_n$ es la frecuencia natural del sistema. En esta ecuación, el término $(1 + \omega_n t) e^{-\omega_n t}$ representa la combinación de un crecimiento lineal y un decaimiento exponencial que caracteriza la respuesta de un sistema críticamente amortiguado. La salida $y(t)$ se aproxima a su valor final $K$ sin presentar oscilaciones, y la rapidez con la que alcanza el valor final está determinada por la frecuencia natural $\omega_n$. En resumen, la respuesta al escalón de un sistema de segundo orden críticamente amortiguado se caracteriza por una aproximación suave al valor final sin oscilaciones, donde la rapidez de la respuesta está influenciada por la frecuencia natural del sistema.    
+
+Y por último, en el caso de un sistema de segundo orden sobreamortiguado, las raíces de la ecuación característica son reales y distintas. La respuesta al escalón no presenta oscilaciones y es más lenta que en el caso crítico, la ecuación que gobierna la respuesta al escalón es:
+\begin{equation}
+y(t) = K \left( 1 - \frac{s_2}{s_2 - s_1} e^{s_1 t} + \frac{s_1}{s_2 - s_1} e^{s_2 t} \right)
+\end{equation}
+donde $s_1$ y $s_2$ son las raíces reales de la ecuación característica dada por:
+\begin{equation}
+s_{1,2} = -\zeta \omega_n \pm \omega_n \sqrt{\zeta^2 - 1}
+\end{equation}
+En esta ecuación, el término $\frac{s_2}{s_2 - s_1} e^{s_1 t}$ y $\frac{s_1}{s_2 - s_1} e^{s_2 t}$ representan la combinación de dos exponenciales reales que caracterizan la respuesta de un sistema sobreamortiguado. La salida $y(t)$ se aproxima a su valor final $K$ de manera más lenta que en el caso críticamente amortiguado, y no presenta oscilaciones. La rapidez con la que alcanza el valor final está determinada por las raíces $s_1$ y $s_2$, que a su vez dependen del factor de amortiguamiento $\zeta$ y la frecuencia natural $\omega_n$ del sistema.\marginpar[-10em]{\textbf{Raíces Reales:} En un sistema de segundo orden sobreamortiguado, las raíces de la ecuación característica son reales y negativas, lo que garantiza que los términos exponenciales decaigan hacia cero, permitiendo que la salida alcance el valor final $K$ de manera lenta que en el caso críticamente amortiguado. Las raíces reales son determinadas por el factor de amortiguamiento $\zeta$ y la frecuencia natural $\omega_n$ del sistema.}
+
+\section{Características de Ruido}\label{sec:caract_ruido} 

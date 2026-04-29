@@ -29,5 +29,6 @@
 \contentsline {subsection}{Relación Señal a Ruido (SNR)}{28}{subsection*.22}%
 \contentsline {subsection}{Ejemplo de Cálculo de la Relación Señal a Ruido (SNR)}{29}{subsection*.23}%
 \contentsline {subsection}{Resolución Real vs. Resolución Nominal}{29}{subsection*.24}%
-\contentsline {chapter}{Bibliograf\'{\i }a}{31}{appendix*.25}%
+\contentsline {subsection}{Resolución Nominal frente a Resolución Real}{29}{subsection*.25}%
+\contentsline {chapter}{Bibliograf\'{\i }a}{31}{appendix*.26}%
 \contentsfinish 

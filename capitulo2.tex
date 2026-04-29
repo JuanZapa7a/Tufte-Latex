@@ -893,3 +893,34 @@ Es importante comprender que la resolución real de un sistema no es la que indi
     \end{tikzpicture}    
     \caption{Resolución real vs. resolución nominal.}\label{fig:resolucion_real_vs_nominal}    
 \end{marginfigure}
+
+
+
+\subsection{Resolución Nominal frente a Resolución Real}\label{sec:resolucion_real_vs_nominal}
+
+En un sistema de medida digital, es fundamental distinguir entre el límite teórico impuesto por el hardware y el límite práctico impuesto por la física del ruido.
+
+\begin{itemize}
+    \item \textbf{Resolución Nominal ($\Delta$)}: Viene determinada por el diseño del convertidor analógico a digital (ADC). Si el rango de entrada es $FS$ (\textit{Full Scale}) y el convertidor tiene $n$ bits, el paso de cuantificación es:
+    \begin{equation}
+        \Delta = \frac{FS}{2^n}
+    \end{equation}
+    Este representa el "peldaño" mínimo que el sistema puede discernir en ausencia total de ruido.
+    
+    \item \textbf{Resolución Real o Efectiva}: Es la resolución que el sistema puede alcanzar en la práctica. Depende de la relación entre el ruido cuadrático medio (\textit{Root Mean Square}, RMS) presente en la señal, $V_{n,RMS}$, y el paso de cuantificación $\Delta$.
+\end{itemize}
+
+\sidenote{
+    \textbf{El ruido "pico a pico":} Para que una medida sea estable en un display, el ruido pico a pico ($V_{pp}$) debe ser menor que $\Delta$. En una distribución gaussiana, se estima que $V_{pp} \approx 6.6 \cdot V_{n,RMS}$. Si $V_{pp} > \Delta$, los bits menos significativos oscilarán aleatoriamente, un fenómeno conocido como \textit{flicker} o parpadeo.
+}
+
+El comportamiento del sistema se clasifica en dos regímenes:
+
+\begin{enumerate}
+    \item \textbf{Sistema limitado por cuantificación} ($V_{n,RMS} \ll \Delta$): El ruido es tan bajo que queda "escondido" dentro de un escalón de cuantificación. En este caso, la resolución real coincide con la nominal. Los bits menos significativos (\textit{Least Significant Bits}, LSB) son estables y contienen información útil de la magnitud física.
+    \item \textbf{Sistema limitado por ruido} ($V_{n,RMS} > \Delta$): El nivel de ruido es superior al escalón de cuantificación. La resolución real se degrada y el número efectivo de bits (\textbf{ENOB}, \textit{Effective Number of Bits}) es menor que el nominal ($n$). Los bits afectados por el ruido fluctúan aleatoriamente y no proporcionan información válida sobre la medida.
+\end{enumerate}
+
+\sidenote{
+    \textbf{Conclusión para el diseño:} No tiene sentido económico ni técnico utilizar un ADC de alta resolución (ej. 24 bits) si el ruido del sensor o de la etapa de acondicionamiento es muy elevado. El ingeniero debe equilibrar el suelo de ruido del hardware con la resolución del cuantificador.
+}

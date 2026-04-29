@@ -53,6 +53,7 @@ Es vital que se utilice la terminología profesional, especialmente en un contex
 \begin{itemize}
   \item \textbf{Magnitud}: Propiedad física que se puede medir (ej. Temperatura, Longitud). La magnitud es la característica física que se desea medir, como la temperatura, la presión o la longitud. Es una propiedad cuantificable del mundo físico que puede ser representada por un número y una unidad. 
   \item \textbf{Medida}: Proceso de asignar un valor numérico a una magnitud. La figura~\ref{fig:error_medida} ilustra la relación entre magnitud, valor verdadero y valor medido.
+
     \begin{marginfigure}
     \centering
     \shorthandoff{>}
@@ -81,11 +82,13 @@ Es vital que se utilice la terminología profesional, especialmente en un contex
     \end{tikzpicture}
     \caption{Representación del Error de Medida: diferencia entre el valor medido y el valor verdadero. El error puede ser positivo o negativo. El error es la diferencia entre el valor medido y el valor verdadero. }\label{fig:error_medida}
     \end{marginfigure}
+
   \item \textbf{Valor Verdadero}: Valor ideal sin errores (inaccesible en la práctica).
   \item \textbf{Valor Medido}: Resultado obtenido del proceso de medida.
   \item \textbf{Error de Medida}: Diferencia entre el valor medido y el valor verdadero o de referencia. $e = V_{\text{med}} - V_{\text{ref}}$
   \item \textbf{Exactitud (Accuracy)}: Grado de concordancia entre el valor medido y el valor verdadero. La figura~\ref{fig:acc_prec} ilustra la relación entre exactitud y precisión.
-    \begin{marginfigure}
+    
+  \begin{marginfigure}
     \centering
     \shorthandoff{>}
     \begin{tikzpicture}
@@ -98,38 +101,39 @@ Es vital que se utilice la terminología profesional, especialmente en un contex
     \foreach \i in {1,...,10}
         \fill[red] (0.5+0.1*rand, 0.5+0.1*rand) circle (2pt);
 
-    %Diana arriba Derecha: Baja precisión, Baja Exactitud
-    \begin{scope}[xshift=3cm]
-        \draw[thick] (0,0) circle (1cm);
-        \draw[thick] (0,0) circle (0.6cm);
-        \draw[thick] (0,0) circle (0.2cm);        
-        \node at (0,-1.3) {NO Exacto, NO Preciso};        
-        \foreach \i in {1,...,10}
-            \fill[orange] (rand, rand) circle (2pt);
-    \end{scope}
+        %Diana arriba Derecha: Baja precisión, Baja Exactitud
+        \begin{scope}[xshift=3cm]
+            \draw[thick] (0,0) circle (1cm);
+            \draw[thick] (0,0) circle (0.6cm);
+            \draw[thick] (0,0) circle (0.2cm);        
+            \node at (0,-1.3) {NO Exacto, NO Preciso};        
+            \foreach \i in {1,...,10}
+                \fill[orange] (rand, rand) circle (2pt);
+        \end{scope}
 
-    % Diana abajo Izquierda: Alta Exactitud, Baja Precisión
-    \begin{scope}[yshift=-3cm]
-        \draw[thick] (0,0) circle (1cm);
-        \draw[thick] (0,0) circle (0.6cm);
-        \draw[thick] (0,0) circle (0.2cm);
-        \node at (0,-1.3) {Exacto, NO Preciso};
-        \foreach \i in {1,...,10}
-            \fill[blue] (0.3*rand+0.05*rand, 0.3*rand+0.05*rand) circle (2pt);
-    \end{scope}
+        % Diana abajo Izquierda: Alta Exactitud, Baja Precisión
+        \begin{scope}[yshift=-3cm]
+            \draw[thick] (0,0) circle (1cm);
+            \draw[thick] (0,0) circle (0.6cm);
+            \draw[thick] (0,0) circle (0.2cm);
+            \node at (0,-1.3) {Exacto, NO Preciso};
+            \foreach \i in {1,...,10}
+                \fill[blue] (0.3*rand+0.05*rand, 0.3*rand+0.05*rand) circle (2pt);
+        \end{scope}
 
-    % Diana abajo Derecha: Alta Exactitud, Alta Precisión
-    \begin{scope}[xshift=3cm, yshift=-3cm]
-        \draw[thick] (0,0) circle (1cm);
-        \draw[thick] (0,0) circle (0.6cm);
-        \draw[thick] (0,0) circle (0.2cm);
-        \node at (0,-1.3) {Exacto, Preciso};
-        \foreach \i in {1,...,10}
-            \fill[green] (0.05*rand, 0.05*rand) circle (2pt);
-    \end{scope}
-\end{tikzpicture}
+        % Diana abajo Derecha: Alta Exactitud, Alta Precisión
+        \begin{scope}[xshift=3cm, yshift=-3cm]
+            \draw[thick] (0,0) circle (1cm);
+            \draw[thick] (0,0) circle (0.6cm);
+            \draw[thick] (0,0) circle (0.2cm);
+            \node at (0,-1.3) {Exacto, Preciso};
+            \foreach \i in {1,...,10}
+                \fill[green] (0.05*rand, 0.05*rand) circle (2pt);
+        \end{scope}
+    \end{tikzpicture}
     \caption{Relación entre Exactitud y Precisión. Un sistema puede ser preciso pero no exacto (resultados con baja dispersión -consistentes- pero promedio incorrecto), o exacto pero no preciso (resultados con promedio correcto pero alta dispersión -inconsistentes-). En general, un sistema es preciso y exacto al mismo tiempo cuando se cumplen ambas condiciones simultaneamente promedio correcto y baja dispersion. El peor de los casos es que el sistema no sea preciso ni exacto al mismo tiempo lo que trae como consecuencia un promedio incorrecto y alta dispersion e implica un mayor riesgo de error.}\label{fig:acc_prec}
     \end{marginfigure}
+
   \item \textbf{Precisión (Precision)}: Grado de concordancia entre resultados repetidos. 
   \item \textbf{Veracidad (Trueness)}: Grado de concordancia entre la media de muchas medidas y el valor verdadero. 
   \item \textbf{Resolución (Resolution)}: Mínimo cambio detectable por el sistema de medida. Ejemplo: En un ADC de \SI{10}{bits} con rango \SI{0}{V} a \SI{5}{V}, la resolución es \SI{5}{V}/$2^{10}$ bits  \(\approx\) \SI{0.05}{V/\bit}.
@@ -152,10 +156,14 @@ Es vital que se utilice la terminología profesional, especialmente en un contex
 
 Es fundamental distinguir entre los términos que definen la calidad de la medida como se muestra en la Tabla~\ref{tab:terminos_metrologicos}. La exactitud está relacionado con el error total (sistemático + aleatorio), la veracidad solo con el error sistemático, la precisión solo con el error aleatorio, y la resolución con el umbral de ruido o cuantificación del sistema. 
 
-\begin{table}[htbp]
+Un error sistemático es un sesgo constante que desvía las mediciones en una dirección, mientras que un error aleatorio es una variación impredecible que afecta la consistencia de las mediciones. La resolución determina el mínimo cambio detectable por el sistema, lo que afecta la capacidad de distinguir entre valores cercanos.
+
+\begin{table}[!htbp]
     \centering
-    \caption{Comparativa de términos metrológicos. Exactitud se refiere a la cercanía al valor verdadero, precisión a la consistencia entre medidas repetidas, veracidad a la cercanía de la media de muchas medidas al valor verdadero, y resolución al mínimo cambio detectable por el sistema. Veracidad y Precisión no es lo mismo. Veracidad refiere a la cercanía de la media de muchas medidas al valor verdadero, mientras que Precisión se refiere a la cercanía entre medidas independientes repetidas. Por último Resolución es el mínimo cambio detectable por el sistema.}\label{tab:terminos_metrologicos}
-    \begin{tabular}{l p{0.37\columnwidth} p{0.37\columnwidth}}
+    \small
+    \caption[Comparativa de términos metrológicos]{Comparativa de términos metrológicos. Exactitud se refiere a la cercanía al valor verdadero, precisión a la consistencia entre medidas repetidas, veracidad a la cercanía de la media de muchas medidas al valor verdadero, y resolución al mínimo cambio detectable por el sistema. Veracidad y Precisión no es lo mismo. Veracidad refiere a la cercanía de la media de muchas medidas al valor verdadero, mientras que Precisión se refiere a la cercanía entre medidas independientes repetidas. Por último Resolución es el mínimo cambio detectable por el sistema. \protect\label{tab:terminos_metrologicos}}
+    \setlength{\tabcolsep}{3pt} % Reducimos el espacio entre columnas
+    \begin{tabularx}{\linewidth}{l X X}
         \toprule
         \textbf{Término} & \textbf{Definición} & \textbf{Relación con el Error} \\
        \midrule
@@ -167,10 +175,10 @@ Es fundamental distinguir entre los términos que definen la calidad de la medid
         %\midrule
         Resolución & Mínimo incremento detectable por el sistema. & Umbral de ruido / Cuantificación. \\
         \bottomrule
-    \end{tabular}
+    \end{tabularx}
 \end{table}
 
-Un error sistemático es un sesgo constante que desvía las mediciones en una dirección, mientras que un error aleatorio es una variación impredecible que afecta la consistencia de las mediciones. La resolución determina el mínimo cambio detectable por el sistema, lo que afecta la capacidad de distinguir entre valores cercanos.
+
 
 Un ejemplo clásico, como se ilustra en la Figura~\ref{fig:ejemplo_balanza}, es el de una balanza que siempre marca \SI{0.5}{kg} más de lo que realmente pesa (error sistemático), y además tiene fluctuaciones de \SI{0.1}{kg} debido a vibraciones (error aleatorio). La exactitud de la balanza se ve afectada por ambos errores, la veracidad solo por el error sistemático, la precisión solo por el error aleatorio, y la resolución por el umbral de ruido o cuantificación del sistema.
 
@@ -237,9 +245,9 @@ Los errores sistemáticos y aleatorios tienen características distintas:
 \begin{description}
     \item[Errores Sistemáticos ($E_{\text{sist}}$)]: Permanecen constantes o varían de forma predecible. Afectan a la veracidad del sistema.
         \begin{itemize}
-            \item \textbf{Offset}: Desplazamiento del cero (error de lectura cuando la entrada es cero).
-            \item \textbf{Ganancia}: Error en la pendiente de la curva de transferencia.
-            \item \textbf{No linealidad}: Desviación respecto a la relación lineal ideal.
+            \item \emph{Offset}: Desplazamiento del cero (error de lectura cuando la entrada es cero).
+            \item \emph{Ganancia}: Error en la pendiente de la curva de transferencia.
+            \item \emph{No linealidad}: Desviación respecto a la relación lineal ideal.
         \end{itemize}
     \item[Errores Aleatorios ($\epsilon$)]: Debidos a fluctuaciones temporales (ruido térmico, electromagnético). Afectan a la precisión del sistema. Se reducen mediante el promediado de $N$ muestras:
         \begin{equation}
@@ -253,8 +261,8 @@ Los errores sistemáticos y aleatorios tienen características distintas:
 La incertidumbre es el parámetro que caracteriza la dispersión de los valores que podrían ser atribuidos a la magnitud. La Guía GUM (Guide to the Expression of Uncertainty in Measurement) establece dos tipos de evaluación de la incertidumbre:
 
 \begin{enumerate}
-    \item \textbf{Evaluación Tipo A}: Basada en el análisis estadístico de los datos experimentales (repetibilidad, desviación estándar).
-    \item \textbf{Evaluación Tipo B}: Basada en la información disponible (especificaciones del fabricante, experiencia previa, etc.).
+    \item \emph{Evaluación Tipo A}: Basada en el análisis estadístico de los datos experimentales (repetibilidad, desviación estándar).
+    \item \emph{Evaluación Tipo B}: Basada en la información disponible (especificaciones del fabricante, experiencia previa, etc.).
 \end{enumerate}
 
 \subsection{Evaluación Tipo A (Estadística)}\label{sec:eval_tipoA}
@@ -262,10 +270,10 @@ La incertidumbre es el parámetro que caracteriza la dispersión de los valores 
 Dada una serie de $n$ lecturas $x_i$, se pueden calcular:
 
 \begin{enumerate}
-  \item \textbf{Valor medio}: $\bar{x} = \frac{1}{n} \sum x_i$. Es el mejor estimador del valor verdadero.
-  \item \textbf{Desviación típica ($s$)}: Indica la dispersión de las medidas individuales.
+  \item \emph{Valor medio}: $\bar{x} = \frac{1}{n} \sum x_i$. Es el mejor estimador del valor verdadero.
+  \item \emph{Desviación típica ($s$)}: Indica la dispersión de las medidas individuales.
     \[ s(x) = \sqrt{\frac{1}{n-1} \sum{(x_i - \bar{x})}^2} \]
-  \item \textbf{Incertidumbre típica ($u_A$)}: Representa la dispersión de la media. A diferencia de la desviación típica, esta \textbf{disminuye} al aumentar el número de medidas.
+  \item \emph{Incertidumbre típica ($u_A$)}: Representa la dispersión de la media. A diferencia de la desviación típica, esta \emph{disminuye} al aumentar el número de medidas.
     \[ u_A = \frac{s(x)}{\sqrt{n}} \]
 \end{enumerate}
 
@@ -285,7 +293,7 @@ Si el error se indica con una distribución normal, la incertidumbre tipo B se c
 \[
 u_B = \frac{0.5\%}{1}
 \]  
-\begin{marginfigure}[-30em]
+\begin{marginfigure}
     \centering
     \begin{tikzpicture}
       \shorthandoff{>}
@@ -311,14 +319,14 @@ u_B = \frac{0.5\%}{1}
 \caption{Ejemplos de distribuciones de probabilidad para la evaluación tipo B de la incertidumbre. La distribución rectangular (uniforme) se utiliza cuando el error es igualmente probable dentro de un rango, la distribución triangular se utiliza cuando el error es más probable cerca del valor central, y la distribución normal se utiliza cuando el error sigue una distribución gaussiana. En la distribución gaussiana s es la desviación típica.}\label{fig:distribuciones_tipoB}
 \end{marginfigure}
 
-
-
-\begin{table}[ht]
+\begin{table}[!htbp]
 \centering
-\caption{Distribución de probabilidad para la evaluación tipo B de la incertidumbre. La distribución normal se utiliza cuando el error sigue una distribución gaussiana. En la distribución gaussiana s es la desviación típica. En la distribución triangular se utiliza cuando el error es más probable cerca del valor central y en la distribución rectangular se utiliza cuando el error es igualmente probable dentro de un rango.}\label{tab:distribuciones_tipoB}
-\begin{tabular}{l p{0.5\linewidth} p{0.2\linewidth}}
+\small
+\caption{Distribución de probabilidad para la evaluación tipo B de la incertidumbre. La distribución normal se utiliza cuando el error sigue una distribución gaussiana. En la distribución gaussiana s es la desviación típica. En la distribución triangular se utiliza cuando el error es más probable cerca del valor central y en la distribución rectangular se utiliza cuando el error es igualmente probable dentro de un rango.\protect\label{tab:distribuciones_tipoB}}
+\setlength{\tabcolsep}{3pt} % Reducimos el espacio entre columnas
+\begin{tabularx}{\linewidth}{l X c}    
 \toprule
-\textbf{Distribución} & \textbf{Cuándo usarla} & \textbf{Cálculo de $U_B$} \\
+\textbf{Distribución} & \textbf{Cuándo usarla} & \textbf{Cálculo de $\mathbf{U_B}$} \\
 \midrule
 Rectangular & El error es igualmente probable dentro de un rango. & $u = a/\sqrt{3}$ \\
 \midrule
@@ -326,9 +334,10 @@ Triangular & El error es más probable cerca del valor central.  & $u = a/\sqrt{
 \midrule
 Normal & El error sigue una distribución gaussiana. & $u = a/s$ \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 
 \end{table}
+
 
 \subsection{Propagación de la Incertidumbre (Guía GUM)}\label{sec:propagacion}
 
@@ -385,7 +394,7 @@ El factor de cobertura $k$ depende del nivel de confianza deseado y de la distri
     \item $k = 3$ para aproximadamente el 99.7\% (99.73\%) de confianza.
 \end{itemize}
 La incertidumbre expandida proporciona una forma de comunicar la incertidumbre de una medición de manera más comprensible para los usuarios finales, indicando el rango dentro del cual se espera que se encuentre el valor verdadero con un nivel de confianza específico. Es importante destacar que la incertidumbre expandida no es una medida de la precisión o exactitud del sistema de medida, sino una forma de expresar la incertidumbre de la medición en términos de un intervalo de confianza. La elección del factor de cobertura $k$ debe basarse en el nivel de confianza deseado y en la distribución de la incertidumbre, y es fundamental para garantizar que la incertidumbre expandida proporcione una representación precisa de la incertidumbre de la medición. Como se ilustra en la Figura~\ref{fig:intervalos_confianza}, el factor de cobertura $k$ determina el nivel de confianza asociado a la incertidumbre expandida, con áreas sombreadas que representan los intervalos de confianza correspondientes a diferentes valores de $k$.
-\begin{marginfigure}[-15em]
+\begin{marginfigure}
     \centering
     \shorthandoff{>}
     \begin{tikzpicture}[

@@ -16,10 +16,18 @@
 \contentsline {subsection}{Recta de Referencia}{22}{subsection*.11}%
 \contentsline {subsection}{Histéresis y Repetibilidad}{22}{subsection*.12}%
 \contentsline {subsection}{Error de Histeresis}{23}{subsection*.13}%
+\contentsline {subsection}{Rango de Entrada y Saturación}{23}{subsection*.14}%
 \contentsline {section}{\numberline {2.2}Características Dinámicas}{23}{section.2.2}%
-\contentsline {subsection}{Sistema de Orden 0}{23}{subsection*.14}%
-\contentsline {subsection}{Sistema de Primer Orden}{23}{subsection*.15}%
-\contentsline {subsection}{Sistema de Segundo Orden}{24}{subsection*.16}%
-\contentsline {section}{\numberline {2.3}Características de Ruido}{25}{section.2.3}%
-\contentsline {chapter}{Bibliograf\'{\i }a}{27}{appendix*.17}%
+\contentsline {subsection}{Sistema de Orden 0}{24}{subsection*.15}%
+\contentsline {subsection}{Sistema de Primer Orden}{24}{subsection*.16}%
+\contentsline {subsection}{Sistema de Segundo Orden}{24}{subsection*.17}%
+\contentsline {section}{\numberline {2.3}Límites de la Medida: Ruido y Rango Dinámico}{27}{section.2.3}%
+\contentsline {subsection}{El suelo de Ruido (\textit {Noise Floor})}{27}{subsection*.18}%
+\contentsline {subsection}{Ejemplo de Cálculo del Suelo de Ruido}{27}{subsection*.19}%
+\contentsline {subsection}{Rango Dinámico}{27}{subsection*.20}%
+\contentsline {subsection}{Ejemplo de Cálculo del Rango Dinámico}{28}{subsection*.21}%
+\contentsline {subsection}{Relación Señal a Ruido (SNR)}{28}{subsection*.22}%
+\contentsline {subsection}{Ejemplo de Cálculo de la Relación Señal a Ruido (SNR)}{29}{subsection*.23}%
+\contentsline {subsection}{Resolución Real vs. Resolución Nominal}{29}{subsection*.24}%
+\contentsline {chapter}{Bibliograf\'{\i }a}{31}{appendix*.25}%
 \contentsfinish 

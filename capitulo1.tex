@@ -42,7 +42,7 @@ Un sistema de instrumentación moderno es una cadena de transferencia de energí
 \begin{enumerate}
     \item Transductor/Sensor: Interfaz con el mundo físico. Convierte la magnitud física $x(t)$ (temperatura, presión) en una señal eléctrica $s(t)$
     \item Acondicionador de Señal: Mejora la calidad de la señal (amplificación, filtrado, linealización, aislamiento). Su objetivo es maximizar la relación señal-ruido (SNR).
-    \item Sistema de Adquisición (DAQ): Compuesto por el S\&H (Sample and Hold) y el ADC. Realiza la discretización en tiempo y amplitud.
+    \item Sistema de Adquisición (DAQ): Compuesto por el S\&H (Sample and Hold) y el ADC.\@ Realiza la discretización en tiempo y amplitud.
     \item Procesado y Control: Algoritmos de corrección, promediado y protocolos de comunicación (USB, Ethernet, CAN).
 \end{enumerate}
 
@@ -264,7 +264,7 @@ Dada una serie de $n$ lecturas $x_i$, se pueden calcular:
 \begin{enumerate}
   \item \textbf{Valor medio}: $\bar{x} = \frac{1}{n} \sum x_i$. Es el mejor estimador del valor verdadero.
   \item \textbf{Desviación típica ($s$)}: Indica la dispersión de las medidas individuales.
-    \[ s(x) = \sqrt{\frac{1}{n-1} \sum (x_i - \bar{x})^2} \]
+    \[ s(x) = \sqrt{\frac{1}{n-1} \sum{(x_i - \bar{x})}^2} \]
   \item \textbf{Incertidumbre típica ($u_A$)}: Representa la dispersión de la media. A diferencia de la desviación típica, esta \textbf{disminuye} al aumentar el número de medidas.
     \[ u_A = \frac{s(x)}{\sqrt{n}} \]
 \end{enumerate}
@@ -334,16 +334,15 @@ Normal & El error sigue una distribución gaussiana. & $u = a/s$ \\
 
 La propagación de la incertidumbre se realiza utilizando la fórmula de propagación de errores para funciones de varias variables. Si la magnitud final $y$ depende de varias variables de entrada $x_i$, la incertidumbre de $y$ se calcula como:
 \[
-u_c(y) = \sqrt{\sum_{i=1}^{n} \left( \frac{\partial y}{\partial x_i} u_i \right)^2}
+u_c(y) = \sqrt{\sum_{i=1}^{n} {\left( \frac{\partial y}{\partial x_i} u_i \right)}^2}
 \]
-donde $u_i$ es la incertidumbre de cada variable de entrada $x_i$. En términos generales, si se tiene una función $f(x_1, x_2, ..., x_n)$ que depende de varias variables de entrada $x_i$, la incertidumbre de la variable de salida $y$ se calcula como:
+donde $u_i$ es la incertidumbre de cada variable de entrada $x_i$. En términos generales, si se tiene una función $f(x_1, x_2, \ldots, x_n)$ que depende de varias variables de entrada $x_i$, la incertidumbre de la variable de salida $y$ se calcula como:
 \[
-u_c(f) = \sqrt{\sum_{i=1}^{n} \left( \frac{\partial f}{\partial x_i} u_i \right)^2}
+u_c(f) = \sqrt{\sum_{i=1}^{n} {\left( \frac{\partial f}{\partial x_i} u_i \right)}^2}
 \]    
 donde $f$ es la función que relaciona las variables de entrada $x_i$ con la variable de salida, $u_i$ es la incertidumbre de cada variable de entrada,y $u_c(f)$ es la incertidumbre combinada de la variable de salida. Se denominan coeficientes de sensibilidad a las derivadas parciales $\frac{\partial f}{\partial x_i}$, que indican cómo la incertidumbre de cada variable de entrada afecta la incertidumbre de la variable de salida.
 
-Esta fórmula se utiliza para calcular la incertidumbre total de una medición que depende de varias variables, teniendo en cuenta las incertidumbres individuales de cada variable de entrada y cómo estas afectan la variable de salida a través de sus derivadas parciales. La propagación de la incertidumbre es fundamental para evaluar la calidad de las mediciones en sistemas de medida complejos donde la salida depende de múltiples variables de entrada, permitiendo así una evaluación más precisa de la incertidumbre total asociada a la medición. \marginnote{
-    \textbf{Ejemplo: Método Voltio-Amperimétrico} \\
+Esta fórmula se utiliza para calcular la incertidumbre total de una medición que depende de varias variables, teniendo en cuenta las incertidumbres individuales de cada variable de entrada y cómo estas afectan la variable de salida a través de sus derivadas parciales. La propagación de la incertidumbre es fundamental para evaluar la calidad de las mediciones en sistemas de medida complejos donde la salida depende de múltiples variables de entrada, permitiendo así una evaluación más precisa de la incertidumbre total asociada a la medición.\marginnote{\textbf{Ejemplo: Método Voltio-Amperimétrico} \\
     Medimos una resistencia $R$ mediante el método voltio-amperimétrico mediante $V$ e $I$:
     \begin{itemize}
         \item $V = 10.00 \pm 0.05$ V
@@ -357,9 +356,9 @@ Esta fórmula se utiliza para calcular la incertidumbre total de una medición q
       \[ \frac{\partial R}{\partial V} = \frac{1}{I} = \frac{1}{2} = 0.5 \Omega/V \]
       \[ \frac{\partial R}{\partial I} = -\frac{V}{I^2} = -\frac{10}{2^2} = -2.5 \Omega/A \]
       \item Cálculo de la incertidumbre combinada:
-      \[ u_c(R) = \sqrt{\left( \frac{\partial R}{\partial V} u_V \right)^2 + \left( \frac{\partial R}{\partial I} u_I \right)^2} \]
-      \[ u_c(R) = \sqrt{\left( 0.5 \times 0.05 \right)^2 + \left( -2.5 \times 0.01  \right)^2} \]
-      \[ u_c(R) = \sqrt{\left( 0.025 \right)^2 + \left( -0.025 \right)^2} \]
+      \[ u_c(R) = \sqrt{{\left( \frac{\partial R}{\partial V} u_V \right)}^2 + {\left( \frac{\partial R}{\partial I} u_I \right)}^2} \]
+      \[ u_c(R) = \sqrt{{\left( 0.5 \times 0.05 \right)}^2 + {\left( -2.5 \times 0.01  \right)}^2} \]
+      \[ u_c(R) = \sqrt{{\left( 0.025 \right)}^2 + {\left( -0.025 \right)}^2} \]
       \[ u_c(R) = \sqrt{0.000625 + 0.000625} \]
       \[ u_c(R) = \sqrt{0.00125} \approx 0.0354 \, \Omega \]
       \[ U = k \times u_c(R) = 2 \times 0.0354 = 0.0708\, \Omega \]
@@ -370,7 +369,7 @@ Esta fórmula se utiliza para calcular la incertidumbre total de una medición q
 
 La incertidumbre combinada se obtiene mediante la raíz cuadrada de la suma de los cuadrados de las incertidumbres individuales ponderadas. Este procedimiento es el estándar propuesto por la guía GUM para variables no correlacionadas. En casos donde las variables de entrada están correlacionadas, se deben incluir términos adicionales que consideren la covarianza entre las variables. La fórmula general para la propagación de la incertidumbre en el caso de variables correlacionadas es:
 \[
-u_c(f) = \sqrt{\sum_{i=1}^{n} \left( \frac{\partial f}{\partial x_i} u_i \right)^2 + 2 \sum_{i=1}^{n} \sum_{j=i+1}^{n} \frac{\partial f}{\partial x_i} \frac{\partial f}{\partial x_j} u_i u_j}
+u_c(f) = \sqrt{\sum_{i=1}^{n} {\left( \frac{\partial f}{\partial x_i} u_i \right)}^2 + 2 \sum_{i=1}^{n} \sum_{j=i+1}^{n} \frac{\partial f}{\partial x_i} \frac{\partial f}{\partial x_j} u_i u_j}
 \]
 donde el segundo término incluye la covarianza entre las variables de entrada $x_i$ y $x_j$. En la práctica, es común asumir que las variables de entrada son independientes (no correlacionadas), lo que simplifica la fórmula a la versión sin términos de covarianza. Sin embargo, en situaciones donde existe una correlación significativa entre las variables de entrada, es crucial considerar estos términos adicionales para obtener una estimación precisa de la incertidumbre total.
 
@@ -425,10 +424,8 @@ La incertidumbre expandida proporciona una forma de comunicar la incertidumbre d
 
 Significa que si realizamos una medición y calculamos la incertidumbre combinada $u_c$, podemos proporcionar un intervalo de confianza alrededor del valor medido utilizando la incertidumbre expandida $U$. Por ejemplo, si medimos una resistencia y obtenemos un valor de $R = 100 \, \Omega$ con una incertidumbre combinada de $u_c = 2 \, \Omega$, y queremos proporcionar un intervalo de confianza del 95\%, podemos calcular la incertidumbre expandida como $U = 2 \cdot u_c = 4 \, \Omega$. Esto nos permite comunicar que el valor verdadero de la resistencia se encuentra dentro del rango de $96 \, \Omega$ a $104 \, \Omega$ con un nivel de confianza del 95\%. La incertidumbre expandida es una herramienta esencial para comunicar la calidad de las mediciones y proporcionar a los usuarios finales una comprensión clara de la incertidumbre asociada a los resultados de las mediciones.
 
-En este punto final de la discusión es necesario aclarar la diferencia entre lo que hace el sensor que mide y lo que sabemos nosotros, usando las mediciones independientes, $n$. Por ejemplo, si medimos un voltaje 10 veces, $n=10$, cada medida individual $x_i$ será distinta  debido al ruido aleatorio. la dispersión de esas medidas individuales se representa mediante la desviación típica $s(x)$, representa el ruido intrínseco del sistema. por mucho que se aumente $n$, la desviación típica $s(x)$ no disminuye, es una propiedad del sistema. 
+En este punto final de la discusión es necesario aclarar la diferencia entre lo que hace el sensor que mide y lo que sabemos nosotros, usando las mediciones independientes, $n$. Por ejemplo, si medimos un voltaje 10 veces, $n=10$, cada medida individual $x_i$ será distinta  debido al ruido aleatorio. La dispersión de esas medidas individuales se representa mediante la desviación típica $s(x)$, representa el ruido intrínseco del sistema. Por mucho que se aumente $n$, la desviación típica $s(x)$ no disminuye, es una propiedad del sistema. 
 
-Sin embargo, la incertidumbre típica $u_A$ representa la dispersión de la media de las medidas, y esta sí disminuye al aumentar el número de medidas $n$, ya que se calcula como $u_A = \frac{s(x)}{\sqrt{n}}$. Al promediar, los errores aleatorios (positivos y negativos) tienden a cancelarse. Por eso, cuantas más muestras $n$, más estrecha es la distribución de la media y más 'seguros'   estamos del resultado. Esto significa que al aumentar el número de medidas independientes, podemos reducir la incertidumbre asociada a la media de las medidas, lo que nos permite obtener una estimación más precisa del valor verdadero. 
+Sin embargo, la incertidumbre típica $u_A$ representa la dispersión de la media de las medidas, y esta sí disminuye al aumentar el número de medidas $n$, ya que se calcula como $u_A = \frac{s(x)}{\sqrt{n}}$. Al promediar, los errores aleatorios (positivos y negativos) tienden a cancelarse. Por eso, cuantas más muestras $n$, más estrecha es la distribución de la media y más \emph{seguros} estamos del resultado. Esto significa que al aumentar el número de medidas independientes, podemos reducir la incertidumbre asociada a la media de las medidas, lo que nos permite obtener una estimación más precisa del valor verdadero. 
 
 En resumen, el sensor mide con una desviación típica $s(x)$ que representa el ruido intrínseco del sistema, mientras que nosotros podemos reducir la incertidumbre de la media de las medidas aumentando el número de mediciones independientes $n$, lo que se refleja en la disminución de la incertidumbre típica $u_A$.
-
-HOla

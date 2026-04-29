@@ -37,7 +37,7 @@ En cuanto a la resolución, es importante considerar que un sistema con alta res
 
 \subsection{Linealidad y Ajuste por Mínimos Cuadrados}
 
-En ingeniería, siempre preferimos sistemas lineales de la forma $y = mx + b$, ya que facilitan el procesado posterior. Sin embargo, los sensores reales presentan desviaciones. Para obtener la "mejor recta" que representa a un sensor en el laboratorio, utilizamos el \textbf{Método de los Mínimos Cuadrados}, comose muestra en la Figura~\ref{fig:minimos_cuadrados}.
+En ingeniería, siempre preferimos sistemas lineales de la forma $y = mx + b$, ya que facilitan el procesado posterior. Sin embargo, los sensores reales presentan desviaciones. Para obtener la \emph{mejor recta} de ajuste, que se considera la curva de calibración que representa a un sensor en el laboratorio, utilizamos el \textbf{Método de los Mínimos Cuadrados}, comose muestra en la Figura~\ref{fig:minimos_cuadrados}.
 \begin{marginfigure}[-30em]
     \centering
     \begin{tikzpicture}
@@ -103,7 +103,7 @@ Despejando $b$ de (\ref{eq:normal2}):
 \[ b = \frac{\sum y_i - m\sum x_i}{n} = \bar{y} - m\bar{x} \]
 
 Sustituyendo $b$ en (\ref{eq:normal1}) y resolviendo para $m$:
-\begin{equation} \label{eq:m_final}
+\begin{equation} \label{eq:m_final_note}
     m = \frac{n\sum x_i y_i - \sum x_i \sum y_i}{n\sum x_i^2 - (\sum x_i)^2}
 \end{equation}
 

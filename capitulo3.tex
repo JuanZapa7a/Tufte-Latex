@@ -270,8 +270,10 @@ Las galgas metálicas están hechas de aleaciones como Constantán o Karma, que 
 Las galgas extensiométricas metálicas se utilizan comúnmente en aplicaciones de ingeniería civil y mecánica para medir esfuerzos en puentes, edificios y maquinaria. Las galgas de semiconductor, debido a su alta sensibilidad, se emplean en aplicaciones donde se requieren mediciones de deformación extremadamente precisas, como en la investigación científica y en la industria aeroespacial.
 
 %MEMS
-Las galgas de semiconductor se han miniaturizado en forma de dispositivos MEMS (\textit{Microelectromechanical Systems}), que integran sensores de deformación con circuitos electrónicos en un solo chip, permitiendo aplicaciones avanzadas en monitoreo estructural y biomecánica. Un ejemplo de MEMS es el acelerómetro piezoresistivo como el que semuestra en la Figura~\ref{fig:mems_acelerometro}, que utiliza galgas de semiconductor para medir la aceleración a través de la deformación inducida en las estructuras del dispositivo que como máximo ejempo es el acelerómetro del teléfono móvil, que detecta la orientación del dispositivo y permite funciones como el cambio automático entre modo vertical y horizontal. Las galgas de semiconductor muestran una respuesta mucho más sensible a la deformación en comparación con las galgas metálicas debido a su mayor factor de galga $G$. Las galgas son regiones del propio silicio de la viga que han sido dopadas selectivamente (es decir, con impurezas mediante un proceso de difusion o implantación iónica) para ser piezorresistivas.\marginnote{\textbf{Dopaje y Orientación Cristalina:} El efecto piezorresistivo en el silicio es anisotrópico (depende de la dirección). Dopaje tipo P (Boro): Es el más utilizado en MEMS. Se introducen átomos de Boro (trivalentes) que crean \emph{huecos}. El silicio tipo P es extremadamente sensible a los esfuerzos de cizalla en la dirección cristalográfica <110>, que es la dirección estándar de los brazos en un acelerómetro. Dopaje tipo N (Fósforo/Arsénico): Se introducen electrones en exceso. Aunque también es piezorresistivo, su coeficiente de sensibilidad suele ser menor que el del tipo P para la mayoría de las configuraciones. Existe un compromiso con la catidad de dopaje. Bajo Dopaje: Si ponemos pocos átomos de Boro, el sensor es muy sensible (Factor de Galga $G$ muy alto), pero es inestable con la temperatura. Cualquier cambio térmico altera la resistencia tanto como la deformación. Alto Dopaje (Silicio Degenerado): Si saturamos el silicio con mucho Boro, el sensor se vuelve muy estable térmicamente, pero pierde mucha sensibilidad (el Factor de Galga $G$ baja). La Figura~\ref{fig:zona_dopada} muestra la integración de la galga de semiconductor en el acelerómetro piezoresistivo. Lo que hace que el dopaje sea piezorresistivo es que las impurezas permiten que los cambios en la red cristalina afecten directamente a la nube de electrones/huecos, algo que en un aislante o en un conductor metálico normal no ocurre con tanta intensidad.
-} Se colocan sobre la superficie de la viga, lo más cerca posible de las uniones (con el marco, que tambien es de silicio fijo). Si imaginamos la viga como una tabla de trampolín, cuando la masa se mueve, la viga se dobla. El punto donde el silicio se estira y se comprime más (máximo esfuerzo mecánico) es justo en el \emph{encastre}, es decir, donde la viga nace del marco fijo (y también donde se une a la masa). De hecho, para un acelerómetro de alta calidad (puente completo), se suelen poner galgas en ambos extremos de cada viga (una cerca del marco y otra cerca de la masa).
+Las galgas de semiconductor se han miniaturizado en forma de dispositivos MEMS (\textit{Microelectromechanical Systems}), que integran sensores de deformación con circuitos electrónicos en un solo chip, permitiendo aplicaciones avanzadas en monitoreo estructural y biomecánica. Un ejemplo de MEMS es el acelerómetro piezoresistivo como el que semuestra en la Figura~\ref{fig:mems_acelerometro}, que utiliza galgas de semiconductor para medir la aceleración a través de la deformación inducida en las estructuras del dispositivo que como máximo ejempo es el acelerómetro del teléfono móvil, que detecta la orientación del dispositivo y permite funciones como el cambio automático entre modo vertical y horizontal. Las galgas de semiconductor muestran una respuesta mucho más sensible a la deformación en comparación con las galgas metálicas debido a su mayor factor de galga $G$. Como se ilustra en la Figura~\ref{fig:dopaje}, las galgas son regiones del propio silicio de la viga que han sido dopadas selectivamente (es decir, con impurezas mediante un proceso de difusion o implantación iónica) para ser piezorresistivas. La Figura~\ref{fig:zona_dopada} muestra la integración de la galga de semiconductor en el acelerómetro piezoresistivo. % 
+\marginnote{\textbf{Dopaje y Orientación Cristalina:} El efecto piezorresistivo en el silicio es anisotrópico (depende de la dirección). Mediante un dopaje tipo P (Boro), el más utilizado en MEMS, se introducen átomos de Boro (trivalentes) que crean \emph{huecos}. El silicio tipo P es extremadamente sensible a los esfuerzos de cizalla en la dirección cristalográfica <110>, que es la dirección estándar de los brazos en un acelerómetro. En el dopaje tipo N (Fósforo/Arsénico) se introducen electrones en exceso. Aunque también es piezorresistivo, su coeficiente de sensibilidad suele ser menor que el del tipo P para la mayoría de las configuraciones. Existe un compromiso con la catidad de dopaje. Bajo Dopaje: Si ponemos pocos átomos de Boro, el sensor es muy sensible (Factor de Galga $G$ muy alto), pero es inestable con la temperatura. Cualquier cambio térmico altera la resistencia tanto como la deformación. Alto Dopaje (Silicio Degenerado): Si saturamos el silicio con mucho Boro, el sensor se vuelve muy estable térmicamente, pero pierde mucha sensibilidad (el Factor de Galga $G$ baja).
+}% 
+Las galgas se colocan sobre la superficie de la viga, lo más cerca posible de las uniones (con el marco, que tambien es de silicio fijo). Si imaginamos la viga como una tabla de trampolín, cuando la masa se mueve, la viga se dobla. El punto donde el silicio se estira y se comprime más (máximo esfuerzo mecánico) es justo en el \emph{encastre}, es decir, donde la viga nace del marco fijo (y también donde se une a la masa). De hecho, para un acelerómetro de alta calidad (puente completo), se suelen poner galgas en ambos extremos de cada viga (una cerca del marco y otra cerca de la masa).
 
 %Figura de un MEMS del acelerómetro piezoresistivo, mostrando cómo las galgas de semiconductor están integradas en la estructura del dispositivo para medir la aceleración a través de la deformación inducida.
 \begin{marginfigure}
@@ -320,16 +322,49 @@ Las galgas de semiconductor se han miniaturizado en forma de dispositivos MEMS (
     \caption[Estructura de un acelerómetro MEMS.]{Estructura de un acelerómetro MEMS. La aceleración desplaza la masa central, deformando las vigas de suspensión. Las galgas de semiconductor (en rojo) integradas en las zonas de máxima flexión detectan la deformación $\epsilon$. El silicio tiene excelentes propiedades mecánicas (no presenta histéresis elástica y es casi tan duro como el acero), lo que permite fabricar sensores de aceleración extremadamente robustos y de bajo coste. }\label{fig:mems_acelerometro}
 \end{marginfigure}
 
-\begin{marginfigure}[0em]
+%Figura mostrando la estructura cristalina y como aporta el dopaje impurezas tipo P o N a la estructura.
+\begin{marginfigure}
+\centering
+\begin{tikzpicture}[scale=1]
+% Red P-Type (Boro)
+\begin{scope}
+\draw[gray!30] (-1.5,-1.5) grid (1.5,1.5);
+\foreach \x in {-1,0,1} \foreach \y in {-1,0,1}
+\fill[gray!60] (\x,\y) circle (4pt) node[white] {Si};
+% Átomo de Boro central
+\fill[red!80] (0,0) circle (5pt) node[white] {B};
+% Hueco
+\draw[red, thick] (0.4,0.4) circle (3pt) node {+};
+\node[below] at (0,-1.7) {\scriptsize Dopaje Tipo P (Hueco)};
+\end{scope}
+
+% Red N-Type (Fósforo)
+    \begin{scope}[xshift=3.1cm]
+        \draw[gray!30] (-1.5,-1.5) grid (1.5,1.5);
+        \foreach \x in {-1,0,1} \foreach \y in {-1,0,1} 
+            \fill[gray!60] (\x,\y) circle (4pt) node[white] {Si};
+        % Átomo de Fósforo central
+        \fill[blue!80] (0,0) circle (5pt) node[white] {P};
+        % Electrón libre
+        \fill[blue] (0.5,0.5) circle (2pt);
+        \node[blue, right] at (0.5,0.5) {$e^-$};
+        \node[below] at (0,-1.7) {\scriptsize Dopaje Tipo N (Electrón)};
+    \end{scope}
+\end{tikzpicture}
+\caption[Representación atómica del dopaje en la red de silicio]{Representación atómica del dopaje en la red de silicio. El Boro genera un exceso de huecos, mientras que el Fósforo aporta electrones libres. Lo que hace que el dopaje sea piezorresistivo es que las impurezas permiten que los cambios en la red cristalina afecten directamente a la nube de electrones/huecos, algo que en un aislante o en un conductor metálico normal no ocurre con tanta intensidad.}\label{fig:dopaje}
+\end{marginfigure}
+
+
+\begin{marginfigure}
     \centering
-    \begin{tikzpicture}[scale=0.8, font=\tiny]
+    \begin{tikzpicture}[scale=1]
         % Sustrato de Silicio (Bulk)
         \draw[fill=gray!30] (0,0) rectangle (4,1);
         \node at (2,0.5) {Silicio Intrínseco (Si)};
         
         % Zona Dopada (La galga)
         \draw[fill=red!40, draw=red, thick] (0.5,0.7) rectangle (3.5,1);
-        \node[red] at (2,0.85) {Zona Dopada Tipo P (Boro)};
+        \node[red] at (2,0.85) {Dopado Tipo P (Boro)};
         
         % Capa de Pasivación (Óxido)
         \draw[fill=blue!10, opacity=0.5] (0,1) rectangle (4,1.2);
@@ -345,7 +380,7 @@ Las galgas de semiconductor se han miniaturizado en forma de dispositivos MEMS (
         % Vista de planta
 
     \end{tikzpicture}
-    \caption{Integración de la galga en el silicio. La zona roja es la que cambia su resistividad ante la flexión del sustrato.}\label{fig:zona_dopada}
+    \caption[Integración de la galga en el silicio]{Integración de la galga en el silicio. La zona roja es la que cambia su resistividad ante la flexión del sustrato.}\label{fig:zona_dopada}
 \end{marginfigure}
 
 Ante una aceleración externa $\vec{a}$, la masa central experimenta una fuerza inercial $\vec{F}=m\vec{a}$. Esta fuerza provoca el desplazamiento de la masa, lo que genera una flexión en las vigas de suspensión. Según la teoría de vigas, el esfuerzo máximo ($\sigma$) se produce en la unión de las vigas con el marco fijo formado por un sustrato de silicio fijo. Las galgas de semiconductor situadas en estos puntos críticos aprovechan su elevado Factor de Galga ($G \approx 100$) para convertir la deformación en una variación de resistencia significativa ($\Delta R/R = G \cdot \epsilon \approx 0.1$). Normalmente, estas cuatro galgas se conectan en una configuración de puente de Wheatstone completo para maximizar la sensibilidad y compensar efectos térmicos no deseados.
@@ -354,14 +389,207 @@ Ante una aceleración externa $\vec{a}$, la masa central experimenta una fuerza 
 La temperatura afecta tanto a las galgas metálicas como a las de semiconductor, aunque de manera diferente. En las galgas metálicas, la resistencia varía con la temperatura debido al coeficiente de temperatura de la resistividad ($\alpha$), lo que puede introducir errores en la medida de deformación. En las galgas de semiconductor, la dependencia de la resistividad con la temperatura es aún más pronunciada, lo que puede resultar en errores significativos si no se compensa adecuadamente. Para mitigar estos efectos, se utilizan técnicas de compensación como la conexión en puente de Wheatstone, donde se combinan galgas activas (sujetas a deformación) con galgas de referencia (no deformadas) para cancelar las variaciones debidas a la temperatura. Además, se pueden emplear materiales con bajo coeficiente de temperatura o implementar algoritmos de corrección basados en mediciones de temperatura para mejorar la precisión de las galgas en entornos variables.
 
 \section{Sensores de Temperatura Resistivos (RTD)}\label{sec:rtd}
+% Resumen de la seccion basandonos en las subsecciones que lo componen
 
+Los RTD (\textit{Resistance Temperature Detectors}) representan el estándar de precisión en la termometría industrial y de laboratorio. En esta sección analizaremos el uso del platino como material de referencia (Pt100), el modelado matemático mediante la ecuación de Callendar-Van Dusen y, fundamentalmente, las topologías de conexión de 2, 3 y 4 hilos necesarias para compensar la resistencia de las líneas en medidas de alta precisión.
 
 
 
 \subsection{Metales Utilizados: El platino y la Pt100}
+
+A diferencia de los termistores semiconductores, los RTD utilizan metales puros. En un metal, al aumentar la temperatura, las vibraciones de la red cristalina aumentan, lo que incrementa la probabilidad de choque de los electrones de conducción y, por ende, su resistencia eléctrica.
+
+\begin{itemize}
+\item \emph{Platino (Pt)}: Es el material más común debido a su excelente estabilidad, resistencia a la corrosión y amplio rango de temperatura (\qty{-200}{\degree C} a \qty{850}{\degree C}).
+\item \emph{Pt100}: Es el sensor estándar industrial. El nombre indica que está fabricado de platino y que su resistencia nominal a \qty{0}{\degree C} es exactamente \qty{100}{\Omega}.
+\end{itemize}
+\marginnote{\textbf{Coeficiente $\alpha$:}
+La sensibilidad media entre \qty{0}{\degree C} y \qty{100}{\degree C} se define mediante el coeficiente $\alpha$. El coeficiente $\alpha$ se calcula de la siguiente manera:
+\begin{equation}
+\alpha = \frac{R_{100} - R_0}{100 \cdot R_0}
+\end{equation}
+Para el platino estándar (DIN/IEC 60751), el coeficiente $\alpha$ es aproximadamente \qty{0.01}{\degree C^{-1}}. En resumen, el coeficiente $\alpha$ es una medida de la variación de la resistencia del platino con respecto a la temperatura. Como se puede ver, el coeficiente $\alpha$ para el platino es muy bajo, lo que significa que la variación de la resistencia con respecto a la temperatura es relativamente lenta. Esta característica se utiliza en la ecuación de Callendar-Van Dusen para modelar el comportamiento de los RTD.
+}.
+
+
 \subsection{Ecuación de Callendar-Van Dusen}
+En una primera aproximación por serie de Taylor de primer orden de la resistencia de un metal en función de la temperatura, se obtiene la siguiente ecuación:
+\begin{equation} \label{eq:ecuacion_lineal}
+    R_T = R_0 (1 + \alpha(T - T_0)) \approx R_0 (1 + \alpha T)
+\end{equation}
+Por ser la ecuación de una recta, se puede interpretar que $R_0$ es la ordenada en el origen (resistencia a \qty{0}{\degree C}) y $R_0 \alpha$ es la pendiente de la recta o (variación de la resistencia respecto a la variación de temperatura). Esa pendiente tendra mas o menos inclinación dependiendo del coeficiente $\alpha$, también conocido como sensibilidad normalizada o simplemente la variación de la resistencia con respecto a la temperatura y se define como:
+\begin{equation}
+    \alpha = \frac{1}{R_0} \frac{dR}{dT}
+\end{equation}
+Es decir, físicamente, al aumentar la temperatura, los iones de la red cristalina del metal vibran con una mayor amplitud (fonones), lo que aumenta la probrabilidad de que los electrones de choquen entre si y con la red cristalina, lo que aumenta la resistencia de su movimiento.
+
+Esta formula es simple de interpretar, pero no es exacta por varios motivos. En primer lugar solo es exacta en rangos estrechos (ej. $\qty{0}{\degree C}$ a $\qty{100}{\degree C})$, para rangos más amplios, la curva de la variación de la resistencia con respecto a la temperatura se ve distorsionada. En segundo lugar, si usamos la ecuación lineal para una Pt100 a $\qty{400}{\degree C}$, cometeremos un error incluso de varios grados, ya que el modelo lineal ignora el degradado de la curva del material. Para una Pt100 estándar, $\alpha \approx \qty{0.00385}{\degree C^{-1}}$, lo que implica un incremento de resistencia del $\qty{0.385}{\percent}$ por cada grado Celsius de aumento, como se ilustra en la Figura~\ref{fig:lineal_rtd}. Así por ejemplo, si una Pt100 mide \qty{119.25}{\Omega}, la temperatura calculada mediante el modelo lineal es:
+    \[ T = \frac{R - R_0}{R_0 \alpha} = \frac{119.25 - 100}{100 \cdot 0.00385} \approx \qty{50}{\degree C} 
+    \]
+\begin{marginfigure}
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}
+        \begin{axis}[
+            width=\linewidth, height=5cm,
+            xlabel={$T$ (\qty{}{\degree C})}, ylabel={$R$ (\qty{}{\Omega})},
+            xmin=0, xmax=200, ymin=100, ymax=185,
+            font=\scriptsize,
+            axis lines=left,
+            xtick={0, 100, 200},
+            ytick={100, 138.5, 177},
+            grid=both,
+            grid style={line width=.1pt, draw=gray!10},
+        ]
+            % Modelo Lineal Pt100
+            \addplot[thick, blue, domain=0:200] {100*(1 + 0.00385*x)};
+            
+            % Marcadores
+            \draw[dashed, gray] (axis cs:100,0) -- (axis cs:100,138.5) -- (axis cs:0,138.5);
+            \fill[black] (axis cs:0,100) circle (1.5pt) node[left] {$R_0$};
+            
+            \node[blue, rotate=32, anchor=south] at (axis cs:60, 125) {$R = R_0(1+\alpha T)$};
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Respuesta lineal de una Pt100. La pendiente $R_0 \alpha \approx \qty{0.385}{\Omega/\degree C}$ define la ganancia necesaria en la etapa de amplificación.}\label{fig:lineal_rtd}
+\end{marginfigure}
+
+
+Por tanto, esta aproximación lineal resulta insuficiente para aplicaciones de alta precisión. Para modelar con mayor rigor el comportamiento de los RTD en rangos amplios, se emplea la ecuación de Callendar-Van Dusen que se expresa de la siguiente manera:
+\begin{equation} \label{eq:ecuacion_cv} \begin{split}   
+    R_T =  R_0 \left[ 1 + AT + BT^2 + C(T - 100)T^3 \right] \approx R_0 \left[1 + \alpha T \right]
+\end{split} \end{equation}    
+donde los coeficientes $A$, $B$ y $C$ para el platino estándar (DIN/IEC 60751) con $\alpha = \qty{0.00385}{\degree C^{-1}}$ toman los siguientes valores:
+
+\begin{equation} \label{eq:coef_cv}
+\begin{split}
+    A &= \qty{3.9083e-3}{\degree C^{-1}} \\
+    B &= \qty{-5.775e-7}{\degree C^{-2}} \\
+    C &= \qty{-4.183e-12}{\degree C^{-4}} \quad (\text{solo para } T < \qty{0}{\degree C})
+\end{split}
+\end{equation}
+
+Para temperaturas superiores a \qty{0}{\degree C}, el coeficiente $C$  se vuelve nulo y se simplifica  la ecuación de Callendar-Van Dusen a una ecuación cuadrática. Es importante notar que el signo negativo del coeficiente $B$ es el responsable de que la curva de la Pt100 tenga esa ligera concavidad hacia abajo (pierde sensibilidad a medida que aumenta la temperatura). En el rango de \qty{0}{\degree C} a \qty{100}{\degree C}, el error sistemático cometido al usar el modelo lineal ($R = R_0(1+\alpha T)$) frente a este modelo de orden superior es de aproximadamente \qty{0,4}{\degree C}. Aunque parezca poco, en instrumentación industrial o procesos químicos, un error de casi medio grado es inaceptable, lo que justifica el uso de estos coeficientes en el procesado digital de la señal mediante microcontroladores o PLC.
+
+%figura con la curva Callendar-Van Dusen y la Steinhart-Hart con TikZ.
+% \begin{marginfigure}
+%     \centering
+%     \shorthandoff{>}
+%     \begin{tikzpicture}
+%         \begin{axis}[
+%             width=\linewidth, height=7cm,
+%             xlabel={$T$ (\qty{}{\degree C})}, 
+%             ylabel={$R/R_0$ (Escala Log)},
+%             ymode=log, % EJE Y LOGARÍTMICO: Crucial para ver la NTC
+%             xmin=0, xmax=1000,
+%             ymin=0.0001, ymax=10,
+%             axis lines=left,
+%             grid=both,
+%             grid style={line width=.1pt, draw=gray!10},
+%             font=\scriptsize,
+%             legend style={at={(0.5,-0.2)}, anchor=north, font=\tiny}
+%         ]
+%             % --- CURVA RTD (Callendar-Van Dusen) ---
+%             % Rt/R0 = 1 + At + Bt^2
+%             \addplot[thick, blue, domain=0:1000, samples=100] 
+%                 {1 + 0.0039083*x - 0.0000005775*x^2};
+%             \addlegendentry{RTD Pt100 (Estable)}
+
+%             % --- CURVA NTC (Modelo Beta) ---
+%             % Rn/R0 = exp(beta * (1/T - 1/T0))
+%             % Beta = 3500K
+%             \addplot[thick, red, domain=0:1000, samples=200] 
+%                 {exp(3500 * (1/(x+273.15) - 1/273.15))};
+%             \addlegendentry{NTC (Pérdida de sensibilidad)}
+
+%             % Zona de fallo de la NTC (Sombreado)
+%             \fill[red, opacity=0.1] (axis cs:300, 0.0001) rectangle (axis cs:1000, 10);
+%             \node[red, rotate=90, font=\tiny] at (axis cs:350, 0.001) {Rango no operativo NTC};
+
+%             % Anotación RTD
+%             \node[blue, font=\tiny] at (axis cs:800, 5) {Pt100};
+
+%         \end{axis}
+%     \end{tikzpicture}
+%     \caption{Comparativa RTD vs. NTC hasta \qty{1000}{\degree C}. Nótese el uso de la escala logarítmica para apreciar cómo la resistencia de la NTC cae drásticamente hasta niveles casi indetectables, mientras que la Pt100 mantiene una respuesta útil y predecible.}\label{fig:comparativa_1000c}
+% \end{marginfigure}
+
 \subsection{Configuraciones de Conexión: 2, 3 y 4 hilos}\label{sec:conexion_hilos}
 % Vital para instrumentación industrial.
+El principal reto en la medida de precisión con RTDs es la resistencia parásita de los hilos de cobre que conectan el sensor al equipo de medida ($R_w$). Dado que una Pt100 varía solo \qty{0,385}{\Omega/\degree C}, una resistencia de cable de tan solo \qty{1}{\Omega} introduciría un error sistemático superior a \qty{2,5}{\degree C}.
+
+\emph{Conexión a 2 hilos: El error no compensado}
+
+Es la configuración más sencilla pero la menos precisa. El equipo de medida detecta la suma de la resistencia del sensor ($R_s$) y la de los dos hilos de ida y vuelta.
+
+\begin{marginfigure}[0em]
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}[american, scale=1]
+        \draw (0,0) node[left] {$V_{exc}$} to[short, o-*] (0.5,0)
+              to[R, l=$R_w$] (2,0) -- (2.5,0)
+              to[R, l=$R_s$, color=blue] (2.5,-1.5)
+              -- (2,-1.5) to[R, l=$R_w$] (0.5,-1.5)
+              to[short, *-o] (0,-1.5) node[left] {GND};
+        \draw[<->, red] (0,0.3) -- (0,-1.8) node[midway, left] {$V_{meas}$};
+    \end{tikzpicture}
+    \caption{Conexión a 2 hilos. La resistencia total medida es $R_m = R_s + 2R_w$. Cualquier variación térmica en los cables se interpreta erróneamente como cambio en la temperatura del proceso.}\label{fig:2hilos}
+\end{marginfigure}
+
+La resistencia medida es $R_m = R_s + 2R_w$. El error es inaceptable si los cables son largos o si la temperatura ambiente de los cables fluctúa, alterando $R_w$ de forma impredecible.
+
+\emph{Conexión a 3 hilos: Estándar Industrial}
+
+Es la configuración más extendida en la industria. Se basa en el supuesto de que los tres hilos son idénticos ($R_{w1} \approx R_{w2} \approx R_{w3}$). Se utiliza típicamente en un **Puente de Wheatstone** para cancelar el efecto de los cables.
+
+\begin{marginfigure}[2em]
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}[american, scale=0.7, font=\tiny]
+        % Puente de Wheatstone simplificado para ver la compensación
+        \draw (0,0) to[R, l=$R_1$] (1.5,1.5) to[R, l=$R_2$] (3,0);
+        \draw (0,0) to[R, l=$R_3$] (1.5,-1.5);
+        \draw (1.5,-1.5) to[R, l=$R_w$, color=red] (3,-1.5); % Hilo 3
+        \draw (3,0) to[R, l=$R_w$, color=red] (4.5,0); % Hilo 1
+        \draw (4.5,0) to[R, l=$R_s$, color=blue] (4.5,-1.5); % Sensor
+        \draw (4.5,-1.5) -- (3,-1.5); % Unión en el sensor
+        \draw (3,-1.5) to[short, -o] (1.5,0) node[right] {$V_{out}$}; % Hilo 2 (medida)
+        \draw (1.5,1.5) to[short, -o] (1.5,2) node[above] {$V_{exc}$};
+        \draw (1.5,-1.5) node[ground] {};
+    \end{tikzpicture}
+    \caption{Conexión a 3 hilos en puente. El tercer hilo (hilo de medida) lleva la tensión al centro del puente sin cargar la línea, permitiendo que las caídas de tensión en los otros dos hilos se cancelen entre sí.}\label{fig:3hilos}
+\end{marginfigure}
+
+Como se observa en la Figura~\ref{fig:3hilos}, la resistencia de un hilo queda en serie con el sensor, mientras que la del otro queda en serie con la resistencia patrón del puente ($R_3$). Si el puente está equilibrado y los hilos son iguales, las caídas de tensión se restan, anulando el error.
+
+\emph{Conexión a 4 hilos: Medida Kelvin}
+
+Es la configuración de máxima precisión, obligatoria en laboratorios y metrología. Separa completamente el camino de la corriente de excitación del camino de medida de tensión.
+
+\begin{equation}
+    V_{sense} = I_{source} \cdot R_s + \cancel{2 \cdot I_{sense} \cdot R_w}
+\end{equation}
+
+\begin{marginfigure}[2em]
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}[american, scale=0.8, font=\scriptsize]
+        % Sensor
+        \draw[thick, blue] (2,0.5) to[R, l=$R_s$] (2,-0.5);
+        % Hilos de corriente (Force)
+        \draw (0,1) node[left] {$I_{source}$} to[R, l=$R_w$] (2,1) -- (2,0.5);
+        \draw (0,-1) node[left] {Return} to[R, l=$R_w$] (2,-1) -- (2,-0.5);
+        % Hilos de tensión (Sense)
+        \draw (2,0.5) -- (1,0.5) to[R, l=$R_w$] (0.5,0.5) to[short, -o] (0,0.5) node[left] {$V_{+}$};
+        \draw (2,-0.5) -- (1,-0.5) to[R, l=$R_w$] (0.5,-0.5) to[short, -o] (0,-0.5) node[left] {$V_{-}$};
+    \end{tikzpicture}
+    \caption{Conexión a 4 hilos. La corriente circula por los hilos exteriores. Los hilos interiores se conectan a un voltímetro de alta impedancia ($I \approx 0$), por lo que no hay caída de tensión en ellos.}\label{fig:4hilos}
+\end{marginfigure}
+
+\sidenote{
+    \textbf{Por qué funciona:} Al medir con un voltímetro de alta impedancia, la corriente por los hilos de "Sense" es despreciable ($< \unit{1}{nA}$). Según la ley de Ohm ($V=IR$), si la corriente es nula, la caída de tensión en los cables es nula, midiendo exclusivamente la caída en el sensor.
+}
+
 \subsection{Error por Autocalentamiento}
 
 \section{Termistores (NTC y PTC)}\label{sec:termistores}

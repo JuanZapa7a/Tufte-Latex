@@ -535,10 +535,10 @@ Es la configuración más sencilla pero la menos precisa. El equipo de medida de
     \shorthandoff{>}
     \begin{tikzpicture}[american, scale=1]
         \draw (0,0) node[left] {$V_{exc}$} to[short, o-*] (0.5,0)
-              to[R, l=$R_w$] (2,0) -- (2.5,0)
-              to[R, l=$R_s$, color=blue] (2.5,-1.5)
-              -- (2,-1.5) to[R, l=$R_w$] (0.5,-1.5)
-              to[short, *-o] (0,-1.5) node[left] {GND};
+            to[R, l=$R_w$] (2,0) -- (2.5,0)
+            to[R, l=$R_s$, color=blue] (2.5,-1.5)
+            -- (2,-1.5) to[R, l=$R_w$] (0.5,-1.5)
+            to[short, *-o] (0,-1.5) node[left] {GND};
         \draw[<->, red] (0,0.3) -- (0,-1.8) node[midway, left] {$V_{meas}$};
     \end{tikzpicture}
     \caption{Conexión a 2 hilos. La resistencia total medida es $R_m = R_s + 2R_w$. Cualquier variación térmica en los cables se interpreta erróneamente como cambio en la temperatura del proceso.}\label{fig:2hilos}
@@ -553,7 +553,7 @@ Es la configuración más extendida en la industria. Se basa en el supuesto de q
 \begin{marginfigure}[2em]
     \centering
     \shorthandoff{>}
-    \begin{tikzpicture}[american, scale=0.7, font=\tiny]
+    \begin{tikzpicture}[american, scale=1]
         % Puente de Wheatstone simplificado para ver la compensación
         \draw (0,0) to[R, l=$R_1$] (1.5,1.5) to[R, l=$R_2$] (3,0);
         \draw (0,0) to[R, l=$R_3$] (1.5,-1.5);
@@ -581,21 +581,55 @@ Es la configuración de máxima precisión, obligatoria en laboratorios y metrol
 \begin{marginfigure}[2em]
     \centering
     \shorthandoff{>}
-    \begin{tikzpicture}[american, scale=0.8, font=\scriptsize]
+    \begin{tikzpicture}[american, scale=1]
         % Sensor
-        \draw[thick, blue] (2,0.5) to[R, l=$R_s$] (2,-0.5);
+        \draw[thick, blue] (2,1) to[R, l=$R_s$] (2,-1);
         % Hilos de corriente (Force)
-        \draw (0,1) node[left] {$I_{source}$} to[R, l=$R_w$] (2,1) -- (2,0.5);
-        \draw (0,-1) node[left] {Return} to[R, l=$R_w$] (2,-1) -- (2,-0.5);
+        \draw (0,1.5) node[left] {$I_{source}$} to[R, l=$R_w$] (2,1.5) -- (2,1) node[circ]{};
+        \draw (0,-1.5) node[left] {Return} to[R, l_=$R_w$] (2,-1.5) -- (2,-1) node[circ]{};
         % Hilos de tensión (Sense)
-        \draw (2,0.5) -- (1,0.5) to[R, l=$R_w$] (0.5,0.5) to[short, -o] (0,0.5) node[left] {$V_{+}$};
-        \draw (2,-0.5) -- (1,-0.5) to[R, l=$R_w$] (0.5,-0.5) to[short, -o] (0,-0.5) node[left] {$V_{-}$};
+        \draw (2,1) to[R, l=$R_w$] (0,1) to[short, -o] (0,1) node[left] {$V_{+}$};
+        \draw (2,-1) to[R, l_=$R_w$] (0,-1) to[short, -o] (0,-1) node[left] {$V_{-}$};
     \end{tikzpicture}
     \caption{Conexión a 4 hilos. La corriente circula por los hilos exteriores. Los hilos interiores se conectan a un voltímetro de alta impedancia ($I \approx 0$), por lo que no hay caída de tensión en ellos.}\label{fig:4hilos}
 \end{marginfigure}
 
 \marginnote{\textbf{Por qué funciona:} Al medir con un voltímetro de alta impedancia, la corriente por los hilos de "Sense" es despreciable ($< \unit{1}{nA}$). Según la ley de Ohm ($V=IR$), si la corriente es nula, la caída de tensión en los cables es nula, midiendo exclusivamente la caída en el sensor.
 }
+
+% \begin{marginfigure}[-15em]
+%     \centering
+%     \shorthandoff{>}
+%     \begin{tikzpicture}[american, scale=0.8, font=\scriptsize]
+%         % --- 2 HILOS ---
+%         \draw (0,4) node[left]{$I_{exc}$} to[short, o-*] (0.5,4)
+%               to[R, l=$R_w$] (2,4) -- (2.5,4)
+%               to[R, l=$R_s$, color=blue] (2.5,3)
+%               -- (2,3) to[R, l=$R_w$] (0.5,3)
+%               to[short, *-o] (0,3) node[left]{GND};
+%         \node at (1.25, 2.5) {\textbf{2 Hilos}};
+
+%         % --- 3 HILOS ---
+%         \begin{scope}[yshift=-3.5cm]
+%             \draw (0,4) node[left]{$R_1$} to[short, o-] (0.5,4) to[R, l=$R_w$] (2,4) coordinate (A);
+%             \draw (0,3.5) node[left]{$V_{out}$} to[short, o-] (2,3.5) -- (A);
+%             \draw (A) to[R, l=$R_s$, color=blue] (2,2.5) coordinate (B);
+%             \draw (B) to[R, l=$R_w$] (0.5,2.5) to[short, -o] (0,2.5) node[left]{$R_2$};
+%             \node at (1, 1.8) {\textbf{3 Hilos}};
+%         \end{scope}
+
+%         % --- 4 HILOS ---
+%         \begin{scope}[yshift=-7cm]
+%             \draw (0,4) node[left]{$I^+$} to[short, o-] (0.5,4) to[R, l=$R_w$] (2,4) coordinate (C);
+%             \draw (0,3.5) node[left]{$V^+$} to[short, o-] (1.5,3.5) -- (1.5,4);
+%             \draw (C) to[R, l=$R_s$, color=blue] (2,2.5) coordinate (D);
+%             \draw (0,3) node[left]{$I^-$} to[short, o-] (0.5,3) to[R, l=$R_w$] (2,3) -- (D);
+%             \draw (0,2.5) node[left]{$V^-$} to[short, o-] (1.5,2.5) -- (1.5,3);
+%             \node at (1, 1.8) {\textbf{4 Hilos}};
+%         \end{scope}
+%     \end{tikzpicture}
+%     \caption{Comparativa de conexiones para RTD. El sistema de 4 hilos (Kelvin) es el único que garantiza independencia total de la longitud del cable.}\label{fig:conexiones_detalladas}
+% \end{marginfigure}
 
 \subsection{Error por Autocalentamiento}
 

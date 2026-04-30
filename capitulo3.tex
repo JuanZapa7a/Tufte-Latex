@@ -21,7 +21,7 @@ La Figura~\ref{fig:resistencia} ilustra la variación de la resistencia ante cam
 \begin{marginfigure}
     \centering
     \shorthandoff{>}
-    \begin{tikzpicture}[scale=0.8, font=\scriptsize]
+    \begin{tikzpicture}[scale=1]
         % --- DIBUJO A: POTENCIÓMETRO ---
         \begin{scope}[yshift=0cm]
             % Pista resistiva (rectángulo sombreado)
@@ -157,7 +157,7 @@ El error de linealidad absoluto se define como la diferencia entre la salida rea
             xtick={0, 0.2, 0.4, 0.6, 0.8, 1},
             %font=\tiny,
             axis lines=left,
-            legend style={at={(0.05,0.95)}, anchor=north west, draw=none, font=\tiny}
+            legend style={at={(0.05,0.95)}, anchor=north west, draw=none}
         ]
             % Respuesta Ideal (Recta)
             \addplot[thick, gray, dashed, domain=0:1] {x};
@@ -237,14 +237,14 @@ Este factor depende del material y la geometría de la galga. Para galgas metál
             xlabel={Deformación $\epsilon$ [mm/m]}, 
             ylabel={Var. Relativa $\Delta R / R$},
             % Definimos el dominio para que coincida con la vista
-            xmin=0, xmax=0.01, 
+            xmin=0, xmax=0.011, 
             ymin=0, ymax=1.1,
             % Formato de números para evitar notación científica amontonada
+            scaled x ticks=false,
             xtick={0, 0.005, 0.01},
             xticklabel style={/pgf/number format/fixed, /pgf/number format/precision=3},
             axis lines=left,
-            font=\scriptsize,
-            legend style={at={(0.05,0.95)}, anchor=north west, font=\tiny, draw=none}
+            legend style={at={(0.025,0.95)}, anchor=north west, draw=none}
         ]
             % Galga de Semiconductor (G = 100)
             % IMPORTANTE: domain=0:0.01 evita el error "Dimension too large"
@@ -253,7 +253,7 @@ Este factor depende del material y la geometría de la galga. Para galgas metál
 
             % Galga Metálica (G = 2)
             \addplot[thick, blue, domain=0:0.01, samples=2] {2*x};
-            \addlegendentry{G = 2 (Metálica)};
+            \addlegendentry{G = 2 (Metál.)};
 
             % Nodo explicativo
             \node[red, anchor=south west] at (axis cs:0.004, 0.5) {$G \approx 100$};
@@ -270,7 +270,7 @@ Las galgas metálicas están hechas de aleaciones como Constantán o Karma, que 
 Las galgas extensiométricas metálicas se utilizan comúnmente en aplicaciones de ingeniería civil y mecánica para medir esfuerzos en puentes, edificios y maquinaria. Las galgas de semiconductor, debido a su alta sensibilidad, se emplean en aplicaciones donde se requieren mediciones de deformación extremadamente precisas, como en la investigación científica y en la industria aeroespacial.
 
 %MEMS
-Las galgas de semiconductor se han miniaturizado en forma de dispositivos MEMS (\textit{Microelectromechanical Systems}), que integran sensores de deformación con circuitos electrónicos en un solo chip, permitiendo aplicaciones avanzadas en monitoreo estructural y biomecánica. Un ejemplo de MEMS es el acelerómetro piezoresistivo como el que semuestra en la Figura~\ref{fig:mems_acelerometro}, que utiliza galgas de semiconductor para medir la aceleración a través de la deformación inducida en las estructuras del dispositivo que como máximo ejempo es el acelerómetro del teléfono móvil, que detecta la orientación del dispositivo y permite funciones como el cambio automático entre modo vertical y horizontal. Las galgas de semiconductor muestran una respuesta mucho más sensible a la deformación en comparación con las galgas metálicas debido a su mayor factor de galga $G$. Como se ilustra en la Figura~\ref{fig:dopaje}, las galgas son regiones del propio silicio de la viga que han sido dopadas selectivamente (es decir, con impurezas mediante un proceso de difusion o implantación iónica) para ser piezorresistivas. La Figura~\ref{fig:zona_dopada} muestra la integración de la galga de semiconductor en el acelerómetro piezoresistivo. % 
+Las galgas de semiconductor se han miniaturizado en forma de dispositivos MEMS (\textit{Microelectromechanical Systems}), que integran sensores de deformación con circuitos electrónicos en un solo chip, permitiendo aplicaciones avanzadas en monitoreo estructural y biomecánica. Un ejemplo de MEMS es el acelerómetro piezoresistivo como el que se muestra en la Figura~\ref{fig:mems_acelerometro}, que utiliza galgas de semiconductor para medir la aceleración a través de la deformación inducida en las estructuras del dispositivo que como máximo ejempo es el acelerómetro del teléfono móvil, que detecta la orientación del dispositivo y permite funciones como el cambio automático entre modo vertical y horizontal. Las galgas de semiconductor muestran una respuesta mucho más sensible a la deformación en comparación con las galgas metálicas debido a su mayor factor de galga $G$. Como se ilustra en la Figura~\ref{fig:dopaje}, las galgas son regiones del propio silicio de la viga que han sido dopadas selectivamente (es decir, con impurezas mediante un proceso de difusion o implantación iónica) para ser piezorresistivas. La Figura~\ref{fig:zona_dopada} muestra la integración de la galga de semiconductor en el acelerómetro piezoresistivo. % 
 \marginnote{\textbf{Dopaje y Orientación Cristalina:} El efecto piezorresistivo en el silicio es anisotrópico (depende de la dirección). Mediante un dopaje tipo P (Boro), el más utilizado en MEMS, se introducen átomos de Boro (trivalentes) que crean \emph{huecos}. El silicio tipo P es extremadamente sensible a los esfuerzos de cizalla en la dirección cristalográfica <110>, que es la dirección estándar de los brazos en un acelerómetro. En el dopaje tipo N (Fósforo/Arsénico) se introducen electrones en exceso. Aunque también es piezorresistivo, su coeficiente de sensibilidad suele ser menor que el del tipo P para la mayoría de las configuraciones. Existe un compromiso con la catidad de dopaje. Bajo Dopaje: Si ponemos pocos átomos de Boro, el sensor es muy sensible (Factor de Galga $G$ muy alto), pero es inestable con la temperatura. Cualquier cambio térmico altera la resistencia tanto como la deformación. Alto Dopaje (Silicio Degenerado): Si saturamos el silicio con mucho Boro, el sensor se vuelve muy estable térmicamente, pero pierde mucha sensibilidad (el Factor de Galga $G$ baja).
 }% 
 Las galgas se colocan sobre la superficie de la viga, lo más cerca posible de las uniones (con el marco, que tambien es de silicio fijo). Si imaginamos la viga como una tabla de trampolín, cuando la masa se mueve, la viga se dobla. El punto donde el silicio se estira y se comprime más (máximo esfuerzo mecánico) es justo en el \emph{encastre}, es decir, donde la viga nace del marco fijo (y también donde se une a la masa). De hecho, para un acelerómetro de alta calidad (puente completo), se suelen poner galgas en ambos extremos de cada viga (una cerca del marco y otra cerca de la masa).
@@ -330,7 +330,7 @@ Las galgas se colocan sobre la superficie de la viga, lo más cerca posible de l
 \begin{scope}
 \draw[gray!30] (-1.5,-1.5) grid (1.5,1.5);
 \foreach \x in {-1,0,1} \foreach \y in {-1,0,1}
-\fill[gray!60] (\x,\y) circle (4pt) node[white] {Si};
+\fill[gray!60] (\x,\y) circle (4pt) node[white,font=\tiny] {Si};
 % Átomo de Boro central
 \fill[red!80] (0,0) circle (5pt) node[white] {B};
 % Hueco
@@ -342,7 +342,7 @@ Las galgas se colocan sobre la superficie de la viga, lo más cerca posible de l
     \begin{scope}[xshift=3.1cm]
         \draw[gray!30] (-1.5,-1.5) grid (1.5,1.5);
         \foreach \x in {-1,0,1} \foreach \y in {-1,0,1} 
-            \fill[gray!60] (\x,\y) circle (4pt) node[white] {Si};
+            \fill[gray!60] (\x,\y) circle (4pt) node[white,font=\tiny] {Si};
         % Átomo de Fósforo central
         \fill[blue!80] (0,0) circle (5pt) node[white] {P};
         % Electrón libre
@@ -516,13 +516,21 @@ Para temperaturas superiores a \qty{0}{\degree C}, el coeficiente $C$  se vuelve
 
 \subsection{Configuraciones de Conexión: 2, 3 y 4 hilos}\label{sec:conexion_hilos}
 % Vital para instrumentación industrial.
-El principal reto en la medida de precisión con RTDs es la resistencia parásita de los hilos de cobre que conectan el sensor al equipo de medida ($R_w$). Dado que una Pt100 varía solo \qty{0,385}{\Omega/\degree C}, una resistencia de cable de tan solo \qty{1}{\Omega} introduciría un error sistemático superior a \qty{2,5}{\degree C}.
+El principal reto en la medida de precisión con RTDs es la resistencia parásita de los hilos de cobre que conectan el sensor al equipo de medida ($R_w$). Dado que una Pt100 varía solo \qty{0,385}{\Omega/\degree C}, una resistencia de cable de tan solo \qty{1}{\Omega} introduciría un error sistemático superior a \qty{2,5}{\degree C} en la conexión mas simple (2 hilos).
+% Demostración de que una resistencia de cable de \qty{1}{\Omega} introduce un error sistemático de \qty{2,5}{\degree C}.
+\marginnote{\textbf{Demostración del error sistemático de una resistencia de cable de $\mathbf{R_w=\qty{1}{\Omega}}$ introduce un error sistemático superior a \qty{2,5}{\degree C}:} 
+    La sensibilidad de una Pt100 es: 
+    \[S = R_0 \alpha = \qty{0.385}{\Omega/\degree C}\] 
+    Si los cables introducen una resistencia parásita $\Delta R = \qty{1}{\Omega}$, el error en la medida de temperatura será:
+    \[ \Delta T = \frac{\Delta R}{S} = \frac{\unit{1}{\Omega}}{\qty{0.385}{\Omega/\degree C}} \approx \qty{2.6}{\degree C} \]
+    Este error es sistemático y positivo, lo que justifica la necesidad de usar configuraciones de 3 o 4 hilos.
+}
 
-\emph{Conexión a 2 hilos: El error no compensado}
+\paragraph{Conexión a 2 hilos: El error no compensado:}
 
-Es la configuración más sencilla pero la menos precisa. El equipo de medida detecta la suma de la resistencia del sensor ($R_s$) y la de los dos hilos de ida y vuelta.
+Es la configuración más sencilla pero la menos precisa. El equipo de medida detecta la suma de la resistencia del sensor ($R_s$) y la de los dos hilos ($R_w$) de ida y vuelta.
 
-\begin{marginfigure}[0em]
+\begin{marginfigure}
     \centering
     \shorthandoff{>}
     \begin{tikzpicture}[american, scale=1]
@@ -538,9 +546,9 @@ Es la configuración más sencilla pero la menos precisa. El equipo de medida de
 
 La resistencia medida es $R_m = R_s + 2R_w$. El error es inaceptable si los cables son largos o si la temperatura ambiente de los cables fluctúa, alterando $R_w$ de forma impredecible.
 
-\emph{Conexión a 3 hilos: Estándar Industrial}
+\paragraph{Conexión a 3 hilos: Estándar Industrial: El error compensado:}
 
-Es la configuración más extendida en la industria. Se basa en el supuesto de que los tres hilos son idénticos ($R_{w1} \approx R_{w2} \approx R_{w3}$). Se utiliza típicamente en un **Puente de Wheatstone** para cancelar el efecto de los cables.
+Es la configuración más extendida en la industria. Se basa en el supuesto de que los tres hilos son idénticos ($R_{w1} \approx R_{w2} \approx R_{w3}$). Se utiliza típicamente en un \emph{Puente de Wheatstone} para cancelar el efecto de los cables.
 
 \begin{marginfigure}[2em]
     \centering
@@ -562,7 +570,7 @@ Es la configuración más extendida en la industria. Se basa en el supuesto de q
 
 Como se observa en la Figura~\ref{fig:3hilos}, la resistencia de un hilo queda en serie con el sensor, mientras que la del otro queda en serie con la resistencia patrón del puente ($R_3$). Si el puente está equilibrado y los hilos son iguales, las caídas de tensión se restan, anulando el error.
 
-\emph{Conexión a 4 hilos: Medida Kelvin}
+\paragraph{Conexión a 4 hilos: Medida Kelvin: El error compensado:}
 
 Es la configuración de máxima precisión, obligatoria en laboratorios y metrología. Separa completamente el camino de la corriente de excitación del camino de medida de tensión.
 
@@ -586,8 +594,7 @@ Es la configuración de máxima precisión, obligatoria en laboratorios y metrol
     \caption{Conexión a 4 hilos. La corriente circula por los hilos exteriores. Los hilos interiores se conectan a un voltímetro de alta impedancia ($I \approx 0$), por lo que no hay caída de tensión en ellos.}\label{fig:4hilos}
 \end{marginfigure}
 
-\sidenote{
-    \textbf{Por qué funciona:} Al medir con un voltímetro de alta impedancia, la corriente por los hilos de "Sense" es despreciable ($< \unit{1}{nA}$). Según la ley de Ohm ($V=IR$), si la corriente es nula, la caída de tensión en los cables es nula, midiendo exclusivamente la caída en el sensor.
+\marginnote{\textbf{Por qué funciona:} Al medir con un voltímetro de alta impedancia, la corriente por los hilos de "Sense" es despreciable ($< \unit{1}{nA}$). Según la ley de Ohm ($V=IR$), si la corriente es nula, la caída de tensión en los cables es nula, midiendo exclusivamente la caída en el sensor.
 }
 
 \subsection{Error por Autocalentamiento}

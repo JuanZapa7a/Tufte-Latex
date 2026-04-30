@@ -43,19 +43,22 @@
 \contentsline {subsection}{Metales Utilizados: El platino y la Pt100}{36}{subsection*.31}%
 \contentsline {subsection}{Ecuación de Callendar-Van Dusen}{36}{subsection*.32}%
 \contentsline {subsection}{Configuraciones de Conexión: 2, 3 y 4 hilos}{37}{subsection*.33}%
-\contentsline {subsection}{Error por Autocalentamiento}{38}{subsection*.34}%
+\contentsline {paragraph}{Conexión a 2 hilos: El error no compensado:}{37}{paragraph*.34}%
+\contentsline {paragraph}{Conexión a 3 hilos: Estándar Industrial: El error compensado:}{37}{paragraph*.35}%
+\contentsline {paragraph}{Conexión a 4 hilos: Medida Kelvin: El error compensado:}{38}{paragraph*.36}%
+\contentsline {subsection}{Error por Autocalentamiento}{38}{subsection*.37}%
 \contentsline {section}{\numberline {3.5}Termistores (NTC y PTC)}{38}{section.3.5}%
-\contentsline {subsection}{Termistores NTC: Modelo Exponencial y Parámetro $\beta $}{38}{subsection*.35}%
-\contentsline {subsection}{Ecuación de Steinhart-Hart}{38}{subsection*.36}%
-\contentsline {subsection}{Linealización de la Respuesta NTC}{38}{subsection*.37}%
-\contentsline {subsection}{Termistores PTC y aplicaciones de protección}{38}{subsection*.38}%
+\contentsline {subsection}{Termistores NTC: Modelo Exponencial y Parámetro $\beta $}{38}{subsection*.38}%
+\contentsline {subsection}{Ecuación de Steinhart-Hart}{38}{subsection*.39}%
+\contentsline {subsection}{Linealización de la Respuesta NTC}{38}{subsection*.40}%
+\contentsline {subsection}{Termistores PTC y aplicaciones de protección}{38}{subsection*.41}%
 \contentsline {section}{\numberline {3.6}Sensores de Luz y Campos Magnéticos}{38}{section.3.6}%
-\contentsline {subsection}{Fotorresistencias (LDR): Respuesta Espectral}{38}{subsection*.39}%
-\contentsline {subsection}{Magnetorresistencias (AMR y GMR)}{38}{subsection*.40}%
+\contentsline {subsection}{Fotorresistencias (LDR): Respuesta Espectral}{38}{subsection*.42}%
+\contentsline {subsection}{Magnetorresistencias (AMR y GMR)}{38}{subsection*.43}%
 \contentsline {section}{\numberline {3.7}Circuitos de Medida: El Puente de Wheatstone}{38}{section.3.7}%
-\contentsline {subsection}{Análisis del Puente Desequilibrado}{38}{subsection*.41}%
-\contentsline {subsection}{Configuraciones: Cuarto, Medio y Puente Completo}{38}{subsection*.42}%
-\contentsline {subsection}{Linealidad según el tipo de excitación (Voltaje vs. Corriente)}{38}{subsection*.43}%
+\contentsline {subsection}{Análisis del Puente Desequilibrado}{38}{subsection*.44}%
+\contentsline {subsection}{Configuraciones: Cuarto, Medio y Puente Completo}{38}{subsection*.45}%
+\contentsline {subsection}{Linealidad según el tipo de excitación (Voltaje vs. Corriente)}{38}{subsection*.46}%
 \contentsline {section}{\numberline {3.8}Resumen de Errores en Sensores Resistivos}{38}{section.3.8}%
-\contentsline {chapter}{Bibliograf\'{\i }a}{39}{appendix*.44}%
+\contentsline {chapter}{Bibliograf\'{\i }a}{39}{appendix*.47}%
 \contentsfinish 

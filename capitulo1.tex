@@ -33,7 +33,7 @@ Un sistema de instrumentación no es solo un sensor; es una cadena de bloques qu
     \node[left of=cond, node distance=3.2cm] (noise) {Ruido /Interferencias};
     \draw [->, red, dashed] (noise) -- (cond);
     \end{tikzpicture}
-    \caption{Cadena de Instrumentación: Desde la magnitud física hasta la información útil. La magnitud fisica se transforma en una señal eléctrica mediante un sensor o transductor. La señal eléctrica se acondiciona para mejorar la calidad de la señal y se transforma en digital. La señal digital se adquiere mediante un sistema de adquisición. La información digital se procesa y se presenta.}\label{fig:cadena_instrumentacion}
+    \caption[Cadena de Instrumentación.]{Cadena de Instrumentación: Desde la magnitud física hasta la información útil. La magnitud fisica se transforma en una señal eléctrica mediante un sensor o transductor. La señal eléctrica se acondiciona para mejorar la calidad de la señal y se transforma en digital. La señal digital se adquiere mediante un sistema de adquisición. La información digital se procesa y se presenta.}\label{fig:cadena_instrumentacion}
 \end{marginfigure}
 
 Incidir en que el eslabón más débil de la cadena determina la precisión de todo el sistema. Un sistema de medida es tan bueno como su componente más impreciso.
@@ -80,7 +80,7 @@ Es vital que se utilice la terminología profesional, especialmente en un contex
     % Fórmula del error
     \node[red] at (0.75,-1.2) {$e = V_m - V_v = 1.5$};
     \end{tikzpicture}
-    \caption{Representación del Error de Medida: diferencia entre el valor medido y el valor verdadero. El error puede ser positivo o negativo. El error es la diferencia entre el valor medido y el valor verdadero. }\label{fig:error_medida}
+    \caption[Representación del Error de Medida.]{Representación del Error de Medida: diferencia entre el valor medido y el valor verdadero. El error puede ser positivo o negativo. El error es la diferencia entre el valor medido y el valor verdadero. }\label{fig:error_medida}
     \end{marginfigure}
 
   \item \textbf{Valor Verdadero}: Valor ideal sin errores (inaccesible en la práctica).
@@ -131,7 +131,7 @@ Es vital que se utilice la terminología profesional, especialmente en un contex
                 \fill[green] (0.05*rand, 0.05*rand) circle (2pt);
         \end{scope}
     \end{tikzpicture}
-    \caption{Relación entre Exactitud y Precisión. Un sistema puede ser preciso pero no exacto (resultados con baja dispersión -consistentes- pero promedio incorrecto), o exacto pero no preciso (resultados con promedio correcto pero alta dispersión -inconsistentes-). En general, un sistema es preciso y exacto al mismo tiempo cuando se cumplen ambas condiciones simultaneamente promedio correcto y baja dispersion. El peor de los casos es que el sistema no sea preciso ni exacto al mismo tiempo lo que trae como consecuencia un promedio incorrecto y alta dispersion e implica un mayor riesgo de error.}\label{fig:acc_prec}
+    \caption[Relación entre Exactitud y Precisión.]{Relación entre Exactitud y Precisión. Un sistema puede ser preciso pero no exacto (resultados con baja dispersión -consistentes- pero promedio incorrecto), o exacto pero no preciso (resultados con promedio correcto pero alta dispersión -inconsistentes-). En general, un sistema es preciso y exacto al mismo tiempo cuando se cumplen ambas condiciones simultaneamente promedio correcto y baja dispersion. El peor de los casos es que el sistema no sea preciso ni exacto al mismo tiempo lo que trae como consecuencia un promedio incorrecto y alta dispersion e implica un mayor riesgo de error.}\label{fig:acc_prec}
     \end{marginfigure}
 
   \item \textbf{Precisión (Precision)}: Grado de concordancia entre resultados repetidos. 
@@ -145,12 +145,6 @@ Es vital que se utilice la terminología profesional, especialmente en un contex
   \item \textbf{Trazabilidad}: Capacidad de relacionar las mediciones con estándares internacionales a través de una cadena documentada de calibraciones.
   \item \textbf{Incertidumbre de Medida}: Rango dentro del cual se espera que se encuentre el valor verdadero con un nivel de confianza específico. Se expresa como $U = k \cdot u_c$, donde $u_c$ es la incertidumbre combinada y $k$ es el factor de cobertura (ej. $k=2$ para aproximadamente 95\% de confianza).
 \end{itemize}
-
-
-
-
-
-
 
 \section{Modelo de Error Total}\label{sec:modelo_error}
 
@@ -226,7 +220,7 @@ Un ejemplo clásico, como se ilustra en la Figura~\ref{fig:ejemplo_balanza}, es 
     %     \end{tabular}
     % };
     \end{tikzpicture}
-    \caption{Ejemplo de errores en una balanza: valor verdadero 2.0 kg, error sistemático de +0.5 kg (desplazamiento constante), y error aleatorio de ±0.1 kg (fluctuaciones).}\label{fig:ejemplo_balanza}
+    \caption[Ejemplo de errores en una balanza.]{Ejemplo de errores en una balanza: valor verdadero 2.0 kg, error sistemático de +0.5 kg (desplazamiento constante), y error aleatorio de ±0.1 kg (fluctuaciones).}\label{fig:ejemplo_balanza}
 \end{marginfigure}
 
 
@@ -322,7 +316,7 @@ u_B = \frac{0.5\%}{1}
 \begin{table}[!htbp]
 \centering
 \small
-\caption{Distribución de probabilidad para la evaluación tipo B de la incertidumbre. La distribución normal se utiliza cuando el error sigue una distribución gaussiana. En la distribución gaussiana s es la desviación típica. En la distribución triangular se utiliza cuando el error es más probable cerca del valor central y en la distribución rectangular se utiliza cuando el error es igualmente probable dentro de un rango.\protect\label{tab:distribuciones_tipoB}}
+\caption[Distribuciones de probabilidad para la evaluación tipo B de la incertidumbre.]{Distribución de probabilidad para la evaluación tipo B de la incertidumbre. La distribución normal se utiliza cuando el error sigue una distribución gaussiana. En la distribución gaussiana s es la desviación típica. En la distribución triangular se utiliza cuando el error es más probable cerca del valor central y en la distribución rectangular se utiliza cuando el error es igualmente probable dentro de un rango.\protect\label{tab:distribuciones_tipoB}}
 \setlength{\tabcolsep}{3pt} % Reducimos el espacio entre columnas
 \begin{tabularx}{\linewidth}{l X c}    
 \toprule
@@ -428,7 +422,7 @@ La incertidumbre expandida proporciona una forma de comunicar la incertidumbre d
 
     \end{axis}
 \end{tikzpicture}
-\caption{Figura que ilustra la relación entre el factor de cobertura $k$ y el nivel de confianza en una distribución normal. El área sombreada en azul claro representa el intervalo de confianza del 95\% (correspondiente a $k=2$), mientras que el área sombreada en azul más oscuro representa el intervalo de confianza del 68\% (correspondiente a $k=1$). La curva principal muestra la distribución normal estándar con media $\mu$ y desviación estándar $\sigma$. El factor $k=2$ asume que el numero de medidas independientes, $n$, es grande (n $\gg$ 30), si $n$ es pequeño se usa la $t$-Student. }\label{fig:intervalos_confianza}
+\caption[Relación entre el factor de cobertura $k$ y el nivel de confianza en una distribución normal.]{Figura que ilustra la relación entre el factor de cobertura $k$ y el nivel de confianza en una distribución normal. El área sombreada en azul claro representa el intervalo de confianza del 95\% (correspondiente a $k=2$), mientras que el área sombreada en azul más oscuro representa el intervalo de confianza del 68\% (correspondiente a $k=1$). La curva principal muestra la distribución normal estándar con media $\mu$ y desviación estándar $\sigma$. El factor $k=2$ asume que el numero de medidas independientes, $n$, es grande (n $\gg$ 30), si $n$ es pequeño se usa la $t$-Student. }\label{fig:intervalos_confianza}
 \end{marginfigure}
 
 Significa que si realizamos una medición y calculamos la incertidumbre combinada $u_c$, podemos proporcionar un intervalo de confianza alrededor del valor medido utilizando la incertidumbre expandida $U$. Por ejemplo, si medimos una resistencia y obtenemos un valor de $R = 100 \, \Omega$ con una incertidumbre combinada de $u_c = 2 \, \Omega$, y queremos proporcionar un intervalo de confianza del 95\%, podemos calcular la incertidumbre expandida como $U = 2 \cdot u_c = 4 \, \Omega$. Esto nos permite comunicar que el valor verdadero de la resistencia se encuentra dentro del rango de $96 \, \Omega$ a $104 \, \Omega$ con un nivel de confianza del 95\%. La incertidumbre expandida es una herramienta esencial para comunicar la calidad de las mediciones y proporcionar a los usuarios finales una comprensión clara de la incertidumbre asociada a los resultados de las mediciones.

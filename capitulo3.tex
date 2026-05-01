@@ -515,6 +515,51 @@ Para temperaturas superiores a \qty{0}{\degree C}, el coeficiente $C$  se vuelve
 % \end{marginfigure}
 
 \subsection{Configuraciones de Conexión: 2, 3 y 4 hilos}\label{sec:conexion_hilos}
+% ¿Como se mide la resistencia en un equipo de medida?
+
+El proceso de medida de un sensor resistivo se basa en el método voltio-amperimétrico. Como se ilustra en la Figura~\ref{fig:equipo_medida}, el equipo de medida integra una fuente de corriente de precisión ($I_{exc}$) y un voltímetro de alta impedancia de entrada Un equipo de medida funciona proporcionando un corriente al sensor y mediendo la tensión que se produce en el mismo. Como el voltímetro ideal tiene impedancia infinita, toda la corriente circula por la resistencia, y se puede calcular la resistencia del sensor mediante la ley de Ohm: $R = V / I$.
+
+Los valores de intensidad que se proporciona depende del tipo de sensor. En el caso de un RTD, se proporciona una corriente continua de \qty{0,1}{A}. En el caso de un NTC, se proporciona una corriente continua de \qty{0,01}{A}. Normalmente a resistencias de sensor mas altas se utilizan corrientes más pequeñas para evitar el autocalentamiento debido a la disipación de potencia, especialmente en elementos pequeños con una escasa transferencia térmica con su entorno. 
+
+El aspecto principal es que el dispositivo de medición de la resistencia en sí debe saber exactamente qué corriente está generando para poder llevar a cabo un cálculo correcto de la resistencia.
+
+%Figura mostrando una fuente de corriente en paralelo a un voltimetro y en paralelo a la resistencias que quiero medir.
+\begin{marginfigure}
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}[american, scale=1]
+        % Reducimos el tamaño de las resistencias al 70%
+        \ctikzset{resistors/scale=0.7}
+
+        % Equipo de Medida (Caja punteada)
+        \draw[dashed, gray!60, thick, fill=gray!5] (-0.75,-0.75) rectangle (2.75,2.75);
+        \node[gray] at (1, 2.5) {EQUIPO DE MEDIDA};
+
+        % Fuente de Corriente Interna
+        \draw (0.5,0) to[isource, l=$I_{exc}$] (0.5,2) -- (2,2) node[circ]{};
+        \draw(0.5,0) -- (2,0) node[circ] {};
+        
+        % Voltímetro Interno
+        \draw (2,2) to[voltmeter, l_=$V_m$] (2,0);
+
+        % Conexiones de salida del equipo
+        \draw (2,2) -- (3,2) coordinate (ext+);
+        \draw (2,0) -- (3,0) coordinate (ext-);
+
+        % Resistencia a medir (Fuera del equipo)
+        \draw (3,2) to[short, i=$I$] (4,2) 
+              to[R, l=$R_s$, v=$V_s$] (4,0) 
+              to[short] (3,0);
+
+        % Terminales de conexión
+        \fill[black] (3,2) circle (2pt) node[above, font=\tiny] {$HI$};
+        \fill[black] (3,0) circle (2pt) node[below, font=\tiny] {$LO$};
+
+    \end{tikzpicture}
+    \caption{Principio de medida de resistencia. El equipo (zona sombreada) actúa como una fuente de corriente en paralelo con un voltímetro. La corriente $I$ se inyecta en la resistencia externa $R_s$, generando una tensión $V_s$ proporcional a su valor.}\label{fig:equipo_medida}
+\end{marginfigure}
+
+
 % Vital para instrumentación industrial.
 El principal reto en la medida de precisión con RTDs es la resistencia parásita de los hilos de cobre que conectan el sensor al equipo de medida ($R_w$). Dado que una Pt100 varía solo \qty{0,385}{\Omega/\degree C}, una resistencia de cable de tan solo \qty{1}{\Omega} introduciría un error sistemático superior a \qty{2,5}{\degree C} en la conexión mas simple (2 hilos).
 % Demostración de que una resistencia de cable de \qty{1}{\Omega} introduce un error sistemático de \qty{2,5}{\degree C}.
@@ -526,76 +571,229 @@ El principal reto en la medida de precisión con RTDs es la resistencia parásit
     Este error es sistemático y positivo, lo que justifica la necesidad de usar configuraciones de 3 o 4 hilos.
 }
 
-\paragraph{Conexión a 2 hilos: El error no compensado:}
+\paragraph{Conexión a 2 hilos: El error no es compensado:}
 
-Es la configuración más sencilla pero la menos precisa. El equipo de medida detecta la suma de la resistencia del sensor ($R_s$) y la de los dos hilos ($R_w$) de ida y vuelta.
+La configuración que se muestra en la Figura \ref{fig:conexion_2hilos} es la más sencilla pero la menos precisa. El equipo de medida detecta la suma de la resistencia del sensor ($R_s$) y la de los dos hilos ($R_w$) de ida y vuelta.
 
 \begin{marginfigure}
     \centering
     \shorthandoff{>}
-    \begin{tikzpicture}[american, scale=1]
-        \draw (0,0) node[left] {$V_{exc}$} to[short, o-*] (0.5,0)
-            to[R, l=$R_w$] (2,0) -- (2.5,0)
-            to[R, l=$R_s$, color=blue] (2.5,-1.5)
-            -- (2,-1.5) to[R, l=$R_w$] (0.5,-1.5)
-            to[short, *-o] (0,-1.5) node[left] {GND};
-        \draw[<->, red] (0,0.3) -- (0,-1.8) node[midway, left] {$V_{meas}$};
+    \begin{tikzpicture}[american, scale=0.984]
+        % Reducimos el tamaño de las resistencias al 70%
+        \ctikzset{resistors/scale=0.7}
+
+        % Equipo de Medida (Caja punteada)
+        \draw[dashed, gray!60, thick, fill=gray!5] (-0.75,-0.75) rectangle (2.75,2.75);
+        \node[gray, font=\footnotesize] at (1, 2.5) {EQUIPO DE MEDIDA};
+
+        % Fuente de Corriente Interna
+        \draw (0.5,0) to[isource, l=$I_{exc}$] (0.5,2) -- (2,2) node[circ]{};
+        \draw (0.5,0) -- (2,0) node[circ] {};
+        
+        % Voltímetro Interno (Mide en los terminales del equipo)
+        \draw (2,2) to[voltmeter, l_=$V_m$] (2,0);
+
+        % Conexiones de salida hacia los terminales
+        \draw (2,2) -- (3,2) coordinate (HI);
+        \draw (2,0) -- (3,0) coordinate (LO);
+
+        % Hilo de ida con resistencia parásita
+        \draw (HI) to[R, l=$R_w$, i=$I$] (5,2);
+        
+        % Sensor
+        \draw (5,2) to[R, l=$R_s$, v=$V_s$] (5,0);
+        
+        % Hilo de retorno con resistencia parásita
+        \draw (5,0) to[R, l_=$R_w$] (3,0);
+
+        % Terminales de conexión (Bornes del equipo)
+        \fill[black] (3,2) circle (2pt) node[above, font=\tiny] {$HI$};
+        \fill[black] (3,0) circle (2pt) node[below, font=\tiny] {$LO$};
+
     \end{tikzpicture}
-    \caption{Conexión a 2 hilos. La resistencia total medida es $R_m = R_s + 2R_w$. Cualquier variación térmica en los cables se interpreta erróneamente como cambio en la temperatura del proceso.}\label{fig:2hilos}
+    \caption{Conexión a 2 hilos. Las resistencias de los cables $R_w$ están en serie con el sensor. El voltímetro interno $V_m$ mide la suma de las caídas de tensión: $V_m = I(R_w + R_s + R_w)$, lo que introduce el error sistemático discutido.}\label{fig:conexion_2hilos}
 \end{marginfigure}
 
 La resistencia medida es $R_m = R_s + 2R_w$. El error es inaceptable si los cables son largos o si la temperatura ambiente de los cables fluctúa, alterando $R_w$ de forma impredecible.
 
-\paragraph{Conexión a 3 hilos: Estándar Industrial: El error compensado:}
+\paragraph{Conexión a 3 hilos: Estándar Industrial con error compensado:}
 
 Es la configuración más extendida en la industria. Se basa en el supuesto de que los tres hilos son idénticos ($R_{w1} \approx R_{w2} \approx R_{w3}$). Se utiliza típicamente en un \emph{Puente de Wheatstone} para cancelar el efecto de los cables.
 
-\begin{marginfigure}[2em]
+\begin{marginfigure}
     \centering
     \shorthandoff{>}
-    \begin{tikzpicture}[american, scale=1]
-        % Puente de Wheatstone simplificado para ver la compensación
-        \draw (0,0) to[R, l=$R_1$] (1.5,1.5) to[R, l=$R_2$] (3,0);
-        \draw (0,0) to[R, l=$R_3$] (1.5,-1.5);
-        \draw (1.5,-1.5) to[R, l=$R_w$, color=red] (3,-1.5); % Hilo 3
-        \draw (3,0) to[R, l=$R_w$, color=red] (4.5,0); % Hilo 1
-        \draw (4.5,0) to[R, l=$R_s$, color=blue] (4.5,-1.5); % Sensor
-        \draw (4.5,-1.5) -- (3,-1.5); % Unión en el sensor
-        \draw (3,-1.5) to[short, -o] (1.5,0) node[right] {$V_{out}$}; % Hilo 2 (medida)
-        \draw (1.5,1.5) to[short, -o] (1.5,2) node[above] {$V_{exc}$};
-        \draw (1.5,-1.5) node[ground] {};
+    \begin{tikzpicture}[american, scale=0.984]
+        \ctikzset{resistors/scale=0.7}
+
+        % Equipo de Medida (Caja punteada)
+        \draw[dashed, gray!60, thick, fill=gray!5] (-0.75,-0.75) rectangle (2.75,3.75);
+        \node[gray, font=\footnotesize] at (1, 3.4) {EQUIPO DE MEDIDA};
+
+        % Fuente de Corriente Interna
+        \draw (0.5,0) to[isource, l=$I_{exc}$] (0.5,3) -- (3,3);
+        \draw (0.5,0) -- (3,0);
+        
+        % Terminales del equipo
+        \fill[black] (3,3) circle (2pt) node[above, font=\tiny] {$HI$};
+        \fill[black] (3,2) circle (2pt) node[above, font=\tiny] {$SENSE$};
+        \fill[black] (3,0) circle (2pt) node[below, font=\tiny] {$LO$};
+
+        % Voltímetro Interno (Conectado entre SENSE y LO)
+        \draw (2,2) to[voltmeter, l_=$V_m$] (2,0) node[circ]{};
+        \draw (2,2) -- (3,2);
+
+        % --- CABLEADO EXTERNO (3 HILOS) ---
+        
+        % Hilo 1 (ID_A): lleva la corriente
+        \draw (3,3) to[R, l=$R_w$, i=$I$] (5,3);
+        
+        % Sensor
+        \draw (5,3) to[R, l=$R_s$, v=$V_s$] (5,0);
+        
+        % Hilo 2 (SENSE): no lleva corriente (I=0)
+        \draw (3,2) to[R, l=$R_w$, i=$0$] (5,2) ;
+        
+        % Hilo 3 (RETORNO): cierra el lazo
+        \draw (5,0) to[R, l_=$R_w$] (3,0);
+
     \end{tikzpicture}
-    \caption{Conexión a 3 hilos en puente. El tercer hilo (hilo de medida) lleva la tensión al centro del puente sin cargar la línea, permitiendo que las caídas de tensión en los otros dos hilos se cancelen entre sí.}\label{fig:3hilos}
+    \caption{Conexión a 3 hilos. El hilo de \emph{SENSE} permite al voltímetro medir la tensión justo antes del sensor. Al separar el terminal de medida (\emph{SENSE}), el voltímetro ignora la caída de tensión en el hilo superior. El error sistemático se reduce a la caída de tensión del hilo de retorno, la cual es compensada internamente por el equipo. }\label{fig:conexion_3hilos}
 \end{marginfigure}
 
-Como se observa en la Figura~\ref{fig:3hilos}, la resistencia de un hilo queda en serie con el sensor, mientras que la del otro queda en serie con la resistencia patrón del puente ($R_3$). Si el puente está equilibrado y los hilos son iguales, las caídas de tensión se restan, anulando el error.
-
-\paragraph{Conexión a 4 hilos: Medida Kelvin: El error compensado:}
-
-Es la configuración de máxima precisión, obligatoria en laboratorios y metrología. Separa completamente el camino de la corriente de excitación del camino de medida de tensión.
+Como se observa en la Figura~\ref{fig:conexion_3hilos}, la corriente $I_{exc}$ circula exclusivamente por el hilo superior ($HI$) e inferior ($LO$), sin pasar por el hilo de medida ($SENSE$). El hilo central ($SENSE$) está conectado a un voltímetro de alta impedancia, por lo que su corriente es despreciable ($I \approx 0$) y no hay caida de tensión en ese hilo ($V_{R_{w\_SENSE}} \approx 0$). Sin embargo, la intensidad $I$ si atraviesa la resistencia $R_s$ del sensor y la corriente $I$ tambien atraviesa la resistencia $R_{w\_LO}$ del cable de retorno. Por lo tanto, la tensión medida por el voltímetro es:
 
 \begin{equation}
-    V_{sense} = I_{source} \cdot R_s + \cancel{2 \cdot I_{sense} \cdot R_w}
+V_m = V_s + V_{R_{w\_LO}} = I \cdot R_s + I \cdot R_{w\_LO} = I \cdot R_s + I \cdot R_{w\_SENSE}
 \end{equation}
 
-\begin{marginfigure}[2em]
+Sabemos entonces que hay un error de $V_{R_{w\_LO}}$ en la tensión medida por el voltímetro, el cual se puede compensar internamente. Se consigue gracias al que el equipo mide (o conoce por diseño) la caída de tensión en el hilo de corriente de ida ($HI$), es decir el equipo mide la tensión entre el terminal ($HI$) y el terminal ($SENSE$). Dado que el hilo de ida ($HI$) y el de retorno ($LO$) son iguales (misma longitud y material), sus resistencias son idénticas ($R_w$). La electrónica de acondicionamiento del equipo resta ese valor de la medida principal:
+\begin{equation}
+V_{final} = \underbrace{(V_s + I \cdot R_w)}_{\text{\scriptsize Lectura } V_m} - \underbrace{(I \cdot R_w \mathstrut)}_{\text{\scriptsize Caída en un hilo}} = V_s
+\end{equation}
+
+\paragraph{Conexión a 4 hilos: Medida Kelvin:}
+
+Es la configuración de máxima precisión, obligatoria en laboratorios y metrología. Separa completamente el camino de la corriente de excitación del camino de medida de tensión. A diferencia de los 3 hilos, aquí no dependemos de que las resistencias de los cables sean idénticas. El secreto reside en que el voltímetro se conecta mediante hilos independientes directamente a los bornes del sensor. Como la impedancia de entrada del voltímetro es idealmente infinita, por los hilos de medida no circula corriente ($I \approx0$).
+
+% \begin{equation}
+%     V_{sense} = I_{source} \cdot R_s + \cancel{2 \cdot I_{sense} \cdot R_w}
+% \end{equation}
+
+% \begin{marginfigure}[2em]
+%     \centering
+%     \shorthandoff{>}
+%     \begin{tikzpicture}[american, scale=1]
+%         % Sensor
+%         \draw[thick, blue] (2,1) to[R, l=$R_s$] (2,-1);
+%         % Hilos de corriente (Force)
+%         \draw (0,1.5) node[left] {$I_{source}$} to[R, l=$R_w$] (2,1.5) -- (2,1) node[circ]{};
+%         \draw (0,-1.5) node[left] {Return} to[R, l_=$R_w$] (2,-1.5) -- (2,-1) node[circ]{};
+%         % Hilos de tensión (Sense)
+%         \draw (2,1) to[R, l=$R_w$] (0,1) to[short, -o] (0,1) node[left] {$V_{+}$};
+%         \draw (2,-1) to[R, l_=$R_w$] (0,-1) to[short, -o] (0,-1) node[left] {$V_{-}$};
+%     \end{tikzpicture}
+%     \caption{Conexión a 4 hilos. La corriente circula por los hilos exteriores. Los hilos interiores se conectan a un voltímetro de alta impedancia ($I \approx 0$), por lo que no hay caída de tensión en ellos.}\label{fig:4hilos}
+% \end{marginfigure}
+
+\begin{marginfigure}
     \centering
     \shorthandoff{>}
-    \begin{tikzpicture}[american, scale=1]
+    \begin{tikzpicture}[american, scale=0.984]
+        \ctikzset{resistors/scale=0.7}
+
+        % Equipo de Medida (Caja punteada)
+        \draw[dashed, gray!60, thick, fill=gray!5] (-.75,-1.75) rectangle (2.75,3.75);
+        \node[gray, font=\footnotesize] at (1, 3.4) {EQUIPO DE MEDIDA};
+
+        % Fuente de Corriente Interna
+        \draw (0.5,-1) to[isource, l=$I_{exc}$] (0.5,3) -- (3,3);
+        \draw (0.5,-1) -- (3,-1);
+        
+        % Terminales del equipo
+        \fill[black] (3,3) circle (2pt) node[above, font=\tiny] {$HI$};
+        \fill[black] (3,2) circle (2pt) node[above, font=\tiny] {$S+$};
+        \fill[black] (3,0) circle (2pt) node[below, font=\tiny] {$S-$};
+        \fill[black] (3,-1) circle (2pt) node[below, font=\tiny] {$LO$};
+
+        % Voltímetro Interno (Conectado entre SENSE y LO)
+        \draw (2,2) to[voltmeter, l_=$V_m$] (2,0)--(3,0);
+        \draw (2,2) -- (3,2);
+
+        % --- CABLEADO EXTERNO (3 HILOS) ---
+        
+        % Hilo 1 (ID_A): lleva la corriente
+        \draw (3,3) to[R, l=$R_w$, i=$I$] (5,3);
+        
         % Sensor
-        \draw[thick, blue] (2,1) to[R, l=$R_s$] (2,-1);
-        % Hilos de corriente (Force)
-        \draw (0,1.5) node[left] {$I_{source}$} to[R, l=$R_w$] (2,1.5) -- (2,1) node[circ]{};
-        \draw (0,-1.5) node[left] {Return} to[R, l_=$R_w$] (2,-1.5) -- (2,-1) node[circ]{};
-        % Hilos de tensión (Sense)
-        \draw (2,1) to[R, l=$R_w$] (0,1) to[short, -o] (0,1) node[left] {$V_{+}$};
-        \draw (2,-1) to[R, l_=$R_w$] (0,-1) to[short, -o] (0,-1) node[left] {$V_{-}$};
+        \draw (5,3) to[R, l=$R_s$, v=$V_s$] (5,-1);
+        
+        % Hilo 2 (SENSE): no lleva corriente (I=0)
+        \draw (3,2) to[R, l=$R_w$, i=$0$] (5,2) ;
+        
+        % Hilo 3 (RETORNO): cierra el lazo
+        \draw (5,0) to[R, l_=$R_w$] (3,0);
+
+        % Hilo 4 (ID_B): lleva la corriente
+        \draw (3,-1) to[R, l=$R_w$] (5,-1);
+
     \end{tikzpicture}
-    \caption{Conexión a 4 hilos. La corriente circula por los hilos exteriores. Los hilos interiores se conectan a un voltímetro de alta impedancia ($I \approx 0$), por lo que no hay caída de tensión en ellos.}\label{fig:4hilos}
+    \caption{Conexión a 4 hilos (Kelvin). El voltímetro mide la tensión \emph{exactamente} en los bornes de $R_s$. Al no circular corriente por los hilos intermedios, la resistencia de los cables $R_{w2}$ y $R_{w3}$ no genera caída de tensión.}\label{fig:conexion_4hilos}
 \end{marginfigure}
 
-\marginnote{\textbf{Por qué funciona:} Al medir con un voltímetro de alta impedancia, la corriente por los hilos de "Sense" es despreciable ($< \unit{1}{nA}$). Según la ley de Ohm ($V=IR$), si la corriente es nula, la caída de tensión en los cables es nula, midiendo exclusivamente la caída en el sensor.
+
+% \begin{marginfigure}
+%     \centering
+%     \shorthandoff{>}
+%     \begin{tikzpicture}[american, scale=0.9]
+%         % Ajustes de estilo
+%         \ctikzset{resistors/scale=0.6, sources/scale=0.9, instruments/scale=0.8}
+
+%         % --- EQUIPO DE MEDIDA (Caja gris) ---
+%         \draw[dashed, gray!60, thick, fill=gray!2] (-0.5,-1) rectangle (3.0,5);
+%         \node[gray, font=\sffamily\tiny] at (1.25, 4.7) {EQUIPO DE MEDIDA};
+
+%         % Fuente de corriente (Lazo Force)
+%         \draw (0.5,0) to[isource, l=$I_{exc}$] (0.5,4) -- (3.0,4);
+%         \draw (0.5,0) -- (3.0,0);
+        
+%         % Voltímetro (Lazo Sense)
+%         \draw (2.0,3) to[voltmeter, l_=$V_m$] (2.0,1);
+%         \draw (2.0,3) -- (3.0,3);
+%         \draw (2.0,1) -- (3.0,1);
+        
+%         % Terminales del equipo
+%         \fill[black] (3.0,4) circle (2pt) node[above left, font=\tiny] {HI (F+)};
+%         \fill[black] (3.0,3) circle (2pt) node[above left, font=\tiny] {S+};
+%         \fill[black] (3.0,1) circle (2pt) node[below left, font=\tiny] {S-};
+%         \fill[black] (3.0,0) circle (2pt) node[below left, font=\tiny] {LO (F-)};
+
+%         % --- CABLEADO EXTERNO (4 HILOS) ---
+        
+%         % Hilos de Corriente (Llevan I)
+%         \draw (3.0,4) to[R, l=$R_{w1}$] (6.0,4) -- (6.0,3.5);
+%         \draw (3.0,0) to[R, l=$R_{w4}$] (6.0,0) -- (6.0,0.5);
+%         \draw (4.5,4) node[above, blue] {$I$};
+%         \draw[blue, -stealth] (4.6,4.3) -- (5.2,4.3);
+
+%         % Hilos de Tensión (Sense) - Corriente Cero
+%         \draw (3.0,3) to[R, l=$R_{w2}$] (6.0,3);
+%         \draw (3.0,1) to[R, l=$R_{w3}$] (6.0,1);
+%         \node[font=\tiny] at (4.5, 3.3) {$I \approx 0$};
+%         \node[font=\tiny] at (4.5, 0.7) {$I \approx 0$};
+
+%         % Sensor Rs
+%         \draw (6.0,3) to[R, l=$R_s$, v=$V_s$, *-*] (6.0,1);
+%         \draw (6.0,3) -- (6.0,4);
+%         \draw (6.0,1) -- (6.0,0);
+
+%     \end{tikzpicture}
+%     \caption{Conexión a 4 hilos (Kelvin). El voltímetro mide la tensión \emph{exactamente} en los bornes de $R_s$. Al no circular corriente por los hilos intermedios, la resistencia de los cables $R_{w2}$ y $R_{w3}$ no genera caída de tensión.}\label{fig:conexion_4hilos}
+% \end{marginfigure}
+
+\marginnote{\textbf{¿Por qué funciona?:} Al medir con un voltímetro de alta impedancia, la corriente por los hilos del voltímetro es despreciable ($< \unit{1}{nA}$). Según la ley de Ohm ($V=IR$), si la corriente es nula, la caída de tensión en los cables es nula, midiendo ($V_m$) exclusivamente la caída en el sensor.
 }
+
 
 % \begin{marginfigure}[-15em]
 %     \centering
@@ -631,11 +829,174 @@ Es la configuración de máxima precisión, obligatoria en laboratorios y metrol
 %     \caption{Comparativa de conexiones para RTD. El sistema de 4 hilos (Kelvin) es el único que garantiza independencia total de la longitud del cable.}\label{fig:conexiones_detalladas}
 % \end{marginfigure}
 
-\subsection{Error por Autocalentamiento}
+Para finalizar el estudio de las técnicas de conexión de RTDs, es fundamental
+realizar un análisis comparativo que permita al ingeniero seleccionar la
+topología óptima en función de los requisitos de precisión, el coste del
+cableado y las condiciones ambientales de la instalación.
+
+A continuación, se presenta un resumen de las tres configuraciones analizadas,
+destacando el error residual de medida y el principio de compensación empleado
+en cada caso.
+
+\subsection{Resumen Comparativo de Topologías de Medida}
+
+Existe un compromiso o 
+(\emph{trade-off}) evidente entre la complejidad del sistema y la inmunidad frente a
+las resistencias parásitas de los conductores.
+
+Para finalizar el estudio de las técnicas de conexión de RTDs, es fundamental
+realizar un análisis comparativo que permita al ingeniero seleccionar la
+topología óptima en función de los requisitos de precisión, el coste del
+cableado y las condiciones ambientales de la instalación.
+
+A continuación se muestra la Tabla~\ref{tab:resumen_hilos} donde se presenta un resumen de las tres configuraciones analizadas,
+estacando el error residual de medida y el principio de compensación empleado
+en cada caso. Desde el punto de vista de la ingeniería de sistemas, la elección de la topología no debe basarse únicamente en la precisión teórica:
+\begin{enumerate}
+\item  En la conexión a 2 hilos, el error no es solo la resistencia inicial del
+    cable, sino su deriva térmica. Si el cable atraviesa zonas con cambios de
+    temperatura, el error fluctuará de forma impredecible, imposibilitando una
+    compensación por software.
+\item  La conexión a 3 hilos es la solución más eficiente en coste-beneficio. Sin
+    embargo, el alumno debe recordar que esta configuración depende de que los
+    terminales de conexión tengan la misma resistencia de contacto. Una borna
+    mal apretada romperá la simetría ($R_{w1} \neq R_{w3}$) e introducirá un error
+    que el equipo no podrá cancelar.
+\item  La conexión a 4 hilos (Medida Kelvin) es la única que garantiza la
+    integridad de la señal ante variaciones extremas de la resistencia del
+    cableado. Es la configuración estándar cuando se trabaja con corrientes de
+    excitación muy bajas (para evitar el autocalentamiento) donde la señal útil
+    ($V_s$) es del mismo orden de magnitud que la caída en los hilos.
+\end{enumerate}
+
+\begin{table}[!htbp] 
+    \centering
+    \caption[Comparativa de configuraciones de conexión para sensores RTD.]{Comparativa de configuraciones de conexión para sensores RTD.\ El error residual se expresa en términos de tensión medida adicional debido a los cables.}\label{tab:resumen_hilos}
+    %reducir ancho intercolumnas en tabularx
+    \setlength{\tabcolsep}{3pt} % Reducimos el espacio entre columnas
+    \small
+    \begin{tabularx}{\linewidth}{l l l X}
+        \toprule 
+        \textbf{Conf.} & \textbf{Error($V$)} & \textbf{Simetría} & \textbf{Aplicación Típica} \\ \midrule
+        \emph{2 hilos} & $I \cdot (2R_w)$ & No requerida & Distancias cortas (< \unit{3}{m}) y baja precisión. \\ 
+        \emph{3 hilos} & $I \cdot (R_{w1} - R_{w3})$ &
+        \emph{Crítica} & Estándar industrial (PLCs, control de procesos). \\ 
+        \emph{4 hilos} & $\approx 0$ & Irrelevante & Metrología, laboratorios y sensores de baja resistencia. \\ 
+        \bottomrule 
+    \end{tabularx} 
+\end{table}
+
+
+\subsection{Error por Autocalentamiento}\label{subsec:autocalentamiento}
+
+Al ser los RTD y termistores sensores pasivos, requieren una corriente de excitación $I_{exc}$ para convertir su variación de resistencia en una señal de tensión medible. Por efecto Joule, el sensor disipa una potencia $P = I_{exc}^2 \cdot R$, lo que provoca un incremento de su temperatura interna ($\Delta T$) por encima de la temperatura del medio que se desea medir.
+
+Este fenómeno introduce un \emph{error sistemático positivo} que se modela mediante la siguiente expresión:
+
+\begin{equation}\label{eq:autocalentamiento}
+    \Delta T = T_{sensor} - T_{medio} = \frac{P}{\delta} = \frac{I_{exc}^2 \cdot R}{\delta}
+\end{equation}
+donde $\delta$ es el \emph{coeficiente de disipación} del sensor (expresado típicamente en \unit{mW/\degree C}).
+
+\begin{marginfigure}[0em]
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}
+        \begin{axis}[
+            width=\linewidth, height=5cm,
+            xlabel={$I_{exc}$ (\unit{mA})}, ylabel={$\Delta T$ (\unit{\degree C})},
+            xmin=0, xmax=11, ymin=0, ymax=0.4,
+            axis lines=left,
+            grid=both,
+            grid style={line width=.1pt, draw=gray!10},
+            font=\scriptsize,
+            samples=100
+        ]
+            \addplot[thick, red, domain=0:10] { ( (x*0.001)^2 * 100 ) / 0.025 };
+            
+            \node[red, anchor=south west] at (axis cs: 2, 0.2) {Curva parabólica};
+            \draw[dashed, gray] (axis cs: 1, 0) -- (axis cs: 1, 0.004) -- (axis cs: 0, 0.004);
+        \end{axis}
+    \end{tikzpicture}
+    \caption[Error por autocalentamiento.]{Error por autocalentamiento en una Pt100. El error crece de forma cuadrática con la corriente de excitación.}\label{fig:curva_autocalentamiento}
+\end{marginfigure}
+
+\paragraph{Factores que afectan a $\delta$:}
+El coeficiente de disipación no es una constante intrínseca del sensor, sino que depende críticamente del entorno:
+\begin{itemize}
+    \item \emph{Medio de inmersión}: El aire es un mal conductor térmico ($\delta$ bajo), mientras que el agua o el aceite facilitan la evacuación del calor ($\delta$ alto).
+    \item \emph{Velocidad del fluido}: En fluidos en movimiento, la transferencia de calor por convección aumenta, lo que reduce el error de autocalentamiento.
+    \item \emph{Encapsulado}: Sensores con mayor superficie de contacto disipan mejor el calor.
+\end{itemize}
+
+En instrumentación industrial con Pt100, se suele limitar la corriente de excitación a \qty{1}{mA}. Esto mantiene el error de autocalentamiento por debajo de los \qty{0,01}{\degree C} en la mayoría de condiciones, lo cual es despreciable frente a la tolerancia del sensor.
+
+
+\paragraph{Ejemplo de cálculo de corriente máxima:}
+Supongamos que estamos diseñando un termómetro con una Pt100 ($\delta = \qty{25}{mW/\degree C}$ en agua agitada) y queremos que el error por autocalentamiento sea inferior a \qty{0.05}{\degree C}. ¿Cuál es la corriente máxima permitida?
+
+Aplicando la Ecuación~\ref{eq:autocalentamiento}:
+\[ P_{max} = \Delta T_{max} \cdot \delta = \qty{0,05}{\degree C} \cdot \qty{25}{mW/\degree C} = \qty{1,25}{mW} \]
+Considerando el caso peor ($R = \qty{100}{\Omega}$):
+\[ I_{max} = \sqrt{\frac{P_{\max}}{R}} = \sqrt{\frac{\si{1,25e^{-3}}{W}}{\qty{100}{\Omega}}} \approx \qty{3.53}{mA} \]
 
 \section{Termistores (NTC y PTC)}\label{sec:termistores}
+A diferencia de los RTD (los detectores de temperatura resistivos son metales), los termistores están fabricados con materiales semiconductores (óxidos de manganeso, níquel, cobalto, etc.). Su principal característica es una sensibilidad mucho mayor que la del platino, aunque a costa de una fuerte no linealidad.
 
 \subsection{Termistores NTC: Modelo Exponencial y Parámetro $\beta$}
+Los termistores NTC (\textit{Negative Temperature Coefficient}) presentan una disminución drástica de su resistencia al aumentar la temperatura. Esto se debe a que, en los semiconductores, el aporte térmico libera portadores de carga hacia la banda de conducción. El modelo más utilizado para rangos de temperatura limitados es el modelo exponencial de un parámetro ($\beta$):
+
+% \begin{equation}\label{eq:modelo_beta}
+% R(T) = R_0 \cdot e^{\beta \left( \frac{1}{T} - \frac{1}{T_0} \right)}
+% \end{equation}
+
+% donde $R_0$ es la resistencia a la temperatura de referencia $T_0$ (típicamente \qty{298,15}{K} o \qty{25}{\degree C}). $T$ Y $T_0$ son las temperaturas actuales y de referencia respectivamente y deben expresarse obligatoriamente en Kelvin.\ $\beta$ es la temperatura característica del material (típicamente entre \qty{2000}{K} y \qty{5000}{K}).
+
+% \paragraph{Ejemplo de cálculo de resistencia:}
+% Supongamos que tenemos un termistor NTC con $R_0 = \qty{10}{k\Omega}$ y $\beta = \qty{4000}{K}$. ¿Cuál es la resistencia a \qty{50}{\degree C}?
+
+% Aplicando la Ecuación~\ref{eq:modelo_beta}:     
+% \[ R(\qty{50}{\degree C}) = \qty{10}{k\Omega} \cdot e^{\qty{4000}{K} \left( \frac{1}{\qty{50}{\degree C}} - \frac{1}{\qty{25}{\degree C}} \right)} = \qty{10000}{\Omega} \] 
+
+% \begin{marginfigure}[2em]
+% \centering
+% \shorthandoff{>}
+% \begin{tikzpicture}
+% \begin{axis}[
+% width=\linewidth, height=5cm,
+% xlabel={
+
+        
+% T
+% T
+
+      
+
+% (\unit{}{\degree C})}, ylabel={
+
+        
+% R
+% R
+
+      
+
+% (\unit{}{\Omega})},
+% xmin=0, xmax=100, ymin=0, ymax=10000,
+% axis lines=left, grid=both,
+% grid style={line width=.1pt, draw=gray!10},
+% font=\scriptsize
+% ]
+% % NTC 10k con Beta=3950
+% \addplot[thick, red, domain=0:100, samples=100]
+% {10000 * exp(3950 * (1/(x+273.15) - 1/298.15))};
+% \node[red, anchor=west] at (axis cs:40, 5000) {NTC 10k};
+% \end{axis}
+% \end{tikzpicture}
+% \caption{Curva característica de un termistor NTC de \unit{10}{k\Omega}. Nótese la elevada sensibilidad a bajas temperaturas y el achatamiento de la curva a altas temperaturas.}\label{fig:curva_ntc}
+% \end{marginfigure}
+
+
+
 \subsection{Ecuación de Steinhart-Hart}
 \subsection{Linealización de la Respuesta NTC}
 \subsection{Termistores PTC y aplicaciones de protección}
@@ -645,10 +1006,10 @@ Es la configuración de máxima precisión, obligatoria en laboratorios y metrol
 \subsection{Fotorresistencias (LDR): Respuesta Espectral}
 \subsection{Magnetorresistencias (AMR y GMR)}
 
-\section{Circuitos de Medida: El Puente de Wheatstone}\label{sec:puente_wheatstone}
+% \section{Circuitos de Medida: El Puente de Wheatstone}\label{sec:puente_wheatstone}
 
-\subsection{Análisis del Puente Desequilibrado}
-\subsection{Configuraciones: Cuarto, Medio y Puente Completo}
-\subsection{Linealidad según el tipo de excitación (Voltaje vs. Corriente)}
+% \subsection{Análisis del Puente Desequilibrado}
+% \subsection{Configuraciones: Cuarto, Medio y Puente Completo}
+% \subsection{Linealidad según el tipo de excitación (Voltaje vs. Corriente)}
 
-\section{Resumen de Errores en Sensores Resistivos}\label{sec:errores_resistivos}
+% \section{Resumen de Errores en Sensores Resistivos}\label{sec:errores_resistivos}

@@ -59,18 +59,18 @@ En ingeniería, siempre preferimos sistemas lineales de la forma $y = mx + b$, y
             \node[right, font=\tiny] at (axis cs:3, 3.15) {$e_i$};
         \end{axis}
     \end{tikzpicture}
-    \caption{Ajuste lineal por mínimos cuadrados. La recta minimiza la distancia vertical al cuadrado de cada punto experimental.}\label{fig:minimos_cuadrados}
+    \caption[Ajuste lineal por mínimos cuadrados.]{Ajuste lineal por mínimos cuadrados. La recta minimiza la distancia vertical al cuadrado de cada punto experimental.}\label{fig:minimos_cuadrados}
 \end{marginfigure}
 
 Dado un conjunto de $n$ pares de medidas $(x_i, y_i)$, buscamos la recta que minimiza la suma de los cuadrados de los residuos ($e_i$). El residuo para cada punto es la diferencia entre la salida medida $y_i$ y la salida predicha por la recta de ajuste $mx_i + b$:
 \[ e_i = y_i - (mx_i + b) \]
 
 El objetivo es encontrar los coeficientes $m$ y $b$ que minimizan la suma de los cuadrados de los residuos:
-\begin{equation} 
+\begin{equation}\label{eq:error_cuadratico} 
     \sum_{i=1}^n e_i^2 = \sum_{i=1}^n {(y_i - (mx_i + b))}^2 = \sum_{i=1}^n {(y_i - mx_i - b)}^2
-\end{equation}\label{eq:error_cuadratico}
+\end{equation}
 
-Para obtener la mejor representación lineal de los datos obtenidos en el laboratorio, utilizamos el \textbf{Método de los Mínimos Cuadrados}.\marginnote{\emph{Método de los Mínimos Cuadrados $m$ y $b$:}  La demostración de la Ecuación~\ref{eq:m_final} y~\ref{eq:b_final} se basa en la minimización de la función de error cuadrático proporcionada por la Ecuación~\ref{eq:error_cuadratico}, que es la suma de los cuadrados de los residuos. Al derivar esta función con respecto a $m$ y $b$ y establecer las derivadas iguales a cero, se obtienen las fórmulas mencionadas para $m$ y $b$. Este proceso asegura que se encuentra el punto mínimo de la función de error, lo que corresponde a la mejor recta de ajuste para los datos experimentales.
+Para obtener la mejor representación lineal de los datos obtenidos en el laboratorio, utilizamos el \emph{Método de los Mínimos Cuadrados}.\marginnote{\emph{Método de los Mínimos Cuadrados $m$ y $b$:}  La demostración de la Ecuación~\ref{eq:m_final} y~\ref{eq:b_final} se basa en la minimización de la función de error cuadrático proporcionada por la Ecuación~\ref{eq:error_cuadratico}, que es la suma de los cuadrados de los residuos. Al derivar esta función con respecto a $m$ y $b$ y establecer las derivadas iguales a cero, se obtienen las fórmulas mencionadas para $m$ y $b$. Este proceso asegura que se encuentra el punto mínimo de la función de error, lo que corresponde a la mejor recta de ajuste para los datos experimentales.
 
 Para minimizar la función de error cuadrático $E(m, b) = \sum_{i=1}^n {(y_i - mx_i - b)}^2$, buscamos el punto donde las derivadas parciales se anulan:
 
@@ -113,8 +113,7 @@ En la Tabla~\ref{tab:datos_ejemplo} del siguiente ejemplo se muestra un conjunto
 \begin{margintable}
     \centering
     %\footnotesize
-    \caption{Datos experimentales del sensor. Se muestra un conjunto de $n=5$ pares de medidas $(x_i, y_i)$ y la recta de ajuste encontrada por el Método de los Mínimos Cuadrados.\\}\label{tab:datos_ejemplo}
-
+    \caption[Datos experimentales del sensor.]{Datos experimentales del sensor. Se muestra un conjunto de $n=5$ pares de medidas $(x_i, y_i)$ y la recta de ajuste encontrada por el Método de los Mínimos Cuadrados.}\label{tab:datos_ejemplo}
     \begin{tabular}{c c}
         \toprule
         $x_i$ (bar) & $y_i$ (V) \\
@@ -185,7 +184,7 @@ La recta de ajuste resultante es \textbf{$y = 0.95x + 0.14$} y está representad
             \legend{Exp., Ajuste}
         \end{axis}
     \end{tikzpicture}
-    \caption{Representación de los puntos y la recta de ajuste calculada por el Método de los Mínimos Cuadrados.}\label{fig:grafico_ejemplo}
+    \caption[Representación de los puntos y la recta de ajuste calculada por el Método de los Mínimos Cuadrados.]{Representación de los puntos y la recta de ajuste calculada por el Método de los Mínimos Cuadrados.}\label{fig:grafico_ejemplo}
 \end{marginfigure}
 
 \subsection{Error de No Linealidad}\label{sec:error_no_linealidad}
@@ -203,7 +202,7 @@ donde $y_{\max} = 3.9$ V y $y_{\min} = 0.1$ V son los valores máximo y mínimo 
 \begin{itemize}
     \item Para $x_0 = 0$ bar: $|0.1 - (0.95\cdot 0 + 0.14)| = |0.1 - 0.14| = 0.04$ V
     \item Para $x_1 = 1$ bar: $|1.2 - (0.95\cdot 1 + 0.14)| = |1.2 - 1.09               | = 0.11$ V
-    \item Para $x_2 = 2$ bar: $|1.9 - (0.95\    cdot 2 + 0.14)| = |1.9 - 2.04| = 0.14$ V
+    \item Para $x_2 = 2$ bar: $|1.9 - (0.95\cdot 2 + 0.14)| = |1.9 - 2.04| = 0.14$ V
     \item Para $x_3 = 3$ bar: $|3.1 - (0.95\cdot 3 + 0.14)| = |3.1 - 2.85| = 0.19$ V    
     \item Para $x_4 = 4$ bar: $|3.9 - (0.95\cdot 4 + 0.14)| = |3.9 - 3.64| = 0.21$ V
 \end{itemize}
@@ -227,7 +226,7 @@ Esto indica que el error de no linealidad del sensor es aproximadamente del 5.38
 \subsection{Recta de Referencia}
 %que es la recta de referencia y como se define.
 
-La recta de referencia es una linea que une el origen del sistema de coordenadas con el punto máximo de la salida. Esta recta se utiliza como una referencia para evaluar la linealidad y el comportamiento dinámico del sistema de medida. La elección de la recta de referencia es crucial, ya que puede influir en la interpretación de las características dinámicas del sensor, como la histéresis y la repetibilidad.
+La recta de referencia, como se ilustra en la Figura~\ref{fig:recta_referencia}, es una linea que une el origen del sistema de coordenadas con el punto máximo de la salida. Esta recta se utiliza como una referencia para evaluar la linealidad y el comportamiento dinámico del sistema de medida. La elección de la recta de referencia es crucial, ya que puede influir en la interpretación de las características dinámicas del sensor, como la histéresis y la repetibilidad.
 
 %ejemplo grafico de la recta de referencia y como se define.Dibujar una serie de puntos experimentales que no sean muy lineales y luego dibujar la recta de ajuste y la recta de referencia que los une. Explicar que esta recta se utiliza para evaluar la linealidad y el comportamiento dinámico del sistema de medida.
 \begin{marginfigure}
@@ -286,6 +285,9 @@ La recta de referencia es una linea que une el origen del sistema de coordenadas
             \legend{Exp., Ajuste, Ref.}           
         \end{axis}       
     \end{tikzpicture}
+    \caption[Recta de referencia y recta de ajuste]{
+        Recta de referencia y recta de ajuste para una serie de puntos experimentales. 
+    }\label{fig:recta_referencia}
 \end{marginfigure}
 
 % Como se define la recta de referencia. existen varias formas?
@@ -312,10 +314,10 @@ Un sistema presenta \emph{histéresis} cuando la salida depende de la dirección
         \draw[blue, thick, ->] (0.2,0.2) .. controls (1,0.8) .. (2,2);
         % Curva descendente
         \draw[red, thick, ->] (2,2) .. controls (1.2,1.4) .. (0.2,0.2);
-        \node[blue, font=\tiny] at (0.5,1) {asc.};
-        \node[red, font=\tiny] at (1.5,1.2) {desc.};
+        \node[blue] at (1.5,1) {asc.};
+        \node[red] at (.5,1.2) {desc.};
     \end{tikzpicture}
-    \caption{Efecto de histéresis. Es común en sensores magnéticos y mecánicos debido a la fricción o deformación elástica.}\label{fig:histeresis}
+    \caption[Efecto de histéresis.]{Efecto de histéresis. Es común en sensores magnéticos y mecánicos debido a la fricción o deformación elástica.}\label{fig:histeresis}
 \end{marginfigure}
 
 %banda de Muerta
@@ -332,9 +334,9 @@ El \emph{banda de muerta} es un fenómeno relacionado con la histéresis, donde 
         \draw[blue, thick] (0.2,0.2) -- (1,0.2) -- (1.5,1.5) -- (2,2);
         % Banda de muerta
         \draw[dashed, red] (1,0.2) -- (1.5,1.5);
-        \node[red, font=\tiny] at (1.25,0.8) {Banda de Muerta};
+        \node[red] at (1.25,0.8) {Banda de Muerta};
     \end{tikzpicture}
-    \caption{Ejemplo de banda de muerta. Es común en sistemas mecánicos con fricción o en sensores que requieren una fuerza mínima para activar la salida.}\label{fig:banda_muerta}
+    \caption[Ejemplo de banda de muerta.]{Ejemplo de banda de muerta. Es común en sistemas mecánicos con fricción o en sensores que requieren una fuerza mínima para activar la salida.}\label{fig:banda_muerta}
 \end{marginfigure}
 
 La \emph{repetibilidad} es la capacidad de un sensor para entregar la misma salida al aplicar la misma entrada varias veces en periodos cortos de tiempo. Un sensor con buena repetibilidad producirá resultados consistentes bajo las mismas condiciones de prueba, lo que es crucial para aplicaciones donde se requiere alta precisión y confiabilidad. La repetibilidad se puede evaluar realizando múltiples mediciones con el mismo valor de entrada y analizando la variación en las salidas obtenidas. Un sensor con alta repetibilidad tendrá una desviación estándar baja en sus mediciones, lo que indica que las salidas son consistentes y confiables. En la Figura~\ref{fig:repetibilidad} se muestra un ejemplo gráfico de repetibilidad, donde se realizan varias mediciones con el mismo valor de entrada. La dispersión de los puntos alrededor de la media indica el nivel de repetibilidad del sensor, siendo una dispersión menor indicativa de una mejor repetibilidad.\marginnote{\textbf{Ejemplo de repetibilidad.} Un ejemplo típico de repetibilidad es el comportamiento de un sensor de temperatura, donde se espera que el sensor entregue la misma salida para la misma temperatura en múltiples mediciones realizadas en periodos cortos de tiempo. Otro ejemplo típico de repetibilidad es el comportamiento de un sensor de presión, donde se espera que el sensor entregue la misma salida para la misma presión en múltiples mediciones realizadas en periodos cortos de tiempo.} 
@@ -419,11 +421,8 @@ La saturación es una característica no lineal que ocurre cuando la entrada exc
             \node[red, font=\tiny] at (axis cs:4,3.2) {Saturación};
         \end{axis}
     \end{tikzpicture}
-    \caption{Característica de saturación. Físicamente, suele estar impuesta por los límites de alimentación de la electrónica o la deformación máxima del material del sensor.}\label{fig:saturacion}
+    \caption[Característica de saturación.]{Característica de saturación. Físicamente, suele estar impuesta por los límites de alimentación de la electrónica o la deformación máxima del material del sensor.}\label{fig:saturacion}
 \end{marginfigure}
-
-
-
 
 \section{Características Dinámicas}\label{sec:caract_dinamicas} 
 
@@ -465,13 +464,13 @@ donde $K$ es una constante de ganancia. La sensibilidad estática $K     = b_0/a
             %\addlegendentry{Salida $y(t)$}
         \end{axis}
     \end{tikzpicture}
-    \caption{Respuesta al escalón de un sistema de orden 0. La salida sigue a la entrada instantáneamente sin retardo ni error dinámico.}\label{fig:orden_0}
+    \caption[Respuesta al escalón de un sistema de orden 0.]{Respuesta al escalón de un sistema de orden 0. La salida sigue a la entrada instantáneamente sin retardo ni error dinámico.}\label{fig:orden_0}
 \end{marginfigure}
 
 \subsection{Sistema de Primer Orden}
 Corresponde a sensores con almacenamiento de energía (ej.\ una capacidad térmica de un termómetro o condensador en un circuito). En este caso la salida $y(t)$ depende de la entrada $x(t)$ y de la constante de tiempo $\tau$. Matemáticamente, se modela mediante una ecuación diferencial lineal de primer orden. Su ecuación es:
 \[ \tau \frac{dy(t)}{dt} + y(t) = K \cdot x(t) \]
-donde $K$ es una constante de ganancia. La sensibilidad estática $K = b_0/a_0$ es la sensibilidad estática. En la Figura~\ref{fig:primer_orden} se muestra la respuesta al escalón de un sistema de primer orden. La respuesta al escalón de un sistema de primer orden es una curva exponencial que se aproxima a un valor final $K \cdot x(t)$ con una constante de tiempo $\tau$ que es un parámetro crucial que define la rapidez del sensor, ya que determina cuánto tiempo tarda la salida en responder a un cambio en la entrada. Un valor de $\tau$ más pequeño indica una respuesta más rápida, mientras que un valor de $\tau$ más grande indica una respuesta más lenta.\marginnote{\textbf{Constante de Tiempo ($\tau$):} Es el parámetro que define la rapidez del sensor. Representa el tiempo necesario para que la salida alcance el \SI{63.2}{\percent} de su valor final ante un escalón.
+donde $K$ es una constante de ganancia. La sensibilidad estática $K = b_0/a_0$ es la sensibilidad estática. En la Figura~\ref{fig:primer_orden} se muestra la respuesta al escalón de un sistema de primer orden. La respuesta al escalón de un sistema de primer orden es una curva exponencial que se aproxima a un valor final $K \cdot x(t)$ con una constante de tiempo $\tau$ que es un parámetro crucial que define la rapidez del sensor, ya que determina cuánto tiempo tarda la salida en responder a un cambio en la entrada. Un valor de $\tau$ más pequeño indica una respuesta más rápida, mientras que un valor de $\tau$ más grande indica una respuesta más lenta.\marginnote{\textbf{Constante de Tiempo ($\tau$):} Es el parámetro que define la rapidez del sensor. Representa el tiempo necesario para que la salida alcance el \qty{63.2}{\percent} de su valor final ante un escalón.
 }
 
 % Figura que muestra el escalon en rojo y en azul la respuesta al escalon de un sistema de primer orden, que es una curva exponencial que se aproxima a un valor final $K \cdot x(t)$ con una constante de tiempo $\tau$ que determina la rapidez de la respuesta. Las líneas punteadas indican el tiempo $\tau$ necesario para que la salida alcance el \SI{63.2}{\percent} de su valor final. La constante de tiempo $\tau$ es un parámetro crucial que define la rapidez del sensor, ya que determina cuánto tiempo tarda la salida en responder a un cambio en la entrada. Un valor de $\tau$ más pequeño indica una respuesta más rápida, mientras que un valor de $\tau$ más grande indica una respuesta más lenta.
@@ -499,7 +498,7 @@ donde $K$ es una constante de ganancia. La sensibilidad estática $K = b_0/a_0$ 
             \addplot[thick, red, dashed, domain=0:4] {1};
         \end{axis}
     \end{tikzpicture}
-    \caption{Respuesta al escalón de un sistema de 1er orden. La curva azul representa la salida $y(t)$ que se aproxima a su valor final $K \cdot x(t)$ de manera exponencial, y las líneas punteadas indican el tiempo $\tau$ necesario para que la salida alcance el \SI{63.2}{\percent} de su valor final. }\label{fig:primer_orden}
+    \caption[Respuesta al escalón de un sistema de 1er orden.]{Respuesta al escalón de un sistema de 1er orden. La curva azul representa la salida $y(t)$ que se aproxima a su valor final $K \cdot x(t)$ de manera exponencial, y las líneas punteadas indican el tiempo $\tau$ necesario para que la salida alcance el \SI{63.2}{\percent} de su valor final. }\label{fig:primer_orden}
 \end{marginfigure}
 
 \subsection{Sistema de Segundo Orden}\label{sec:segundo_orden}
@@ -545,7 +544,7 @@ donde $m$ es la masa, $c$ es el coeficiente de amortiguamiento, $k$ es la consta
         \draw[->,line width=1.5pt,orange] (0,-3.5) -- (0,-4.5) node[below,draw=none] {$F(t)$};
 
     \end{tikzpicture}
-    \caption{Sistema mecánico de segundo orden. Los parámetros $m$ (masa), $k$ (constante elástica) y $c$ (coeficiente de amortiguamiento) definen la respuesta dinámica del sensor.}\label{fig:masa_resorte}
+    \caption[Sistema mecánico de segundo orden.]{Sistema mecánico de segundo orden. Los parámetros $m$ (masa), $k$ (constante elástica) y $c$ (coeficiente de amortiguamiento) definen la respuesta dinámica del sensor.}\label{fig:masa_resorte}
 \end{marginfigure}
 %
 Comparando la expresión~\eqref{eq:segundo_orden} con la forma normalizada de un sistema de segundo orden:
@@ -626,7 +625,7 @@ que representa la máxima desviación de la salida respecto al valor final duran
             \draw[dashed, gray] (axis cs:0,1) -- (axis cs:6,1);
         \end{axis}
     \end{tikzpicture}
-    \caption{Respuesta al escalón de un sistema de segundo orden. Las curvas representan las salidas $y(t)$ que puedes presentar oscilaciones dependiendo del valor del factor de amortiguamiento $\zeta$. En este caso, se muestra un sistema subamortiguado ($\zeta < 1$) donde la salida oscila antes de estabilizarse en su valor final; un sistema críticamente amortiguado ($\zeta = 1$) donde la salida alcanza su valor final sin oscilar; y un sistema sobreamortiguado ($\zeta > 1$) donde la salida se aproxima a su valor final de manera exponencial sin oscilar.}\label{fig:segundo_orden}
+    \caption[Respuesta al escalón de un sistema de segundo orden.]{Respuesta al escalón de un sistema de segundo orden. Las curvas representan las salidas $y(t)$ que puedes presentar oscilaciones dependiendo del valor del factor de amortiguamiento $\zeta$. En este caso, se muestra un sistema subamortiguado ($\zeta < 1$) donde la salida oscila antes de estabilizarse en su valor final; un sistema críticamente amortiguado ($\zeta = 1$) donde la salida alcanza su valor final sin oscilar; y un sistema sobreamortiguado ($\zeta > 1$) donde la salida se aproxima a su valor final de manera exponencial sin oscilar.}\label{fig:segundo_orden}
 \end{marginfigure}
 
 
@@ -712,7 +711,7 @@ En resumen, el sistema analizado es capaz de seguir cambios con una rapidez mode
             \draw[dashed, gray] (axis cs:0,1) -- (axis cs:6,1);
         \end{axis}
     \end{tikzpicture}
-    \caption{Ejemplo de cálculo de la respuesta al escalón de un sistema de segundo orden subamortiguado, con $\zeta = 0.3$ y $\omega_n = 3$. La curva azul representa la salida $y(t)$ que se aproxima a su valor final $K$ de manera exponencial amortiguada y oscilatoria, donde la magnitud de la sobreoscilación $M_p$ y la frecuencia de las oscilaciones dependen del factor de amortiguamiento $\zeta$ y la frecuencia natural $\omega_n$ del sistema.}\label{fig:ejemplo_segundo_orden}
+    \caption[Respuesta al escalón de un sistema de segundo orden.]{Ejemplo de cálculo de la respuesta al escalón de un sistema de segundo orden subamortiguado, con $\zeta = 0.3$ y $\omega_n = 3$. La curva azul representa la salida $y(t)$ que se aproxima a su valor final $K$ de manera exponencial amortiguada y oscilatoria, donde la magnitud de la sobreoscilación $M_p$ y la frecuencia de las oscilaciones dependen del factor de amortiguamiento $\zeta$ y la frecuencia natural $\omega_n$ del sistema.}\label{fig:ejemplo_segundo_orden}
 \end{marginfigure}
 
 \section{Límites de la Medida: Ruido y Rango Dinámico}\label{sec:limites_medida}
@@ -825,7 +824,7 @@ Como se observa en la Figura~\ref{fig:noise_floor}, el diseño de un sistema de 
 
         \end{axis}    
     \end{tikzpicture}        
-    \caption{Diagrama de niveles de un sistema de medida. El \emph{Suelo de Ruido} ($N_f$) marca el límite inferior de detección, mientras que el nivel de \emph{Saturación} marca el límite superior. El \emph{Rango Dinámico} es una propiedad fija del sistema (120 dB en este ejemplo), mientras que la \emph{SNR} varía según la magnitud de la señal actual.}\label{fig:noise_floor}    
+    \caption[Diagrama de niveles de un sistema de medida.]{Diagrama de niveles de un sistema de medida. El \emph{Suelo de Ruido} ($N_f$) marca el límite inferior de detección, mientras que el nivel de \emph{Saturación} marca el límite superior. El \emph{Rango Dinámico} es una propiedad fija del sistema (120 dB en este ejemplo), mientras que la \emph{SNR} varía según la magnitud de la señal actual.}\label{fig:noise_floor}    
 \end{marginfigure}
 
 % \subsection{Resolución Real vs. Resolución Nominal}\label{sec:resolucion_real_vs_nominal}

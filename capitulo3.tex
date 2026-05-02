@@ -567,7 +567,7 @@ El principal reto en la medida de precisión con RTDs es la resistencia parásit
     La sensibilidad de una Pt100 es: 
     \[S = R_0 \alpha = \qty{0.385}{\Omega/\degree C}\] 
     Si los cables introducen una resistencia parásita $\Delta R = \qty{1}{\Omega}$, el error en la medida de temperatura será:
-    \[ \Delta T = \frac{\Delta R}{S} = \frac{\unit{1}{\Omega}}{\qty{0.385}{\Omega/\degree C}} \approx \qty{2.6}{\degree C} \]
+    \[ \Delta T = \frac{\Delta R}{S} = \frac{\qty{1}{\Omega}}{\qty{0.385}{\Omega/\degree C}} \approx \qty{2.6}{\degree C} \]
     Este error es sistemático y positivo, lo que justifica la necesidad de usar configuraciones de 3 o 4 hilos.
 }
 
@@ -791,7 +791,7 @@ Es la configuración de máxima precisión, obligatoria en laboratorios y metrol
 %     \caption{Conexión a 4 hilos (Kelvin). El voltímetro mide la tensión \emph{exactamente} en los bornes de $R_s$. Al no circular corriente por los hilos intermedios, la resistencia de los cables $R_{w2}$ y $R_{w3}$ no genera caída de tensión.}\label{fig:conexion_4hilos}
 % \end{marginfigure}
 
-\marginnote{\textbf{¿Por qué funciona?:} Al medir con un voltímetro de alta impedancia, la corriente por los hilos del voltímetro es despreciable ($< \unit{1}{nA}$). Según la ley de Ohm ($V=IR$), si la corriente es nula, la caída de tensión en los cables es nula, midiendo ($V_m$) exclusivamente la caída en el sensor.
+\marginnote{\textbf{¿Por qué funciona?:} Al medir con un voltímetro de alta impedancia, la corriente por los hilos del voltímetro es despreciable ($< \qty{1}{nA}$). Según la ley de Ohm ($V=IR$), si la corriente es nula, la caída de tensión en los cables es nula, midiendo ($V_m$) exclusivamente la caída en el sensor.
 }
 
 
@@ -878,7 +878,7 @@ en cada caso. Desde el punto de vista de la ingeniería de sistemas, la elecció
     \begin{tabularx}{\linewidth}{l l l X}
         \toprule 
         \textbf{Conf.} & \textbf{Error($V$)} & \textbf{Simetría} & \textbf{Aplicación Típica} \\ \midrule
-        \emph{2 hilos} & $I \cdot (2R_w)$ & No requerida & Distancias cortas (< \unit{3}{m}) y baja precisión. \\ 
+        \emph{2 hilos} & $I \cdot (2R_w)$ & No requerida & Distancias cortas (< \qty{3}{m}) y baja precisión. \\ 
         \emph{3 hilos} & $I \cdot (R_{w1} - R_{w3})$ &
         \emph{Crítica} & Estándar industrial (PLCs, control de procesos). \\ 
         \emph{4 hilos} & $\approx 0$ & Irrelevante & Metrología, laboratorios y sensores de baja resistencia. \\ 
@@ -944,72 +944,454 @@ Considerando el caso peor ($R = \qty{100}{\Omega}$):
 A diferencia de los RTD (los detectores de temperatura resistivos son metales), los termistores están fabricados con materiales semiconductores (óxidos de manganeso, níquel, cobalto, etc.). Su principal característica es una sensibilidad mucho mayor que la del platino, aunque a costa de una fuerte no linealidad.
 
 \subsection{Termistores NTC: Modelo Exponencial y Parámetro $\beta$}
-Los termistores NTC (\textit{Negative Temperature Coefficient}) presentan una disminución drástica de su resistencia al aumentar la temperatura. Esto se debe a que, en los semiconductores, el aporte térmico libera portadores de carga hacia la banda de conducción. El modelo más utilizado para rangos de temperatura limitados es el modelo exponencial de un parámetro ($\beta$):
+Los termistores NTC (\textit{Negative Temperature Coefficient}) presentan una disminución drástica de su resistencia al aumentar la temperatura, como se muestra en la Figura~\ref{fig:curva_ntc}. Esto se debe a que, en los semiconductores, el aporte térmico libera portadores de carga hacia la banda de conducción. El modelo más utilizado para rangos de temperatura limitados es el modelo exponencial de un parámetro ($\beta$):
 
-% \begin{equation}\label{eq:modelo_beta}
-% R(T) = R_0 \cdot e^{\beta \left( \frac{1}{T} - \frac{1}{T_0} \right)}
-% \end{equation}
+\begin{equation}\label{eq:modelo_beta}
+R(T) = R_0 \cdot e^{\beta \left( \frac{1}{T} - \frac{1}{T_0} \right)}
+\end{equation}
+donde $R_0$ es la resistencia a la temperatura de referencia $T_0$ (típicamente \qty{298,15}{K} o \qty{25}{\degree C}). $T$ Y $T_0$ son las temperaturas actuales y de referencia respectivamente y deben expresarse obligatoriamente en Kelvin.\ $\beta$ es la temperatura característica del material (típicamente entre \qty{2000}{K} y \qty{5000}{K}).
 
-% donde $R_0$ es la resistencia a la temperatura de referencia $T_0$ (típicamente \qty{298,15}{K} o \qty{25}{\degree C}). $T$ Y $T_0$ son las temperaturas actuales y de referencia respectivamente y deben expresarse obligatoriamente en Kelvin.\ $\beta$ es la temperatura característica del material (típicamente entre \qty{2000}{K} y \qty{5000}{K}).
+\marginnote{\textbf{Ejemplo de cálculo de resistencia en una NTC:}
+Supongamos que tenemos un termistor NTC con $R_0 = \qty{10}{k\Omega}$ y $\beta = \qty{4000}{K}$. ¿Cuál es la resistencia a \qty{50}{\degree C}?\\
+Primero hacermos una conversión a Kelvin:
+    \[T_0 = \qty{298,15}{K}\]
+    \[T_{50} = \qty{273,15} + \qty{50}{\degree C} = \qty{323,15}{K}\]
+Ahora aplicamos el modelo exponencial descrita con la Ecuación~\ref{eq:modelo_beta} 
+    \[R = 10^4 \cdot e^{4000 \left( \frac{1}{323,15} - \frac{1}{298,15} \right)}\]
+Proporcionando la temperatura de referencia $T_0$ y el parámetro $\beta$ se obtiene el siguiente resultado:
+    \[R \approx \qty{3541,5}{\Omega}\]
+La resistencia cae un \qty{65}{\percent} con solo \qty{25}{\degree C} de incremento.}
 
-% \paragraph{Ejemplo de cálculo de resistencia:}
-% Supongamos que tenemos un termistor NTC con $R_0 = \qty{10}{k\Omega}$ y $\beta = \qty{4000}{K}$. ¿Cuál es la resistencia a \qty{50}{\degree C}?
-
-% Aplicando la Ecuación~\ref{eq:modelo_beta}:     
-% \[ R(\qty{50}{\degree C}) = \qty{10}{k\Omega} \cdot e^{\qty{4000}{K} \left( \frac{1}{\qty{50}{\degree C}} - \frac{1}{\qty{25}{\degree C}} \right)} = \qty{10000}{\Omega} \] 
-
-% \begin{marginfigure}[2em]
-% \centering
-% \shorthandoff{>}
-% \begin{tikzpicture}
-% \begin{axis}[
-% width=\linewidth, height=5cm,
-% xlabel={
-
+\begin{marginfigure}
+\centering
+\shorthandoff{>}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=\linewidth, height=6cm,
+        xlabel={$T$ ($^\circ$C)},
+        ylabel={$R$ ($\Omega$)},
+        xmin=0, xmax=110,
+        ymin=0, ymax=35000, % Ampliado para ver el valor a 0 grados
+        axis lines=left,
+        grid=both,
+        grid style={line width=.1pt, draw=gray!10},
+        font=\scriptsize,
+        % Cambiamos a multiplicador 10^3 para que se lea en kOhm
+        ytick={0, 10000, 20000, 30000},
+        yticklabels={0, 10k, 20k, 30k},
+        scaled y ticks=false
+    ]
+        % Ecuación Beta: R = R0 * exp(B * (1/T - 1/T0))
+        % R0=10000, T0=298.15, B=3950
+        \addplot[thick, red, domain=0:100, samples=100] 
+            {10000 * exp(3950 * (1/(x+273.15) - 1/298.15))};
         
-% T
-% T
+        % Punto de referencia (25C, 10k)
+        \draw[dashed, gray] (axis cs:25,0) -- (axis cs:25,10000) -- (axis cs:0,10000);
+        \node[red, anchor=south west] at (axis cs:25, 10000) {NTC 10k};
+    \end{axis}
+\end{tikzpicture}
 
-      
-
-% (\unit{}{\degree C})}, ylabel={
-
-        
-% R
-% R
-
-      
-
-% (\unit{}{\Omega})},
-% xmin=0, xmax=100, ymin=0, ymax=10000,
-% axis lines=left, grid=both,
-% grid style={line width=.1pt, draw=gray!10},
-% font=\scriptsize
-% ]
-% % NTC 10k con Beta=3950
-% \addplot[thick, red, domain=0:100, samples=100]
-% {10000 * exp(3950 * (1/(x+273.15) - 1/298.15))};
-% \node[red, anchor=west] at (axis cs:40, 5000) {NTC 10k};
-% \end{axis}
-% \end{tikzpicture}
-% \caption{Curva característica de un termistor NTC de \unit{10}{k\Omega}. Nótese la elevada sensibilidad a bajas temperaturas y el achatamiento de la curva a altas temperaturas.}\label{fig:curva_ntc}
-% \end{marginfigure}
-
-
+\caption{Curva característica de un termistor NTC de \qty{10}{k\Omega}. Nótese la elevada sensibilidad a bajas temperaturas y el achatamiento de la curva a altas temperaturas.}\label{fig:curva_ntc}
+\end{marginfigure}
 
 \subsection{Ecuación de Steinhart-Hart}
+
+Para instrumentación de alta precisión en rangos amplios, el modelo $\beta$ es insuficiente. Se emplea entonces la ecuación de Steinhart-Hart, que es una aproximación polinómica de tercer orden del logaritmo de la resistencia:
+    \begin{equation}
+    \frac{1}{T} = A + B \ln(R) + C (\ln R)^3
+    \end{equation}
+\marginnote{\textbf{Comparativa: Modelo $\beta$ vs. Steinhart-Hart} \\
+        En el cálculo anterior, el modelo $\beta$ nos dio $R = \qty{3541.5}{\Omega}$ para $T = \qty{50}{\degree C}$. Veamos qué temperatura daría Steinhart-Hart para esa misma resistencia.
+
+        \emph{1. Coeficientes NTC 10k típicos:}
+        \begin{itemize}
+            \item $A = 1.1292 \times 10^{-3}$
+            \item $B = 2.3411 \times 10^{-4}$
+            \item $C = 8.7755 \times 10^{-8}$
+        \end{itemize}
+
+        \emph{2. Aplicamos la ecuación:}
+        \[ \frac{1}{T} = A + B \ln(R) + C (\ln R)^3 \]
+        Para $R = \qty{3541.5}{\Omega}$:
+        \[ \ln(3541.5) \approx 8.1723 \]
+        \[ \frac{1}{T} = A + B(8.1723) + C(8.1723)^3 \]
+
+        \emph{3. Cálculo de la Temperatura:}
+        \[ \frac{1}{T} \approx 0.001129 + 0.001913 + 0.000048 \]
+        \[ \frac{1}{T} \approx 0.003090 \implies T \approx \qty{323.6}{\text{K}} \]
+        \[ T \approx 323.6 - 273.15 = \mathbf{\qty{50.45}{\degree C}} \]
+
+        \emph{Conclusión:} Existe una diferencia de \textbf{\qty{0.45}{\degree C}} entre modelos. Esta desviación es el \emph{error de modelo} que Steinhart-Hart elimina al ser un ajuste de orden superior.
+}
+
+Esta ecuación permite errores inferiores a \qty{0,01}{\degree C}. Los coeficientes $A$, $B$ y $C$ se obtienen mediante la calibración del sensor en tres puntos de temperatura conocidos y resolviendo el sistema de ecuaciones resultante. La Figura~\ref{fig:curva_ntc_sh} muestra la curva de la ecuación de Steinhart-Hart que modela la resistencia de un termistor NTC.
+
+
+
+
+
+\begin{marginfigure}
+\centering
+\shorthandoff{>}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=\linewidth, height=5cm,
+        xlabel={Resistencia $R$ ($\Omega$)},
+        ylabel={Temperatura $T$ ($^\circ$C)},
+        grid=both,
+        xmin=500, xmax=20000,
+        font=\scriptsize
+    ]
+        % x representa la Resistencia medida
+        % El resultado de Steinhart-Hart es 1/T en Kelvin. 
+        % Invertimos para tener T y restamos 273.15 para Celsius.
+        \addplot[
+            thick, 
+            red, 
+            domain=1000:20000, 
+            samples=100
+        ] { (1 / (0.001129 + 0.000234 * ln(x) + 0.000000087 * pow(ln(x),3))) - 273.15 };
+        
+        \addlegendentry{Modelo Steinhart-Hart}
+    \end{axis}
+\end{tikzpicture}
+\caption[Caracterización de una NTC mediante Steinhart-Hart]{Modelo de Steinhart-Hart para un termistor NTC. El gráfico muestra la conversión de la resistencia medida en temperatura absoluta. Este ajuste de tercer orden del logaritmo de la resistencia permite corregir la no linealidad del semiconductor con una precisión superior a \qty{0,01}{\degree C}.}\label{fig:curva_ntc_sh}
+\end{marginfigure}
+
+
+
 \subsection{Linealización de la Respuesta NTC}
+
+Debido a su naturaleza exponencial, las NTC no pueden usarse directamente en circuitos analógicos de control sin una etapa de linealización previa. La técnica más sencilla consiste en añadir una resistencia fija $R_p$ en paralelo como se ilustra en la Figura~\ref{fig:linealizacion_pasiva}.\marginnote{\textbf{Diseño de $R_p$:} 
+    Para maximizar la linealidad en torno a una temperatura central $T_c$, el valor óptimo de la resistencia de linealización es:
+    \[ R_p = R_{NTC}(T_c) \cdot \frac{\beta - 2T_c}{\beta + 2T_c} \]
+    donde $T_c$ debe estar en Kelvin.
+}
+
+\begin{marginfigure}[0em]
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}[american, scale=1]
+        \ctikzset{resistors/scale=0.7}
+        \draw (0,0) to[short, o-] (0.5,0) coordinate (p1)
+            -- (0.5,0.5) to[R, l=$R_p$, color=blue] (2.5,0.5) -- (2.5,0) coordinate (p2)
+            to[short, -o] (3,0);
+        \draw (p1) -- (0.5,-0.5) to[R, l=NTC] (2.5,-0.5) -- (p2);
+        \node[] at (1.75, -1.2) {Red equivalente $R_{eq}$};
+    \end{tikzpicture}
+    \caption{Circuito de linealización pasiva. Al combinar la curva convexa de la NTC con la respuesta de $R_p$, se obtiene un punto de inflexión con linealidad local.}\label{fig:linealizacion_pasiva}
+\end{marginfigure}
+
+La técnica más extendida consiste en conectar una resistencia fija $R_p$ en paralelo con el termistor. Al combinar la naturaleza \emph{convexa} de la exponencial de la NTC con la respuesta constante de $R_p$, se genera una red equivalente $R_{eq}$ que posee un \emph{punto de inflexión}.
+
+Matemáticamente, existe una temperatura $T_c$ donde la derivada segunda de la resistencia equivalente se anula ($\frac{d^2 R_{eq}}{dT^2} = 0$). En las proximidades de este punto, la respuesta del sensor es extraordinariamente lineal como se muestra en la Figura~\ref{fig:linealizacion_ntc}.
+
+\begin{marginfigure}
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}
+        \begin{axis}[
+            width=\linewidth, height=6cm,
+            xlabel={$T$ (\unit{\degree C})}, ylabel={$R/R_{25}$ (Norm.)},
+            xmin=0, xmax=100, ymin=0, ymax=1.2,
+            axis lines=left, grid=both,
+            grid style={line width=.1pt, draw=gray!10},
+            font=\scriptsize,
+            legend style={at={(0.5,-0.25)}, anchor=north, font=\tiny}
+        ]
+            % NTC Pura (Exponencial Beta=3500)
+            \addplot[thick, red, domain=0:100, samples=100] 
+                {exp(3500 * (1/(x+273.15) - 1/298.15))};
+            \addlegendentry{NTC Pura}
+
+            % NTC Linealizada (Rp optimizada para 50 grados)
+            % Formula simplificada para visualización: (Rntc * 0.35) / (Rntc + 0.35) * Factor_escala
+            \addplot[thick, blue, domain=0:100, samples=100] 
+                { (exp(3500 * (1/(x+273.15) - 1/298.15)) * 0.38) / (exp(3500 * (1/(x+273.15) - 1/298.15)) + 0.38) * 3.8 };
+            \addlegendentry{Red Linealizada ($R_{eq}$)}
+            
+            % Punto de inflexión
+            \draw[dashed, gray] (axis cs:50,0) -- (axis cs:50,1.2);
+            \node[blue, font=\tiny, align=center] at (axis cs:70, 0.9) {Zona\\Lineal};
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Efecto de la linealización analógica. La curva azul muestra cómo el sacrificio de sensibilidad global permite obtener una respuesta lineal en el rango central del diseño.}\label{fig:linealizacion_ntc}
+\end{marginfigure}
+
+La linealización analógica no es gratuita; el ingeniero debe evaluar sus efectos secundarios:
+
+\begin{itemize}
+    \item \emph{Pérdida de Sensibilidad}: La pendiente local de la curva linealizada es significativamente menor que la de la NTC pura (especialmente a bajas temperaturas). Se intercambia sensibilidad por predictibilidad.
+    \item \emph{Rango Limitado}: La linealidad solo se mantiene dentro de una banda estrecha (típicamente $\pm \qty{20}{\degree C}$) alrededor del punto de inflexión.
+    \item \emph{Autocalentamiento}: Al añadir resistencias en la red de medida, el consumo de corriente aumenta, elevando el riesgo de error por disipación de potencia Joule en el sensor.
+\end{itemize}\marginnote{\textbf{Criterio de Selección:} Si la aplicación requiere un rango de medida extenso (ej. \qty{-40}{\degree C} a \qty{125}{\degree C}), es preferible no linealizar analógicamente y procesar la señal mediante \emph{Steinhart-Hart}. Si el rango es estrecho y el coste es crítico (ej. un termostato doméstico), la \emph{linealización por hardware} es la solución óptima.
+}
+
 \subsection{Termistores PTC y aplicaciones de protección}
+
+Los PTC (\textit{Positive Temperature Coefficient}) aumentan su resistencia con la temperatura. Se clasifican en dos grandes grupos:
+\begin{enumerate}
+    \item \emph{Silistores}: Basados en silicio con un dopaje que produce una respuesta suave y casi lineal, similar a un RTD pero con mayor sensibilidad.
+    \item \emph{De tipo conmutación}: Fabricados con materiales cerámicos (como el titanato de bario) que presentan un incremento crítico de resistencia de varios órdenes de magnitud al alcanzar la \emph{Temperatura de Curie}.
+\end{enumerate}
+
+Un PTC es una solución adecuada para protegerse de sobrecalentamiento debido a que aumenta la resistencia con la temperatura y por tanto disminuye la corriente. Otra aplicación es la de protegerse de arranques abruptos de motores. Cuando se arranca un motor, la temperatura de los componentes aumenta y el PTC disminuye la corriente protegiendo al motor de un sobrecalentamiento. Otra aplicación es la de estabilización de temperatura en sistemas de calefacción. Cuando la temperatura de los componentes aumenta, el PTC disminuye la corriente para mantener la temperatura estable. La Tabla~\ref{tab:ptc_apps} resume algunas aplicaciones típicas de PTC.
+
+\begin{margintable}
+    \centering
+    \caption[Aplicaciones típicas de termistores PTC.]{Aplicaciones típicas de termistores PTC.}\label{tab:ptc_apps}
+    \begin{tabularx}{\linewidth}{l X}
+        \\  
+        \toprule
+        \textbf{Aplicación} & \textbf{Función del PTC} \\
+        \midrule
+        Protección & Limitación de corriente por autocalentamiento. \\
+        Arranque & Desconexión de bobinas en motores tras el inicio. \\
+        Calefacción & Estabilización automática de temperatura (PTC Heaters). \\
+        \bottomrule
+    \end{tabularx}
+\end{margintable}
 
 \section{Sensores de Luz y Campos Magnéticos}\label{sec:otros_resistivos}
 
-\subsection{Fotorresistencias (LDR): Respuesta Espectral}
+Más allá de la temperatura y la deformación, existen materiales cuya resistividad se ve alterada por la incidencia de radiación electromagnética o por la presencia de densidades de flujo magnético.
+
+\subsection{Fotorresistencias (LDR)}
+
+Las LDR (\textit{Light Dependent Resistors}) son dispositivos fabricados con semiconductores de alta resistencia, típicamente sulfuro de cadmio (CdS). Su funcionamiento se basa en el \emph{efecto fotoeléctrico}: cuando los fotones incidentes tienen energía suficiente, liberan electrones hacia la banda de conducción, disminuyendo drásticamente la resistencia del material.
+
+\paragraph{Modelo Matemático y Respuesta}
+La relación entre la resistencia $R$ y la iluminancia $E$ (medida en lux) no es lineal como se muestra en la Figura~\ref{fig:ldr_log}, sino que sigue una ley de potencia:
+
+\begin{equation}\label{eq:ldr_potencia}
+    R = A \cdot E^{-\gamma} \implies \log(R) = \log(A) - \gamma \log(E)
+\end{equation}
+donde $A$ es una constante dependiente del material y $\gamma$ es el índice de sensibilidad (típicamente entre \num{0.6} y \num{0.9}).
+
+\begin{marginfigure}
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}
+        \begin{axis}[
+            width=\linewidth, height=6cm,
+            xlabel={Iluminancia $E$ (\unit{lux})}, ylabel={$R$ (\unit{\Omega})},
+            xmode=log, ymode=log, % Gráfico LOG-LOG
+            grid=both, font=\scriptsize,
+            grid style={line width=.1pt, draw=gray!10},
+            xmin=1, xmax=1000, ymin=100, ymax=100000,
+            xtick={1, 10, 100, 1000},
+            ytick={100, 1000, 10000, 100000},
+            scaled ticks=false
+        ]
+            % Curva LDR típica: R = 50000 * E^-0.8
+            \addplot[thick, blue!70!black, domain=1:1000, samples=50] {50000 * x^(-0.8)};
+            
+            \node[blue!70!black, font=\tiny, rotate=-35] at (axis cs:10, 10000) {Pendiente $= -\gamma$};
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Respuesta log-log de una fotorresistencia. La linealidad en esta escala permite procesar la señal mediante amplificadores logarítmicos o algoritmos de potencia.}\label{fig:ldr_log}
+\end{marginfigure}
+
+\marginnote{\textbf{Efecto Memoria:} Las LDR presentan una limitación dinámica crítica: su resistencia depende de la iluminación previa. Tras un cambio brusco de luz a oscuridad, el tiempo de recuperación puede ser de varios segundos, lo que las inhabilita para aplicaciones de alta velocidad.
+}
+
 \subsection{Magnetorresistencias (AMR y GMR)}
 
-% \section{Circuitos de Medida: El Puente de Wheatstone}\label{sec:puente_wheatstone}
+Estos sensores varían su resistencia ante la presencia de un campo magnético externo $\vec{B}$. En la instrumentación moderna, han desplazado en muchas aplicaciones a los sensores de efecto Hall debido a su mayor sensibilidad y menor ruido.
 
-% \subsection{Análisis del Puente Desequilibrado}
-% \subsection{Configuraciones: Cuarto, Medio y Puente Completo}
-% \subsection{Linealidad según el tipo de excitación (Voltaje vs. Corriente)}
+\paragraph{AMR (Magnetorresistencia Anisotrópica):}
+Basadas en aleaciones ferromagnéticas (como el Permalloy), su resistencia varía en función del ángulo $\theta$ entre el vector de magnetización y la dirección de la corriente:
+\begin{equation}
+    R(\theta) = R_{\perp} + (R_{\parallel} - R_{\perp}) \cos^2 \theta
+\end{equation}
+Se utilizan en brújulas electrónicas y detección de posición angular con precisiones inferiores a \qty{0,1}{\degree}.
+
+\paragraph{GMR (Magnetorresistencia Gigante):}
+Es un efecto mecánico-cuántico observado en estructuras de multicapas delgadas (nanómetros) de materiales ferromagnéticos y no magnéticos. La resistencia depende de la orientación relativa de los espines electrónicos en las capas. 
+
+\begin{marginfigure}
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}[scale=1]
+        % Capas GMR
+        \draw[fill=blue!20] (0,0.8) rectangle (3,1.1); \node at (1.5,0.95) {Ferro (Libre)};
+        \draw[fill=gray!20] (0,0.5) rectangle (3,0.8); \node at (1.5,0.65) {No Magnética};
+        \draw[fill=blue!40] (0,0.2) rectangle (3,0.5); \node at (1.5,0.35) {Ferro (Fija)};
+        
+        % Flechas de espín
+        \draw[->, thick, red] (0.5,0.35) -- (1.0,0.35); % Fija
+        \draw[->, thick, red] (2.5,0.95) -- (2.0,0.95); % Libre (Antiparalela = R alta)
+        
+        \node[red] at (1.5, 1.3) {Magnetización Antiparalela ($R_{max}$)};
+    \end{tikzpicture}
+    \caption{Estructura simplificada de una celda GMR. El alineamiento de los momentos magnéticos altera la probabilidad de dispersión de los electrones (espintrónica).}\label{fig:gmr_diag}
+\end{marginfigure}
+
+\marginnote{\textbf{Espintrónica:} El descubrimiento de la GMR (Premios Nobel 2007) marcó el inicio de la espintrónica, donde el \textit{espín} del electrón se utiliza como portador de información además de su carga.
+}
+
+\begin{table}[!htbp]
+    \centering
+    %reducir ancho intercolumnas en tabularx
+    \setlength{\tabcolsep}{3pt} % Reducimos el espacio entre columnas
+    \begin{tabularx}{\linewidth}{l l X}
+        \toprule
+        \textbf{Tecnología} & \textbf{Variación ($\Delta R/R$)} & \textbf{Aplicación Principal} \\
+        \midrule
+        AMR & \SIrange{2}{3}{\percent} & Brújulas, encoders de baja velocidad. \\
+        GMR & \SIrange{10}{50}{\percent} & Discos duros, sensores de ABS, aislamiento galvánico. \\
+        Hall & Muy baja (tensión) & Detección de proximidad simple. \\
+        \bottomrule
+    \end{tabularx}
+    \caption{Comparativa de tecnologías de detección magnética.}
+\end{table}
+
+% \marginnote{\textbf{Ejemplo de cálculo de la eficiencia de una celda GMR} Consideremos una unión GMR simplificada. La resistencia de una capa para un espín alineado es $r = \qty{10}{\Omega}$ y para uno opuesto es $R = \qty{100}{\Omega}$. Calcule el ratio GMR porcentual.
+
+%     \textbf{1. Resistencia Paralela ($R_P$):} \\
+%     Dos canales: ($\uparrow$) con $r+r$ y ($\downarrow$) con $R+R$.
+%     \[ R_{P} = (2r) \parallel (2R) = \frac{20 \cdot 200}{20 + 200} \approx \qty{18,18}{\Omega} \]
+
+%     \textbf{2. Resistencia Antiparalela ($R_{AP}$):} \\
+%     Ambos canales son iguales: ($\uparrow$) con $r+R$ y ($\downarrow$) con $R+r$.
+%     \[ R_{AP} = (r+R) \parallel (R+r) = \frac{110}{2} = \qty{55}{\Omega} \]
+
+%     \textbf{3. Ratio GMR:} 
+%     \[ \frac{R_{AP} - R_P}{R_P} = \frac{55 - 18,18}{18,18} \approx \mathbf{\qty{202,5}{\percent}} \]
+    
+%     \textit{Este valor masivo justifica por qué esta tecnología desplazó rápidamente a los sensores basados en efecto Hall.}}
+
+\section{Circuitos de Medida: El Puente de Wheatstone}\label{sec:puente_wheatstone}
+
+La mayoría de los sensores resistivos analizados (galgas extensiométricas, Pt100) presentan variaciones de resistencia extremadamente pequeñas respecto a su valor nominal ($\Delta R \ll R$). Medir estas variaciones mediante un divisor de tensión simple resultaría en señales con un nivel de continua elevado y una sensibilidad pobre. El puente de Wheatstone es el circuito por excelencia en instrumentación para realizar medidas diferenciales, permitiendo eliminar el valor de reposo, mejorar la linealidad y compensar variaciones térmicas.
+
+
+
+\subsection{Análisis del Puente Desequilibrado}
+
+El puente de Wheatstone básico consta de cuatro ramas resistivas alimentadas por una tensión de excitación $V_{exc}$. La salida $V_o$ se mide de forma diferencial entre los nodos centrales de las dos ramas.
+
+\begin{marginfigure}
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}[american, scale=1]
+        \ctikzset{resistors/scale=0.7}
+        % Nodos del puente en diamante
+        \draw (0,0) coordinate (Vminus) 
+              to[R, l=$R_3$, *-*] (-1.5,1.5) coordinate (Va)
+              to[R, l=$R_1$, *-*] (0,3) coordinate (Vplus);
+        \draw (0,0) 
+              to[R, l_=$R_4$, *-*] (1.5,1.5) coordinate (Vb)
+              to[R, l_=$R_2$, *-*] (0,3);
+        
+        % Alimentación
+        \draw (Vplus) to[short, -o] (0,3.5) node[above] {$V_{exc}$};
+        \draw (Vminus) node[ground] {};
+        
+        % Salida diferencial
+        \draw (Va) to[short, -o] (-2,1.5) node[left] {$V_a$};
+        \draw (Vb) to[short, -o] (2,1.5) node[right] {$V_b$};
+        \draw[<->, red, thick] (-1.45,1.5) -- (1.45,1.5) node[midway, below] {$V_o$};
+    \end{tikzpicture}
+    \caption{Topología en diamante del puente de Wheatstone. La medida diferencial $V_o = V_a - V_b$ elimina el modo común de la señal.}\label{fig:puente_basico}
+\end{marginfigure}
+
+La tensión de salida es la diferencia de potencial entre los dos divisores de tensión:
+\begin{equation}\label{eq:v_out_puente}
+    V_o = V_{exc} \left( \frac{R_3}{R_1 + R_3} - \frac{R_4}{R_2 + R_4} \right)
+\end{equation}
+
+El puente está \emph{equilibrado} cuando $V_o = 0$, lo que implica que las relaciones de las resistencias cumplen:
+\begin{equation}
+    \frac{R_1}{R_3} = \frac{R_2}{R_4} \implies R_1 R_4 = R_2 R_3
+\end{equation}
+
+\subsection{Configuraciones: Cuarto, Medio y Puente Completo}
+
+En diseño de sensores, sustituimos una o más resistencias fijas por elementos activos (sensores). Supondremos un puente inicialmente equilibrado donde todas las resistencias valen $R$.
+
+\paragraph{Cuarto de Puente (1 brazo activo)}
+Típico para medir una Pt100 o una galga solitaria. Sea $R_4 = R + \Delta R$:
+\begin{equation}
+    V_o = V_{exc} \left( \frac{R}{R+R} - \frac{R+\Delta R}{R + R + \Delta R} \right) = - \frac{V_{exc}}{4} \left( \frac{\Delta R/R}{1 + \frac{\Delta R}{2R}} \right)
+\end{equation}
+Si $\Delta R \ll R$, la expresión se aproxima linealmente como:
+\begin{equation}
+    V_o \approx - \frac{V_{exc}}{4} \frac{\Delta R}{R}
+\end{equation}
+
+\paragraph{Medio Puente (2 brazos activos)}
+Se utilizan dos sensores que varían en sentido opuesto (ej. una galga en tracción y otra en compresión). Si $R_4 = R + \Delta R$ y $R_2 = R - \Delta R$:
+\begin{equation}
+    V_o = \frac{V_{exc}}{2} \frac{\Delta R}{R}
+\end{equation}
+\emph{Nota}: Esta configuración es inherentemente \emph{lineal} y dobla la sensibilidad respecto al cuarto de puente.
+
+\paragraph{Puente Completo (4 brazos activos)}
+Máxima sensibilidad y precisión, común en células de carga de pesaje:
+\begin{equation}
+    V_o = V_{exc} \frac{\Delta R}{R}
+\end{equation}
+
+\subsection{Linealidad según el tipo de excitación (Voltaje vs. Corriente)}
+
+Un problema recurrente en el cuarto de puente es la no linealidad debida al término $\Delta R$ en el denominador. Para un ingeniero electrónico, existe una solución elegante: alimentar el puente con una \emph{fuente de corriente constante} $I_{exc}$ en lugar de tensión.
+
+\begin{marginfigure}
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}[american, scale=1]
+        \ctikzset{resistors/scale=0.7, sources/scale=1}
+        \draw (0,4) to[isource, l=$I_{exc}$] (0,3) -- (0,2.5) coordinate (top);
+        \draw (Vminus) node[ground] {} to[short, *-] (0,0) coordinate (bot);
+        \draw (top) to[R, l_=$R$] (-1.2,1.25) coordinate (Va) to[R, l_=$R$] (bot);
+        \draw (top) to[R, l=$R$] (1.2,1.25) coordinate (Vb) to[R, l=$R+\Delta R$] (bot);
+        \draw[<->, red] (Va) -- (Vb) node[midway, below] {$V_o$};
+    \end{tikzpicture}
+    \caption{Puente alimentado por corriente. Al forzar la corriente, la caída de tensión en el sensor se vuelve lineal respecto a $\Delta R$.}\label{fig:puente_corriente}
+\end{marginfigure}
+
+Cuando el puente se alimenta con corriente constante, la tensión de salida para un cuarto de puente resulta:
+\begin{equation}
+    V_o = I_{exc} \frac{\Delta R}{4}
+\end{equation}
+Nótese que en esta expresión el denominador es constante, logrando una **linealización perfecta** por hardware, independientemente de la magnitud de $\Delta R$.
+
+\subsection{Resumen de Sensibilidad y Aplicación}
+
+\begin{table}[ht]
+    \centering
+    \footnotesize
+    \begin{tabularx}{\linewidth}{l l l X}
+        \toprule
+        \textbf{Topología} & \textbf{Sensibilidad} & \textbf{Linealidad} & \textbf{Uso común} \\
+        \midrule
+        Cuarto de Puente & $V_{exc}/4$ & Pobre & Termometría (Pt100). \\
+        Medio Puente & $V_{exc}/2$ & Buena & Medida de flexión en vigas. \\
+        Puente Completo & $V_{exc}$ & Excelente & Células de carga y presión. \\
+        \bottomrule
+    \end{tabularx}
+    \caption{Comparativa de configuraciones del puente de Wheatstone.}
+\end{table}
+
+\marginnote[0em]{\textbf{Problema de Célula de Carga:}
+    Un puente completo de galgas ($\qty{350}{\Omega}$) se alimenta con $V_{exc} = \qty{10}{V}$. Si la sensibilidad del sensor es $\qty{2}{mV/V}$ a fondo de escala, calcule la variación $\Delta R$ de cada galga.
+    
+    \textbf{1. Tensión de salida a FS:} \\
+    $V_o = 10 \text{ V} \cdot \qty{2}{mV/V} = \qty{20}{mV}$.
+    
+    \textbf{2. Relación del puente completo:} \\
+    $V_o = V_{exc} \frac{\Delta R}{R} \implies \frac{\Delta R}{R} = \frac{20 \text{ mV}}{10 \text{ V}} = 0,002$.
+    
+    \textbf{3. Variación de resistencia:} \\
+    $\Delta R = 350 \cdot 0,002 = \mathbf{\qty{0,7}{\Omega}}$.
+    
+    \textit{Reflexión: Medir $\qty{20}{mV}$ es sencillo para un amplificador, pero detectar $\qty{0,7}{\Omega}$ sobre un fondo de $\qty{350}{\Omega}$ con un multímetro ordinario sería imposible sin el puente.}
+}
+
+\marginnote{
+    \textbf{Compensación de hilos:} El puente de Wheatstone es el aliado perfecto de la conexión a 3 hilos. Al colocar las resistencias de los cables en ramas opuestas, sus efectos se restan algebraicamente en la salida diferencial, haciendo la medida inmune a la longitud del cable.
+}
 
 % \section{Resumen de Errores en Sensores Resistivos}\label{sec:errores_resistivos}

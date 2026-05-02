@@ -53,10 +53,21 @@
 \contentsline {section}{\numberline {3.5}Termistores (NTC y PTC)}{38}{section.3.5}%
 \contentsline {subsection}{Termistores NTC: Modelo Exponencial y Parámetro $\beta $}{38}{subsection*.41}%
 \contentsline {subsection}{Ecuación de Steinhart-Hart}{38}{subsection*.42}%
-\contentsline {subsection}{Linealización de la Respuesta NTC}{38}{subsection*.43}%
-\contentsline {subsection}{Termistores PTC y aplicaciones de protección}{38}{subsection*.44}%
-\contentsline {section}{\numberline {3.6}Sensores de Luz y Campos Magnéticos}{38}{section.3.6}%
-\contentsline {subsection}{Fotorresistencias (LDR): Respuesta Espectral}{38}{subsection*.45}%
-\contentsline {subsection}{Magnetorresistencias (AMR y GMR)}{38}{subsection*.46}%
-\contentsline {chapter}{Bibliograf\'{\i }a}{39}{appendix*.47}%
+\contentsline {subsection}{Linealización de la Respuesta NTC}{39}{subsection*.43}%
+\contentsline {subsection}{Termistores PTC y aplicaciones de protección}{39}{subsection*.44}%
+\contentsline {section}{\numberline {3.6}Sensores de Luz y Campos Magnéticos}{40}{section.3.6}%
+\contentsline {subsection}{Fotorresistencias (LDR)}{40}{subsection*.45}%
+\contentsline {paragraph}{Modelo Matemático y Respuesta}{40}{paragraph*.46}%
+\contentsline {subsection}{Magnetorresistencias (AMR y GMR)}{40}{subsection*.47}%
+\contentsline {paragraph}{AMR (Magnetorresistencia Anisotrópica):}{40}{paragraph*.48}%
+\contentsline {paragraph}{GMR (Magnetorresistencia Gigante):}{40}{paragraph*.49}%
+\contentsline {section}{\numberline {3.7}Circuitos de Medida: El Puente de Wheatstone}{40}{section.3.7}%
+\contentsline {subsection}{Análisis del Puente Desequilibrado}{41}{subsection*.50}%
+\contentsline {subsection}{Configuraciones: Cuarto, Medio y Puente Completo}{41}{subsection*.51}%
+\contentsline {paragraph}{Cuarto de Puente (1 brazo activo)}{41}{paragraph*.52}%
+\contentsline {paragraph}{Medio Puente (2 brazos activos)}{41}{paragraph*.53}%
+\contentsline {paragraph}{Puente Completo (4 brazos activos)}{41}{paragraph*.54}%
+\contentsline {subsection}{Linealidad según el tipo de excitación (Voltaje vs. Corriente)}{42}{subsection*.55}%
+\contentsline {subsection}{Resumen de Sensibilidad y Aplicación}{42}{subsection*.56}%
+\contentsline {chapter}{Bibliograf\'{\i }a}{43}{appendix*.57}%
 \contentsfinish 

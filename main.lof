@@ -33,5 +33,13 @@
 \contentsline {figure}{\numberline {3.10}{\ignorespaces Conexión a 3 hilos. El hilo de \emph {SENSE} permite al voltímetro medir la tensión justo antes del sensor. Al separar el terminal de medida (\emph {SENSE}), el voltímetro ignora la caída de tensión en el hilo superior. El error sistemático se reduce a la caída de tensión del hilo de retorno, la cual es compensada internamente por el equipo. }}{36}{figure.3.10}%
 \contentsline {figure}{\numberline {3.11}{\ignorespaces Conexión a 4 hilos (Kelvin). El voltímetro mide la tensión \emph {exactamente} en los bornes de $R_s$. Al no circular corriente por los hilos intermedios, la resistencia de los cables $R_{w2}$ y $R_{w3}$ no genera caída de tensión.}}{37}{figure.3.11}%
 \contentsline {figure}{\numberline {3.12}{\ignorespaces Error por autocalentamiento.}}{37}{figure.3.12}%
+\contentsline {figure}{\numberline {3.13}{\ignorespaces Curva característica de un termistor NTC de \qty {10}{k\Omega }. Nótese la elevada sensibilidad a bajas temperaturas y el achatamiento de la curva a altas temperaturas.}}{38}{figure.3.13}%
+\contentsline {figure}{\numberline {3.14}{\ignorespaces Caracterización de una NTC mediante Steinhart-Hart}}{39}{figure.3.14}%
+\contentsline {figure}{\numberline {3.15}{\ignorespaces Circuito de linealización pasiva. Al combinar la curva convexa de la NTC con la respuesta de $R_p$, se obtiene un punto de inflexión con linealidad local.}}{39}{figure.3.15}%
+\contentsline {figure}{\numberline {3.16}{\ignorespaces Efecto de la linealización analógica. La curva azul muestra cómo el sacrificio de sensibilidad global permite obtener una respuesta lineal en el rango central del diseño.}}{39}{figure.3.16}%
+\contentsline {figure}{\numberline {3.17}{\ignorespaces Respuesta log-log de una fotorresistencia. La linealidad en esta escala permite procesar la señal mediante amplificadores logarítmicos o algoritmos de potencia.}}{40}{figure.3.17}%
+\contentsline {figure}{\numberline {3.18}{\ignorespaces Estructura simplificada de una celda GMR. El alineamiento de los momentos magnéticos altera la probabilidad de dispersión de los electrones (espintrónica).}}{40}{figure.3.18}%
+\contentsline {figure}{\numberline {3.19}{\ignorespaces Topología en diamante del puente de Wheatstone. La medida diferencial $V_o = V_a - V_b$ elimina el modo común de la señal.}}{41}{figure.3.19}%
+\contentsline {figure}{\numberline {3.20}{\ignorespaces Puente alimentado por corriente. Al forzar la corriente, la caída de tensión en el sensor se vuelve lineal respecto a $\Delta R$.}}{41}{figure.3.20}%
 \addvspace {10\p@ }
 \contentsfinish 

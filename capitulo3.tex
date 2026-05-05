@@ -72,7 +72,7 @@ La Figura~\ref{fig:resistencia} ilustra la variación de la resistencia ante cam
             \node at (2,-1.8) {(b) Galga extensiométrica};
         \end{scope}
     \end{tikzpicture}
-    \caption{Representación física de sensores resistivos: (a) Potenciómetro donde la posición $x$ del cursor determina la división de tensión a través del wiper. (b) Galga extensiométrica donde la deformación longitudinal $\epsilon$ altera la resistencia del hilo metálico $\sigma$.}\label{fig:resistencia}
+    \caption[Representación física de sensores resistivos.]{Representación física de sensores resistivos: (a) Potenciómetro donde la posición $x$ del cursor determina la división de tensión a través del wiper. (b) Galga extensiométrica donde la deformación longitudinal $\epsilon$ altera la resistencia del hilo metálico $\sigma$.}\label{fig:resistencia}
 \end{marginfigure}
 
 
@@ -184,7 +184,7 @@ El error de linealidad absoluto se define como la diferencia entre la salida rea
 
         \end{axis}
     \end{tikzpicture}
-    \caption{Efecto de carga. El circuito (arriba) muestra la $R_L$ en paralelo con el brazo inferior. La gráfica (abajo) ilustra cómo la salida se \emph{aplasta} respecto a la ideal, perdiendo linealidad. El eje $y$ representa la relación $V_o/V_i$ y el eje $x$ la posición del cursor.}\label{fig:efecto_carga}
+    \caption[Efecto de carga.]{Efecto de carga. El circuito (arriba) muestra la $R_L$ en paralelo con el brazo inferior. La gráfica (abajo) ilustra cómo la salida se \emph{aplasta} respecto a la ideal, perdiendo linealidad. El eje $y$ representa la relación $V_o/V_i$ y el eje $x$ la posición del cursor.}\label{fig:efecto_carga}
 \end{marginfigure}
 
 Ese error se vuelve significativo cuando $R_L$ es pequeño, lo que reduce la resolución efectiva del potenciómetro. Para minimizar este efecto, se recomienda utilizar un amplificador de alta impedancia de entrada o seleccionar un potenciómetro con una resistencia total $R_{total}$ mucho mayor que la resistencia de carga $R_L$. Se utiliza un amplificador operacional en configuración seguidor de tensión para asegurar que la carga no afecte la medida, manteniendo la linealidad y precisión del potenciómetro. eso es debido a que el seguidor de tensión presenta una impedancia de entrada muy alta, lo que minimiza el efecto de carga y permite obtener una salida que sigue fielmente la tensión en el cursor del potenciómetro.
@@ -451,7 +451,7 @@ Esta formula es simple de interpretar, pero no es exacta por varios motivos. En 
             \node[blue, rotate=32, anchor=south] at (axis cs:60, 125) {$R = R_0(1+\alpha T)$};
         \end{axis}
     \end{tikzpicture}
-    \caption{Respuesta lineal de una Pt100. La pendiente $R_0 \alpha \approx \qty{0.385}{\Omega/\degree C}$ define la ganancia necesaria en la etapa de amplificación.}\label{fig:lineal_rtd}
+    \caption[Resistencia de un Pt100.]{Respuesta lineal de una Pt100. La pendiente $R_0 \alpha \approx \qty{0.385}{\Omega/\degree C}$ define la ganancia necesaria en la etapa de amplificación.}\label{fig:lineal_rtd}
 \end{marginfigure}
 
 
@@ -556,7 +556,7 @@ El aspecto principal es que el dispositivo de medición de la resistencia en sí
         \fill[black] (3,0) circle (2pt) node[below, font=\tiny] {$LO$};
 
     \end{tikzpicture}
-    \caption{Principio de medida de resistencia. El equipo (zona sombreada) actúa como una fuente de corriente en paralelo con un voltímetro. La corriente $I$ se inyecta en la resistencia externa $R_s$, generando una tensión $V_s$ proporcional a su valor.}\label{fig:equipo_medida}
+    \caption[Principio de medida de resistencia.]{Principio de medida de resistencia. El equipo (zona sombreada) actúa como una fuente de corriente en paralelo con un voltímetro. La corriente $I$ se inyecta en la resistencia externa $R_s$, generando una tensión $V_s$ proporcional a su valor.}\label{fig:equipo_medida}
 \end{marginfigure}
 
 
@@ -611,7 +611,7 @@ La configuración que se muestra en la Figura \ref{fig:conexion_2hilos} es la m�
         \fill[black] (3,0) circle (2pt) node[below, font=\tiny] {$LO$};
 
     \end{tikzpicture}
-    \caption{Conexión a 2 hilos. Las resistencias de los cables $R_w$ están en serie con el sensor. El voltímetro interno $V_m$ mide la suma de las caídas de tensión: $V_m = I(R_w + R_s + R_w)$, lo que introduce el error sistemático discutido.}\label{fig:conexion_2hilos}
+    \caption[Conexión a 2 hilos.]{Conexión a 2 hilos. Las resistencias de los cables $R_w$ están en serie con el sensor. El voltímetro interno $V_m$ mide la suma de las caídas de tensión: $V_m = I(R_w + R_s + R_w)$, lo que introduce el error sistemático discutido.}\label{fig:conexion_2hilos}
 \end{marginfigure}
 
 La resistencia medida es $R_m = R_s + 2R_w$. El error es inaceptable si los cables son largos o si la temperatura ambiente de los cables fluctúa, alterando $R_w$ de forma impredecible.
@@ -658,7 +658,7 @@ Es la configuración más extendida en la industria. Se basa en el supuesto de q
         \draw (5,0) to[R, l_=$R_w$] (3,0);
 
     \end{tikzpicture}
-    \caption{Conexión a 3 hilos. El hilo de \emph{SENSE} permite al voltímetro medir la tensión justo antes del sensor. Al separar el terminal de medida (\emph{SENSE}), el voltímetro ignora la caída de tensión en el hilo superior. El error sistemático se reduce a la caída de tensión del hilo de retorno, la cual es compensada internamente por el equipo. }\label{fig:conexion_3hilos}
+    \caption[Conexión a 3 hilos.]{Conexión a 3 hilos. El hilo de \emph{SENSE} permite al voltímetro medir la tensión justo antes del sensor. Al separar el terminal de medida (\emph{SENSE}), el voltímetro ignora la caída de tensión en el hilo superior. El error sistemático se reduce a la caída de tensión del hilo de retorno, la cual es compensada internamente por el equipo. }\label{fig:conexion_3hilos}
 \end{marginfigure}
 
 Como se observa en la Figura~\ref{fig:conexion_3hilos}, la corriente $I_{exc}$ circula exclusivamente por el hilo superior ($HI$) e inferior ($LO$), sin pasar por el hilo de medida ($SENSE$). El hilo central ($SENSE$) está conectado a un voltímetro de alta impedancia, por lo que su corriente es despreciable ($I \approx 0$) y no hay caida de tensión en ese hilo ($V_{R_{w\_SENSE}} \approx 0$). Sin embargo, la intensidad $I$ si atraviesa la resistencia $R_s$ del sensor y la corriente $I$ tambien atraviesa la resistencia $R_{w\_LO}$ del cable de retorno. Por lo tanto, la tensión medida por el voltímetro es:
@@ -738,7 +738,7 @@ Es la configuración de máxima precisión, obligatoria en laboratorios y metrol
         \draw (3,-1) to[R, l=$R_w$] (5,-1);
 
     \end{tikzpicture}
-    \caption{Conexión a 4 hilos (Kelvin). El voltímetro mide la tensión \emph{exactamente} en los bornes de $R_s$. Al no circular corriente por los hilos intermedios, la resistencia de los cables $R_{w2}$ y $R_{w3}$ no genera caída de tensión.}\label{fig:conexion_4hilos}
+    \caption[Conexión a 4 hilos.]{Conexión a 4 hilos (Kelvin). El voltímetro mide la tensión \emph{exactamente} en los bornes de $R_s$. Al no circular corriente por los hilos intermedios, la resistencia de los cables $R_{w2}$ y $R_{w3}$ no genera caída de tensión.}\label{fig:conexion_4hilos}
 \end{marginfigure}
 
 
@@ -992,7 +992,7 @@ La resistencia cae un \qty{65}{\percent} con solo \qty{25}{\degree C} de increme
     \end{axis}
 \end{tikzpicture}
 
-\caption{Curva característica de un termistor NTC de \qty{10}{k\Omega}. Nótese la elevada sensibilidad a bajas temperaturas y el achatamiento de la curva a altas temperaturas.}\label{fig:curva_ntc}
+\caption[Curva característica de un termistor NTC.]{Curva característica de un termistor NTC de \qty{10}{k\Omega}. Nótese la elevada sensibilidad a bajas temperaturas y el achatamiento de la curva a altas temperaturas.}\label{fig:curva_ntc}
 \end{marginfigure}
 
 \subsection{Ecuación de Steinhart-Hart}
@@ -1080,7 +1080,7 @@ Debido a su naturaleza exponencial, las NTC no pueden usarse directamente en cir
         \draw (p1) -- (0.5,-0.5) to[R, l=NTC] (2.5,-0.5) -- (p2);
         \node[] at (1.75, -1.2) {Red equivalente $R_{eq}$};
     \end{tikzpicture}
-    \caption{Circuito de linealización pasiva. Al combinar la curva convexa de la NTC con la respuesta de $R_p$, se obtiene un punto de inflexión con linealidad local.}\label{fig:linealizacion_pasiva}
+    \caption[Circuito de linealización pasiva.]{Circuito de linealización pasiva. Al combinar la curva convexa de la NTC con la respuesta de $R_p$, se obtiene un punto de inflexión con linealidad local.}\label{fig:linealizacion_pasiva}
 \end{marginfigure}
 
 La técnica más extendida consiste en conectar una resistencia fija $R_p$ en paralelo con el termistor. Al combinar la naturaleza \emph{convexa} de la exponencial de la NTC con la respuesta constante de $R_p$, se genera una red equivalente $R_{eq}$ que posee un \emph{punto de inflexión}.
@@ -1116,7 +1116,7 @@ Matemáticamente, existe una temperatura $T_c$ donde la derivada segunda de la r
             \node[blue, font=\tiny, align=center] at (axis cs:70, 0.9) {Zona\\Lineal};
         \end{axis}
     \end{tikzpicture}
-    \caption{Efecto de la linealización analógica. La curva azul muestra cómo el sacrificio de sensibilidad global permite obtener una respuesta lineal en el rango central del diseño.}\label{fig:linealizacion_ntc}
+    \caption[Efecto de la linealización analógica.]{Efecto de la linealización analógica. La curva azul muestra cómo el sacrificio de sensibilidad global permite obtener una respuesta lineal en el rango central del diseño.}\label{fig:linealizacion_ntc}
 \end{marginfigure}
 
 La linealización analógica no es gratuita; el ingeniero debe evaluar sus efectos secundarios:
@@ -1190,7 +1190,7 @@ donde $A$ es una constante dependiente del material y $\gamma$ es el índice de 
             \node[blue!70!black, font=\tiny, rotate=-35] at (axis cs:10, 10000) {Pendiente $= -\gamma$};
         \end{axis}
     \end{tikzpicture}
-    \caption{Respuesta log-log de una fotorresistencia. La linealidad en esta escala permite procesar la señal mediante amplificadores logarítmicos o algoritmos de potencia.}\label{fig:ldr_log}
+    \caption[Rspuesta log-log de una fotorresistencia.]{Respuesta log-log de una fotorresistencia. La linealidad en esta escala permite procesar la señal mediante amplificadores logarítmicos o algoritmos de potencia.}\label{fig:ldr_log}
 \end{marginfigure}
 
 \marginnote{\textbf{Efecto Memoria:} Las LDR presentan una limitación dinámica crítica: su resistencia depende de la iluminación previa. Tras un cambio brusco de luz a oscuridad, el tiempo de recuperación puede ser de varios segundos, lo que las inhabilita para aplicaciones de alta velocidad.
@@ -1210,7 +1210,7 @@ Se utilizan en brújulas electrónicas y detección de posición angular con pre
 \paragraph{GMR (Magnetorresistencia Gigante):}
 Es un efecto mecánico-cuántico observado en estructuras de multicapas delgadas (nanómetros) de materiales ferromagnéticos y no magnéticos. La resistencia depende de la orientación relativa de los espines electrónicos en las capas. 
 
-\begin{marginfigure}
+\begin{marginfigure}[10em]
     \centering
     \shorthandoff{>}
     \begin{tikzpicture}[scale=1]
@@ -1225,7 +1225,7 @@ Es un efecto mecánico-cuántico observado en estructuras de multicapas delgadas
         
         \node[red] at (1.5, 1.3) {Magnetización Antiparalela ($R_{max}$)};
     \end{tikzpicture}
-    \caption{Estructura simplificada de una celda GMR. El alineamiento de los momentos magnéticos altera la probabilidad de dispersión de los electrones (espintrónica).}\label{fig:gmr_diag}
+    \caption[Estructura simplificada de una celda GMR.]{Estructura simplificada de una celda GMR. El alineamiento de los momentos magnéticos altera la probabilidad de dispersión de los electrones (espintrónica).}\label{fig:gmr_diag}
 \end{marginfigure}
 
 \marginnote{\textbf{Espintrónica:} El descubrimiento de la GMR (Premios Nobel 2007) marcó el inicio de la espintrónica, donde el \textit{espín} del electrón se utiliza como portador de información además de su carga.
@@ -1233,6 +1233,7 @@ Es un efecto mecánico-cuántico observado en estructuras de multicapas delgadas
 
 \begin{table}[!htbp]
     \centering
+    \small
     %reducir ancho intercolumnas en tabularx
     \setlength{\tabcolsep}{3pt} % Reducimos el espacio entre columnas
     \begin{tabularx}{\linewidth}{l l X}
@@ -1244,7 +1245,7 @@ Es un efecto mecánico-cuántico observado en estructuras de multicapas delgadas
         Hall & Muy baja (tensión) & Detección de proximidad simple. \\
         \bottomrule
     \end{tabularx}
-    \caption{Comparativa de tecnologías de detección magnética.}
+    \caption[Comparativa de tecnologías de detección magnética.]{Comparativa de tecnologías de detección magnética. La variación de resistencia se expresa en \% de la resistencia de la capa libre.}\label{tab:resumen_gmr}
 \end{table}
 
 % \marginnote{\textbf{Ejemplo de cálculo de la eficiencia de una celda GMR} Consideremos una unión GMR simplificada. La resistencia de una capa para un espín alineado es $r = \qty{10}{\Omega}$ y para uno opuesto es $R = \qty{100}{\Omega}$. Calcule el ratio GMR porcentual.
@@ -1294,7 +1295,7 @@ El puente de Wheatstone básico consta de cuatro ramas resistivas alimentadas po
         \draw (Vb) to[short, -o] (2,1.5) node[right] {$V_b$};
         \draw[<->, red, thick] (-1.45,1.5) -- (1.45,1.5) node[midway, below] {$V_o$};
     \end{tikzpicture}
-    \caption{Topología en diamante del puente de Wheatstone. La medida diferencial $V_o = V_a - V_b$ elimina el modo común de la señal.}\label{fig:puente_basico}
+    \caption[Topología en diamante del puente de Wheatstone.]{Topología en diamante del puente de Wheatstone. La medida diferencial $V_o = V_a - V_b$ elimina el modo común de la señal.}\label{fig:puente_basico}
 \end{marginfigure}
 
 La tensión de salida es la diferencia de potencial entre los dos divisores de tensión:
@@ -1309,9 +1310,9 @@ El puente está \emph{equilibrado} cuando $V_o = 0$, lo que implica que las rela
 
 \subsection{Configuraciones: Cuarto, Medio y Puente Completo}
 
-En diseño de sensores, sustituimos una o más resistencias fijas por elementos activos (sensores). Supondremos un puente inicialmente equilibrado donde todas las resistencias valen $R$.
+En diseño de sensores, sustituimos una o más resistencias fijas por elementos activos (sensores). Supondremos un puente inicialmente equilibrado donde todas las resistencias valen $R$. Como se muestra en la Figura~\ref{fig:puente_basico}.
 
-\paragraph{Cuarto de Puente (1 brazo activo)}
+\paragraph{Cuarto de Puente (1 brazo activo).}
 Típico para medir una Pt100 o una galga solitaria. Sea $R_4 = R + \Delta R$:
 \begin{equation}
     V_o = V_{exc} \left( \frac{R}{R+R} - \frac{R+\Delta R}{R + R + \Delta R} \right) = - \frac{V_{exc}}{4} \left( \frac{\Delta R/R}{1 + \frac{\Delta R}{2R}} \right)
@@ -1321,14 +1322,14 @@ Si $\Delta R \ll R$, la expresión se aproxima linealmente como:
     V_o \approx - \frac{V_{exc}}{4} \frac{\Delta R}{R}
 \end{equation}
 
-\paragraph{Medio Puente (2 brazos activos)}
+\paragraph{Medio Puente (2 brazos activos).}
 Se utilizan dos sensores que varían en sentido opuesto (ej. una galga en tracción y otra en compresión). Si $R_4 = R + \Delta R$ y $R_2 = R - \Delta R$:
 \begin{equation}
     V_o = \frac{V_{exc}}{2} \frac{\Delta R}{R}
 \end{equation}
 \emph{Nota}: Esta configuración es inherentemente \emph{lineal} y dobla la sensibilidad respecto al cuarto de puente.
 
-\paragraph{Puente Completo (4 brazos activos)}
+\paragraph{Puente Completo (4 brazos activos).}
 Máxima sensibilidad y precisión, común en células de carga de pesaje:
 \begin{equation}
     V_o = V_{exc} \frac{\Delta R}{R}
@@ -1342,27 +1343,44 @@ Un problema recurrente en el cuarto de puente es la no linealidad debida al tér
     \centering
     \shorthandoff{>}
     \begin{tikzpicture}[american, scale=1]
-        \ctikzset{resistors/scale=0.7, sources/scale=1}
-        \draw (0,4) to[isource, l=$I_{exc}$] (0,3) -- (0,2.5) coordinate (top);
-        \draw (Vminus) node[ground] {} to[short, *-] (0,0) coordinate (bot);
-        \draw (top) to[R, l_=$R$] (-1.2,1.25) coordinate (Va) to[R, l_=$R$] (bot);
-        \draw (top) to[R, l=$R$] (1.2,1.25) coordinate (Vb) to[R, l=$R+\Delta R$] (bot);
-        \draw[<->, red] (Va) -- (Vb) node[midway, below] {$V_o$};
+        \ctikzset{resistors/scale=0.7}
+        \draw (0,5) to[isource, l=$I_{exc}$] (0,4) -- (0,3.5) coordinate (top);
+        % Nodos del puente en diamante
+        \draw (0,0) coordinate (Vminus) 
+              to[R, l=$R$, *-*] (-1.5,1.5) coordinate (Va)
+              to[R, l=$R$, *-*] (0,3) coordinate (Vplus);
+        \draw (0,0) 
+              to[R, l_=$R+\Delta R$, *-*] (1.5,1.5) coordinate (Vb)
+              to[R, l_=$R$, *-*] (0,3);
+        
+        % Alimentación
+        \draw (Vplus) to[short, -o] (0,3.5);
+        \draw (Vminus) node[ground] {};
+        
+        % Salida diferencial
+        \draw (Va) to[short, -o] (-2,1.5) node[left] {$V_a$};
+        \draw (Vb) to[short, -o] (2,1.5) node[right] {$V_b$};
+        \draw[<->, red, thick] (-1.45,1.5) -- (1.45,1.5) node[midway, below] {$V_o$};
     \end{tikzpicture}
-    \caption{Puente alimentado por corriente. Al forzar la corriente, la caída de tensión en el sensor se vuelve lineal respecto a $\Delta R$.}\label{fig:puente_corriente}
+    \caption[Puente Wheatstone alimentado por corriente.]{Puente Wheatstone alimentado por corriente. Al forzar la corriente, la caída de tensión en el sensor se vuelve lineal respecto a $\Delta R$.}\label{fig:puente_corriente}
 \end{marginfigure}
 
 Cuando el puente se alimenta con corriente constante, la tensión de salida para un cuarto de puente resulta:
 \begin{equation}
     V_o = I_{exc} \frac{\Delta R}{4}
 \end{equation}
-Nótese que en esta expresión el denominador es constante, logrando una **linealización perfecta** por hardware, independientemente de la magnitud de $\Delta R$.
+Nótese que en esta expresión el denominador es constante, logrando una \emph{linealización perfecta} por hardware, independientemente de la magnitud de $\Delta R$.
 
 \subsection{Resumen de Sensibilidad y Aplicación}
 
+La elección de la configuración del puente de Wheatstone representa un compromiso crítico entre el coste del cableado, la complejidad mecánica de la instalación y las prestaciones metrológicas requeridas. Como se resume en la Tabla~\ref{tab:resumen_puentes}, incrementar el número de elementos activos no solo eleva proporcionalmente la sensibilidad del sistema (logrando en el puente completo una ganancia cuatro veces superior a la del cuarto de puente), sino que introduce ventajas fundamentales como la \emph{linealización intrínseca} de la respuesta y la \emph{cancelación de errores por modo común}. 
+
 \begin{table}[ht]
     \centering
-    \footnotesize
+    \small
+    \caption{Comparativa de configuraciones del puente de Wheatstone.}\label{tab:resumen_puentes}
+    %\footnotesize
+    \setlength{\tabcolsep}{3pt} % Reducimos el espacio entre columnas
     \begin{tabularx}{\linewidth}{l l l X}
         \toprule
         \textbf{Topología} & \textbf{Sensibilidad} & \textbf{Linealidad} & \textbf{Uso común} \\
@@ -1372,7 +1390,7 @@ Nótese que en esta expresión el denominador es constante, logrando una **linea
         Puente Completo & $V_{exc}$ & Excelente & Células de carga y presión. \\
         \bottomrule
     \end{tabularx}
-    \caption{Comparativa de configuraciones del puente de Wheatstone.}
+    
 \end{table}
 
 \marginnote[0em]{\textbf{Problema de Célula de Carga:}
@@ -1394,4 +1412,59 @@ Nótese que en esta expresión el denominador es constante, logrando una **linea
     \textbf{Compensación de hilos:} El puente de Wheatstone es el aliado perfecto de la conexión a 3 hilos. Al colocar las resistencias de los cables en ramas opuestas, sus efectos se restan algebraicamente en la salida diferencial, haciendo la medida inmune a la longitud del cable.
 }
 
-% \section{Resumen de Errores en Sensores Resistivos}\label{sec:errores_resistivos}
+En la práctica de la ingeniería, esto se traduce en que el puente completo es el estándar \emph{de facto} para sensores de alta precisión como celdas de carga y transductores de presión, donde se busca maximizar la relación señal-ruido (SNR) y compensar automáticamente las derivas térmicas. Por el contrario, el cuarto de puente se reserva para aplicaciones de coste reducido o donde la naturaleza del sensor es individual (como en termometría con Pt100), asumiendo una ligera no linealidad que deberá ser corregida, si fuera necesario, mediante el procesado posterior en la etapa digital.
+
+\section{Resumen de Errores en Sensores Resistivos}\label{sec:errores_resistivos}
+
+El diseño de un sistema de instrumentación basado en sensores resistivos no consiste únicamente en la conversión de una magnitud física en una señal eléctrica, sino en la identificación, cuantificación y mitigación de las fuentes de incertidumbre. En esta sección se clasifican los errores analizados a lo largo del capítulo, proporcionando una visión sistémica necesaria para el diseño de hardware de alta precisión.
+
+Como se ha estudiado, los errores en la cadena de medida resistiva pueden clasificarse en sistemáticos (desviaciones predecibles) y aleatorios (fluctuaciones estadísticas). \marginnote{\textbf{Prioridades de diseño:} En una instalación industrial con \textbf{Pt100} a larga distancia, el error de los hilos domina el presupuesto. En una NTC médica de alta precisión, el error dominante suele ser la no linealidad del modelo matemático empleado Steinhart-Hart frente a modelo $\beta$).
+}
+
+\subsection{El Presupuesto de Errores (\textit{Error Budget})}
+
+Para evaluar la calidad final de un instrumento, el ingeniero debe combinar las distintas fuentes de incertidumbre. Siguiendo las directrices de la guía GUM, si las fuentes de error son independientes, la incertidumbre combinada típica $u_c$ se obtiene mediante la raíz cuadrada de la suma de los cuadrados (\textit{Root Sum Square}, RSS):
+
+\begin{equation}\label{eq:error_budget}
+    u_c = \sqrt{u_{hilos}^2 + u_{auto}^2 + u_{linealidad}^2 + u_{cuantif}^2 + u_{ruido}^2}
+\end{equation}
+
+La Tabla~\ref{tab:resumen_errores_resistivos} sintetiza los principales retos a los que se enfrenta el ingeniero.
+
+\begin{table}[ht]
+    \centering
+    \small
+    \caption[Clasificación y mitigación de errores en sistemas de medida resistivos.]{Clasificación y mitigación de errores en sistemas de medida resistivos.}\label{tab:resumen_errores_resistivos}
+    \setlength{\tabcolsep}{3pt} % Reducimos el espacio entre columnas
+    \begin{tabularx}{\linewidth}{l X X}
+        \toprule
+        \textbf{Fuente de Error} & \textbf{Manifestación en Medida} & \textbf{Técnica de Mitigación} \\
+        \midrule
+        Resistencia de hilos & Desplazamiento del cero (\textit{offset}) y deriva térmica del cableado. & Conexión a 3 o 4 hilos (Kelvin). \\
+        \midrule
+        Autocalentamiento & Error sistemático positivo debido a la potencia disipada ($I^2R$). & Limitar $I_{exc} \le \unit{1}{mA}$ o usar medida pulsada. \\
+        \midrule
+        Efecto de Carga & No linealidad cóncava por la impedancia de entrada finita del equipo. & Uso de amplificadores de instrumentación ($Z_{in} > \unit{10}{G\Omega}$). \\
+        \midrule
+        No linealidad del puente & Error de escala al alejarse del punto de equilibrio (cuarto de puente). & Alimentación por fuente de corriente o corrección algorítmica. \\
+        \midrule
+        Tolerancia y Drift & Incertidumbre en el valor nominal de las resistencias del puente. & Calibración de cero y uso de resistencias de bajo coeficiente térmico. \\
+        \midrule
+        Ruido Térmico & Límite fundamental de resolución (\textit{flicker} en los bits del ADC). & Reducción del ancho de banda y filtrado analógico paso bajo. \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+
+
+\section{Conclusión}
+
+La excelencia en la instrumentación electrónica no reside en la búsqueda de un sensor ideal carente de errores, sino en la capacidad del diseñador para:
+\begin{enumerate}
+    \item Comprender los límites físicos del transductor.
+    \item Seleccionar la topología circuital que cancele los errores de modo común (como el puente de Wheatstone).
+    \item Implementar las configuraciones de cableado adecuadas para preservar la integridad de la señal.
+    \item Aplicar modelos matemáticos de orden superior en la etapa de procesado digital para corregir las no linealidades intrínsecas del material.
+\end{enumerate}
+
+Un diseño robusto es aquel en el que el presupuesto de errores total es inferior a la resolución requerida por la aplicación, manteniendo un compromiso óptimo entre coste, complejidad y fiabilidad.

@@ -1,0 +1,414 @@
+% !TeX root = main.tex
+% !TEX program = pdflatex
+
+\chapter{Sensores Reactivos: Capacitivos e Inductivos}\label{cap:reactivos}
+
+En este capítulo se estudian los sensores basados en la variación de los parámetros reactivos de un circuito: la capacidad ($C$) y la inductancia ($L$). Estos sensores destacan por su alta resolución, ausencia de contacto físico y versatilidad. Analizaremos sus modelos físicos, el impacto crítico de las capacidades parásitas y las técnicas de acondicionamiento en alterna necesarias para convertir variaciones de impedancia en señales de tensión procesables.
+
+
+\section{Fundamentos de los Sensores Reactivos}\label{sec:fundamentos_reactivos}
+
+A diferencia de los sensores resistivos que disipan energía, los sensores reactivos la almacenan en campos eléctricos o magnéticos. Puesto que en corriente continua un condensador ideal es un circuito abierto y un inductor un cortocircuito, la medida de estos sensores exige el uso de una señal de \emph{excitación alterna} ($v_{exc} = V_p \sin(\omega t)$). La magnitud física a medir altera la geometría o las propiedades electromagnéticas del sensor, modificando su reactancia $X$:
+\begin{equation}
+    X_C = \frac{1}{j\omega C} \quad ; \quad X_L = j\omega L
+\end{equation}
+
+En el estudio de los sensores reactivos, la oposición al paso de la corriente alterna se describe mediante la \emph{Impedancia compleja ($\mathit{Z}$)}. Esta magnitud unifica el comportamiento disipativo de la resistencia ($R$) con el comportamiento de almacenamiento de energía de la reactancia ($X$):
+
+\begin{equation}
+    Z = R + jX
+\end{equation}
+
+Donde $R$ es la parte real y $X$ es la parte imaginaria. Como se ilustra en la Figura~\ref{fig:impedancia_compleja}, el signo de la reactancia determina el carácter del sensor:
+
+\begin{itemize}
+    \item \emph{Carácter Inductivo}: La reactancia es positiva ($X_L = \omega L$). La tensión adelanta a la corriente.
+    \item \emph{Carácter Capacitivo}: La reactancia es negativa ($X_C = -1/\omega C$). La corriente adelanta a la tensión.
+\end{itemize}
+
+\begin{marginfigure}[0em]
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}[american, scale=1]
+        \ctikzset{resistors/scale=0.7, inductors/scale=0.7, inductor=cute, capacitors/scale=0.7}
+
+        % --- PARTE 1: PLANO COMPLEJO GENERAL ---
+        \begin{scope}
+            % Ejes
+            \draw[->, >=stealth] (-1.5,0) -- (2.5,0) node[below] {Real};
+            \draw[->, >=stealth] (0,-1.5) -- (0,2) node[left] {Imaginario};
+            
+            % Vectores
+            \draw[ultra thick, white!40!black,-stealth] (0.2,0.1) -- (1.5,0.1) node[right, above] {$R$};
+            \draw[ultra thick, green!60!black, -stealth] (-0.1,0.2) -- (-0.1,1.5) node[left] {$X_L$};
+            \draw[ultra thick, blue!60!black, -stealth] (-0.1,-0.2) -- (-0.1,-1.2) node[left] {$X_C$};
+            
+            % Fórmulas
+            \node[anchor=west] at (1.2, 1.5) {$X_L = j\omega L$};
+            \node[anchor=west] at (1.2, -1.0) {$X_C = \dfrac{-j}{\omega C} = \dfrac{1}{j\omega C}$};
+            
+            % Iconos
+            \draw (-1.2, 1.2) to[L, color=red] (-1.2, 0.2); \node[left, red] at (-1.2, 0.7) {$L$};
+            \draw (-1.2, -0.2) to[C, color=red] (-1.2, -1.2); \node[left, red] at (-1.2, -0.7) {$C$};
+            \draw(0.4, 0.7) to[R, color=red] (1.4, 0.7); \node[left, red] at (1.2, 1.1) {$R$};
+        \end{scope}
+
+        % --- PARTE 2: CIRCUITO RL ---
+        \begin{scope}[xshift=-1cm, yshift=-3.5cm]
+            %\draw[dotted] (-1.8, 2) rectangle (4.5, -0.5);
+            % Diagrama fasorial
+            \draw[->] (-0.2,0) -- (2,0) node[below] {$R_L$};
+            \draw[->] (0,-0.2) -- (0,1.5);
+            \draw[thick, -stealth] (0,0) -- (1.5,0); % R
+            \draw[thick, green!60!black, -stealth] (1.5,0) -- (1.5,1.2) node[right] {$j\omega L$};
+            \draw[thick, blue, -stealth] (0,0) -- (1.5,1.2) node[midway, above left] {$Z_L$};
+            
+            % Circuito y Fórmula
+            \begin{scope}[xshift=2.5cm, yshift=1cm]
+                \draw[red] (0,0) to[R, l=$R_L$] (0.8,0) to[L, l=$L$] (1.6,0);
+                \node[anchor=north] at (0.8, -0.2) {$Z_L = R_L + j\omega L$};
+            \end{scope}
+        \end{scope}
+
+        % --- PARTE 3: CIRCUITO RC ---
+        \begin{scope}[xshift=-1cm, yshift=-6cm]
+            %\draw[dotted] (-1.8, 2) rectangle (4.5, -0.5);
+            % Diagrama fasorial
+            \draw[->] (-0.2,1) -- (2,1) node[above] {$R_C$};
+            \draw[->] (0,1.5) -- (0,-0.5);
+            \draw[thick, -stealth] (0,1) -- (1.5,1); % R
+            \draw[thick, green!60!black, -stealth] (1.5,1) -- (1.5,-0.2) node[right] {$-\frac{j}{\omega C}$};
+            \draw[thick, blue, -stealth] (0,1) -- (1.5,-0.2) node[midway, below left] {$Z_C$};
+            
+            % Circuito y Fórmula
+            \begin{scope}[xshift=2.5cm, yshift=0.5cm]
+                \draw[red] (0,.5) to[R, l=$R_C$] (0.8,.5) to[C, l=$C$] (1.6,.5);
+                \node[anchor=north] at (0.8, 0.2) {$Z_C = R_C - \dfrac{j}{\omega C}$};
+            \end{scope}
+        \end{scope}
+    \end{tikzpicture}
+    \caption{Representación en el plano complejo de las impedancias para circuitos RL y RC serie. La parte real representa la resistencia (disipativa) y la parte imaginaria la reactancia (almacenamiento).}\label{fig:impedancia_compleja}
+\end{marginfigure}
+
+En la práctica, un sensor reactivo de alta calidad busca que la magnitud de la reactancia $|X|$ sea mucho mayor que la resistencia serie $R$, lo que se traduce en un \emph{ángulo de fase} cercano a los $\qty{90}{\degree}$. Este desfase será el parámetro fundamental utilizado en las técnicas de \emph{demodulación síncrona} para recuperar la información de la magnitud física medida.
+
+En un sensor puramente resistivo, la tensión y la corriente están en fase ($\phi = \qty{0}{\degree}$), lo que significa que ambos alcanzan sus valores máximos y mínimos simultáneamente. Sin embargo, en los sensores reactivos, la naturaleza del almacenamiento de energía introduce un desplazamiento temporal o \emph{desfase} como se ilustra en la Figura~\ref{fig:fase_temporal}. El desfase es el parámetro fundamental utilizado en las técnicas de \emph{demodulación alterna} para recuperar la información de la magnitud fisica medida.
+
+\begin{marginfigure}
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}
+        \begin{axis}[
+            width=\linewidth, height=5.5cm,
+            xlabel={$t$}, ylabel={Amplitud normalizada},
+            xmin=0, xmax=2*pi,
+            ymin=-1.3, ymax=1.5,
+            axis lines=middle,
+            xtick={0, 1.57, 3.14, 4.71, 6.28},
+            xticklabels={0, $\frac{\pi}{2}$, $\pi$, $\frac{3\pi}{2}$, $2\pi$},
+            ytick={-1, 1},
+            font=\scriptsize,
+            legend style={at={(0.5,1.15)}, anchor=south, legend columns=-1, draw=none}
+        ]
+            % Corriente i(t) - Azul
+            \addplot[thick, blue, domain=0:2*pi, samples=100] {sin(deg(x))};
+            \addlegendentry{$i(t)$}
+
+            % Tensión v(t) - Roja (Adelantada 90 grados para un inductor)
+            \addplot[thick, red, dashed, domain=0:2*pi, samples=100] {cos(deg(x))};
+            \addlegendentry{$v(t)$}
+
+            % Indicación del adelanto (Lead)
+            \draw[<->, >=stealth, gray] (axis cs:0, 1) -- (axis cs:1.57, 1);
+            \node[gray, font=\tiny, anchor=south] at (axis cs:0.78, 1) {$\Delta \phi = \qty{90}{\degree}$};
+        \end{axis}
+    \end{tikzpicture}
+    \caption[Representación temporal del desfase en un inductor ideal.]{Representación temporal del desfase en un inductor ideal. La curva de tensión (roja) alcanza su valor máximo un cuarto de ciclo antes que la de corriente (azul).}\label{fig:fase_temporal}
+\end{marginfigure}
+
+\paragraph{El Inductor: La tensión adelanta a la corriente}
+Físicamente, un inductor se opone a las variaciones bruscas de la intensidad de corriente debido a la Ley de Lenz. La corriente tarda un tiempo en establecerse tras aplicar una diferencia de potencial. 
+
+Matemáticamente, la relación es diferencial: $v(t) = L \frac{di(t)}{dt}$. Si la corriente es una señal senoidal $i(t) = I_0 \sin(\omega t)$, la tensión resultante es:
+\begin{equation}
+    v(t) = L \cdot \omega I_0 \cos(\omega t) = V_0 \sin(\omega t + \qty{90}{\degree})
+\end{equation}
+
+
+\paragraph{El Condensador: La corriente adelanta a la tensión}
+En un condensador, la tensión entre sus placas no puede cambiar instantáneamente; requiere el flujo previo de portadores de carga (corriente). Por tanto, la corriente debe fluir antes de que se observe un aumento en la tensión.
+
+La relación es $i(t) = C \frac{dv(t)}{dt}$. Si aplicamos una tensión $v(t) = V_0 \sin(\omega t)$, la corriente es:
+\begin{equation}
+    i(t) = C \cdot \omega V_0 \cos(\omega t) = I_0 \sin(\omega t + \qty{90}{\degree})
+\end{equation}
+
+\paragraph{Implicaciones en Instrumentación:}
+Para un ingeniero electrónico, el concepto de adelanto o retardo se traduce en la posición del vector en el plano complejo:
+\begin{itemize}
+    \item Un adelanto de $\qty{90}{\degree}$ sitúa el fasor en el eje imaginario positivo ($+j$).
+    \item Un retardo de $\qty{90}{\degree}$ lo sitúa en el eje imaginario negativo ($-j$).
+\end{itemize}
+
+En los capítulos siguientes veremos que el \emph{LVDT} utiliza precisamente este desfase para determinar la dirección del movimiento: si el núcleo se desplaza hacia un lado, la señal está en fase ($\phi=\qty{0}{\degree}$); si se desplaza hacia el otro, se invierte por completo ($\phi=\qty{180}{\degree}$).
+
+% \begin{marginfigure}
+%     \centering
+%     \shorthandoff{>}
+%     \begin{tikzpicture}[american, scale=1]
+%         % --- DIBUJO (a): CAPACITIVO ---
+%         \begin{scope}
+%             % Placas
+%             \draw[ultra thick, fill=gray!20] (0,0.8) rectangle (2,1);
+%             \draw[ultra thick, fill=gray!20] (0,0) rectangle (2,0.2);
+%             % Líneas de campo E
+%             \foreach \x in {0.2,0.6,...,2.2} {
+%                 \draw[blue, -stealth, thin] (\x, 0.78) -- (\x, 0.22);
+%             }
+%             \node[blue, font=\tiny] at (2.3, 0.4) {$\vec{E}$};
+%             \node at (1, -0.6) {\textbf{(a) Almacenamiento en } $\vec{E}$};
+%         \end{scope}
+
+%         % --- DIBUJO (b): INDUCTIVO ---
+%         \begin{scope}[yshift=-3.8cm]
+%             \draw (0,0.5) to[L, l=$L$, color=red!70!black] (2,0.5);
+%             % Líneas de campo B (elipses)
+%             \draw[red!70!black, dashed, thin] (1,0.5) ellipse (1.2cm and 0.5cm);
+%             \draw[red!70!black, dashed, thin] (1,0.5) ellipse (0.8cm and 0.3cm);
+%             \node[red!70!black, font=\tiny] at (2.2, 1.1) {$\vec{B}$};
+%             \node at (1, -0.6) {\textbf{(b) Almacenamiento en } $\vec{B}$};
+%         \end{scope}
+%     \end{tikzpicture}
+%     \caption{Interacción con los campos en sensores reactivos. La variación de la capacidad depende de la permitividad y la geometría de las placas, mientras que la inductancia depende de la permeabilidad del núcleo y la configuración del devanado.}\label{fig:fundamentos_reactivos}
+% \end{marginfigure}
+
+\subsection{Figuras de Mérito: El Factor de Calidad ($Q$)}
+En un diseño de ingeniería real, los sensores reactivos no son puros. Presentan pérdidas debidas a la resistencia del conductor (en inductores) o a las corrientes de fuga y polarización del dieléctrico (en condensadores). Para caracterizar la eficiencia del sensor se emplea el \emph{Factor de Calidad ($Q$)}:
+
+\begin{equation}\label{eq:factor_q}
+    Q = \frac{\text{Energía almacenada}}{\text{Energía disipada por ciclo}}
+\end{equation}
+
+Para modelos con resistencia serie ($R_s$):
+\begin{itemize}
+    \item \emph{Inductor}: $Q_L = \frac{\omega L}{R_s}$ (Aumenta con la frecuencia).
+    \item \emph{Condensador}: $Q_C = \frac{1}{\omega C R_s}$ (Disminuye con la frecuencia).
+\end{itemize}
+
+\marginnote{\textbf{Consideración de Diseño:} Un sensor con un $Q$ bajo se comporta de forma cuasi-resistiva, perdiendo la ventaja de la inmunidad al ruido térmico y dificultando el diseño de circuitos resonantes estables. En 4º curso se asume que un sensor de instrumentación de alta gama debe operar en zonas donde $Q > 50$.
+}
+
+\subsection{Ventajas del Uso de Reactancias}
+El salto tecnológica de la medida resistiva a la reactiva ofrece ventajas críticas:
+\begin{enumerate}
+    \item \emph{Ausencia de Ruido Térmico}: Puesto que el ruido de Johnson-Nyquist es proporcional a la parte real de la impedancia ($R$), un sensor puramente reactivo es idealmente silencioso.
+    \item \emph{Sensibilidad Estática}: Muchos materiales dieléctricos (aire, cuarzo) son extremadamente estables frente a variaciones de temperatura comparados con los semiconductores de una NTC.
+    \item \emph{Bajo Consumo}: No requieren circular una corriente de excitación constante para mantener la información; la energía se devuelve a la fuente en cada semiciclo.
+\end{enumerate}
+
+\section{Sensores Capacitivos}\label{sec:capacitivos}
+
+Los sensores capacitivos convierten cambios de una magnitud física en cambios de la capacidad de un condensador. Partiendo del modelo de placas paralelas:
+\begin{equation}\label{eq:capacidad_placas}
+    C = \epsilon_0 \epsilon_r \frac{A}{d}
+\end{equation}
+donde $\epsilon_0$ es la permitividad del vacío, $\epsilon_r$ la permitividad relativa del dieléctrico, $A$ el área efectiva de las placas y $d$ la distancia de separación.
+
+\subsection{Principios de Funcionamiento}
+% Variación de distancia (d), área (A) y constante dieléctrica (epsilon).
+
+Los sensores capacitivos basan su funcionamiento en la modificación de uno o más parámetros de la ecuación fundamental del condensador de placas paralelas:
+
+\paragraph{Variación de la Distancia ($d$):}
+Es el método más común para medir desplazamientos microscópicos o presiones. Si una placa se desplaza una distancia $x$ respecto a la posición inicial $d_0$, la capacidad es:
+\begin{equation}
+    C(x) = \frac{\epsilon A}{d_0 - x} = C_0 \frac{1}{1 - x/d_0}
+\end{equation}
+La respuesta es \emph{no lineal} (hiperbólica). Sin embargo, su sensibilidad ($S = dC/dx$) aumenta a medida que las placas se aproximan, lo que permite detectar variaciones del orden de los nanómetros. Para mantener la linealidad, se suele restringir su uso a desplazamientos $x \ll d_0$ o se emplean configuraciones diferenciales.
+
+\paragraph{Variación del Área ($A$):}
+Se obtiene mediante el desplazamiento lateral de una placa sobre la otra. Si las placas tienen un ancho $w$ y el solapamiento inicial es $L$, un desplazamiento $x$ resulta en:
+\begin{equation}
+    C(x) = \frac{\epsilon \cdot w \cdot (L - x)}{d} = C_0 \left( 1 - \frac{x}{L} \right)
+\end{equation}
+A diferencia del método anterior, la relación es \emph{intrínsecamente lineal}. Es la configuración preferida para sensores de desplazamiento lineal de largo recorrido o sensores de rotación angular (usando placas semicirculares).
+
+\paragraph{Variación del Dieléctrico ($\epsilon_r$):}
+El sensor consta de placas fijas, y la magnitud física (como el nivel de un líquido o la humedad ambiental) altera la permitividad efectiva del medio.
+\begin{equation}
+    C_{total} = C_{fixed} + \Delta C(\epsilon_r)
+\end{equation}
+Es el principio utilizado en la medida de humedad (el polímero absorbe agua, variando su $\epsilon_r$) y en la monitorización de calidad de aceites o nivel de combustibles.
+
+\begin{marginfigure}[-15em]
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}[scale=1]
+        % Estilo de las placas
+        \tikzset{placa/.style={fill=gray!30, draw=black, thick}}
+        
+        % --- MODO A: VARIACIÓN DE DISTANCIA ---
+        \begin{scope}[yshift=0cm]
+            \draw[placa] (0,0.8) rectangle (2,1);
+            \draw[placa] (0,0) rectangle (2,0.2);
+            \draw[<->, >=stealth, red] (1, 0.2) -- (1, 0.8) node[midway, right] {$d$};
+            \draw[->, ultra thick, blue] (1, 1.1) -- (1, 1.4) node[above] {$x(t)$};
+            \node at (1, -0.4) {(a) Variación de $d$};
+        \end{scope}
+
+        % --- MODO B: VARIACIÓN DE ÁREA ---
+        \begin{scope}[yshift=-2cm]
+            \draw[placa] (0.8,0.6) rectangle (2.8,0.8);
+            \draw[placa] (0,0) rectangle (2,0.2);
+            \draw[dashed, gray] (0.8,0.2) -- (0.8,0.6);
+            \draw[<->, >=stealth, blue] (0, 0.4) -- (0.8, 0.4) node[midway, above] {$x$};
+            \fill[blue!10, opacity=0.5] (0.8, 0.2) rectangle (2, 0.6);
+            \node at (1, -0.4) {(b) Variación de $A$};
+        \end{scope}
+
+        % --- MODO C: VARIACIÓN DE DIELÉCTRICO ---
+        \begin{scope}[yshift=-4cm]
+            \draw[placa] (0,0.6) rectangle (2,0.8);
+            \draw[placa] (0,0) rectangle (2,0.2);
+            % Dieléctrico entrando
+            \draw[fill=orange!30, draw=orange!80] (-0.5, 0.25) rectangle (1.2, 0.55);
+            \draw[->, ultra thick, orange] (-0.8, 0.4) -- (-0.2, 0.4);
+            \node[orange] at (0.35, 0.4) {$\epsilon_r$};
+            \node at (1, -0.4) {(c) Variación de $\epsilon$};
+        \end{scope}
+    \end{tikzpicture}
+    \caption[Métodos de transducción en sensores capacitivos.]{Métodos de transducción en sensores capacitivos. La elección del modo de operación define la sensibilidad y el rango dinámico del sensor.}\label{fig:modos_capacitivos}
+\end{marginfigure}
+
+
+\subsection{Modelos de Sensibilidad y Linealidad}
+% Modelos de sensibilidad y linealidad.
+
+El diseño de un sistema de instrumentación capacitivo exige evaluar el compromiso entre la \textbf{sensibilidad absoluta} ($S = dC/dx$) y el \textbf{error de no linealidad}. Dependiendo del parámetro geométrico que se modifique, el comportamiento del sensor varía drásticamente, como se resume en la Tabla~\ref{tab:sensibilidad_capacitiva}.
+
+\begin{table}[ht]
+    \centering
+    \begin{tabularx}{\linewidth}{l X X X}
+        \toprule
+        \textbf{Modo} & \textbf{Ecuación $C(x)$} & \textbf{Sensibilidad ($S$)} & \textbf{Linealidad} \\
+        \midrule
+        \textbf{Área ($A$)} & $C_0 (1 - \frac{x}{L})$ & $-\frac{\epsilon w}{d}$ (Constante) & Excelente (Lineal) \\
+        \midrule
+        \textbf{Distancia ($d$)} & $\frac{C_0}{1 - x/d_0}$ & $\frac{C_0 / d_0}{(1 - x/d_0)^2}$ (Variable) & Pobre (Hiperbólica) \\
+        \bottomrule
+    \end{tabularx}
+    \caption{Comparativa de modelos de sensibilidad. La variación de distancia ofrece una sensibilidad mucho mayor a costa de una respuesta no lineal.}\label{tab:sensibilidad_capacitiva}
+\end{table}
+
+\begin{marginfigure}
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}
+        \begin{axis}[
+            width=\linewidth, height=5.5cm,
+            xlabel={$x$ (Desplazamiento)}, ylabel={$C/C_0$},
+            xmin=0, xmax=0.8, ymin=0, ymax=4,
+            axis lines=left, grid=both,
+            grid style={line width=.1pt, draw=gray!10},
+            font=\scriptsize,
+            legend style={at={(0.1,0.9)}, anchor=north west, font=\tiny, draw=none}
+        ]
+            % Variación de Área (Lineal)
+            \addplot[thick, blue, domain=0:0.8] {1 + x};
+            \addlegendentry{Var. Área}
+
+            % Variación de Distancia (Hiperbólica)
+            \addplot[thick, red, domain=0:0.75, samples=100] {1 / (1 - x)};
+            \addlegendentry{Var. Distancia}
+            
+            \node[red, font=\tiny, align=center] at (axis cs:0.4, 3.2) {Sensibilidad\\creciente};
+            \node[blue, font=\tiny, rotate=30] at (axis cs:0.4, 1.2) {Sensibilidad cte.};
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Comparativa de respuesta. El sensor de distancia es ideal para desplazamientos ínfimos (nanómetros), mientras que el de área es preferible para rangos mayores.}\label{fig:curvas_sensibilidad}
+\end{marginfigure}
+
+\paragraph{Linealización mediante Configuraciones Diferenciales:}
+
+En ingeniería de precisión, el problema de la no linealidad hiperbólica de los sensores de distancia se resuelve mediante el uso de un \textbf{condensador diferencial} o configuración \textit{Push-Pull}. Este sistema consta de tres placas: dos fijas y una central móvil.
+
+Si la placa central se desplaza una distancia $x$ desde el centro equilibrado ($d_0$), las capacidades resultantes son:
+\begin{equation}
+    C_1 = \frac{\epsilon A}{d_0 - x} \quad ; \quad C_2 = \frac{\epsilon A}{d_0 + x}
+\end{equation}
+
+Al procesar la señal de forma diferencial ($\Delta C = C_1 - C_2$), la expresión resultante mejora significativamente la linealidad:
+\begin{equation}
+    \Delta C = C_0 \left( \frac{1}{1-x/d_0} - \frac{1}{1+x/d_0} \right) = C_0 \left( \frac{2x/d_0}{1 - (x/d_0)^2} \right)
+\end{equation}
+
+Para desplazamientos pequeños ($x \ll d_0$), el término cuadrático del denominador se desprecia, obteniendo una respuesta lineal:
+\begin{equation}
+    \Delta C \approx 2 C_0 \frac{x}{d_0}
+\end{equation}
+
+\marginnote{
+    \textbf{Ventaja del diferencial:} 
+    Además de duplicar la sensibilidad ($2C_0/d_0$), esta topología cancela por \textit{modo común} los errores debidos a variaciones térmicas del dieléctrico, ya que afectan a $C_1$ y $C_2$ por igual y se restan en la etapa de acondicionamiento.
+}
+
+\begin{marginfigure}
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}[scale=0.85, font=\scriptsize]
+        % Placas fijas
+        \draw[fill=gray!30, thick] (0,1.5) rectangle (2,1.7);
+        \draw[fill=gray!30, thick] (0,0) rectangle (2,0.2);
+        
+        % Placa móvil central
+        \draw[fill=blue!40, thick] (0,0.75) rectangle (2,0.95);
+        \draw[->, ultra thick, blue] (2.2, 0.85) -- (2.2, 1.1) node[right] {$x$};
+        
+        % Etiquetas
+        \node at (1, 1.9) {Placa Fija 1};
+        \node at (1, -0.3) {Placa Fija 2};
+        \node[blue] at (1, 0.5) {Placa Móvil};
+        
+        % Dimensiones d0
+        \draw[<->, gray] (2.5, 0.2) -- (2.5, 0.85) node[midway, right] {$d_0-x$};
+        \draw[<->, gray] (2.5, 0.85) -- (2.5, 1.5) node[midway, right] {$d_0+x$};
+        
+        % Capacidades
+        \node[left] at (0, 1.2) {$C_1$};
+        \node[left] at (0, 0.4) {$C_2$};
+    \end{tikzpicture}
+    \caption{Esquema de un sensor capacitivo diferencial. Es la arquitectura base de los acelerómetros MEMS y sensores de presión de alta gama.}\label{fig:sensor_diferencial}
+\end{marginfigure}
+
+\paragraph{Conclusión para el Diseño}
+Para un ingeniero electrónico, la elección depende del rango dinámico requerido:
+\begin{enumerate}
+    \item \emph{Alta Linealidad}: Usar variación de área o configuraciones diferenciales en rango central.
+    \item \emph{Alta Sensibilidad}: Usar variación de distancia con huecos ($d_0$) muy pequeños, asumiendo la necesidad de compensación por software de la no linealidad.
+\end{enumerate}
+
+\subsection{Problemas de Implementación: Capacidades Parásitas}
+% Introducción al blindaje y técnicas de guarda (Guarding).
+
+\subsection{Aplicaciones Típicas}
+% Sensores de proximidad, nivel de líquidos y humedad.
+
+\section{Sensores Inductivos y Electromagnéticos}\label{sec:inductivos}
+
+\subsection{Sensores de Inductancia Variable (Reluctancia)}
+% Sensores de núcleo móvil.
+\subsection{Transformador Diferencial de Variación Lineal (LVDT)}
+% El sensor estrella de este capítulo. Estructura, fase y magnitud.
+\subsection{Sensores de Corrientes de Foucault (\textit{Eddy Currents})}
+\subsection{Sensores de Efecto Hall vs. Magnetorresistivos (Repaso)}
+
+\section{Acondicionamiento de Sensores Reactivos}\label{sec:acondic_reactivo}
+
+\subsection{Puentes de Alterna}
+% Puente de Maxwell, puente de Hay y puente de Wien. Condiciones de equilibrio.
+\subsection{Circuitos Resonantes y Osciladores}
+% Conversión de C o L a frecuencia.
+\subsection{Demodulación Síncrona (Detección de Fase)}
+% Crucial para el LVDT para saber el sentido del desplazamiento.
+
+\section{Resumen y Comparativa de Sensores Reactivos}\label{sec:resumen_reactivos}

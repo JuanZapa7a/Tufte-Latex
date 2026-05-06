@@ -1,18 +1,19 @@
 % !TeX root = main.tex
 % !TEX program = pdflatex
 
-\chapter{Metrología y Caracterización de Sistemas de Medida}
+\chapter{Metrología y Caracterización de Sistemas de Medida}\label{cap:metrologia}
 
 \section{El Sistema de Medida de Ingeniería}\label{sec:sistema-medida}
 
 Un sistema de instrumentación no es solo un sensor; es una cadena de bloques que transforma una variable física en una información útil~\cite{WHO2025}. Esta cadena como se ilustra en la Figura~\ref{fig:cadena_instrumentacion} incluye:
 
 \begin{enumerate}
-  \item Mundo Físico: La magnitud a medir (temperatura, presión, flujo, etc.).
-  \item Sensor/Transductor: Convierte la magnitud física en eléctrica (ej. Resistencia, Voltaje).
-  \item Acondicionamiento de Señal: Filtrado, amplificación, linealización.
-  \item Adquisición de Datos (DAQ): Conversión Analógica-Digital (ADC).
-  \item Procesamiento y Presentación: Microcontrolador/PC y visualización. 
+    \item \emph{Mundo Físico}: La magnitud a medir (temperatura, presión, flujo, etc.).
+    \item \emph{Sensor/Transductor}: Interfaz con el mundo físico. Convierte la magnitud física en una señal eléctrica.
+    \item \emph{Sensor/Transductor}: Convierte la magnitud física en eléctrica (ej. Resistencia, Voltaje).
+    \item \emph{Acondicionamiento de Señal}: Filtrado, amplificación, linealización.
+    \item \emph{Adquisición de Datos (DAQ)}: Conversión Analógica-Digital (ADC).
+    \item \emph{Procesamiento y Presentación}: Procesamiento y Presentación: Microcontrolador/PC y visualización. 
 \end{enumerate}
 
 \begin{marginfigure}
@@ -40,10 +41,10 @@ Incidir en que el eslabón más débil de la cadena determina la precisión de t
 
 Un sistema de instrumentación moderno es una cadena de transferencia de energía e información. El efecto de carga, el sensor extrae energía del sistema físico (temperatura, presión, flujo, etc.), afecta a la magnitud fisica $x(t)$ proporcionando ruido.  Cada etapa introduce una degradación de la señal (ruido) y una incertidumbre asociada. La cadena de instrumentación se compone de bloques de bloques funcionales:
 \begin{enumerate}
-    \item Transductor/Sensor: Interfaz con el mundo físico. Convierte la magnitud física $x(t)$ (temperatura, presión) en una señal eléctrica $s(t)$
-    \item Acondicionador de Señal: Mejora la calidad de la señal (amplificación, filtrado, linealización, aislamiento). Su objetivo es maximizar la relación señal-ruido (SNR).
-    \item Sistema de Adquisición (DAQ): Compuesto por el S\&H (Sample and Hold) y el ADC.\@ Realiza la discretización en tiempo y amplitud.
-    \item Procesado y Control: Algoritmos de corrección, promediado y protocolos de comunicación (USB, Ethernet, CAN).
+    \item \emph{Transductor/Sensor:} Interfaz con el mundo físico. Convierte la magnitud física $x(t)$ (temperatura, presión) en una señal eléctrica $s(t)$
+    \item \emph{Acondicionador de Señal}: Mejora la calidad de la señal (amplificación, filtrado, linealización, aislamiento). Su objetivo es maximizar la relación señal-ruido (SNR).
+    \item \emph{Sistema de Adquisición (DAQ):} Compuesto por el S\&H (Sample and Hold) y el ADC.\@ Realiza la discretización en tiempo y amplitud.
+    \item \emph{Procesado y Control:} Algoritmos de corrección, promediado y protocolos de comunicación (USB, Ethernet, CAN).
 \end{enumerate}
 
 \section{Terminología según el VIM (Vocabulario Internacional de Metrología)}\label{sec:terminologia-vim}
@@ -51,13 +52,13 @@ Un sistema de instrumentación moderno es una cadena de transferencia de energí
 Es vital que se utilice la terminología profesional, especialmente en un contexto académico y técnico. El VIM (Vocabulario Internacional de Metrología) proporciona definiciones estandarizadas para términos clave en metrología. A continuación se presentan las definiciones más relevantes para este curso:
 
 \begin{itemize}
-  \item \textbf{Magnitud}: Propiedad física que se puede medir (ej. Temperatura, Longitud). La magnitud es la característica física que se desea medir, como la temperatura, la presión o la longitud. Es una propiedad cuantificable del mundo físico que puede ser representada por un número y una unidad. 
-  \item \textbf{Medida}: Proceso de asignar un valor numérico a una magnitud. La figura~\ref{fig:error_medida} ilustra la relación entre magnitud, valor verdadero y valor medido.
+    \item \emph{Magnitud}: Propiedad física que se puede medir (ej. Temperatura, Longitud). La magnitud es la característica física que se desea medir, como la temperatura, la presión o la longitud. Es una propiedad cuantificable del mundo físico que puede ser representada por un número y una unidad. 
+    \item \emph{Medida}: Proceso de asignar un valor numérico a una magnitud. La figura~\ref{fig:error_medida} ilustra la relación entre magnitud, valor verdadero y valor medido.
 
     \begin{marginfigure}
     \centering
     \shorthandoff{>}
-    \begin{tikzpicture}[scale=1, transform shape, font=\footnotesize]
+    \begin{tikzpicture}[scale=1, transform shape]
     % Eje horizontal
     \draw[->] (-3,0) -- (3,0) node[right] {$x$};
     \foreach \x in {-2,-1,0,1,2}
@@ -399,7 +400,7 @@ La incertidumbre expandida proporciona una forma de comunicar la incertidumbre d
         axis lines=left, xlabel=$x$, ylabel=$P(x)$,
         every axis y label/.style={at=(current axis.above origin),anchor=south},
         every axis x label/.style={at=(current axis.right of origin),anchor=west},
-        height=5cm, width=1.2\linewidth,
+        height=5cm, width=\linewidth,
         xtick={-3,-2, -1, 0, 1, 2, 3},
         xticklabels={$-3\sigma$, $-2\sigma$, $-\sigma$, $\mu$, $\sigma$, $2\sigma$, $3\sigma$},
         ytick=\empty,

@@ -91,6 +91,7 @@ donde $R_L$ es la resistencia de carga conectada a la salida. En el caso ideal s
 
 
 \subsection{Efecto de Carga y Error de Linealidad}\label{sec:efecto_carga}
+
 % Aquí desarrollaremos el análisis de cómo RL afecta a la medida.
 Cuando se conecta una carga $R_L$ a la salida del potenciómetro, el divisor de tensión ya no es ideal y la salida se ve afectada por el efecto de carga, como se muestra en la Figura~\ref{fig:efecto_carga}. La relación entre la salida real y la posición se vuelve no lineal, especialmente cuando $R_L$ es bastante menor que $R(x)$. El error de linealidad introducido por el efecto de carga se puede cuantificar como:
 \begin{equation}
@@ -326,19 +327,20 @@ Las galgas se colocan sobre la superficie de la viga, lo más cerca posible de l
 \begin{marginfigure}
 \centering
 \begin{tikzpicture}[scale=1]
-% Red P-Type (Boro)
-\begin{scope}
-\draw[gray!30] (-1.5,-1.5) grid (1.5,1.5);
-\foreach \x in {-1,0,1} \foreach \y in {-1,0,1}
-\fill[gray!60] (\x,\y) circle (4pt) node[white,font=\tiny] {Si};
-% Átomo de Boro central
-\fill[red!80] (0,0) circle (5pt) node[white] {B};
-% Hueco
-\draw[red, thick] (0.4,0.4) circle (3pt) node {+};
-\node[below] at (0,-1.7) {\scriptsize Dopaje Tipo P (Hueco)};
-\end{scope}
 
-% Red N-Type (Fósforo)
+    % Red P-Type (Boro)
+    \begin{scope}
+        \draw[gray!30] (-1.5,-1.5) grid (1.5,1.5);
+        \foreach \x in {-1,0,1} \foreach \y in {-1,0,1}
+        \fill[gray!60] (\x,\y) circle (4pt) node[white,font=\tiny] {Si};
+        % Átomo de Boro central
+        \fill[red!80] (0,0) circle (5pt) node[white] {B};
+        % Hueco
+        \draw[red, thick] (0.4,0.4) circle (3pt) node {+};
+        \node[below] at (0,-1.7) {\scriptsize Dopaje Tipo P (Hueco)};
+    \end{scope}
+
+    % Red N-Type (Fósforo)
     \begin{scope}[xshift=3.1cm]
         \draw[gray!30] (-1.5,-1.5) grid (1.5,1.5);
         \foreach \x in {-1,0,1} \foreach \y in {-1,0,1} 
@@ -413,6 +415,7 @@ Para el platino estándar (DIN/IEC 60751), el coeficiente $\alpha$ es aproximada
 
 
 \subsection{Ecuación de Callendar-Van Dusen}
+
 En una primera aproximación por serie de Taylor de primer orden de la resistencia de un metal en función de la temperatura, se obtiene la siguiente ecuación:
 \begin{equation} \label{eq:ecuacion_lineal}
     R_T = R_0 (1 + \alpha(T - T_0)) \approx R_0 (1 + \alpha T)
@@ -426,6 +429,7 @@ Es decir, físicamente, al aumentar la temperatura, los iones de la red cristali
 Esta formula es simple de interpretar, pero no es exacta por varios motivos. En primer lugar solo es exacta en rangos estrechos (ej. $\qty{0}{\degree C}$ a $\qty{100}{\degree C})$, para rangos más amplios, la curva de la variación de la resistencia con respecto a la temperatura se ve distorsionada. En segundo lugar, si usamos la ecuación lineal para una Pt100 a $\qty{400}{\degree C}$, cometeremos un error incluso de varios grados, ya que el modelo lineal ignora el degradado de la curva del material. Para una Pt100 estándar, $\alpha \approx \qty{0.00385}{\degree C^{-1}}$, lo que implica un incremento de resistencia del $\qty{0.385}{\percent}$ por cada grado Celsius de aumento, como se ilustra en la Figura~\ref{fig:lineal_rtd}. Así por ejemplo, si una Pt100 mide \qty{119.25}{\Omega}, la temperatura calculada mediante el modelo lineal es:
     \[ T = \frac{R - R_0}{R_0 \alpha} = \frac{119.25 - 100}{100 \cdot 0.00385} \approx \qty{50}{\degree C} 
     \]
+
 \begin{marginfigure}
     \centering
     \shorthandoff{>}
@@ -547,9 +551,7 @@ El aspecto principal es que el dispositivo de medición de la resistencia en sí
         \draw (2,0) -- (3,0) coordinate (ext-);
 
         % Resistencia a medir (Fuera del equipo)
-        \draw (3,2) to[short, i=$I$] (4,2) 
-              to[R, l=$R_s$, v=$V_s$] (4,0) 
-              to[short] (3,0);
+        \draw (3,2) to[short, i=$I$] (4,2) to[R, l=$R_s$, v=$V_s$] (4,0) to[short] (3,0);
 
         % Terminales de conexión
         \fill[black] (3,2) circle (2pt) node[above, font=\tiny] {$HI$};
@@ -1207,25 +1209,35 @@ Basadas en aleaciones ferromagnéticas (como el Permalloy), su resistencia varí
 \end{equation}
 Se utilizan en brújulas electrónicas y detección de posición angular con precisiones inferiores a \qty{0,1}{\degree}.
 
+\paragraph{Efecto Hall:}
+Se basa en la presencia de un campo magnético externo $\vec{B}$ en el dispositivo. La resistencia variaba en una ley de potencia:
+\begin{equation}    
+    R(\theta) = R_{\perp} + (R_{\parallel} - R_{\perp}) \cos^2 \theta
+\end{equation}
+donde $R_{\perp}$ y $R_{\parallel}$ son las resistencias paralelas y perpendiculares al campo magnético.
+
+La tabla~\ref{tab:resumen_gmr} muestra un resumen de los principales efectos de los sensores de magnetorresistencia así como sus aplicaciones principales.
+
+
 \paragraph{GMR (Magnetorresistencia Gigante):}
-Es un efecto mecánico-cuántico observado en estructuras de multicapas delgadas (nanómetros) de materiales ferromagnéticos y no magnéticos. La resistencia depende de la orientación relativa de los espines electrónicos en las capas. 
+Es un efecto mecánico-cuántico observado en estructuras de multicapas delgadas (nanómetros) de materiales ferromagnéticos y no magnéticos. La resistencia depende de la orientación relativa de los espines electrónicos en las capas como se esquematiza en la Figura~\ref{fig:gmr_diag}. 
 
 \begin{marginfigure}[10em]
     \centering
     \shorthandoff{>}
     \begin{tikzpicture}[scale=1]
         % Capas GMR
-        \draw[fill=blue!20] (0,0.8) rectangle (3,1.1); \node at (1.5,0.95) {Ferro (Libre)};
-        \draw[fill=gray!20] (0,0.5) rectangle (3,0.8); \node at (1.5,0.65) {No Magnética};
-        \draw[fill=blue!40] (0,0.2) rectangle (3,0.5); \node at (1.5,0.35) {Ferro (Fija)};
+        \draw[fill=blue!20] (0,1.6) rectangle (4,2.4); \node at (2,2) {Ferro (Libre)};
+        \draw[fill=gray!20] (0,0.8) rectangle (4,1.6); \node at (2,1.2) {No Magnética};
+        \draw[fill=blue!40] (0,0) rectangle (4,0.8); \node at (2,0.4) {Ferro (Fija)};
         
         % Flechas de espín
-        \draw[->, thick, red] (0.5,0.35) -- (1.0,0.35); % Fija
-        \draw[->, thick, red] (2.5,0.95) -- (2.0,0.95); % Libre (Antiparalela = R alta)
+        \draw[->, thick, red] (0.5,0.4) -- (1.0,0.4); % Fija
+        \draw[->, thick, red] (3.5,2) -- (3,2); % Libre (Antiparalela = R alta)
         
-        \node[red] at (1.5, 1.3) {Magnetización Antiparalela ($R_{max}$)};
+        \node[red] at (2, 2.7) {Magnetización Antiparalela ($R_{max}$)};
     \end{tikzpicture}
-    \caption[Estructura simplificada de una celda GMR.]{Estructura simplificada de una celda GMR. El alineamiento de los momentos magnéticos altera la probabilidad de dispersión de los electrones (espintrónica).}\label{fig:gmr_diag}
+    \caption[Estructura simplificada de una celda GMR.]{Estructura simplificada de una celda GMR. El alineamiento de los momentos magnéticos altera la probabilidad de dispersión de los electrones (espintrónica). Libre significa que el alineamiento de los espines electrónicos varia aleatoriamente mientras que fija significa que el alineamiento es fijo. El alineamiento de los momentos magnéticos altera la probabilidad de dispersión de los electrones (espintrónica).}\label{fig:gmr_diag}
 \end{marginfigure}
 
 \marginnote{\textbf{Espintrónica:} El descubrimiento de la GMR (Premios Nobel 2007) marcó el inicio de la espintrónica, donde el \textit{espín} del electrón se utiliza como portador de información además de su carga.
@@ -1262,6 +1274,162 @@ Es un efecto mecánico-cuántico observado en estructuras de multicapas delgadas
 %     \[ \frac{R_{AP} - R_P}{R_P} = \frac{55 - 18,18}{18,18} \approx \mathbf{\qty{202,5}{\percent}} \]
     
 %     \textit{Este valor masivo justifica por qué esta tecnología desplazó rápidamente a los sensores basados en efecto Hall.}}
+
+
+
+\section{Medida Diferencial y Conceptos de Modo}\label{sec:medida_diferencial}
+
+En instrumentación, la forma en que conectamos un sensor a la etapa de acondicionamiento define la robustez del sistema frente al ruido. Distinguimos principalmente dos configuraciones:
+\begin{itemize}
+    \item \emph{Single-ended}: Se mide el potencial de un solo hilo respecto a la masa común (GND). Es económica pero vulnerable a interferencias.
+    \item \emph{Diferencial}: Se mide la diferencia de potencial entre dos hilos ($V_1 - V_2$), donde ninguno de los dos está necesariamente unido a masa.
+\end{itemize}
+
+\subsection{Definiciones Matemáticas: Modo Diferencial y Modo Común}
+
+Cualquier par de señales de entrada $(V_1, V_2)$ puede descomponerse analíticamente en dos componentes ortogonales que facilitan su estudio:
+
+\begin{enumerate}
+    \item \emph{Modo Diferencial ($V_{dm}$)}: Es la señal que contiene la información útil de la magnitud física. Representa la diferencia neta entre los dos terminales.
+    \begin{equation}\label{eq:v_dm}
+        V_{dm} = V_1 - V_2
+    \end{equation}
+    
+    \item \emph{Modo Común ($V_{cm}$)}: Es el promedio de los potenciales de ambos hilos respecto a masa. Típicamente, el modo común está compuesto por niveles de continua (offsets) y ruido inducido (como el zumbido de \unit{50}{Hz} de la red eléctrica).
+    \begin{equation}\label{eq:v_cm}
+        V_{cm} = \frac{V_1 + V_2}{2}
+    \end{equation}
+\end{enumerate}
+
+Las señales originales pueden reconstruirse a partir de estos modos como:
+\begin{equation}
+    V_1 = V_{cm} + \frac{V_{dm}}{2} \quad ; \quad V_2 = V_{cm} - \frac{V_{dm}}{2}
+\end{equation}
+
+\marginnote{\textbf{La Figura de Mérito CMRR:} 
+    Un amplificador ideal de instrumentación debería tener una ganancia infinita para el modo diferencial ($A_d$) y cero para el común. La capacidad de un equipo para ignorar el ruido de modo común se mide mediante el \textbf{CMRR} (\textit{Common Mode Rejection Ratio}), expresado en decibelios:
+    \[ \text{CMRR}_{dB} = 20 \log_{10} \left| \frac{A_d}{A_{cm}} \right| \]
+}
+
+\begin{marginfigure}
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}[scale=1]
+        \begin{axis}[
+            width=\linewidth, height=5cm,
+            xlabel={Tiempo}, ylabel={Amplitud (V)},
+            xmin=0, xmax=10, ymin=0, ymax=6,
+            axis lines=left,
+            xtick=\empty, ytick={0},
+            legend style={at={(0.5,1.25)}, anchor=south, legend columns=-1, , draw=none}
+        ]
+            % Modo Común (Señal de interferencia + DC)
+            \addplot[thick, gray!40, domain=0:10, samples=100] {3 + 0.5*sin(deg(2*x))};
+            \addlegendentry{$V_{cm}$ (Ruido)}
+
+            % Señal V1 (Info + Ruido)
+            \addplot[thick, blue, domain=0:10, samples=100] {3 + 0.5*sin(deg(2*x)) + 0.8*sin(deg(0.5*x))};
+            \addlegendentry{$V_1$}
+
+            % Señal V2 (Info invertida + Ruido)
+            \addplot[thick, red, domain=0:10, samples=100] {3 + 0.5*sin(deg(2*x)) - 0.8*sin(deg(0.5*x))};
+            \addlegendentry{$V_2$}
+
+            % Anotación Vdm
+            \draw[<->, >=stealth, green!50!black, thick] (axis cs:3.9, 2.7) -- (axis cs:3.9, 4.3) 
+                node[pos=0.25, left] {$V_{dm}$};
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Visualización de señales en modo diferencial. La información útil ($V_{dm}$) es la separación entre las trazas roja y azul. El ruido de modo común (gris) afecta a ambos hilos por igual y es cancelado mediante la resta diferencial.}\label{fig:modos_visual}
+\end{marginfigure}
+
+\subsection{Ventajas de la Medida Diferencial}
+
+La implementación de medidas diferenciales aporta tres beneficios fundamentales:
+
+\begin{enumerate}
+    \item \emph{Inmunidad al Ruido Electromagnético}: Las interferencias externas suelen acoplarse por igual a ambos hilos conductores de la línea de medida. Al realizar la operación $(V_{cm} + V_{dm}/2) - (V_{cm} - V_{dm}/2)$, el término $V_{cm}$ se anula.
+    \item \emph{Compensación Térmica Automática}: Si la temperatura ambiente altera la permitividad del dieléctrico del sensor, ambas capacidades ($C_1$ y $C_2$) variarán en la misma proporción. Este cambio se interpreta como modo común y se elimina de la señal final.
+    \item \emph{Linealización}: En sensores con respuesta hiperbólica ($1/d$), la configuración diferencial cancela los términos de error de orden par, extendiendo el rango de linealidad del transductor.
+\end{enumerate}
+
+
+\subsection{Ejemplo: El Problema del Zumbido de Red (\unit{50}{Hz})}\label{subsec:ejemplo_zumbido}
+
+Para comprender la superioridad de la medida diferencial, consideremos un escenario real de instrumentación industrial. Como se muestra en la Figura~\ref{fig:ejemplo_diferencial}, Supongamos que deseamos medir la deformación de una estructura mediante una galga extensiométrica que entrega una señal útil de tan solo \unit{10}{mV}. El sensor se encuentra conectado al equipo mediante cables de \unit{10}{m} que atraviesan un entorno con motores eléctricos, los cuales inducen por acoplamiento electromagnético un ruido de \unit{2}{V} a la frecuencia de red (\unit{50}{Hz}), es decir entrega una señal $2.0 \sin(\omega t)$ siendo $\omega = 2\pi f$.
+
+\paragraph{Escenario A: Medida \textit{Single-Ended}.}
+Si conectamos el sensor referenciándolo a la masa local (GND), el ruido inducido se suma directamente a la señal. La tensión que llega al amplificador será:
+\begin{equation}
+    V_{in}(t) = \unit{0,01}{V} + 2,0 \cdot \sin(100\pi t) \, \text{V}
+\end{equation}
+En este caso, la señal de interés es \emph{200 veces más pequeña, \unit{0.01} vs \unit{2.0}} que el ruido. La relación señal-ruido (SNR) es negativa ($SNR = 0.01/2.0 = 0.005 = -20 \, dB$) y la información queda totalmente enmascarada, siendo imposible recuperarla mediante filtrado simple sin distorsionar la dinámica del sensor.
+
+\paragraph{Escenario B: Medida Diferencial.}
+Utilizando un cable de par trenzado y un amplificador diferencial, el ruido de \unit{2}{V} se induce con la misma fase y magnitud en ambos conductores (el ruido se convierte en una señal en \emph{Modo Común}, $V_{cm}$). La señal útil, en cambio, se distribuye de forma balanceada en \emph{Modo Diferencial}, $V_{dm}$:
+\begin{itemize}
+    \item \emph{Hilo 1 ($V_1$)}: $V_{cm} + \dfrac{V_{dm}}{2} = 2,0 \sin(\omega t) + \unit{0,005}{V}$
+    \item \emph{Hilo 2 ($V_2$)}: $V_{cm} - \dfrac{V_{dm}}{2} = 2,0 \sin(\omega t) - \unit{0,005}{V}$
+\end{itemize}
+
+El amplificador diferencial realiza la resta analógica de ambas señales:
+\begin{align}
+    V_{out} &= A_d \cdot (V_1 - V_2) = \\ 
+    &= A_d \cdot \left[ (2,0 \sin(\omega t) + 0,005) - (2,0 \sin(\omega t) - 0,005) \right] \\
+    &= A_d \cdot \unit{0,010}{V}
+\end{align}
+donde $A_d$ es la ganancia del amplificador diferencial. %
+%
+\begin{marginfigure}
+    \centering
+    \shorthandoff{>}
+    \ctikzset{
+    amplifiers/fill=blue!5,        % Un ligero color de fondo queda muy bien
+    amplifiers/thickness=2,        % Borde un poco más grueso
+    }
+    \begin{tikzpicture}[american, scale=1]
+        
+        % --- FUENTE DE RUIDO ---
+        \draw[dashed, orange, thick] (1,3) ellipse (1.5cm and 0.5cm);
+        \node[orange] at (1,3.7) {Campo EM (\unit{50}{Hz})};
+        \draw[orange, -{Stealth}] (1,3) -- (1,2.1);
+        \draw[orange, -{Stealth}] (1.5,3) -- (1.5,.1);
+
+        % --- SENSOR ---
+        \draw (0,2) to[R, l=$R_s$, color=blue] (0,0);
+        \node[blue] at (0, 2.3) {SENSOR};
+        
+        % --- LÍNEA DE TRANSMISIÓN ---
+        \draw (0,2) -- (0.5,2) to[R, l=$R_w$] (2,2) coordinate (V1);
+        \draw (0,0) -- (0.5,0) to[R, l=$R_w$] (2,0) coordinate (V2);
+        
+        % --- AMPLIFICADOR ---
+        \draw (3.5,1) node[op amp, scale=1] (diff) {};
+        \draw (V1) -- (diff.+) node[pos=0.4, above right] {$V_1$};
+        \draw (V2) -- (diff.-) node[pos=0.4, below right] {$V_2$};
+        
+        % Salida
+        \draw (diff.out) -- (4.5,1) node[ocirc] {} node[right, blue] {$V_{out}$};
+        
+        % Nota matemática
+        \node[anchor=north west, align=left] at (-0.5, -0.5) {
+            $\mathbf{V_1 = V_{noise} + V_{dm}/2}$ \\
+            $\mathbf{V_2 = V_{noise} - V_{dm}/2}$ 
+        } ;
+        \node[anchor=north west, align=left] at (2.25, -0.7) {
+            $\implies \mathbf{V_1 - V_2 = V_{dm}}$
+        } ;
+    \end{tikzpicture}
+    \caption[Cancelación de ruido mediante medida diferencial.]{Cancelación de ruido mediante medida diferencial. El campo electromagnético externo induce una tensión de modo común que el amplificador de instrumentación elimina por sustracción, preservando la integridad de la señal del sensor.}\label{fig:ejemplo_diferencial}
+\end{marginfigure}
+%
+Como se observa matemáticamente, el ruido de \unit{2}{V} ha desaparecido por completo independientemente de su magnitud, siempre que el amplificador tenga un buen rechazo al modo común (CMRR). Este principio es el que permite que la instrumentación electrónica moderna funcione con precisión en fábricas, aviones o entornos hospitalarios donde conviven señales fisiológicas débiles con maquinaria de gran potencia.
+\marginnote{\textbf{Eficacia del Trenzado}: 
+    En el diseño físico, los hilos se trenzan (\textit{twisted pair}) para garantizar que ambos conductores estén expuestos al mismo flujo magnético promedio. Esto asegura que el ruido sea estrictamente idéntico en ambos ($V_{cm}$ puro) y maximiza la eficacia de la cancelación diferencial.
+}
+
+
+
 
 \section{Circuitos de Medida: El Puente de Wheatstone}\label{sec:puente_wheatstone}
 
@@ -1396,13 +1564,13 @@ La elección de la configuración del puente de Wheatstone representa un comprom
 \marginnote[0em]{\textbf{Problema de Célula de Carga:}
     Un puente completo de galgas ($\qty{350}{\Omega}$) se alimenta con $V_{exc} = \qty{10}{V}$. Si la sensibilidad del sensor es $\qty{2}{mV/V}$ a fondo de escala, calcule la variación $\Delta R$ de cada galga.
     
-    \textbf{1. Tensión de salida a FS:} \\
+    \emph{1. Tensión de salida a FS:} \\
     $V_o = 10 \text{ V} \cdot \qty{2}{mV/V} = \qty{20}{mV}$.
     
-    \textbf{2. Relación del puente completo:} \\
-    $V_o = V_{exc} \frac{\Delta R}{R} \implies \frac{\Delta R}{R} = \frac{20 \text{ mV}}{10 \text{ V}} = 0,002$.
+    \emph{2. Relación del puente completo:} \\
+    $V_o = V_{exc} \dfrac{\Delta R}{R} \implies \dfrac{\Delta R}{R} = \dfrac{20 \text{ mV}}{10 \text{ V}} = 0,002$.
     
-    \textbf{3. Variación de resistencia:} \\
+    \emph{3. Variación de resistencia:} \\
     $\Delta R = 350 \cdot 0,002 = \mathbf{\qty{0,7}{\Omega}}$.
     
     \textit{Reflexión: Medir $\qty{20}{mV}$ es sencillo para un amplificador, pero detectar $\qty{0,7}{\Omega}$ sobre un fondo de $\qty{350}{\Omega}$ con un multímetro ordinario sería imposible sin el puente.}

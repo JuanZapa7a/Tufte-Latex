@@ -101,14 +101,13 @@ En un sensor puramente resistivo, la tensión y la corriente están en fase ($\p
         \begin{axis}[
             width=\linewidth, height=5.5cm,
             xlabel={$t$}, ylabel={Amplitud normalizada},
-            xmin=0, xmax=2*pi,
+            xmin=0, xmax=2*pi+pi/4,
             ymin=-1.3, ymax=1.5,
             axis lines=middle,
             xtick={0, 1.57, 3.14, 4.71, 6.28},
             xticklabels={0, $\frac{\pi}{2}$, $\pi$, $\frac{3\pi}{2}$, $2\pi$},
             ytick={-1, 1},
-            font=\scriptsize,
-            legend style={at={(0.5,1.15)}, anchor=south, legend columns=-1, draw=none}
+            legend style={at={(0.5,1)}, anchor=south, legend columns=-1, draw=none}
         ]
             % Corriente i(t) - Azul
             \addplot[thick, blue, domain=0:2*pi, samples=100] {sin(deg(x))};
@@ -191,8 +190,8 @@ En un diseño de ingeniería real, los sensores reactivos no son puros. Presenta
 
 Para modelos con resistencia serie ($R_s$):
 \begin{itemize}
-    \item \emph{Inductor}: $Q_L = \frac{\omega L}{R_s}$ (Aumenta con la frecuencia).
-    \item \emph{Condensador}: $Q_C = \frac{1}{\omega C R_s}$ (Disminuye con la frecuencia).
+    \item \emph{Inductor}: $Q_L = \dfrac{\omega L}{R_s}$ (Aumenta con la frecuencia).
+    \item \emph{Condensador}: $Q_C = \dfrac{1}{\omega C R_s}$ (Disminuye con la frecuencia).
 \end{itemize}
 
 \marginnote{\textbf{Consideración de Diseño:} Un sensor con un $Q$ bajo se comporta de forma cuasi-resistiva, perdiendo la ventaja de la inmunidad al ruido térmico y dificultando el diseño de circuitos resonantes estables. En 4º curso se asume que un sensor de instrumentación de alta gama debe operar en zonas donde $Q > 50$.
@@ -248,7 +247,7 @@ Es el principio utilizado en la medida de humedad (el polímero absorbe agua, va
         \tikzset{placa/.style={fill=gray!30, draw=black, thick}}
         
         % --- MODO A: VARIACIÓN DE DISTANCIA ---
-        \begin{scope}[yshift=0cm]
+        \begin{scope}[xshift=-1.5cm]
             \draw[placa] (0,0.8) rectangle (2,1);
             \draw[placa] (0,0) rectangle (2,0.2);
             \draw[<->, >=stealth, red] (1, 0.2) -- (1, 0.8) node[midway, right] {$d$};
@@ -257,7 +256,7 @@ Es el principio utilizado en la medida de humedad (el polímero absorbe agua, va
         \end{scope}
 
         % --- MODO B: VARIACIÓN DE ÁREA ---
-        \begin{scope}[yshift=-2cm]
+        \begin{scope}[xshift=1.5cm]
             \draw[placa] (0.8,0.6) rectangle (2.8,0.8);
             \draw[placa] (0,0) rectangle (2,0.2);
             \draw[dashed, gray] (0.8,0.2) -- (0.8,0.6);
@@ -267,7 +266,7 @@ Es el principio utilizado en la medida de humedad (el polímero absorbe agua, va
         \end{scope}
 
         % --- MODO C: VARIACIÓN DE DIELÉCTRICO ---
-        \begin{scope}[yshift=-4cm]
+        \begin{scope}[yshift=-2cm]
             \draw[placa] (0,0.6) rectangle (2,0.8);
             \draw[placa] (0,0) rectangle (2,0.2);
             % Dieléctrico entrando
@@ -284,17 +283,19 @@ Es el principio utilizado en la medida de humedad (el polímero absorbe agua, va
 \subsection{Modelos de Sensibilidad y Linealidad}
 % Modelos de sensibilidad y linealidad.
 
-El diseño de un sistema de instrumentación capacitivo exige evaluar el compromiso entre la \textbf{sensibilidad absoluta} ($S = dC/dx$) y el \textbf{error de no linealidad}. Dependiendo del parámetro geométrico que se modifique, el comportamiento del sensor varía drásticamente, como se resume en la Tabla~\ref{tab:sensibilidad_capacitiva}.
+El diseño de un sistema de instrumentación capacitivo exige evaluar el compromiso entre la \emph{sensibilidad absoluta} ($S = dC/dx$) y el \emph{error de no linealidad}. Dependiendo del parámetro geométrico que se modifique, el comportamiento del sensor varía drásticamente, como se resume en la Tabla~\ref{tab:sensibilidad_capacitiva}.
 
 \begin{table}[ht]
     \centering
-    \begin{tabularx}{\linewidth}{l X X X}
+    \setlength{\tabcolsep}{3pt} % Reducimos el espacio entre columnas
+    \small
+    \begin{tabularx}{\linewidth}{l c c X}
         \toprule
         \textbf{Modo} & \textbf{Ecuación $C(x)$} & \textbf{Sensibilidad ($S$)} & \textbf{Linealidad} \\
         \midrule
-        \textbf{Área ($A$)} & $C_0 (1 - \frac{x}{L})$ & $-\frac{\epsilon w}{d}$ (Constante) & Excelente (Lineal) \\
+        \emph{Área} ($A$) & $C_0 (1 - \dfrac{x}{L})$ & $-\dfrac{\epsilon w}{d}$ (Constante) & Excelente (Lineal) \\
         \midrule
-        \textbf{Distancia ($d$)} & $\frac{C_0}{1 - x/d_0}$ & $\frac{C_0 / d_0}{(1 - x/d_0)^2}$ (Variable) & Pobre (Hiperbólica) \\
+        \emph{Distancia ($d$)} & $\dfrac{C_0}{1 - x/d_0}$ & $\dfrac{C_0 / d_0}{(1 - x/d_0)^2}$ (Variable) & Pobre (Hiperbólica) \\
         \bottomrule
     \end{tabularx}
     \caption{Comparativa de modelos de sensibilidad. La variación de distancia ofrece una sensibilidad mucho mayor a costa de una respuesta no lineal.}\label{tab:sensibilidad_capacitiva}
@@ -305,32 +306,32 @@ El diseño de un sistema de instrumentación capacitivo exige evaluar el comprom
     \shorthandoff{>}
     \begin{tikzpicture}
         \begin{axis}[
-            width=\linewidth, height=5.5cm,
+            width=\linewidth, height=5cm,
             xlabel={$x$ (Desplazamiento)}, ylabel={$C/C_0$},
-            xmin=0, xmax=0.8, ymin=0, ymax=4,
+            xmin=0, xmax=1.1, ymin=0, ymax=4.5,
             axis lines=left, grid=both,
             grid style={line width=.1pt, draw=gray!10},
-            font=\scriptsize,
-            legend style={at={(0.1,0.9)}, anchor=north west, font=\tiny, draw=none}
+            %font=\scriptsize,
+            legend style={at={(0.1,0.9)}, anchor=north west, draw=none}
         ]
             % Variación de Área (Lineal)
             \addplot[thick, blue, domain=0:0.8] {1 + x};
             \addlegendentry{Var. Área}
 
             % Variación de Distancia (Hiperbólica)
-            \addplot[thick, red, domain=0:0.75, samples=100] {1 / (1 - x)};
+            \addplot[thick, red, domain=0:0.8, samples=100] {1 / (1 - x)};
             \addlegendentry{Var. Distancia}
             
-            \node[red, font=\tiny, align=center] at (axis cs:0.4, 3.2) {Sensibilidad\\creciente};
-            \node[blue, font=\tiny, rotate=30] at (axis cs:0.4, 1.2) {Sensibilidad cte.};
+            \node[red, font=\tiny, align=center] at (axis cs:0.4, 2.2) {Sensibilidad\\creciente};
+            \node[blue, font=\tiny, rotate=12] at (axis cs:0.4, 1.2) {Sensibilidad cte.};
         \end{axis}
     \end{tikzpicture}
-    \caption{Comparativa de respuesta. El sensor de distancia es ideal para desplazamientos ínfimos (nanómetros), mientras que el de área es preferible para rangos mayores.}\label{fig:curvas_sensibilidad}
+    \caption[Comparativa de respuesta variación Área y Distancia.]{Comparativa de respuesta. El sensor de distancia es ideal para desplazamientos ínfimos (nanómetros), mientras que el de área es preferible para rangos mayores.}\label{fig:curvas_sensibilidad}
 \end{marginfigure}
 
 \paragraph{Linealización mediante Configuraciones Diferenciales:}
 
-En ingeniería de precisión, el problema de la no linealidad hiperbólica de los sensores de distancia se resuelve mediante el uso de un \textbf{condensador diferencial} o configuración \textit{Push-Pull}. Este sistema consta de tres placas: dos fijas y una central móvil.
+En ingeniería de precisión, el problema de la no linealidad hiperbólica de los sensores de distancia se resuelve mediante el uso de un \emph{condensador diferencial} o configuración \textit{Push-Pull}. Este sistema consta de tres placas: dos fijas y una central móvil.
 
 Si la placa central se desplaza una distancia $x$ desde el centro equilibrado ($d_0$), las capacidades resultantes son:
 \begin{equation}
@@ -347,37 +348,37 @@ Para desplazamientos pequeños ($x \ll d_0$), el término cuadrático del denomi
     \Delta C \approx 2 C_0 \frac{x}{d_0}
 \end{equation}
 
-\marginnote{
-    \textbf{Ventaja del diferencial:} 
+\marginnote{\textbf{Ventaja del diferencial:} 
     Además de duplicar la sensibilidad ($2C_0/d_0$), esta topología cancela por \textit{modo común} los errores debidos a variaciones térmicas del dieléctrico, ya que afectan a $C_1$ y $C_2$ por igual y se restan en la etapa de acondicionamiento.
 }
 
 \begin{marginfigure}
     \centering
     \shorthandoff{>}
-    \begin{tikzpicture}[scale=0.85, font=\scriptsize]
+    \begin{tikzpicture}[scale=1]
         % Placas fijas
-        \draw[fill=gray!30, thick] (0,1.5) rectangle (2,1.7);
-        \draw[fill=gray!30, thick] (0,0) rectangle (2,0.2);
+        \draw[fill=gray!30, thick] (0,1.5) rectangle (4,1.7);
+        \draw[fill=gray!30, thick] (0,0) rectangle (4,0.2);
         
         % Placa móvil central
-        \draw[fill=blue!40, thick] (0,0.75) rectangle (2,0.95);
-        \draw[->, ultra thick, blue] (2.2, 0.85) -- (2.2, 1.1) node[right] {$x$};
+        \draw[fill=blue!40, thick] (0,0.75) rectangle (4,0.95);
+        \draw[->, ultra thick, blue] (4.2, 0.85) -- (4.2, 1.1) node[right] {$x$};
+        \draw[->, ultra thick, blue] (4.2, 0.85) -- (4.2, 0.6) node[right] {$x$};
         
         % Etiquetas
-        \node at (1, 1.9) {Placa Fija 1};
-        \node at (1, -0.3) {Placa Fija 2};
-        \node[blue] at (1, 0.5) {Placa Móvil};
+        \node at (2, 1.9) {Placa Fija 1};
+        \node at (2, -0.3) {Placa Fija 2};
+        \node[blue] at (2, 0.5) {Placa Móvil};
         
         % Dimensiones d0
-        \draw[<->, gray] (2.5, 0.2) -- (2.5, 0.85) node[midway, right] {$d_0-x$};
-        \draw[<->, gray] (2.5, 0.85) -- (2.5, 1.5) node[midway, right] {$d_0+x$};
+        \draw[<->, gray] (4.7, 0.2) -- (4.7, 0.85) node[midway, right] {$d_0+x$};
+        \draw[<->, gray] (4.7, 0.85) -- (4.7, 1.5) node[midway, right] {$d_0-x$};
         
         % Capacidades
         \node[left] at (0, 1.2) {$C_1$};
         \node[left] at (0, 0.4) {$C_2$};
     \end{tikzpicture}
-    \caption{Esquema de un sensor capacitivo diferencial. Es la arquitectura base de los acelerómetros MEMS y sensores de presión de alta gama.}\label{fig:sensor_diferencial}
+    \caption[Esquema de un sensor capacitivo diferencial.]{Esquema de un sensor capacitivo diferencial. Es la arquitectura base de los acelerómetros MEMS y sensores de presión de alta gama.}\label{fig:sensor_diferencial}
 \end{marginfigure}
 
 \paragraph{Conclusión para el Diseño}
@@ -390,6 +391,186 @@ Para un ingeniero electrónico, la elección depende del rango dinámico requeri
 \subsection{Problemas de Implementación: Capacidades Parásitas}
 % Introducción al blindaje y técnicas de guarda (Guarding).
 
+La medida de la capacidad plantea un reto tecnológico mayor que la de la resistencia. Mientras que los sensores resistivos suelen tener valores de \unit{k\Omega}, los sensores capacitivos presentan valores extremadamente bajos, típicamente en el rango de los \unit{pF} ($10^{-12}$ F) o incluso \unit{fF} ($10^{-15}$ F).
+
+\paragraph{El Efecto del Cable de Conexión} El principal enemigo de un sensor capacitivo es el cable que lo une a la electrónica. Un cable coaxial estándar presenta una capacidad parásita de entre \qtyrange{50}{100}{pF/m}. 
+
+Si intentamos medir un sensor de \unit{1}{pF} mediante un cable de \unit{1}{m}, la capacidad del cable es \emph{100 veces superior} a la del sensor, actuando como un condensador en paralelo que enmascara la señal y degrada la sensibilidad. 
+%
+\begin{marginfigure}[0em]
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}[american, scale=1]
+        %\ctikzset{resistors/scale=0.6, capacitors/scale=0.6}
+        % Sensor
+        \draw (0,2) to[C, l_=$C_s$] (0,0) node[ground]{};
+        % Cable coaxial (modelo)
+        \draw (0,2) -- (1,2) coordinate(A);
+        \draw (1,2) to[C, l=$C_p$ (cable)] (1,0) node[ground]{};
+        \draw (1,2) -- (2,2) node[ocirc]{} node[right]{Electrónica};
+        
+        \node[blue] at (0, 2.3) {SENSOR};
+        \node[red] at (1, 0.3) {PARÁSITA};
+    \end{tikzpicture}
+    \caption[Efecto de la capacidad parásita del cable.]{Efecto de la capacidad parásita del cable. $C_p$ aparece en paralelo con el sensor, sumándose a la medida y reduciendo drásticamente la variación relativa $\Delta C/C_{total}$.}\label{fig:cable_parasito}
+\end{marginfigure}
+%
+Dos condensadores en paralelo, uno de \unit{1}{pF} y otro de \unit{100}{pF}, representan un \emph{sensor de baja capacidad degradado por la capacidad parásita} de un cable de conexión de longitud moderada (aprox. \unit{1}{m}). 
+
+\paragraph{Análisis de la Degradación de Sensibilidad}
+Para un ingeniero, el problema no es que la capacidad total sea mayor, sino que la \emph{sensibilidad relativa} del sistema se desploma. Consideremos que el sensor de \unit{1}{pF} experimenta una variación del \unit{10}{\%} ante un estímulo físico ($\Delta C_s = \unit{0,1}{pF}$).
+
+\begin{enumerate}
+    \item \emph{Caso Ideal (Sin cable)}: 
+    La variación relativa que detecta la electrónica es:
+    \[ \frac{\Delta C}{C} = \frac{\unit{0,1}{pF}}{\unit{1}{pF}} = \mathbf{\unit{10}{\%}} \]
+    
+    \item \emph{Caso Real (Con cable de \unit{100}{pF})}:
+    La capacidad total es $C_T = C_s + C_p = \unit{101}{pF}$. La variación relativa que detecta la electrónica ahora es:
+    \[ \frac{\Delta C}{C_T} = \frac{\unit{0,1}{pF}}{\unit{101}{pF}} \approx \mathbf{\unit{0,1}{\%}} \]
+\end{enumerate}
+
+\marginnote{\textbf{Solución a la atenuación de la sensibilidad:}
+        La presencia de la capacidad parásita ha \emph{atenuado la sensibilidad en un factor de 100}. Para recuperar la medida, necesitaríamos un ADC con 7 bits adicionales de resolución o un amplificador con una ganancia masiva que, inevitablemente, amplificaría también el ruido.
+}
+
+\begin{marginfigure}
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}[american, scale=1]
+        \ctikzset{capacitors/scale=0.7}
+        % Nodo de entrada
+        \draw (0,2) -- (3,2);
+        % Sensor
+        \draw (0.5,2) to[C, l=$C_s$, v=$\Delta C$] (0.5,0) node[ground]{};
+        % Parásita
+        \draw (2.5,2) to[C, l=$C_p$] (2.5,0) node[ground]{};
+        
+        \node[blue] at (0.5, 2.3) {\unit{1}{pF}};
+        \node[red] at (2.5, 2.3) {\unit{100}{pF}};
+        
+        % Flecha de suma
+        \draw[thick, ->, >=stealth] (3.3,1) -- (3.6,1) node[right] {$C_{total} = \unit{101}{pF}$};
+    \end{tikzpicture}
+    \caption{Modelo equivalente del sensor y el cable. La gran magnitud de $C_p$ enmascara los pequeños cambios de $C_s$.}\label{fig:paralelo_capacitivo}
+\end{marginfigure}
+
+\paragraph{Estrategias de Mitigación}
+Ante este escenario, el ingeniero de diseño tiene tres opciones:
+\begin{itemize}
+    \item \emph{Electrónica de proximidad}: Colocar el convertidor $C/V$ o el microcontrolador justo al lado del sensor (minimizando la longitud del cable).
+    \item \emph{Guarda Activa}: Utilizar la técnica de \textit{guarding} analizada anteriormente para anular eléctricamente el efecto de $C_p$.
+    \item \emph{Medida en Frecuencia}: Integrar el condensador en un oscilador, donde la frecuencia de salida $f \propto 1/\sqrt{C}$ suele ser más robusta frente a ruidos de amplitud, aunque la no linealidad persiste.
+\end{itemize}
+
+
+\paragraph{Blindaje Activo o Técnica de Guarda (\textit{Guarding})}
+Para eliminar el efecto de $C_p$, no basta con blindar el cable (conectando la malla a masa); esto solo protegería frente a ruido externo, pero mantendría la capacidad parásita. La solución profesional es la \emph{Guarda Activa}.
+
+\marginnote{\textbf{Principio de la Guarda:} 
+    Si mantenemos los dos conductores de un condensador al \textbf{mismo potencial} ($V_1 = V_2$), la diferencia de tensión es nula. Según $Q = C \cdot \Delta V$, la carga acumulada es cero y, por tanto, no circula corriente a través de esa capacidad. \textit{Físicamente, la capacidad parásita sigue ahí, pero el circuito no la ``ve''}.
+}
+
+En esta técnica, se utiliza un seguidor de tensión (buffer) para alimentar el blindaje interno con exactamente la misma tensión que lleva el hilo de señal.
+
+% \begin{marginfigure}
+%     \centering
+%     \shorthandoff{>}
+%     \ctikzset{amplifiers/fill=blue!5, capacitors/scale=0.6}
+%     %\usetikzlibrary{circuits.ee.IEC}
+%     \begin{tikzpicture}[american, scale=1] 
+%         % Sensor
+%         \draw (0,2) to[C, l=$C_s$] (0,0) node[ground]{};
+        
+%         % Seguidor de tensión (Guarda)
+%         \draw (2,1) node[op amp, scale=0.6] (opamp) {};
+%         \draw (0,2) -- (1,2) |- (opamp.+);
+%         \draw (opamp.out) -- ++(0,0.5) -| (opamp.-);
+        
+%         % Conexión a la guarda
+%         \draw (opamp.out) -- ++(0.5,0) coordinate(G);
+        
+%         % Representación del cable triaxial o guarda
+%         \draw[thick, gray] (0.8, 2.2) rectangle (2.8, 1.8);
+%         \node[gray, font=\tiny] at (1.8, 2.4) {GUARDA};
+%         \draw (G) |- (1.8, 1.8);
+        
+%         % Capacidades eliminadas
+%         \draw[red, dashed] (1.5, 2) to[C, l=$C_p$, color=red] (1.5, 1.8);
+        
+%     \end{tikzpicture}
+%     \caption{Esquema de guarda activa. El amplificador asegura que el potencial de la guarda sea idéntico al de la señal, anulando la corriente a través de $C_p$.}\label{fig:guarda_activa}
+% \end{marginfigure}
+
+\begin{marginfigure}
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}[american, scale=1]
+        % Ajustes de componentes
+        \ctikzset{resistors/scale=0.6, capacitors/scale=0.6, amplifiers/fill=blue!5}
+
+        % --- LÍNEA DE SEÑAL PRINCIPAL ---
+        \draw (0,0) node[ground]{} 
+              to[C, l=$C_s$] (0,2.5)      % Sensor
+              to[short] (0.8,2.5)     % Punto de toma para el buffer
+              -- (5,2.5) node[ocirc, scale=0.6] {} node[above] {Acond.};
+
+        % --- EL SEGUIDOR DE TENSIÓN (BUFFER) ---
+        % Lo situamos debajo para que no estorbe
+        \draw (1.75,1) node[op amp, scale=0.7] (OA) {};
+        
+        % Conexión de entrada (+) al cable de señal
+        \draw (0.5,2.5) node[circ,scale=0.6]{} |- (OA.+);
+        
+        % Realimentación unitaria (Salida a entrada -)
+        \draw (OA.out)node[circ,scale=0.6]{} -- ++(0,0.95) -| (OA.-);
+        \node[blue!50, font=\tiny\bfseries] at (3, .3) {BUFFER (Seguidor de tensión)};
+
+        % --- LA GUARDA (CABLE BLINDADO) ---
+        % Dibujamos la guarda como una caja gris que envuelve el cable
+        \draw[thick, gray!80] (1.5, 2.1) rectangle (4.5, 2.9);
+        \node[gray!80, font=\tiny\bfseries] at (3, 3.1) {GUARDA (Malla)};
+
+        % Conexión de la salida del buffer a la guarda
+        \draw (OA.out) -- ++(0.4,0) |- (2.98, 2.1)node[circ,scale=0.6]{};
+
+        % --- CAPACIDAD PARÁSITA ELIMINADA ---
+        % Se dibuja entre el hilo interno (2.5) y la malla (2.1)
+        \draw[red, dashed, thick] (3.8, 2.5) to[C, l=$C_p$] (3.8, 2.1);
+        
+        % Nota aclaratoria
+        \node[red, font=\tiny, align=center] at (4.3, 1.7) {$V_{sig} \approx V_{guard}$  $\implies I_{Cp} \approx 0$};
+
+    \end{tikzpicture}
+    \caption{Esquema de guarda activa. El buffer de ganancia unidad asegura que la malla del cable esté al mismo potencial que el hilo de señal ($V_{sig} \approx V_{guard}$), eliminando la corriente a través de $C_p$. Al no haber diferencia de tensión entre los terminales de $C_p$, esta capacidad no se carga ni descarga, eliminando su efecto en la medida del sensor.}\label{fig:guarda_activa}
+\end{marginfigure}
+
+\paragraph{Implementación en PCB: El Anillo de Guarda}
+En el diseño de circuitos impresos (PCB), las corrientes de fuga por la superficie de la placa y las capacidades entre pistas también falsean la medida. Para evitarlo, se rodea la pista de alta impedancia del sensor con un \emph{anillo de guarda} conectado al mismo potencial.
+
+\begin{marginfigure}
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}[scale=0.7]
+        % Pista de señal
+        \draw[fill=orange!80, draw=black] (0,0) circle (0.3);
+        \node[font=\tiny] at (0,0) {SIG};
+        
+        % Anillo de guarda
+        \draw[line width=3pt, orange!40] (0,0) circle (0.8);
+        \draw[draw=black, thin] (0,0) circle (0.7);
+        \draw[draw=black, thin] (0,0) circle (0.9);
+        \node[orange!70!black, font=\tiny] at (0,-1.1) {ANILLO DE GUARDA ($V_{sig}$)};
+        
+        % Masa exterior
+        \draw[fill=green!10, even odd rule] (-2,-2) rectangle (2,2) (0,0) circle (1.2);
+        \node[green!50!black, font=\tiny] at (1.5, 1.5) {PLANO MASA};
+    \end{tikzpicture}
+    \caption{Diseño de un anillo de guarda en PCB. El anillo actúa como una barrera de potencial que intercepta corrientes de fuga y neutraliza capacidades parásitas laterales.}\label{fig:anillo_guarda}
+\end{marginfigure}
+
+\marginnote{\textbf{Aplicación Crítica:} Esta técnica es obligatoria en sensores de \textbf{humedad capacitivos} y en \textbf{acelerómetros MEMS}, donde las variaciones de señal son tan pequeñas que el simple aire entre pistas de la PCB podría actuar como una carga capacitiva inaceptable.
+}
 \subsection{Aplicaciones Típicas}
 % Sensores de proximidad, nivel de líquidos y humedad.
 

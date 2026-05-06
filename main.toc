@@ -60,44 +60,56 @@
 \contentsline {paragraph}{Modelo Matemático y Respuesta}{40}{paragraph*.46}%
 \contentsline {subsection}{Magnetorresistencias (AMR y GMR)}{40}{subsection*.47}%
 \contentsline {paragraph}{AMR (Magnetorresistencia Anisotrópica):}{40}{paragraph*.48}%
-\contentsline {paragraph}{GMR (Magnetorresistencia Gigante):}{40}{paragraph*.49}%
-\contentsline {section}{\numberline {3.7}Circuitos de Medida: El Puente de Wheatstone}{40}{section.3.7}%
-\contentsline {subsection}{Análisis del Puente Desequilibrado}{41}{subsection*.50}%
-\contentsline {subsection}{Configuraciones: Cuarto, Medio y Puente Completo}{41}{subsection*.51}%
-\contentsline {paragraph}{Cuarto de Puente (1 brazo activo).}{41}{paragraph*.52}%
-\contentsline {paragraph}{Medio Puente (2 brazos activos).}{41}{paragraph*.53}%
-\contentsline {paragraph}{Puente Completo (4 brazos activos).}{41}{paragraph*.54}%
-\contentsline {subsection}{Linealidad según el tipo de excitación (Voltaje vs. Corriente)}{41}{subsection*.55}%
-\contentsline {subsection}{Resumen de Sensibilidad y Aplicación}{42}{subsection*.56}%
-\contentsline {section}{\numberline {3.8}Resumen de Errores en Sensores Resistivos}{42}{section.3.8}%
-\contentsline {subsection}{El Presupuesto de Errores (\textit {Error Budget})}{42}{subsection*.57}%
-\contentsline {section}{\numberline {3.9}Conclusión}{43}{section.3.9}%
-\contentsline {chapter}{\numberline {4}Sensores Reactivos: Capacitivos e Inductivos}{45}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Fundamentos de los Sensores Reactivos}{45}{section.4.1}%
-\contentsline {paragraph}{El Inductor: La tensión adelanta a la corriente}{46}{paragraph*.58}%
-\contentsline {paragraph}{El Condensador: La corriente adelanta a la tensión}{46}{paragraph*.59}%
-\contentsline {paragraph}{Implicaciones en Instrumentación:}{46}{paragraph*.60}%
-\contentsline {subsection}{Figuras de Mérito: El Factor de Calidad ($Q$)}{46}{subsection*.61}%
-\contentsline {subsection}{Ventajas del Uso de Reactancias}{46}{subsection*.62}%
-\contentsline {section}{\numberline {4.2}Sensores Capacitivos}{47}{section.4.2}%
-\contentsline {subsection}{Principios de Funcionamiento}{47}{subsection*.63}%
-\contentsline {paragraph}{Variación de la Distancia ($d$):}{47}{paragraph*.64}%
-\contentsline {paragraph}{Variación del Área ($A$):}{47}{paragraph*.65}%
-\contentsline {paragraph}{Variación del Dieléctrico ($\epsilon _r$):}{47}{paragraph*.66}%
-\contentsline {subsection}{Modelos de Sensibilidad y Linealidad}{48}{subsection*.67}%
-\contentsline {paragraph}{Linealización mediante Configuraciones Diferenciales:}{48}{paragraph*.68}%
-\contentsline {paragraph}{Conclusión para el Diseño}{48}{paragraph*.69}%
-\contentsline {subsection}{Problemas de Implementación: Capacidades Parásitas}{49}{subsection*.70}%
-\contentsline {subsection}{Aplicaciones Típicas}{49}{subsection*.71}%
-\contentsline {section}{\numberline {4.3}Sensores Inductivos y Electromagnéticos}{49}{section.4.3}%
-\contentsline {subsection}{Sensores de Inductancia Variable (Reluctancia)}{49}{subsection*.72}%
-\contentsline {subsection}{Transformador Diferencial de Variación Lineal (LVDT)}{49}{subsection*.73}%
-\contentsline {subsection}{Sensores de Corrientes de Foucault (\textit {Eddy Currents})}{49}{subsection*.74}%
-\contentsline {subsection}{Sensores de Efecto Hall vs. Magnetorresistivos (Repaso)}{49}{subsection*.75}%
-\contentsline {section}{\numberline {4.4}Acondicionamiento de Sensores Reactivos}{49}{section.4.4}%
-\contentsline {subsection}{Puentes de Alterna}{49}{subsection*.76}%
-\contentsline {subsection}{Circuitos Resonantes y Osciladores}{49}{subsection*.77}%
-\contentsline {subsection}{Demodulación Síncrona (Detección de Fase)}{49}{subsection*.78}%
-\contentsline {section}{\numberline {4.5}Resumen y Comparativa de Sensores Reactivos}{49}{section.4.5}%
-\contentsline {chapter}{Bibliograf\'{\i }a}{51}{appendix*.79}%
+\contentsline {paragraph}{Efecto Hall:}{40}{paragraph*.49}%
+\contentsline {paragraph}{GMR (Magnetorresistencia Gigante):}{40}{paragraph*.50}%
+\contentsline {section}{\numberline {3.7}Medida Diferencial y Conceptos de Modo}{41}{section.3.7}%
+\contentsline {subsection}{Definiciones Matemáticas: Modo Diferencial y Modo Común}{41}{subsection*.51}%
+\contentsline {subsection}{Ventajas de la Medida Diferencial}{41}{subsection*.52}%
+\contentsline {subsection}{Ejemplo: El Problema del Zumbido de Red (\unit {50}{Hz})}{42}{subsection*.53}%
+\contentsline {paragraph}{Escenario A: Medida \textit {Single-Ended}.}{42}{paragraph*.54}%
+\contentsline {paragraph}{Escenario B: Medida Diferencial.}{42}{paragraph*.55}%
+\contentsline {section}{\numberline {3.8}Circuitos de Medida: El Puente de Wheatstone}{42}{section.3.8}%
+\contentsline {subsection}{Análisis del Puente Desequilibrado}{43}{subsection*.56}%
+\contentsline {subsection}{Configuraciones: Cuarto, Medio y Puente Completo}{43}{subsection*.57}%
+\contentsline {paragraph}{Cuarto de Puente (1 brazo activo).}{43}{paragraph*.58}%
+\contentsline {paragraph}{Medio Puente (2 brazos activos).}{43}{paragraph*.59}%
+\contentsline {paragraph}{Puente Completo (4 brazos activos).}{43}{paragraph*.60}%
+\contentsline {subsection}{Linealidad según el tipo de excitación (Voltaje vs. Corriente)}{43}{subsection*.61}%
+\contentsline {subsection}{Resumen de Sensibilidad y Aplicación}{44}{subsection*.62}%
+\contentsline {section}{\numberline {3.9}Resumen de Errores en Sensores Resistivos}{44}{section.3.9}%
+\contentsline {subsection}{El Presupuesto de Errores (\textit {Error Budget})}{44}{subsection*.63}%
+\contentsline {section}{\numberline {3.10}Conclusión}{44}{section.3.10}%
+\contentsline {chapter}{\numberline {4}Sensores Reactivos: Capacitivos e Inductivos}{47}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Fundamentos de los Sensores Reactivos}{47}{section.4.1}%
+\contentsline {paragraph}{El Inductor: La tensión adelanta a la corriente}{48}{paragraph*.64}%
+\contentsline {paragraph}{El Condensador: La corriente adelanta a la tensión}{48}{paragraph*.65}%
+\contentsline {paragraph}{Implicaciones en Instrumentación:}{48}{paragraph*.66}%
+\contentsline {subsection}{Figuras de Mérito: El Factor de Calidad ($Q$)}{48}{subsection*.67}%
+\contentsline {subsection}{Ventajas del Uso de Reactancias}{48}{subsection*.68}%
+\contentsline {section}{\numberline {4.2}Sensores Capacitivos}{49}{section.4.2}%
+\contentsline {subsection}{Principios de Funcionamiento}{49}{subsection*.69}%
+\contentsline {paragraph}{Variación de la Distancia ($d$):}{49}{paragraph*.70}%
+\contentsline {paragraph}{Variación del Área ($A$):}{49}{paragraph*.71}%
+\contentsline {paragraph}{Variación del Dieléctrico ($\epsilon _r$):}{49}{paragraph*.72}%
+\contentsline {subsection}{Modelos de Sensibilidad y Linealidad}{50}{subsection*.73}%
+\contentsline {paragraph}{Linealización mediante Configuraciones Diferenciales:}{50}{paragraph*.74}%
+\contentsline {paragraph}{Conclusión para el Diseño}{50}{paragraph*.75}%
+\contentsline {subsection}{Problemas de Implementación: Capacidades Parásitas}{50}{subsection*.76}%
+\contentsline {paragraph}{El Efecto del Cable de Conexión}{50}{paragraph*.77}%
+\contentsline {paragraph}{Análisis de la Degradación de Sensibilidad}{51}{paragraph*.78}%
+\contentsline {paragraph}{Estrategias de Mitigación}{51}{paragraph*.79}%
+\contentsline {paragraph}{Blindaje Activo o Técnica de Guarda (\textit {Guarding})}{51}{paragraph*.80}%
+\contentsline {paragraph}{Implementación en PCB: El Anillo de Guarda}{51}{paragraph*.81}%
+\contentsline {subsection}{Aplicaciones Típicas}{52}{subsection*.82}%
+\contentsline {section}{\numberline {4.3}Sensores Inductivos y Electromagnéticos}{52}{section.4.3}%
+\contentsline {subsection}{Sensores de Inductancia Variable (Reluctancia)}{52}{subsection*.83}%
+\contentsline {subsection}{Transformador Diferencial de Variación Lineal (LVDT)}{52}{subsection*.84}%
+\contentsline {subsection}{Sensores de Corrientes de Foucault (\textit {Eddy Currents})}{52}{subsection*.85}%
+\contentsline {subsection}{Sensores de Efecto Hall vs. Magnetorresistivos (Repaso)}{52}{subsection*.86}%
+\contentsline {section}{\numberline {4.4}Acondicionamiento de Sensores Reactivos}{52}{section.4.4}%
+\contentsline {subsection}{Puentes de Alterna}{52}{subsection*.87}%
+\contentsline {subsection}{Circuitos Resonantes y Osciladores}{52}{subsection*.88}%
+\contentsline {subsection}{Demodulación Síncrona (Detección de Fase)}{52}{subsection*.89}%
+\contentsline {section}{\numberline {4.5}Resumen y Comparativa de Sensores Reactivos}{52}{section.4.5}%
+\contentsline {chapter}{Bibliograf\'{\i }a}{53}{appendix*.90}%
 \contentsfinish 

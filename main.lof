@@ -39,13 +39,19 @@
 \contentsline {figure}{\numberline {3.16}{\ignorespaces Efecto de la linealización analógica.}}{39}{figure.3.16}%
 \contentsline {figure}{\numberline {3.17}{\ignorespaces Rspuesta log-log de una fotorresistencia.}}{40}{figure.3.17}%
 \contentsline {figure}{\numberline {3.18}{\ignorespaces Estructura simplificada de una celda GMR.}}{40}{figure.3.18}%
-\contentsline {figure}{\numberline {3.19}{\ignorespaces Topología en diamante del puente de Wheatstone.}}{41}{figure.3.19}%
-\contentsline {figure}{\numberline {3.20}{\ignorespaces Puente Wheatstone alimentado por corriente.}}{41}{figure.3.20}%
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Representación en el plano complejo de las impedancias para circuitos RL y RC serie. La parte real representa la resistencia (disipativa) y la parte imaginaria la reactancia (almacenamiento).}}{45}{figure.4.1}%
+\contentsline {figure}{\numberline {3.19}{\ignorespaces Visualización de señales en modo diferencial. La información útil ($V_{dm}$) es la separación entre las trazas roja y azul. El ruido de modo común (gris) afecta a ambos hilos por igual y es cancelado mediante la resta diferencial.}}{41}{figure.3.19}%
+\contentsline {figure}{\numberline {3.20}{\ignorespaces Cancelación de ruido mediante medida diferencial.}}{42}{figure.3.20}%
+\contentsline {figure}{\numberline {3.21}{\ignorespaces Topología en diamante del puente de Wheatstone.}}{43}{figure.3.21}%
+\contentsline {figure}{\numberline {3.22}{\ignorespaces Puente Wheatstone alimentado por corriente.}}{43}{figure.3.22}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Representación en el plano complejo de las impedancias para circuitos RL y RC serie. La parte real representa la resistencia (disipativa) y la parte imaginaria la reactancia (almacenamiento).}}{47}{figure.4.1}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Representación temporal del desfase en un inductor ideal.}}{46}{figure.4.2}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Métodos de transducción en sensores capacitivos.}}{47}{figure.4.3}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Comparativa de respuesta. El sensor de distancia es ideal para desplazamientos ínfimos (nanómetros), mientras que el de área es preferible para rangos mayores.}}{48}{figure.4.4}%
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Esquema de un sensor capacitivo diferencial. Es la arquitectura base de los acelerómetros MEMS y sensores de presión de alta gama.}}{48}{figure.4.5}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Representación temporal del desfase en un inductor ideal.}}{48}{figure.4.2}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Métodos de transducción en sensores capacitivos.}}{49}{figure.4.3}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Comparativa de respuesta variación Área y Distancia.}}{50}{figure.4.4}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Esquema de un sensor capacitivo diferencial.}}{50}{figure.4.5}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Efecto de la capacidad parásita del cable.}}{50}{figure.4.6}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Modelo equivalente del sensor y el cable. La gran magnitud de $C_p$ enmascara los pequeños cambios de $C_s$.}}{51}{figure.4.7}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Esquema de guarda activa. El buffer de ganancia unidad asegura que la malla del cable esté al mismo potencial que el hilo de señal ($V_{sig} \approx V_{guard}$), eliminando la corriente a través de $C_p$. Al no haber diferencia de tensión entre los terminales de $C_p$, esta capacidad no se carga ni descarga, eliminando su efecto en la medida del sensor.}}{51}{figure.4.8}%
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Diseño de un anillo de guarda en PCB. El anillo actúa como una barrera de potencial que intercepta corrientes de fuga y neutraliza capacidades parásitas laterales.}}{51}{figure.4.9}%
 \addvspace {10\p@ }
 \contentsfinish 

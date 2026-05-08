@@ -57,11 +57,11 @@
 \contentsline {figure}{\numberline {4.11}{\ignorespaces Principio del \textit {touchscreen} capacitivo. El cuerpo humano altera el campo eléctrico proyectado por la matriz de electrodos.}}{54}{figure.4.11}%
 \contentsline {figure}{\numberline {4.12}{\ignorespaces Sensor de reluctancia variable.}}{55}{figure.4.12}%
 \contentsline {figure}{\numberline {4.13}{\ignorespaces Respuesta $L(g)$ del sensor de reluctancia variable.}}{55}{figure.4.13}%
-\contentsline {figure}{\numberline {4.14}{\ignorespaces Sensor de velocidad de rueda ABS. El reluctor gira solidario a la rueda; el sensor de reluctancia variable genera un pulso por cada diente. La UCE del ABS calcula $v$ a partir de la frecuencia de pulsos mediante la ec.~\eqref {eq:abs_freq}.}}{55}{figure.4.14}%
-\contentsline {figure}{\numberline {4.15}{\ignorespaces Sección transversal del LVDT. El primario está alimentado con una señal alterna. Las dos secundarias están conectadas en oposición de serie.}}{56}{figure.4.15}%
+\contentsline {figure}{\numberline {4.14}{\ignorespaces Sensor de velocidad de rueda ABS.}}{55}{figure.4.14}%
+\contentsline {figure}{\numberline {4.15}{\ignorespaces Sección transversal del LVDT. El primario está alimentado con una señal alterna. Las dos secundarias están conectadas en oposición de serie. La varilla de accionamiento controla la posición del núcleo ferromagnético. El núcleo ferromagnético se encuentra en la sección transversal.}}{56}{figure.4.15}%
 \contentsline {figure}{\numberline {4.16}{\ignorespaces Curvas de transferencia del LVDT. Sin demodulación síncrona solo se obtiene el módulo (azul). La detección de fase proporciona el desplazamiento con signo (rojo).}}{56}{figure.4.16}%
 \contentsline {figure}{\numberline {4.17}{\ignorespaces Principio de los sensores de corrientes de Foucault. Las corrientes inducidas en el target crean un campo de reacción que modifica la impedancia de la bobina como función de $\delta $.}}{57}{figure.4.17}%
 \contentsline {figure}{\numberline {4.18}{\ignorespaces Profundidad de penetración $\delta _{skin}$ frente a frecuencia de excitación para aluminio y acero. El acero, al ser ferromagnético ($\mu _r \gg 1$), confina las corrientes en una capa mucho más delgada.}}{57}{figure.4.18}%
-\contentsline {figure}{\numberline {4.19}{\ignorespaces Geometría del efecto Hall. La corriente $I$ fluye horizontalmente; el campo $\vec {B}$ es perpendicular. Los portadores se acumulan generando $V_H$ en la dirección transversal.}}{57}{figure.4.19}%
+\contentsline {figure}{\numberline {4.19}{\ignorespaces Principio del efecto Hall. El campo magnético $\vec {B}$ atraviesa verticalmente el material. La fuerza de Lorentz desvía los portadores mayoritarios (huecos en tipo P) hacia la cara posterior, estableciendo una diferencia de potencial transversal $V_H$.}}{58}{figure.4.19}%
 \addvspace {10\p@ }
 \contentsfinish 

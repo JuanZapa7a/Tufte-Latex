@@ -746,7 +746,9 @@ la respuesta es hiperbólica, idéntica al sensor capacitivo de distancia. Se ap
 
 \paragraph{Curva de Transferencia y No Linealidad}
 
-La Figura~\ref{fig:curva_reluctancia} muestra la respuesta $L$ frente a $g$ para el modelo de la ecuación~\eqref{eq:L_vs_g}. Como en los sensores capacitivos de distancia, la alta sensibilidad en el origen (entrehierros pequeños) se paga con una respuesta no lineal. Para resolver este problema, se propone un modelo de \emph{configuración diferencial}. La \emph{configuración diferencial de reluctancia variable} con dos bobinas ($L_1, L_2$) en estructura push-pull linealiza la respuesta y duplica la sensibilidad, siguiendo la misma álgebra que el condensador diferencial. Sin embargo, esta solución es más compleja de implementar que en el caso capacitivo, ya que requiere un diseño mecánico preciso para garantizar la simetría de las bobinas y el movimiento de la armadura.
+La Figura~\ref{fig:curva_reluctancia} muestra la respuesta $L$ frente a $g$ para el modelo de la ecuación~\eqref{eq:L_vs_g}. Como en los sensores capacitivos de distancia, la alta sensibilidad en el origen (entrehierros pequeños) se paga con una respuesta no lineal. 
+
+Para resolver este problema, se propone un modelo de \emph{configuración diferencial}. La \emph{configuración diferencial de reluctancia variable} con dos bobinas ($L_1, L_2$) en estructura push-pull linealiza la respuesta y duplica la sensibilidad, siguiendo la misma álgebra que el condensador diferencial. Sin embargo, esta solución es más compleja de implementar que en el caso capacitivo, ya que requiere un diseño mecánico preciso para garantizar la simetría de las bobinas y el movimiento de la armadura.
 
 \begin{marginfigure}
   \centering
@@ -779,155 +781,218 @@ La Figura~\ref{fig:curva_reluctancia} muestra la respuesta $L$ frente a $g$ para
   \caption[Respuesta $L(g)$ del sensor de reluctancia variable.]{Respuesta $L(g)$ del sensor de reluctancia variable. Solo en un entorno reducido del punto de operación la curva puede aproximarse por una recta.}\label{fig:curva_reluctancia}
 \end{marginfigure}
 
-Los sensores de efecto Hall activos han reemplazado progresivamente
-a los de reluctancia variable en ABS modernos, ya que funcionan
-desde velocidad cero (el sensor pasivo de reluctancia variable
-requiere una velocidad mínima de \qty{2}{km/h} para generar
-señal), y su salida digital (tren de pulsos de amplitud constante)
-es inmune al ruido electromagnético del entorno del vehículo.
+Los sensores de efecto Hall activos han reemplazado progresivamente a los de reluctancia variable en los \emph{Anti-lock Braking System} (ABS) modernos, ya que funcionan desde velocidad cero (el sensor pasivo de reluctancia variable requiere una velocidad mínima de \qty{2}{km/h} para generar señal), y su salida digital (tren de pulsos de amplitud constante) es inmune al ruido electromagnético del entorno del vehículo.
 
 \paragraph{Aplicaciones}
 
-Los sensores de reluctancia variable son la base de los \emph{encoders de efecto magnético} para medida de posición angular en motores de corriente continua y los \emph{sensores de velocidad de rueda} (\emph{Anti-lock Braking System}, ABS) en automoción, donde la frecuencia de los pulsos generados es proporcional a la velocidad de rotación.  Una rueda dentada ferromagnética gira junto a la rueda del coche, y el sensor de reluctancia variable genera un pulso eléctrico cada vez que un diente pasa por delante. La frecuencia de esos pulsos es proporcional a la velocidad de rotación de la rueda. La (E ,ECU) del ABS monitoriza las cuatro ruedas continuamente y, si detecta que una se frena bruscamente (frecuencia cae a cero → rueda bloqueada), modula la presión hidráulica del freno para evitar el deslizamiento.
+Los sensores de reluctancia variable son la base de los \emph{encoders de efecto magnético} para medida de posición angular en motores de corriente continua y los \emph{sensores de velocidad de rueda}  ABS en automoción, donde la frecuencia de los pulsos generados es proporcional a la velocidad de rotación.  Como se muestra en la Figura \ref{fig:abs_sensor}, una rueda dentada ferromagnética gira junto a la rueda del coche, y el sensor de reluctancia variable genera un pulso eléctrico cada vez que un diente pasa por delante. La frecuencia de esos pulsos es proporcional a la velocidad de rotación de la rueda. La \emph{Electronic Control Unit} (ECU) del ABS monitoriza las cuatro ruedas continuamente y, si detecta que una se frena bruscamente (frecuencia cae a cero → rueda bloqueada), modula la presión hidráulica del freno para evitar el deslizamiento.
+
+% \begin{marginfigure}[0em]
+%   \centering
+%   \shorthandoff{>}
+%   \begin{tikzpicture}[scale=1.0]
+
+%     % --- Disco dentado (reluctor) ---
+%     % Radio interior y exterior del disco
+%     \def\Ri{1.0}   % radio interior (alma del disco)
+%     \def\Ro{1.45}  % radio exterior (punta del diente)
+%     \def\Nd{12}    % número de dientes visibles (simplificado)
+
+%     % Alma del disco
+%     \fill[gray!40] (0,0) circle (\Ri);
+%     \draw[thick]   (0,0) circle (\Ri);
+
+%     % Dientes: cada diente ocupa 360/Nd grados, la mitad es diente
+%     % y la mitad es hueco. Se dibujan como sectores anulares.
+%     \foreach \i in {0,1,...,11} {
+%       \pgfmathsetmacro{\angA}{\i * 360/\Nd}
+%       \pgfmathsetmacro{\angB}{\angA + 0.5*360/\Nd}
+%       % Diente (sólido)
+%       \fill[gray!60]
+%         (\angA:\Ri) arc[start angle=\angA, end angle=\angB,
+%                         radius=\Ri]
+%         -- (\angB:\Ro) arc[start angle=\angB, end angle=\angA,
+%                            radius=\Ro]
+%         -- cycle;
+%       \draw[thick, gray!70]
+%         (\angA:\Ri) arc[start angle=\angA, end angle=\angB,
+%                         radius=\Ri]
+%         -- (\angB:\Ro) arc[start angle=\angB, end angle=\angA,
+%                            radius=\Ro]
+%         -- cycle;
+%     }
+
+%     % Eje central
+%     \fill[gray!80] (0,0) circle (0.18);
+%     \draw[thick]   (0,0) circle (0.18);
+
+%     % Flecha de rotación
+%     \draw[->, thick, red!70!black, >=stealth]
+%       (0, 1.75) arc[start angle=90, end angle=20, radius=1.75]
+%       node[midway, above right, font=\tiny, red!70!black] {$\omega$};
+
+%     % --- Sensor de reluctancia variable ---
+%     % Posicionado en la parte superior derecha (diente en posición ~75°)
+%     \begin{scope}[shift={(1.85, 1.85)}, rotate=-45]
+
+%       % Cuerpo del sensor (carcasa)
+%       \fill[blue!15]  (-0.22, 0) rectangle (0.22, 0.65);
+%       \draw[thick]    (-0.22, 0) rectangle (0.22, 0.65);
+
+%       % Polo magnético (núcleo)
+%       \fill[gray!60]  (-0.12, 0) rectangle (0.12, 0.30);
+
+%       % Bobina (espiras simplificadas)
+%       \foreach \yy in {0.08, 0.15, 0.22} {
+%         \draw[blue!70!black, thick]
+%           (-0.22, \yy) arc[start angle=180, end angle=0,
+%                            x radius=0.22, y radius=0.055];
+%         \draw[blue!70!black, dashed, thick, opacity=0.5]
+%           (-0.22, \yy) arc[start angle=180, end angle=360,
+%                            x radius=0.22, y radius=0.055];
+%       }
+
+%       % Conector (cable)
+%       \draw[thick, gray!60] (0, 0.65) -- (0, 1.0);
+%       \fill[gray!50] (-0.08, 1.0) rectangle (0.08, 1.12);
+
+%     \end{scope}
+
+%     % Entrehierro entre sensor y diente (flecha roja)
+%     \draw[<->, red, >=stealth, thick]
+%       (0.98, 1.40) -- (1.25, 1.60)
+%       node[midway, above left, font=\tiny, red] {$g$};
+
+%     % Etiquetas
+%     \node[font=\tiny, align=center] at (0, -1.75)
+%       {Reluctor ($n=48$ dientes)};
+%     \node[font=\tiny, blue!70!black, align=center] at (2.5, 2.6)
+%       {Sensor};
+
+%   \end{tikzpicture}
+%   \caption[Sensor de velocidad de rueda ABS.]{Sensor de velocidad de rueda ABS. El reluctor gira
+%     solidario a la rueda; el sensor de reluctancia variable genera
+%     un pulso por cada diente. La UCE del ABS calcula $v$ a partir
+%     de la frecuencia de pulsos mediante la
+%     ec.~\eqref{eq:abs_freq}.}\label{fig:abs_sensor}
+% \end{marginfigure}
 
 \begin{marginfigure}[0em]
   \centering
   \shorthandoff{>}
-  \begin{tikzpicture}[scale=1.0]
+  \begin{tikzpicture}[
+    scale=1, 
+    %font=\scriptsize,
+    >=stealth,
+    diente/.style={fill=gray!60, draw=gray!80, thick},
+    alma/.style={fill=gray!30, draw=black, thick}
+  ]
 
-    % --- Disco dentado (reluctor) ---
-    % Radio interior y exterior del disco
-    \def\Ri{1.0}   % radio interior (alma del disco)
-    \def\Ro{1.45}  % radio exterior (punta del diente)
-    \def\Nd{12}    % número de dientes visibles (simplificado)
+    % --- Parámetros Geométricos ---
+    \def\Ri{0.9}    % Radio interior
+    \def\Ro{1.3}    % Radio exterior (dientes)
+    \def\Nd{16}     % Número de dientes para que se vea más denso
+    \def\angSensor{60} % Ángulo donde situamos el sensor
 
-    % Alma del disco
-    \fill[gray!40] (0,0) circle (\Ri);
-    \draw[thick]   (0,0) circle (\Ri);
-
-    % Dientes: cada diente ocupa 360/Nd grados, la mitad es diente
-    % y la mitad es hueco. Se dibujan como sectores anulares.
-    \foreach \i in {0,1,...,11} {
-      \pgfmathsetmacro{\angA}{\i * 360/\Nd}
-      \pgfmathsetmacro{\angB}{\angA + 0.5*360/\Nd}
-      % Diente (sólido)
-      \fill[gray!60]
-        (\angA:\Ri) arc[start angle=\angA, end angle=\angB,
-                        radius=\Ri]
-        -- (\angB:\Ro) arc[start angle=\angB, end angle=\angA,
-                           radius=\Ro]
-        -- cycle;
-      \draw[thick, gray!70]
-        (\angA:\Ri) arc[start angle=\angA, end angle=\angB,
-                        radius=\Ri]
-        -- (\angB:\Ro) arc[start angle=\angB, end angle=\angA,
-                           radius=\Ro]
-        -- cycle;
+    % --- Disco dentado (Reluctor) ---
+    \fill[gray!10] (0,0) circle (\Ro + 0.5); % Fondo sutil para dar contexto
+    
+    % Dibujo de los dientes
+    \foreach \i in {0,1,...,\numexpr\Nd-1\relax} {
+      \pgfmathsetmacro{\angInicio}{\i * 360/\Nd - (360/\Nd)/4}
+      \pgfmathsetmacro{\angFin}{\i * 360/\Nd + (360/\Nd)/4}
+      
+      \fill[gray!60] (\angInicio:\Ri) -- (\angInicio:\Ro) 
+        arc (\angInicio:\angFin:\Ro) -- (\angFin:\Ri) 
+        arc (\angFin:\angInicio:\Ri) -- cycle;
+      \draw[gray!80, thick] (\angInicio:\Ri) -- (\angInicio:\Ro) 
+        arc (\angInicio:\angFin:\Ro) -- (\angFin:\Ri) 
+        arc (\angFin:\angInicio:\Ri);
     }
+    
+    % Alma del disco (círculo interior)
+    \draw[alma] (0,0) circle (\Ri);
+    \fill[gray!80] (0,0) circle (0.15); % Eje
 
-    % Eje central
-    \fill[gray!80] (0,0) circle (0.18);
-    \draw[thick]   (0,0) circle (0.18);
+    % Flecha de rotación omega
+    \draw[->, thick, red!70!black] (0:1.6) arc (0:40:1.6) 
+      node[midway, right, red!70!black] {$\omega$};
 
-    % Flecha de rotación
-    \draw[->, thick, red!70!black, >=stealth]
-      (0, 1.75) arc[start angle=90, end angle=20, radius=1.75]
-      node[midway, above right, font=\tiny, red!70!black] {$\omega$};
-
-    % --- Sensor de reluctancia variable ---
-    % Posicionado en la parte superior derecha (diente en posición ~75°)
-    \begin{scope}[shift={(1.85, 1.85)}, rotate=-45]
-
-      % Cuerpo del sensor (carcasa)
-      \fill[blue!15]  (-0.22, 0) rectangle (0.22, 0.65);
-      \draw[thick]    (-0.22, 0) rectangle (0.22, 0.65);
-
-      % Polo magnético (núcleo)
-      \fill[gray!60]  (-0.12, 0) rectangle (0.12, 0.30);
-
-      % Bobina (espiras simplificadas)
-      \foreach \yy in {0.08, 0.15, 0.22} {
-        \draw[blue!70!black, thick]
-          (-0.22, \yy) arc[start angle=180, end angle=0,
-                           x radius=0.22, y radius=0.055];
-        \draw[blue!70!black, dashed, thick, opacity=0.5]
-          (-0.22, \yy) arc[start angle=180, end angle=360,
-                           x radius=0.22, y radius=0.055];
+    % --- Sensor de Reluctancia Variable ---
+    % Situado exactamente sobre el diente en \angSensor
+    \begin{scope}[shift={(\angSensor:1.8)}, rotate=\angSensor-90]
+      
+      % Carcasa del sensor
+      \draw[fill=blue!5, thick] (-0.25, 0) rectangle (0.25, 1.2);
+      
+      % Imán permanente (parte trasera)
+      \fill[red!60] (-0.15, 0.8) rectangle (0.15, 1.1);
+      \node[white, font=\tiny] at (0, 0.95) {N};
+      
+      % Núcleo de hierro (Polo)
+      \fill[gray!40, draw=black] (-0.1, 0) rectangle (0.1, 0.8);
+      
+      % Bobina (Windings) - Representación más densa
+      \foreach \y in {0.15, 0.22, 0.29, 0.36, 0.43} {
+        \draw[blue!80!black, semithick] (-0.25, \y) arc (180:0:0.25 and 0.06);
+        \draw[blue!80!black, densely dashed, opacity=0.4] (-0.25, \y) arc (180:360:0.25 and 0.06);
       }
-
-      % Conector (cable)
-      \draw[thick, gray!60] (0, 0.65) -- (0, 1.0);
-      \fill[gray!50] (-0.08, 1.0) rectangle (0.08, 1.12);
-
+      
+      % Salida de cables
+      \draw[thick] (0, 1.2) -- (0, 1.5) coordinate (finalCable);
+      \node[blue!70!black, right] at (0.1, 1.4) {Señal};
     \end{scope}
 
-    % Entrehierro entre sensor y diente (flecha roja)
-    \draw[<->, red, >=stealth, thick]
-      (0.98, 1.40) -- (1.25, 1.60)
-      node[midway, above left, font=\tiny, red] {$g$};
+    % --- Detalles de medida ---
+    % Entrehierro g (medido desde la punta del diente al núcleo)
+    \draw[<->, red, thick] (\angSensor:\Ro + 0.05) -- (\angSensor:1.8 - 0.05)
+      node[midway, right, font=\footnotesize\bfseries] {$g$};
 
-    % Etiquetas
-    \node[font=\tiny, align=center] at (0, -1.75)
-      {Reluctor ($n=48$ dientes)};
-    \node[font=\tiny, blue!70!black, align=center] at (2.5, 2.6)
-      {Sensor};
+    % Etiquetas de componentes
+    \node[anchor=north, gray!70!black] at (0,-1.4) {Rueda fónica (Reluctor)};
+    \node[anchor=south, blue!70!black] at (\angSensor:3.2) {Sensor Pasivo};
 
   \end{tikzpicture}
-  \caption{Sensor de velocidad de rueda ABS. El reluctor gira
-    solidario a la rueda; el sensor de reluctancia variable genera
-    un pulso por cada diente. La UCE del ABS calcula $v$ a partir
-    de la frecuencia de pulsos mediante la
-    ec.~\eqref{eq:abs_freq}.}\label{fig:abs_sensor}
+  \caption[Sensor de velocidad de rueda ABS.]{Sensor de velocidad de rueda ABS (Rueda fónica). El movimiento de los dientes altera la reluctancia del circuito magnético del sensor, induciendo una tensión alterna cuya frecuencia es proporcional a la velocidad angular de la rueda.}\label{fig:abs_sensor}
 \end{marginfigure}
 
 % ------- Marginnote: funcionamiento del ABS -------
-\marginnote{%
-  \textbf{Cómo actúa el ABS:} La Unidad de Control Electrónico
-  (UCE) monitoriza las cuatro ruedas simultáneamente. Si durante
-  una frenada la frecuencia de una rueda cae a cero mientras las
-  demás siguen girando, la UCE detecta \emph{bloqueo inminente}
-  y activa el módulo hidráulico: reduce la presión de frenado en
-  esa rueda ($\approx \qty{20}{ms}$), la deja recuperar
-  velocidad y vuelve a aplicar presión. Este ciclo
-  (\emph{reduce\,--\,mantiene\,--\,aumenta}) se repite a
-  \qtyrange{8}{15}{\hertz}, manteniendo la rueda en el rango
-  de deslizamiento óptimo ($\lambda \approx \qty{15}{\percent}$)
-  donde la adherencia neumático-asfalto es máxima.%
+\marginnote{\textbf{Cómo actúa el ABS:} La Unidad de Control Electrónico (UCE) monitoriza las cuatro ruedas simultáneamente. Si durante una frenada la frecuencia de una rueda cae a cero mientras las demás siguen girando, la UCE detecta \emph{bloqueo inminente} y activa el módulo hidráulico: reduce la presión de frenado en esa rueda ($\approx \qty{20}{ms}$), la deja recuperar velocidad y vuelve a aplicar presión. Este ciclo (\emph{reduce\,--\,mantiene\,--\,aumenta}) se repite a \qtyrange{8}{15}{\hertz}, manteniendo la rueda en el rango de deslizamiento óptimo ($\lambda \approx \qty{15}{\percent}$) donde la adherencia neumático-asfalto es máxima.%
 }
 
 % -----------------------------------------------------------
 \subsection{Transformador Diferencial de Variación Lineal (LVDT)}\label{sub:lvdt}
 % -----------------------------------------------------------
 
-El \emph{Linear Variable Differential Transformer} (LVDT) es el sensor de desplazamiento de referencia en instrumentación de precisión. Combina la ausencia de contacto mecánico, la robustez intrínseca de los sensores inductivos y una respuesta \textbf{intrínsecamente lineal} en un amplio rango. Se emplea en ensayos de materiales, control de turbinas de aviación y microscopía de fuerza atómica.
+El \emph{Linear Variable Differential Transformer} (LVDT) es el sensor de desplazamiento de referencia en instrumentación de precisión. Combina la ausencia de contacto mecánico, la robustez intrínseca de los sensores inductivos y una respuesta \emph{intrínsecamente lineal} en un amplio rango. Se emplea en ensayos de materiales, control de turbinas de aviación y microscopía de fuerza atómica.
 
 \paragraph{Estructura Interna}
 
 \begin{marginfigure}[0em]
   \centering
   \shorthandoff{>}
-  \begin{tikzpicture}[scale=0.85]
+  \begin{tikzpicture}[scale=1]
     % Cuerpo del LVDT (sección transversal)
     \draw[fill=gray!15, thick] (0,0) rectangle (5, 3.5);
-    \node[font=\tiny, gray] at (2.5, 3.7) {Carcasa (INVAR)};
+    \node[gray] at (2.5, 4) {Carcasa (INVAR)};
 
     % Bobina primaria (centro)
     \draw[fill=orange!30, thick] (1.8, 0.3) rectangle (3.2, 3.2);
-    \node[orange!80!black, font=\tiny, align=center] at (2.5, 1.75)
+    \node[orange!80!black, align=center, above] at (2.5, 1.95)
          {Primario\\$V_p \sin\omega t$};
 
     % Bobina secundaria 1 (izquierda)
     \draw[fill=blue!20, thick] (0.2, 0.5) rectangle (1.6, 3.0);
-    \node[blue!80, font=\tiny, align=center] at (0.9, 1.75) {S1\\$V_{s1}$};
+    \node[blue!80, align=center] at (0.9, 1.75) {S1\\$V_{s1}$};
 
     % Bobina secundaria 2 (derecha)
     \draw[fill=blue!20, thick] (3.4, 0.5) rectangle (4.8, 3.0);
-    \node[blue!80, font=\tiny, align=center] at (4.1, 1.75) {S2\\$V_{s2}$};
+    \node[blue!80,align=center] at (4.1, 1.75) {S2\\$V_{s2}$};
 
     % Núcleo ferromagnético
     \draw[fill=red!60!gray, thick, rounded corners=2pt]
          (1.5, 1.55) rectangle (3.5, 1.95);
-    \node[white, font=\tiny\bfseries] at (2.5, 1.75) {NÚCLEO};
+    \node[white, font=\bfseries] at (2.5, 1.75) {NÚCLEO};
 
     % Varilla de accionamiento
     \draw[thick, red!70!black] (3.5, 1.75) -- (5.5, 1.75);
@@ -936,15 +1001,15 @@ El \emph{Linear Variable Differential Transformer} (LVDT) es el sensor de despla
 
     % Posición nula
     \draw[dashed, gray] (2.5, 0) -- (2.5, 3.5)
-          node[above, font=\tiny, gray] {$x=0$};
+          node[above, gray] {$x=0$};
   \end{tikzpicture}
-  \caption{Sección transversal del LVDT. El primario está alimentado con una señal alterna. Las dos secundarias están conectadas en oposición de serie.}\label{fig:lvdt_estructura}
+  \caption{Sección transversal del LVDT. El primario está alimentado con una señal alterna. Las dos secundarias están conectadas en oposición de serie. La varilla de accionamiento controla la posición del núcleo ferromagnético. El núcleo ferromagnético se encuentra en la sección transversal.}\label{fig:lvdt_estructura}
 \end{marginfigure}
 
-El LVDT consta de tres bobinas coaxiales: un \textbf{primario} central excitado con $V_p \sin(\omega t)$ (tipicamente entre \qty{1}{kHz} y \qty{10}{kHz}) y dos \textbf{secundarios} (S1 y S2) situados simétricamente a ambos lados, conectados en oposición de serie:
+Como se muestra en la figura~\ref{fig:lvdt_estructura}, el LVDT consta de tres bobinas coaxiales: un \emph{primario} central excitado con $V_p \sin(\omega t)$ (tipicamente entre \qty{1}{kHz} y \qty{10}{kHz}) y dos \emph{secundarios} (S1 y S2) situados simétricamente a ambos lados, conectados en oposición de serie:
 
 \begin{equation}\label{eq:v_out_lvdt}
-  V_{out} = V_{S1} - V_{S2}
+    V_{out} = V_{S1} - V_{S2}
 \end{equation}
 
 \paragraph{Análisis de Transferencia}
@@ -952,20 +1017,20 @@ El LVDT consta de tres bobinas coaxiales: un \textbf{primario} central excitado 
 El acoplamiento mutuo entre el primario y cada secundario depende de la posición del núcleo ferromagnético:
 
 \begin{equation}
-  M_1(x) = M_0 + k \cdot x \qquad ; \qquad M_2(x) = M_0 - k \cdot x
+    M_1(x) = M_0 + k \cdot x \qquad ; \qquad M_2(x) = M_0 - k \cdot x
 \end{equation}
 
 donde $k$ es una constante de sensibilidad geométrica y $x$ el desplazamiento del núcleo. Las tensiones inducidas son $V_{S1} \propto M_1$ y $V_{S2} \propto M_2$, por lo que la salida diferencial resulta:
 
 \begin{equation}\label{eq:lvdt_lineal}
-  \boxed{V_{out}(x) = 2k \cdot x \cdot V_p \sin(\omega t + \phi)}
+    V_{out}(x) = 2k \cdot x \cdot V_p \sin(\omega t + \phi)
 \end{equation}
 
 La ecuación~\eqref{eq:lvdt_lineal} revela dos propiedades fundamentales del LVDT:
 
 \begin{enumerate}
-  \item \textbf{Linealidad perfecta:} La amplitud de $V_{out}$ es estrictamente proporcional a $x$.
-  \item \textbf{Información de dirección en la fase:} Para $x > 0$, $V_{out}$ está en fase con $V_p$ ($\phi = 0°$); para $x < 0$, $V_{out}$ se invierte ($\phi = 180°$). Un simple voltímetro de valor eficaz \emph{no puede distinguir} la dirección; se requiere \textbf{demodulación síncrona}.
+    \item \emph{Linealidad perfecta:} La amplitud de $V_{out}$ es estrictamente proporcional a $x$.
+    \item \emph{Información de dirección en la fase:} Para $x > 0$, $V_{out}$ está en fase con $V_p$ ($\phi = 0°$); para $x < 0$, $V_{out}$ se invierte ($\phi = 180°$). Un simple voltímetro de valor eficaz \emph{no puede distinguir} la dirección; se requiere \emph{demodulación síncrona}.
 \end{enumerate}
 
 \marginnote{\textbf{Punto nulo eléctrico:} En la posición central ($x=0$), la salida ideal es $V_{out} = 0$. En la práctica, siempre existe una pequeña tensión residual de cuadratura (en fase con $dV_p/dt$) debida a acoplamientos capacitivos parásitos entre bobinas. Esta tensión de cuadratura es el indicador de calidad de fabricación del LVDT.}
@@ -1005,7 +1070,7 @@ La ecuación~\eqref{eq:lvdt_lineal} revela dos propiedades fundamentales del LVD
   \caption{Curvas de transferencia del LVDT. Sin demodulación síncrona solo se obtiene el módulo (azul). La detección de fase proporciona el desplazamiento con signo (rojo).}\label{fig:lvdt_curvas}
 \end{marginfigure}
 
-\paragraph{Ventajas e Inconvenientes del LVDT}
+La Tabla~\ref{tab:lvdt_pros_cons} resume las ventajas e inconvenientes del LVDT para el diseñador de sistemas de instrumentación. Su linealidad intrínseca y robustez lo convierten en la opción preferida para aplicaciones de alta precisión, aunque su complejidad de señal y sensibilidad a campos magnéticos externos pueden ser limitantes en entornos industriales ruidosos.
 
 \begin{table}[ht]
   \centering
@@ -1176,49 +1241,263 @@ Cuando una corriente $I$ fluye por un conductor situado en un campo magnético $
 \begin{equation}\label{eq:v_hall}
   V_H = \frac{R_H \cdot I \cdot B}{t} = \frac{I \cdot B}{n_e \cdot q \cdot t}
 \end{equation}
-
+%
 donde $R_H = 1/(n_e q)$ es la constante de Hall del material ($n_e$ densidad de portadores, $q$ carga del electrón) y $t$ el espesor del conductor.
 
-\begin{marginfigure}[1em]
+% \begin{marginfigure}[1em]
+%   \centering
+%   \shorthandoff{>}
+%   \begin{tikzpicture}[scale=0.8]
+%     % Plaqueta de Hall (paralelepípedo)
+%     \draw[fill=blue!15, thick]
+%       (0.5, 0.5) -- (2.5, 0.5) -- (3.0, 1.0) --
+%       (1.0, 1.0) -- cycle;                          % cara superior
+%     \draw[fill=blue!25, thick]
+%       (0.5, 0.5) -- (0.5, 2.5) -- (1.0, 3.0) --
+%       (1.0, 1.0) -- cycle;                          % cara izquierda
+%     \draw[fill=blue!10, thick]
+%       (0.5, 2.5) -- (2.5, 2.5) -- (3.0, 3.0) --
+%       (1.0, 3.0) -- cycle;                          % cara frontal
+%     \draw[fill=blue!20, thick]
+%       (2.5, 0.5) -- (2.5, 2.5) -- (3.0, 3.0) --
+%       (3.0, 1.0) -- cycle;                          % cara derecha
+%     \draw[fill=blue!5, thick]
+%       (0.5, 0.5) -- (2.5, 0.5) -- (2.5, 2.5) --
+%       (0.5, 2.5) -- cycle;                          % cara frontal
+
+%     % Corriente I (horizontal, rojo)
+%     \draw[->, thick, red] (-0.3, 1.5) -- (0.5, 1.5)
+%           node[above, font=\tiny, red] {$I$};
+%     \draw[->, thick, red] (2.5, 1.5) -- (3.3, 1.5);
+
+%     % Campo B (vertical, verde, hacia arriba)
+%     \draw[->, thick, green!60!black] (1.5, -0.2) -- (1.5, 0.5)
+%           node[below left, font=\tiny, green!60!black] {$\vec{B}$};
+%     \draw[->, thick, green!60!black] (1.5, 2.5) -- (1.5, 3.2);
+
+%     % Tensión Hall (azul, lateral)
+%     \draw[<->, thick, blue] (0.1, 0.8) -- (0.1, 2.2)
+%           node[midway, left, font=\tiny, blue] {$V_H$};
+
+%     % Espesor t
+%     \draw[<->, gray] (2.7, 0.5) -- (2.7, 2.5)
+%           node[midway, right, font=\tiny, gray] {$t$};
+%   \end{tikzpicture}
+%   \caption{Geometría del efecto Hall. La corriente $I$ fluye horizontalmente; el campo $\vec{B}$ es perpendicular. Los portadores se acumulan generando $V_H$ en la dirección transversal.}\label{fig:hall_geometria}
+% \end{marginfigure}
+
+% \begin{marginfigure}[2em]
+%   \centering
+%   \shorthandoff{>}
+%   \begin{tikzpicture}[
+%     x=(10:2cm), y=(90:1.5cm), z=(210:1.0cm), % Perspectiva isométrica
+%     font=\scriptsize,
+%     >=stealth
+%   ]
+
+%     % --- Parámetros de la plaqueta ---
+%     \def\w{2.0} % ancho
+%     \def\h{0.6} % alto
+%     \def\t{1.2} % espesor (profundidad)
+
+%     % --- Dibujo de la plaqueta (Slab) ---
+%     % Cara inferior
+%     \fill[blue!5] (0,0,0) -- (\w,0,0) -- (\w,0,\t) -- (0,0,\t) -- cycle;
+    
+%     % Cara trasera
+%     \fill[blue!10] (0,0,\t) -- (\w,0,\t) -- (\w,\h,\t) -- (0,\h,\t) -- cycle;
+    
+%     % Cara izquierda
+%     \fill[blue!15] (0,0,0) -- (0,0,\t) -- (0,\h,\t) -- (0,\h,0) -- cycle;
+
+%     % Cara frontal
+%     \fill[blue!20, opacity=0.8] (0,0,0) -- (\w,0,0) -- (\w,\h,0) -- (0,\h,0) -- cycle;
+%     \draw[thick, blue!80!black] (0,0,0) -- (\w,0,0) -- (\w,\h,0) -- (0,\h,0) -- cycle;
+
+%     % Cara superior
+%     \fill[blue!10, opacity=0.8] (0,\h,0) -- (\w,\h,0) -- (\w,\h,\t) -- (0,\h,\t) -- cycle;
+%     \draw[thick, blue!80!black] (0,\h,0) -- (\w,\h,0) -- (\w,\h,\t) -- (0,\h,\t) -- cycle;
+%     \draw[thick, blue!80!black] (\w,0,0) -- (\w,0,\t) -- (\w,\h,\t) -- (\w,\h,0);
+%     \draw[thick, blue!80!black] (0,\h,\t) -- (\w,\h,\t);
+
+%     % --- Vectores ---
+
+%     % Corriente I (Eje X)
+%     \draw[ultra thick, red, ->] (-0.5, \h/2, \t/2) -- (0, \h/2, \t/2) node[pos=0, left] {$I$};
+%     \draw[red, dashed] (0, \h/2, \t/2) -- (\w, \h/2, \t/2);
+%     \draw[ultra thick, red, ->] (\w, \h/2, \t/2) -- (\w+0.5, \h/2, \t/2);
+
+%     % Campo Magnético B (Eje Z - Entrante)
+%     \foreach \x in {0.5, 1.5} {
+%         \draw[ultra thick, green!60!black, ->] (\x, \h+0.5, \t+0.5) -- (\x, \h+0.5, \t-0.5) 
+%               node[pos=0, above] {$\vec{B}$};
+%     }
+
+%     % Portadores y Fuerza de Lorentz (Cargas negativas acumuladas al frente)
+%     \foreach \z in {0.2, 0.6, 1.0} {
+%         \node[blue!80!black, font=\tiny] at (0.3, \h-0.15, 0) {$-$};
+%         \node[red!80!black, font=\tiny] at (0.3, 0.15, 0) {$+$};
+%     }
+
+%     % --- Tensión de Hall V_H (Eje Y) ---
+%     \draw[<->, blue, thick] (-0.3, 0, 0) -- (-0.3, \h, 0) 
+%           node[midway, left] {$V_H$};
+    
+%     % --- Dimensiones ---
+%     \draw[<->, gray] (\w, -0.2, 0) -- (\w, -0.2, \t) node[midway, below right] {$d$};
+%     \draw[<->, gray] (0, -0.2, 0) -- (\w, -0.2, 0) node[midway, below] {$w$};
+
+%   \end{tikzpicture}
+%   \caption[Principio del Efecto Hall.]{Geometría del efecto Hall en un semiconductor tipo $n$. La aplicación de un campo magnético perpendicular $\vec{B}$ a la dirección de la corriente $I$ desvía los portadores de carga hacia las caras laterales debido a la fuerza de Lorentz, originando un campo eléctrico transversal y una diferencia de potencial $V_H$.}\label{fig:hall_geometria}
+% \end{marginfigure}
+
+% \begin{marginfigure}
+%   \centering
+%   \shorthandoff{>}
+%   \begin{tikzpicture}[
+%     x={(0:1cm)}, y={(90:1cm)}, z={(210:0.5cm)}, % Perspectiva
+%     font=\scriptsize, >=stealth,
+%     cargap/.style={circle, fill=red!20, draw=red, inner sep=0.5pt, font=\tiny},
+%     cargan/.style={circle, fill=blue!20, draw=blue, inner sep=0.5pt, font=\tiny}
+%   ]
+
+%     % --- IMÁN SUPERIOR ---
+%     \begin{scope}[shift={(1.5, 4, 0)}]
+%         % Polo Norte (Rojo)
+%         \fill[red!80!black] (-0.5, 0.5) rectangle (0.5, 1.2);
+%         \node[white, font=\bfseries] at (0, 0.85) {N};
+%         % Cuerpo imán
+%         \fill[gray!20] (-0.5, -0.2) rectangle (0.5, 0.5);
+%         % Polo Sur (Azul)
+%         \fill[blue!80!black] (-0.5, -0.9) rectangle (0.5, -0.2);
+%         \node[white, font=\bfseries] at (0, -0.55) {S};
+%         \draw[thick] (-0.5, -0.9) rectangle (0.5, 1.2);
+%         \node[above] at (0, 1.2) {Imán};
+%     \end{scope}
+
+%     % --- LÍNEAS DE FUERZA (B) ---
+%     \foreach \x in {-0.4, -0.2, 0.2, 0.4} {
+%         \draw[blue!60, dashed, ->] (1.5+\x, 3.1) .. controls (1.5+\x, 2.5) .. (1.5+\x, 1.1);
+%     }
+%     \node[right, blue!60, font=\tiny, align=left] at (2, 2.8) {Líneas de\\fuerza};
+
+%     % --- ELEMENTO HALL (Plaqueta tipo P) ---
+%     % Base
+%     \fill[brown!40!black] (0,0,2) -- (3,0,2) -- (3,0,0) -- (0,0,0) -- cycle;
+%     % Cuerpo (Semiconductor)
+%     \fill[cyan!20, opacity=0.8] (0,0,2) -- (3,0,2) -- (3,0.3,2) -- (0,0.3,2) -- cycle; % Frontal
+%     \fill[cyan!10, opacity=0.8] (0,0.3,2) -- (3,0.3,2) -- (3,0.3,0) -- (0,0.3,0) -- cycle; % Superior
+%     \draw[thick, brown!40!black] (0,0,2) -- (3,0,2) -- (3,0.3,2) -- (0,0.3,2) -- cycle;
+%     \draw[thick, brown!40!black] (0,0.3,2) -- (3,0.3,2) -- (3,0.3,0) -- (0,0.3,0) -- cycle;
+%     \draw[thick, brown!40!black] (3,0,2) -- (3,0,0) -- (3,0.3,0) -- (3,0.3,2);
+
+%     % --- PORTADORES Y CORRIENTE ---
+%     \draw[->, purple, ultra thick] (0.5, 0.15, 1) -- (2.5, 0.15, 1) node[midway, above, font=\tiny] {Flujo de corriente constante};
+    
+%     % Acumulación de cargas (Huecos al fondo, electrones al frente por Lorentz)
+%     % En tipo P, el campo B hacia abajo y v a la derecha desvía huecos (+) hacia atrás
+%     \foreach \i in {0.5, 1.2, 2, 2.7} {
+%         \node[cargap] at (\i, 0.4, 0.2) {+};
+%         \node[cargan] at (\i, 0.4, 1.8) {-};
+%     }
+%     \node[anchor=east, font=\tiny] at (0, 0, 2) {Elemento Hall tipo P};
+
+%     % --- CIRCUITO DE ALIMENTACIÓN (DC) ---
+%     \draw (0, 0.15, 1) -- (-0.8, 0.15, 1) -- (-0.8, -1.5, 1) -- (0.5, -1.5, 1);
+%     \draw (3, 0.15, 1) -- (3.8, 0.15, 1) -- (3.8, -1.5, 1) -- (1.5, -1.5, 1);
+%     \begin{scope}[shift={(1, -1.5, 1)}]
+%         \draw[thick] (0, -0.3) -- (0, 0.3); \draw[thick] (0.2, -0.15) -- (0.2, 0.15); % Batería
+%         \node[below=0.2cm] at (0.1, 0) {Fuente DC};
+%         \node[above left] at (0, 0) {+}; \node[above right] at (0.2, 0) {-};
+%         \draw[->, purple] (1.5, 0.2) -- (0.8, 0.2) node[midway, above] {$i$};
+%     \end{scope}
+
+%     % --- CIRCUITO VOLTÍMETRO (V_H) ---
+%     \fill[black] (1.5, 0.3, 0) circle (2pt); % Contacto atrás
+%     \fill[black] (1.5, 0.3, 2) circle (2pt); % Contacto adelante
+%     \draw (1.5, 0.3, 0) -- (4.5, 0.3, 0) -- (4.5, 0.5, 1);
+%     \draw (1.5, 0.3, 2) -- (4.5, 0.3, 2) -- (4.5, 1.5, 1);
+%     \draw (4.5, 1, 1) circle (0.3) node {$V_H$};
+%     \node[right] at (4.8, 1, 1) {Tensión de Hall};
+%     \node[blue, left] at (4.5, 1.5, 1) {+};
+%     \node[blue, left] at (4.5, 0.5, 1) {-};
+
+%   \end{tikzpicture}
+%   \caption{Sensor de efecto Hall con semiconductor tipo P. El campo magnético vertical $H$ desvía los huecos y electrones hacia los laterales de la plaqueta, creando la tensión transversal $V_H$.}\label{fig:hall_completo}
+% \end{marginfigure}
+
+\begin{marginfigure}
   \centering
   \shorthandoff{>}
-  \begin{tikzpicture}[scale=0.8]
-    % Plaqueta de Hall (paralelepípedo)
-    \draw[fill=blue!15, thick]
-      (0.5, 0.5) -- (2.5, 0.5) -- (3.0, 1.0) --
-      (1.0, 1.0) -- cycle;                          % cara superior
-    \draw[fill=blue!25, thick]
-      (0.5, 0.5) -- (0.5, 2.5) -- (1.0, 3.0) --
-      (1.0, 1.0) -- cycle;                          % cara izquierda
-    \draw[fill=blue!10, thick]
-      (0.5, 2.5) -- (2.5, 2.5) -- (3.0, 3.0) --
-      (1.0, 3.0) -- cycle;                          % cara frontal
-    \draw[fill=blue!20, thick]
-      (2.5, 0.5) -- (2.5, 2.5) -- (3.0, 3.0) --
-      (3.0, 1.0) -- cycle;                          % cara derecha
-    \draw[fill=blue!5, thick]
-      (0.5, 0.5) -- (2.5, 0.5) -- (2.5, 2.5) --
-      (0.5, 2.5) -- cycle;                          % cara frontal
+  \begin{tikzpicture}[
+    x={(0:1cm)}, y={(90:1cm)}, z={(210:0.5cm)},
+    font=\scriptsize, >=stealth,
+    cargap/.style={circle, fill=red!20, draw=red, inner sep=0.5pt, font=\tiny},
+    cargan/.style={circle, fill=blue!20, draw=blue, inner sep=0.5pt, font=\tiny}
+  ]
 
-    % Corriente I (horizontal, rojo)
-    \draw[->, thick, red] (-0.3, 1.5) -- (0.5, 1.5)
-          node[above, font=\tiny, red] {$I$};
-    \draw[->, thick, red] (2.5, 1.5) -- (3.3, 1.5);
+    % --- CAMPO MAGNÉTICO (Vectores verticales atravesando) ---
+    % Dibujamos algunos vectores detrás de la plaqueta
+    \foreach \ix in {0.5, 1.5, 2.5} {
+        \foreach \iz in {0.5, 1.5} {
+            \draw[green!60!black, thick, ->] (\ix, -0.5, \iz) -- (\ix, 2.5, \iz);
+        }
+    }
+    \node[green!60!black, font=\bfseries] at (2.8, 2.2, 0.5) {$\vec{B}$};
 
-    % Campo B (vertical, verde, hacia arriba)
-    \draw[->, thick, green!60!black] (1.5, -0.2) -- (1.5, 0.5)
-          node[below left, font=\tiny, green!60!black] {$\vec{B}$};
-    \draw[->, thick, green!60!black] (1.5, 2.5) -- (1.5, 3.2);
+    % --- ELEMENTO HALL (Plaqueta tipo P) ---
+    % Base (Cara inferior)
+    %\fill[cyan!10, opacity=0.7] (0,0,2) -- (3,0,2) -- (3,0,0) -- (0,0,0) -- cycle;
+    % FRONTAL (Semiconductor translúcido para ver el campo)
+    \fill[cyan!10, opacity=0.7] (0,0,2) -- (3,0,2) -- (3,0.4,2) -- (0,0.4,2) -- cycle; 
+    % ARRIBA
+    \fill[cyan!10, opacity=0.7] (0,0.4,2) -- (3,0.4,2) -- (3,0.4,0) -- (0,0.4,0) -- cycle; % Superior
+    % trasera
+    %\fill[cyan!10, opacity=0.7] (0,0,0) -- (3,0,0) -- (3,0.4,0) -- (0,0.4,0) -- cycle;
+    % LADO
+    \fill[cyan!10, opacity=0.7] (3,0,2) -- (3,0,0) -- (3,0.4,0) -- (3,0.4,2) -- cycle; % Derecha
 
-    % Tensión Hall (azul, lateral)
-    \draw[<->, thick, blue] (0.1, 0.8) -- (0.1, 2.2)
-          node[midway, left, font=\tiny, blue] {$V_H$};
+    % Aristas de la plaqueta
+    % FRONTAL
+    \draw[thick, brown!60!black] (0,0,2) -- (3,0,2) -- (3,0.4,2) -- (0,0.4,2) -- cycle;
+    % ARRIBA
+    \draw[thick, brown!60!black] (0,0.4,2) -- (3,0.4,2) -- (3,0.4,0) -- (0,0.4,0) -- cycle;
+    % lado
+    \draw[thick, brown!60!black] (3,0,2) -- (3,0,0) -- (3,0.4,0) -- (3,0.4,2);
 
-    % Espesor t
-    \draw[<->, gray] (2.7, 0.5) -- (2.7, 2.5)
-          node[midway, right, font=\tiny, gray] {$t$};
+    % --- PORTADORES Y CORRIENTE ---
+    % Flecha de corriente principal
+    \draw[->, purple, ultra thick] (-0.5, 0.2, 1) -- (3.5, 0.2, 1) 
+          node[pos=0, left, font=\tiny, align=right] {Corriente\\constante ($I$)};
+    
+    % Acumulación de cargas (Lorentz)
+    % En tipo P con B hacia arriba e I a la derecha:
+    % Huecos (+) se van al fondo, electrones (-) vienen al frente
+    \foreach \i in {0.6, 1.4, 2.2} {
+        \node[cargap] at (\i, 0.45, 0.3) {+};
+        \node[cargan] at (\i, 0.45, 1.7) {-};
+    }
+    \node[anchor=north west, font=\tiny, gray] at (0,0,2) {Semiconductor Tipo P};
+
+    % --- CIRCUITO VOLTÍMETRO (V_H) ---
+    \fill[black] (1.5, 0.4, 0.1) circle (1.5pt); % Contacto atrás
+    \fill[black] (1.5, 0.4, 1.9) circle (1.5pt); % Contacto adelante
+    
+    \draw (1.5, 0.4, 0.1) -- (4, 0.4, 0.1) -- (4, 0.6, 1);
+    \draw (1.5, 0.4, 1.9) -- (4, 0.4, 1.9) -- (4, 1.4, 1);
+    
+    \draw[fill=white] (4, 1, 1) circle (0.3) node {$V_H$};
+    \node[right] at (4.3, 1, 1) {Tensión de Hall};
+    
+    % Signos del voltímetro
+    \node[blue, font=\bfseries] at (3.8, 1.4, 1) {+};
+    \node[blue, font=\bfseries] at (3.8, 0.6, 1) {-};
+
+    % --- ETIQUETAS DE DIMENSIONES ---
+    \draw[<->, gray] (3.2, 0, 2) -- (3.2, 0.4, 2) node[midway, right] {$d$};
+
   \end{tikzpicture}
-  \caption{Geometría del efecto Hall. La corriente $I$ fluye horizontalmente; el campo $\vec{B}$ es perpendicular. Los portadores se acumulan generando $V_H$ en la dirección transversal.}\label{fig:hall_geometria}
+  \caption{Principio del efecto Hall. El campo magnético $\vec{B}$ atraviesa verticalmente el material. La fuerza de Lorentz desvía los portadores mayoritarios (huecos en tipo P) hacia la cara posterior, estableciendo una diferencia de potencial transversal $V_H$.}\label{fig:hall_vectorial}
 \end{marginfigure}
 
 \paragraph{Sensores Magnetorresistivos (AMR/GMR)}

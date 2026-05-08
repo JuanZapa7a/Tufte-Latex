@@ -114,25 +114,24 @@
 \contentsline {subsection}{Transformador Diferencial de Variación Lineal (LVDT)}{55}{subsection*.92}%
 \contentsline {paragraph}{Estructura Interna}{56}{paragraph*.93}%
 \contentsline {paragraph}{Análisis de Transferencia}{56}{paragraph*.94}%
-\contentsline {paragraph}{Ventajas e Inconvenientes del LVDT}{56}{paragraph*.95}%
-\contentsline {paragraph}{Rangos típicos de especificación}{56}{paragraph*.96}%
-\contentsline {subsection}{Sensores de Corrientes de Foucault (\textit {Eddy Currents})}{56}{subsection*.97}%
-\contentsline {paragraph}{Fenómeno Físico}{56}{paragraph*.98}%
-\contentsline {paragraph}{Profundidad de Penetración (\textit {Skin Depth})}{57}{paragraph*.99}%
-\contentsline {paragraph}{Circuito Equivalente y Medida}{57}{paragraph*.100}%
-\contentsline {paragraph}{Características y Aplicaciones}{57}{paragraph*.101}%
-\contentsline {subsection}{Sensores de Efecto Hall y Magnetorresistivos}{57}{subsection*.102}%
-\contentsline {paragraph}{Efecto Hall}{57}{paragraph*.103}%
-\contentsline {paragraph}{Sensores Magnetorresistivos (AMR/GMR)}{58}{paragraph*.104}%
+\contentsline {paragraph}{Rangos típicos de especificación}{56}{paragraph*.95}%
+\contentsline {subsection}{Sensores de Corrientes de Foucault (\textit {Eddy Currents})}{57}{subsection*.96}%
+\contentsline {paragraph}{Fenómeno Físico}{57}{paragraph*.97}%
+\contentsline {paragraph}{Profundidad de Penetración (\textit {Skin Depth})}{57}{paragraph*.98}%
+\contentsline {paragraph}{Circuito Equivalente y Medida}{57}{paragraph*.99}%
+\contentsline {paragraph}{Características y Aplicaciones}{57}{paragraph*.100}%
+\contentsline {subsection}{Sensores de Efecto Hall y Magnetorresistivos}{57}{subsection*.101}%
+\contentsline {paragraph}{Efecto Hall}{57}{paragraph*.102}%
+\contentsline {paragraph}{Sensores Magnetorresistivos (AMR/GMR)}{58}{paragraph*.103}%
 \contentsline {section}{\numberline {4.4}Sensores Inductivos y Electromagnéticos}{58}{section.4.4}%
-\contentsline {subsection}{Sensores de Inductancia Variable (Reluctancia)}{58}{subsection*.105}%
-\contentsline {subsection}{Transformador Diferencial de Variación Lineal (LVDT)}{58}{subsection*.106}%
-\contentsline {subsection}{Sensores de Corrientes de Foucault (\textit {Eddy Currents})}{58}{subsection*.107}%
-\contentsline {subsection}{Sensores de Efecto Hall vs. Magnetorresistivos (Repaso)}{58}{subsection*.108}%
+\contentsline {subsection}{Sensores de Inductancia Variable (Reluctancia)}{58}{subsection*.104}%
+\contentsline {subsection}{Transformador Diferencial de Variación Lineal (LVDT)}{58}{subsection*.105}%
+\contentsline {subsection}{Sensores de Corrientes de Foucault (\textit {Eddy Currents})}{58}{subsection*.106}%
+\contentsline {subsection}{Sensores de Efecto Hall vs. Magnetorresistivos (Repaso)}{58}{subsection*.107}%
 \contentsline {section}{\numberline {4.5}Acondicionamiento de Sensores Reactivos}{58}{section.4.5}%
-\contentsline {subsection}{Puentes de Alterna}{58}{subsection*.109}%
-\contentsline {subsection}{Circuitos Resonantes y Osciladores}{58}{subsection*.110}%
-\contentsline {subsection}{Demodulación Síncrona (Detección de Fase)}{58}{subsection*.111}%
+\contentsline {subsection}{Puentes de Alterna}{58}{subsection*.108}%
+\contentsline {subsection}{Circuitos Resonantes y Osciladores}{58}{subsection*.109}%
+\contentsline {subsection}{Demodulación Síncrona (Detección de Fase)}{58}{subsection*.110}%
 \contentsline {section}{\numberline {4.6}Resumen y Comparativa de Sensores Reactivos}{58}{section.4.6}%
-\contentsline {chapter}{Bibliograf\'{\i }a}{59}{appendix*.112}%
+\contentsline {chapter}{Bibliograf\'{\i }a}{59}{appendix*.111}%
 \contentsfinish 

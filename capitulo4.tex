@@ -572,10 +572,86 @@ En el diseño de circuitos impresos (PCB), las corrientes de fuga por la superfi
     \caption[Diseño de un anillo de guarda en PCB.]{Diseño de un anillo de guarda en PCB. El anillo actúa como una barrera de potencial que intercepta corrientes de fuga y neutraliza capacidades parásitas laterales.}\label{fig:anillo_guarda}
 \end{marginfigure}
 
-\marginnote{\textbf{Aplicación Crítica:} Esta técnica es obligatoria en sensores de \textbf{humedad capacitivos} y en \textbf{acelerómetros MEMS}, donde las variaciones de señal son tan pequeñas que el simple aire entre pistas de la PCB podría actuar como una carga capacitiva inaceptable.
+\marginnote{\textbf{Aplicación Anillo de Guarda}: Esta técnica es obligatoria en sensores de \textbf{humedad capacitivos} y en \textbf{acelerómetros MEMS}, donde las variaciones de señal son tan pequeñas que el simple aire entre pistas de la PCB podría actuar como una carga capacitiva inaceptable.
 }
-\subsection{Aplicaciones Típicas}
+\subsection{Aplicaciones Típicas de los Sensores Capacitivos}\label{sec:aplicaciones_capacitivas}
 
+La versatilidad de la transducción capacitiva permite su uso en una amplia gama de magnitudes físicas, aprovechando la ausencia de contacto mecánico y su alta resolución intrínseca.
+
+\paragraph{1. Medida de Nivel de Líquidos}
+Se basa en la variación de la permitividad efectiva ($\epsilon_r$) entre dos electrodos fijos (normalmente cilindros concéntricos o placas paralelas) sumergidos en un tanque como se muestra en la figura \ref{fig:nivel_capacitivo}. 
+
+\begin{marginfigure}
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}[scale=1]
+        % Tanque
+        \draw[thick] (0,3) -- (0,0) -- (2,0) -- (2,3);
+        % Electrodos (Capacitor)
+        \draw[line width=2pt, gray] (0.7, 3) -- (0.7, 0);
+        \draw[line width=2pt, gray] (1.3, 3) -- (1.3, 0);
+        
+        % Líquido
+        \fill[blue!20, opacity=0.6] (0,0) rectangle (2,1.8);
+        \draw[blue, thick] (0,1.8) -- (2,1.8);
+        
+        % Cotas
+        \draw[<->, >=stealth] (2.3, 0) -- (2.3, 1.8) node[midway, right] {$h$};
+        \draw[<->, >=stealth] (-0.3, 0) -- (-0.3, 3) node[midway, left] {$H$};
+        
+        \node[blue!70!black] at (1, 1) {$\epsilon_{liq}$};
+        \node[gray] at (1, 2.5) {$\epsilon_{aire}$};
+    \end{tikzpicture}
+    \caption[Medida de nivel capacitiva.]{Medida de nivel capacitiva. El líquido actúa como un dieléctrico variable que rellena el espacio entre las placas a medida que sube el nivel $h$.}\label{fig:nivel_capacitivo}
+\end{marginfigure}
+
+Si el líquido es no conductor (dieléctrico), la capacidad total puede modelarse como la suma de dos condensadores en paralelo: uno con aire y otro sumergido. La capacidad resultante es lineal respecto a la altura $h$:
+\begin{equation}
+    C(h) = \frac{\epsilon_0 \cdot w}{d} \left[ h \cdot \epsilon_{liq} + (H - h) \cdot \epsilon_{aire} \right]
+\end{equation}
+donde $w$ es el ancho de las placas y $d$ la distancia entre ellas, $H$ la altura total del tanque y $h$ la altura del líquido. La variación de capacidad es proporcional a la altura del líquido, permitiendo una medida precisa del nivel.
+
+\paragraph{2. Sensores de Humedad Relativa}
+Utilizan un polímero higroscópico como dieléctrico. Este material tiene la propiedad de absorber moléculas de agua del aire, lo que altera su permitividad relativa ($\epsilon_r$) de forma proporcional a la humedad ambiente. 
+
+\marginnote{\textbf{Dato técnico:} El agua pura tiene una $\epsilon_r \approx 80$, mientras que los polímeros secos tienen $\epsilon_r \approx 3$. Por ello, incluso una pequeña absorción de humedad provoca cambios de capacidad detectables con gran precisión.
+}
+
+\paragraph{3. Pantallas Táctiles y Sensores de Proximidad}
+En las pantallas capacitivas, el dedo humano actúa como una ``tercera placa'' o un camino a masa como se esquematiza en la Figura \ref{fig:touch_capacitivo}. Al acercar el dedo, se distorsiona el campo eléctrico proyectado, creando una capacidad parásita que la electrónica localiza con alta resolución espacial.
+
+\begin{marginfigure}
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}[scale=1]
+        % Panel de cristal
+        \draw[fill=cyan!10] (0,0.5) rectangle (5,1);
+        \node at (2.5, 0.8) {Cristal / Dieléctrico};
+        
+        % Electrodos
+        \draw[ultra thick, orange] (0.5, 0.4) -- (2, 0.4);
+        \draw[ultra thick, orange] (3, 0.4) -- (4.5, 0.4);
+        \node[orange] at (1.25, 0.2) {Electrodo X};
+        \node[orange] at (3.75, 0.2) {Electrodo Y};
+        
+        % Dedo (Esquema)
+        \draw[fill=orange!20, rounded corners=5pt] (2.2, 3) -- (2.2, 1.7) -- (2.8, 1.7) -- (2.8, 3);
+        \node at (2.5, 3.2) {Dedo (GND)};
+        
+        % Capacidad inducida
+        \draw[red, dashed, thick] (2.5, 1.7) to[C, l=$C_{touch}$] (2.5, 0.7);
+    \end{tikzpicture}
+    \caption{Principio del \textit{touchscreen} capacitivo. El cuerpo humano altera el campo eléctrico proyectado por la matriz de electrodos.}\label{fig:touch_capacitivo}
+\end{marginfigure}
+
+\paragraph{4. Acelerómetros MEMS y Sensores de Presión}
+En la microelectrónica de consumo (\textit{smartphones}), los acelerómetros son estructuras de silicio donde la aceleración desplaza una masa móvil, variando la distancia $d$ entre micro-placas. Estos sensores miden variaciones en el rango de los \unit{fF} (femtofaradios).
+
+\marginnote{\textbf{Ventaja en MEMS:} La transducción capacitiva no requiere circular corriente constante por el sensor (a diferencia de las galgas), lo que reduce drásticamente el consumo de batería en dispositivos móviles.
+}
+
+\paragraph{5. Micrófonos de Condensador}
+Consisten en un diafragma elástico que vibra con las ondas sonoras frente a una placa fija. El cambio en la distancia $d$ modula la capacidad a la frecuencia del sonido. Requieren una tensión de polarización (típicamente \unit{48}{V}, o \textit{Phantom Power}) para convertir el movimiento en una señal eléctrica medible.
 
 % Sensores de proximidad, nivel de líquidos y humedad.
 
@@ -593,6 +669,7 @@ Los sensores inductivos explotan la relación entre el movimiento mecánico y el
 \begin{equation}
   \mathcal{E} = -N \frac{d\Phi}{dt} = -N \frac{d(B \cdot A)}{dt}
 \end{equation}
+donde $B$ es la densidad de flujo magnético y $A$ el área del circuito magnético. Al variar $B$ o $A$ mediante el movimiento de una armadura, se genera una señal eléctrica proporcional a la velocidad del cambio.
 
 A diferencia de los sensores resistivos o capacitivos, los sensores inductivos presentan \emph{inmunidad intrínseca al ruido eléctrico} (son insensibles a campos eléctricos externos) y toleran entornos industriales con vibraciones, suciedad y alta temperatura, razón por la que dominan en automoción, aeronáutica y manufactura pesada.
 
@@ -669,7 +746,7 @@ la respuesta es hiperbólica, idéntica al sensor capacitivo de distancia. Se ap
 
 \paragraph{Curva de Transferencia y No Linealidad}
 
-La Figura~\ref{fig:curva_reluctancia} muestra la respuesta $L$ frente a $g$ para el modelo de la ecuación~\eqref{eq:L_vs_g}. Como en los sensores capacitivos de distancia, la alta sensibilidad en el origen (entrehierros pequeños) se paga con una respuesta no lineal. La \emph{configuración diferencial de reluctancia variable} con dos bobinas ($L_1, L_2$) en estructura push-pull linealiza la respuesta y duplica la sensibilidad, siguiendo la misma álgebra que el condensador diferencial. Sin embargo, esta solución es más compleja de implementar que en el caso capacitivo, ya que requiere un diseño mecánico preciso para garantizar la simetría de las bobinas y el movimiento de la armadura.
+La Figura~\ref{fig:curva_reluctancia} muestra la respuesta $L$ frente a $g$ para el modelo de la ecuación~\eqref{eq:L_vs_g}. Como en los sensores capacitivos de distancia, la alta sensibilidad en el origen (entrehierros pequeños) se paga con una respuesta no lineal. Para resolver este problema, se propone un modelo de \emph{configuración diferencial}. La \emph{configuración diferencial de reluctancia variable} con dos bobinas ($L_1, L_2$) en estructura push-pull linealiza la respuesta y duplica la sensibilidad, siguiendo la misma álgebra que el condensador diferencial. Sin embargo, esta solución es más compleja de implementar que en el caso capacitivo, ya que requiere un diseño mecánico preciso para garantizar la simetría de las bobinas y el movimiento de la armadura.
 
 \begin{marginfigure}
   \centering
@@ -702,9 +779,121 @@ La Figura~\ref{fig:curva_reluctancia} muestra la respuesta $L$ frente a $g$ para
   \caption[Respuesta $L(g)$ del sensor de reluctancia variable.]{Respuesta $L(g)$ del sensor de reluctancia variable. Solo en un entorno reducido del punto de operación la curva puede aproximarse por una recta.}\label{fig:curva_reluctancia}
 \end{marginfigure}
 
+Los sensores de efecto Hall activos han reemplazado progresivamente
+a los de reluctancia variable en ABS modernos, ya que funcionan
+desde velocidad cero (el sensor pasivo de reluctancia variable
+requiere una velocidad mínima de \qty{2}{km/h} para generar
+señal), y su salida digital (tren de pulsos de amplitud constante)
+es inmune al ruido electromagnético del entorno del vehículo.
+
 \paragraph{Aplicaciones}
 
-Los sensores de reluctancia variable son la base de los \emph{encoders de efecto magnético} para medida de posición angular en motores de corriente continua y los \emph{sensores de velocidad de rueda} (ABS) en automoción, donde la frecuencia de los pulsos generados es proporcional a la velocidad de rotación.
+Los sensores de reluctancia variable son la base de los \emph{encoders de efecto magnético} para medida de posición angular en motores de corriente continua y los \emph{sensores de velocidad de rueda} (\emph{Anti-lock Braking System}, ABS) en automoción, donde la frecuencia de los pulsos generados es proporcional a la velocidad de rotación.  Una rueda dentada ferromagnética gira junto a la rueda del coche, y el sensor de reluctancia variable genera un pulso eléctrico cada vez que un diente pasa por delante. La frecuencia de esos pulsos es proporcional a la velocidad de rotación de la rueda. La (E ,ECU) del ABS monitoriza las cuatro ruedas continuamente y, si detecta que una se frena bruscamente (frecuencia cae a cero → rueda bloqueada), modula la presión hidráulica del freno para evitar el deslizamiento.
+
+\begin{marginfigure}[0em]
+  \centering
+  \shorthandoff{>}
+  \begin{tikzpicture}[scale=1.0]
+
+    % --- Disco dentado (reluctor) ---
+    % Radio interior y exterior del disco
+    \def\Ri{1.0}   % radio interior (alma del disco)
+    \def\Ro{1.45}  % radio exterior (punta del diente)
+    \def\Nd{12}    % número de dientes visibles (simplificado)
+
+    % Alma del disco
+    \fill[gray!40] (0,0) circle (\Ri);
+    \draw[thick]   (0,0) circle (\Ri);
+
+    % Dientes: cada diente ocupa 360/Nd grados, la mitad es diente
+    % y la mitad es hueco. Se dibujan como sectores anulares.
+    \foreach \i in {0,1,...,11} {
+      \pgfmathsetmacro{\angA}{\i * 360/\Nd}
+      \pgfmathsetmacro{\angB}{\angA + 0.5*360/\Nd}
+      % Diente (sólido)
+      \fill[gray!60]
+        (\angA:\Ri) arc[start angle=\angA, end angle=\angB,
+                        radius=\Ri]
+        -- (\angB:\Ro) arc[start angle=\angB, end angle=\angA,
+                           radius=\Ro]
+        -- cycle;
+      \draw[thick, gray!70]
+        (\angA:\Ri) arc[start angle=\angA, end angle=\angB,
+                        radius=\Ri]
+        -- (\angB:\Ro) arc[start angle=\angB, end angle=\angA,
+                           radius=\Ro]
+        -- cycle;
+    }
+
+    % Eje central
+    \fill[gray!80] (0,0) circle (0.18);
+    \draw[thick]   (0,0) circle (0.18);
+
+    % Flecha de rotación
+    \draw[->, thick, red!70!black, >=stealth]
+      (0, 1.75) arc[start angle=90, end angle=20, radius=1.75]
+      node[midway, above right, font=\tiny, red!70!black] {$\omega$};
+
+    % --- Sensor de reluctancia variable ---
+    % Posicionado en la parte superior derecha (diente en posición ~75°)
+    \begin{scope}[shift={(1.85, 1.85)}, rotate=-45]
+
+      % Cuerpo del sensor (carcasa)
+      \fill[blue!15]  (-0.22, 0) rectangle (0.22, 0.65);
+      \draw[thick]    (-0.22, 0) rectangle (0.22, 0.65);
+
+      % Polo magnético (núcleo)
+      \fill[gray!60]  (-0.12, 0) rectangle (0.12, 0.30);
+
+      % Bobina (espiras simplificadas)
+      \foreach \yy in {0.08, 0.15, 0.22} {
+        \draw[blue!70!black, thick]
+          (-0.22, \yy) arc[start angle=180, end angle=0,
+                           x radius=0.22, y radius=0.055];
+        \draw[blue!70!black, dashed, thick, opacity=0.5]
+          (-0.22, \yy) arc[start angle=180, end angle=360,
+                           x radius=0.22, y radius=0.055];
+      }
+
+      % Conector (cable)
+      \draw[thick, gray!60] (0, 0.65) -- (0, 1.0);
+      \fill[gray!50] (-0.08, 1.0) rectangle (0.08, 1.12);
+
+    \end{scope}
+
+    % Entrehierro entre sensor y diente (flecha roja)
+    \draw[<->, red, >=stealth, thick]
+      (0.98, 1.40) -- (1.25, 1.60)
+      node[midway, above left, font=\tiny, red] {$g$};
+
+    % Etiquetas
+    \node[font=\tiny, align=center] at (0, -1.75)
+      {Reluctor ($n=48$ dientes)};
+    \node[font=\tiny, blue!70!black, align=center] at (2.5, 2.6)
+      {Sensor};
+
+  \end{tikzpicture}
+  \caption{Sensor de velocidad de rueda ABS. El reluctor gira
+    solidario a la rueda; el sensor de reluctancia variable genera
+    un pulso por cada diente. La UCE del ABS calcula $v$ a partir
+    de la frecuencia de pulsos mediante la
+    ec.~\eqref{eq:abs_freq}.}\label{fig:abs_sensor}
+\end{marginfigure}
+
+% ------- Marginnote: funcionamiento del ABS -------
+\marginnote{%
+  \textbf{Cómo actúa el ABS:} La Unidad de Control Electrónico
+  (UCE) monitoriza las cuatro ruedas simultáneamente. Si durante
+  una frenada la frecuencia de una rueda cae a cero mientras las
+  demás siguen girando, la UCE detecta \emph{bloqueo inminente}
+  y activa el módulo hidráulico: reduce la presión de frenado en
+  esa rueda ($\approx \qty{20}{ms}$), la deja recuperar
+  velocidad y vuelve a aplicar presión. Este ciclo
+  (\emph{reduce\,--\,mantiene\,--\,aumenta}) se repite a
+  \qtyrange{8}{15}{\hertz}, manteniendo la rueda en el rango
+  de deslizamiento óptimo ($\lambda \approx \qty{15}{\percent}$)
+  donde la adherencia neumático-asfalto es máxima.%
+}
 
 % -----------------------------------------------------------
 \subsection{Transformador Diferencial de Variación Lineal (LVDT)}\label{sub:lvdt}

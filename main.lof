@@ -60,8 +60,11 @@
 \contentsline {figure}{\numberline {4.14}{\ignorespaces Sensor de velocidad de rueda ABS.}}{55}{figure.4.14}%
 \contentsline {figure}{\numberline {4.15}{\ignorespaces Sección transversal del LVDT. El primario está alimentado con una señal alterna. Las dos secundarias están conectadas en oposición de serie. La varilla de accionamiento controla la posición del núcleo ferromagnético. El núcleo ferromagnético se encuentra en la sección transversal.}}{56}{figure.4.15}%
 \contentsline {figure}{\numberline {4.16}{\ignorespaces Curvas de transferencia del LVDT.}}{56}{figure.4.16}%
-\contentsline {figure}{\numberline {4.17}{\ignorespaces Principio de los sensores de corrientes de Foucault. Las corrientes inducidas en el target crean un campo de reacción que modifica la impedancia de la bobina como función de $\delta $.}}{57}{figure.4.17}%
+\contentsline {figure}{\numberline {4.17}{\ignorespaces Principio de funcionamiento de los sensores de corrientes de Foucault. El campo magnético primario ($\vec {B}_{exc}$) generado por la bobina induce corrientes de Foucault circulares en el target conductor. Estas generan, por la ley de Lenz, un campo de reacción ($\vec {B}_{reac}$) que se opone al original, alterando la impedancia compleja de la sonda según la distancia de separación $\delta $.}}{57}{figure.4.17}%
 \contentsline {figure}{\numberline {4.18}{\ignorespaces Profundidad de penetración $\delta _{skin}$ frente a frecuencia de excitación para aluminio y acero. El acero, al ser ferromagnético ($\mu _r \gg 1$), confina las corrientes en una capa mucho más delgada.}}{57}{figure.4.18}%
 \contentsline {figure}{\numberline {4.19}{\ignorespaces Principio del efecto Hall. El campo magnético $\vec {B}$ atraviesa verticalmente el material. La fuerza de Lorentz desvía los portadores mayoritarios (huecos en tipo P) hacia la cara posterior, estableciendo una diferencia de potencial transversal $V_H$.}}{58}{figure.4.19}%
+\contentsline {figure}{\numberline {4.20}{\ignorespaces Puente de Maxwell.}}{59}{figure.4.20}%
+\contentsline {figure}{\numberline {4.21}{\ignorespaces Acondicionamiento mediante conversión a frecuencia. El sensor forma parte de la red de realimentación de un oscilador.}}{59}{figure.4.21}%
+\contentsline {figure}{\numberline {4.22}{\ignorespaces Diagrama de bloques de un demodulador síncrono. Esta estructura actúa como un filtro de banda estrecha extremadamente selectivo, eliminando cualquier ruido que no esté en fase con la referencia.}}{60}{figure.4.22}%
 \addvspace {10\p@ }
 \contentsfinish 

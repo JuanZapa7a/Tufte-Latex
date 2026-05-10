@@ -123,15 +123,11 @@
 \contentsline {subsection}{Sensores de Efecto Hall y Magnetorresistivos}{58}{subsection*.101}%
 \contentsline {paragraph}{Efecto Hall}{58}{paragraph*.102}%
 \contentsline {paragraph}{Sensores Magnetorresistivos (AMR/GMR)}{58}{paragraph*.103}%
-\contentsline {section}{\numberline {4.4}Sensores Inductivos y Electromagnéticos}{59}{section.4.4}%
-\contentsline {subsection}{Sensores de Inductancia Variable (Reluctancia)}{59}{subsection*.104}%
-\contentsline {subsection}{Transformador Diferencial de Variación Lineal (LVDT)}{59}{subsection*.105}%
-\contentsline {subsection}{Sensores de Corrientes de Foucault (\textit {Eddy Currents})}{59}{subsection*.106}%
-\contentsline {subsection}{Sensores de Efecto Hall vs. Magnetorresistivos (Repaso)}{59}{subsection*.107}%
-\contentsline {section}{\numberline {4.5}Acondicionamiento de Sensores Reactivos}{59}{section.4.5}%
-\contentsline {subsection}{Puentes de Alterna}{59}{subsection*.108}%
-\contentsline {subsection}{Circuitos Resonantes y Osciladores}{59}{subsection*.109}%
-\contentsline {subsection}{Demodulación Síncrona (Detección de Fase)}{59}{subsection*.110}%
-\contentsline {section}{\numberline {4.6}Resumen y Comparativa de Sensores Reactivos}{59}{section.4.6}%
-\contentsline {chapter}{Bibliograf\'{\i }a}{61}{appendix*.111}%
+\contentsline {section}{\numberline {4.4}Acondicionamiento de Sensores Reactivos}{59}{section.4.4}%
+\contentsline {subsection}{Puentes de Alterna}{59}{subsection*.104}%
+\contentsline {paragraph}{Puente de Maxwell}{59}{paragraph*.105}%
+\contentsline {subsection}{Circuitos Resonantes y Osciladores}{59}{subsection*.106}%
+\contentsline {subsection}{Demodulación Síncrona (Detección de Fase)}{60}{subsection*.107}%
+\contentsline {section}{\numberline {4.5}Resumen y Comparativa de Sensores Reactivos}{60}{section.4.5}%
+\contentsline {chapter}{Bibliograf\'{\i }a}{61}{appendix*.108}%
 \contentsfinish 

@@ -287,7 +287,7 @@ El diseño de un sistema de instrumentación capacitivo exige evaluar el comprom
 
 \begin{table}[!ht]
     \centering
-    \caption{Comparativa de modelos de sensibilidad. La variación de distancia ofrece una sensibilidad mucho mayor a costa de una respuesta no lineal.}\label{tab:sensibilidad_capacitiva}
+    \caption{Comparativa de modelos de sensibilidad. La variación de distancia ofrece una sensibilidad mucho mayor a costa de una respuesta no lineal.\protect\label{tab:sensibilidad_capacitiva}}
     \setlength{\tabcolsep}{3pt} % Reducimos el espacio entre columnas
     \small
     \begin{tabularx}{\linewidth}{l c c X}
@@ -700,7 +700,7 @@ donde $L$ es la inductancia de la bobina. La inductancia varía inversamente con
 \]
 la respuesta es hiperbólica, idéntica al sensor capacitivo de distancia. Se aplica la misma solución: \emph{configuración diferencial}.}
 
-\begin{marginfigure}[2em]
+\begin{marginfigure}
   \centering
   \shorthandoff{>}
   \begin{tikzpicture}[scale=1]
@@ -878,7 +878,7 @@ Los sensores de reluctancia variable son la base de los \emph{encoders de efecto
 %     ec.~\eqref{eq:abs_freq}.}\label{fig:abs_sensor}
 % \end{marginfigure}
 
-\begin{marginfigure}[0em]
+\begin{marginfigure}
   \centering
   \shorthandoff{>}
   \begin{tikzpicture}[
@@ -1096,10 +1096,14 @@ Desde el punto de vista de la implementación industrial, la robustez del LVDT f
 
 La Tabla~\ref{tab:lvdt_pro} resume las ventajas e inconvenientes del LVDT para el diseñador de sistemas de instrumentación. Su linealidad intrínseca y robustez lo convierten en la opción preferida para aplicaciones de alta precisión, aunque su complejidad de señal y sensibilidad a campos magnéticos externos pueden ser limitantes en entornos industriales ruidosos.
 
+\paragraph{Rangos típicos de especificación}
+
+Un LVDT industrial estándar (p.ej. familia HCD de Sensata o Series 100 de Measurement Specialties) presenta: rango de $\pm$\qty{0.5}{mm} a $\pm$\qty{500}{mm}, linealidad mejor del \qty{0.25}{\%} F.E., resolución en el orden de \qty{1}{\micro m} con electrónica de 16~bits, y temperatura de operación de \qtyrange{-55}{150}{\degreeCelsius}.
+
 \begin{table}[!ht]
     \centering
+    \caption{Comparativa de ventajas e inconvenientes del LVDT para el diseñador de sistemas de instrumentación.\protect\label{tab:lvdt_pro}}
     \small
-    \caption{Comparativa de ventajas e inconvenientes del LVDT para el diseñador de sistemas de instrumentación.}\label{tab:lvdt_pro}
     \begin{tabularx}{\linewidth}{X X}
         \toprule
         \textbf{Ventajas} & \textbf{Inconvenientes} \\
@@ -1111,14 +1115,6 @@ La Tabla~\ref{tab:lvdt_pro} resume las ventajas e inconvenientes del LVDT para e
         \bottomrule
     \end{tabularx}
 \end{table}
-
-
-
-
-
-\paragraph{Rangos típicos de especificación}
-
-Un LVDT industrial estándar (p.ej. familia HCD de Sensata o Series 100 de Measurement Specialties) presenta: rango de $\pm$\qty{0.5}{mm} a $\pm$\qty{500}{mm}, linealidad mejor del \qty{0.25}{\%} F.E., resolución en el orden de \qty{1}{\micro m} con electrónica de 16~bits, y temperatura de operación de \qtyrange{-55}{150}{\degreeCelsius}.
 
 % -----------------------------------------------------------
 \subsection{Sensores de Corrientes de Foucault (\textit{Eddy Currents})}\label{sub:eddy}
@@ -1140,44 +1136,47 @@ donde $\delta$ es la distancia entre la bobina y el conductor objetivo (\textit{
 \begin{marginfigure}
     \centering
     \shorthandoff{>}
-    \begin{tikzpicture}[scale=0.85]
-        % Bobina de excitación
-        \draw[fill=orange!20, thick, rounded corners=3pt]
-            (0, 2.0) rectangle (3, 3.0);
-        \foreach \x in {0.3, 0.75, 1.2, 1.65, 2.1, 2.55} {
-        \draw[orange!70!black] (\x, 2.0) arc[start angle=180, end angle=0,
-                                            x radius=0.2, y radius=0.12];
-        }
-        \node[font=\tiny, orange!80!black] at (1.5, 2.5) {Bobina ($f_{exc}$)};
+    \begin{tikzpicture}[>=Stealth]
+        % --- Target Conductor (Más ancho y alto) ---
+        \draw[fill=gray!10, thick] (0,0) rectangle (4.8, 1.1);
+        \node[anchor=south west, gray!80!black] at (0,-.5) {Target Metálico};
 
-        % Flujo primario (flechas azules hacia abajo)
-        \foreach \x in {0.5, 1.5, 2.5} {
-        \draw[->, blue!60, dashed] (\x, 2.0) -- (\x, 1.2);
-        }
-        \node[blue!60, font=\tiny] at (3.4, 1.6) {$\vec{B}_{prim}$};
+        % --- Coil (Cuerpo de la bobina más grande) ---
+        % Coil former / Body
+        \draw[fill=orange!5, orange!30, dashed] (1.2, 2.8) rectangle (3.6, 3.6);
+        
+        % Individual windings (Bottom row) - Aumentamos el radio de las espiras
+        \foreach \x in {1.4, 1.8, 2.2, 2.6, 3.0, 3.4}
+            \draw[thick, orange!80!black, fill=orange!20] (\x, 2.8) circle (3.2pt);
+        % Individual windings (Top row)
+        \foreach \x in {1.4, 1.8, 2.2, 2.6, 3.0, 3.4}
+            \draw[thick, orange!80!black, fill=orange!20] (\x, 3.6) circle (3.2pt);
+        
+        \node[orange!80!black] at (2.4, 4.0) {Sonda (Bobina)};
 
-        % Entrehierro
-        \draw[<->, red, >=stealth] (3.2, 1.2) -- (3.2, 2.0)
-            node[midway, right, font=\tiny, red] {$\delta$};
+        % --- Magnetic Flux (Primary) ---
+        % Línea central
+        \draw[blue, thick, dashed, ->] (2.4, 2.8) -- (2.4, 1.1);
+        % Líneas laterales
+        \draw[blue, thick, dashed, ->] (1.8, 2.8) .. controls (1.8, 1.6) and (0.7, 1.6) .. (0.7, 0.7);
+        \draw[blue, thick, dashed, ->] (3.0, 2.8) .. controls (3.0, 1.6) and (4.1, 1.6) .. (4.1, 0.7);
+        \node[blue] at (0.3, 2.0) {$\vec{B}_{exc}$};
 
-        % Target conductor
-        \draw[fill=gray!50, thick] (0, 0.5) rectangle (3, 1.2);
-        \node[font=\tiny, white] at (1.5, 0.85) {Target (Conductor)};
+        % --- Eddy Currents ---
+        % Elipses más grandes para que se vean mejor los remolinos
+        \draw[red, ultra thick, ->] (2.4, 0.6) ellipse (1.1cm and 0.22cm);
+        \draw[red, thick, ->] (2.4, 0.6) ellipse (0.6cm and 0.12cm);
+        \node[red, anchor=north] at (2.4, 0.4) {Corrientes inducidas};
 
-        % Corrientes de Foucault (elipses rojas)
-        \draw[thick, red!70!black, ->]
-            (0.8, 0.85) ellipse (0.55cm and 0.22cm);
-        \draw[thick, red!70!black, ->]
-            (2.2, 0.85) ellipse (0.55cm and 0.22cm);
-        \node[red!70!black, font=\tiny] at (1.5, 0.3) {Corrientes de Foucault};
+        % --- Reaction Flux (Secondary) ---
+        \draw[green!60!black, thick, ->] (1.5, 0.8) .. controls (1.5, 1.8) and (2.0, 2.4) .. (2.0, 2.7);
+        \draw[green!60!black, thick, ->] (3.3, 0.8) .. controls (3.3, 1.8) and (2.8, 2.4) .. (2.8, 2.7);
+        \node[green!60!black, anchor=west] at (3.5, 2.2) {$\vec{B}_{reac}$};
 
-        % Campo de reacción (flechas hacia arriba)
-        \foreach \x in {0.8, 2.2} {
-        \draw[->, green!50!black, dashed] (\x, 1.2) -- (\x, 1.8);
-        }
-        \node[green!50!black, font=\tiny] at (3.4, 1.0) {$\vec{B}_{reac}$};
+        % --- Cota delta (Ajustada al nuevo tamaño) ---
+        \draw[<->, black, thin] (5.1, 1.1) -- (5.1, 2.8) node[midway, right ] {$\delta$};
     \end{tikzpicture}
-    \caption{Principio de los sensores de corrientes de Foucault. Las corrientes inducidas en el target crean un campo de reacción que modifica la impedancia de la bobina como función de $\delta$.}\label{fig:eddy_principio}
+    \caption{Principio de funcionamiento de los sensores de corrientes de Foucault. El campo magnético primario ($\vec{B}_{exc}$) generado por la bobina induce corrientes de Foucault circulares en el target conductor. Estas generan, por la ley de Lenz, un campo de reacción ($\vec{B}_{reac}$) que se opone al original, alterando la impedancia compleja de la sonda según la distancia de separación $\delta$.}\label{fig:eddy_principio}
 \end{marginfigure}
 
 \paragraph{Profundidad de Penetración (\textit{Skin Depth})}
@@ -1187,10 +1186,10 @@ Las corrientes de Foucault no se distribuyen uniformemente en el conductor: se c
 \begin{equation}\label{eq:skin_depth}
     \delta_{skin} = \sqrt{\frac{2\rho}{\omega \mu_0 \mu_r}} = \sqrt{\frac{\rho}{\pi f \mu_0 \mu_r}}
 \end{equation}
-
+%
 donde $\rho$ es la resistividad del material y $f$ la frecuencia de excitación. La evolución de este parámetro para distintos materiales en función de la frecuencia se muestra en la Figura~\ref{fig:skin_depth}.
 
-\marginnote{\textbf{Implicación de diseño:} La frecuencia de excitación determina la profundidad de análisis. A \qty{10}{kHz} en aluminio ($\rho = \qty{28}{n\Omega\cdot m}$), $\delta_{skin} \approx \qty{0.8}{mm}$. A \qty{1}{MHz}, $\delta_{skin} \approx \qty{0.08}{mm}$. Esto permite usar los sensores de Eddy Currents para \emph{END} (Ensayos No Destructivos): a baja frecuencia se detectan defectos internos; a alta frecuencia, solo superficiales.}
+\marginnote{\textbf{Implicación de diseño:} La frecuencia de excitación determina la profundidad de análisis. A \qty{10}{kHz} en aluminio ($\rho = \qty{2.82e-8}{\Omega\cdot m}$), $\delta_{skin} \approx \qty{0.84}{mm}$. En cobre ($\rho = \qty{1.68e-8}{\Omega\cdot m}$), $\delta_{skin} \approx \qty{0.65}{mm}$. En acero ($\rho = \qty{1.5e-7}{\Omega\cdot m}$, $\mu_r \approx 1000$), $\delta_{skin} \approx \qty{0.06}{mm}$. Esto permite usar los sensores de Eddy Currents para \emph{END} (Ensayos No Destructivos): a baja frecuencia se detectan defectos internos; a alta frecuencia, solo superficiales.}
 
 \begin{marginfigure}
   \centering
@@ -1208,16 +1207,19 @@ donde $\rho$ es la resistividad del material y $f$ la frecuencia de excitación.
       legend style={at={(0.95,0.95)}, anchor=north east,
                     draw=none, font=\tiny}
     ]
-      % Aluminio: delta = sqrt(rho/(pi*f*mu0)) con rho=2.8e-8, mu0=4pi*1e-7
-      % delta_mm = sqrt(2.8e-8 / (pi * f*1e3 * 4*pi*1e-7)) * 1000
-      % = sqrt(2.8e-8 / (1.2566e-6 * f*1e3)) * 1000
-      % = sqrt(22.28e-3 / f) * 1000 = sqrt(22.28/f) * ... simplificamos:
-      % delta = 8.4 / sqrt(f_kHz)  mm  (approx. para Al)
-      \addplot[thick, blue, domain=1:500, samples=80] {8.4/sqrt(x)};
+      % Constantes calculadas para delta_skin (mm) = C / sqrt(f_kHz)
+      % C = sqrt(rho / (pi * mu0 * mu_r * 1000)) * 1000
+      % mu0 = 4*pi*1e-7
+      % Aluminio: rho = 2.82e-8, mu_r = 1  => C_Al = 2.67
+      \addplot[thick, blue, domain=1:500, samples=80] {2.67/sqrt(x)};
       \addlegendentry{Al ($\mu_r=1$)}
 
-      % Acero: mu_r ≈ 1000, delta = 8.4/sqrt(1000*f) = 0.266/sqrt(f)
-      \addplot[thick, red, dashed, domain=1:500, samples=80] {0.266/sqrt(x)};
+      % Cobre: rho = 1.68e-8, mu_r = 1 => C_Cu = 2.06
+      \addplot[thick, orange, domain=1:500, samples=80] {2.06/sqrt(x)};
+      \addlegendentry{Cu ($\mu_r=1$)}
+
+      % Acero: rho = 1.5e-7, mu_r ≈ 1000 => C_Acero = 0.195
+      \addplot[thick, red, dashed, domain=1:500, samples=80] {0.195/sqrt(x)};
       \addlegendentry{Acero ($\mu_r \approx 1000$)}
 
       % Linea guia
@@ -1254,10 +1256,9 @@ Ambas partes (resistiva e inductiva) dependen de $\delta$ a través del acoplami
         Frecuencia de excitación & \qtyrange{1}{10}{MHz} \\
         Materiales target & Cualquier conductor (Al, Cu, acero, Ti) \\
         Temperatura de operación & \qtyrange{-50}{200}{\degreeCelsius} \\
-        Inmunidad a contaminantes & Aceite, polvo, agua: \textbf{total} \\
+        Inmunidad a contaminantes & Aceite, polvo, agua: \emph{total} \\
         \bottomrule
     \end{tabularx}
-    
 \end{table}
 
 Sus principales aplicaciones en ingeniería de telecomunicaciones e industrial son: medida de espesor de recubrimientos no conductores sobre metal, detección de grietas subsuperficiales en piezas aeronáuticas (\emph{END}), medida de desplazamiento de ejes en rodamientos magnéticos y control de calidad de placas PCB (grosor del cobre).
@@ -1268,267 +1269,84 @@ Sus principales aplicaciones en ingeniería de telecomunicaciones e industrial s
 
 \paragraph{Efecto Hall}
 
-Cuando una corriente $I$ fluye por un conductor situado en un campo magnético $\vec{B}$ perpendicular, la fuerza de Lorentz ($\vec{F} = q\vec{v} \times \vec{B}$) desvía los portadores de carga acumulándose en las caras laterales del conductor hasta establecer un campo eléctrico transversal que equilibra la fuerza magnética. La tensión de Hall resultante es:
+Cuando una corriente $I$ fluye por un conductor situado en un campo magnético $\vec{B}$ perpendicular, la fuerza de Lorentz ($\vec{F} = q\vec{v} \times \vec{B}$) desvía los portadores de carga acumulándose en las caras laterales del conductor hasta establecer un campo eléctrico transversal que equilibra la fuerza magnética. La geometría típica de un sensor de efecto Hall se muestra en la Figura~\ref{fig:hall_vectorial}. La tensión de Hall resultante es:
 
 \begin{equation}\label{eq:v_hall}
     V_H = \frac{R_H \cdot I \cdot B}{t} = \frac{I \cdot B}{n_e \cdot q \cdot t}
 \end{equation}
 %
-donde $R_H = 1/(n_e q)$ es la constante de Hall del material ($n_e$ densidad de portadores, $q$ carga del electrón) y $t$ el espesor del conductor.
-
-% \begin{marginfigure}[1em]
-%   \centering
-%   \shorthandoff{>}
-%   \begin{tikzpicture}[scale=0.8]
-%     % Plaqueta de Hall (paralelepípedo)
-%     \draw[fill=blue!15, thick]
-%       (0.5, 0.5) -- (2.5, 0.5) -- (3.0, 1.0) --
-%       (1.0, 1.0) -- cycle;                          % cara superior
-%     \draw[fill=blue!25, thick]
-%       (0.5, 0.5) -- (0.5, 2.5) -- (1.0, 3.0) --
-%       (1.0, 1.0) -- cycle;                          % cara izquierda
-%     \draw[fill=blue!10, thick]
-%       (0.5, 2.5) -- (2.5, 2.5) -- (3.0, 3.0) --
-%       (1.0, 3.0) -- cycle;                          % cara frontal
-%     \draw[fill=blue!20, thick]
-%       (2.5, 0.5) -- (2.5, 2.5) -- (3.0, 3.0) --
-%       (3.0, 1.0) -- cycle;                          % cara derecha
-%     \draw[fill=blue!5, thick]
-%       (0.5, 0.5) -- (2.5, 0.5) -- (2.5, 2.5) --
-%       (0.5, 2.5) -- cycle;                          % cara frontal
-
-%     % Corriente I (horizontal, rojo)
-%     \draw[->, thick, red] (-0.3, 1.5) -- (0.5, 1.5)
-%           node[above, font=\tiny, red] {$I$};
-%     \draw[->, thick, red] (2.5, 1.5) -- (3.3, 1.5);
-
-%     % Campo B (vertical, verde, hacia arriba)
-%     \draw[->, thick, green!60!black] (1.5, -0.2) -- (1.5, 0.5)
-%           node[below left, font=\tiny, green!60!black] {$\vec{B}$};
-%     \draw[->, thick, green!60!black] (1.5, 2.5) -- (1.5, 3.2);
-
-%     % Tensión Hall (azul, lateral)
-%     \draw[<->, thick, blue] (0.1, 0.8) -- (0.1, 2.2)
-%           node[midway, left, font=\tiny, blue] {$V_H$};
-
-%     % Espesor t
-%     \draw[<->, gray] (2.7, 0.5) -- (2.7, 2.5)
-%           node[midway, right, font=\tiny, gray] {$t$};
-%   \end{tikzpicture}
-%   \caption{Geometría del efecto Hall. La corriente $I$ fluye horizontalmente; el campo $\vec{B}$ es perpendicular. Los portadores se acumulan generando $V_H$ en la dirección transversal.}\label{fig:hall_geometria}
-% \end{marginfigure}
-
-% \begin{marginfigure}[2em]
-%   \centering
-%   \shorthandoff{>}
-%   \begin{tikzpicture}[
-%     x=(10:2cm), y=(90:1.5cm), z=(210:1.0cm), % Perspectiva isométrica
-%     font=\scriptsize,
-%     >=stealth
-%   ]
-
-%     % --- Parámetros de la plaqueta ---
-%     \def\w{2.0} % ancho
-%     \def\h{0.6} % alto
-%     \def\t{1.2} % espesor (profundidad)
-
-%     % --- Dibujo de la plaqueta (Slab) ---
-%     % Cara inferior
-%     \fill[blue!5] (0,0,0) -- (\w,0,0) -- (\w,0,\t) -- (0,0,\t) -- cycle;
-    
-%     % Cara trasera
-%     \fill[blue!10] (0,0,\t) -- (\w,0,\t) -- (\w,\h,\t) -- (0,\h,\t) -- cycle;
-    
-%     % Cara izquierda
-%     \fill[blue!15] (0,0,0) -- (0,0,\t) -- (0,\h,\t) -- (0,\h,0) -- cycle;
-
-%     % Cara frontal
-%     \fill[blue!20, opacity=0.8] (0,0,0) -- (\w,0,0) -- (\w,\h,0) -- (0,\h,0) -- cycle;
-%     \draw[thick, blue!80!black] (0,0,0) -- (\w,0,0) -- (\w,\h,0) -- (0,\h,0) -- cycle;
-
-%     % Cara superior
-%     \fill[blue!10, opacity=0.8] (0,\h,0) -- (\w,\h,0) -- (\w,\h,\t) -- (0,\h,\t) -- cycle;
-%     \draw[thick, blue!80!black] (0,\h,0) -- (\w,\h,0) -- (\w,\h,\t) -- (0,\h,\t) -- cycle;
-%     \draw[thick, blue!80!black] (\w,0,0) -- (\w,0,\t) -- (\w,\h,\t) -- (\w,\h,0);
-%     \draw[thick, blue!80!black] (0,\h,\t) -- (\w,\h,\t);
-
-%     % --- Vectores ---
-
-%     % Corriente I (Eje X)
-%     \draw[ultra thick, red, ->] (-0.5, \h/2, \t/2) -- (0, \h/2, \t/2) node[pos=0, left] {$I$};
-%     \draw[red, dashed] (0, \h/2, \t/2) -- (\w, \h/2, \t/2);
-%     \draw[ultra thick, red, ->] (\w, \h/2, \t/2) -- (\w+0.5, \h/2, \t/2);
-
-%     % Campo Magnético B (Eje Z - Entrante)
-%     \foreach \x in {0.5, 1.5} {
-%         \draw[ultra thick, green!60!black, ->] (\x, \h+0.5, \t+0.5) -- (\x, \h+0.5, \t-0.5) 
-%               node[pos=0, above] {$\vec{B}$};
-%     }
-
-%     % Portadores y Fuerza de Lorentz (Cargas negativas acumuladas al frente)
-%     \foreach \z in {0.2, 0.6, 1.0} {
-%         \node[blue!80!black, font=\tiny] at (0.3, \h-0.15, 0) {$-$};
-%         \node[red!80!black, font=\tiny] at (0.3, 0.15, 0) {$+$};
-%     }
-
-%     % --- Tensión de Hall V_H (Eje Y) ---
-%     \draw[<->, blue, thick] (-0.3, 0, 0) -- (-0.3, \h, 0) 
-%           node[midway, left] {$V_H$};
-    
-%     % --- Dimensiones ---
-%     \draw[<->, gray] (\w, -0.2, 0) -- (\w, -0.2, \t) node[midway, below right] {$d$};
-%     \draw[<->, gray] (0, -0.2, 0) -- (\w, -0.2, 0) node[midway, below] {$w$};
-
-%   \end{tikzpicture}
-%   \caption[Principio del Efecto Hall.]{Geometría del efecto Hall en un semiconductor tipo $n$. La aplicación de un campo magnético perpendicular $\vec{B}$ a la dirección de la corriente $I$ desvía los portadores de carga hacia las caras laterales debido a la fuerza de Lorentz, originando un campo eléctrico transversal y una diferencia de potencial $V_H$.}\label{fig:hall_geometria}
-% \end{marginfigure}
-
-% \begin{marginfigure}
-%   \centering
-%   \shorthandoff{>}
-%   \begin{tikzpicture}[
-%     x={(0:1cm)}, y={(90:1cm)}, z={(210:0.5cm)}, % Perspectiva
-%     font=\scriptsize, >=stealth,
-%     cargap/.style={circle, fill=red!20, draw=red, inner sep=0.5pt, font=\tiny},
-%     cargan/.style={circle, fill=blue!20, draw=blue, inner sep=0.5pt, font=\tiny}
-%   ]
-
-%     % --- IMÁN SUPERIOR ---
-%     \begin{scope}[shift={(1.5, 4, 0)}]
-%         % Polo Norte (Rojo)
-%         \fill[red!80!black] (-0.5, 0.5) rectangle (0.5, 1.2);
-%         \node[white, font=\bfseries] at (0, 0.85) {N};
-%         % Cuerpo imán
-%         \fill[gray!20] (-0.5, -0.2) rectangle (0.5, 0.5);
-%         % Polo Sur (Azul)
-%         \fill[blue!80!black] (-0.5, -0.9) rectangle (0.5, -0.2);
-%         \node[white, font=\bfseries] at (0, -0.55) {S};
-%         \draw[thick] (-0.5, -0.9) rectangle (0.5, 1.2);
-%         \node[above] at (0, 1.2) {Imán};
-%     \end{scope}
-
-%     % --- LÍNEAS DE FUERZA (B) ---
-%     \foreach \x in {-0.4, -0.2, 0.2, 0.4} {
-%         \draw[blue!60, dashed, ->] (1.5+\x, 3.1) .. controls (1.5+\x, 2.5) .. (1.5+\x, 1.1);
-%     }
-%     \node[right, blue!60, font=\tiny, align=left] at (2, 2.8) {Líneas de\\fuerza};
-
-%     % --- ELEMENTO HALL (Plaqueta tipo P) ---
-%     % Base
-%     \fill[brown!40!black] (0,0,2) -- (3,0,2) -- (3,0,0) -- (0,0,0) -- cycle;
-%     % Cuerpo (Semiconductor)
-%     \fill[cyan!20, opacity=0.8] (0,0,2) -- (3,0,2) -- (3,0.3,2) -- (0,0.3,2) -- cycle; % Frontal
-%     \fill[cyan!10, opacity=0.8] (0,0.3,2) -- (3,0.3,2) -- (3,0.3,0) -- (0,0.3,0) -- cycle; % Superior
-%     \draw[thick, brown!40!black] (0,0,2) -- (3,0,2) -- (3,0.3,2) -- (0,0.3,2) -- cycle;
-%     \draw[thick, brown!40!black] (0,0.3,2) -- (3,0.3,2) -- (3,0.3,0) -- (0,0.3,0) -- cycle;
-%     \draw[thick, brown!40!black] (3,0,2) -- (3,0,0) -- (3,0.3,0) -- (3,0.3,2);
-
-%     % --- PORTADORES Y CORRIENTE ---
-%     \draw[->, purple, ultra thick] (0.5, 0.15, 1) -- (2.5, 0.15, 1) node[midway, above, font=\tiny] {Flujo de corriente constante};
-    
-%     % Acumulación de cargas (Huecos al fondo, electrones al frente por Lorentz)
-%     % En tipo P, el campo B hacia abajo y v a la derecha desvía huecos (+) hacia atrás
-%     \foreach \i in {0.5, 1.2, 2, 2.7} {
-%         \node[cargap] at (\i, 0.4, 0.2) {+};
-%         \node[cargan] at (\i, 0.4, 1.8) {-};
-%     }
-%     \node[anchor=east, font=\tiny] at (0, 0, 2) {Elemento Hall tipo P};
-
-%     % --- CIRCUITO DE ALIMENTACIÓN (DC) ---
-%     \draw (0, 0.15, 1) -- (-0.8, 0.15, 1) -- (-0.8, -1.5, 1) -- (0.5, -1.5, 1);
-%     \draw (3, 0.15, 1) -- (3.8, 0.15, 1) -- (3.8, -1.5, 1) -- (1.5, -1.5, 1);
-%     \begin{scope}[shift={(1, -1.5, 1)}]
-%         \draw[thick] (0, -0.3) -- (0, 0.3); \draw[thick] (0.2, -0.15) -- (0.2, 0.15); % Batería
-%         \node[below=0.2cm] at (0.1, 0) {Fuente DC};
-%         \node[above left] at (0, 0) {+}; \node[above right] at (0.2, 0) {-};
-%         \draw[->, purple] (1.5, 0.2) -- (0.8, 0.2) node[midway, above] {$i$};
-%     \end{scope}
-
-%     % --- CIRCUITO VOLTÍMETRO (V_H) ---
-%     \fill[black] (1.5, 0.3, 0) circle (2pt); % Contacto atrás
-%     \fill[black] (1.5, 0.3, 2) circle (2pt); % Contacto adelante
-%     \draw (1.5, 0.3, 0) -- (4.5, 0.3, 0) -- (4.5, 0.5, 1);
-%     \draw (1.5, 0.3, 2) -- (4.5, 0.3, 2) -- (4.5, 1.5, 1);
-%     \draw (4.5, 1, 1) circle (0.3) node {$V_H$};
-%     \node[right] at (4.8, 1, 1) {Tensión de Hall};
-%     \node[blue, left] at (4.5, 1.5, 1) {+};
-%     \node[blue, left] at (4.5, 0.5, 1) {-};
-
-%   \end{tikzpicture}
-%   \caption{Sensor de efecto Hall con semiconductor tipo P. El campo magnético vertical $H$ desvía los huecos y electrones hacia los laterales de la plaqueta, creando la tensión transversal $V_H$.}\label{fig:hall_completo}
-% \end{marginfigure}
+donde $R_H = 1/(n_e q)$ es la constante de Hall del material ($n_e$ densidad de portadores, $q$ carga del electrón) y $t$ el espesor del conductor. La corriente $I$ fluye horizontalmente, el campo $\vec{B}$ es perpendicular (hacia arriba) y la tensión de Hall $V_H$ se mide en la dirección transversal (lateral). Este principio se emplea en sensores de posición, velocidad angular y corriente sin contacto.
 
 \begin{marginfigure}
     \centering
     \shorthandoff{>}
     \begin{tikzpicture}[
-        x={(0:1cm)}, y={(90:1cm)}, z={(210:0.5cm)},
-        font=\scriptsize, >=stealth,
+        x={(0:1.0cm)}, y={(90:1.0cm)}, z={(215:0.6cm)},
+        >=Stealth,
         cargap/.style={circle, fill=red!20, draw=red, inner sep=0.5pt, font=\tiny},
         cargan/.style={circle, fill=blue!20, draw=blue, inner sep=0.5pt, font=\tiny}
     ]
 
-        % --- CAMPO MAGNÉTICO (Vectores verticales atravesando) ---
-        % Dibujamos algunos vectores detrás de la plaqueta
-        \foreach \ix in {0.5, 1.5, 2.5} {
-            \foreach \iz in {0.5, 1.5} {
-                \draw[green!60!black, thick, ->] (\ix, -0.5, \iz) -- (\ix, 2.5, \iz);
+        % --- Parámetros del bloque ---
+        \def\W{4.0} % Ancho (x)
+        \def\H{0.8} % Alto (y)
+        \def\D{2.5} % Profundidad (z)
+
+        % --- CUERPO DEL SEMICONDUCTOR (Caras traseras e inferior) ---
+        \fill[cyan!5, draw=brown!40!black] (0,0,0) -- (\W,0,0) -- (\W,0,\D) -- (0,0,\D) -- cycle; % Base
+        \fill[cyan!10, draw=brown!40!black] (0,0,0) -- (0,\H,0) -- (\W,\H,0) -- (\W,0,0) -- cycle; % Trasera
+
+        % --- CAMPO MAGNÉTICO (B) - Parte inferior y atravesando ---
+        \foreach \ix in {1.0, 2.0, 3.0} {
+            \draw[green!60!black, thick] (\ix, -0.8, \D/2) -- (\ix, 0, \D/2); % Tramo inferior
+            \draw[green!60!black, thin, dashed] (\ix, 0, \D/2) -- (\ix, \H, \D/2); % Tramo interno
+        }
+
+        % --- FLUJO DE PORTADORES (Superficie) ---
+        % Dibujamos vectores en la superficie superior
+        \foreach \iz in {0.6, 1.9} {
+            \foreach \ix in {0.2, 1.5, 2.8} {
+                \draw[purple!70, thick, ->] (\ix, \H, \iz) -- (\ix+0.8, \H, \iz); 
             }
         }
-        \node[green!60!black, font=\bfseries] at (2.8, 2.2, 0.5) {$\vec{B}$};
+        \node[purple] at (2.0, \H+0.4, 0.2) {Flujo huecos ($I$)};
 
-        \draw[->, purple, ultra thick] (-0.5, 0.2, 1) -- (3.5, 0.2, 1) 
-            node[pos=0, left, font=\tiny, align=right] {Corriente\\constante ($I$)};
+        % --- CUERPO DEL SEMICONDUCTOR (Caras frontales y superior) ---
+        \fill[cyan!20, opacity=0.4, draw=brown!80!black, thick] (0,0,\D) -- (\W,0,\D) -- (\W,\H,\D) -- (0,\H,\D) -- cycle; % Frontal
+        \fill[cyan!15, opacity=0.3, draw=brown!80!black, thick] (0,\H,0) -- (\W,\H,0) -- (\W,\H,\D) -- (0,\H,\D) -- cycle; % Superior
+        \draw[brown!80!black, thick] (\W,0,0) -- (\W,\H,0) -- (\W,\H,\D) -- (\W,0,\D) -- cycle; % Lateral derecha
 
-        % --- ELEMENTO HALL (Plaqueta tipo P) ---
-        % Base (Cara inferior)
-        %\fill[cyan!10, opacity=0.7] (0,0,2) -- (3,0,2) -- (3,0,0) -- (0,0,0) -- cycle;
-        % FRONTAL (Semiconductor translúcido para ver el campo)
-        \fill[cyan!10, opacity=0.7] (0,0,2) -- (3,0,2) -- (3,0.4,2) -- (0,0.4,2) -- cycle; 
-        % ARRIBA
-        \fill[cyan!10, opacity=0.7] (0,0.4,2) -- (3,0.4,2) -- (3,0.4,0) -- (0,0.4,0) -- cycle; % Superior
-        % trasera
-        %\fill[cyan!10, opacity=0.7] (0,0,0) -- (3,0,0) -- (3,0.4,0) -- (0,0.4,0) -- cycle;
-        % LADO
-        \fill[cyan!10, opacity=0.7] (3,0,2) -- (3,0,0) -- (3,0.4,0) -- (3,0.4,2) -- cycle; % Derecha
-
-        % Aristas de la plaqueta
-        % FRONTAL
-        \draw[thick, brown!60!black] (0,0,2) -- (3,0,2) -- (3,0.4,2) -- (0,0.4,2) -- cycle;
-        % ARRIBA
-        \draw[thick, brown!60!black] (0,0.4,2) -- (3,0.4,2) -- (3,0.4,0) -- (0,0.4,0) -- cycle;
-        % lado
-        \draw[thick, brown!60!black] (3,0,2) -- (3,0,0) -- (3,0.4,0) -- (3,0.4,2);
-
-        % --- PORTADORES Y CORRIENTE ---
-        % Flecha de corriente principal
-        
-        
-        % Acumulación de cargas (Lorentz)
-        % En tipo P con B hacia arriba e I a la derecha:
-        % Huecos (+) se van al fondo, electrones (-) vienen al frente
-        \foreach \i in {0.6, 1.4, 2.2} {
-            \node[cargap] at (\i, 0.45, 0.3) {+};
-            \node[cargan] at (\i, 0.45, 1.7) {-};
+        % --- CAMPO MAGNÉTICO (B) - Parte superior ---
+        \foreach \ix in {1.0, 2.0, 3.0} {
+            \draw[green!60!black, thick, ->] (\ix, \H, \D/2) -- (\ix, \H+1.4, \D/2);
         }
-        \node[anchor=north west, font=\tiny, gray] at (0,0,2) {Semiconductor Tipo P};
+        \node[green!60!black, font=\footnotesize\bfseries] at (3.5, \H+1.2, \D/2) {$\vec{B}$};
 
-        % --- CIRCUITO VOLTÍMETRO (V_H) ---
-        \fill[black] (1.5, 0.4, 0.1) circle (1.5pt); % Contacto atrás
-        \fill[black] (1.5, 0.4, 1.9) circle (1.5pt); % Contacto adelante
-        
-        \draw (1.5, 0.4, 0.1) -- (4, 0.4, 0.1) -- (4, 0.6, 1);
-        \draw (1.5, 0.4, 1.9) -- (4, 0.4, 1.9) -- (4, 1.4, 1);
-        
-        \draw[fill=white] (4, 1, 1) circle (0.3) node {$V_H$};
-        \node[right] at (4.3, 1, 1) {Tensión de Hall};
-        
-        % Signos del voltímetro
-        \node[blue, font=\bfseries] at (3.8, 1.4, 1) {+};
-        \node[blue, font=\bfseries] at (3.8, 0.6, 1) {-};
+        % --- ACUMULACIÓN DE CARGAS (Separación por Lorentz) ---
+        \foreach \ix in {1.0, 2.0, 3.0} {
+            \node[cargap] at (\ix, \H/2, \D) {$+$}; % Huecos al frente
+            \node[cargan] at (\ix, \H/2, 0) {$-$};   % Electrones al fondo
+        }
+        \node[anchor=south west, font=\tiny\bfseries, gray!40!black] at (0, 0, \D) {Tipo P};
 
-        % --- ETIQUETAS DE DIMENSIONES ---
-        \draw[<->, gray] (3.2, 0, 2) -- (3.2, 0.4, 2) node[midway, right] {$d$};
+        % --- INDICACIÓN DE DIFERENCIA DE POTENCIAL (Arrow) ---
+        % Líneas de referencia para V_H
+        \draw[gray, thin] (\W, \H/2, \D) -- (\W+0.5, \H/2, \D);
+        \draw[gray, thin] (\W, \H/2, 0) -- (\W+0.5, \H/2, 0);
+        \draw[<->, red, ultra thick] (\W+0.4, \H/2, \D) -- (\W+0.4, \H/2, 0) 
+            node[midway, right, yshift=-3pt] {$V_H$};
+        \node[red, align=left] at (\W+0.2, \H-1.5, \D/2) {Tensión\\transversal};
+
+        % --- DIMENSIONES ---
+        % Líneas de referencia y cota para d (espesor)
+        \draw[gray, thin] (0, 0, \D) -- (-0.5, 0, \D);
+        \draw[gray, thin] (0, \H, \D) -- (-0.5, \H, \D);
+        \draw[<->, gray] (-0.4, 0, \D) -- (-0.4, \H, \D) node[midway, left] {$d$};
+
+        % Líneas de referencia y cota para w (longitud)
+        \draw[gray, thin] (0, 0, \D) -- (0, -0.5, \D);
+        \draw[gray, thin] (\W, 0, \D) -- (\W, -0.5, \D);
+        \draw[<->, gray] (0, -0.4, \D) -- (\W, -0.4, \D) node[midway, below] {$w$};
 
     \end{tikzpicture}
     \caption{Principio del efecto Hall. El campo magnético $\vec{B}$ atraviesa verticalmente el material. La fuerza de Lorentz desvía los portadores mayoritarios (huecos en tipo P) hacia la cara posterior, estableciendo una diferencia de potencial transversal $V_H$.}\label{fig:hall_vectorial}
@@ -1543,44 +1361,172 @@ Los materiales \emph{anisótropos magnetorresistivos} (AMR) presentan una variac
 \end{equation}
 donde $\theta$ es el ángulo entre la magnetización y la corriente. Para campos pequeños, la sensibilidad es muy superior a la del efecto Hall, con variaciones del \qty{2}{\%}-\qty{3}{\%} de la resistencia por unidad de campo.
 
-Los \emph{sensores GMR} (Giant Magnetoresistance, Nobel de Física 2007) alcanzan variaciones de hasta el \qty{80}{\%} mediante multicapas cuánticas ferromagnético/antiferromagnético (Fe/Cr). Son la base de los cabezales de lectura de discos duros y de los sensores de ángulo en los codificadores magnéticos de precisión.
+Los \emph{sensores GMR} (Giant Magnetoresistance, Nobel de Física 2007) alcanzan variaciones de hasta el \qty{80}{\%} mediante multicapas cuánticas ferromagnético/antiferromagnético (Fe/Cr). Son la base de los cabezales de lectura de discos duros y de los sensores de ángulo en los codificadores magnéticos de precisión. En la Tabla~\ref{tab:hall_vs_mr} se comparan las características de los sensores Hall, AMR y GMR para aplicaciones de instrumentación magnética. 
 
-
-\marginnote{\textbf{Para el diseñador:} La elección entre Hall, AMR y GMR depende del rango de campo y la sensibilidad requerida. \textbf{Hall}: campos fuertes (\qtyrange{0.1}{1}{\tesla}), bajo coste. \textbf{AMR}: campos medios (\qty{1}{\micro\tesla} a \qty{1}{\milli\tesla}), buena linealidad. \textbf{GMR}: campos débiles (\qty{<1}{\micro\tesla}), máxima sensibilidad pero no lineal.}
+\marginnote{\textbf{Para el diseñador:} La elección entre Hall, AMR y GMR depende del rango de campo y la sensibilidad requerida. \textbf{Hall}: campos fuertes (\qtyrange{0.1}{1}{\tesla}), bajo coste. \textbf{AMR}: campos medios (\qty{1}{\micro\tesla} a \qty{1}{\milli\tesla}), buena linealidad. \textbf{GMR}: campos débiles (\qty{<1}{\micro\tesla}), máxima sensibilidad pero no lineal.}%
 
 \begin{table}[!ht]
     \centering
-    \caption{Comparativa Hall / AMR / GMR para el diseño de instrumentación magnética.}\label{tab:hall_vs_mr}
+    \caption{Comparativa Hall / AMR / GMR para el diseño de instrumentación magnética. Los valores son aproximados. La variación de resistencia se expresa en \% de la resistencia de la capa libre. \protect\label{tab:hall_vs_mr}}
     \small
     \setlength{\tabcolsep}{4pt}
-    \begin{tabularx}{\linewidth}{l c c c X}
+    \begin{tabularx}{\linewidth}{l c c X X}
         \toprule
-        \textbf{Tipo} & \textbf{Sens.} & \textbf{Rango} & \textbf{Lineal.} & \textbf{Aplicación típica} \\
+        \textbf{Tipo} & \textbf{Sensibilidad} & \textbf{Rango} & \textbf{Linealidad} & \textbf{Aplicación típica} \\
         \midrule
         Hall & \qty{1}{\milli\volt\per\milli\tesla} & \qtyrange{0.1}{1}{\tesla} & Buena & Posición, corriente \\
         AMR  & \qty{50}{\milli\volt\per\milli\tesla} & \qty{1}{\micro\tesla} a \qty{1}{\milli\tesla} & Buena & Brújulas, encoders \\
         GMR  & \qty{500}{\milli\volt\per\milli\tesla} & \qty{<1}{\micro\tesla} & Regular & HDD, biosensores \\
         \bottomrule
-    \end{tabularx}
-    
+    \end{tabularx}   
 \end{table}
 
-\section{Sensores Inductivos y Electromagnéticos}\label{sec:inductivos}
 
-\subsection{Sensores de Inductancia Variable (Reluctancia)}
-% Sensores de núcleo móvil.
-\subsection{Transformador Diferencial de Variación Lineal (LVDT)}
-% El sensor estrella de este capítulo. Estructura, fase y magnitud.
-\subsection{Sensores de Corrientes de Foucault (\textit{Eddy Currents})}
-\subsection{Sensores de Efecto Hall vs. Magnetorresistivos (Repaso)}
+
 
 \section{Acondicionamiento de Sensores Reactivos}\label{sec:acondic_reactivo}
 
+A diferencia de los sensores resistivos, que pueden excitarse con corriente continua, los sensores reactivos requieren obligatoriamente señales de excitación alterna (normalmente senoidales). Esto es debido a que en régimen de continua un condensador ideal actúa como un circuito abierto y un inductor como un cortocircuito, impidiendo la detección de cambios en su valor. Por tanto, el objetivo del acondicionamiento es procesar la señal de alterna para extraer la información contenida en la amplitud o en el desfase de la impedancia del sensor, convirtiéndola finalmente en una tensión continua proporcional a la magnitud medida.
+
 \subsection{Puentes de Alterna}
-% Puente de Maxwell, puente de Hay y puente de Wien. Condiciones de equilibrio.
+
+Estructuralmente, un puente de alterna es idéntico al puente de Wheatstone, formando un cuadrilátero o diamante con cuatro ramas de medida. La diferencia fundamental reside en que se alimenta mediante una fuente de tensión senoidal en una diagonal y utiliza impedancias complejas ($Z = R + jX$) en sus brazos. El objetivo es lograr el equilibrio, situación en la que no existe diferencia de potencial (ni en amplitud ni en fase) entre los nodos de la diagonal de salida.
+
+Para un puente con cuatro impedancias, la condición de equilibrio compleja es:
+\begin{equation}
+    Z_1 Z_4 = Z_2 Z_3
+\end{equation}
+Esta igualdad implica dos condiciones simultáneas: una para las magnitudes ($|Z_1||Z_4| = |Z_2||Z_3|$) y otra para las fases ($\theta_1 + \theta_4 = \theta_2 + \theta_3$).
+
+\paragraph{Puente de Maxwell} Se utiliza para medir una inductancia desconocida ($L_x, R_x$) comparándola con un condensador patrón ($C_s$). Su gran ventaja es que las condiciones de equilibrio son independientes de la frecuencia.
+
+\begin{marginfigure}
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}[american]
+        \ctikzset{resistors/scale=0.6, capacitors/scale=0.6, inductors/scale=0.6}
+        % Nodos del puente
+        \draw (0,0) coordinate (Vminus) 
+              to[R, l=$R_3$, *-*] (-1.5,1.5) coordinate (Va);
+
+        % Rama superior izquierda (R1 || Cs) en paralelo - Simetría de diamante
+        \draw (Va) -- ++(-0.3, 0.3) to[R, l=$R_1$] ++(1.5, 1.5) -- (0,3) coordinate (Vplus);
+        \draw (Va) to[C, l_=$C_s$] (Vplus);
+        \fill (Va) circle (2pt);
+        \fill (Vplus) circle (2pt);
+
+        \draw (0,0) to[L, l_=$L_x$, *-] (0.75,0.75) to[R, l_=$R_x$, -*] (1.5,1.5) coordinate (Vb);
+        \draw (1.5,1.5) to[R, l_=$R_2$, *-*] (0,3);
+        
+        % Fuente de excitación conectada a la diagonal de alimentación
+        \draw (Vplus) -- (2.2,3) to[vsourcesin, l=$v_{exc}$] (2.2,0) -- (Vminus);
+        
+        % Tensión de salida diferencial
+        \draw[<->, red, thick] (Va) -- (Vb) node[midway, below] {$v_o$};
+    \end{tikzpicture}
+    \caption[Puente de Maxwell.]{Puente de Maxwell para la medida de inductancias. Al equilibrar el puente, se obtienen los valores de $L_x$ y $R_x$ a partir de componentes puramente resistivos y un condensador patrón $C_s$.}\label{fig:puente_maxwell}
+\end{marginfigure}
+
+Para derivar las condiciones de equilibrio, planteamos la igualdad de las ramas opuestas $Z_1 Z_4 = Z_2 Z_3$. En este caso, la rama 1 tiene una admitancia $Y_1 = 1/R_1 + j\omega C_s$, y la rama 4 es la bobina bajo prueba $Z_4 = R_x + j\omega L_x$. Reescribiendo la condición como $Z_4 / Z_3 = Z_2 Y_1$, obtenemos:
+\begin{equation}
+    \frac{R_x + j\omega L_x}{R_3} = R_2 \left( \frac{1}{R_1} + j\omega C_s \right)
+\end{equation}
+
+Al igualar la parte real con la real, y la imaginaria con la imaginaria, se llega al resultado final:
+\begin{equation}
+    R_x = \frac{R_2 R_3}{R_1} \quad ; \quad L_x = R_2 R_3 C_s
+\end{equation}
+
+\marginnote{\textbf{Independencia de la frecuencia:} Observe que la frecuencia $\omega$ ha desaparecido de ambas ecuaciones. Esto significa que el equilibrio del puente de Maxwell no depende de la estabilidad del oscilador de excitación, lo que lo hace sumamente preciso para caracterizar bobinas con pérdidas resistivas significativas.}
+
 \subsection{Circuitos Resonantes y Osciladores}
-% Conversión de C o L a frecuencia.
+
+En aplicaciones donde la señal debe transmitirse a larga distancia o en entornos con mucho ruido de amplitud, se prefiere convertir la variación de $L$ o $C$ en una variación de \textbf{frecuencia}. 
+
+Al integrar el sensor en un circuito resonante $LC$, la frecuencia de oscilación viene dada por la fórmula de Thomson:
+\begin{equation}
+    f_r = \frac{1}{2\pi \sqrt{LC}}
+\end{equation}
+Cualquier cambio en la magnitud física que altere la capacidad del sensor provocará un desplazamiento de la frecuencia ($\Delta f$). Esta señal digital es intrínsecamente robusta y fácil de medir mediante el contador/temporizador de un microcontrolador sin necesidad de un ADC de alta precisión.
+
+\begin{marginfigure}
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}[scale=0.8]
+        % Bloque Oscilador
+        \draw[fill=blue!10, thick] (0,0) rectangle (2.5,1.5);
+        \node at (1.25, 0.75) {Oscilador};
+        
+        % Sensor LC
+        \draw (1.25, 0) -- (1.25, -0.5);
+        \draw (0.5, -0.5) to[C, l=$C_s$] (0.5, -1.5) node[ground]{};
+        \draw (2.0, -0.5) to[L, l=$L$] (2.0, -1.5) node[ground]{};
+        \draw (0.5, -0.5) -- (2.0, -0.5);
+        
+        % Salida
+        \draw[->, thick] (2.5, 0.75) -- (4, 0.75) node[right] {$f_{out} \propto \frac{1}{\sqrt{C_s}}$};
+        
+        % Estímulo
+        \draw[->, ultra thick, red] (1.25, -2.2) -- (1.25, -1.7) node[below, pos=0] {Magnitud Física};
+    \end{tikzpicture}
+    \caption{Acondicionamiento mediante conversión a frecuencia. El sensor forma parte de la red de realimentación de un oscilador.}\label{fig:oscilador_sensor}
+\end{marginfigure}
+
 \subsection{Demodulación Síncrona (Detección de Fase)}
-% Crucial para el LVDT para saber el sentido del desplazamiento.
+
+Es la técnica reina para el LVDT y sensores de Eddy Currents. Permite extraer la información de una señal alterna (portadora) multiplicándola por una referencia de la misma frecuencia. 
+
+Supongamos una señal de sensor $v_s(t) = V_s \sin(\omega t + \phi)$ y una referencia $v_{ref}(t) = V_r \sin(\omega t)$. Al multiplicarlas:
+\begin{equation}
+    v_{mult}(t) = \frac{V_s V_r}{2} \left[ \cos(\phi) - \cos(2\omega t + \phi) \right]
+\end{equation}
+Tras pasar por un filtro paso bajo (LPF), eliminamos el término de alta frecuencia ($2\omega$), obteniendo una tensión de continua proporcional al coseno del desfase:
+\begin{equation}
+    V_{out, DC} = \frac{V_s V_r}{2} \cos(\phi)
+\end{equation}
+
+\marginnote{\textbf{Detección de dirección:} En el LVDT, si el núcleo se mueve a la derecha, $\phi=0^\circ \implies \cos(0)=1$ (V positiva). Si se mueve a la izquierda, $\phi=180^\circ \implies \cos(180)=-1$ (V negativa). Así recuperamos el signo del desplazamiento.}
+
+\begin{marginfigure}
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}[node distance=1.5cm, >=stealth]
+        \tikzstyle{block} = [draw, rectangle, minimum height=0.8cm, minimum width=1.2cm]
+        \tikzstyle{sum} = [draw, circle, inner sep=0pt, minimum size=0.5cm]
+
+        \node (in) {$v_s(t)$};
+        \node [sum, right of=in] (mult) {$\times$};
+        \node [block, right of=mult, node distance=2cm] (lpf) {LPF};
+        \node [right of=lpf] (out) {$V_{DC}$};
+        \node [below of=mult, node distance=1.2cm] (ref) {$v_{ref}(t)$};
+
+        \draw [->] (in) -- (mult);
+        \draw [->] (mult) -- (lpf);
+        \draw [->] (lpf) -- (out);
+        \draw [->] (ref) -- (mult);
+    \end{tikzpicture}
+    \caption{Diagrama de bloques de un demodulador síncrono. Esta estructura actúa como un filtro de banda estrecha extremadamente selectivo, eliminando cualquier ruido que no esté en fase con la referencia.}\label{fig:block_demod}
+\end{marginfigure}
 
 \section{Resumen y Comparativa de Sensores Reactivos}\label{sec:resumen_reactivos}
+
+Para concluir el estudio de los sensores reactivos, la Tabla~\ref{tab:comparativa_final} resume las tecnologías analizadas. La elección dependerá de la precisión requerida y las condiciones ambientales.
+
+\begin{table}[!htbp]
+    \centering
+    \caption[Comparativa general de tecnologías reactivas.]{Comparativa general de tecnologías reactivas.}\label{tab:comparativa_final}
+    \small
+    \setlength{\tabcolsep}{3pt}
+    \begin{tabularx}{\linewidth}{l X X X}
+        \toprule
+        \textbf{Tipo} & \textbf{Variable} & \textbf{Ventaja clave} & \textbf{Limitación} \\
+        \midrule
+        Capacitivo & Capacidad ($C$) & Resolución sub-nanométrica. & Sensible a humedad y parásitas. \\
+        LVDT & Inducción ($M$) & Linealidad y robustez industrial. & Tamaño y electrónica compleja. \\
+        Eddy Currents & Impedancia ($Z$) & Inmune a suciedad, alta velocidad. & Rango muy corto ($\approx$ mm). \\
+        Hall/AMR & Tensión/Resist. & Bajo coste, estado sólido (IC). & Sensible a campos externos. \\
+        \bottomrule
+    \end{tabularx}   
+\end{table}
+
+\marginnote{\textbf{Conclusión:} Mientras que los sensores resistivos son la solución de bajo coste, los reactivos son la base de la \textit{instrumentación de precisión}. El dominio de la fase y el acondicionamiento en alterna permite al ingeniero diseñar sistemas con una relación señal-ruido inalcanzable para la electrónica puramente resistiva.}

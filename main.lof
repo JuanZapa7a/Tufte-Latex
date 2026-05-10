@@ -1,11 +1,11 @@
 \babel@toc {spanish}{}\relax 
-\contentsline {figure}{\numberline {1.1}{\ignorespaces Cadena de Instrumentación.}}{13}{figure.1.1}%
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Cadena de Instrumentación.}}{15}{figure.1.1}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {1.2}{\ignorespaces Representación del Error de Medida.}}{14}{figure.1.2}%
-\contentsline {figure}{\numberline {1.3}{\ignorespaces Relación entre Exactitud y Precisión.}}{14}{figure.1.3}%
-\contentsline {figure}{\numberline {1.4}{\ignorespaces Ejemplo de errores en una balanza.}}{15}{figure.1.4}%
-\contentsline {figure}{\numberline {1.5}{\ignorespaces Ejemplos de distribuciones de probabilidad para la evaluación tipo B de la incertidumbre}}{16}{figure.1.5}%
-\contentsline {figure}{\numberline {1.6}{\ignorespaces Relación entre el factor de cobertura $k$ y el nivel de confianza en una distribución normal.}}{18}{figure.1.6}%
+\contentsline {figure}{\numberline {1.2}{\ignorespaces Representación del Error de Medida.}}{16}{figure.1.2}%
+\contentsline {figure}{\numberline {1.3}{\ignorespaces Relación entre Exactitud y Precisión.}}{16}{figure.1.3}%
+\contentsline {figure}{\numberline {1.4}{\ignorespaces Ejemplo de errores en una balanza.}}{17}{figure.1.4}%
+\contentsline {figure}{\numberline {1.5}{\ignorespaces Ejemplos de distribuciones de probabilidad para la evaluación tipo B de la incertidumbre}}{18}{figure.1.5}%
+\contentsline {figure}{\numberline {1.6}{\ignorespaces Relación entre el factor de cobertura $k$ y el nivel de confianza en una distribución normal.}}{20}{figure.1.6}%
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Ajuste lineal por mínimos cuadrados.}}{22}{figure.2.1}%
 \contentsline {figure}{\numberline {2.2}{\ignorespaces Representación de los puntos y la recta de ajuste calculada por el Método de los Mínimos Cuadrados.}}{23}{figure.2.2}%
@@ -58,13 +58,16 @@
 \contentsline {figure}{\numberline {4.12}{\ignorespaces Sensor de reluctancia variable.}}{55}{figure.4.12}%
 \contentsline {figure}{\numberline {4.13}{\ignorespaces Respuesta $L(g)$ del sensor de reluctancia variable.}}{55}{figure.4.13}%
 \contentsline {figure}{\numberline {4.14}{\ignorespaces Sensor de velocidad de rueda ABS.}}{55}{figure.4.14}%
-\contentsline {figure}{\numberline {4.15}{\ignorespaces Sección transversal del LVDT. El primario está alimentado con una señal alterna. Las dos secundarias están conectadas en oposición de serie. La varilla de accionamiento controla la posición del núcleo ferromagnético. El núcleo ferromagnético se encuentra en la sección transversal.}}{56}{figure.4.15}%
+\contentsline {figure}{\numberline {4.15}{\ignorespaces Sección transversal del LVDT. El primario está alimentado con una señal alterna y las secundarias están conectadas en oposición de serie. La varilla de accionamiento controla la posición del núcleo ferromagnético.}}{56}{figure.4.15}%
 \contentsline {figure}{\numberline {4.16}{\ignorespaces Curvas de transferencia del LVDT.}}{56}{figure.4.16}%
 \contentsline {figure}{\numberline {4.17}{\ignorespaces Principio de funcionamiento de los sensores de corrientes de Foucault. El campo magnético primario ($\vec {B}_{exc}$) generado por la bobina induce corrientes de Foucault circulares en el target conductor. Estas generan, por la ley de Lenz, un campo de reacción ($\vec {B}_{reac}$) que se opone al original, alterando la impedancia compleja de la sonda según la distancia de separación $\delta $.}}{57}{figure.4.17}%
 \contentsline {figure}{\numberline {4.18}{\ignorespaces Profundidad de penetración $\delta _{skin}$ frente a frecuencia de excitación para aluminio y acero. El acero, al ser ferromagnético ($\mu _r \gg 1$), confina las corrientes en una capa mucho más delgada.}}{57}{figure.4.18}%
 \contentsline {figure}{\numberline {4.19}{\ignorespaces Principio del efecto Hall. El campo magnético $\vec {B}$ atraviesa verticalmente el material. La fuerza de Lorentz desvía los portadores mayoritarios (huecos en tipo P) hacia la cara posterior, estableciendo una diferencia de potencial transversal $V_H$.}}{58}{figure.4.19}%
 \contentsline {figure}{\numberline {4.20}{\ignorespaces Puente de Maxwell.}}{59}{figure.4.20}%
-\contentsline {figure}{\numberline {4.21}{\ignorespaces Acondicionamiento mediante conversión a frecuencia. El sensor forma parte de la red de realimentación de un oscilador.}}{59}{figure.4.21}%
+\contentsline {figure}{\numberline {4.21}{\ignorespaces Acondicionamiento mediante conversión a frecuencia. El sensor forma parte de la red de realimentación de un oscilador.}}{60}{figure.4.21}%
 \contentsline {figure}{\numberline {4.22}{\ignorespaces Diagrama de bloques de un demodulador síncrono. Esta estructura actúa como un filtro de banda estrecha extremadamente selectivo, eliminando cualquier ruido que no esté en fase con la referencia.}}{60}{figure.4.22}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Circuito completo del amplificador de instrumentación.}}{63}{figure.5.1}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Filtro paso bajo Sallen-Key de segundo orden. Presenta una caída de \qty {40}{dB/decada} tras la frecuencia de corte.}}{64}{figure.5.2}%
 \addvspace {10\p@ }
 \contentsfinish 

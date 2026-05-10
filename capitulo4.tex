@@ -998,16 +998,16 @@ El \emph{Linear Variable Differential Transformer} (LVDT) es el sensor de despla
     % Varilla de accionamiento
     \draw[thick, red!70!black] (3.5, 1.75) -- (5.5, 1.75);
     \draw[->, thick, red!70!black] (5.5, 1.75) -- (6.0, 1.75)
-        node[right, font=\tiny] {$x$};
+        node[right, font=\small] {$x$};
 
     % Posición nula
     \draw[dashed, gray] (2.5, 0) -- (2.5, 3.5)
         node[above, gray] {$x=0$};
 \end{tikzpicture}
-\caption{Sección transversal del LVDT. El primario está alimentado con una señal alterna. Las dos secundarias están conectadas en oposición de serie. La varilla de accionamiento controla la posición del núcleo ferromagnético. El núcleo ferromagnético se encuentra en la sección transversal.}\label{fig:lvdt_estructura}
+\caption{Sección transversal del LVDT. El primario está alimentado con una señal alterna y las secundarias están conectadas en oposición de serie. La varilla de accionamiento controla la posición del núcleo ferromagnético.}\label{fig:lvdt_estructura}
 \end{marginfigure}
 
-Como se muestra en la figura~\ref{fig:lvdt_estructura}, el LVDT consta de tres bobinas coaxiales: un \emph{primario} central excitado con $V_p \sin(\omega t)$ (tipicamente entre \qty{1}{kHz} y \qty{10}{kHz}) y dos \emph{secundarios} (S1 y S2) situados simétricamente a ambos lados, conectados en oposición de serie:
+Como se muestra en la figura~\ref{fig:lvdt_estructura}, el LVDT consta de tres bobinas coaxiales: un \emph{primario} central excitado con una portadora $V_p \sin(\omega t)$ (típicamente entre \qty{1}{kHz} y \qty{10}{kHz}) y dos \emph{secundarios} (S1 y S2) situados simétricamente, conectados en oposición de serie:
 
 \begin{equation}\label{eq:v_out_lvdt}
     V_{out} = V_{S1} - V_{S2}
@@ -1277,7 +1277,7 @@ Cuando una corriente $I$ fluye por un conductor situado en un campo magnético $
 %
 donde $R_H = 1/(n_e q)$ es la constante de Hall del material ($n_e$ densidad de portadores, $q$ carga del electrón) y $t$ el espesor del conductor. La corriente $I$ fluye horizontalmente, el campo $\vec{B}$ es perpendicular (hacia arriba) y la tensión de Hall $V_H$ se mide en la dirección transversal (lateral). Este principio se emplea en sensores de posición, velocidad angular y corriente sin contacto.
 
-\begin{marginfigure}
+\begin{marginfigure}[-10em]
     \centering
     \shorthandoff{>}
     \begin{tikzpicture}[
@@ -1309,10 +1309,10 @@ donde $R_H = 1/(n_e q)$ es la constante de Hall del material ($n_e$ densidad de 
                 \draw[purple!70, thick, ->] (\ix, \H, \iz) -- (\ix+0.8, \H, \iz); 
             }
         }
-        \node[purple] at (2.0, \H+0.4, 0.2) {Flujo huecos ($I$)};
+        \node[purple] at (2.0, \H+0.4, 0.2) {Corriente de huecos ($I$)};
 
         % --- CUERPO DEL SEMICONDUCTOR (Caras frontales y superior) ---
-        \fill[cyan!20, opacity=0.4, draw=brown!80!black, thick] (0,0,\D) -- (\W,0,\D) -- (\W,\H,\D) -- (0,\H,\D) -- cycle; % Frontal
+        \fill[red!20, opacity=0.4, draw=brown!80!black, thick] (0,0,\D) -- (\W,0,\D) -- (\W,\H,\D) -- (0,\H,\D) -- cycle; % Frontal
         \fill[cyan!15, opacity=0.3, draw=brown!80!black, thick] (0,\H,0) -- (\W,\H,0) -- (\W,\H,\D) -- (0,\H,\D) -- cycle; % Superior
         \draw[brown!80!black, thick] (\W,0,0) -- (\W,\H,0) -- (\W,\H,\D) -- (\W,0,\D) -- cycle; % Lateral derecha
 
@@ -1333,15 +1333,15 @@ donde $R_H = 1/(n_e q)$ es la constante de Hall del material ($n_e$ densidad de 
         % Líneas de referencia para V_H
         \draw[gray, thin] (\W, \H/2, \D) -- (\W+0.5, \H/2, \D);
         \draw[gray, thin] (\W, \H/2, 0) -- (\W+0.5, \H/2, 0);
-        \draw[<->, red, ultra thick] (\W+0.4, \H/2, \D) -- (\W+0.4, \H/2, 0) 
+        \draw[<->, red!50!black, thick] (\W+0.4, \H/2, \D) -- (\W+0.4, \H/2, 0) 
             node[midway, right, yshift=-3pt] {$V_H$};
-        \node[red, align=left] at (\W+0.2, \H-1.5, \D/2) {Tensión\\transversal};
+        \node[red!50!black, font=\tiny, align=left] at (\W+0.4, \H-1, \D/2) {Tensión\\transversal};
 
         % --- DIMENSIONES ---
         % Líneas de referencia y cota para d (espesor)
-        \draw[gray, thin] (0, 0, \D) -- (-0.5, 0, \D);
-        \draw[gray, thin] (0, \H, \D) -- (-0.5, \H, \D);
-        \draw[<->, gray] (-0.4, 0, \D) -- (-0.4, \H, \D) node[midway, left] {$d$};
+        \draw[gray, thin] (0, 0, \D) -- (-0.3, 0, \D);
+        \draw[gray, thin] (0, \H, \D) -- (-0.3, \H, \D);
+        \draw[<->, gray] (-0.2, 0, \D) -- (-0.2, \H, \D) node[midway, left] {$d$};
 
         % Líneas de referencia y cota para w (longitud)
         \draw[gray, thin] (0, 0, \D) -- (0, -0.5, \D);
@@ -1361,9 +1361,14 @@ Los materiales \emph{anisótropos magnetorresistivos} (AMR) presentan una variac
 \end{equation}
 donde $\theta$ es el ángulo entre la magnetización y la corriente. Para campos pequeños, la sensibilidad es muy superior a la del efecto Hall, con variaciones del \qty{2}{\%}-\qty{3}{\%} de la resistencia por unidad de campo.
 
-Los \emph{sensores GMR} (Giant Magnetoresistance, Nobel de Física 2007) alcanzan variaciones de hasta el \qty{80}{\%} mediante multicapas cuánticas ferromagnético/antiferromagnético (Fe/Cr). Son la base de los cabezales de lectura de discos duros y de los sensores de ángulo en los codificadores magnéticos de precisión. En la Tabla~\ref{tab:hall_vs_mr} se comparan las características de los sensores Hall, AMR y GMR para aplicaciones de instrumentación magnética. 
+\marginnote[-3em]{\textbf{Para el diseñador:} La elección entre Hall, AMR y GMR depende del rango de campo y la sensibilidad requerida. \emph{Hall}: campos fuertes (\qtyrange{0.1}{1}{\tesla}), bajo coste. \emph{AMR}: campos medios (\qty{1}{\micro\tesla} a \qty{1}{\milli\tesla}), buena linealidad. \emph{GMR}: campos débiles (\qty{<1}{\micro\tesla}), máxima sensibilidad pero no lineal.}%
 
-\marginnote{\textbf{Para el diseñador:} La elección entre Hall, AMR y GMR depende del rango de campo y la sensibilidad requerida. \textbf{Hall}: campos fuertes (\qtyrange{0.1}{1}{\tesla}), bajo coste. \textbf{AMR}: campos medios (\qty{1}{\micro\tesla} a \qty{1}{\milli\tesla}), buena linealidad. \textbf{GMR}: campos débiles (\qty{<1}{\micro\tesla}), máxima sensibilidad pero no lineal.}%
+Los \emph{sensores GMR} (Giant Magnetoresistance) alcanzan variaciones de hasta el \qty{80}{\%} mediante multicapas cuánticas ferromagnético/antiferro\-magnético (Fe/Cr). Son la base de los cabezales de lectura de discos duros y de los sensores de ángulo en los codificadores de precisión. La Tabla~\ref{tab:hall_vs_mr} resume las características de estos tres tipos de sensores para aplicaciones de instrumentación magnética.   
+
+\marginnote[-3em]{\textbf{Premio Nobel 2007:} Albert Fert y Peter Grünberg compartieron el galardón por el descubrimiento de la GMR de forma independiente. Este avance permitió que la densidad de almacenamiento en los discos duros aumentara de forma exponencial, reduciendo el tamaño de los cabezales de lectura y haciendo posible la era del \emph{Big Data} y la tecnología portátil actual.}
+
+
+
 
 \begin{table}[!ht]
     \centering
@@ -1398,7 +1403,7 @@ Para un puente con cuatro impedancias, la condición de equilibrio compleja es:
 \end{equation}
 Esta igualdad implica dos condiciones simultáneas: una para las magnitudes ($|Z_1||Z_4| = |Z_2||Z_3|$) y otra para las fases ($\theta_1 + \theta_4 = \theta_2 + \theta_3$).
 
-\paragraph{Puente de Maxwell} Se utiliza para medir una inductancia desconocida ($L_x, R_x$) comparándola con un condensador patrón ($C_s$). Su gran ventaja es que las condiciones de equilibrio son independientes de la frecuencia.
+\paragraph{Puente de Maxwell} Se utiliza para medir una inductancia ($L_x, R_x$) desconocida comparándola con un condensador patrón ($C_s$). El esquema de medición se muestra en la Figura~\ref{fig:puente_maxwell}. Su gran ventaja es que las condiciones de equilibrio son independientes de la frecuencia.
 
 \begin{marginfigure}
     \centering
@@ -1441,24 +1446,25 @@ Al igualar la parte real con la real, y la imaginaria con la imaginaria, se lleg
 
 \subsection{Circuitos Resonantes y Osciladores}
 
-En aplicaciones donde la señal debe transmitirse a larga distancia o en entornos con mucho ruido de amplitud, se prefiere convertir la variación de $L$ o $C$ en una variación de \textbf{frecuencia}. 
+En aplicaciones donde la señal debe transmitirse a larga distancia o en entornos con mucho ruido de amplitud, se prefiere convertir la variación de $L$ o $C$ en una variación de \emph{frecuencia}. 
 
 Al integrar el sensor en un circuito resonante $LC$, la frecuencia de oscilación viene dada por la fórmula de Thomson:
 \begin{equation}
     f_r = \frac{1}{2\pi \sqrt{LC}}
 \end{equation}
-Cualquier cambio en la magnitud física que altere la capacidad del sensor provocará un desplazamiento de la frecuencia ($\Delta f$). Esta señal digital es intrínsecamente robusta y fácil de medir mediante el contador/temporizador de un microcontrolador sin necesidad de un ADC de alta precisión.
+Cualquier cambio en la magnitud física que altere la capacidad del sensor provocará un desplazamiento de la frecuencia ($\Delta f$). Esta señal digital es intrínsecamente robusta y fácil de medir mediante el contador/temporizador de un microcontrolador sin necesidad de un ADC de alta precisión. La Figura~\ref{fig:oscilador_sensor} muestra un ejemplo de cómo integrar un sensor capacitivo en la red de realimentación de un oscilador para convertir su variación en una frecuencia proporcional a la magnitud medida.
 
 \begin{marginfigure}
     \centering
     \shorthandoff{>}
-    \begin{tikzpicture}[scale=0.8]
+    \begin{tikzpicture}[scale=1.0]
+      \ctikzset{resistors/scale=0.6, capacitors/scale=0.6, inductors/scale=0.6}
         % Bloque Oscilador
         \draw[fill=blue!10, thick] (0,0) rectangle (2.5,1.5);
         \node at (1.25, 0.75) {Oscilador};
         
         % Sensor LC
-        \draw (1.25, 0) -- (1.25, -0.5);
+        \draw (1.25, 0) -- (1.25, -0.5) node[circ,scale=0.6]{};
         \draw (0.5, -0.5) to[C, l=$C_s$] (0.5, -1.5) node[ground]{};
         \draw (2.0, -0.5) to[L, l=$L$] (2.0, -1.5) node[ground]{};
         \draw (0.5, -0.5) -- (2.0, -0.5);
@@ -1477,17 +1483,23 @@ Cualquier cambio en la magnitud física que altere la capacidad del sensor provo
 Es la técnica reina para el LVDT y sensores de Eddy Currents. Permite extraer la información de una señal alterna (portadora) multiplicándola por una referencia de la misma frecuencia. 
 
 Supongamos una señal de sensor $v_s(t) = V_s \sin(\omega t + \phi)$ y una referencia $v_{ref}(t) = V_r \sin(\omega t)$. Al multiplicarlas:
+
+\begin{equation}
+    v_{mult}(t) = v_s(t) \cdot v_{ref}(t) = V_s V_r \sin(\omega t + \phi) \sin(\omega t)
+\end{equation}
+Aplicando la identidad trigonométrica $\sin A \sin B = \frac{1}{2} [\cos(A-B) - \cos(A+B)]$, obtenemos: 
+
 \begin{equation}
     v_{mult}(t) = \frac{V_s V_r}{2} \left[ \cos(\phi) - \cos(2\omega t + \phi) \right]
 \end{equation}
-Tras pasar por un filtro paso bajo (LPF), eliminamos el término de alta frecuencia ($2\omega$), obteniendo una tensión de continua proporcional al coseno del desfase:
+Como se muestra en la Figura~\ref{fig:block_demod}, tras pasar por un filtro paso bajo (Low Pass Filter, LPF), eliminamos el término de alta frecuencia ($2\omega$), obteniendo una tensión de continua proporcional al coseno del desfase:
 \begin{equation}
     V_{out, DC} = \frac{V_s V_r}{2} \cos(\phi)
 \end{equation}
 
-\marginnote{\textbf{Detección de dirección:} En el LVDT, si el núcleo se mueve a la derecha, $\phi=0^\circ \implies \cos(0)=1$ (V positiva). Si se mueve a la izquierda, $\phi=180^\circ \implies \cos(180)=-1$ (V negativa). Así recuperamos el signo del desplazamiento.}
+\marginnote[-10em]{\textbf{Detección de dirección:} En el LVDT, si el núcleo se mueve a la derecha, $\phi=0^\circ \implies \cos(0)=1$ (V positiva). Si se mueve a la izquierda, $\phi=180^\circ \implies \cos(180)=-1$ (V negativa). Así recuperamos el signo del desplazamiento.}
 
-\begin{marginfigure}
+\begin{marginfigure}[-2em]
     \centering
     \shorthandoff{>}
     \begin{tikzpicture}[node distance=1.5cm, >=stealth]
@@ -1510,14 +1522,15 @@ Tras pasar por un filtro paso bajo (LPF), eliminamos el término de alta frecuen
 
 \section{Resumen y Comparativa de Sensores Reactivos}\label{sec:resumen_reactivos}
 
-Para concluir el estudio de los sensores reactivos, la Tabla~\ref{tab:comparativa_final} resume las tecnologías analizadas. La elección dependerá de la precisión requerida y las condiciones ambientales.
+Para concluir el estudio de los sensores reactivos, la Tabla~\ref{tab:comparativa_final} resume las tecnologías analizadas. La elección dependerá de la precisión requerida y las condiciones ambientales. 
+  Si se busca la máxima resolución y el entorno es controlado, los sensores capacitivos son la mejor opción. Para aplicaciones industriales robustas, los LVDT son la referencia. En entornos sucios o con alta velocidad, los Eddy Currents son insuperables. Para aplicaciones de bajo coste o integración en ICs, los sensores de efecto Hall y AMR son la elección natural.
 
-\begin{table}[!htbp]
+\begin{table}[!ht]
     \centering
-    \caption[Comparativa general de tecnologías reactivas.]{Comparativa general de tecnologías reactivas.}\label{tab:comparativa_final}
+    \caption[Comparativa general de tecnologías reactivas.]{Comparativa general de tecnologías reactivas. Se resaltan las ventajas y limitaciones de cada tecnología. Destacamos que la elección dependerá de la precisión requerida y las condiciones ambientales.}\label{tab:comparativa_final}
     \small
     \setlength{\tabcolsep}{3pt}
-    \begin{tabularx}{\linewidth}{l X X X}
+    \begin{tabularx}{\linewidth}{l l X X}
         \toprule
         \textbf{Tipo} & \textbf{Variable} & \textbf{Ventaja clave} & \textbf{Limitación} \\
         \midrule
@@ -1530,3 +1543,36 @@ Para concluir el estudio de los sensores reactivos, la Tabla~\ref{tab:comparativ
 \end{table}
 
 \marginnote{\textbf{Conclusión:} Mientras que los sensores resistivos son la solución de bajo coste, los reactivos son la base de la \textit{instrumentación de precisión}. El dominio de la fase y el acondicionamiento en alterna permite al ingeniero diseñar sistemas con una relación señal-ruido inalcanzable para la electrónica puramente resistiva.}
+
+\section{Resumen de Errores en Sensores Reactivos}\label{sec:errores_reactivos}
+
+El diseño de un sistema de instrumentación basado en sensores reactivos presenta desafíos adicionales a los resistivos, especialmente debido a la naturaleza alterna de la excitación y la influencia crítica de elementos parásitos. En esta sección se clasifican los errores analizados en este capítulo, proporcionando la base necesaria para el diseño de hardware de alta resolución.
+
+Como se ha estudiado, los errores en la cadena de medida reactiva pueden clasificarse en sistemáticos y aleatorios. \marginnote{\textbf{Prioridades de diseño:} En sensores capacitivos de muy baja capacidad (\unit{pF}), el error dominante suele ser la \textbf{capacidad parásita} del cableado. En sensores inductivos como el LVDT, el error principal proviene de la \textbf{tensión residual de cuadratura} en el punto nulo.} En ambos casos, la mitigación de estos errores es fundamental para alcanzar la resolución teórica del sensor. La Tabla~\ref{tab:resumen_errores_reactivos} resume las fuentes de error más relevantes, su manifestación en la medida y las técnicas de mitigación recomendadas.
+
+\subsection{El Presupuesto de Errores (\textit{Error Budget})}
+El \textit{error budget} es una herramienta esencial para el ingeniero de instrumentación, que permite cuantificar y priorizar las fuentes de error en un sistema de medida. Para un sensor reactivo, el error total ($E_{total}$) se puede expresar como la raíz cuadrada de la suma de los cuadrados de los errores individuales:
+\begin{equation}
+    E_{total} = \sqrt{E_1^2 + E_2^2 + \ldots + E_n^2}
+\end{equation}
+Donde cada $E_i$ representa una fuente de error específica (capacidad parásita, tensión residual, acoplamientos magnéticos, etc.). El objetivo del diseño es minimizar cada $E_i$ a través de técnicas de mitigación, asegurando que el error total se mantenga dentro de los límites requeridos para la aplicación.
+
+\begin{table}[!ht]
+    \centering
+    \small
+    \caption[Clasificación y mitigación de errores en sistemas de medida reactivos.]{Clasificación y mitigación de errores en sistemas de medida reactivos.}\label{tab:resumen_errores_reactivos}
+    \setlength{\tabcolsep}{2pt} % Reducimos el espacio entre columnas
+    \begin{tabularx}{\linewidth}{l X X}
+        \toprule
+        \textbf{Fuente de Error} & \textbf{Manifestación Medida} & \textbf{Técnica de Mitigación} \\
+        \midrule
+        Capacidades parásitas & Atenuación masiva de la sensibilidad relativa ($\Delta C/C$). & Guarda activa (\textit{driven shield}) y anillos de guarda. \\
+        \midrule
+        Tensión residual & Salida no nula en el centro del LVDT ($x=0$). & Ajuste del punto nulo y demodulación síncrona. \\
+        \midrule
+        Acoplamientos magnéticos & Ruido inducido por maquinaria cercana. & Blindaje magnético (mu-metal) y cables de par trenzado. \\
+        \midrule
+        Deriva de la portadora & Error de ganancia por inestabilidad de la amplitud de excitación. & Uso de referencias de tensión de alterna estables o medida ratiométrica. \\
+        \bottomrule
+    \end{tabularx}
+\end{table}

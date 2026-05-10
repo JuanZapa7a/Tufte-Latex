@@ -9,11 +9,10 @@ Un sistema de instrumentación no es solo un sensor; es una cadena de bloques qu
 
 \begin{enumerate}
     \item \emph{Mundo Físico}: La magnitud a medir (temperatura, presión, flujo, etc.).
-    \item \emph{Sensor/Transductor}: Interfaz con el mundo físico. Convierte la magnitud física en una señal eléctrica.
-    \item \emph{Sensor/Transductor}: Convierte la magnitud física en eléctrica (ej. Resistencia, Voltaje).
+    \item \emph{Sensor/Transductor}: Interfaz que convierte la magnitud física en una señal eléctrica (ej. Resistencia, Voltaje).
     \item \emph{Acondicionamiento de Señal}: Filtrado, amplificación, linealización.
     \item \emph{Adquisición de Datos (DAQ)}: Conversión Analógica-Digital (ADC).
-    \item \emph{Procesamiento y Presentación}: Procesamiento y Presentación: Microcontrolador/PC y visualización. 
+    \item \emph{Procesamiento y Presentación}: Microcontrolador/PC y visualización de la información. 
 \end{enumerate}
 
 \begin{marginfigure}
@@ -34,7 +33,7 @@ Un sistema de instrumentación no es solo un sensor; es una cadena de bloques qu
     \node[left of=cond, node distance=3.2cm] (noise) {Ruido /Interferencias};
     \draw [->, red, dashed] (noise) -- (cond);
     \end{tikzpicture}
-    \caption[Cadena de Instrumentación.]{Cadena de Instrumentación: Desde la magnitud física hasta la información útil. La magnitud fisica se transforma en una señal eléctrica mediante un sensor o transductor. La señal eléctrica se acondiciona para mejorar la calidad de la señal y se transforma en digital. La señal digital se adquiere mediante un sistema de adquisición. La información digital se procesa y se presenta.}\label{fig:cadena_instrumentacion}
+    \caption[Cadena de Instrumentación.]{Cadena de Instrumentación: flujo desde la magnitud física hasta la presentación de datos, destacando las etapas de acondicionamiento y digitalización.}\label{fig:cadena_instrumentacion}
 \end{marginfigure}
 
 Incidir en que el eslabón más débil de la cadena determina la precisión de todo el sistema. Un sistema de medida es tan bueno como su componente más impreciso.

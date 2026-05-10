@@ -1,0 +1,131 @@
+% !TeX root = main.tex
+% !TEX program = pdflatex
+
+\chapter{Acondicionamiento de Señal: Amplificadores Operacionales}\label{cap:opamps}
+
+Una vez que el sensor ha convertido la magnitud física en una variación eléctrica, la señal suele ser demasiado débil, ruidosa o no lineal para ser procesada directamente por un convertidos analógico-digital (\emph{analog-to-digital converter}, ADC). El acondicionamiento de la señal es el arte de extraer la señal del ruido y prepararla para que ocupe todo el rango dinámico del ADC. En este capítulo estudiaremos el acondicionamiento analógico mediante amplificadores operacionales de precisión, centrándonos en el amplificador de instrumentación, el amplificador de carga y los filtros activos.
+
+\section{El Amplificador de Instrumentación (In-Amp)}\label{sec:inamp}
+
+El amplificador de instrumentación es la joya de la corona en el acondicionamiento de puentes de Wheatstone. A diferencia de un operacional convencional, está diseñado para ofrecer una impedancia de entrada extremadamente alta en ambos terminales y un rechazo al modo común (CMRR) excepcionalmente elevado.
+
+\paragraph{Estructura de Tres Operacionales}
+La configuración clásica consta de una etapa de entrada diferencial (dos amplificadores de precisión con realimentación cruzada) y una etapa de salida restadora, como se esquematiza en la Figura~\ref{fig:inamp_diag}. La etapa diferencial amplifica la diferencia entre las señales de los dos terminales del puente, mientras que la etapa restadora elimina cualquier componente común a ambas entradas, como el ruido o las variaciones de temperatura.
+
+\begin{marginfigure}
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}[american, scale=0.65]
+        \ctikzset{amplifiers/fill=blue!5, resistors/scale=0.4, capacitors/scale=0.6}
+        
+        % --- ETAPA 1: ENTRADA ---
+        \draw (0,4) node[op amp, yscale=-1, scale=0.6] (oa1) {};
+        \draw (0,0) node[op amp, scale=0.6] (oa2) {};
+        
+        \draw (oa1.+) to[short, -o] ++(-0.5,0) node[left] {$V_1$};
+        \draw (oa2.+) to[short, -o] ++(-0.5,0) node[left] {$V_2$};
+        
+        \draw (oa1.out) to[R, l_=$R_1$, *-] ++(0,-1.5) coordinate (j1) -| (oa1.-);
+        \draw (j1) to[R, l=$R_G$, color=red, *-*] ++(0,-1) coordinate (j2) -| (oa2.-);
+        \draw (j2) to[R, l_=$R_1$, -*] (oa2.out);
+        
+        % --- ETAPA 2: RESTADORA ---
+        \draw (4.5,2) node[op amp, scale=0.6] (oa3) {}; % Separadas las etapas para mayor claridad
+        
+        % Conexiones e intermedias R2
+        \draw (oa1.out) -- ++(0.5,0) |- ([xshift=-1.2cm]oa3.-) to[R, l=$R_2$,-*] (oa3.-); 
+        \draw (oa2.out) -- ++(0.5,0) |- ([xshift=-1.2cm]oa3.+) to[R, l_=$R_2$] (oa3.+); 
+        
+        % Realimentación y referencia R3
+        \draw (oa3.-) -- ++(0,1) to[R, l=$R_3$] ++(2.2,0) -| (oa3.out) node[circ]{};
+        \draw (oa3.+) to[R, l=$R_3$,*-] ++(0,-1.5) node[ground]{};
+        
+        % Salida final
+        \draw (oa3.out) to[short, -o] ++(0.5,0) node[right] {$V_{out}$};
+
+        % Etiquetas de etapas
+        \node[gray] at (0, 5.5) {Etapa Entrada};
+        \node[gray] at (4.5, 4.5) {Etapa Diferencial}; 
+
+    \end{tikzpicture}
+    \caption[Circuito completo del amplificador de instrumentación.]{Amplificador de instrumentación de tres operacionales. La primera etapa proporciona alta impedancia y ganancia diferencial, mientras que la segunda etapa (restadora) elimina el modo común.}\label{fig:inamp_diag}
+\end{marginfigure}
+
+Para entender el funcionamiento del In-Amp, analizamos la corriente en la red de entrada. Debido al cortocircuito virtual, la tensión en los terminales de $R_G$ es exactamente $V_1 - V_2$. La corriente resultante $I_G = (V_1 - V_2)/R_G$ circula también por ambas $R_1$, generando una salida diferencial tras la primera etapa de $V_{o1} - V_{o2}=I_G (2 R_1 + R_G)$. Sustituyendo $I_G$, obtenemos la ganancia diferencial de la primera etapa:
+
+\begin{equation}
+    V_{o1} - V_{o2} = (V_1 - V_2) \left( 1 + \frac{2R_1}{R_G} \right)
+\end{equation}
+
+Finalmente, la etapa restadora multiplica esta diferencia por el factor de la segunda etapa, resultando en una ganancia total:
+\begin{equation}
+    G = \left( 1 + \frac{2R_1}{R_G} \right) \frac{R_3}{R_2}
+\end{equation}
+
+En la Figura \ref{fig:inamp_diag}, se muestra el circuito completo del In-Amp. La elección de los valores de $R_1$, $R_G$, $R_2$ y $R_3$ determina la ganancia total del amplificador, así como su rechazo al modo común. En aplicaciones de instrumentación, es común elegir $R_1 = R_G$ para simplificar el diseño y garantizar una alta CMRR.
+
+¿Por qué es tan importante el rechazo al modo común? El CMRR del In-Amp es un indicador de la calidad del sensor. Se define como la razón entre la ganancia de la etapa restadora y la ganancia diferencial de la primera etapa. Nos interesa que este indicador sea elevado para asegurar la calidad del sensor. Es decir que la ganacia de la etapa restadora sea mayor que la ganancia diferencial de la primera etapa. Lo que pretendemos es que el In-Amp amplifique la señal diferencial (la señal útil) y rechace cualquier señal común a ambas entradas (ruido, interferencias, variaciones de temperatura, etc). En un entorno industrial, las interferencias electromagnéticas pueden inducir voltajes comunes en ambos terminales del sensor. Un In-Amp con un CMRR de \qty{100}{dB} puede atenuar estas interferencias en un factor de \qty{100000}{\%}, asegurando que la señal útil se amplifique sin distorsión. 
+
+% \begin{table}[h]
+%     \centering
+%     \small
+%     \begin{tabularx}{\linewidth}{l X}
+%         \toprule
+%         \textbf{Componente} & \textbf{Función en la Ganancia} \\
+%         \midrule
+%         $R_1, R_G$ & Definen la ganancia diferencial de entrada. \\
+%         $R_2, R_3$ & Definen la ganancia de la etapa restadora y el CMRR. \\
+%         \bottomrule
+%     \end{tabularx}
+% \end{table}
+
+\marginnote{\textbf{Ventaja clave:} En un In-Amp, las corrientes de entrada son del orden de los \unit{pA}. Esto anula virtualmente el \emph{efecto de carga} que estudiamos en el Capítulo 3 para los potenciómetros.}
+
+\section{Amplificadores de Carga}\label{sec:amp_carga}
+
+Como vimos en el Capítulo~\ref{cap:reactivos}, los sensores capacitivos y piezoeléctricos generan variaciones de carga eléctrica ($q$) muy pequeñas. Un amplificador de tensión convencional fallaría debido a las capacidades parásitas de los cables. El \emph{amplificador de carga} soluciona esto manteniendo el sensor en un cortocircuito virtual.
+
+\begin{equation}
+    V_{out} = -\frac{q_{in}}{C_f}
+\end{equation}
+
+donde $C_f$ es la capacidad de realimentación. En esta configuración, la tensión de salida no depende de la capacidad del cable, lo que permite alejar el sensor de la electrónica de acondicionamiento sin perder sensibilidad.
+
+\section{Filtros Activos en Instrumentación}\label{sec:filtros}
+
+El ruido es inevitable. Sin embargo, sabemos que las magnitudes físicas suelen variar lentamente en comparación con el ruido electromagnético de alta frecuencia.
+
+\paragraph{Filtro de Antialiasing}
+Antes de cualquier conversión A/D, es obligatorio colocar un filtro paso bajo para cumplir con el teorema de Nyquist. Un filtro Sallen-Key de segundo orden es la opción más equilibrada entre complejidad y rendimiento.
+
+\begin{marginfigure}
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}[american, scale=0.8]
+        \ctikzset{amplifiers/fill=green!5, resistors/scale=0.6, capacitors/scale=0.6}
+        \draw (2,0) node[op amp, anchor=+] (oa) {};
+        \draw (oa.-) -- ++(0,-0.5) -| (oa.out) node[circ]{};
+        \draw (oa.+) to[R, l=$R$, -*] ++(-1.5,0) coordinate (mid) to[R, l=$R$, o-] ++(-1.5,0) node[left] {$V_{in}$};
+        \draw (mid) to[C, l=$C$] ++(0,1.5) -| (oa.out);
+        \draw (oa.+) to[C, l=$C$] ++(0,-1.5) node[ground]{};
+    \end{tikzpicture}
+    \caption{Filtro paso bajo Sallen-Key de segundo orden. Presenta una caída de \qty{40}{dB/decada} tras la frecuencia de corte.}\label{fig:sallen_key}
+\end{marginfigure}
+
+\section{Errores y Limitaciones Reales}\label{sec:errores_opamp}
+
+En instrumentación de precisión, no podemos ignorar las imperfecciones de los operacionales reales:
+
+\begin{itemize}
+    \item \emph{Tensión de Offset ($V_{os}$)}: Pequeña tensión continua en la salida incluso con entradas a cero. Crítico en medidas de termopares.
+    \item \emph{Corrientes de Polarización ($I_b$)}: Corrientes que fluyen hacia las entradas del operacional. Generan errores de tensión al circular por las resistencias del puente.
+    \item \emph{Deriva Térmica}: El cambio de los parámetros anteriores con la temperatura.
+\end{itemize}
+
+\marginnote{\textbf{Selección de componentes:} Para un sensor de alta impedancia (pH, fotodiodos), elegimos operacionales con entrada \textbf{FET} o \textbf{CMOS}. Para señales de muy baja tensión (termopares), preferimos operacionales \textbf{Bipolares} de bajo ruido o tipo \textbf{Chopper}.}
+
+\section{Resumen del Capítulo}\label{sec:resumen_opamp}
+
+El acondicionamiento analógico es el arte de extraer la señal del ruido. Un buen diseño minimiza los errores sistemáticos de los componentes y prepara la señal para que ocupe todo el rango dinámico del ADC, maximizando así la resolución efectiva del sistema.
+
+\cleardoublepage

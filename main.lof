@@ -68,6 +68,7 @@
 \contentsline {figure}{\numberline {4.22}{\ignorespaces Diagrama de bloques de un demodulador síncrono. Esta estructura actúa como un filtro de banda estrecha extremadamente selectivo, eliminando cualquier ruido que no esté en fase con la referencia.}}{60}{figure.4.22}%
 \contentsline {figure}{\numberline {5.1}{\ignorespaces Circuito completo del amplificador de instrumentación.}}{63}{figure.5.1}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Filtro paso bajo Sallen-Key de segundo orden. Presenta una caída de \qty {40}{dB/decada} tras la frecuencia de corte.}}{64}{figure.5.2}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Amplificador de carga para sensores capacitivos o piezoeléctricos. La salida es proporcional a la carga de entrada e inversamente proporcional a la capacidad de realimentación $C_f$.}}{65}{figure.5.2}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Filtro paso bajo Sallen-Key de segundo orden. Presenta una caída de \qty {40}{dB/decada} tras la frecuencia de corte.}}{66}{figure.5.3}%
 \addvspace {10\p@ }
 \contentsfinish 

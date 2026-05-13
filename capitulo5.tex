@@ -168,7 +168,29 @@ $$q_{in} = - (C_f \cdot -V_{out}) \implies V_{out} = \frac{q_{in}}{C_f}$$
 
 \section{Filtros Activos en Instrumentación}\label{sec:filtros}
 
-El ruido es inevitable. Sin embargo, sabemos que las magnitudes físicas suelen variar lentamente en comparación con el ruido electromagnético de alta frecuencia.
+% Explicar que es un filtro activo, explicar la necesidad de filtros para eliminar el ruido de alta frecuencia antes de la conversión A/D. Introducir el concepto de filtro de antialiasing y su implementación con amplificadores operacionales. hacerlo con figuras y o tablas explicativas
+
+Un filtro activo es un circuito que utiliza amplificadores operacionales junto con resistencias y condensadores para implementar funciones de filtrado (paso bajo, paso alto, paso banda, etc) sin la necesidad de inductores. En instrumentación, los filtros activos son esenciales para eliminar el ruido de alta frecuencia antes de la conversión A/D, asegurando que la señal útil se muestree correctamente y no se introduzcan artefactos por aliasing.
+
+El hecho de no usar inductores es una gran ventaja, ya que los inductores son voluminosos, caros y pueden introducir pérdidas y no linealidades. Antes de ver el filtro activo, conviene comparar con un filtro pasivo convencional de segundo orden que sí utiliza inductores.
+
+\begin{marginfigure}
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}[american, scale=1]
+        \ctikzset{resistors/scale=0.6, inductors/scale=0.6, capacitors/scale=0.6}
+        \draw (0,0) to[short, -o] ++(-1,0) node[left] {$V_{in}$};
+        \draw (0,0) to[R, l=$R$] (2,0) to[L, l=$L$] (4,0) node (out) {};
+        \draw (out) to[short] ++(1,0) node[right] {$V_{out}$};
+        \draw (4,0) to[C, l=$C$] (4,-2) node[ground]{};
+    \end{tikzpicture}
+    \caption{Filtro pasivo RLC paso bajo convencional.}
+    \label{fig:filtro_pasivo_rlc}
+\end{marginfigure}
+
+Este filtro utiliza una resistencia, una inductancia y una capacitancia para obtener una respuesta de segundo orden con frecuencia de corte $\omega_0 = 1/\sqrt{LC}$, pero requiere un inductor y no puede proveer ganancia.
+
+El mismo comportamiento de filtrado puede implementarse como un filtro activo sin inductores, usando un amplificador operacional y sólo resistencias y condensadores. El filtro Sallen-Key de la Figura~\ref{fig:sallen_key} es un ejemplo típico de esta conversión, manteniendo la respuesta de segundo orden y facilitando el diseño en instrumentación.
 
 \paragraph{Filtro de Antialiasing}
 Antes de cualquier conversión A/D, es obligatorio colocar un filtro paso bajo para cumplir con el teorema de Nyquist. Un filtro Sallen-Key de segundo orden es la opción más equilibrada entre complejidad y rendimiento.
@@ -184,7 +206,7 @@ Antes de cualquier conversión A/D, es obligatorio colocar un filtro paso bajo p
         \draw (mid) to[C, l=$C$] ++(0,1.5) -| (oa.out);
         \draw (oa.+) to[C, l=$C$] ++(0,-1.5) node[ground]{};
     \end{tikzpicture}
-    \caption{Filtro paso bajo Sallen-Key de segundo orden. Presenta una caída de \qty{40}{dB/decada} tras la frecuencia de corte.}\label{fig:sallen_key}
+    \caption{Filtro activo paso bajo Sallen-Key de segundo orden equivalente al filtro RLC pasivo. Presenta una caída de \qty{40}{dB/decada} tras la frecuencia de corte.}\label{fig:sallen_key}
 \end{marginfigure}
 
 \section{Errores y Limitaciones Reales}\label{sec:errores_opamp}

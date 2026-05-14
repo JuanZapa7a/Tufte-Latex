@@ -69,7 +69,7 @@
 \contentsline {figure}{\numberline {5.1}{\ignorespaces Circuito completo del amplificador de instrumentación.}}{63}{figure.5.1}%
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {5.2}{\ignorespaces Amplificador de carga para sensores capacitivos o piezoeléctricos. La salida es proporcional a la carga de entrada e inversamente proporcional a la capacidad de realimentación $C_f$.}}{65}{figure.5.2}%
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Filtro pasivo RLC paso bajo convencional.}}{66}{figure.5.3}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Filtros pasivos RLC: paso bajo (arriba) y paso alto (abajo).}}{65}{figure.5.3}%
 \contentsline {figure}{\numberline {5.4}{\ignorespaces Filtro activo paso bajo Sallen-Key de segundo orden equivalente al filtro RLC pasivo. Presenta una caída de \qty {40}{dB/decada} tras la frecuencia de corte.}}{66}{figure.5.4}%
 \addvspace {10\p@ }
 \contentsfinish 

@@ -73,20 +73,15 @@ La señal $V_{o2}$ llega a la pata no inversora ($+$) de $OA_3$ a través de un 
 Debido al cortocircuito virtual, la tensión en la pata inversora es la misma: $$V_- = V_+ = V_{o2} \cdot \frac{R_3}{R_2 + R_3}$$
 La corriente que entra por $R_2$ desde $V_{o1}$ debe ser la misma que sale por $R_3$ hacia $V_{out}$ (ya que no entra corriente al operacional): $$\frac{V_{o1} - V_-}{R_2} = \frac{V_- - V_{out}}{R_3}$$
 
-Reorganizamos la ecuación para aislar el término de salida: $$\frac{V_{out}}{R_3} = \frac{V_-}{R_3} - \frac{V_{o1} - V_-}{R_2}$$ $$\frac{V_{out}}{R_3} = V_- \left( \frac{1}{R_3} + \frac{1}{R_2} \right) - \frac{V_{o1}}{R_2}$$ $$\frac{V_{out}}{R_3} = V_- \left( \frac{R_2 + R_3}{R_2 R_3} \right) - \frac{V_{o1}}{R_2}$$
+Reorganizamos la ecuación para aislar el término de salida: $$\frac{V_{out}}{R_3} = \frac{V_-}{R_3} - \frac{V_{o1}}{R_2} - \frac{V_-}{R_2} = V_- \left( \frac{1}{R_3} + \frac{1}{R_2} \right) - \frac{V_{o1}}{R_2}$$ $$\frac{V_{out}}{R_3} = V_- \left( \frac{R_2 + R_3}{R_2 R_3} \right) - \frac{V_{o1}}{R_2}$$
 
-Sustituimos la expresión de $V_-$ que calculamos en el paso 1: 
+Sustituimos la expresión de $V_-$ que calculamos: 
     $$\frac{V_{out}}{R_3} = \left( V_{o2} \cdot \frac{R_3}{R_2 + R_3} \right) \cdot \left( \frac{R_2 + R_3}{R_2 R_3} \right) - \frac{V_{o1}}{R_2}$$
-}
 
-\marginnote{\textbf{Funcionamiento IN-AMP continuación...} Los términos $(R_2 + R_3)$ y $R_3$ se cancelan en el primer bloque: $$\frac{V_{out}}{R_3} = \frac{V_{o2}}{R_2} - \frac{V_{o1}}{R_2}$$ $$\frac{V_{out}}{R_3} = \frac{1}{R_2} (V_{o2} - V_{o1})$$
+Los términos $(R_2 + R_3)$ y $R_3$ se cancelan en el primer bloque: $$\frac{V_{out}}{R_3} = \frac{V_{o2}}{R_2} - \frac{V_{o1}}{R_2} = \frac{1}{R_2} (V_{o2} - V_{o1})$$
 
 Finalmente, multiplicando por $R_3$: 
     $$V_{out} = \frac{R_3}{R_2} (V_{o2} - V_{o1})$$
-
-La etapa restadora, con resistencias $R_2$ y $R_3$, amplifica esta diferencia de tensión: 
-    $$V_{out} = \frac{R_3}{R_2} (V_{o2} - V_{o1})$$    
-(Nota: El signo depende de a qué pata del restador conectes cada salida; típicamente se busca $V_2 - V_1$). 
 
 Sustituyendo el resultado de la primera etapa en la segunda, obtenemos la ganancia total del Amplificador de Instrumentación:
     $$G = \left( 1 + \frac{2R_1}{R_G} \right) \frac{R_3}{R_2}$$
@@ -116,7 +111,7 @@ La elección de los valores de $R_1$, $R_G$, $R_2$ y $R_3$ determina la ganancia
 
 
 
-\marginnote{\textbf{Ventaja clave:} En un In-Amp, las corrientes de entrada son del orden de los \unit{pA}. Esto anula virtualmente el \emph{efecto de carga} que estudiamos en el Capítulo 3 para los potenciómetros.}
+\marginnote{\textbf{Ventaja clave In-Amp:} En un In-Amp, las corrientes de entrada son del orden de los \unit{pA}. Esto anula virtualmente el \emph{efecto de carga} que estudiamos en el Capítulo 3 para los potenciómetros.}
 
 \section{Amplificadores de Carga}\label{sec:amp_carga}
 
@@ -124,7 +119,7 @@ Los sensores piezoeléctricos y capacitivos se comportan como fuentes de impedan
 
 El \emph{amplificador de carga}, esquematizado en la Figura~\ref{fig:amp_carga}, elimina este problema mediante el uso de su tierra virtual. Al conectar el sensor a la entrada inversora y mantener la no inversora a masa, el operacional asegura que $V_- \approx 0$. 
 
-\marginnote{\textbf{Independencia del cable:} Al estar el cable a potencial cero (tierra virtual), no se acumula carga en su capacidad parásita ($q_c = C_c \cdot V_{cable} = 0$). Toda la carga generada por el sensor es forzada a desplazarse hacia el camino de realimentación.}
+\marginnote{\textbf{Ventaja Amplificador de carga:} Al estar el cable a potencial cero (tierra virtual), no se acumula carga en su capacidad parásita ($q_c = C_c \cdot V_{cable} = 0$). Toda la carga generada por el sensor es forzada a desplazarse hacia el camino de realimentación.}
 
 La configuración consiste en un operacional con un condensador de realimentación $C_f$. La relación de transferencia es:
 
@@ -133,7 +128,7 @@ La configuración consiste en un operacional con un condensador de realimentaci�
 \end{equation}
 donde $q_{in}$ es la carga inyectada por el sensor. La principal ventaja es que la ganancia del sistema depende exclusivamente de un componente interno ($C_f$) y no de las condiciones de instalación (cableado).
 
-\marginnote{\textbf{Amplificador de carga:} Para entender su funcionamiento, analizamos la corriente en el nodo inversor. Debido a la tierra virtual, $V_- \approx 0$, lo que significa que no se acumula carga en la entrada. La corriente generada por el sensor ($i_{in}$) debe fluir a través del condensador de realimentación ($C_f$) para mantener el nodo inversor a potencial cero.:
+\marginnote{\textbf{Funcionamiento Amplificador de carga:} Para entender su funcionamiento, analizamos la corriente en el nodo inversor. Debido a la tierra virtual, $V_- \approx 0$, lo que significa que no se acumula carga en la entrada. La corriente generada por el sensor ($i_{in}$) debe fluir a través del condensador de realimentación ($C_f$) para mantener el nodo inversor a potencial cero.:
 Considerando el nodo inversor, la suma de corrientes debe ser nula. Como $i = dq/dt$:
 $$\frac{dq_{in}}{dt} + \frac{dq_{C_f}}{dt} = 0 \implies q_{in} = -q_{C_f}$$
 Dado que la tensión en el condensador es $V_C = V_- - V_{out} = 0 - V_{out}$, la carga almacenada en la realimentación es $q_{C_f} = C_f \cdot (-V_{out})$. Igualando ambas expresiones:
@@ -172,41 +167,156 @@ $$q_{in} = - (C_f \cdot -V_{out}) \implies V_{out} = \frac{q_{in}}{C_f}$$
 
 Un filtro activo es un circuito que utiliza amplificadores operacionales junto con resistencias y condensadores para implementar funciones de filtrado (paso bajo, paso alto, paso banda, etc) sin la necesidad de inductores. En instrumentación, los filtros activos son esenciales para eliminar el ruido de alta frecuencia antes de la conversión A/D, asegurando que la señal útil se muestree correctamente y no se introduzcan artefactos por aliasing.
 
-El hecho de no usar inductores es una gran ventaja, ya que los inductores son voluminosos, caros y pueden introducir pérdidas y no linealidades. Antes de ver el filtro activo, conviene comparar con un filtro pasivo convencional de segundo orden que sí utiliza inductore. Observando la Figura~\ref{fig:filtro_pasivo_rlc}, podemos dedudir su funcionamiento:
+El hecho de no usar inductores es una gran ventaja, ya que los inductores son voluminosos, caros y pueden introducir pérdidas y no linealidades. Antes de ver el filtro activo, conviene comparar con un filtro pasivo convencional de segundo orden que sí utiliza inductores. Observando la Figura~\ref{fig:filtros_pasivos_rlc}, podemos dedudir su funcionamiento:
 
 
 \begin{marginfigure}
     \centering
     \shorthandoff{>}
+    % Filtro paso bajo
     \begin{tikzpicture}[american, scale=1]
-        \ctikzset{resistors/scale=0.6, inductors/scale=0.6, capacitors/scale=0.6}
-        \draw (0,0) to[short, -o] ++(-1,0) node[left] {$V_{in}$};
-        \draw (0,0) to[R, l=$R$] (2,0) to[L, l=$L$] (4,0) node (out) {};
-        \draw (out) to[short] ++(1,0) node[right] {$V_{out}$};
-        \draw (4,0) to[C, l=$C$] (4,-2) node[ground]{};
+        \ctikzset{resistors/scale=0.6, inductors/scale=0.6, inductor=cute, capacitors/scale=0.6}
+        \draw (0,0) to[short, -o] ++(-0.5,0) node[left] {$V_{in}$};
+        \draw (0,0) to[R, l=$R$] (1,0) to[L, l=$L$] (2,0) node[circ, scale=0.6]{} -- ++(1,0) node[ocirc]{} node[right] {$V_{out}$};
+        \draw (2,0) to[C, l=$C$] (2,-1) node[ground]{};
     \end{tikzpicture}
-    \caption{Filtro pasivo RLC paso bajo convencional.}\label{fig:filtro_pasivo_rlc}
+    \vspace{1.5em}
+    % Filtro paso alto
+    \begin{tikzpicture}[american, scale=1]
+        \ctikzset{resistors/scale=0.6, inductors/scale=0.6, inductor=cute, capacitors/scale=0.6}
+        \draw (0,0) to[short, -o] ++(-0.5,0) node[left] {$V_{in}$};
+        \draw (0,0) to[C, l=$C$] (1,0) to[R, l=$R$] (2,0) node[circ, scale=0.6]{} -- ++(1,0) node[ocirc]{} node[right] {$V_{out}$};
+        \draw (2,0) to[L, l=$L$] (2,-1) node[ground]{};
+    \end{tikzpicture}
+    \caption{Filtros pasivos RLC: paso bajo (arriba) y paso alto (abajo).}\label{fig:filtros_pasivos_rlc}
 \end{marginfigure}
 
-Este filtro utiliza una resistencia, una inductancia y una capacitancia para obtener una respuesta de segundo orden. Para demostrar su frecuencia de corte, analizamos la función de transferencia en el dominio de Laplace considerando la salida en el condensador:
+Aunque ambos filtros comparten el mismo denominador (y por tanto la misma frecuencia natural $\omega_0$ y factor de amortiguamiento $\zeta$), difieren en su numerador. Mientras que el filtro paso bajo busca mantener la componente continua, el paso alto la elimina. Matemáticamente, las funciones de transferencia normalizadas son:
 
 \begin{equation}
-    H(s) = \frac{V_{out}(s)}{V_{in}(s)} = \frac{1/Cs}{R + Ls + 1/Cs} = \frac{1}{LCs^2 + RCs + 1}
+    H_{LP}(s) = \frac{\omega_0^2}{s^2 + 2\zeta\omega_0s + \omega_0^2} \quad ; \quad H_{HP}(s) = \frac{s^2}{s^2 + 2\zeta\omega_0s + \omega_0^2}
+\end{equation}
+
+\marginnote{\textbf{Diferencia clave:} El numerador determina qué frecuencias se permiten pasar. En el paso alto, el término $s^2$ actúa como una doble derivada, lo que anula cualquier valor constante (continua) y resalta las variaciones rápidas de la señal.}
+
+Para demostrar la respuesta del filtro paso bajo RLC serie, analizamos la función de transferencia tomando la salida en el condensador~$C$.
+%
+La tensión de salida $V_{out}$ es la tensión en bornes del condensador. Aplicando la Ley de Kirchhoff de Tensiones (KVT) en la malla serie, la tensión de entrada debe igualar la suma de caídas en cada elemento:
+
+\begin{equation}\label{eq:kvt_rlc}
+    V_{in}(t) = V_R(t) + V_L(t) + V_C(t)
+            = R\,i(t) + L\,\frac{di(t)}{dt} + \frac{1}{C}\int i(t)\,dt
+\end{equation}
+%
+donde $i(t)$ es la \emph{única} corriente que circula por el circuito serie. Nótese que $V_{out}(t) = V_C(t)$.
+
+Transformando al dominio de Laplace (con condiciones iniciales nulas, donde $s = d/dt$ y $1/s = \int dt$), la tensión de entrada se expresa como:
+
+\begin{equation}\label{eq:tension_laplace}
+V_{in}(s) = R\,I(s) + L\,s\,I(s) + \frac{1}{Cs}I(s) = I(s)(R + Ls + \frac{1}{Cs})
+\end{equation}
+
+% \begin{equation}\label{eq:corriente_laplace}
+%   I(s) = \frac{V_{in}(s) - V_{out}(s)}{Z_{RL}(s)}
+%        = \frac{V_{in}(s) - V_{out}(s)}{R + Ls}
+% \end{equation}
+
+La tensión de salida (en el condensador) se relaciona con la corriente mediante la impedancia capacitiva $Z_C = 1/Cs$:
+
+\begin{equation}\label{eq:vout_condensador}
+    V_{out}(s) = I(s)\frac{1}{Cs} 
+\end{equation}
+
+La resuesta del filtro paso bajo RLC se obtiene comparando la salida con la entrada. 
+\begin{equation}
+    H_{LP}(s) = \dfrac{V_{out}(s)}{V_{in}(s)} = \dfrac{I(s)\frac{1}{Cs}}{I(s)(R + Ls + \frac{1}{Cs})} = \dfrac{\frac{1}{Cs}}{R + Ls + \frac{1}{Cs}}
+\end{equation}
+multiplicando por $Cs$, obtenemos:
+\begin{equation}\label{eq:tf_rlc_intermedia}
+    H_{LP}(s) = \frac{1}{LCs^2 + RCs + 1} 
 \end{equation}
 
 Al normalizar la expresión para que el término de mayor grado sea unitario, dividimos por $LC$:
-
 \begin{equation}
-    H(s) = \frac{\frac{1}{LC}}{s^2 + \frac{R}{L}s + \frac{1}{LC}}
+    H_{LP}(s) = \frac{\frac{1}{LC}}{s^2 + \frac{R}{L}s + \frac{1}{LC}}
 \end{equation}
-
-Comparando con la forma estándar de un sistema de segundo orden ($s^2 + 2\zeta\omega_0s + \omega_0^2$), identificamos la frecuencia natural o de corte $\omega_0$ como:
-
+%
+Comparando con la forma estándar de un sistema de segundo orden, $$ H(s) = \dfrac{\omega_0^2}{s^2 + 2\zeta\omega_0s + \omega_0^2} $$ identificamos la frecuencia natural o de corte $\omega_0$ como:
+%
 \begin{equation}
     \omega_0^2 = \frac{1}{LC} \implies \omega_0 = \frac{1}{\sqrt{LC}}
 \end{equation}
+%
+Luego, igualamos: $$ 2\zeta\omega_0 = \frac{R}{L} $$ Ahora, podemos despejar el factor de amortiguamiento $\zeta$. Para ello, sustituimos $\omega_0 = \frac{1}{\sqrt{LC}}$ en esta ecuación: $$ 2\zeta \left(\frac{1}{\sqrt{LC}}\right) = \frac{R}{L} $$ Despejando $\zeta$: $$ \zeta = \frac{R}{L} \cdot \frac{\sqrt{LC}}{2} = \frac{R}{2} \sqrt{\frac{C}{L}} $$ El factor de amortiguamiento $\zeta$ nos dice cómo de \emph{suave} o \emph{oscilatoria} será la respuesta del filtro.
 
-Aunque este diseño es funcional, en instrumentación moderna se prefiere evitar el uso de inductores debido a su tamaño, peso y susceptibilidad a interferencias electromagnéticas.
+\begin{enumerate}
+    \item Si $\zeta < 1$, el filtro tendrá una respuesta subamortiguada, lo que significa que puede haber un pico en la respuesta en frecuencia antes de la atenuación.
+    \item Si $\zeta = 1$, el filtro es críticamente amortiguado, ofreciendo la respuesta más rápida sin oscilaciones.
+    \item Si $\zeta > 1$, el filtro es sobreamortiguado, y su respuesta será más lenta.
+\end{enumerate}
+
+Por tanto, el controlar $\zeta$ es vital para decidir si se quiere que el filtro sea muy rápido (pero con oscilaciones) o muy estable (pero más lento). Aunque este diseño es funcional, en instrumentación moderna se prefiere evitar el uso de inductores debido a su tamaño, peso y susceptibilidad a interferencias electromagnéticas.
+
+\marginnote{\textbf{Filtro pasa alto:} De forma análoga, para obtener la respuesta del filtro paso alto, hay que comparar la salida en el inductor~$L$ con la entrada. La tensión de salida es $V_{out}(s) = I(s)Ls $, y la tension de entrada sigue siendo $V_{in}(s) = I(s)(R + Ls + \frac{1}{Cs})$. Por tanto, la función de transferencia del filtro paso alto es:
+
+%\begin{equation}\label{eq:tf_hp}
+    \begin{align*}
+    H_{HP}(s) &= \dfrac{V_{out}(s)}{V_{in}(s)} = \dfrac{I(s)Ls}{I(s)(R + Ls + \dfrac{1}{Cs})}\\
+    &= \dfrac{Ls}{R + Ls + \dfrac{1}{Cs}} 
+    \end{align*}
+%\end{equation}
+%
+multiplicando por $Cs$, obtenemos:
+\begin{equation*}    H_{HP}(s) = \frac{LCs^2}{LCs^2 + RCs + 1} 
+\end{equation*}
+
+Al normalizar la expresión para que el término de mayor grado sea unitario, dividimos por $LC$:
+\begin{equation*}    H_{HP}(s) = \frac{s^2}{s^2 + \frac{R}{L}s + \frac{1}{LC}} 
+\end{equation*}
+Comparando con la forma estándar de un sistema de segundo orden, $$ H(s) = \dfrac{s^2}{s^2 + 2\zeta\omega_0s + \omega_0^2} $$ identificamos la frecuencia natural o de corte $\omega_0$ y el factor de amortiguamiento $\zeta$ como:
+\begin{equation*}
+    \omega_0^2 = \frac{1}{LC} \         \implies \omega_0 = \frac{1}{\sqrt{LC}} \quad ; \quad \zeta = \frac{R}{2} \sqrt{\frac{C}{L}}
+\end{equation*}  
+Es decir, el filtro paso alto se comporta con los mismos $\omega_0$ y $\zeta$ que el filtro paso bajo, ya que comparten el mismo circuito RLC serie; solo cambia el punto de medida de la salida.
+}
+
+
+En el Capítulo~\ref{cap:caracteristicas_sistemas_medida}, analizamos sistemas mecánicos de segundo orden (masa-muelle-amortiguador). Allí, la frecuencia natural ($\omega_n$) representaba la velocidad a la que el sistema oscilaría por sí solo si no hubiera rozamiento. En este Capítulo~\ref{cap:opamps}, al hablar de filtros, llamamos a este mismo término frecuencia de corte ($\omega_0$). Ambos conceptos son análogos, ya que ambos representan la frecuencia a la que el sistema responde de manera más pronunciada. En un filtro, esta es la frecuencia a la que la señal comienza a ser atenuada significativamente. En un sistema mecánico, es la frecuencia a la que el sistema oscilaría libremente. El factor de amortiguamiento ($\zeta$) también tiene un papel similar en ambos contextos, controlando si la respuesta es oscilatoria o no. Por tanto, podemos hacer una analogía directa entre la dinámica de un sistema mecánico de segundo orden y la respuesta en frecuencia de un filtro de segundo orden, lo que nos ayuda a entender intuitivamente cómo se comportan los filtros en función de sus componentes. La Tabla~\ref{tab:analogias} resume estas analogías entre sistemas mecánicos y filtros electrónicos.
+
+\begin{margintable}
+    \centering
+    %\small
+    \caption{Analogía de parámetros físicos entre sistemas mecánicos y eléctricos.\protect\label{tab:analogias}}
+    \setlength{\tabcolsep}{3pt}
+    \begin{tabularx}{\linewidth}{l X X}
+        \toprule
+        \multirow{2}{*}{\textbf{Parámetro}} & \textbf{Sistema} & \textbf{Sistema} \\
+        & \textbf{Mecánico} & \textbf{Eléctrico/Filtro} \\
+        \midrule
+        Inercia     & Masa ($m$)                & Inductancia ($L$) \\ % Esta línea es correcta, no se modifica
+        \multirow{2}{*}{Elasticidad} & Constante  & Inversa \\
+        & muelle ($k$) & capacidad ($1/C$) \\
+        Disipación  & Amortiguam. ($c$)      & Resistencia ($R$) \\
+        \bottomrule
+    \end{tabularx}
+\end{margintable}
+
+% \begin{table}[h]
+%     \centering
+%     \caption[Analogías entre sistemas mecánicos de segundo orden y filtros electrónicos.]{Analogías entre sistemas mecánicos de segundo orden y filtros electrónicos.}\label{tab:analogias}
+%     \small
+%     \begin{tabularx}{\linewidth}{l X}
+%         \toprule
+%         \textbf{Concepto} & \textbf{Analogía} \\
+%         \midrule
+%         Frecuencia natural ($\omega_n$) & Frecuencia de corte ($\omega_0$) \\
+%         Factor de amortiguamiento ($\zeta$) & Controla la oscilación en la respuesta del filtro \\
+%         Respuesta subamortiguada ($\zeta < 1$) & Pico en la respuesta en frecuencia \\
+%         Respuesta críticamente amortiguada ($\zeta = 1$) & Respuesta rápida sin oscilaciones \\
+%         Respuesta sobreamortiguada ($\zeta > 1$) & Respuesta lenta sin oscilaciones \\
+%         \bottomrule
+%     \end{tabularx}
+% \end{table}
 
 El mismo comportamiento de filtrado puede implementarse como un filtro activo sin inductores, usando un amplificador operacional y sólo resistencias y condensadores. El filtro Sallen-Key de la Figura~\ref{fig:sallen_key} es un ejemplo típico de esta conversión, manteniendo la respuesta de segundo orden y facilitando el diseño en instrumentación.
 
@@ -216,16 +326,20 @@ Antes de cualquier conversión A/D, es obligatorio colocar un filtro paso bajo p
 \begin{marginfigure}
     \centering
     \shorthandoff{>}
-    \begin{tikzpicture}[american, scale=0.8]
+    \begin{tikzpicture}[american, scale=1]
         \ctikzset{amplifiers/fill=green!5, resistors/scale=0.6, capacitors/scale=0.6}
-        \draw (2,0) node[op amp, anchor=+] (oa) {};
-        \draw (oa.-) -- ++(0,-0.5) -| (oa.out) node[circ]{};
+        \draw (2,0) node[op amp, yscale=-1] (oa) {}; % Rotado 180 grados para que el + esté arriba
+        %\draw (oa.-) -- ++(0,-0.75) node[circ]{} (Ac)  to[R, l=$R_a$] ((Ac) -| (oa.out)) -- (oa.out) node[circ]{};
         \draw (oa.+) to[R, l=$R$, -*] ++(-1.5,0) coordinate (mid) to[R, l=$R$, o-] ++(-1.5,0) node[left] {$V_{in}$};
         \draw (mid) to[C, l=$C$] ++(0,1.5) -| (oa.out);
         \draw (oa.+) to[C, l=$C$] ++(0,-1.5) node[ground]{};
     \end{tikzpicture}
     \caption{Filtro activo paso bajo Sallen-Key de segundo orden equivalente al filtro RLC pasivo. Presenta una caída de \qty{40}{dB/decada} tras la frecuencia de corte.}\label{fig:sallen_key}
 \end{marginfigure}
+
+
+
+
 
 \section{Errores y Limitaciones Reales}\label{sec:errores_opamp}
 

@@ -136,7 +136,7 @@
 \contentsline {paragraph}{Estructura de Tres Operacionales}{63}{paragraph*.109}%
 \contentsline {section}{\numberline {5.2}Amplificadores de Carga}{64}{section.5.2}%
 \contentsline {section}{\numberline {5.3}Filtros Activos en Instrumentación}{64}{section.5.3}%
-\contentsline {paragraph}{Filtro de Antialiasing}{64}{paragraph*.110}%
+\contentsline {paragraph}{Filtro de Antialiasing}{65}{paragraph*.110}%
 \contentsline {section}{\numberline {5.4}Errores y Limitaciones Reales}{65}{section.5.4}%
 \contentsline {section}{\numberline {5.5}Resumen del Capítulo}{65}{section.5.5}%
 \contentsline {chapter}{Bibliograf\'{\i }a}{67}{appendix*.111}%

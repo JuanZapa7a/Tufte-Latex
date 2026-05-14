@@ -172,7 +172,8 @@ $$q_{in} = - (C_f \cdot -V_{out}) \implies V_{out} = \frac{q_{in}}{C_f}$$
 
 Un filtro activo es un circuito que utiliza amplificadores operacionales junto con resistencias y condensadores para implementar funciones de filtrado (paso bajo, paso alto, paso banda, etc) sin la necesidad de inductores. En instrumentación, los filtros activos son esenciales para eliminar el ruido de alta frecuencia antes de la conversión A/D, asegurando que la señal útil se muestree correctamente y no se introduzcan artefactos por aliasing.
 
-El hecho de no usar inductores es una gran ventaja, ya que los inductores son voluminosos, caros y pueden introducir pérdidas y no linealidades. Antes de ver el filtro activo, conviene comparar con un filtro pasivo convencional de segundo orden que sí utiliza inductores.
+El hecho de no usar inductores es una gran ventaja, ya que los inductores son voluminosos, caros y pueden introducir pérdidas y no linealidades. Antes de ver el filtro activo, conviene comparar con un filtro pasivo convencional de segundo orden que sí utiliza inductore. Observando la Figura~\ref{fig:filtro_pasivo_rlc}, podemos dedudir su funcionamiento:
+
 
 \begin{marginfigure}
     \centering
@@ -184,11 +185,28 @@ El hecho de no usar inductores es una gran ventaja, ya que los inductores son vo
         \draw (out) to[short] ++(1,0) node[right] {$V_{out}$};
         \draw (4,0) to[C, l=$C$] (4,-2) node[ground]{};
     \end{tikzpicture}
-    \caption{Filtro pasivo RLC paso bajo convencional.}
-    \label{fig:filtro_pasivo_rlc}
+    \caption{Filtro pasivo RLC paso bajo convencional.}\label{fig:filtro_pasivo_rlc}
 \end{marginfigure}
 
-Este filtro utiliza una resistencia, una inductancia y una capacitancia para obtener una respuesta de segundo orden con frecuencia de corte $\omega_0 = 1/\sqrt{LC}$, pero requiere un inductor y no puede proveer ganancia.
+Este filtro utiliza una resistencia, una inductancia y una capacitancia para obtener una respuesta de segundo orden. Para demostrar su frecuencia de corte, analizamos la función de transferencia en el dominio de Laplace considerando la salida en el condensador:
+
+\begin{equation}
+    H(s) = \frac{V_{out}(s)}{V_{in}(s)} = \frac{1/Cs}{R + Ls + 1/Cs} = \frac{1}{LCs^2 + RCs + 1}
+\end{equation}
+
+Al normalizar la expresión para que el término de mayor grado sea unitario, dividimos por $LC$:
+
+\begin{equation}
+    H(s) = \frac{\frac{1}{LC}}{s^2 + \frac{R}{L}s + \frac{1}{LC}}
+\end{equation}
+
+Comparando con la forma estándar de un sistema de segundo orden ($s^2 + 2\zeta\omega_0s + \omega_0^2$), identificamos la frecuencia natural o de corte $\omega_0$ como:
+
+\begin{equation}
+    \omega_0^2 = \frac{1}{LC} \implies \omega_0 = \frac{1}{\sqrt{LC}}
+\end{equation}
+
+Aunque este diseño es funcional, en instrumentación moderna se prefiere evitar el uso de inductores debido a su tamaño, peso y susceptibilidad a interferencias electromagnéticas.
 
 El mismo comportamiento de filtrado puede implementarse como un filtro activo sin inductores, usando un amplificador operacional y sólo resistencias y condensadores. El filtro Sallen-Key de la Figura~\ref{fig:sallen_key} es un ejemplo típico de esta conversión, manteniendo la respuesta de segundo orden y facilitando el diseño en instrumentación.
 

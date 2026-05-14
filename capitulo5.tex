@@ -329,10 +329,11 @@ Antes de cualquier conversión A/D, es obligatorio colocar un filtro paso bajo p
     \begin{tikzpicture}[american, scale=1]
         \ctikzset{amplifiers/fill=green!5, resistors/scale=0.6, capacitors/scale=0.6}
         \draw (2,0) node[op amp, yscale=-1] (oa) {}; % Rotado 180 grados para que el + esté arriba
-        %\draw (oa.-) -- ++(0,-0.75) node[circ]{} (Ac)  to[R, l=$R_a$] ((Ac) -| (oa.out)) -- (oa.out) node[circ]{};
-        \draw (oa.+) to[R, l=$R$, -*] ++(-1.5,0) coordinate (mid) to[R, l=$R$, o-] ++(-1.5,0) node[left] {$V_{in}$};
-        \draw (mid) to[C, l=$C$] ++(0,1.5) -| (oa.out);
-        \draw (oa.+) to[C, l=$C$] ++(0,-1.5) node[ground]{};
+        % Realimentación: definir un nodo/círculo intermedio y usar (Ac -| oa.out)
+        \draw (oa.-) -- ++(0,-0.75) node[circ] (Ac) {} to[R, l=$R_a$] (Ac -| oa.out) -- (oa.out) node[circ]{};
+        \draw (oa.+)++(-0.5,0) to[R, l=$R$, -*] ++(-1.25,0) coordinate (mid) to[R, l=$R$, o-] ++(-1.25,0) node[ocirc]{} node[above] {$V_{in}$};
+        \draw (mid)  --++(0,1) node[](Ab){} to[C, l=$C$] (Ab -| oa.out) -- (oa.out);
+        \draw (oa.+) -- ++(-0.5,0) node[circ]{}  to[C, l=$C$] ++(0,-1.25) node[ground]{};
     \end{tikzpicture}
     \caption{Filtro activo paso bajo Sallen-Key de segundo orden equivalente al filtro RLC pasivo. Presenta una caída de \qty{40}{dB/decada} tras la frecuencia de corte.}\label{fig:sallen_key}
 \end{marginfigure}

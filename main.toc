@@ -136,8 +136,9 @@
 \contentsline {paragraph}{Estructura de Tres Operacionales}{63}{paragraph*.109}%
 \contentsline {section}{\numberline {5.2}Amplificadores de Carga}{64}{section.5.2}%
 \contentsline {section}{\numberline {5.3}Filtros Activos en Instrumentación}{64}{section.5.3}%
-\contentsline {paragraph}{Filtro de Antialiasing}{66}{paragraph*.110}%
-\contentsline {section}{\numberline {5.4}Errores y Limitaciones Reales}{66}{section.5.4}%
-\contentsline {section}{\numberline {5.5}Resumen del Capítulo}{67}{section.5.5}%
-\contentsline {chapter}{Bibliograf\'{\i }a}{69}{appendix*.111}%
+\contentsline {subsection}{Filtro activos: La Topología Sallen-Key}{66}{subsection*.110}%
+\contentsline {paragraph}{Filtro de Antialiasing}{68}{paragraph*.111}%
+\contentsline {section}{\numberline {5.4}Errores y Limitaciones Reales}{68}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Resumen del Capítulo}{68}{section.5.5}%
+\contentsline {chapter}{Bibliograf\'{\i }a}{69}{appendix*.112}%
 \contentsfinish 

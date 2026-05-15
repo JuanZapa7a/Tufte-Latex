@@ -318,10 +318,16 @@ En el Capítulo~\ref{cap:caracteristicas_sistemas_medida}, analizamos sistemas m
 %     \end{tabularx}
 % \end{table}
 
+\subsection{Filtro activos: La Topología Sallen-Key}\label{sec:sallen_key}
+
 El mismo comportamiento de filtrado puede implementarse como un filtro activo sin inductores, usando un amplificador operacional y sólo resistencias y condensadores. El filtro Sallen-Key de la Figura~\ref{fig:sallen_key} es un ejemplo típico de esta conversión, manteniendo la respuesta de segundo orden y facilitando el diseño en instrumentación.
 
-\paragraph{Filtro de Antialiasing}
-Antes de cualquier conversión A/D, es obligatorio colocar un filtro paso bajo para cumplir con el teorema de Nyquist. Un filtro Sallen-Key de segundo orden es la opción más equilibrada entre complejidad y rendimiento.
+El filtro Sallen-Key de segundo orden (Figura~\ref{fig:sallen_key}) se basa en una configuración de \emph{fuente de tensión controlada por tensión} (VCVS). Sus componentes principales son:
+\begin{itemize}
+    \item \emph{Red RC ($R_1, R_2, C_1, C_2$)}: Determinan la respuesta en frecuencia y el amortiguamiento.
+    \item \emph{Amplificador Operacional}: Configurado como amplificador no inversor, proporciona ganancia y aísla la carga de la red de filtrado.
+    \item \emph{Red de realimentación ($R_a, R_b$)}: Define la ganancia en banda de paso ($K$).
+\end{itemize}
 
 \begin{marginfigure}
     \centering
@@ -330,13 +336,125 @@ Antes de cualquier conversión A/D, es obligatorio colocar un filtro paso bajo p
         \ctikzset{amplifiers/fill=green!5, resistors/scale=0.6, capacitors/scale=0.6}
         \draw (2,0) node[op amp, yscale=-1] (oa) {}; % Rotado 180 grados para que el + esté arriba
         % Realimentación: definir un nodo/círculo intermedio y usar (Ac -| oa.out)
-        \draw (oa.-) -- ++(0,-0.75) node[circ] (Ac) {} to[R, l=$R_a$] (Ac -| oa.out) -- (oa.out) node[circ]{};
-        \draw (oa.+)++(-0.5,0) to[R, l=$R$, -*] ++(-1.25,0) coordinate (mid) to[R, l=$R$, o-] ++(-1.25,0) node[ocirc]{} node[above] {$V_{in}$};
-        \draw (mid)  --++(0,1) node[](Ab){} to[C, l=$C$] (Ab -| oa.out) -- (oa.out);
-        \draw (oa.+) -- ++(-0.5,0) node[circ]{}  to[C, l=$C$] ++(0,-1.25) node[ground]{};
+        \draw (oa.-) -- ++(0,-0.75) node[circ] (Ac) {} to[R, l_=$R_a$] (Ac -| oa.out) -- (oa.out) node[circ]{};
+        \draw (Ac) to[R, l=$R_b$] ++(0,-1.25) node[ground]{};
+        \draw (oa.+)++(-0.5,0) node[above]{$V_B$} to[R, l_=$R_2$, -*] ++(-1.25,0) node[below](mid){$V_A$} to[R, l_=$R_1$, *-] ++(-1.25,0) node[ocirc]{} node[above] {$V_{in}$};
+        \draw (mid)  -- ++(0,1) node[](Ab){} to[C, l=$C_1$] (Ab -| oa.out) -- (oa.out)-- ++(0.35,0) node[ocirc]{} node[above] {$V_{out}$};
+        \draw (oa.+) -- ++(-0.5,0) node[circ]{}  to[C, l_=$C_2$] ++(0,-1.25) node[ground]{};
     \end{tikzpicture}
     \caption{Filtro activo paso bajo Sallen-Key de segundo orden equivalente al filtro RLC pasivo. Presenta una caída de \qty{40}{dB/decada} tras la frecuencia de corte.}\label{fig:sallen_key}
 \end{marginfigure}
+
+Para demostrar el comportamiento de este filtro, aplicaremos la \emph{Ley de Corrientes de Kirchhoff (KCL)} en el dominio de Laplace ($s$). Definimos $V_A$ como el nodo entre las dos resistencias de entrada y $V_B$ como el nodo de la entrada no inversora.
+
+Podemos considerar que el filtro Sallen-Key se comporta como un amplificador ideal, $V_{out} = K \cdot V_{in}$, donde $V_{in}$ es la tensión en la entrada no inversora. Dado que el amplificador está configurado como no inversor, $V_{in} = V_B$. Por tanto, podemos expresar $V_B$ en función de la salida del filtro:
+
+\begin{equation}\label{eq:vb_val}
+    V_B = \frac{V_{out}}{K}; \quad \text{donde} \quad K = 1 + \frac{R_a}{R_b}
+\end{equation}
+donde $V_{out}$ es la salida del filtro y $K$  es la ganacia de cualquier amplificador no inversor. Esta relación es fundamental para el análisis posterior, ya que nos permite expresar $V_B$ en función de la salida, lo que es clave para aplicar KCL en los nodos del circuito.
+
+
+La corriente que atraviesa $R_2$ es la misma que carga el condensador $C_2$:
+\begin{equation}
+    \frac{V_A - V_B}{R_2} = \frac{V_B}{1/sC_2} = V_B \cdot sC_2
+\end{equation}
+Sustituyendo $V_B$ y despejando $V_A$ en función de la salida:
+\begin{equation}\label{eq:va_val}
+    V_A = V_B (1 + sR_2C_2) = \frac{V_{out}}{K} (1 + sR_2C_2)
+\end{equation}
+
+
+En este nodo converge la corriente de entrada, la de realimentación por $C_1$ y la que sigue hacia $R_2$:
+\begin{equation}
+    \frac{V_{in} - V_A}{R_1} + \frac{V_{out} - V_A}{1/sC_1} = \frac{V_A - V_B}{R_2}
+\end{equation}
+%mostrar reordenación de términos paso a paso:
+\begin{equation}
+    \frac{V_{in}}{R_1} - \frac{V_A}{R_1} + V_{out} \cdot sC_1 - V_A \cdot sC_1 = \frac{V_A}{R_2}- \frac{V_B}{R_2}
+\end{equation}
+Reordenando y agrupando términos:
+\begin{equation}\label{eq:kcl_a}
+    \frac{V_{in}}{R_1} + V_{out} \cdot sC_1 = V_A \left( \frac{1}{R_1} + \frac{1}{R_2} + sC_1 \right) - \frac{V_B}{R_2}
+\end{equation}
+
+
+Sustituyendo las expresiones de $V_A$ (\ref{eq:va_val}) y $V_B$ \eqref{eq:vb_val} en la ecuación (\ref{eq:kcl_a}), obtenemos:
+%paso a paso
+
+\begin{equation}
+    \frac{V_{in}}{R_1} + V_{out} \cdot sC_1 = \left( \frac{V_{out}}{K} (1 + sR_2C_2) \right) \left( \frac{1}{R_1} + \frac{1}{R_2} + sC_1 \right) - \frac{V_{out}}{KR_2}
+\end{equation}
+
+\begin{equation}\label{eq:kcl_final}
+\frac{V_{in}}{R_1} + V_{out} \cdot sC_1 = \frac{V_{out}}{K} \left[ (1 + sR_2C_2) \left( \frac{1}{R_1} + \frac{1}{R_2} + sC_1 \right) - \frac{1}{R_2} \right]
+\end{equation}
+
+Reordenando términos y multiplicando por $K$,finalmente, expresamos la función de transferencia del filtro como la relación entre la salida y la entrada:
+
+
+\marginnote{\textbf{Demostración paso a paso:} Para llegar a la función de transferencia final, es necesario realizar una serie de pasos algebraicos que incluyen el desarrollo de productos de polinomios, sustitución de variables y agrupación de términos. Este proceso es fundamental para entender cómo los componentes del filtro interactúan para definir su respuesta en frecuencia. A continuación, se detallan estos pasos para clarificar el camino hacia la función de transferencia final.
+%\paragraph{Paso 1: Desarrollo del producto de polinomios}
+Para simplificar el miembro de la derecha, desarrollamos el producto de los dos paréntesis:
+\begin{align*}
+    &(1 + sR_2C_2) \left( \frac{1}{R_1} + \frac{1}{R_2} + sC_1 \right) = \\
+    &\frac{1}{R_1} + \frac{1}{R_2} + sC_1 + \frac{sR_2C_2}{R_1} + \frac{sR_2C_2}{R_2} + s^2 R_2 C_1 C_2
+\end{align*}
+Simplificando el término $\frac{sR_2C_2}{R_2} = sC_2$ y agrupando por potencias de $s$:
+\begin{equation*}\label{eq:desarrollo_poli}
+    = \frac{1}{R_1} + \frac{1}{R_2} + s \left( C_1 + C_2 + \frac{R_2 C_2}{R_1} \right) + s^2 R_2 C_1 C_2
+\end{equation*}
+
+%\paragraph{Paso 2: Sustitución y cancelación}
+Introducimos este desarrollo en la ecuación principal \eqref{eq:kcl_final} y factorizamos $V_{out}/K$:
+\begin{align*}
+    & \frac{V_{in}}{R_1} + V_{out}sC_1 =\\
+    & \frac{V_{out}}{K} \left[ \frac{1}{R_1} + \cancel{\frac{1}{R_2}} + s \left( C_1 + C_2 + \frac{R_2 C_2}{R_1} \right) + s^2 R_2 C_1 C_2 - \cancel{\frac{1}{R_2}} \right]
+\end{align*}
+Nótese que los términos $1/R_2$ se cancelan mutuamente, simplificando la expresión.
+
+%\paragraph{Paso 3: Agrupación de términos en $V_{out}$}
+Multiplicamos toda la ecuación por $K$ y llevamos el término $sC_1 V_{out}$ al lado derecho multiplicándolo también por $K$:
+\begin{equation*}
+    \frac{K V_{in}}{R_1} = V_{out} \left[ \frac{1}{R_1} + s \left( C_1 + C_2 + \frac{R_2 C_2}{R_1} \right) + s^2 R_2 C_1 C_2 - s C_1 K \right]
+\end{equation*}
+
+%\paragraph{Paso 4: Normalización y resultado final}
+Multiplicamos toda la expresión por $R_1$ para eliminar el denominador del término de entrada:
+\begin{equation*}
+    K V_{in} = V_{out} \left[ 1 + s \left( R_1 C_1 + R_1 C_2 + R_2 C_2 \right) + s^2 (R_1 R_2 C_1 C_2) - s R_1 C_1 K \right]
+\end{equation*}
+Finalmente, agrupamos los coeficientes de $s$ para obtener la función de transferencia estándar de un sistema de segundo orden:
+\begin{align*}
+&H(s) = \frac{V_{out}(s)}{V_{in}(s)} =\\
+&= \frac{K}{s^2(R_1 R_2 C_1 C_2) + s(R_1 C_2 + R_2 C_2 + R_1 C_1 (1 - K)) + 1}
+\end{align*}
+}
+
+
+
+
+\begin{equation}\label{eq:transferencia_final}
+    H(s) = \frac{V_{out}(s)}{V_{in}(s)} = \frac{K}{s^2(R_1R_2C_1C_2) + s(R_1C_2 + R_2C_2 + R_1C_1(1-K)) + 1}
+\end{equation}
+
+Comparando la Ecuación~\ref{eq:transferencia_final} con la forma canónica de un sistema de segundo orden:
+\begin{equation}
+    H(s) = \frac{K}{\frac{s^2}{\omega_n^2} + \frac{s}{Q\omega_n} + 1}
+\end{equation}
+
+Podemos identificar los parámetros fundamentales de diseño:
+\begin{itemize}
+    \item \textbf{Frecuencia natural ($\omega_n$)}: 
+    \[ \omega_n = \frac{1}{\sqrt{R_1R_2C_1C_2}} \quad \implies \quad f_c = \frac{1}{2\pi \sqrt{R_1R_2C_1C_2}} \]
+    \item \textbf{Factor de Calidad ($Q$)}:
+    \[ Q = \frac{\sqrt{R_1R_2C_1C_2}}{R_1C_2 + R_2C_2 + R_1C_1(1-K)} \]
+\end{itemize}
+
+
+\paragraph{Filtro de Antialiasing}
+Antes de cualquier conversión A/D, es obligatorio colocar un filtro paso bajo para cumplir con el teorema de Nyquist. Un filtro Sallen-Key de segundo orden es la opción más equilibrada entre complejidad y rendimiento.
+
 
 
 

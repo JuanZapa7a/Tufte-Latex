@@ -23,9 +23,9 @@
 \contentsline {figure}{\numberline {3.1}{\ignorespaces Representación física de sensores resistivos.}}{33}{figure.3.1}%
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {3.2}{\ignorespaces Efecto de carga.}}{34}{figure.3.2}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Comparativa de sensibilidad entre galgas.}}{35}{figure.3.3}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Comparativa de sensibilidad entre galgas.}}{34}{figure.3.3}%
 \contentsline {figure}{\numberline {3.4}{\ignorespaces Estructura de un acelerómetro MEMS.}}{35}{figure.3.4}%
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Representación atómica del dopaje en la red de silicio}}{36}{figure.3.5}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Representación atómica del dopaje en la red de silicio}}{35}{figure.3.5}%
 \contentsline {figure}{\numberline {3.6}{\ignorespaces Integración de la galga en el silicio}}{36}{figure.3.6}%
 \contentsline {figure}{\numberline {3.7}{\ignorespaces Resistencia de un Pt100.}}{37}{figure.3.7}%
 \contentsline {figure}{\numberline {3.8}{\ignorespaces Principio de medida de resistencia.}}{37}{figure.3.8}%
@@ -71,5 +71,6 @@
 \contentsline {figure}{\numberline {5.2}{\ignorespaces Amplificador de carga para sensores capacitivos o piezoeléctricos. La salida es proporcional a la carga de entrada e inversamente proporcional a la capacidad de realimentación $C_f$.}}{65}{figure.5.2}%
 \contentsline {figure}{\numberline {5.3}{\ignorespaces Filtros pasivos RLC: paso bajo (arriba) y paso alto (abajo).}}{65}{figure.5.3}%
 \contentsline {figure}{\numberline {5.4}{\ignorespaces Filtro activo paso bajo Sallen-Key de segundo orden equivalente al filtro RLC pasivo. Presenta una caída de \qty {40}{dB/decada} tras la frecuencia de corte.}}{66}{figure.5.4}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Acción del filtro antialiasing.}}{69}{figure.5.5}%
 \addvspace {10\p@ }
 \contentsfinish 

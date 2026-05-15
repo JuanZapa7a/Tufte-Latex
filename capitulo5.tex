@@ -241,13 +241,31 @@ Al normalizar la expresión para que el término de mayor grado sea unitario, di
     H_{LP}(s) = \frac{\frac{1}{LC}}{s^2 + \frac{R}{L}s + \frac{1}{LC}}
 \end{equation}
 %
-Comparando con la forma estándar de un sistema de segundo orden, $$ H(s) = \dfrac{\omega_0^2}{s^2 + 2\zeta\omega_0s + \omega_0^2} $$ identificamos la frecuencia natural o de corte $\omega_0$ como:
-%
+Comparando con la forma estándar de un sistema de segundo orden, 
+\begin{equation}\label{eq:tf_rlc_final}
+    H(s) = \dfrac{\omega_0^2}{s^2 + 2\zeta\omega_0s + \omega_0^2}
+\end{equation} 
+identificamos la frecuencia natural o de corte $\omega_0$ como:
+
+
 \begin{equation}
     \omega_0^2 = \frac{1}{LC} \implies \omega_0 = \frac{1}{\sqrt{LC}}
 \end{equation}
 %
-Luego, igualamos: $$ 2\zeta\omega_0 = \frac{R}{L} $$ Ahora, podemos despejar el factor de amortiguamiento $\zeta$. Para ello, sustituimos $\omega_0 = \frac{1}{\sqrt{LC}}$ en esta ecuación: $$ 2\zeta \left(\frac{1}{\sqrt{LC}}\right) = \frac{R}{L} $$ Despejando $\zeta$: $$ \zeta = \frac{R}{L} \cdot \frac{\sqrt{LC}}{2} = \frac{R}{2} \sqrt{\frac{C}{L}} $$ El factor de amortiguamiento $\zeta$ nos dice cómo de \emph{suave} o \emph{oscilatoria} será la respuesta del filtro.
+Luego, igualamos: 
+\begin{equation}
+2\zeta\omega_0 = \frac{R}{L}   
+\end{equation}
+
+Ahora, podemos despejar el factor de amortiguamiento $\zeta$. Para ello, sustituimos $\omega_0 = \frac{1}{\sqrt{LC}}$ en esta ecuación:
+\begin{equation}
+2\zeta \left(\frac{1}{\sqrt{LC}}\right) = \frac{R}{L} 
+\end{equation} 
+Despejando $\zeta$: 
+\begin{equation} 
+\zeta = \frac{R}{L} \cdot \frac{\sqrt{LC}}{2} = \frac{R}{2} \sqrt{\frac{C}{L}} 
+\end{equation} 
+El factor de amortiguamiento $\zeta$ nos dice cómo de \emph{suave} o \emph{oscilatoria} será la respuesta del filtro.
 
 \begin{enumerate}
     \item Si $\zeta < 1$, el filtro tendrá una respuesta subamortiguada, lo que significa que puede haber un pico en la respuesta en frecuencia antes de la atenuación.
@@ -393,7 +411,7 @@ Sustituyendo las expresiones de $V_A$ (\ref{eq:va_val}) y $V_B$ \eqref{eq:vb_val
 Reordenando términos y multiplicando por $K$,finalmente, expresamos la función de transferencia del filtro como la relación entre la salida y la entrada:
 
 
-\marginnote{\textbf{Demostración paso a paso:} Para llegar a la función de transferencia final, es necesario realizar una serie de pasos algebraicos que incluyen el desarrollo de productos de polinomios, sustitución de variables y agrupación de términos. Este proceso es fundamental para entender cómo los componentes del filtro interactúan para definir su respuesta en frecuencia. A continuación, se detallan estos pasos para clarificar el camino hacia la función de transferencia final.
+\marginnote{\textbf{Desde la equación (\ref{eq:kcl_final}) hasta la ecuación final (\ref{eq:transferencia_final}):} Para llegar a la función de transferencia final, es necesario realizar una serie de pasos algebraicos que incluyen el desarrollo de productos de polinomios, sustitución de variables y agrupación de términos. Este proceso es fundamental para entender cómo los componentes del filtro interactúan para definir su respuesta en frecuencia. A continuación, se detallan estos pasos para clarificar el camino hacia la función de transferencia final.
 %\paragraph{Paso 1: Desarrollo del producto de polinomios}
 Para simplificar el miembro de la derecha, desarrollamos el producto de los dos paréntesis:
 \begin{align*}
@@ -407,73 +425,227 @@ Simplificando el término $\frac{sR_2C_2}{R_2} = sC_2$ y agrupando por potencias
 
 %\paragraph{Paso 2: Sustitución y cancelación}
 Introducimos este desarrollo en la ecuación principal \eqref{eq:kcl_final} y factorizamos $V_{out}/K$:
-\begin{align*}
-    & \frac{V_{in}}{R_1} + V_{out}sC_1 =\\
-    & \frac{V_{out}}{K} \left[ \frac{1}{R_1} + \cancel{\frac{1}{R_2}} + s \left( C_1 + C_2 + \frac{R_2 C_2}{R_1} \right) + s^2 R_2 C_1 C_2 - \cancel{\frac{1}{R_2}} \right]
-\end{align*}
-Nótese que los términos $1/R_2$ se cancelan mutuamente, simplificando la expresión.
-
-%\paragraph{Paso 3: Agrupación de términos en $V_{out}$}
-Multiplicamos toda la ecuación por $K$ y llevamos el término $sC_1 V_{out}$ al lado derecho multiplicándolo también por $K$:
 \begin{equation*}
-    \frac{K V_{in}}{R_1} = V_{out} \left[ \frac{1}{R_1} + s \left( C_1 + C_2 + \frac{R_2 C_2}{R_1} \right) + s^2 R_2 C_1 C_2 - s C_1 K \right]
+    \begin{split}
+    & \frac{V_{in}}{R_1} + V_{out}sC_1 =\\
+    & \frac{V_{out}}{K} \left[ \frac{1}{R_1} + \cancel{\frac{1}{R_2}} + s \left( C_1 + C_2 + \frac{R_2 C_2}{R_1} \right) \right. \\
+    & \left. \quad + s^2 R_2 C_1 C_2 - \cancel{\frac{1}{R_2}} \vphantom{\left( \frac{R_2 C_2}{R_1} \right)} \right]
+    \end{split}
+\end{equation*}
+
+Nótese que los términos $1/R_2$ se cancelan mutuamente, simplificando la expresión. Si multiplicamos toda la ecuación por $K$ y llevamos el término $sC_1 V_{out}$ al lado derecho multiplicándolo también por $K$:
+\begin{equation*}
+    \begin{split}
+    \frac{K V_{in}}{R_1} &= V_{out} \left[ \frac{1}{R_1} + s \left( C_1 + C_2 + \frac{R_2 C_2}{R_1} \right) \right. \\
+    &\quad \left. + s^2 R_2 C_1 C_2 - s C_1 K \vphantom{\left( \frac{R_2 C_2}{R_1} \right)} \right]
+    \end{split}
 \end{equation*}
 
 %\paragraph{Paso 4: Normalización y resultado final}
 Multiplicamos toda la expresión por $R_1$ para eliminar el denominador del término de entrada:
 \begin{equation*}
-    K V_{in} = V_{out} \left[ 1 + s \left( R_1 C_1 + R_1 C_2 + R_2 C_2 \right) + s^2 (R_1 R_2 C_1 C_2) - s R_1 C_1 K \right]
+    \begin{split}
+    K V_{in} &= V_{out} \left[ 1 + s \left( R_1 C_1 + R_1 C_2 + R_2 C_2 \right) \right. \\
+    &\quad \left. + s^2 (R_1 R_2 C_1 C_2) - s R_1 C_1 K \right]
+    \end{split}
 \end{equation*}
 Finalmente, agrupamos los coeficientes de $s$ para obtener la función de transferencia estándar de un sistema de segundo orden:
 \begin{align*}
-&H(s) = \frac{V_{out}(s)}{V_{in}(s)} =\\
-&= \frac{K}{s^2(R_1 R_2 C_1 C_2) + s(R_1 C_2 + R_2 C_2 + R_1 C_1 (1 - K)) + 1}
+H(s) &= \frac{V_{out}(s)}{V_{in}(s)} = \frac{K}{\splitfrac{s^2(R_1 R_2 C_1 C_2) + s(R_1 C_2 +}{R_2 C_2 + R_1 C_1 (1 - K)) + 1}}
 \end{align*}
 }
-
-
-
 
 \begin{equation}\label{eq:transferencia_final}
     H(s) = \frac{V_{out}(s)}{V_{in}(s)} = \frac{K}{s^2(R_1R_2C_1C_2) + s(R_1C_2 + R_2C_2 + R_1C_1(1-K)) + 1}
 \end{equation}
 
 Comparando la Ecuación~\ref{eq:transferencia_final} con la forma canónica de un sistema de segundo orden:
-\begin{equation}
-    H(s) = \frac{K}{\frac{s^2}{\omega_n^2} + \frac{s}{Q\omega_n} + 1}
+\begin{equation}\label{eq:tf_canonica}
+    H(s) = \dfrac{K}{\dfrac{s^2}{\omega_n^2} + \dfrac{s}{Q\omega_n} + 1}
 \end{equation}
 
 Podemos identificar los parámetros fundamentales de diseño:
 \begin{itemize}
-    \item \textbf{Frecuencia natural ($\omega_n$)}: 
+    \item \emph{Frecuencia natural ($\omega_n$)}: 
     \[ \omega_n = \frac{1}{\sqrt{R_1R_2C_1C_2}} \quad \implies \quad f_c = \frac{1}{2\pi \sqrt{R_1R_2C_1C_2}} \]
-    \item \textbf{Factor de Calidad ($Q$)}:
+    \item \emph{Factor de Calidad ($Q$)}:
     \[ Q = \frac{\sqrt{R_1R_2C_1C_2}}{R_1C_2 + R_2C_2 + R_1C_1(1-K)} \]
 \end{itemize}
 
-
-\paragraph{Filtro de Antialiasing}
-Antes de cualquier conversión A/D, es obligatorio colocar un filtro paso bajo para cumplir con el teorema de Nyquist. Un filtro Sallen-Key de segundo orden es la opción más equilibrada entre complejidad y rendimiento.
-
-
-
-
-
-
-\section{Errores y Limitaciones Reales}\label{sec:errores_opamp}
-
-En instrumentación de precisión, no podemos ignorar las imperfecciones de los operacionales reales:
+\marginnote{\textbf{Relación entre las formas estándar de la Función de Transferencia} Es normal observar que la función de transferencia del filtro Sallen-Key, expresada como:
+\begin{equation*}
+    H(s) = \frac{K}{\splitfrac{s^2(R_1 R_2 C_1 C_2) + s(R_1 C_2 +}{R_2 C_2 + R_1 C_1 (1 - K)) + 1}}
+\end{equation*}
+puede compararse con la forma canónica:
+\begin{equation*}\label{eq:tf_rlc_standard}
+    H(s) = \dfrac{\omega_0^2}{s^2 + 2\zeta\omega_0s + \omega_0^2}
+\end{equation*}
+Ambas expresiones son representaciones válidas y equivalentes de un sistema de segundo orden, como un filtro paso bajo. Para establecer la equivalencia, primero normalizamos la ecuación \eqref{eq:transferencia_final} dividiendo por el coeficiente de $s^2$, que es $R_1R_2C_1C_2$:
+\begin{align*}\label{eq:tf_sallen_key_normalized}
+    & H(s) = \\
+    & \dfrac{\dfrac{K}{R_1R_2C_1C_2}}{\splitfrac{s^2 + s\left(\dfrac{R_1C_2 + R_2C_2 +R_1C_1(1-K)}{R_1R_2C_1C_2}\right)}{+ \dfrac{1}{R_1R_2C_1C_2}}}
+\end{align*}
+Ahora, podemos comparar directamente los coeficientes de esta forma con los de la ecuación \eqref{eq:tf_rlc_standard}.
 
 \begin{itemize}
-    \item \emph{Tensión de Offset ($V_{os}$)}: Pequeña tensión continua en la salida incluso con entradas a cero. Crítico en medidas de termopares.
-    \item \emph{Corrientes de Polarización ($I_b$)}: Corrientes que fluyen hacia las entradas del operacional. Generan errores de tensión al circular por las resistencias del puente.
-    \item \emph{Deriva Térmica}: El cambio de los parámetros anteriores con la temperatura.
+    \item \textbf{Frecuencia Natural ($\omega_n$ o $\omega_0$):}
+    \[ \omega_n^2 = \omega_0^2 = \frac{1}{R_1R_2C_1C_2}\]  
+    \[ \omega_n = \omega_0 = \frac{1}{\sqrt{R_1R_2C_1C_2}}\]
+    
+    \item \textbf{Factor de Amortiguamiento ($\zeta$) y Factor de Calidad ($Q$):}
+    \[ 2\zeta\omega_0 = \frac{R_1C_2 + R_2C_2 + R_1C_1(1-K)}{R_1R_2C_1C_2} \]
+    %Sustituyendo $\omega_0 = \frac{1}{\sqrt{R_1R_2C_1C_2}}$ y despejando $\zeta$, obtenemos:
+    \[ \zeta = \frac{1}{2} \left( \frac{R_1C_2 + R_2C_2 + R_1C_1(1-K)}{\sqrt{R_1R_2C_1C_2}} \right) \]
+    El factor de calidad $Q$ está relacionado con $\zeta$ por $Q = \frac{1}{2\zeta}$. Por lo tanto:
+    \[ Q = \frac{\sqrt{R_1R_2C_1C_2}}{R_1C_2 + R_2C_2 + R_1C_1(1-K)} \]
+
+    \item \textbf{Ganancia DC ($K_{DC}$):}
+    Si dividimos \eqref{eq:tf_rlc_standard} por $\omega_0^2$, obtenemos:
+    \[ H(s) = \dfrac{1}{\dfrac{s^2}{\omega_0^2} + \dfrac{2\zeta}{\omega_0}s + 1} \]
+    Para $s \to 0$ (frecuencia cero o DC), esta forma da una ganancia de $1$. Es decir, está normalizada para una ganancia DC unitaria.
+
+    En contraste, la ecuación \eqref{eq:tf_canonica} tiene $\frac{K}{R_1R_2C_1C_2}$ en el numerador. Si la evaluamos para $s \to 0$, la ganancia DC es:
+    \[ H(0) = \dfrac{\dfrac{K}{R_1R_2C_1C_2}}{\dfrac{1}{R_1R_2C_1C_2}} = K \]
+    Este $K$ es precisamente la ganancia del amplificador no inversor ($K = 1 + R_a/R_b$) que forma parte del filtro Sallen-Key. 
+\end{itemize}
+}
+
+
+\paragraph{Filtro de Antialiasing}
+En cualquier sistema de adquisición de datos, el paso del mundo analógico al digital se realiza mediante el muestreo. Para que este proceso sea reversible (es decir, que no se pierda información), debemos cumplir el \emph{Teorema de Nyquist-Shannon}. Este establece que la frecuencia de muestreo ($f_s$) debe ser al menos el doble de la frecuencia más alta ($f_{max}$) contenida en la señal original:
+\begin{equation}
+    f_s > 2 \cdot f_{max}
+\end{equation}
+Si la señal de entrada contiene componentes de frecuencia superiores a la frecuencia de Nyquist ($f_N = f_s/2$), se produce el \emph{aliasing} o solapamiento espectral. En este estado, las frecuencias altas se \emph{disfrazan} de frecuencias bajas dentro de la banda de interés, creando señales fantasma que el software de procesamiento no puede distinguir de la señal real.
+
+% \begin{marginfigure}[-2em]
+%     \centering
+%     \shorthandoff{>}
+%     \begin{tikzpicture}[scale=0.8]
+%         \begin{axis}[
+%             width=\linewidth, height=5cm,
+%             xlabel={Tiempo}, ylabel={Amplitud},
+%             xmin=0, xmax=10, ymin=-1.2, ymax=1.2,
+%             axis lines=left,
+%             xtick=\empty, ytick=\empty,
+%             legend style={at={(0.5,1.1)}, anchor=south, legend columns=-1, draw=none, font=\tiny}
+%         ]
+%             % Señal original de alta frecuencia
+%             \addplot[thick, blue, domain=0:10, samples=200] {sin(deg(2*pi*1.5*x))};
+%             \addlegendentry{Señal Original ($f_{sig}$)}
+
+%             % Puntos de muestreo (frecuencia baja)
+%             \addplot[only marks, mark=*, mark options={fill=red}, red, samples=11, domain=0:10] {sin(deg(2*pi*1.5*x))};
+%             \addlegendentry{Puntos de Muestreo ($f_s$)}
+
+%             % Señal aliased (conectando los puntos de muestreo)
+%             \addplot[thick, dashed, orange, samples=11, domain=0:10] {sin(deg(2*pi*1.5*x))};
+%             \addlegendentry{Señal Aliased ($f_{alias}$)}
+            
+%             % Flechas para indicar las frecuencias
+%             \draw[->, gray, thick] (axis cs:0.5, 0.8) -- (axis cs:1.5, 0.8) node[midway, above, font=\tiny] {$f_{sig}$};
+%             \draw[->, gray, thick] (axis cs:0.5, -0.8) -- (axis cs:2.5, -0.8) node[midway, below, font=\tiny] {$f_{alias}$};
+            
+%             % Líneas verticales para los puntos de muestreo
+%             \foreach \x in {0,1,...,10} {
+%                 \draw[dashed, gray!50, thin] (axis cs:\x, -1.2) -- (axis cs:\x, 1.2);
+%             }
+%         \end{axis}
+%     \end{tikzpicture}
+%     \caption[Ilustración del fenómeno del aliasing.]{Ilustración del fenómeno del aliasing. La señal original de alta frecuencia (azul) es muestreada a una tasa insuficiente (puntos rojos). Al reconstruir la señal a partir de estos puntos, se obtiene una señal de menor frecuencia (naranja discontinua), que es la señal aliased.}\label{fig:aliasing_ejemplo}
+% \end{marginfigure}
+
+\marginnote{\textbf{Aliasing visual:} Un ejemplo cotidiano de aliasing es el efecto de las ruedas de un carro en el cine: cuando la cámara (que muestrea a \qty{24}{fps}) no es lo suficientemente rápida para captar el giro real de los radios, las ruedas parecen girar hacia atrás o estar casi quietas.}
+
+\paragraph{Necesidad del Filtro Antialiasing (AAF)}
+
+\begin{marginfigure}[2em]
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}[scale=1]
+        % Ejes espectro original
+        \draw[->] (0,0) -- (3.5,0) node[right] {$f$};
+        \draw[->] (0,0) -- (0,1.5) node[above] {$|X(f)|$};
+        
+        % Señal útil (Triángulo)
+        \draw[fill=blue!20, blue] (0,0) -- (1,1) -- (2,0) -- cycle;
+        \node[blue] at (1,0.5) {Señal};
+        
+        % Ruido/Aliasing (Círculo/Curva alta)
+        \draw[fill=red!20, red, dashed] (2.5,0) arc (180:0:0.4) -- cycle;
+        \node[red] at (2.9,0.3) {Ruido};
+        
+        % Límite Nyquist
+        \draw[thick, dashed, gray] (2.2, -0.2) -- (2.2, 1.5) node[above, font=\tiny, black] {$f_s/2$};
+        
+        % Curva del filtro (Sallen-Key)
+        \draw[green!60!black, ultra thick] (0,1.2) -- (1.5,1.2) 
+            .. controls (2.1,1.2) and (2.2,0.1) .. (3,0);
+        \node[green!60!black] at (1.5,1.4) {Filtro AAF};
+
+        % Flecha de proceso
+        \draw[->, ultra thick, gray!40] (1.5,-0.5) -- (1.5,-1.2);
+
+        % Resultado tras el filtro
+        \begin{scope}[yshift=-2.8cm]
+            \draw[->] (0,0) -- (3.5,0) node[right] {$f$};
+            \draw[->] (0,0) -- (0,1.5) node[above] {$|X'(f)|$};
+            
+            % Señal útil intacta
+            \draw[fill=blue!20, blue] (0,0) -- (1,1) -- (2,0) -- cycle;
+            
+            % Ruido eliminado (Sombreado muy tenue)
+            \draw[gray!20, dashed] (2.5,0) arc (180:0:0.4) -- cycle;
+            
+            % Límite Nyquist
+            \draw[thick, dashed, gray] (2.2, -0.2) -- (2.2, 1.5);
+            \node[align=center] at (1.5, -0.6) {Espectro "Limpio"\\listo para ADC};
+        \end{scope}
+    \end{tikzpicture}
+    \caption[Acción del filtro antialiasing.]{Efecto del filtro antialiasing en el dominio de la frecuencia. El filtro elimina el ruido que se encuentra más allá de $f_s/2$ para evitar que se solape con la señal útil durante el muestreo.}\label{fig:espectro_aaf}
+\end{marginfigure}
+
+Puesto que en la práctica es imposible garantizar que una señal física o el ruido ambiental no contengan componentes por encima de $f_s/2$, es obligatorio situar un filtro paso bajo analógico \emph{antes} del convertidor ADC. Este filtro se denomina \textit{Filtro Antialiasing} (AAF).
+
+Su función es limpiar el espectro, eliminando cualquier componente que pudiera causar solapamiento. En instrumentación, un filtro Sallen-Key de segundo orden (como el analizado en la sección anterior) es la opción predilecta. Al ofrecer una caída de \qty{40}{dB/decada}, permite una atenuación suficiente del ruido de alta frecuencia. 
+
+En sistemas de precisión, es común utilizar técnicas de \emph{sobremuestreo} ($f_s \gg 2 f_{max}$) para relajar las exigencias del filtro analógico. Al muestrear mucho más rápido de lo estrictamente necesario, la banda de transición del filtro puede ser más ancha, permitiendo diseños más sencillos y con menor distorsión de fase en la banda de paso.
+
+
+
+
+
+
+\section{Errores y Limitaciones Reales de los Amplificadores Operacionales}\label{sec:errores_opamp}
+
+En instrumentación de precisión, el amplificador operacional ideal es una abstracción útil, pero en la realidad, los dispositivos presentan una serie de imperfecciones que pueden degradar significativamente la precisión de la medida. No podemos ignorar estas limitaciones:
+
+\begin{itemize}
+    \item \emph{Tensión de Offset de Entrada ($V_{os}$)}: Es una pequeña tensión continua que aparece en la salida del operacional incluso cuando la diferencia de tensión entre sus entradas es exactamente cero. Se origina por desequilibrios inherentes en el par diferencial de entrada del amplificador. Su efecto es el de introducir un \emph{error sistemático (offset)} en la medida, desplazando toda la curva de transferencia. Es especialmente crítico en aplicaciones que miden señales de muy baja amplitud, como las de termopares o galgas extensiométricas, donde $V_{os}$ puede ser del mismo orden de magnitud que la señal útil. Se mitiga mediante técnicas de ajuste (nulling) o compensación por software.
+
+    \item \emph{Corrientes de Polarización de Entrada ($I_b$)}: Son pequeñas corrientes continuas que fluyen hacia (o desde) los terminales de entrada del amplificador operacional. Estas corrientes son necesarias para polarizar los transistores de entrada del operacional (en el caso de diseños bipolares) o son corrientes de fuga (en diseños FET). Cuando estas corrientes circulan a través de las resistencias de la red de entrada (por ejemplo, las resistencias de un puente de Wheatstone o la impedancia de fuente del sensor), generan caídas de tensión que se suman a la señal de entrada. Esto se manifiesta como un \emph{error de offset adicional}, particularmente problemático cuando el sensor tiene una alta impedancia de salida.
+
+    \item \emph{Deriva Térmica ($TCV_{os}, TCI_b$)}: Los parámetros $V_{os}$ e $I_b$ no son constantes, sino que varían con la temperatura ambiente. La deriva térmica de la tensión de offset ($TCV_{os}$) y de las corrientes de polarización ($TCI_b$) describe cuánto cambian estos parámetros por cada grado Celsius de variación de temperatura. Esta deriva introduce un \emph{error variable y dependiente de la temperatura}, lo que hace que la calibración del sistema sea inestable y que la precisión de la medida fluctúe con las condiciones ambientales. Para aplicaciones de alta precisión, es fundamental utilizar operacionales con muy baja deriva térmica o implementar técnicas de compensación activa de temperatura.
+
+    \item \emph{Ruido Intrínseco}: Todo amplificador operacional genera ruido eléctrico internamente, que se suma a la señal de entrada. Este ruido se caracteriza por su densidad espectral de tensión ($nV/\sqrt{Hz}$) y de corriente ($pA/\sqrt{Hz}$). Aunque no es un error sistemático, establece el \emph{límite fundamental de resolución} del sistema, ya que enmascara las señales de muy baja amplitud.
+
+    \item \emph{Rango de Tensión de Modo Común (CMRR finito)}: Aunque los amplificadores de instrumentación están diseñados para rechazar el modo común, ningún dispositivo real es perfecto. Un CMRR finito significa que una parte de la tensión de modo común (ruido, offsets) se convierte en una señal diferencial y se amplifica, introduciendo un \emph{error en la medida}.
 \end{itemize}
 
-\marginnote{\textbf{Selección de componentes:} Para un sensor de alta impedancia (pH, fotodiodos), elegimos operacionales con entrada \textbf{FET} o \textbf{CMOS}. Para señales de muy baja tensión (termopares), preferimos operacionales \textbf{Bipolares} de bajo ruido o tipo \textbf{Chopper}.}
+\marginnote{\textbf{Selección de componentes:} Para un sensor de alta impedancia (pH, fotodiodos), elegimos operacionales con entrada \emph{FET} o \emph{CMOS} debido a sus extremadamente bajas corrientes de polarización ($I_b$). Para señales de muy baja tensión (termopares, galgas), preferimos operacionales \emph{Bipolares} de bajo ruido o tipo \em{phChopper} (que minimizan la deriva y el offset) para mantener la integridad de la señal.
+}
 
 \section{Resumen del Capítulo}\label{sec:resumen_opamp}
 
-El acondicionamiento analógico es el arte de extraer la señal del ruido. Un buen diseño minimiza los errores sistemáticos de los componentes y prepara la señal para que ocupe todo el rango dinámico del ADC, maximizando así la resolución efectiva del sistema.
+En este capítulo se han analizado las etapas fundamentales para transformar una señal analógica cruda en una magnitud procesable por un sistema digital:
+
+\begin{itemize}
+    \item \emph{Amplificador de Instrumentación}: Basado en la topología de tres operacionales, es la solución óptima para sensores en puente. Su elevada impedancia de entrada y su CMRR garantizan la amplificación de la señal diferencial útil frente a interferencias de modo común (como el zumbido de red).
+    \item \emph{Amplificador de Carga}: Mediante el uso de realimentación capacitiva y tierra virtual, permite medir sensores piezoeléctricos eliminando el efecto degradante de la capacidad parásita del cable de conexión.
+    \item \emph{Filtros Activos (Sallen-Key)}: Permiten implementar funciones de transferencia de segundo orden sin inductores voluminosos. Son esenciales como filtros \textit{antialiasing} para asegurar el cumplimiento del teorema de Nyquist-Shannon antes del ADC.
+    \item \emph{Imperfecciones Reales}: El conocimiento de parámetros como la tensión de \textit{offset} ($V_{os}$) y las corrientes de polarización ($I_b$) es vital para seleccionar el componente adecuado (FET para alta impedancia, Bipolar para bajo ruido o Chopper para mínima deriva).
+\end{itemize}
+
+\marginnote{\textbf{Conclusión:} El acondicionamiento analógico es el arte de extraer la señal del ruido. Un diseño robusto no solo amplifica, sino que maximiza la relación señal-ruido (SNR) y adapta el rango dinámico del sensor al del ADC.}
 
 \cleardoublepage

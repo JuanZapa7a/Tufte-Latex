@@ -138,7 +138,8 @@
 \contentsline {section}{\numberline {5.3}Filtros Activos en Instrumentación}{64}{section.5.3}%
 \contentsline {subsection}{Filtro activos: La Topología Sallen-Key}{66}{subsection*.110}%
 \contentsline {paragraph}{Filtro de Antialiasing}{68}{paragraph*.111}%
-\contentsline {section}{\numberline {5.4}Errores y Limitaciones Reales}{68}{section.5.4}%
-\contentsline {section}{\numberline {5.5}Resumen del Capítulo}{68}{section.5.5}%
-\contentsline {chapter}{Bibliograf\'{\i }a}{69}{appendix*.112}%
+\contentsline {paragraph}{Necesidad del Filtro Antialiasing (AAF)}{68}{paragraph*.112}%
+\contentsline {section}{\numberline {5.4}Errores y Limitaciones Reales de los Amplificadores Operacionales}{68}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Resumen del Capítulo}{69}{section.5.5}%
+\contentsline {chapter}{Bibliograf\'{\i }a}{71}{appendix*.113}%
 \contentsfinish 

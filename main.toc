@@ -141,5 +141,31 @@
 \contentsline {paragraph}{Necesidad del Filtro Antialiasing (AAF)}{68}{paragraph*.112}%
 \contentsline {section}{\numberline {5.4}Errores y Limitaciones Reales de los Amplificadores Operacionales}{68}{section.5.4}%
 \contentsline {section}{\numberline {5.5}Resumen del Capítulo}{69}{section.5.5}%
-\contentsline {chapter}{Bibliograf\'{\i }a}{71}{appendix*.113}%
+\contentsline {chapter}{\numberline {6}Sensores Generadores}{71}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Sensores Termoeléctricos: Termopares}{71}{section.6.1}%
+\contentsline {subsection}{Fundamentos Físicos: Efectos Seebeck, Peltier y Thomson}{71}{subsection*.113}%
+\contentsline {paragraph}{El Efecto Seebeck}{71}{paragraph*.114}%
+\contentsline {paragraph}{Efectos Peltier y Thomson}{72}{paragraph*.115}%
+\contentsline {subsection}{Leyes de los Circuitos Termoeléctricos}{72}{subsection*.116}%
+\contentsline {subsection}{Tipos de Termopares y Rangos (Normativa IEC)}{72}{subsection*.117}%
+\contentsline {paragraph}{Clasificación General}{72}{paragraph*.118}%
+\contentsline {paragraph}{Termopar Tipo K (El estándar universal)}{73}{paragraph*.119}%
+\contentsline {paragraph}{Termopar Tipo J (Económico)}{73}{paragraph*.120}%
+\contentsline {paragraph}{Termopar Tipo T (Precisión y Criogenia)}{73}{paragraph*.121}%
+\contentsline {paragraph}{Termopares de Metales Nobles (R, S y B)}{73}{paragraph*.122}%
+\contentsline {subsection}{Compensación de la Unión Fría (CJC)}{73}{subsection*.123}%
+\contentsline {paragraph}{El Bloque Isotérmico}{73}{paragraph*.124}%
+\contentsline {paragraph}{Compensación por Software}{73}{paragraph*.125}%
+\contentsline {paragraph}{Compensación por Hardware (Compensación de Unión Fría Activa)}{74}{paragraph*.126}%
+\contentsline {paragraph}{Cables de Extensión y Compensación}{74}{paragraph*.127}%
+\contentsline {section}{\numberline {6.2}Sensores Piezoeléctricos}{74}{section.6.2}%
+\contentsline {subsection}{El Efecto Piezoeléctrico: Generación de Carga}{74}{subsection*.128}%
+\contentsline {subsection}{Modelo Eléctrico Equivalente}{74}{subsection*.129}%
+\contentsline {subsection}{Respuesta en Frecuencia y Error Dinámico}{75}{subsection*.130}%
+\contentsline {paragraph}{Acondicionamiento: El Amplificador de Carga}{75}{paragraph*.131}%
+\contentsline {section}{\numberline {6.3}Otros Sensores Generadores}{75}{section.6.3}%
+\contentsline {subsection}{Sensores Fotovoltaicos (Células solares)}{75}{subsection*.132}%
+\contentsline {subsection}{Sensores Electrodinámicos (Velocímetros)}{75}{subsection*.133}%
+\contentsline {section}{\numberline {6.4}Resumen y Comparativa}{76}{section.6.4}%
+\contentsline {chapter}{Bibliograf\'{\i }a}{77}{appendix*.134}%
 \contentsfinish 

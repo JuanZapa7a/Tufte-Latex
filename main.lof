@@ -72,5 +72,15 @@
 \contentsline {figure}{\numberline {5.3}{\ignorespaces Filtros pasivos RLC: paso bajo (arriba) y paso alto (abajo).}}{65}{figure.5.3}%
 \contentsline {figure}{\numberline {5.4}{\ignorespaces Filtro activo paso bajo Sallen-Key de segundo orden equivalente al filtro RLC pasivo. Presenta una caída de \qty {40}{dB/decada} tras la frecuencia de corte.}}{66}{figure.5.4}%
 \contentsline {figure}{\numberline {5.5}{\ignorespaces Acción del filtro antialiasing.}}{69}{figure.5.5}%
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Lazo termoeléctrico básico. La tensión de Seebeck $V_{AB}$ es proporcional a la diferencia de temperatura entre la unión de medida ($T_1$) y la unión de referencia ($T_2$).}}{71}{figure.6.1}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Curvas de respuesta para termopares estándar. El tipo K es casi lineal y sensible, mientras que el tipo S (metales nobles) es menos sensible pero extremadamente estable a altas temperaturas.}}{72}{figure.6.2}%
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Comparativa de salida de tensión. El Tipo E ofrece la mayor relación señal-ruido, mientras que el Tipo S se reserva para aplicaciones donde la estabilidad es prioritaria sobre la amplitud de señal.}}{73}{figure.6.3}%
+\contentsline {figure}{\numberline {6.4}{\ignorespaces Esquema de un bloque de compensación. Un sensor auxiliar (NTC o RTD) mide la temperatura de los terminales de cobre para permitir la corrección por software o hardware.}}{73}{figure.6.4}%
+\contentsline {figure}{\numberline {6.5}{\ignorespaces Principio de transducción piezoeléctrica.}}{74}{figure.6.5}%
+\contentsline {figure}{\numberline {6.6}{\ignorespaces Circuito equivalente del sensor piezoeléctrico.}}{74}{figure.6.6}%
+\contentsline {figure}{\numberline {6.7}{\ignorespaces Respuesta en frecuencia cualitativa.}}{75}{figure.6.7}%
+\contentsline {figure}{\numberline {6.8}{\ignorespaces Principio del sensor fotovoltaico.}}{75}{figure.6.8}%
+\contentsline {figure}{\numberline {6.9}{\ignorespaces Esquema de un sensor electrodinámico.}}{75}{figure.6.9}%
 \addvspace {10\p@ }
 \contentsfinish 

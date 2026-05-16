@@ -21,4 +21,7 @@
 \contentsline {table}{\numberline {5.1}{\ignorespaces Componentes clave del amplificador de instrumentación y su función en la ganancia total.}}{63}{table.5.1}%
 \contentsline {table}{\numberline {5.2}{\ignorespaces Analogía de parámetros físicos entre sistemas mecánicos y eléctricos.\label {tab:analogias}}}{66}{table.5.2}%
 \addvspace {10\p@ }
+\contentsline {table}{\numberline {6.1}{\ignorespaces Características de los termopares estándar según IEC. Los valores de sensibilidad son promedios en sus rangos lineales.}}{72}{table.6.1}%
+\contentsline {table}{\numberline {6.2}{\ignorespaces Comparativa de sensores generadores. Nótese la diversidad de señales de salida (tensión, carga o corriente), lo que exige etapas de acondicionamiento específicas para cada tecnología.}}{76}{table.6.2}%
+\addvspace {10\p@ }
 \contentsfinish 

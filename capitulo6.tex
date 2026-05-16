@@ -384,14 +384,50 @@ Físicamente, el sensor se comporta como un \emph{filtro paso alto}. La frecuenc
 }
 
 \paragraph{Acondicionamiento: El Amplificador de Carga}
-Si conectamos el sensor a un amplificador de tensión convencional, la capacidad del cable ($C_c$) atenuará la señal y hará que la calibración dependa de la longitud del cable ($V = q / (C_s + C_c)$).
+Si conectamos el sensor a un amplificador de tensión convencional, la capacidad parásita del cable ($C_c$) actúa como un divisor de carga en paralelo, haciendo que la tensión medida dependa críticamente de la longitud del cable ($V = q / (C_s + C_c)$). 
 
-Para solucionar esto, se emplea el \emph{Amplificador de Carga} analizado en el Capítulo~\ref{cap:opamps}. Gracias a la tierra virtual, el potencial del cable se mantiene en cero, anulando la carga en $C_c$ y haciendo que la tensión de salida dependa exclusivamente del condensador de realimentación $C_f$:
+\begin{marginfigure}
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}[american, scale=1]
+        \ctikzset{resistors/scale=0.6, capacitors/scale=0.6, sources/scale=0.6, amplifiers/scale=1, amplifiers/fill=orange!5}
+        % Sensor (Modelo fuente de carga)
+        \draw (0,0) to[isource, l=$i_{in}$] (0,2) -- (0.7,2);
+        \draw (0.7,2) to[C, l=$C_s$,*-*] (0.7,0);
+        \draw (0,0) -- (1.6,0);
+        % Cable
+        \draw (0.7,2) -- (1.6,2) node[circ]{} to[C, l=$C_c$,*-*] (1.6,0) node[ground]{};
+        % Amp
+        \draw (2.5,2) node[op amp, anchor=-] (oa) {};
+        \draw (1.6,2) -- (oa.-);
+        \draw (oa.+) -- (oa.+ |- 0,0) node[ground]{};
+        % Feedback
+        \draw (oa.-) node[circ]{} -- ++(0,0.8) coordinate (top) to[C, l=$C_f$] (top -| oa.out) -- (oa.out) node[circ]{};
+        \draw (oa.out) to[short, -o] ++(0.3,0) node[above] {$V_{out}$};
+        % Tierra virtual highlight
+        \node[red, font=\tiny, align=center] at (2, 2) {Tierra\\Virtual};
+        %\draw[red, thick, <-] (2.2, 1.6) -- (2.2, 2.0);
+    \end{tikzpicture}
+    \caption[Efecto de la tierra virtual en el cable.]{Configuración de amplificador de carga. Al mantener el nodo inversor a potencial de masa (tierra virtual), la capacidad del cable $C_c$ no almacena carga ($q=C \cdot 0 = 0$), eliminando su influencia en la medida.}\label{fig:tierra_virtual_carga}
+\end{marginfigure}
+
+Para solucionar esto, se emplea el \emph{Amplificador de Carga} analizado en el Capítulo~\ref{cap:opamps}. Como se muestra en la Figura~\ref{fig:tierra_virtual_carga}, el operacional se conecta el sensor a la entrada inversora y mantiene el nodo inversor a masa (tierra virtual). Gracias a la tierra virtual, el potencial del conductor central del cable se mantiene en cero, anulando la carga acumulada en $C_c$ y forzando a que toda la carga generada por el sensor se transfiera íntegramente al condensador de realimentación $C_f$. Así, la tensión de salida depende exclusivamente del componente interno $C_f$:
 \begin{equation}
     V_{out} = -\frac{q}{C_f} = -\frac{d \cdot F}{C_f}
 \end{equation}
+donde $d$ es la distancia entre el sensor y el condensador de realimentación, q es la carga generada por el sensor, $C_f$ es la capacidad del condensador de realimentación y $F$ es la fuerza aplicada.
 
-\marginnote{\textbf{Aplicación: Acelerómetros:} 
+Un ejemplo de esto puede verse de la siguiente manera: La sensibilidad se define como $S = \Delta V / \Delta q$. Veamos el caso de utilizar un amplificador de tensión convencional frente a un amplificador de carga:
+    \begin{itemize}
+        \item \emph{Amplificador de Tensión}: La tensión se rige por $V = q / (C_s + C_c)$. La sensibilidad $S_v$ depende críticamente del cable:
+        \[ S_v = \frac{1}{C_s + C_c} \]
+        Para $C_s = \qty{100}{pF}$ y $q = \qty{100}{pC}$, al pasar de \qty{1}{m} ($C_c \approx \qty{100}{pF}$) a \qty{10}{m} ($\qty{1000}{pF}$), la señal cae de \qty{0.5}{V} a \qty{0.09}{V}.
+        \item \emph{Amplificador de Carga}: Debido a la tierra virtual ($V_- \approx 0$), el cable no almacena carga ($q_{cable} = C_c \cdot 0 = 0$). Toda la carga fluye a $C_f$:
+        \[ S_q = -\frac{1}{C_f} \quad \implies \quad V_{out} = -\frac{q}{C_f} \]
+        Con $C_f = \qty{100}{pF}$, la salida es \qty{-1}{V} constante, sin importar la longitud del cable.
+    \end{itemize}
+
+\marginnote{\textbf{Sensores Piezoeléctricos: Acelerómetros:} 
     Son el uso más común de estos sensores. Una masa sísmica presiona el cristal ante una aceleración $a$, generando una fuerza $F=m \cdot a$. Permiten medir vibraciones de hasta \qty{50}{\kilo\hertz} en motores y estructuras.
 }
 
@@ -413,8 +449,20 @@ Como se ilustra en la Figura~\ref{fig:celda_fotovoltaica}, la incidencia de luz 
     \shorthandoff{>}
     \begin{tikzpicture}[scale=1]
         % Unión PN
-        \draw[fill=blue!15] (0,0.5) rectangle (3,1); \node at (1.5,0.75) {Capa P};
-        \draw[fill=red!15] (0,0) rectangle (3,0.5); \node at (1.5,0.25) {Capa N};
+        \draw[fill=red!15] (0,0.5) rectangle (3,1); \node[red!70!black, font=\tiny] at (2.8,0.85) {Capa P};
+        \draw[fill=blue!15] (0,0) rectangle (3,0.5); \node[blue!70!black, font=\tiny] at (0.3,0.15) {Capa N};
+        
+        % Pares electrón-hueco y su movimiento
+        \foreach \xpos [count=\i] in {0.7, 1.5, 2.3} {
+            % Hueco (+) hacia capa P
+            \node[circle, fill=red, inner sep=0.5pt, font=\tiny, text=white] (h\i) at (\xpos, 0.6) {+};
+            \draw[-stealth, red, very thin] (h\i.north) -- ++(0, 0.2);
+            
+            % Electrón (-) hacia capa N
+            \node[circle, fill=blue, inner sep=0.5pt, font=\tiny, text=white] (e\i) at (\xpos+0.2, 0.4) {-};
+            \draw[-stealth, blue, very thin] (e\i.south) -- ++(0, -0.2);
+        }
+        \node[font=\tiny, align=center] at (0.35, 0.5) {Pares\\$e^-/h^+$};
         
         % Fotones (h*nu)
         \foreach \x in {0.5, 1.5, 2.5} {
@@ -423,9 +471,13 @@ Como se ilustra en la Figura~\ref{fig:celda_fotovoltaica}, la incidencia de luz 
         \node[orange, font=\bfseries] at (1.5, 2.2) {$h\nu$ (Luz)};
         
         % Circuito
-        \draw (0.2,0.75) -- (-0.6,0.75) -- (-0.6,-1) coordinate (bot_left);
-        \draw (2.8,0.25) -- (3.6,0.25) -- (3.6,-1) coordinate (bot_right);
+        \draw (0.2,0.75) node[circ]{} -- (-0.6,0.75) -- (-0.6,-1) coordinate (bot_left);
+        \draw (2.8,0.25) node[circ]{} -- (3.6,0.25) -- (3.6,-1) coordinate (bot_right);
         
+        % Sentido de la corriente Iph (Sale de P hacia N)
+        \draw[->, >=latex, blue!70!black, thick] (-0.6,-0.1) -- (-0.6,-0.7) node[left] {$I_{ph}$};
+        \draw[->, >=latex, blue!70!black, thick] (3.6,-0.7) -- (3.6,-0.1);
+
         % Amperímetro
         \draw (1.5, -1) circle (0.3) node {A};
         \draw (bot_left) -- (1.2, -1);
@@ -436,8 +488,7 @@ Como se ilustra en la Figura~\ref{fig:celda_fotovoltaica}, la incidencia de luz 
     \caption[Principio del sensor fotovoltaico.]{Operación de un sensor fotovoltaico. La energía de los fotones genera portadores de carga que dan lugar a la corriente de fotodiodo $I_{ph}$.}\label{fig:celda_fotovoltaica}
 \end{marginfigure}
 
-\marginnote[0em]{
-    \textbf{Respuesta Espectral:} La sensibilidad no es uniforme para todos los colores. Los sensores de silicio tienen su pico de respuesta en el infrarrojo cercano (aprox. \qty{900}{nm}). Para medir iluminancia visible, se requieren filtros ópticos que ajusten la respuesta a la curva fotópica del ojo humano.
+\marginnote[0em]{\textbf{Respuesta Espectral:} La sensibilidad no es uniforme para todos los colores. Los sensores de silicio tienen su pico de respuesta en el infrarrojo cercano (aprox. \qty{900}{nm}). Para medir iluminancia visible, se requieren filtros ópticos que ajusten la respuesta a la curva fotópica del ojo humano.
 }
 
 \subsection{Sensores Electrodinámicos (Velocímetros)}
@@ -447,14 +498,19 @@ Estos sensores aprovechan la \emph{Ley de Inducción de Faraday} para medir la v
 \begin{equation}\label{eq:fem_velocidad}
     e = B \cdot l \cdot v
 \end{equation}
-donde $l$ es la longitud total del conductor del bobinado expuesto al flujo. Como se observa en la Figura~\ref{fig:velocimetro}, el sensor genera una tensión alterna si el movimiento es vibratorio.
+donde $l$ es la longitud total del conductor del bobinado expuesto al flujo, $B$ la intensidad del campo magnético y $v$ la velocidad del objeto. Como se observa en la Figura~\ref{fig:velocimetro}, el sensor genera una tensión alterna si el movimiento es vibratorio.
+%explicado en mas detalle.
+Cuando el objeto se mueve a velocidad constante, la tensión de salida es continua. Sin embargo, si el objeto se mueve a velocidad variable, la tensión de salida será una señal alterna cuya frecuencia y amplitud dependen de la velocidad instantánea del objeto.
+
+
 
 \begin{marginfigure}
     \centering
     \shorthandoff{>}
-    \begin{tikzpicture}[american, scale=0.9, font=\scriptsize]
+    \begin{tikzpicture}[american, scale=1]
         % Imán fijo
-        \draw[thick, fill=gray!10] (0,0) rectangle (0.8,2);
+        \draw[thick, fill=red!20] (0,1) rectangle (0.8,2);
+        \draw[thick, fill=blue!20] (0,0) rectangle (0.8,1);
         \node[red] at (0.4, 1.5) {\textbf{N}};
         \node[blue] at (0.4, 0.5) {\textbf{S}};
         
@@ -462,7 +518,7 @@ donde $l$ es la longitud total del conductor del bobinado expuesto al flujo. Com
         \foreach \y in {0.6, 1, 1.4} {
             \draw[green!60!black, ->, dashed] (0.9, \y) -- (2.3, \y);
         }
-        \node[green!60!black, font=\tiny] at (1.6, 1.7) {$\vec{B}$};
+        \node[green!60!black] at (1.6, 1.7) {$\vec{B}$};
 
         % Bobina móvil (Vibrante)
         \draw[ultra thick, orange!80!black] (2, 0.3) rectangle (2.4, 1.7);
@@ -474,16 +530,55 @@ donde $l$ es la longitud total del conductor del bobinado expuesto al flujo. Com
         \draw[ultra thick, blue, <->, >=stealth] (2.2, 2) -- (2.2, 2.6) node[above] {$\vec{v}(t)$};
         
         % Salida
-        \draw (2.2, 0.3) -- (2.2, -0.4) to[short, -o] (3, -0.4) node[right] {$V_{out} \propto v$};
+        \draw (2.2, 0.3) -- (2.2, -0.4) to[short, -o] (3, -0.4) node[right] {$V_{out} \propto \vec{v}(t)$};
     \end{tikzpicture}
     \caption[Esquema de un sensor electrodinámico.]{Transductor electrodinámico. La tensión de salida es una réplica exacta de la velocidad instantánea del objeto, muy común en sismometría y monitorización de turbinas.}\label{fig:velocimetro}
 \end{marginfigure}
 
-\marginnote{\textbf{Limitación en DC:} Al igual que los piezoeléctricos, los sensores electrodinámicos son incapaces de realizar medidas estáticas. Si la velocidad es nula, el flujo magnético no cambia y la tensión de salida cae a cero, independientemente de la posición del sensor.
+\begin{marginfigure}[2em]
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}[scale=0.85]
+        % Carcasa
+        \draw[thick] (0,0) rectangle (2.5,3.5);
+        \node[font=\tiny, gray] at (1.25, 3.7) {Carcasa (Unida al suelo)};
+
+        % Imán central (Fijo a la carcasa)
+        \draw[fill=red!20] (0.9, 1.2) rectangle (1.6, 1.9);
+        \draw[fill=blue!20] (0.9, 0.5) rectangle (1.6, 1.2);
+        \node[red, font=\tiny] at (1.25, 1.55) {N};
+        \node[blue, font=\tiny] at (1.25, 0.85) {S};
+
+        % Bobina (Suspendida)
+        \draw[ultra thick, orange!80!black] (0.6, 0.8) rectangle (1.9, 2.3);
+        \node[orange!80!black, font=\tiny, rotate=90] at (0.4, 1.55) {Bobina (Masa)};
+
+        % Muelles (Superior e inferior)
+        \draw[decoration={zigzag,amplitude=2pt, segment length=4pt}, decorate, blue!60] (1.25, 3.5) -- (1.25, 2.3);
+        \draw[decoration={zigzag,amplitude=2pt, segment length=4pt}, decorate, blue!60] (1.25, 0.5) -- (1.25, 0);
+        \node[blue!60, font=\tiny] at (1.6, 3) {$k$};
+        
+        % Vibración
+        \draw[<->, thick, gray] (1.25, -0.4) -- (1.25, -1) node[below, font=\tiny] {Vibración};
+    \end{tikzpicture}
+    \caption[Estructura de un geófono.]{Estructura interna de un geófono. La inercia de la masa suspendida permite medir la velocidad de vibración de la carcasa.}\label{fig:geofono}
+\end{marginfigure}
+
+\marginnote{\textbf{Sensores Electrodinámicos: Limitación en DC:} Al igual que los piezoeléctricos, los sensores electrodinámicos son incapaces de realizar medidas estáticas. Si la velocidad es nula, el flujo magnético no cambia y la tensión de salida cae a cero, independientemente de la posición del sensor.
 }
 
 
 \section{Resumen y Comparativa}\label{sec:resumen_generadores}
+
+Como resumen, los sensores generadores son dispositivos que convierten directamente una magnitud física en una señal eléctrica sin necesidad de alimentación externa. Su principal ventaja es la autonomía energética, lo que los hace ideales para aplicaciones donde la alimentación es difícil o indeseable. Sin embargo, esta característica también implica que la señal de salida suele ser de baja amplitud y alta impedancia, lo que requiere etapas de acondicionamiento específicas para cada tipo de sensor.
+
+Los podemos clasificar en función del efecto físico que utilizan para generar la señal eléctrica:
+\begin{itemize}
+    \item \emph{Termopares:} Utilizan el efecto Seebeck para medir temperaturas. Son ideales para aplicaciones de alta temperatura y ambientes hostiles.
+    \item \emph{Sensores Piezoeléctricos:} Basados en la generación de carga ante un esfuerzo mecánico. Son perfectos para medir vibraciones, impactos y aceleraciones.
+    \item \emph{Sensores Fotovoltaicos:} Aprovechan el efecto fotovoltaico para medir la iluminancia. Son comunes en fotometría y aplicaciones de energía solar.
+    \item \emph{Sensores Electrodinámicos:} Utilizan la inducción magnética para medir velocidades. Son esenciales en sismología y monitorización de maquinaria rotativa.
+\end{itemize}
 
 Para finalizar el capítulo, la Tabla~\ref{tab:resumen_generadores} presenta una comparativa técnica de las tecnologías generadoras analizadas. La principal ventaja competitiva de estos sensores es su \emph{autonomía energética}, extrayendo la energía necesaria para la señal directamente de la magnitud física medida.
 
@@ -492,7 +587,7 @@ Para finalizar el capítulo, la Tabla~\ref{tab:resumen_generadores} presenta una
     \small
     \caption{Comparativa de sensores generadores. Nótese la diversidad de señales de salida (tensión, carga o corriente), lo que exige etapas de acondicionamiento específicas para cada tecnología.}\label{tab:resumen_generadores}
     \setlength{\tabcolsep}{1pt}
-    \begin{tabularx}{\linewidth}{l X X X}
+    \begin{tabularx}{\linewidth}{l l l X}
         \toprule
         \textbf{Tipo} & \textbf{Efecto Físico} & \textbf{Salida Típica} & \textbf{Aplicación Principal} \\
         \midrule

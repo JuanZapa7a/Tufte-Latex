@@ -165,7 +165,7 @@
 \contentsline {paragraph}{Acondicionamiento: El Amplificador de Carga}{75}{paragraph*.131}%
 \contentsline {section}{\numberline {6.3}Otros Sensores Generadores}{75}{section.6.3}%
 \contentsline {subsection}{Sensores Fotovoltaicos (Células solares)}{75}{subsection*.132}%
-\contentsline {subsection}{Sensores Electrodinámicos (Velocímetros)}{75}{subsection*.133}%
+\contentsline {subsection}{Sensores Electrodinámicos (Velocímetros)}{76}{subsection*.133}%
 \contentsline {section}{\numberline {6.4}Resumen y Comparativa}{76}{section.6.4}%
-\contentsline {chapter}{Bibliograf\'{\i }a}{77}{appendix*.134}%
+\contentsline {chapter}{Bibliograf\'{\i }a}{79}{appendix*.134}%
 \contentsfinish 

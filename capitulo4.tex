@@ -1269,7 +1269,11 @@ Sus principales aplicaciones en ingeniería de telecomunicaciones e industrial s
 
 \paragraph{Efecto Hall}
 
-Cuando una corriente $I$ fluye por un conductor situado en un campo magnético $\vec{B}$ perpendicular, la fuerza de Lorentz ($\vec{F} = q\vec{v} \times \vec{B}$) desvía los portadores de carga acumulándose en las caras laterales del conductor hasta establecer un campo eléctrico transversal que equilibra la fuerza magnética. La geometría típica de un sensor de efecto Hall se muestra en la Figura~\ref{fig:hall_vectorial}. La tensión de Hall resultante es:
+El efecto Hall, descubierto por Edwin Hall en 1879, es un fenómeno fundamental que permitió por primera vez determinar experimentalmente el signo de los portadores de carga en un conductor. En una época donde la naturaleza de la electricidad era aún objeto de debate, Hall demostró que en los metales la corriente está formada por el movimiento de cargas negativas (electrones).
+
+\marginnote{\textbf{El signo de la carga:} Antes de este descubrimiento, no se podía distinguir si la corriente era un flujo de cargas positivas en una dirección o negativas en la opuesta. Al observar la polaridad de la tensión $V_H$, se confirmó definitivamente la naturaleza electrónica de la conducción metálica.}
+
+Cuando una corriente $I$ fluye por un conductor situado en un campo magnético $\vec{B}$ perpendicular, los portadores experimentan la \emph{fuerza de Lorentz} ($\vec{F} = q\vec{v} \times \vec{B}$). Esta fuerza desvía los electrones (o huecos) hacia una de las caras laterales del material, acumulando carga hasta que el campo eléctrico transversal generado compensa exactamente la fuerza magnética. La geometría típica de un sensor de efecto Hall se muestra en la Figura~\ref{fig:hall_vectorial}. La tensión de Hall resultante es:
 
 \begin{equation}\label{eq:v_hall}
     V_H = \frac{R_H \cdot I \cdot B}{t} = \frac{I \cdot B}{n_e \cdot q \cdot t}
@@ -1277,7 +1281,9 @@ Cuando una corriente $I$ fluye por un conductor situado en un campo magnético $
 %
 donde $R_H = 1/(n_e q)$ es la constante de Hall del material ($n_e$ densidad de portadores, $q$ carga del electrón) y $t$ el espesor del conductor. La corriente $I$ fluye horizontalmente, el campo $\vec{B}$ es perpendicular (hacia arriba) y la tensión de Hall $V_H$ se mide en la dirección transversal (lateral). Este principio se emplea en sensores de posición, velocidad angular y corriente sin contacto.
 
-\begin{marginfigure}[-10em]
+\marginnote{\textbf{Nobel y Física Cuántica:} En 1980, Klaus von Klitzing descubrió el \emph{Efecto Hall Cuántico}, donde la resistencia se cuantiza en pasos exactos dependientes solo de constantes universales ($h$ y $e$). Este hito, que le valió el Nobel en 1985, permite hoy definir con precisión absoluta el Ohmio en metrología internacional.}
+
+\begin{marginfigure}
     \centering
     \shorthandoff{>}
     \begin{tikzpicture}[
@@ -1361,14 +1367,12 @@ Los materiales \emph{anisótropos magnetorresistivos} (AMR) presentan una variac
 \end{equation}
 donde $\theta$ es el ángulo entre la magnetización y la corriente. Para campos pequeños, la sensibilidad es muy superior a la del efecto Hall, con variaciones del \qty{2}{\%}-\qty{3}{\%} de la resistencia por unidad de campo.
 
-\marginnote[-3em]{\textbf{Para el diseñador:} La elección entre Hall, AMR y GMR depende del rango de campo y la sensibilidad requerida. \emph{Hall}: campos fuertes (\qtyrange{0.1}{1}{\tesla}), bajo coste. \emph{AMR}: campos medios (\qty{1}{\micro\tesla} a \qty{1}{\milli\tesla}), buena linealidad. \emph{GMR}: campos débiles (\qty{<1}{\micro\tesla}), máxima sensibilidad pero no lineal.}%
+\marginnote{\textbf{Para el diseñador:} La elección entre Hall, AMR y GMR depende del rango de campo y la sensibilidad requerida. \emph{Hall}: campos fuertes (\qtyrange{0.1}{1}{\tesla}), bajo coste. \emph{AMR}: campos medios (\qty{1}{\micro\tesla} a \qty{1}{\milli\tesla}), buena linealidad. \emph{GMR}: campos débiles (\qty{<1}{\micro\tesla}), máxima sensibilidad pero no lineal.}%
 
 Los \emph{sensores GMR} (Giant Magnetoresistance) alcanzan variaciones de hasta el \qty{80}{\%} mediante multicapas cuánticas ferromagnético/antiferro\-mag\-né\-tico (Fe/Cr). Son la base de los cabezales de lectura de discos duros y de los sensores de ángulo en los codificadores de precisión. La Tabla~\ref{tab:hall_vs_mr} resume las características de estos tres tipos de sensores para aplicaciones de instrumentación magnética.   
 
-\marginnote[-3em]{\textbf{Premio Nobel 2007:} Albert Fert y Peter Grünberg compartieron el galardón por el descubrimiento de la GMR de forma independiente. Este avance permitió que la densidad de almacenamiento en los discos duros aumentara de forma exponencial, reduciendo el tamaño de los cabezales de lectura y haciendo posible la era del \emph{Big Data} y la tecnología portátil actual.}
-
-
-
+\marginnote{\textbf{Premio Nobel 2007:} Albert Fert y Peter Grünberg compartieron el galardón por el descubrimiento de la GMR de forma independiente. Este avance permitió que la densidad de almacenamiento en los discos duros aumentara de forma exponencial, reduciendo el tamaño de los cabezales de lectura y haciendo posible la era del \emph{Big Data} y la tecnología portátil actual.}
+\clearpage
 
 \begin{table}[!ht]
     \centering
@@ -1385,9 +1389,6 @@ Los \emph{sensores GMR} (Giant Magnetoresistance) alcanzan variaciones de hasta 
         \bottomrule
     \end{tabularx}   
 \end{table}
-
-
-
 
 \section{Acondicionamiento de Sensores Reactivos}\label{sec:acondic_reactivo}
 

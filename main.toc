@@ -129,7 +129,7 @@
 \contentsline {subsection}{Circuitos Resonantes y Osciladores}{59}{subsection*.106}%
 \contentsline {subsection}{Demodulación Síncrona (Detección de Fase)}{60}{subsection*.107}%
 \contentsline {section}{\numberline {4.5}Resumen y Comparativa de Sensores Reactivos}{60}{section.4.5}%
-\contentsline {section}{\numberline {4.6}Resumen de Errores en Sensores Reactivos}{60}{section.4.6}%
+\contentsline {section}{\numberline {4.6}Resumen de Errores en Sensores Reactivos}{61}{section.4.6}%
 \contentsline {subsection}{El Presupuesto de Errores (\textit {Error Budget})}{61}{subsection*.108}%
 \contentsline {chapter}{\numberline {5}Acondicionamiento de Señal: Amplificadores Operacionales}{63}{chapter.5}%
 \contentsline {section}{\numberline {5.1}El Amplificador de Instrumentación (In-Amp)}{63}{section.5.1}%
@@ -167,5 +167,15 @@
 \contentsline {subsection}{Sensores Fotovoltaicos (Células solares)}{75}{subsection*.132}%
 \contentsline {subsection}{Sensores Electrodinámicos (Velocímetros)}{76}{subsection*.133}%
 \contentsline {section}{\numberline {6.4}Resumen y Comparativa}{76}{section.6.4}%
-\contentsline {chapter}{Bibliograf\'{\i }a}{79}{appendix*.134}%
+\contentsline {chapter}{\numberline {7}Sensores Ópticos}{79}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Fundamentos de la Detección Óptica}{79}{section.7.1}%
+\contentsline {paragraph}{Bandas de Energía en Semiconductores}{79}{paragraph*.134}%
+\contentsline {paragraph}{Respuesta Espectral}{80}{paragraph*.135}%
+\contentsline {section}{\numberline {7.2}Fotodiodos}{80}{section.7.2}%
+\contentsline {paragraph}{Modos de Operación}{80}{paragraph*.136}%
+\contentsline {section}{\numberline {7.3}Fototransistores}{80}{section.7.3}%
+\contentsline {section}{\numberline {7.4}Sensores de Imagen: CCD y CMOS}{80}{section.7.4}%
+\contentsline {paragraph}{CCD (\textit {Charge-Coupled Device})}{80}{paragraph*.137}%
+\contentsline {paragraph}{CMOS (\textit {Complementary Metal-Oxide-Semiconductor})}{81}{paragraph*.138}%
+\contentsline {chapter}{Bibliograf\'{\i }a}{83}{appendix*.139}%
 \contentsfinish 

@@ -128,7 +128,7 @@ Los termopares se dividen fundamentalmente en dos grupos:
     \centering
     \small
     \caption{Características de los termopares estándar según IEC. Los valores de sensibilidad son promedios en sus rangos lineales.}\label{tab:tipos_termopares}
-    \setlength{\tabcolsep}{15pt}
+    \setlength{\tabcolsep}{10pt}
     \begin{tabularx}{\linewidth}{c X c c}
         \toprule
         \textbf{Tipo} & \textbf{Materiales (+ / -)} & \textbf{Rango (\qty{}{\degree C})} & \textbf{Sensibilidad} \\
@@ -144,7 +144,7 @@ Los termopares se dividen fundamentalmente en dos grupos:
 \end{table}
 
 \paragraph{Termopar Tipo K (El estándar universal)}
-Es el más utilizado en la industria general debido a su amplio rango y buena resistencia a la oxidación. Sin embargo, no debe utilizarse en atmósferas reductoras sin protección, ya que el cromo puede sufrir un fenómeno de "corrosión verde" que altera la calibración.
+Es el más utilizado en la industria general debido a su amplio rango y buena resistencia a la oxidación. Sin embargo, no debe utilizarse en atmósferas reductoras sin protección, ya que el cromo puede sufrir un fenómeno de \emph{corrosión verde} que altera la calibración.
 
 \paragraph{Termopar Tipo J (Económico)}
 Muy popular en maquinaria de inyección de plásticos. Su principal limitación es el hierro, que se oxida rápidamente por encima de los \qty{750}{\degree C}, lo que limita su vida útil en ambientes húmedos u oxidantes.
@@ -498,7 +498,7 @@ Estos sensores aprovechan la \emph{Ley de Inducción de Faraday} para medir la v
 \begin{equation}\label{eq:fem_velocidad}
     e = B \cdot l \cdot v
 \end{equation}
-donde $l$ es la longitud total del conductor del bobinado expuesto al flujo, $B$ la intensidad del campo magnético y $v$ la velocidad del objeto. Como se observa en la Figura~\ref{fig:velocimetro}, el sensor genera una tensión alterna si el movimiento es vibratorio.
+donde $l$ es la longitud total del conductor del bobinado expuesto al flujo, $B$ la intensidad del campo magnético y $v$ la velocidad del objeto. Como se observa en la Figura~\ref{fig:sensores_electrodinamicos}, el sensor genera una tensión alterna si el movimiento es vibratorio.
 %explicado en mas detalle.
 Cuando el objeto se mueve a velocidad constante, la tensión de salida es continua. Sin embargo, si el objeto se mueve a velocidad variable, la tensión de salida será una señal alterna cuya frecuencia y amplitud dependen de la velocidad instantánea del objeto.
 
@@ -507,66 +507,66 @@ Cuando el objeto se mueve a velocidad constante, la tensión de salida es contin
 \begin{marginfigure}
     \centering
     \shorthandoff{>}
-    \begin{tikzpicture}[american, scale=1]
-        % Imán fijo
-        \draw[thick, fill=red!20] (0,1) rectangle (0.8,2);
-        \draw[thick, fill=blue!20] (0,0) rectangle (0.8,1);
-        \node[red] at (0.4, 1.5) {\textbf{N}};
-        \node[blue] at (0.4, 0.5) {\textbf{S}};
-        
-        % Líneas de campo B
-        \foreach \y in {0.6, 1, 1.4} {
-            \draw[green!60!black, ->, dashed] (0.9, \y) -- (2.3, \y);
-        }
-        \node[green!60!black] at (1.6, 1.7) {$\vec{B}$};
+    \begin{tikzpicture}[american, scale=0.95]
+        % --- PARTE (a): Transductor electrodinámico ---
+        \begin{scope}[xshift=-1.7cm]
+            % Imán fijo
+            \draw[thick, fill=red!20] (0,1) rectangle (0.8,2);
+            \draw[thick, fill=blue!20] (0,0) rectangle (0.8,1);
+            \node[red] at (0.4, 1.5) {\textbf{N}};
+            \node[blue] at (0.4, 0.5) {\textbf{S}};
+            
+            % Líneas de campo B
+            \foreach \y in {0.6, 1, 1.4} {
+                \draw[green!60!black, ->, dashed] (0.9, \y) -- (2.3, \y);
+            }
+            \node[green!60!black] at (1.6, 1.7) {$\vec{B}$};
 
-        % Bobina móvil (Vibrante)
-        \draw[ultra thick, orange!80!black] (2, 0.3) rectangle (2.4, 1.7);
-        \foreach \y in {0.5, 0.8, 1.1, 1.4} {
-            \draw[orange] (2, \y) -- (2.4, \y);
-        }
-        
-        % Flecha de velocidad
-        \draw[ultra thick, blue, <->, >=stealth] (2.2, 2) -- (2.2, 2.6) node[above] {$\vec{v}(t)$};
-        
-        % Salida
-        \draw (2.2, 0.3) -- (2.2, -0.4) to[short, -o] (3, -0.4) node[right] {$V_{out} \propto \vec{v}(t)$};
+            % Bobina móvil (Vibrante)
+            \draw[ultra thick, orange!80!black] (2, 0.3) rectangle (2.4, 1.7);
+            \foreach \y in {0.5, 0.8, 1.1, 1.4} {
+                \draw[orange] (2, \y) -- (2.4, \y);
+            }
+            
+            % Flecha de velocidad
+            \draw[ultra thick, blue, <->, >=stealth] (2.2, 2) -- (2.2, 2.6) node[above] {$\vec{v}(t)$};
+            
+            % Salida
+            \draw (2.2, 0.3) -- (2.2, -0.4) node[ocirc, scale=0.6] {} node[below, font=\tiny] {$V_{out} \propto \vec{v}(t)$};
+            \node at (1.2, -1.6) {(a) Transductor lineal};
+        \end{scope}
+
+        % --- PARTE (b): Geófono ---
+        \begin{scope}[ xshift=1.5cm]
+            % Carcasa
+            \draw[thick] (0,0) rectangle (2.5,3.5);
+            \node[font=\tiny, gray] at (1.25, 3.7) {Carcasa (Unida al suelo)};
+
+            % Imán central (Fijo a la carcasa)
+            \draw[fill=red!20] (0.9, 1.2) rectangle (1.6, 1.9);
+            \draw[fill=blue!20] (0.9, 0.5) rectangle (1.6, 1.2);
+            \node[red, font=\tiny] at (1.25, 1.55) {N};
+            \node[blue, font=\tiny] at (1.25, 0.85) {S};
+
+            % Bobina (Suspendida)
+            \draw[ultra thick, orange!80!black] (0.6, 0.8) rectangle (1.9, 2.3);
+            \node[orange!80!black, font=\tiny, rotate=90] at (0.4, 1.55) {Bobina (Masa)};
+
+            % Muelles (Superior e inferior)
+            \draw[decoration={zigzag,amplitude=2pt, segment length=4pt}, decorate, blue!60] (1.25, 3.5) -- (1.25, 2.3);
+            \draw[decoration={zigzag,amplitude=2pt, segment length=4pt}, decorate, blue!60] (1.25, 0.5) -- (1.25, 0);
+            \node[blue!60, font=\tiny] at (1.6, 3) {$k$};
+            
+            % Vibración
+            \draw[<->, thick, gray] (1.25, -0.4) -- (1.25, -1) node[below, font=\tiny] {Vibración};
+            \node at (1.25, -1.6) {(b) Estructura geófono};
+        \end{scope}
     \end{tikzpicture}
-    \caption[Esquema de un sensor electrodinámico.]{Transductor electrodinámico. La tensión de salida es una réplica exacta de la velocidad instantánea del objeto, muy común en sismometría y monitorización de turbinas.}\label{fig:velocimetro}
-\end{marginfigure}
-
-\begin{marginfigure}[2em]
-    \centering
-    \shorthandoff{>}
-    \begin{tikzpicture}[scale=0.85]
-        % Carcasa
-        \draw[thick] (0,0) rectangle (2.5,3.5);
-        \node[font=\tiny, gray] at (1.25, 3.7) {Carcasa (Unida al suelo)};
-
-        % Imán central (Fijo a la carcasa)
-        \draw[fill=red!20] (0.9, 1.2) rectangle (1.6, 1.9);
-        \draw[fill=blue!20] (0.9, 0.5) rectangle (1.6, 1.2);
-        \node[red, font=\tiny] at (1.25, 1.55) {N};
-        \node[blue, font=\tiny] at (1.25, 0.85) {S};
-
-        % Bobina (Suspendida)
-        \draw[ultra thick, orange!80!black] (0.6, 0.8) rectangle (1.9, 2.3);
-        \node[orange!80!black, font=\tiny, rotate=90] at (0.4, 1.55) {Bobina (Masa)};
-
-        % Muelles (Superior e inferior)
-        \draw[decoration={zigzag,amplitude=2pt, segment length=4pt}, decorate, blue!60] (1.25, 3.5) -- (1.25, 2.3);
-        \draw[decoration={zigzag,amplitude=2pt, segment length=4pt}, decorate, blue!60] (1.25, 0.5) -- (1.25, 0);
-        \node[blue!60, font=\tiny] at (1.6, 3) {$k$};
-        
-        % Vibración
-        \draw[<->, thick, gray] (1.25, -0.4) -- (1.25, -1) node[below, font=\tiny] {Vibración};
-    \end{tikzpicture}
-    \caption[Estructura de un geófono.]{Estructura interna de un geófono. La inercia de la masa suspendida permite medir la velocidad de vibración de la carcasa.}\label{fig:geofono}
+    \caption[Sensores electrodinámicos.]{Sensores electrodinámicos: (a) Principio de funcionamiento de un transductor de velocidad lineal. (b) Estructura interna de un geófono, donde la inercia de la masa suspendida permite medir vibraciones terrestres.}\label{fig:sensores_electrodinamicos}
 \end{marginfigure}
 
 \marginnote{\textbf{Sensores Electrodinámicos: Limitación en DC:} Al igual que los piezoeléctricos, los sensores electrodinámicos son incapaces de realizar medidas estáticas. Si la velocidad es nula, el flujo magnético no cambia y la tensión de salida cae a cero, independientemente de la posición del sensor.
 }
-
 
 \section{Resumen y Comparativa}\label{sec:resumen_generadores}
 

@@ -1,0 +1,204 @@
+% !TeX root = main.tex
+% !TEX program = pdflatex
+
+\chapter{Sensores Ópticos}\label{cap:opticos}
+
+Los sensores ópticos convierten la energía radiante (fotones) en señales eléctricas. En este capítulo analizaremos los dispositivos basados en semiconductores que operan mediante la interacción de la luz con la materia, abarcando desde detectores puntuales como fotodiodos y fototransistores hasta sensores de imagen matriciales como los sistemas CCD y CMOS.
+
+\section{Fundamentos de la Detección Óptica}\label{sec:fundamentos_opticos}
+
+La detección óptica es una aplicación tecnológica directa de los principios de la \emph{física cuántica}. Se fundamenta en el \emph{efecto fotoeléctrico interno}, un proceso donde la luz interactúa con la materia a nivel atómico. Este fenómeno demostró definitivamente la naturaleza dual de la luz: los fotones actúan como paquetes discretos de energía, una idea tan revolucionaria que permitió a Albert Einstein recibir el Premio Nobel de Física en 1921 por su explicación teórica.
+
+\marginnote{\textbf{Einstein y el Nobel:} Aunque es mundialmente famoso por la Relatividad, el comité del Nobel le otorgó el premio específicamente por descubrir la ley del efecto fotoeléctrico, sentando las bases de la mecánica cuántica al tratar la luz como un flujo de partículas (fotones).}
+
+A diferencia del efecto fotoeléctrico externo (donde los electrones son arrancados de la superficie de un metal), en el \emph{efecto interno} los portadores permanecen dentro del semiconductor pero cambian su estado energético. Cuando un fotón incide sobre el cristal, si su energía ($E = h \cdot f$) es superior a la energía de banda prohibida (\textit{bandgap}, $E_g$), un electrón de la banda de valencia absorbe esa energía y promociona a la banda de conducción.
+
+\paragraph{Bandas de Energía en Semiconductores}
+En un semiconductor, los electrones se organizan en niveles agrupados en bandas de energía. Existen dos bandas principales: la \emph{banda de valencia} y la \emph{banda de conducción}. Es crucial entender que la \emph{banda de conducción posee mayor energía} que la \emph{banda de valencia}. La banda de conducción se encuentra por encima de la banda de valencia. Los electrones tienden naturalmente a ocupar los estados de mínima energía, por lo que permanecen atrapados en la \emph{banda de valencia} (ligados a los átomos). 
+
+\marginnote{\textbf{La analogía del estante:} Imagina un balón en el suelo (valencia) y un estante elevado (conducción). El balón no subirá solo porque el estante es un estado de mayor energía potencial. Para "promocionarlo", necesitas darle un impulso (el fotón) con energía suficiente para superar la altura del estante.}
+
+Por encima de la banda de valencia se sitúa la \emph{banda de conducción}, que representa el nivel energético necesario para que las cargas se muevan libremente. Para que un electrón realice este salto energético hacia un estado más energético, debe absorber energía externa. La región que separa ambos niveles es el \emph{bandgap} ($E_g$): una barrera que el electrón solo puede vencer si un fotón le entrega exactamente la energía que le falta para llegar arriba.
+
+\begin{marginfigure}
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}[scale=1]
+        % Bandas de energía
+        \draw[thick, fill=blue!10] (0,0) rectangle (3,1.5);
+        \node at (1.5, .25) {Banda de Valencia};
+        
+        \draw[thick, fill=red!10] (0,2.5) rectangle (3,4);
+        \node at (1.5, 3.75) {Banda de Conducción};
+        
+        % Bandgap
+        \draw[<->, thick, gray] (3.2, 1.5) -- (3.2, 2.5) node[midway, right] {$E_g$};
+        
+        % Electrón en banda de valencia
+        \node[circle, fill=blue, inner sep=1.5pt, label=left:{$e^-$}] (electron) at (1, 0.75) {};
+        
+        % Fotón incidente
+        \draw[orange, thick, decoration={snake, amplitude=1.5pt, segment length=5pt}, decorate] (-1, 3.5) -- (electron.center);
+        \node[orange, left] at (-1, 3.5) {$h \cdot f$};
+        
+        % Flecha de promoción del electrón
+        \draw[->, ultra thick, blue] (electron.center) -- (1, 3.25) node[midway, right, black] {};
+        
+        % Electrón en banda de conducción
+        \node[circle, fill=blue, inner sep=1.5pt, label=right:{$e^-$}] (electron_cond) at (1, 3.25) {};
+        
+        % Hueco en banda de valencia
+        \node[circle, draw=red, fill=white, inner sep=1.5pt, label=right:{$h^+$}] (hole) at (1, 0.75) {};
+        
+        % Leyenda
+        \node[align=left, font=\tiny, anchor=north west] at (0, -0.5) {
+            $h \cdot f$: Energía del fotón \\
+            $E_g$: Energía de banda prohibida \\
+            $e^-$: Electrón \\
+            $h^+$: Hueco
+        };
+    \end{tikzpicture}
+    \caption[Efecto fotoeléctrico interno.]{Representación esquemática del efecto fotoeléctrico interno. Un fotón con energía suficiente ($h \cdot f > E_g$) excita un electrón de la banda de valencia a la banda de conducción, generando un par electrón-hueco. La \emph{banda de valencia} contiene los electrones ligados a los átomos, mientras que la \emph{banda de conducción} contiene los electrones libres que pueden conducir electricidad.}\label{fig:efecto_fotoelectrico_interno}
+\end{marginfigure}
+
+Este salto energético genera un \textbf{par electrón-hueco}, transformando instantáneamente un estímulo óptico en portadores de carga eléctrica móviles. La importancia de este descubrimiento es incalculable: es el eslabón fundamental que permite convertir la luz en información, siendo la base de la imagen digital, las comunicaciones por fibra óptica y la energía solar fotovoltaica.
+
+\paragraph{Respuesta Espectral}
+La sensibilidad de un sensor óptico no es constante para todas las longitudes de onda. Se define mediante la \emph{responsividad} ($R$), que relaciona la corriente generada con la potencia óptica incidente (\unit{A/W}). Como se muestra en la Figura~\ref{fig:curva_espectral}, los sensores de Silicio (Si) son ideales para el espectro visible e infrarrojo cercano, mientras que el Arseniuro de Galio-Indio (InGaAs) se emplea en comunicaciones por fibra óptica.
+
+\begin{marginfigure}[2em]
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}
+        \begin{axis}[
+            width=\linewidth, height=5cm,
+            xlabel={$\lambda$ (\qty{}{nm})}, ylabel={Responsividad (A/W)},
+            xmin=300, xmax=1800, ymin=0, ymax=1.1,
+            axis lines=left, grid=both,
+            grid style={line width=.1pt, draw=gray!10},
+            font=\scriptsize,
+            legend style={at={(0.95,0.95)}, anchor=north east, draw=none}
+        ]
+            % Silicio
+            \addplot[thick, blue, domain=300:1100, samples=50] {x/1100 * exp(-(x-1000)^2/50000)};
+            \node[blue, font=\tiny] at (axis cs:700, 0.5) {Silicio (Si)};
+            
+            % InGaAs
+            \addplot[thick, red, domain=800:1700, samples=50] {0.95 * exp(-(x-1550)^2/40000)};
+            \node[red, font=\tiny] at (axis cs:1400, 0.7) {InGaAs};
+            
+            % Banda visible sutil
+            \fill[gray, opacity=0.1] (axis cs:400,0) rectangle (axis cs:700,1.1);
+            \node[gray, rotate=90, font=\tiny] at (axis cs:350, 0.8) {VISIBLE};
+        \end{axis}
+    \end{tikzpicture}
+    \caption[Curvas de responsividad espectral.]{Curvas de responsividad espectral para diferentes materiales. El límite de corte superior viene determinado por el \textit{bandgap} del material.}\label{fig:curva_espectral}
+\end{marginfigure}
+
+\marginnote{
+    \textbf{Energía del fotón:} La longitud de onda de corte ($\lambda_c$) es la máxima que puede detectar un sensor:
+    \[ \lambda_c \approx \frac{1240}{E_g \text{ (eV)}} \text{ nm} \]
+    Para el Silicio ($E_g = \qty{1.12}{eV}$), el corte ocurre cerca de los \qty{1100}{nm}.
+}
+
+\section{Fotodiodos}\label{sec:fotodiodos}
+
+Un fotodiodo es una unión PN diseñada para ser sensible a la luz. Se diferencia de una célula solar en que está optimizado para la velocidad y la linealidad en lugar de la extracción de potencia.
+
+\paragraph{Modos de Operación}
+El ingeniero de instrumentación debe elegir entre dos modos de polarización, cada uno con ventajas específicas:
+
+\begin{enumerate}
+    \item \textbf{Modo Fotovoltaico (Polarización cero)}: El fotodiodo se conecta a un amplificador de transimpedancia con tensión nula. Presenta el menor \emph{ruido de oscuridad} pero es más lento debido a la alta capacidad de unión.
+    \item \textbf{Modo Fotoconductivo (Polarización inversa)}: Se aplica una tensión inversa ($V_R$). Esto ensancha la zona de deplexión, reduciendo la capacidad de unión y aumentando drásticamente la \textbf{velocidad de respuesta}. Sin embargo, aparece una corriente de oscuridad que limita la sensibilidad.
+\end{enumerate}
+
+\begin{marginfigure}[0em]
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}[american, scale=1]
+        \ctikzset{amplifiers/fill=blue!5, capacitors/scale=0.6}
+        % Op amp
+        \draw (2,1) node[op amp] (oa) {};
+        % Fotodiodo
+        \draw (oa.-) -- ++(-1,0) coordinate(nodePD) to[photodiode, l=$I_{ph}$, *-] ++(0,-1.5) node[ground](GND){};
+        % Realimentación
+        \draw (oa.-) -- ++(0,1) coordinate(FB) to[R, l=$R_f$] (FB -| oa.out) -- (oa.out) node[circ]{};
+        \draw (oa.+) -- (oa.+ |- GND) node[ground]{};
+        % Salida
+        \draw (oa.out) to[short, -o] ++(0.5,0) node[right] {$V_{out} = -I_{ph}R_f$};
+        
+        \node[red, font=\tiny, align=center] at (0.5, 0.5) {Tierra\\Virtual};
+    \end{tikzpicture}
+    \caption[Amplificador de transimpedancia para fotodiodo.]{Acondicionamiento típico de un fotodiodo (TIA). El operacional mantiene el diodo en modo fotovoltaico (tensión nula) para maximizar la linealidad.}\label{fig:tia_pd}
+\end{marginfigure}
+
+\marginnote{
+    \textbf{Fotodiodo PIN:} 
+    Muchos sensores modernos introducen una capa intrínseca (I) entre la P y la N. Esto permite captar más fotones y reducir aún más la capacidad, logrando anchos de banda de \qty{}{GHz}.
+}
+
+\section{Fototransistores}\label{sec:fototransistores}
+
+Un fototransistor combina un fotodiodo y un amplificador bipolar en el mismo cristal. La luz incide sobre la unión colector-base, generando una corriente que actúa como corriente de base ($I_b$).
+
+\begin{equation}
+    I_c = \beta \cdot I_{ph}
+\end{equation}
+
+Como se muestra en la Figura~\ref{fig:fototransistor}, el dispositivo ofrece una \textbf{ganancia intrínseca} ($\beta$), lo que simplifica el circuito de acondicionamiento al no requerir etapas de amplificación externas complejas. Sin embargo, su tiempo de respuesta es mucho mayor que el de un fotodiodo (µs frente a ns).
+
+\begin{marginfigure}[2em]
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}[american, scale=1]
+        % Símbolo fototransistor
+        \draw (0,0) node[npn, photo] (pt) {};
+        \draw (pt.C) -- ++(0,0.5) to[R, l=$R_c$] ++(0,1.5) node[above] {$V_{CC}$};
+        \draw (pt.E) node[ground]{};
+        \draw (pt.C) to[short, *-o] ++(1,0) node[right] {$V_{out}$};
+        
+        \node[orange] at (-1, 0.5) {$h\nu$};
+    \end{tikzpicture}
+    \caption[Configuración de fototransistor.]{Fototransistor en configuración de emisor común. La ganancia $\beta$ proporciona una señal de salida robusta a cambio de una menor velocidad de conmutación.}\label{fig:fototransistor}
+\end{marginfigure}
+
+\section{Sensores de Imagen: CCD y CMOS}\label{sec:sensores_imagen}
+
+Los sensores de imagen son matrices de millones de fotodetectores (píxeles). Aunque ambos se basan en el silicio, su arquitectura de lectura es radicalmente distinta.
+
+\paragraph{CCD (\textit{Charge-Coupled Device})}
+Los píxeles actúan como pozos de potencial que acumulan carga. La lectura es analógica y secuencial: las cargas se "desplazan" de un píxel a otro como en una brigada de cubos de agua hasta un único amplificador de salida. 
+\begin{itemize}
+    \item \textbf{Ventaja}: Alta uniformidad y bajo ruido.
+    \item \textbf{Desventaja}: Alto consumo y lectura lenta.
+\end{itemize}
+
+\paragraph{CMOS (\textit{Complementary Metal-Oxide-Semiconductor})}
+Cada píxel posee su propio amplificador y conversor A/D (\textit{Active Pixel Sensor}). La lectura es digital y paralela, similar a una memoria RAM.
+\begin{itemize}
+    \item \textbf{Ventaja}: Integración de funciones (Smart Sensors), bajo coste y alta velocidad.
+    \item \textbf{Desventaja}: Mayor ruido de patrón fijo (\textit{Fixed Pattern Noise}).
+\end{itemize}
+
+\begin{table}[ht]
+    \centering
+    \small
+    \caption{Comparativa técnica de sensores ópticos para instrumentación.}\label{tab:comparativa_optica}
+    \begin{tabularx}{\linewidth}{l X X X}
+        \toprule
+        \textbf{Parámetro} & \textbf{Fotodiodo} & \textbf{Fototransistor} & \textbf{LDR} \\
+        \midrule
+        Linealidad & Excelente & Regular & Pobre (log) \\
+        Velocidad & Muy alta (\unit{ns}) & Media (\unit{\mu s}) & Muy baja (\unit{ms}) \\
+        Sensibilidad & Baja (\unit{nA/lux}) & Alta (\unit{mA/lux}) & Variable \\
+        Acondic. & Crítico (TIA) & Sencillo & Divisor tensión \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+\marginnote[2em]{
+    \textbf{Ruido de Disparo (\textit{Shot Noise}):} Es el ruido dominante en sensores ópticos. Se debe a la naturaleza discreta de los fotones y electrones. Su valor eficaz es $I_n = \sqrt{2qI\Delta f}$.
+}
+
+\cleardoublepage

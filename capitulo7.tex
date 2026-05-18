@@ -61,12 +61,17 @@ Por encima de la banda de valencia se sitúa la \emph{banda de conducción}, que
     \caption[Efecto fotoeléctrico interno.]{Representación esquemática del efecto fotoeléctrico interno. Un fotón con energía suficiente ($h \cdot f > E_g$) excita un electrón de la banda de valencia a la banda de conducción, generando un par electrón-hueco. La \emph{banda de valencia} contiene los electrones ligados a los átomos, mientras que la \emph{banda de conducción} contiene los electrones libres que pueden conducir electricidad.}\label{fig:efecto_fotoelectrico_interno}
 \end{marginfigure}
 
-Este salto energético genera un \textbf{par electrón-hueco}, transformando instantáneamente un estímulo óptico en portadores de carga eléctrica móviles. La importancia de este descubrimiento es incalculable: es el eslabón fundamental que permite convertir la luz en información, siendo la base de la imagen digital, las comunicaciones por fibra óptica y la energía solar fotovoltaica.
+Este salto energético genera un \emph{par electrón-hueco}, transformando instantáneamente un estímulo óptico en portadores de carga eléctrica móviles. La importancia de este descubrimiento es incalculable: es el eslabón fundamental que permite convertir la luz en información, siendo la base de la imagen digital, las comunicaciones por fibra óptica y la energía solar fotovoltaica.
 
 \paragraph{Respuesta Espectral}
 La sensibilidad de un sensor óptico no es constante para todas las longitudes de onda. Se define mediante la \emph{responsividad} ($R$), que relaciona la corriente generada con la potencia óptica incidente (\unit{A/W}). Como se muestra en la Figura~\ref{fig:curva_espectral}, los sensores de Silicio (Si) son ideales para el espectro visible e infrarrojo cercano, mientras que el Arseniuro de Galio-Indio (InGaAs) se emplea en comunicaciones por fibra óptica.
 
-\begin{marginfigure}[2em]
+\marginnote{\textbf{Uso de Silicio en el Espectro Visible?} El silicio se usa en el espectro visible a pesar de que el pico de responsividad del silicio está en el infrarrojo ($\approx \qty{900}{nm}$). El silicio se utiliza masivamente en el visible por: 
+1. \emph{Sensibilidad:} Sigue siendo suficiente en el rango \qtyrange{400}{700}{nm}.
+2. \emph{Coste/Integración:} Es el material base de la industria microelectrónica (CMOS).
+3. \emph{Filtros IR:} Se emplean filtros de corte (\textit{IR-cut filters}) para bloquear el pico infrarrojo y ajustar la respuesta a la del ojo humano.}
+
+\begin{marginfigure}
     \centering
     \shorthandoff{>}
     \begin{tikzpicture}
@@ -76,16 +81,15 @@ La sensibilidad de un sensor óptico no es constante para todas las longitudes d
             xmin=300, xmax=1800, ymin=0, ymax=1.1,
             axis lines=left, grid=both,
             grid style={line width=.1pt, draw=gray!10},
-            font=\scriptsize,
             legend style={at={(0.95,0.95)}, anchor=north east, draw=none}
         ]
             % Silicio
-            \addplot[thick, blue, domain=300:1100, samples=50] {x/1100 * exp(-(x-1000)^2/50000)};
-            \node[blue, font=\tiny] at (axis cs:700, 0.5) {Silicio (Si)};
+            \addplot[thick, blue, domain=300:1100, samples=100] {0.65 * exp(-(x-900)^2/180000)};
+            \node[blue, font=\tiny] at (axis cs:700, 0.6) {Silicio (Si)};
             
             % InGaAs
             \addplot[thick, red, domain=800:1700, samples=50] {0.95 * exp(-(x-1550)^2/40000)};
-            \node[red, font=\tiny] at (axis cs:1400, 0.7) {InGaAs};
+            \node[red, font=\tiny] at (axis cs:1200, 0.5) {InGaAs};
             
             % Banda visible sutil
             \fill[gray, opacity=0.1] (axis cs:400,0) rectangle (axis cs:700,1.1);
@@ -95,8 +99,7 @@ La sensibilidad de un sensor óptico no es constante para todas las longitudes d
     \caption[Curvas de responsividad espectral.]{Curvas de responsividad espectral para diferentes materiales. El límite de corte superior viene determinado por el \textit{bandgap} del material.}\label{fig:curva_espectral}
 \end{marginfigure}
 
-\marginnote{
-    \textbf{Energía del fotón:} La longitud de onda de corte ($\lambda_c$) es la máxima que puede detectar un sensor:
+\marginnote{\textbf{Energía del fotón:} La longitud de onda de corte ($\lambda_c$) es la máxima que puede detectar un sensor:
     \[ \lambda_c \approx \frac{1240}{E_g \text{ (eV)}} \text{ nm} \]
     Para el Silicio ($E_g = \qty{1.12}{eV}$), el corte ocurre cerca de los \qty{1100}{nm}.
 }

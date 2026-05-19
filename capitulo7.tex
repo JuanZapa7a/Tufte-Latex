@@ -18,7 +18,7 @@ En un semiconductor, los electrones se organizan en niveles agrupados en bandas 
 
 \marginnote{\textbf{La analogía del estante:} Imagina un balón en el suelo (valencia) y un estante elevado (conducción). El balón no subirá solo porque el estante es un estado de mayor energía potencial. Para "promocionarlo", necesitas darle un impulso (el fotón) con energía suficiente para superar la altura del estante.}
 
-Por encima de la banda de valencia se sitúa la \emph{banda de conducción}, que representa el nivel energético necesario para que las cargas se muevan libremente. Para que un electrón realice este salto energético hacia un estado más energético, debe absorber energía externa. La región que separa ambos niveles es el \emph{bandgap} ($E_g$): una barrera que el electrón solo puede vencer si un fotón le entrega exactamente la energía que le falta para llegar arriba.
+Por encima de la banda de valencia se sitúa la \emph{banda de conducción}, que representa el nivel energético necesario para que las cargas se muevan libremente. Para que un electrón realice este salto entre bandas hacia un estado más energético, debe absorber energía externa. La región que separa ambos niveles es el \emph{bandgap} ($E_g$): una barrera que el electrón solo puede vencer si un fotón le entrega exactamente la energía que le falta para llegar arriba.
 
 \begin{marginfigure}
     \centering
@@ -106,17 +106,155 @@ La sensibilidad de un sensor óptico no es constante para todas las longitudes d
 
 \section{Fotodiodos}\label{sec:fotodiodos}
 
-Un fotodiodo es una unión PN diseñada para ser sensible a la luz. Se diferencia de una célula solar en que está optimizado para la velocidad y la linealidad en lugar de la extracción de potencia.
+Un fotodiodo es una unión PN semiconductora diseñada para operar bajo la incidencia de radiación lumínica. Aunque comparte la estructura física básica con una célula solar, su diseño está optimizado para maximizar la \emph{linealidad} (relación corriente-iluminancia) y la \emph{velocidad de respuesta} (ancho de banda), sacrificando la capacidad de entregar potencia eléctrica a una carga.
 
 \paragraph{Modos de Operación}
+El funcionamiento se basa en la generación de portadores de carga mediante la absorción de fotones. Como se ilustra en la Figura~\ref{fig:estructura_fotodiodo}, cuando un fotón con energía $h\nu \geq E_g$ impacta en el dispositivo, crea un par electrón-hueco. La separación de estos portadores por el campo eléctrico de la unión genera una corriente fotogenerada ($I_{ph}$) que es proporcional a la intensidad luminosa.
+
+\begin{marginfigure}
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}[scale=1, >=stealth]
+        % --- Cuerpo del semiconductor ---
+        % Capa P
+        \fill[red!15] (0,1.5) rectangle (5,2.5);
+        \node at (3.5,2.15) {Material Tipo P};
+        
+        % Zona de Deplexión (Región activa)
+        \fill[gray!10] (0,1) rectangle (5,1.5);
+        \draw[dashed, gray] (0,1.5) -- (5,1.5);
+        \draw[dashed, gray] (0,1) -- (5,1);
+        \node[gray!70!black] at (3.2,1.25) {Zona de Deplexión};
+        
+        % Capa N
+        \fill[blue!15] (0,0) rectangle (5,1);
+        \node at (1.5,0.35) {Material Tipo N};
+
+        % --- Campo Eléctrico Interno ---
+        \draw[->, thick, gray!80] (4.7, 1.4) -- (4.7, 1.1) node[midway, right] {$\vec{E}$};
+
+        % --- Fotones ---
+        \foreach \x/\yend in {0.6/1.7, 1.3/0.8, 2.0/1.4, 2.7/1.2} {
+            \draw[orange, thick, ->, decoration={snake, amplitude=1pt, segment length=5pt}, decorate] 
+                (\x, 3.2) -- (\x, \yend);
+        }
+        \node[orange, font=\bfseries] at (2, 3.4) {$h\nu$ (Fotones)};
+
+        % --- Generación de pares ---
+        % Hueco (+) moviéndose hacia P
+        \node[circle, fill=red, inner sep=0.5pt, text=white] (h1) at (1.5, 1.3) {\tiny $+$};
+        \draw[->, red] (h1.north) -- ++(0, 0.4);
+        
+        % Electrón (-) moviéndose hacia N
+        \node[circle, fill=blue, inner sep=0.5pt, text=white] (e1) at (1.7, 1.2) {\tiny $-$};
+        \draw[->, blue] (e1.south) -- ++(0, -0.4);
+
+        % --- Terminales ---
+        \draw (2.5, 2.5) -- (2.5, 2.8) node[ocirc] {} node[right] {Ánodo};
+        \draw (2.5, 0) -- (2.5, -0.3) node[ocirc] {} node[right] {Cátodo};
+        
+    \end{tikzpicture}
+    \caption[Estructura física de un fotodiodo.]{Estructura interna de un fotodiodo. El campo eléctrico $\vec{E}$ en la zona de deplexión separa rápidamente los pares electrón-hueco generados por la luz, dando lugar a la fotocorriente $I_{ph}$.}\label{fig:estructura_fotodiodo}
+\end{marginfigure}
+
+Si este par se genera dentro de la \emph{zona de deplexión}, el intenso campo eléctrico interno $\vec{E}$ separa los portadores antes de que puedan recombinarse: los huecos son arrastrados hacia el ánodo (P) y los electrones hacia el cátodo (N). Este flujo de carga constituye la \emph{fotocorriente} ($I_{ph}$), que circula en sentido inverso (del cátodo al ánodo).
+
+\marginnote{\textbf{Corriente de Oscuridad ($I_d$):} Es la pequeña corriente que fluye por el fotodiodo en ausencia total de luz. Se debe a la generación térmica de portadores y representa el ruido de fondo que limita la resolución del sensor.
+}
+
+\paragraph{Linealidad y Responsividad}
+La característica más valorada del fotodiodo en instrumentación es su linealidad. La corriente generada es estrictamente proporcional al número de fotones incidentes (flujo radiante $\Phi_e$) sobre una amplia gama de intensidades (hasta 6 o 7 décadas):
+\begin{equation}\label{eq:responsividad}
+    I_{ph} = \mathcal{R} \cdot \Phi_e
+\end{equation}
+donde $\mathcal{R}$ es la \emph{responsividad} del dispositivo, expresada en \qty{}{A/W}. 
+
+\marginnote{\textbf{Diferencia con Célula Solar:} Mientras que la célula solar busca maximizar el producto $V \cdot I$ para generar potencia, el fotodiodo se utiliza con \emph{polarización nula o inversa} para garantizar que el tiempo de tránsito de los portadores sea mínimo, permitiendo anchos de banda de varios \qty{}{GHz}.
+}
+
 El ingeniero de instrumentación debe elegir entre dos modos de polarización, cada uno con ventajas específicas:
 
 \begin{enumerate}
-    \item \textbf{Modo Fotovoltaico (Polarización cero)}: El fotodiodo se conecta a un amplificador de transimpedancia con tensión nula. Presenta el menor \emph{ruido de oscuridad} pero es más lento debido a la alta capacidad de unión.
-    \item \textbf{Modo Fotoconductivo (Polarización inversa)}: Se aplica una tensión inversa ($V_R$). Esto ensancha la zona de deplexión, reduciendo la capacidad de unión y aumentando drásticamente la \textbf{velocidad de respuesta}. Sin embargo, aparece una corriente de oscuridad que limita la sensibilidad.
+    \item \emph{Modo Fotovoltaico (Polarización cero)}: El fotodiodo se conecta a un amplificador de transimpedancia con tensión nula. Presenta el menor \emph{ruido de oscuridad} pero es más lento debido a la alta capacidad de unión.
+    \item \emph{Modo Fotoconductivo (Polarización inversa)}: Se aplica una tensión inversa ($V_R$). Esto ensancha la zona de deplexión, reduciendo la capacidad de unión y aumentando drásticamente la \emph{velocidad de respuesta}. Sin embargo, aparece una corriente de oscuridad que limita la sensibilidad.
 \end{enumerate}
 
-\begin{marginfigure}[0em]
+La elección del modo de trabajo determina el punto de operación sobre la curva característica del semiconductor. Como se ilustra en la Figura~\ref{fig:curva_vi_modos}, la luz desplaza la curva del diodo hacia valores de corriente negativa (fotocorriente).
+
+\begin{marginfigure}
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}
+        \begin{axis}[
+            width=\linewidth, height=6cm,
+            xlabel={$V_D$ (Tensión)}, ylabel={$I_D$ (Corriente)},
+            xmin=-5, xmax=1.5, ymin=-4, ymax=1.5,
+            axis lines=center,
+            xtick={0}, ytick={0},
+            font=\scriptsize,
+            xlabel style={at={(ticklabel* cs:1)}, anchor=north},
+            ylabel style={at={(ticklabel* cs:1)}, anchor=east},
+        ]
+            % Curva en oscuridad (Diodo normal)
+            \addplot[thick, gray, dashed, domain=-5:0.8, samples=100] {0.1*(exp(x/0.2)-1)};
+            \node[gray, font=\tiny] at (axis cs:0.5, 0.8) {Oscuridad};
+
+            % Curva con Iluminación (Iph = 2)
+            \addplot[ultra thick, blue, domain=-5:0.9, samples=100] {0.1*(exp(x/0.2)-1) - 2};
+            \node[blue, font=\tiny] at (axis cs:-3, -2.4) {Iluminado ($\Phi$)};
+
+            % --- MODO FOTOCONDUCTIVO ---
+            \fill[red!20, opacity=0.5] (axis cs:-4.5,-2.5) rectangle (axis cs:-1,-0.5);
+            \node[red, align=center] at (axis cs:-2.8, -1) {\textbf{Modo}\\\textbf{Fotoconductivo}};
+            \draw[red, thick, ->] (axis cs:-2.8, -1.3) -- (axis cs:-2.8, -1.95);
+            \node[red, font=\small] at (axis cs:-4.2, -3.2) {$V_{bias} < 0$};
+
+            % --- MODO FOTOVOLTAICO ---
+            \fill[green!60!black] (axis cs:0,-2) circle (2.5pt);
+            \node[green!60!black, anchor=west, align=left] at (axis cs:0.2, -2) {\textbf{Modo}\\\textbf{Fotovoltaico}\\($V_D = 0$)};
+            
+            % Flecha de Iph
+            \draw[<->, blue] (axis cs:-4, 0) -- (axis cs:-4, -2) node[midway, left] {$I_{ph}$};
+
+        \end{axis}
+    \end{tikzpicture}
+    \caption[Modos de operación en la curva V-I.]{Curva característica del fotodiodo. El \emph{Modo Fotovoltaico} opera en el origen de tensiones ($V_D=0$), anulando la corriente de oscuridad. El \emph{Modo Fotoconductivo} opera con polarización inversa, aumentando la velocidad de respuesta.}\label{fig:curva_vi_modos}
+\end{marginfigure}
+
+\paragraph{Física del Modo Fotoconductivo}
+Al aplicar una tensión de polarización inversa ($V_{bias} < 0$), los portadores mayoritarios son alejados de la unión, lo que ensancha la zona de deplexión ($w$). Puesto que un fotodiodo se comporta eléctricamente como un condensador de placas paralelas, su capacidad de unión ($C_j$) se reduce según la expresión:
+\begin{equation}\label{eq:capacidad_union}
+    C_j = \frac{\epsilon A}{w} \propto \frac{1}{\sqrt{V_{bi} + |V_{bias}|}}
+\end{equation}
+donde $V_{bi}$ es la tensión de barrera interna. Esta reducción de capacidad es fundamental en instrumentación de alta velocidad, ya que disminuye el tiempo de subida del sensor ($t_r \approx 2,2 \cdot R_L C_j$), permitiendo anchos de banda de megahercios a gigahercios.
+
+\paragraph{Física del Modo Fotovoltaico}
+En este modo, el ánodo y el cátodo se mantienen al mismo potencial, normalmente mediante la tierra virtual de un amplificador de transimpedancia. Al no existir un campo eléctrico externo, no hay una corriente de deriva térmica significativa. La Figura~\ref{fig:tia_pd} muestra que la corriente de oscuridad se anula, ya que el punto de operación se encuentra en el origen de tensiones ($V_D = 0$).
+
+\marginnote{\textbf{Linealidad Precisa:} El modo fotovoltaico es el más lineal. Al operar con $V_D = 0$, evitamos que la resistencia serie del dispositivo y las variaciones de la corriente de saturación afecten a la medida, obteniendo una relación corriente-luz casi perfecta.
+}
+
+Como consecuencia, la \emph{corriente de oscuridad} ($I_{dark}$) se reduce al mínimo teórico, eliminando el principal componente de ruido sistemático. Esta configuración es obligatoria cuando se pretenden medir flujos luminosos extremadamente bajos, donde cualquier fuga térmica enmascararía la señal generada por los fotones.
+
+
+El amplificador de transimpedancia TIA es el componente principal de un fotodiodo operado en modo fotovoltaico. Su función principal es convertir una corriente de entrada en una tensión de salida. Dado que un fotodiodo se comporta esencialmente como una fuente de corriente proporcional a la luz, y que la mayoría de los sistemas de adquisición (ADC) requieren una entrada de tensión, es necesario un bloque convertidor corriente-tensión ($I \to V$). El circuito estándar para esta tarea es el \emph{Amplificador de Transimpedancia}. El nombre proviene de la Ley de Ohm ($V=I \cdot Z$). Como la ganancia del circuito relaciona una tensión de salida con una corriente de entrada, las unidades de dicha ganancia son Ohmios \unit[options]{ohms}.
+\begin{equation}
+G = \frac{V_{out}}{I_{in}} \implies [\text{V}/{\text{A}}] = [\Omega]
+\end{equation}
+Por tanto, la ganancia es una "impedancia de transferencia" o transimpedancia.
+
+
+Aquí tienes la explicación técnica detallada para incluir en tus apuntes, justificando por qué es el compañero inseparable del fotodiodo:
+
+\marginnote{\textbf{Resumen para el diseño:} 
+    \begin{itemize}
+        \item \emph{¿Velocidad?} $\rightarrow$ Fotoconductivo ($V_{bias} < 0$).
+        \item \emph{¿Bajo Ruido?} $\rightarrow$ Fotovoltaico ($V_{bias} = 0$).
+    \end{itemize}
+}
+
+
+\begin{marginfigure}
     \centering
     \shorthandoff{>}
     \begin{tikzpicture}[american, scale=1]
@@ -133,13 +271,15 @@ El ingeniero de instrumentación debe elegir entre dos modos de polarización, c
         
         \node[red, font=\tiny, align=center] at (0.5, 0.5) {Tierra\\Virtual};
     \end{tikzpicture}
-    \caption[Amplificador de transimpedancia para fotodiodo.]{Acondicionamiento típico de un fotodiodo (TIA). El operacional mantiene el diodo en modo fotovoltaico (tensión nula) para maximizar la linealidad.}\label{fig:tia_pd}
+    \caption[Amplificador de transimpedancia para fotodiodo.]{Acondicionamiento típico de un fotodiodo (\emph{Transimpendance Ampifier}, TIA). El operacional mantiene el diodo en modo fotovoltaico (tensión nula) para maximizar la linealidad.}\label{fig:tia_pd}
 \end{marginfigure}
 
 \marginnote{
     \textbf{Fotodiodo PIN:} 
     Muchos sensores modernos introducen una capa intrínseca (I) entre la P y la N. Esto permite captar más fotones y reducir aún más la capacidad, logrando anchos de banda de \qty{}{GHz}.
 }
+
+
 
 \section{Fototransistores}\label{sec:fototransistores}
 

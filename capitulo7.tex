@@ -188,7 +188,7 @@ La elección del modo de trabajo determina el punto de operación sobre la curva
         \begin{axis}[
             width=\linewidth, height=6cm,
             xlabel={$V_D$ (Tensión)}, ylabel={$I_D$ (Corriente)},
-            xmin=-5, xmax=1.5, ymin=-4, ymax=1.5,
+            xmin=-5, xmax=2.7, ymin=-4, ymax=1.5,
             axis lines=center,
             xtick={0}, ytick={0},
             font=\scriptsize,
@@ -201,20 +201,20 @@ La elección del modo de trabajo determina el punto de operación sobre la curva
 
             % Curva con Iluminación (Iph = 2)
             \addplot[ultra thick, blue, domain=-5:0.9, samples=100] {0.1*(exp(x/0.2)-1) - 2};
-            \node[blue, font=\tiny] at (axis cs:-3, -2.4) {Iluminado ($\Phi$)};
+            \node[blue, font=\tiny] at (axis cs:-2.5, -2.4) {Iluminado ($\Phi$)};
 
             % --- MODO FOTOCONDUCTIVO ---
-            \fill[red!20, opacity=0.5] (axis cs:-4.5,-2.5) rectangle (axis cs:-1,-0.5);
-            \node[red, align=center] at (axis cs:-2.8, -1) {\textbf{Modo}\\\textbf{Fotoconductivo}};
-            \draw[red, thick, ->] (axis cs:-2.8, -1.3) -- (axis cs:-2.8, -1.95);
-            \node[red, font=\small] at (axis cs:-4.2, -3.2) {$V_{bias} < 0$};
+            \fill[red!20, opacity=0.5] (axis cs:-4,-2.5) rectangle (axis cs:-1,-1.5);
+            \node[red, align=center] at (axis cs:-2.5, -1) {\textbf{Modo}\\\textbf{Fotoconductivo}};
+            \draw[red, thick, ->] (axis cs:-2.5, -1.3) -- (axis cs:-2.5, -1.95);
+            \node[red, font=\small] at (axis cs:-4, -3.2) {$V_{bias} < 0$};
 
             % --- MODO FOTOVOLTAICO ---
             \fill[green!60!black] (axis cs:0,-2) circle (2.5pt);
             \node[green!60!black, anchor=west, align=left] at (axis cs:0.2, -2) {\textbf{Modo}\\\textbf{Fotovoltaico}\\($V_D = 0$)};
             
             % Flecha de Iph
-            \draw[<->, blue] (axis cs:-4, 0) -- (axis cs:-4, -2) node[midway, left] {$I_{ph}$};
+            \draw[<->, blue] (axis cs:-4.3, 0) -- (axis cs:-4.3, -2) node[midway, left] {$I_{ph}$};
 
         \end{axis}
     \end{tikzpicture}
@@ -229,7 +229,7 @@ Al aplicar una tensión de polarización inversa ($V_{bias} < 0$), los portadore
 donde $V_{bi}$ es la tensión de barrera interna. Esta reducción de capacidad es fundamental en instrumentación de alta velocidad, ya que disminuye el tiempo de subida del sensor ($t_r \approx 2,2 \cdot R_L C_j$), permitiendo anchos de banda de megahercios a gigahercios.
 
 \paragraph{Física del Modo Fotovoltaico}
-En este modo, el ánodo y el cátodo se mantienen al mismo potencial, normalmente mediante la tierra virtual de un amplificador de transimpedancia. Al no existir un campo eléctrico externo, no hay una corriente de deriva térmica significativa. La Figura~\ref{fig:tia_pd} muestra que la corriente de oscuridad se anula, ya que el punto de operación se encuentra en el origen de tensiones ($V_D = 0$).
+En este modo, el ánodo y el cátodo se mantienen al mismo potencial, normalmente mediante la tierra virtual de un amplificador de transimpedancia. Al no existir un campo eléctrico externo, no hay una corriente de deriva térmica significativa. La Figura~\ref{fig:curva_vi_modos} muestra que la corriente de oscuridad se anula, ya que el punto de operación se encuentra en el origen de tensiones ($V_D = 0$).
 
 \marginnote{\textbf{Linealidad Precisa:} El modo fotovoltaico es el más lineal. Al operar con $V_D = 0$, evitamos que la resistencia serie del dispositivo y las variaciones de la corriente de saturación afecten a la medida, obteniendo una relación corriente-luz casi perfecta.
 }
@@ -237,15 +237,13 @@ En este modo, el ánodo y el cátodo se mantienen al mismo potencial, normalment
 Como consecuencia, la \emph{corriente de oscuridad} ($I_{dark}$) se reduce al mínimo teórico, eliminando el principal componente de ruido sistemático. Esta configuración es obligatoria cuando se pretenden medir flujos luminosos extremadamente bajos, donde cualquier fuga térmica enmascararía la señal generada por los fotones.
 
 
-El amplificador de transimpedancia TIA es el componente principal de un fotodiodo operado en modo fotovoltaico. Su función principal es convertir una corriente de entrada en una tensión de salida. Dado que un fotodiodo se comporta esencialmente como una fuente de corriente proporcional a la luz, y que la mayoría de los sistemas de adquisición (ADC) requieren una entrada de tensión, es necesario un bloque convertidor corriente-tensión ($I \to V$). El circuito estándar para esta tarea es el \emph{Amplificador de Transimpedancia}. El nombre proviene de la Ley de Ohm ($V=I \cdot Z$). Como la ganancia del circuito relaciona una tensión de salida con una corriente de entrada, las unidades de dicha ganancia son Ohmios (\unit{ohms}).
+El Amplificador de Transimpedancia (\emph{Transimpedance Amplifier}, TIA) es el componente principal de un fotodiodo operado en modo fotovoltaico. Su función principal es convertir una corriente de entrada en una tensión de salida. Dado que un fotodiodo se comporta esencialmente como una fuente de corriente proporcional a la luz, y que la mayoría de los sistemas de adquisición (ADC) requieren una entrada de tensión, es necesario un bloque convertidor corriente-tensión ($I \to V$). El funcionamiento  es el siguiente, cuando el diodo recibe luz, genera una corriente fotogenerada ($I_{ph}$) que fluye del cátodo al ánodo hacia tierra. El TIA mantiene el terminal inversor a tierra virtual (tensión nula) para maximizar la linealidad. La corriente $I_{ph}$ debe provenir de la resistencia de realimentación ($R_f$), generando una tensión de salida proporcional a la corriente de entrada.
 
 \begin{equation}
-G = \frac{V_{out}}{I_{in}} \implies [\text{V}/{\text{A}}] = [\Omega]
+G = \frac{V_{out}}{I_{ph}} \implies [\text{V}/{\text{A}}] = [\Omega]
 \end{equation}
-Por tanto, la ganancia es una "impedancia de transferencia" o transimpedancia.
+El nombre proviene de la Ley de Ohm ($V=I \cdot Z$). Como la ganancia del circuito relaciona una tensión de salida con una corriente de entrada, las unidades de dicha ganancia son Ohmios (\unit{ohms}). Por tanto, la ganancia es una \emph{impedancia de transferencia} o transimpedancia. 
 
-
-Aquí tienes la explicación técnica detallada para incluir en tus apuntes, justificando por qué es el compañero inseparable del fotodiodo:
 
 \marginnote{\textbf{Resumen para el diseño:} 
     \begin{itemize}
@@ -259,24 +257,26 @@ Aquí tienes la explicación técnica detallada para incluir en tus apuntes, jus
     \centering
     \shorthandoff{>}
     \begin{tikzpicture}[american, scale=1]
-        \ctikzset{amplifiers/fill=blue!5, capacitors/scale=0.6}
+        \ctikzset{amplifiers/fill=blue!5, capacitors/scale=0.6, resistors/scale=0.8, sources/scale=0.6, diodes/scale=0.8, diodes/fill=orange!5}
         % Op amp
-        \draw (2,1) node[op amp] (oa) {};
+        \draw (2,1) node[op amp] (oa) {}; 
         % Fotodiodo
-        \draw (oa.-) -- ++(-1,0) coordinate(nodePD) to[photodiode, l=$I_{ph}$, *-] ++(0,-1.5) node[ground](GND){};
+        \draw (oa.-) -- ++(-1,0) coordinate(nodePD) to[photodiode, i_>=$I_{ph}$] ++(0,-1.5) node[ground](GND){};
         % Realimentación
-        \draw (oa.-) -- ++(0,1) coordinate(FB) to[R, l=$R_f$] (FB -| oa.out) -- (oa.out) node[circ]{};
+        \draw (oa.-) node[circ]{} -- ++(0,1) coordinate(FB) to[R, l_=$R_f$] (FB -| oa.out) -- (oa.out) node[circ]{};
         \draw (oa.+) -- (oa.+ |- GND) node[ground]{};
         % Salida
-        \draw (oa.out) to[short, -o] ++(0.5,0) node[right] {$V_{out} = -I_{ph}R_f$};
+        \draw (oa.out) to[short, -o] ++(0.5,0) node[below] {$V_{out} = I_{ph}R_f$};
+
+        \node[orange] at (0.5, 0.5) {$h\nu$};
         
-        \node[red, font=\tiny, align=center] at (0.5, 0.5) {Tierra\\Virtual};
+        \node[red, font=\tiny, align=center] at (0.5, 1.5) {Tierra\\Virtual};
     \end{tikzpicture}
-    \caption[Amplificador de transimpedancia para fotodiodo.]{Acondicionamiento típico de un fotodiodo (\emph{Transimpendance Ampifier}, TIA). El operacional mantiene el diodo en modo fotovoltaico (tensión nula) para maximizar la linealidad.}\label{fig:tia_pd}
+    \caption[Amplificador de transimpedancia para fotodiodo.]{Acondicionamiento típico de un fotodiodo (\emph{Transimpendance Ampifier}, TIA). El operacional mantiene el diodo en modo fotovoltaico (tensión nula) para maximizar la linealidad. La tensión en la salida se calcula partiendo de la tierra virtual: $V_{out} - V_{nodo(-)} = (I_{ph} \cdot R_f)$, como $V_{nodo(-)} = 0V$, entonces $V_{out} = I_{ph} \cdot R_f$. A más luz más tensión de salida.
+}\label{fig:tia_pd}
 \end{marginfigure}
 
-\marginnote{
-    \textbf{Fotodiodo PIN:} 
+\marginnote{\textbf{Fotodiodo PIN:} 
     Muchos sensores modernos introducen una capa intrínseca (I) entre la P y la N. Esto permite captar más fotones y reducir aún más la capacidad, logrando anchos de banda de \qty{}{GHz}.
 }
 
@@ -292,17 +292,18 @@ Un fototransistor combina un fotodiodo y un amplificador bipolar en el mismo cri
 
 Como se muestra en la Figura~\ref{fig:fototransistor}, el dispositivo ofrece una \textbf{ganancia intrínseca} ($\beta$), lo que simplifica el circuito de acondicionamiento al no requerir etapas de amplificación externas complejas. Sin embargo, su tiempo de respuesta es mucho mayor que el de un fotodiodo (µs frente a ns).
 
-\begin{marginfigure}[2em]
+\begin{marginfigure}
     \centering
     \shorthandoff{>}
     \begin{tikzpicture}[american, scale=1]
+        \ctikzset{resistors/scale=0.8}
         % Símbolo fototransistor
         \draw (0,0) node[npn, photo] (pt) {};
-        \draw (pt.C) -- ++(0,0.5) to[R, l=$R_c$] ++(0,1.5) node[above] {$V_{CC}$};
+        \draw (pt.C) -- ++(0,0.5) to[R, l=$R_c$, i<={$I_c=\beta I_{ph}$}, -o] ++(0,1.5) node[above] {$V_{CC}$};
         \draw (pt.E) node[ground]{};
         \draw (pt.C) to[short, *-o] ++(1,0) node[right] {$V_{out}$};
         
-        \node[orange] at (-1, 0.5) {$h\nu$};
+        \node[orange] at (-1, 0.2) {$h\nu$};
     \end{tikzpicture}
     \caption[Configuración de fototransistor.]{Fototransistor en configuración de emisor común. La ganancia $\beta$ proporciona una señal de salida robusta a cambio de una menor velocidad de conmutación.}\label{fig:fototransistor}
 \end{marginfigure}

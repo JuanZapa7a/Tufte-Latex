@@ -177,7 +177,7 @@
 \contentsline {paragraph}{Física del Modo Fotoconductivo}{80}{paragraph*.138}%
 \contentsline {paragraph}{Física del Modo Fotovoltaico}{81}{paragraph*.139}%
 \contentsline {section}{\numberline {7.3}Fototransistores}{81}{section.7.3}%
-\contentsline {section}{\numberline {7.4}Sensores de Imagen: CCD y CMOS}{81}{section.7.4}%
+\contentsline {section}{\numberline {7.4}Sensores de Imagen: CCD y CMOS}{82}{section.7.4}%
 \contentsline {paragraph}{CCD (\textit {Charge-Coupled Device})}{82}{paragraph*.140}%
 \contentsline {paragraph}{CMOS (\textit {Complementary Metal-Oxide-Semiconductor})}{82}{paragraph*.141}%
 \contentsline {chapter}{Bibliograf\'{\i }a}{83}{appendix*.142}%

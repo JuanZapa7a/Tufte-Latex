@@ -284,13 +284,21 @@ El nombre proviene de la Ley de Ohm ($V=I \cdot Z$). Como la ganancia del circui
 
 \section{Fototransistores}\label{sec:fototransistores}
 
+\marginnote{\textbf{Aplicaciones típicas:} Debido a su alta sensibilidad y facilidad de acondicionamiento, se emplean masivamente en \emph{optoacopladores} para aislamiento galvánico, \emph{encoders ópticos} para medida de velocidad en motores, y en \emph{barreras de detección} para conteo de objetos en líneas de producción.}
+
 Un fototransistor combina un fotodiodo y un amplificador bipolar en el mismo cristal. La luz incide sobre la unión colector-base, generando una corriente que actúa como corriente de base ($I_b$).
 
 \begin{equation}
     I_c = \beta \cdot I_{ph}
 \end{equation}
 
-Como se muestra en la Figura~\ref{fig:fototransistor}, el dispositivo ofrece una \textbf{ganancia intrínseca} ($\beta$), lo que simplifica el circuito de acondicionamiento al no requerir etapas de amplificación externas complejas. Sin embargo, su tiempo de respuesta es mucho mayor que el de un fotodiodo (µs frente a ns).
+Como se muestra en la Figura~\ref{fig:fototransistor}, el dispositivo ofrece una \emph{ganancia intrínseca} ($\beta$), lo que simplifica el circuito de acondicionamiento al no requerir etapas de amplificación externas complejas. Sin embargo, su tiempo de respuesta es mucho mayor que el de un fotodiodo (µs frente a ns).
+
+% Porque eltiempo  de respuesta esmucho mayor? Porque 
+El fototransistor es un dispositivo de corriente, y su respuesta depende del tiempo que tardan los portadores en recombinarse. En un fotodiodo, la corriente se genera directamente por la separación de los portadores en la zona de deplexión, lo que ocurre en nanosegundos. En cambio, en un fototransistor, la corriente de base generada por la luz debe amplificarse a través del transistor, lo que introduce un retardo adicional debido a la carga y descarga de las capacitancias internas del transistor, así como al tiempo de vida de los portadores. Esto hace que el fototransistor sea más lento en comparación con el fotodiodo.
+
+% Que es R_c en la figura? 
+$R_c$ representa la resistencia de carga que se conecta al colector del fototransistor. Esta resistencia es crucial para el funcionamiento del circuito, ya que determina la ganancia y la respuesta del fototransistor. La corriente de colector ($I_c$) fluye a través de $R_c$, generando una caída de tensión que se puede medir como salida ($V_{out}$). La elección de $R_c$ afecta directamente la sensibilidad y el tiempo de respuesta del circuito: un valor más alto aumenta la ganancia pero también puede aumentar el tiempo de respuesta debido a la mayor carga capacitiva. 
 
 \begin{marginfigure}
     \centering
@@ -306,6 +314,128 @@ Como se muestra en la Figura~\ref{fig:fototransistor}, el dispositivo ofrece una
         \node[orange] at (-1, 0.2) {$h\nu$};
     \end{tikzpicture}
     \caption[Configuración de fototransistor.]{Fototransistor en configuración de emisor común. La ganancia $\beta$ proporciona una señal de salida robusta a cambio de una menor velocidad de conmutación.}\label{fig:fototransistor}
+\end{marginfigure}
+
+% Puedes poner un ejemplo numerico para ver como funcionaría?
+\marginnote{\textbf{Ejemplo numérico:} Supongamos que tenemos un fototransistor con una ganancia $\beta = 100$ alimentado a $V_{cc} = \qty{5}{V}$ y una resistencia de carga $R_c = \qty{1}{k\Omega}$. Supongamos que la corriente fotogenerada por la luz incidente es $I_{ph} = \qty{10}{\micro A}$. La corriente de base ($I_b$) sería igual a $I_{ph}$, es decir, $I_b = \qty{10}{\micro A}$. La corriente de colector ($I_c$) se calcula multiplicando la corriente de base por la ganancia del transistor:
+\[I_c = \beta \cdot I_{ph} = 100 \cdot \qty{10}{\micro A} = \qty{1}{\milli A}\]
+Si conectamos una resistencia de carga $R_c = \qty{1}{k\Omega}$ al colector, la tensión de salida ($V_{out} = V_{cc} - I_c R_c$) se puede calcular como:
+\[V_{out} = V_{cc} - I_c \cdot R_c = \qty{5}{V} - \qty{1}{\milli A} \cdot \qty{1}{\kilo\Omega} = \qty{4}{V}\]
+En este ejemplo, una corriente fotogenerada de \qty{10}{\micro A} se amplifica a una corriente de colector de \qty{1}{\milli A}, lo que resulta en una tensión de salida de \qty{4}{V}. Esto indica que el fototransistor está operando en la región activa.
+
+Para que el fototransistor sature y la tensión de salida sea cercana a cero, la corriente fotogenerada debe ser mayor. Por ejemplo, si la corriente fotogenerada fuera $I_{ph} = \qty{50}{\micro A}$:
+\[I_c = \beta \cdot I_{ph} = 100 \cdot \qty{50}{\micro A} = \qty{5}{\milli A}\]
+En este caso, la tensión de salida sería:
+\[V_{out} = V_{cc} - I_c \cdot R_c = \qty{5}{V} - \qty{5}{\milli A} \cdot \qty{1}{\kilo\Omega} = \qty{0}{V}\]
+Por lo tanto, en presencia de luz suficiente para saturar el transistor (como en el segundo ejemplo), la salida del fototransistor será baja (cercana a cero). En ausencia de luz, $I_{ph} = 0$, por lo que $I_c = 0$ y $V_{out} = V_{cc} = \qty{5}{V}$. Esto ilustra cómo el fototransistor puede proporcionar una señal de salida robusta que varía significativamente con la presencia de luz, aunque a costa de una mayor latencia en la respuesta en comparación con un fotodiodo.
+}
+
+
+
+
+La combinación de emisores (LED) y receptores (fotodiodos/fototransistores) permite resolver problemas críticos en automatización y electrónica de potencia.
+
+\subsection{Optoacopladores}\label{sub:optoacopladores}
+
+Un optoacoplador es un dispositivo que transfiere señales eléctricas entre dos circuitos aislados mediante luz. Su función primordial es el \emph{aislamiento galvánico}, protegiendo etapas de control de baja tensión de transitorios o voltajes peligrosos en la etapa de potencia.
+
+\begin{marginfigure}
+    \centering
+    \begin{tikzpicture}[american]
+        % Encapsulado
+        \draw[thick, fill=gray!10] (0,0) rectangle (4,2.5);
+        \node[gray, font=\tiny] at (2, 2.2) {OPTOACOPLADOR};
+        
+        % LED y Corriente de entrada If
+        \draw (0.8,1.8) to[led, l_=LED] (0.8,0.7);
+        \draw (0.8,1.8) to[short, i_<=$I_f$] (-0.4,1.8) node[ocirc]{};
+        \draw (0.8,0.7) -- (-0.4,0.7) node[ocirc]{};
+        
+        % Fototransistor y Corriente de colector Ic
+        \node[npn, photo] (pt) at (3.6,1.25) {};
+        %\draw (4.4,1.8) to[short, i=$I_c$, o-] (3.6,1.8) |- (pt.C);
+        %\draw (pt.E) -| (3.6,0.7) -- (4.4,0.7) node[ocirc]{};
+        \draw (pt.E) -- ++(1,0)  node[ocirc]{};
+        \draw (pt.C) to[short, i<=$I_c$, pos=0.85] ++(1,0)  node[ocirc]{};
+
+        % Barrera de luz
+        \draw[orange, ->, dashed, thick] (1.1,1.25) -- (2.9,1.25) node[midway, above] {Luz};
+    \end{tikzpicture}
+    \caption[Esquema de un optoacoplador.]{Esquema interno de un optoacoplador. No existe conexión eléctrica entre la entrada y la salida; la información viaja exclusivamente en forma de fotones.}\label{fig:optoacoplador}
+\end{marginfigure}
+
+\marginnote{\textbf{CTR (\textit{Current Transfer Ratio}):} Es el parámetro que define la eficiencia del optoacoplador. Se expresa como el ratio entre la corriente de salida ($I_c$) y la de entrada ($I_f$). Un CTR del \qty{100}{\percent} significa que \unit{10}{mA} en el LED producen \unit{10}{mA} en el transistor.}
+
+El parámetro fundamental de diseño es la \emph{tensión de aislamiento}, que puede superar los \unit{5}{kV}. Se utilizan masivamente en fuentes de alimentación conmutadas para realimentar el error desde el secundario al primario manteniendo el aislamiento.
+
+El funcionamiento es sencillo, como se muestra en la Figura~\ref{fig:optoacoplador}. Cuando circula una corriente de entrada ($I_f$) por el LED, este emite una intensidad luminosa proporcional que incide sobre el fototransistor, generando a su vez una corriente de colector ($I_c$). Aunque en los circuitos de interfaz solemos trabajar con tensiones ($V_i, V_o$) mediante el uso de resistencias, el mecanismo de transferencia de información es puramente de corriente. La ausencia de contacto eléctrico directo garantiza que las perturbaciones del lado de potencia no afecten al control.
+
+\subsection{Encoders Ópticos}\label{sub:encoders}
+
+Los encoders ópticos transforman el movimiento rotativo de un eje en una serie de pulsos digitales. Constan de un disco ranurado unido al eje que interrumpe el paso de luz entre un emisor y un receptor.
+
+\begin{marginfigure}
+    \centering
+    \begin{tikzpicture}[scale=0.8]
+        % Disco (simplificado)
+        \draw[thick, fill=gray!30] (0,0) circle (1.5);
+        \draw[fill=white] (0,0) circle (0.3); % Eje
+        
+        % Ranuras
+        \foreach \a in {0,20,...,340} {
+            \draw[fill=white] (\a:1.1) rectangle ++(5:0.3);
+        }
+        
+        % Sensor (Horquilla)
+        \draw[fill=blue!10, opacity=0.8] (1.2, -0.5) rectangle (2.2, 0.5);
+        \node[blue, font=\tiny, rotate=90] at (1.7, 0) {SENSOR};
+        
+        % Flecha rotación
+        \draw[->, thick] (0, 1.8) arc (90:40:1.8) node[midway, above] {$\omega$};
+    \end{tikzpicture}
+    \caption[Principio de un encoder óptico.]{Encoder incremental. El número de pulsos por vuelta define la resolución angular del sensor.}\label{fig:encoder}
+\end{marginfigure}
+
+\marginnote{\textbf{Codificación en Cuadratura:} Al usar dos sensores desfasados \qty{90}{\degree} (Canales A y B), el sistema puede determinar no solo la velocidad, sino también el \textbf{sentido de giro} analizando qué señal adelanta a la otra.}
+
+Existen dos tipos principales:
+\begin{itemize}
+    \item \textbf{Incrementales}: Cuentan pulsos desde una posición inicial. Pierden la referencia si falla la alimentación.
+    \item \textbf{Absolutos}: El disco tiene un código binario único (típicamente código Gray) para cada posición. Conocen su ubicación exacta en todo momento.
+\end{itemize}
+
+\subsection{Barreras de Detección (Fotocélulas)}\label{sub:barreras}
+
+Utilizadas para detectar la presencia o ausencia de objetos en líneas de producción. Dependiendo de la disposición de los elementos ópticos, se clasifican en:
+
+\begin{enumerate}
+    \item \textbf{Barrera (Through-beam)}: Emisor y receptor enfrentados. Ofrecen el mayor alcance y fiabilidad en entornos sucios.
+    \item \textbf{Réflex (Retro-reflective)}: Emisor y receptor en el mismo cuerpo. La luz rebota en un espejo catadióptrico.
+    \item \textbf{Difuso}: El propio objeto actúa como reflector. Se usan para detectar presencia a corta distancia sin necesidad de espejos.
+\end{enumerate}
+
+\begin{marginfigure}
+    \centering
+    \begin{tikzpicture}[scale=0.9]
+        % Emisor
+        \draw[fill=black!80] (0,1) rectangle (0.5,1.5);
+        \node[font=\tiny] at (0.25, 0.8) {E};
+        
+        % Haz de luz
+        \draw[red, dashed, thick] (0.5, 1.25) -- (2.5, 1.25);
+        
+        % Objeto interrumpiendo
+        \draw[fill=orange!40, thick] (1.2, 0.8) rectangle (1.7, 1.7);
+        \node[font=\tiny, rotate=90] at (1.45, 1.25) {OBJETO};
+        
+        % Receptor
+        \draw[fill=black!80] (2.5,1) rectangle (3,1.5);
+        \node[font=\tiny] at (2.75, 0.8) {R};
+        
+        % Flecha de interrupción
+        \draw[->, thick, orange] (1.45, 2.2) -- (1.45, 1.8);
+    \end{tikzpicture}
+    \caption{Barrera de detección simple. La interrupción del haz de luz conmuta la salida del sensor (digitalizada).}\label{fig:barrera}
 \end{marginfigure}
 
 \section{Sensores de Imagen: CCD y CMOS}\label{sec:sensores_imagen}

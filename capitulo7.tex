@@ -374,34 +374,323 @@ El funcionamiento es sencillo, como se muestra en la Figura~\ref{fig:optoacoplad
 
 Los encoders ópticos transforman el movimiento rotativo de un eje en una serie de pulsos digitales. Constan de un disco ranurado unido al eje que interrumpe el paso de luz entre un emisor y un receptor.
 
-\begin{marginfigure}
-    \centering
-    \begin{tikzpicture}[scale=0.8]
-        % Disco (simplificado)
-        \draw[thick, fill=gray!30] (0,0) circle (1.5);
-        \draw[fill=white] (0,0) circle (0.3); % Eje
+% \begin{marginfigure}
+%     \centering
+%     \begin{tikzpicture}[scale=0.8]
+%         % Disco (simplificado)
+%         \draw[thick, fill=gray!30] (0,0) circle (1.5);
+%         \draw[fill=white] (0,0) circle (0.3); % Eje
         
-        % Ranuras
-        \foreach \a in {0,20,...,340} {
-            \draw[fill=white] (\a:1.1) rectangle ++(5:0.3);
-        }
+%         % Ranuras
+%         \foreach \a in {0,20,...,340} {
+%             \draw[fill=white] (\a:1.1) rectangle ++(5:0.3);
+%         }
         
-        % Sensor (Horquilla)
-        \draw[fill=blue!10, opacity=0.8] (1.2, -0.5) rectangle (2.2, 0.5);
-        \node[blue, font=\tiny, rotate=90] at (1.7, 0) {SENSOR};
+%         % Sensor (Horquilla)
+%         \draw[fill=blue!10, opacity=0.8] (1.2, -0.5) rectangle (2.2, 0.5);
+%         \node[blue, font=\tiny, rotate=90] at (1.7, 0) {SENSOR};
         
-        % Flecha rotación
-        \draw[->, thick] (0, 1.8) arc (90:40:1.8) node[midway, above] {$\omega$};
-    \end{tikzpicture}
-    \caption[Principio de un encoder óptico.]{Encoder incremental. El número de pulsos por vuelta define la resolución angular del sensor.}\label{fig:encoder}
-\end{marginfigure}
+%         % Flecha rotación
+%         \draw[->, thick] (0, 1.8) arc (90:40:1.8) node[midway, above] {$\omega$};
+%     \end{tikzpicture}
+%     \caption[Principio de un encoder óptico.]{Encoder incremental. El número de pulsos por vuelta define la resolución angular del sensor.}\label{fig:encoder}
+% \end{marginfigure}
+
+% \begin{marginfigure}
+%   \centering
+%   \begin{tikzpicture}[scale=0.9]
+%     % Sombra del disco
+%     \draw[gray!20, fill=gray!20] (0.05,-0.05) circle (1.55);
+%     % Disco principal
+%     \draw[thick, fill=gray!25] (0,0) circle (1.55);
+%     % Anillo de ranuras (zona oscura)
+%     \draw[fill=gray!50, draw=none] (0,0) circle (1.45);
+%     \draw[fill=gray!25, draw=none] (0,0) circle (0.95);
+%     % Ranuras (arcos blancos en el anillo)
+%     \foreach \a in {0,18,...,342} {
+%       \draw[white, line width=2pt] (\a:1.1) arc (\a:\a+9:1.1);
+%     }
+%     % Eje central
+%     \draw[fill=white, thick] (0,0) circle (0.28);
+%     \draw[fill=gray!60, draw=none] (0,0) circle (0.15);
+%     % Tornillo del eje
+%     \draw[gray!80] (-0.1,0) -- (0.1,0);
+%     \draw[gray!80] (0,-0.1) -- (0,0.1);
+%     % Sensor tipo horquilla
+%     \draw[fill=blue!8, draw=blue!60!black, thick, rounded corners=2pt]
+%       (1.15,-0.55) rectangle (2.05, 0.55);
+%     % Brazos de la horquilla
+%     \draw[blue!60!black, thick] (1.15, 0.3) -- (0.95, 0.3);
+%     \draw[blue!60!black, thick] (1.15,-0.3) -- (0.95,-0.3);
+%     % LED y fotodetector
+%     \draw[fill=red!60,  draw=red!80]  (0.98, 0.28) circle (0.06);
+%     \draw[fill=green!60,draw=green!80](0.98,-0.28) circle (0.06);
+%     % Etiqueta sensor
+%     \node[blue!70!black, font=\tiny\bfseries, rotate=90] at (1.6, 0) {SENSOR};
+%     % Cable del sensor
+%     \draw[gray!70, thick] (2.05, 0) -- (2.35, 0);
+%     \draw[gray!70] (2.35,-0.15) -- (2.35, 0.15);
+%     % Flecha de rotación
+%     \draw[-{Stealth[length=4pt]}, thick]
+%       (100:1.85) arc (100:45:1.85) node[midway, above right=-2pt] {$\omega$};
+%   \end{tikzpicture}
+%   \caption[Encoder óptico incremental.]{%
+%   Encoder incremental. El disco ranurado gira solidario al eje.
+%   Al girar, las ranuras interrumpen el haz infrarrojo entre el LED
+%   ({\color{red!70!black}$\bullet$}) y el fotodetector
+%   ({\color{green!60!black}$\bullet$}) del sensor.
+%   Cada interrupción genera un pulso; contando pulsos por unidad
+%   de tiempo se obtiene la velocidad angular~$\omega$.
+% }\label{fig:encoder}
+% \end{marginfigure}
+
+% \begin{marginfigure}
+%   \centering
+%   \begin{tikzpicture}[scale=0.9]
+%     % Sombra del disco
+%     \draw[gray!20, fill=gray!20] (0.05,-0.05) circle (1.55);
+%     % Disco principal
+%     \draw[thick, fill=gray!25] (0,0) circle (1.55);
+%     % Anillo de ranuras (zona oscura)
+%     \draw[fill=gray!50, draw=none] (0,0) circle (1.45);
+%     \draw[fill=gray!25, draw=none] (0,0) circle (0.95);
+%     % Ranuras (arcos blancos en el anillo)
+%     \foreach \a in {0,18,...,342} {
+%       \draw[white, line width=2pt] (\a:1.1) arc (\a:\a+9:1.1);
+%     }
+%     % Eje central
+%     \draw[fill=white, thick] (0,0) circle (0.28);
+%     \draw[fill=gray!60, draw=none] (0,0) circle (0.15);
+%     \draw[gray!80] (-0.1,0) -- (0.1,0);
+%     \draw[gray!80] (0,-0.1) -- (0,0.1);
+
+%     % ---- SENSOR: horquilla que abraza el anillo ----
+%     % Brazo superior (por encima del disco, sobre el anillo)
+%     \draw[blue!60!black, line width=1.5pt] (1.55, 0.35) -- (2.2, 0.35);
+%     % Brazo inferior (por debajo del disco, bajo el anillo)  
+%     \draw[blue!60!black, line width=1.5pt] (1.55,-0.35) -- (2.2,-0.35);
+%     % Cuerpo del sensor (fuera del disco)
+%     \draw[fill=blue!8, draw=blue!60!black, thick, rounded corners=2pt]
+%       (2.2,-0.45) rectangle (3.0, 0.45);
+%     \node[blue!70!black, font=\tiny\bfseries, rotate=90] at (2.6, 0) {SENSOR};
+
+%     % LED en brazo superior (emite hacia abajo)
+%     \draw[fill=red!70, draw=red!90!black] (1.75, 0.35) circle (0.07);
+%     \node[font=\tiny, red!80!black] at (1.75, 0.58) {LED};
+%     % Fotodetector en brazo inferior (recibe desde arriba)
+%     \draw[fill=green!60, draw=green!80!black] (1.75,-0.35) circle (0.07);
+%     \node[font=\tiny, green!60!black] at (1.75,-0.58) {PD};
+
+%     % Haz de luz (línea punteada entre LED y fotodetector)
+%     \draw[red!60, dashed, line width=0.8pt] (1.75, 0.28) -- (1.75,-0.28)
+%       node[midway, right=2pt, font=\tiny, red!70!black] {haz};
+
+%     % Flecha de rotación
+%     \draw[-{Stealth[length=4pt]}, thick]
+%       (100:1.85) arc (100:45:1.85) node[midway, above right=-2pt] {$\omega$};
+%   \end{tikzpicture}
+%   \caption[Encoder óptico incremental.]{%
+%     Encoder incremental. El LED emite un haz infrarrojo hacia el
+%     fotodetector~(PD). Al girar, las ranuras del anillo interrumpen
+%     periódicamente el haz, generando un pulso por ranura.
+%     La frecuencia de pulsos determina~$\omega$.}\label{fig:encoder}
+% \end{marginfigure}
+
+% \begin{figure}
+%   \centering
+%   \begin{tikzpicture}[scale=0.9, font=\small]
+
+%     %% ============ VISTA FRONTAL (disco) ============
+%     % Disco exterior
+%     \draw[thick] (0,0) circle (2.0);
+%     % Anillo de ranuras
+%     \draw[fill=gray!30, draw=none] (0,0) circle (1.85);
+%     \draw[fill=white,   draw=none] (0,0) circle (1.35);
+%     % Ranuras alternadas
+%     \foreach \a in {0,12,...,348} {
+%       \draw[fill=gray!70, draw=none]
+%         (\a:1.85) -- (\a:1.35) arc (\a:\a+6:1.35) -- (\a+6:1.85) arc (\a+6:\a:1.85) -- cycle;
+%     }
+%     % Eje y ángulo theta
+%     \draw[thick] (0,0) circle (0.25);
+%     \draw[dashed] (0,0) -- (0,1.6);
+%     \draw[dashed] (0,0) -- (35:1.6);
+%     \draw[->] (0,0.7) arc (90:55:0.7) node[midway, right=1pt] {$\theta$};
+%     % Línea de referencia vertical (hacia vista lateral)
+%     \draw[dashed] (0,-2.0) -- (0,-3.2);
+
+%     %% ============ VISTA LATERAL ============
+%     % Etiqueta DISC
+%     \node[left, font=\footnotesize\bfseries] at (-2.5,-3.0) {DISC};
+%     \draw (-2.3,-3.0) -- (-0.3,-3.0);
+%     % Disco (perfil)
+%     \draw[fill=gray!40] (-0.3,-2.8) rectangle (0.3,-3.2);
+%     % Ranuras (perfil)
+%     \foreach \x in {-0.25,-0.15,-0.05,0.05,0.15,0.25}{
+%       \draw[white, line width=1.5pt] (\x,-2.8) -- (\x,-3.2);
+%     }
+%     % Eje (shaft)
+%     \node[left, font=\footnotesize\bfseries] at (-2.5,-3.6) {SHAFT};
+%     \draw (-2.0,-3.6) -- (-0.15,-3.6);
+%     \draw[fill=gray!60] (-0.15,-3.45) rectangle (0.15,-3.75);
+
+%     % Sensor superior (LIGHT SOURCES)
+%     \draw[fill=blue!10, draw=blue!60!black, thick]
+%       (0.5,-2.65) rectangle (2.0,-2.95);
+%     \node[font=\tiny\bfseries, align=center] at (1.25,-2.8) {LIGHT\\SOURCES};
+%     % Brazo superior del sensor
+%     \draw[blue!60!black, thick] (0.5,-2.8) -- (0.3,-2.8);
+
+%     % Sensor inferior (SENSORS)
+%     \draw[fill=green!10, draw=green!60!black, thick]
+%       (0.5,-3.25) rectangle (2.0,-3.55);
+%     \node[font=\tiny\bfseries, align=center] at (1.25,-3.4) {SENSORS};
+%     % Brazo inferior del sensor
+%     \draw[green!60!black, thick] (0.5,-3.4) -- (0.3,-3.4);
+
+%     % Haz de luz
+%     \draw[red!60, dashed] (0.3,-2.8) -- (0.3,-3.4);
+
+%     % Electrónica de acondicionamiento
+%     \draw[fill=yellow!10, draw=orange!60!black, thick]
+%       (0.5,-3.9) rectangle (2.5,-4.3);
+%     \node[font=\tiny\bfseries, align=center] at (1.5,-4.1)
+%       {CONDITIONING\\ELECTRONICS};
+%     % Conexión sensores -> electrónica
+%     \draw[->] (1.25,-3.55) -- (1.25,-3.9);
+%     % Salida digital
+%     \draw[->] (2.5,-4.1) -- (3.1,-4.1);
+%     \node[right, font=\footnotesize\bfseries] at (3.1,-4.1) {DIGITAL OUTPUT};
+
+%     %% ============ SEÑALES A y B ============
+%     % Canal A
+%     \node[font=\footnotesize\bfseries] at (4.2,-2.6) {A};
+%     \draw[blue!70!black, thick]
+%       (4.5,-2.5) -- (4.7,-2.5) -- (4.7,-2.9) -- (4.9,-2.9) -- (4.9,-2.5)
+%       -- (5.1,-2.5) -- (5.1,-2.9) -- (5.3,-2.9) -- (5.3,-2.5)
+%       -- (5.5,-2.5) -- (5.5,-2.9) -- (5.7,-2.9) -- (5.7,-2.5) -- (5.9,-2.5);
+
+%     % Canal B (desfasado 90°)
+%     \node[font=\footnotesize\bfseries] at (4.2,-3.2) {B};
+%     \draw[green!60!black, thick]
+%       (4.5,-3.4) -- (4.6,-3.4) -- (4.6,-3.0) -- (4.8,-3.0) -- (4.8,-3.4)
+%       -- (5.0,-3.4) -- (5.0,-3.0) -- (5.2,-3.0) -- (5.2,-3.4)
+%       -- (5.4,-3.4) -- (5.4,-3.0) -- (5.6,-3.0) -- (5.6,-3.4) -- (5.9,-3.4);
+
+%   \end{tikzpicture}
+%   \caption[Encoder óptico incremental.]{%
+%     Encoder óptico incremental. Vista frontal (disco con ranuras y
+%     ángulo~$\theta$) y lateral (sensor en horquilla con fuente de luz
+%     y fotodetector). Las señales en cuadratura A y B permiten
+%     determinar posición y sentido de giro.}
+%   \label{fig:encoder}
+% \end{figure}
+
+\begin{figure}
+  \centering
+  \begin{tikzpicture}[scale=1.0, font=\small]
+
+    %% ============ VISTA FRONTAL (disco) ============
+    \draw[thick] (0,0) circle (2.0);
+    \draw[fill=gray!20] (0,0) circle (1.85);
+    \draw[fill=gray!10] (0,0) circle (1.30);
+    % Ranuras alternadas
+    \foreach \a in {0,12,...,348} {
+      \draw[fill=gray!60, draw=none]
+        (\a:1.85) -- (\a:1.30) arc (\a:\a+6:1.30)
+        -- (\a+6:1.85) arc (\a+6:\a:1.85) -- cycle;
+    }
+    % Eje
+    \draw[thick, fill=white] (0,0) circle (0.22);
+    % Ángulo theta
+    \draw[dashed, gray] (0,0) -- (0, 1.55);
+    \draw[dashed, gray] (0,0) -- (50:1.55);
+    \draw[->] (0,0.75) arc (90:50:0.75) node[midway, above] {$\theta$};
+    % Línea de referencia hacia abajo
+    \draw[dashed, gray] (0,-2.0) -- (0,-2.8);
+
+    %% ============ VISTA LATERAL ============
+    % --- Disco (perfil) centrado en x=0 ---
+    %\node[left=4pt, font=\footnotesize\bfseries] at (-1.8,-3.1) {DISCO};
+    %\draw[gray] (-1.8,-3.1) -- (-0.35,-3.1);
+    % Perfil del disco con ranuras visibles
+    \draw[fill=gray!30, thick] (-2,-2.8) rectangle (2,-3);
+    % \foreach \x in {-0.28,-0.18,-0.08,0.02,0.12,0.22}{
+    %   \draw[white, line width=2pt] (\x,-2.8) -- (\x,-3.4);
+    % }
+
+    % --- Eje ---
+    \node[left=4pt, font=\footnotesize\bfseries] at (-1.8,-3.75) {EJE};
+    \draw[gray] (-1.8,-3.75) -- (-0.15,-3.75);
+    \draw[fill=gray!60, thick] (-0.15,-3.55) rectangle (0.15,-3.95);
+
+    % --- Horquilla del sensor: abraza el disco ---
+    % Brazo superior
+    \draw[blue!70!black, line width=1.5pt] (0.35,-2.85) -- (1.1,-2.85);
+    % Brazo inferior  
+    \draw[green!60!black, line width=1.5pt] (0.35,-3.35) -- (1.1,-3.35);
+    % Cuerpo vertical que une los brazos
+    \draw[gray!60, line width=1pt] (1.1,-2.85) -- (1.1,-3.35);
+
+    % % LED (brazo superior)
+    % \draw[fill=red!70, draw=red!90!black] (0.75,-2.85) circle (0.07);
+    % % Fotodetector (brazo inferior)
+    % \draw[fill=green!50, draw=green!80!black] (0.75,-3.35) circle (0.07);
+    % % Haz de luz
+    % \draw[red!50, dashed, line width=0.7pt] (0.75,-2.92) -- (0.75,-3.28);
+
+    % % --- Caja FUENTES DE LUZ ---
+    % \draw[fill=blue!8, draw=blue!70!black, thick, rounded corners=2pt]
+    %   (1.1,-2.65) rectangle (2.6,-3.05);
+    % \node[font=\tiny\bfseries, align=center, blue!80!black] at (1.85,-2.85)
+    %   {FUENTES DE LUZ};
+
+    % % --- Caja SENSORES ---
+    % \draw[fill=green!8, draw=green!60!black, thick, rounded corners=2pt]
+    %   (1.1,-3.15) rectangle (2.6,-3.55);
+    % \node[font=\tiny\bfseries, align=center, green!60!black] at (1.85,-3.35)
+    %   {SENSORES};
+
+    % % --- Caja ELECTRÓNICA ---
+    % \draw[fill=orange!8, draw=orange!70!black, thick, rounded corners=2pt]
+    %   (1.1,-3.75) rectangle (2.6,-4.25);
+    % \node[font=\tiny\bfseries, align=center, orange!80!black] at (1.85,-4.0)
+    %   {ELECTRÓNICA DE\\ACONDICIONAMIENTO};
+
+    % % Flecha sensores -> electrónica
+    % \draw[->] (1.85,-3.55) -- (1.85,-3.75);
+    % % Flecha salida digital
+    % \draw[->] (2.6,-4.0) -- (3.2,-4.0);
+    % \node[right, font=\footnotesize\bfseries] at (3.2,-4.0) {SALIDA DIGITAL};
+
+    %% ============ SEÑALES A y B ============
+    \node[font=\footnotesize\bfseries, blue!80!black] at (4.0,-2.7) {A};
+    \draw[blue!70!black, thick]
+      (4.3,-2.6) -- (4.5,-2.6) -- (4.5,-3.0) -- (4.7,-3.0) -- (4.7,-2.6)
+      -- (4.9,-2.6) -- (4.9,-3.0) -- (5.1,-3.0) -- (5.1,-2.6)
+      -- (5.3,-2.6) -- (5.3,-3.0) -- (5.5,-3.0) -- (5.5,-2.6) -- (5.7,-2.6);
+
+    \node[font=\footnotesize\bfseries, green!60!black] at (4.0,-3.3) {B};
+    \draw[green!60!black, thick]
+      (4.3,-3.6) -- (4.4,-3.6) -- (4.4,-3.2) -- (4.6,-3.2) -- (4.6,-3.6)
+      -- (4.8,-3.6) -- (4.8,-3.2) -- (5.0,-3.2) -- (5.0,-3.6)
+      -- (5.2,-3.6) -- (5.2,-3.2) -- (5.4,-3.2) -- (5.4,-3.6) -- (5.7,-3.6);
+
+  \end{tikzpicture}
+  \caption[Encoder óptico incremental.]{%
+    Encoder óptico incremental. Las ranuras del disco interrumpen
+    periódicamente el haz entre fuente de luz y sensor, generando
+    las señales en cuadratura A y~B que permiten determinar
+    posición~$\theta$ y sentido de giro.}
+  \label{fig:encoder}
+\end{figure}
 
 \marginnote{\textbf{Codificación en Cuadratura:} Al usar dos sensores desfasados \qty{90}{\degree} (Canales A y B), el sistema puede determinar no solo la velocidad, sino también el \textbf{sentido de giro} analizando qué señal adelanta a la otra.}
 
 Existen dos tipos principales:
 \begin{itemize}
-    \item \textbf{Incrementales}: Cuentan pulsos desde una posición inicial. Pierden la referencia si falla la alimentación.
-    \item \textbf{Absolutos}: El disco tiene un código binario único (típicamente código Gray) para cada posición. Conocen su ubicación exacta en todo momento.
+    \item \emph{Incrementales}: Cuentan pulsos desde una posición inicial. Pierden la referencia si falla la alimentación.
+    \item \emph{Absolutos}: El disco tiene un código binario único (típicamente código Gray) para cada posición. Conocen su ubicación exacta en todo momento.
 \end{itemize}
 
 \subsection{Barreras de Detección (Fotocélulas)}\label{sub:barreras}

@@ -586,10 +586,12 @@ Los encoders ópticos transforman el movimiento rotativo de un eje en una serie 
 %   \label{fig:encoder}
 % \end{figure}
 
-\begin{figure}
+\begin{marginfigure}
   \centering
-  \begin{tikzpicture}[scale=1.0, font=\small]
-
+  \begin{tikzpicture}[scale=1]
+    \begin{scope}[xshift=-1.5cm,scale=0.5]
+      % Sombra del disco
+      \draw[gray!20, fill=gray!20] (0.05,-0.05) circle (2.05);
     %% ============ VISTA FRONTAL (disco) ============
     \draw[thick] (0,0) circle (2.0);
     \draw[fill=gray!20] (0,0) circle (1.85);
@@ -611,7 +613,7 @@ Los encoders ópticos transforman el movimiento rotativo de un eje en una serie 
 
     %% ============ VISTA LATERAL ============
     % --- Disco (perfil) centrado en x=0 ---
-    %\node[left=4pt, font=\footnotesize\bfseries] at (-1.8,-3.1) {DISCO};
+    \node[left=4pt] at (-1.8,-2.85) {Disco};
     %\draw[gray] (-1.8,-3.1) -- (-0.35,-3.1);
     % Perfil del disco con ranuras visibles
     \draw[fill=gray!30, thick] (-2,-2.8) rectangle (2,-3);
@@ -620,17 +622,25 @@ Los encoders ópticos transforman el movimiento rotativo de un eje en una serie 
     % }
 
     % --- Eje ---
-    \node[left=4pt, font=\footnotesize\bfseries] at (-1.8,-3.75) {EJE};
+    \node[left=4pt] at (-1.8,-3.75) {Eje};
     \draw[gray] (-1.8,-3.75) -- (-0.15,-3.75);
-    \draw[fill=gray!60, thick] (-0.15,-3.55) rectangle (0.15,-3.95);
+    \draw[fill=gray!60, thick] (-0.15,-3.40) rectangle (0.15,-3.45);
+    \draw[fill=gray!60, thick] (-0.15,-3.50) rectangle (0.15,-3.55);
+    \draw[fill=gray!60, thick] (-0.15,-3.60) rectangle (0.15,-3.65);
+    \draw[fill=gray!60, thick] (-0.15,-3.70) rectangle (0.15,-3.75);
+    \draw[fill=gray!60, thick] (-0.15,-3) rectangle (0.15,-3.35);
 
     % --- Horquilla del sensor: abraza el disco ---
     % Brazo superior
-    \draw[blue!70!black, line width=1.5pt] (0.35,-2.85) -- (1.1,-2.85);
+    \draw[blue!70!black, line width=1.5pt] (1.35,-2.45) -- (2.1,-2.45);
+    \draw[fill=blue!70!black, thick] (1.35,-2.45) rectangle (1.55,-2.55);
+    
+    
     % Brazo inferior  
-    \draw[green!60!black, line width=1.5pt] (0.35,-3.35) -- (1.1,-3.35);
+    \draw[green!60!black, line width=1.5pt] (1.35,-3.35) -- (2.1,-3.35);
+    \draw[fill=green!60!black, thick] (1.35,-3.35) rectangle (1.55,-3.25);
     % Cuerpo vertical que une los brazos
-    \draw[gray!60, line width=1pt] (1.1,-2.85) -- (1.1,-3.35);
+    \draw[gray!60, line width=1pt] (2.1,-2.45) -- (2.1,-3.35);
 
     % % LED (brazo superior)
     % \draw[fill=red!70, draw=red!90!black] (0.75,-2.85) circle (0.07);
@@ -663,34 +673,95 @@ Los encoders ópticos transforman el movimiento rotativo de un eje en una serie 
     % \draw[->] (2.6,-4.0) -- (3.2,-4.0);
     % \node[right, font=\footnotesize\bfseries] at (3.2,-4.0) {SALIDA DIGITAL};
 
-    %% ============ SEÑALES A y B ============
-    \node[font=\footnotesize\bfseries, blue!80!black] at (4.0,-2.7) {A};
-    \draw[blue!70!black, thick]
-      (4.3,-2.6) -- (4.5,-2.6) -- (4.5,-3.0) -- (4.7,-3.0) -- (4.7,-2.6)
-      -- (4.9,-2.6) -- (4.9,-3.0) -- (5.1,-3.0) -- (5.1,-2.6)
-      -- (5.3,-2.6) -- (5.3,-3.0) -- (5.5,-3.0) -- (5.5,-2.6) -- (5.7,-2.6);
+    % % ============ SEÑALES A y B ============
+    % \node[font=\footnotesize\bfseries, blue!80!black] at (4.0,-2.7) {A};
+    % \draw[blue!70!black, thick]
+    %   (4.3,-2.6) -- (4.5,-2.6) -- (4.5,-3.0) -- (4.7,-3.0) -- (4.7,-2.6)
+    %   -- (4.9,-2.6) -- (4.9,-3.0) -- (5.1,-3.0) -- (5.1,-2.6)
+    %   -- (5.3,-2.6) -- (5.3,-3.0) -- (5.5,-3.0) -- (5.5,-2.6) -- (5.7,-2.6);
 
-    \node[font=\footnotesize\bfseries, green!60!black] at (4.0,-3.3) {B};
-    \draw[green!60!black, thick]
-      (4.3,-3.6) -- (4.4,-3.6) -- (4.4,-3.2) -- (4.6,-3.2) -- (4.6,-3.6)
-      -- (4.8,-3.6) -- (4.8,-3.2) -- (5.0,-3.2) -- (5.0,-3.6)
-      -- (5.2,-3.6) -- (5.2,-3.2) -- (5.4,-3.2) -- (5.4,-3.6) -- (5.7,-3.6);
+    % \node[font=\footnotesize\bfseries, green!60!black] at (4.0,-3.3) {B};
+    % \draw[green!60!black, thick]
+    %   (4.3,-3.6) -- (4.4,-3.6) -- (4.4,-3.2) -- (4.6,-3.2) -- (4.6,-3.6)
+    %   -- (4.8,-3.6) -- (4.8,-3.2) -- (5.0,-3.2) -- (5.0,-3.6)
+    %   -- (5.2,-3.6) -- (5.2,-3.2) -- (5.4,-3.2) -- (5.4,-3.6) -- (5.7,-3.6);
+    \end{scope}    
+    \begin{scope}[xshift=2.5cm, scale=0.5]
+        % Sombra del disco
+      \draw[gray!20, fill=gray!20] (0.05,-0.05) circle (2.05);
+    %% ============ VISTA FRONTAL (disco) ============
+    \draw[thick] (0,0) circle (2.0);
+    \draw[fill=gray!10] (0,0) circle (1.85);
+    \draw[fill=gray!10] (0,0) circle (1.55);
+    \draw[fill=gray!10] (0,0) circle (1.25);
+    \draw[fill=gray!10] (0,0) circle (0.95);
+    % Ranuras alternadas
+    \foreach \a in {7,19,...,347} {
+      \draw[fill=gray!80, draw=none]
+        (\a:1.85) -- (\a:1.55) arc (\a:\a+6:1.55)
+        -- (\a+6:1.85) arc (\a+6:\a:1.85) -- cycle;
+    }   
+    \foreach \a in {17,52,...,337} {
+      \draw[fill=gray!80, draw=none]
+        (\a:1.55) -- (\a:1.25) arc (\a:\a+8:1.25)
+        -- (\a+8:1.55) arc (\a+8:\a:1.55) -- cycle;
+    }
+    \foreach \a in {0,25,...,350} {
+      \draw[fill=gray!80, draw=none]
+        (\a:1.25) -- (\a:0.95) arc (\a:\a+13:0.95)
+        -- (\a+14:1.25) arc (\a+14:\a:1.25) -- cycle;
+    }   
+%% ============ VISTA LATERAL ============
+    % --- Disco (perfil) centrado en x=0 ---
+    %\node[left=4pt] at (-1.8,-2.85) {DISCO};
+    %\draw[gray] (-1.8,-3.1) -- (-0.35,-3.1);
+    % Perfil del disco con ranuras visibles
+    \draw[fill=gray!30, thick] (-2,-2.8) rectangle (2,-3);
+    % \foreach \x in {-0.28,-0.18,-0.08,0.02,0.12,0.22}{
+    %   \draw[white, line width=2pt] (\x,-2.8) -- (\x,-3.4);
+    % }
+
+    % --- Eje ---
+    %\node[left=4pt] at (-1.8,-3.75) {EJE};
+    %\draw[gray] (-1.8,-3.75) -- (-0.15,-3.75);
+    \draw[fill=gray!60, thick] (-0.15,-3.40) rectangle (0.15,-3.45);
+    \draw[fill=gray!60, thick] (-0.15,-3.50) rectangle (0.15,-3.55);
+    \draw[fill=gray!60, thick] (-0.15,-3.60) rectangle (0.15,-3.65);
+    \draw[fill=gray!60, thick] (-0.15,-3.70) rectangle (0.15,-3.75);
+    \draw[fill=gray!60, thick] (-0.15,-3) rectangle (0.15,-3.35);
+
+    % Eje
+    \draw[thick, fill=white] (0,0) circle (0.22);
+    \draw[dashed, gray] (0, 2.2) -- (0,-3.5);
+    % --- Horquilla del sensor: abraza el disco ---
+    % Brazo superior
+    \draw[blue!70!black, line width=1.5pt] (0.95,-2.45) -- (2.1,-2.45);
+    \draw[fill=blue!70!black, thick] (0.95,-2.45) rectangle (1.20,-2.55);
+    \draw[fill=blue!70!black, thick] (1.25,-2.45) rectangle (1.50,-2.55);
+    \draw[fill=blue!70!black, thick] (1.55,-2.45) rectangle (1.80,-2.55);
+    
+    
+    % Brazo inferior  
+    \draw[green!60!black, line width=1.5pt] (0.95,-3.35) -- (2.1,-3.35);
+    \draw[fill=green!60!black, thick] (0.95,-3.35) rectangle (1.20,-3.25);
+    \draw[fill=green!60!black, thick] (1.25,-3.35) rectangle (1.50,-3.25);
+    \draw[fill=green!60!black, thick] (1.55,-3.35) rectangle (1.80,-3.25); 
+    % Cuerpo vertical que une los brazos
+    \draw[gray!60, line width=1pt] (2.1,-2.45) -- (2.1,-3.35);
+
+    \end{scope}
 
   \end{tikzpicture}
-  \caption[Encoder óptico incremental.]{%
-    Encoder óptico incremental. Las ranuras del disco interrumpen
-    periódicamente el haz entre fuente de luz y sensor, generando
-    las señales en cuadratura A y~B que permiten determinar
-    posición~$\theta$ y sentido de giro.}
-  \label{fig:encoder}
-\end{figure}
+  \caption[Encoders ópticos incremental y absoluto.]{%
+    Comparativa de encoders ópticos. \textbf{izquierda}: el encoder \emph{incremental} genera señales en cuadratura A y B para determinar velocidad y sentido. \textbf{derecha}: el encoder \emph{absoluto} utiliza pistas concéntricas codificadas (ej. código Gray) para identificar la posición angular exacta de forma unívoca y permanente.}\label{fig:encoder}
+\end{marginfigure}
 
 \marginnote{\textbf{Codificación en Cuadratura:} Al usar dos sensores desfasados \qty{90}{\degree} (Canales A y B), el sistema puede determinar no solo la velocidad, sino también el \textbf{sentido de giro} analizando qué señal adelanta a la otra.}
 
-Existen dos tipos principales:
+Existen dos tipos principales,como se muestra en la Figura~\ref{fig:encoder}:
 \begin{itemize}
-    \item \emph{Incrementales}: Cuentan pulsos desde una posición inicial. Pierden la referencia si falla la alimentación.
-    \item \emph{Absolutos}: El disco tiene un código binario único (típicamente código Gray) para cada posición. Conocen su ubicación exacta en todo momento.
+    \item \emph{Incrementales}: El disco cuenta con ranuras equidistantes que generan un tren de pulsos cuya frecuencia es proporcional a la velocidad angular. La resolución viene definida por el número de pulsos por revolución (PPR). Para determinar el sentido de giro, se emplean dos receptores desfasados \qty{90}{\degree} eléctricos (canales A y B); si la señal A adelanta a la B el giro es en un sentido, y viceversa. Además, suelen incluir un canal de índice (Z) que emite un pulso único por vuelta para establecer un cero de referencia. Su principal desventaja es que solo proporcionan información relativa: si el sistema pierde la alimentación o se produce un error de conteo por ruido, se pierde la posición real y es necesario realizar un proceso de búsqueda de referencia (\textit{homing}).
+    \item \emph{Absolutos}: Utilizan un disco con múltiples pistas concéntricas codificadas, de modo que cada posición angular se corresponde con un valor binario único. A diferencia de los incrementales, retienen la posición real de forma permanente (memoria física), por lo que no requieren un proceso de búsqueda de referencia (\textit{homing}) tras un fallo de alimentación. Para evitar lecturas erróneas en las transiciones entre sectores —donde el cambio simultáneo de varios bits en binario natural podría generar estados transitorios falsos debido a ligeras desalineaciones de los sensores—, se emplea el \emph{código Gray}, que garantiza que solo varíe un bit entre posiciones adyacentes. La resolución viene determinada por el número de bits (pistas); un encoder de 12~bits, por ejemplo, ofrece una resolución de \num{4096} pasos por revolución.
 \end{itemize}
 
 \subsection{Barreras de Detección (Fotocélulas)}\label{sub:barreras}

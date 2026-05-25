@@ -179,11 +179,11 @@
 \contentsline {section}{\numberline {7.3}Fototransistores}{81}{section.7.3}%
 \contentsline {subsection}{Optoacopladores}{82}{subsection*.140}%
 \contentsline {subsection}{Encoders Ópticos}{82}{subsection*.141}%
-\contentsline {paragraph}{\emph {Incremental}}{82}{paragraph*.142}%
-\contentsline {paragraph}{\emph {Absolutos}}{83}{paragraph*.143}%
+\contentsline {paragraph}{\emph {Incremental}:}{82}{paragraph*.142}%
+\contentsline {paragraph}{\emph {Absolutos}:}{83}{paragraph*.143}%
 \contentsline {subsection}{Barreras de Detección (Fotocélulas)}{83}{subsection*.144}%
 \contentsline {section}{\numberline {7.4}Sensores de Imagen: CCD y CMOS}{83}{section.7.4}%
 \contentsline {paragraph}{CCD (\textit {Charge-Coupled Device})}{83}{paragraph*.145}%
-\contentsline {paragraph}{CMOS (\textit {Complementary Metal-Oxide-Semiconductor})}{83}{paragraph*.146}%
+\contentsline {paragraph}{CMOS (\textit {Complementary Metal-Oxide-Semiconductor})}{84}{paragraph*.146}%
 \contentsline {chapter}{Bibliograf\'{\i }a}{85}{appendix*.147}%
 \contentsfinish 

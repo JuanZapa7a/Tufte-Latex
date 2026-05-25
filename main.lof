@@ -92,6 +92,6 @@
 \contentsline {figure}{\numberline {7.6}{\ignorespaces Configuración de fototransistor.}}{82}{figure.7.6}%
 \contentsline {figure}{\numberline {7.7}{\ignorespaces Esquema de un optoacoplador.}}{82}{figure.7.7}%
 \contentsline {figure}{\numberline {7.8}{\ignorespaces Encoders ópticos incremental y absoluto.}}{83}{figure.7.8}%
-\contentsline {figure}{\numberline {7.9}{\ignorespaces Barrera de detección simple. La interrupción del haz de luz conmuta la salida del sensor (digitalizada).}}{83}{figure.7.9}%
+\contentsline {figure}{\numberline {7.9}{\ignorespaces Comparativa de configuraciones ópticas de proximidad: (1) Barrera (Through-beam), (2) Réflex y (3) Difuso. La elección depende del alcance requerido y de las propiedades del objeto.}}{83}{figure.7.9}%
 \addvspace {10\p@ }
 \contentsfinish 

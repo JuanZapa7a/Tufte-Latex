@@ -343,8 +343,8 @@ Un optoacoplador es un dispositivo que transfiere señales eléctricas entre dos
     \centering
     \begin{tikzpicture}[american]
         % Encapsulado
-        \draw[thick, fill=gray!10] (0,0) rectangle (4,2.5);
-        \node[gray, font=\tiny] at (2, 2.2) {OPTOACOPLADOR};
+        \draw[thick, fill=gray!10] (0,0) rectangle (4.3,2.5);
+        \node[gray] at (2, 2.2) {OPTOACOPLADOR};
         
         % LED y Corriente de entrada If
         \draw (0.8,1.8) to[led, l_=LED] (0.8,0.7);
@@ -352,7 +352,7 @@ Un optoacoplador es un dispositivo que transfiere señales eléctricas entre dos
         \draw (0.8,0.7) -- (-0.4,0.7) node[ocirc]{};
         
         % Fototransistor y Corriente de colector Ic
-        \node[npn, photo] (pt) at (3.6,1.25) {};
+        \node[npn, photo, label=right:Fototransistor] (pt) at (3.6,1.25) {};
         %\draw (4.4,1.8) to[short, i=$I_c$, o-] (3.6,1.8) |- (pt.C);
         %\draw (pt.E) -| (3.6,0.7) -- (4.4,0.7) node[ocirc]{};
         \draw (pt.E) -- ++(1,0)  node[ocirc]{};
@@ -781,49 +781,49 @@ Las barreras de detección, o fotocélulas, constituyen una familia de sensores 
 \begin{marginfigure}
     \centering
     \shorthandoff{>}
-    \begin{tikzpicture}[scale=1, >=stealth]
+    \begin{tikzpicture}[scale=1.6, >=stealth]
         % Estilos de los elementos
         \tikzset{
-            cuerpo/.style={fill=black!85, draw=black},
-            objeto/.style={fill=orange!40, draw=black!80, thick},
+            cuerpo/.style={fill=gray!85, draw=black},
+            objeto/.style={fill=orange!40, draw=gray!80, thick},
             haz/.style={red, dashed, thick},
             reflector/.style={fill=cyan!20, draw=cyan!80!black, thick}
         }
 
         % --- TIPO 1: BARRERA (THROUGH-BEAM) ---
-        \begin{scope}[yshift=4cm,scale=1.2]
-            \node[anchor=west, font=\tiny] at (0, 1.8) {BARRERA};
+        \begin{scope}[yshift=3cm,scale=1.2]
+            \node[anchor=west] at (0, 1.8) {BARRERA};
             % Emisor
-            \draw[cuerpo] (0,1) rectangle (0.4,1.5) node[midway, white, font=\tiny] {E};
+            \draw[cuerpo] (0,1) rectangle (0.4,1.5) node[midway, white] {E};
             % Receptor
-            \draw[cuerpo] (2.6,1) rectangle (3,1.5) node[midway, white, font=\tiny] {R};
+            \draw[cuerpo] (2.6,1) rectangle (3,1.5) node[midway, white] {R};
             % Haz
             \draw[haz] (0.4, 1.25) -- (2.6, 1.25);
             % Objeto
-            \draw[objeto] (1.3, 0.8) rectangle (1.7, 1.7) node[midway, font=\tiny, rotate=90] {OBJETO};
+            \draw[objeto] (1.3, 0.8) rectangle (1.7, 1.7) node[midway, rotate=90] {OBJETO};
         \end{scope}
 
         % --- TIPO 2: RÉFLEX ---
-        \begin{scope}[yshift=2cm,scale=1.2]
-            \node[anchor=west, font=\tiny] at (0, 1.8) {RÉFLEX};
+        \begin{scope}[yshift=1.5cm,scale=1.2]
+            \node[anchor=west] at (0, 1.8) {RÉFLEX};
             % Cuerpo combinado
-            \draw[cuerpo] (0,1) rectangle (0.4,1.5) node[midway, white, font=\tiny] {E/R};
+            \draw[cuerpo] (0,1) rectangle (0.4,1.5) node[midway, white] {E/R};
             % Reflector (catadióptrico)
             \draw[reflector] (2.8,1) rectangle (3,1.5);
             % Haz ida y vuelta
             \draw[haz] (0.4, 1.35) -- (2.8, 1.35);
             \draw[haz] (2.8, 1.15) -- (0.4, 1.15);
             % Objeto interrumpiendo
-            \draw[objeto] (1.3, 0.8) rectangle (1.7, 1.7) node[midway, font=\tiny, rotate=90] {OBJETO};
+            \draw[objeto] (1.3, 0.8) rectangle (1.7, 1.7) node[midway,  rotate=90] {OBJETO};
         \end{scope}
 
         % --- TIPO 3: DIFUSO ---
         \begin{scope}[yshift=0cm,scale=1.2]
-            \node[anchor=west, font=\tiny] at (0, 1.8) {DIFUSO};
+            \node[anchor=west] at (0, 1.8) {DIFUSO};
             % Cuerpo combinado
-            \draw[cuerpo] (0,1) rectangle (0.4,1.5) node[midway, white, font=\tiny] {E/R};
+            \draw[cuerpo] (0,1) rectangle (0.4,1.5) node[midway, white] {E/R};
             % Objeto (hace de reflector)
-            \draw[objeto] (1.8, 0.8) rectangle (2.2, 1.7) node[midway, font=\tiny, rotate=90] {OBJETO};
+            \draw[objeto] (1.8, 0.8) rectangle (2.2, 1.7) node[midway, rotate=90] {OBJETO};
             % Haz incidente y reflejado
             \draw[haz] (0.4, 1.35) -- (1.8, 1.35);
             \draw[haz, orange!70!black] (1.8, 1.35) -- (0.4, 1.15);
@@ -840,19 +840,132 @@ Las barreras de detección, o fotocélulas, constituyen una familia de sensores 
 
 Los sensores de imagen son matrices de millones de fotodetectores (píxeles). Aunque ambos se basan en el silicio, su arquitectura de lectura es radicalmente distinta.
 
-\paragraph{CCD (\textit{Charge-Coupled Device})}
-Los píxeles actúan como pozos de potencial que acumulan carga. La lectura es analógica y secuencial: las cargas se "desplazan" de un píxel a otro como en una brigada de cubos de agua hasta un único amplificador de salida. 
+\paragraph{CCD (\textit{Charge-Coupled Device}):}\label{par:ccd}
+Basan su funcionamiento en el desplazamiento de paquetes de carga analógica a través de la matriz hasta un único amplificador de salida (técnica \textit{Bucket Brigade}), como se ilustra en la Figura~\ref{fig:ccd_bucket_brigade}.
 \begin{itemize}
-    \item \textbf{Ventaja}: Alta uniformidad y bajo ruido.
-    \item \textbf{Desventaja}: Alto consumo y lectura lenta.
+    \item \emph{Ventaja}: Extraordinaria uniformidad entre píxeles y bajo nivel de ruido, lo que los mantiene como la opción preferida en instrumentación científica y astronomía.
+    \item \emph{Desventaja}: Proceso de fabricación costoso, elevado consumo de potencia y velocidad de lectura limitada por su naturaleza secuencial.
 \end{itemize}
 
-\paragraph{CMOS (\textit{Complementary Metal-Oxide-Semiconductor})}
-Cada píxel posee su propio amplificador y conversor A/D (\textit{Active Pixel Sensor}). La lectura es digital y paralela, similar a una memoria RAM.
+\begin{marginfigure}
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}[scale=0.60, >=stealth]
+        \ctikzset{amplifiers/fill=blue!5, capacitors/scale=0.6, resistors/scale=0.8, sources/scale=0.6, diodes/scale=0.3, diodes/fill=orange!5}
+        \ctikzset{diodes/scale=0.5, diodes/fill=orange!10}
+        \def\px{2.4} \def\py{2.4} \def\ox{0} \def\oy{0}
+        \foreach \col in {0,1,2}{
+            \foreach \row in {0,1,2}{
+                \pgfmathsetmacro\cx{\ox + \col*\px}
+                \pgfmathsetmacro\cy{\oy - \row*\py}
+                % Fondo del píxel
+                \fill[cellbg] (\cx-1.1, \cy-1.1) rectangle (\cx+1.1, \cy+1.1);
+                \draw[gray!60] (\cx-1.1, \cy-1.1) rectangle (\cx+1.1, \cy+1.1);
+                %\node[font=\tiny] at (\cx, \cy+0.5) {Píxel};
+                % Bloque APS (Amplificador/ADC)
+                %\draw[fill=white] (\cx-0.7, \cy-0.8) rectangle (\cx+0.7, -0.2+\cy);
+                %\node[scale=0.5] at (\cx, \cy-0.5) {APS (ADC)};
+                
+                % Dibujar el fotodiodo (usando 'to' para que se vea)
+                \draw (\cx, \cy-0.5) coordinate (catode) to[photodiode] (\cx, \cy+0.5) coordinate (anode);
+                \draw(catode) node[ground, scale=0.4] {};
+                %\draw (0,0) \node[ground, scale=0.5, anchor=north]{}; % Conectar cátodo a tierra
+                %\node[photodiode](ph) at (\cx, \cy){};
+
+
+                % Fotodiodo
+                % \draw (\cx-0.6, \cy-0.5) coordinate (anode) to[photodiode] (\cx-0.6, \cy+0.5);
+
+                % FET (MOSFET de selección) conectado al ánodo
+                \node [nmos, anchor=S, scale=0.4,rotate=-90] (mos) at (anode) {};
+                % \draw (anode) -- (mos.S);
+                \draw (mos.G) -- (mos.G |- \cx, \cy+1.2) node[circ,scale=0.4,blue]{}; % Puerta a línea azul (fila)
+                \draw (mos.D) -- (mos.D -|\cx+1.2, \cy) node[circ,scale=0.4,red]{}; % Drenador a línea roja (columna)
+                
+                % % Bloque APS local en cada píxel
+                % \draw[fill=white, thin] (\cx+0.1, \cy-0.8) rectangle (\cx+0.9, \cy-0.1);
+                % \node[scale=0.4, font=\bfseries] at (\cx+0.5, \cy-0.45) {APS};
+            }
+        }
+        % Bus digital
+        \draw[fill=cyan!50!white] (6.5, 1.5) rectangle (7.5, -6.25) node[midway, white, font=\bfseries, rotate=-90] {Vertical Shift Register};
+        \draw[fill=red!50!white] (-1.5, 2.75) rectangle (6.4, 1.75) node[midway, white, font=\bfseries] {Horizontal Shift Register};
+        \foreach \r in {0,2,4,6} { \draw[->, blue] (-1.5, -1.2*\r +1.2) -- (6.5, -1.2*\r +1.2); }
+        \foreach \r in {0,2,4,6} { \draw[->, red] (1.2*\r-1.2,1.75) -- (1.2*\r -1.2,-6.25); }
+        
+    \end{tikzpicture}
+    \caption[Arquitectura de un sensor CMOS APS.]{Arquitectura de un sensor CMOS de píxel activo (APS). Cada píxel de la matriz integra un fotodiodo junto a un transistor MOSFET de selección. El registro vertical (derecha) activa las filas mediante las líneas azules, mientras que el registro horizontal (arriba) coordina la lectura de la señal de cada píxel a través del bus de columnas (líneas rojas).}\label{fig:cmos_active_pixel}
+\end{marginfigure}
+ 
+    
+%     \begin{marginfigure}
+%     \centering
+%     \shorthandoff{>}
+%     \begin{tikzpicture}[scale=0.8, >=stealth]
+%         % Grid of pixels% % Define pixel positions (col, row) → center coords
+%         % Columns: x = 0, 2.4, 4.8   Rows: y = -4.5, -2.1, 0.3
+%         \def\px{2.4}   % pixel pitch x
+%         \def\py{2.4}   % pixel pitch y
+%         \def\ox{0}     % origin x
+%         \def\oy{0}     % origin y
+        
+%         % Draw 3×3 grid of pixel cells
+%         \foreach \col in {0,1,2}{
+%         \foreach \row in {0,1,2}{
+%             \pgfmathsetmacro\cx{\ox + \col*\px}
+%             \pgfmathsetmacro\cy{\oy - \row*\py}
+%             % Cell background
+%             \fill[cellbg] (\cx-1.1, \cy-1.1) rectangle (\cx+1.1, \cy+1.1);
+%             \draw[gray!60] (\cx-1.1, \cy-1.1) rectangle (\cx+1.1, \cy+1.1);
+
+%     \end{tikzpicture}
+% \end{marginfigure}
+
+
+
+
+\paragraph{CMOS (\textit{Complementary Metal-Oxide-Semiconductor}):}\label{par:cmos}
+Utilizan la arquitectura APS (\textit{Active Pixel Sensor}), donde cada píxel integra su propio amplificador y conversor A/D. La lectura es digital y paralela, similar al acceso a una memoria RAM, como se muestra en la Figura~\ref{fig:cmos_active_pixel}.
 \begin{itemize}
-    \item \textbf{Ventaja}: Integración de funciones (Smart Sensors), bajo coste y alta velocidad.
-    \item \textbf{Desventaja}: Mayor ruido de patrón fijo (\textit{Fixed Pattern Noise}).
+    \item \emph{Ventaja}: Bajo coste de fabricación, mínima disipación de potencia y altísima velocidad de muestreo. Permiten integrar lógica de procesado en el mismo chip (\textit{Smart Sensors}).
+    \item \emph{Desventaja}: Mayor presencia de ruido de patrón fijo (\textit{Fixed Pattern Noise}) debido a las ligeras variaciones de ganancia entre los amplificadores individuales de cada píxel.
 \end{itemize}
+% \begin{marginfigure}
+%     \centering
+%     \shorthandoff{>}
+%     \begin{tikzpicture}[scale=0.8, >=stealth]
+%         % Grid of pixels
+%         \def\numrows{3}
+%         \def\numcols{3}
+%         \def\pixelwidth{1.5}
+%         \def\pixelheight{1.5}
+
+%         \foreach \i in {0,...,\numrows-1} {
+%             \foreach \j in {0,...,\numcols-1} {
+%                 \pgfmathsetmacro{\x}{\j * \pixelwidth}
+%                 \pgfmathsetmacro{\y}{-\i * \pixelheight}
+%                 \draw[thick, fill=orange!10] (\x,\y) rectangle (\x+\pixelwidth,\y+\pixelheight);
+%                 \node[font=\tiny] at (\x+0.75,\y+1.2) {Píxel};
+%                 % Small amplifier/ADC symbol inside each pixel
+%                 \draw[thick, fill=gray!10] (\x+0.5,\y+0.5) rectangle (\x+1,\y+0.8);
+%                 \node[font=\tiny] at (\x+0.75,\y+0.65) {Amp/ADC};
+%                 % Output line from each pixel
+%                 \draw[->, thin, gray] (\x+1,\y+0.65) -- (\x+\pixelwidth,\y+0.65);
+%             }
+%         }
+
+%         % Readout bus (simplified)
+%         \draw[thick, blue!50!black] (\numcols*\pixelwidth, 0) -- (\numcols*\pixelwidth, -\numrows*\pixelheight);
+%         \node[right, blue!50!black] at (\numcols*\pixelwidth, -0.75*\pixelheight) {Bus de Datos Digital};
+
+%         % Arrows for parallel readout
+%         \foreach \i in {0,...,\numrows-1} {
+%             \pgfmathsetmacro{\y}{-\i * \pixelheight + 0.65}
+%             \draw[->, ultra thick, blue] (\numcols*\pixelwidth-0.2, \y) -- (\numcols*\pixelwidth, \y);
+%         }
+%     \end{tikzpicture}
+%     \caption[Funcionamiento de un sensor CMOS.]{Funcionamiento de un sensor CMOS (Complementary Metal-Oxide-Semiconductor). Cada píxel integra su propio amplificador y conversor A/D, permitiendo una lectura digital y paralela. Esto se traduce en alta velocidad y bajo consumo, pero puede introducir ruido de patrón fijo.}\label{fig:cmos_active_pixel}
+% \end{marginfigure}
 
 \begin{table}[ht]
     \centering

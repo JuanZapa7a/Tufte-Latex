@@ -184,6 +184,8 @@
 \contentsline {subsection}{Barreras de Detección (Fotocélulas)}{83}{subsection*.144}%
 \contentsline {section}{\numberline {7.4}Sensores de Imagen: CCD y CMOS}{83}{section.7.4}%
 \contentsline {paragraph}{CCD (\textit {Charge-Coupled Device}):}{83}{paragraph*.145}%
-\contentsline {paragraph}{CMOS (\textit {Complementary Metal-Oxide-Semiconductor}):}{84}{paragraph*.146}%
-\contentsline {chapter}{Bibliograf\'{\i }a}{85}{appendix*.147}%
+\contentsline {paragraph}{CMOS:}{84}{paragraph*.146}%
+\contentsline {paragraph}{Consideraciones prácticas:}{84}{paragraph*.147}%
+\contentsline {section}{\numberline {7.5}Resumen y Conclusiones}{84}{section.7.5}%
+\contentsline {chapter}{Bibliograf\'{\i }a}{85}{appendix*.148}%
 \contentsfinish 

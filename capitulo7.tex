@@ -840,7 +840,7 @@ Las barreras de detección, o fotocélulas, constituyen una familia de sensores 
 
 \section{Sensores de Imagen: CCD y CMOS}\label{sec:sensores_imagen}
 
-Los sensores de imagen son matrices de millones de fotodetectores (píxeles). Aunque ambos se basan en el silicio, su arquitectura de lectura es radicalmente distinta. Existen dos tecnologías principales, como se muestra en la Figura~\ref{fig:ccd_cmos}:
+Los sensores de imagen convierten fotones en señales eléctricas mediante una matriz de fotodiodos (píxeles). Aunque ambos están fabricados en silicio, difieren en la arquitectura de lectura y en el tratamiento de la señal: los CCD desplazan la carga hasta un único amplificador, mientras que los CMOS integran electrónica de lectura por píxel o por columna. En la Figura~\ref{fig:ccd_cmos} se resumen los principios de funcionamiento.
 
 \begin{marginfigure}
 \centering
@@ -869,7 +869,7 @@ Los sensores de imagen son matrices de millones de fotodetectores (píxeles). Au
     \node[font=\sffamily\bfseries] at (0,3.2) {CCD Sensor};
     \node at (0,2.9) {Charge-Coupled Device};
     %\node at (0,2.5) {Photosite (pixels)};
-    \node at (0,2) {Luz (fotones convertidos en paquetes de carga)};
+    \node at (0,2) {Luz (fotones a paquetes de carga)};
 
     % Grid 5x5
     \foreach \x in {0,1,2,3} {
@@ -899,7 +899,7 @@ Los sensores de imagen son matrices de millones de fotodetectores (píxeles). Au
     %\draw[arrow] (1.4, -1.7) -- (sr.west);
 
     % Output Amplifier & ADC
-    \node[box, minimum width=2.5cm] (adc) at (1, -3.1) {Output Amplifier \& ADC\\(Analog-to-Digital Converter)};
+    \node[box, minimum width=2.5cm] (adc) at (0, -3.1) {Output Amplifier \& ADC\\(Analog-to-Digital Converter)};
     
     % Path from Serial Register to ADC
     \draw[arrow] (sr.east) -- ++(0.2,0) -- ++(0,-0.7) -| (adc.north);
@@ -978,11 +978,21 @@ Los sensores de imagen son matrices de millones de fotodetectores (píxeles). Au
 \end{marginfigure}
 
 \paragraph{CCD (\textit{Charge-Coupled Device}):}\label{par:ccd}
-Basan su funcionamiento en el desplazamiento de paquetes de carga analógica a través de la matriz hasta un único amplificador de salida (técnica \textit{Bucket Brigade}).
+Los sensores CCD trasladan la carga eléctrica generada por cada fotodiodo a través de la matriz hasta un único amplificador de salida (método conocido como "bucket brigade"). Este desplazamiento secuencial centraliza la conversión A/D y las etapas de amplificación.
 \begin{itemize}
-    \item \emph{Ventaja}: Extraordinaria uniformidad entre píxeles y bajo nivel de ruido, lo que los mantiene como la opción preferida en instrumentación científica y astronomía.
-    \item \emph{Desventaja}: Proceso de fabricación costoso, elevado consumo de potencia y velocidad de lectura limitada por su naturaleza secuencial.
+    \item \emph{Ventajas:} alta uniformidad entre píxeles, bajo ruido de lectura y excelente sensibilidad, lo que los hace idóneos para instrumentación científica, astrofotografía y aplicaciones donde la fidelidad de la imagen es crítica.
+    \item \emph{Inconvenientes:} fabricación más costosa, mayor consumo energético y limitación en la velocidad de lectura debido al carácter secuencial de la transferencia de carga.
 \end{itemize}
+
+\paragraph{CMOS:} Utilizan la arquitectura APS (\textit{Active Pixel Sensor}), donde cada píxel integra su propio amplificador y conversor A/D. La lectura es digital y paralela, similar al acceso a una memoria RAM.
+Los sensores CMOS integran, dentro de cada píxel o en cada columna, amplificadores y en muchos casos convertidores A/D. Esto permite lecturas aleatorias, mayor velocidad y menor consumo, así como integración de lógica adicional (corrimiento, ruido reducido por circuitería, modos de ventana, etc.).
+\begin{itemize}
+    \item \emph{Ventajas:} menor coste de fabricación, altas tasas de lectura, bajo consumo y gran flexibilidad de integración en sistemas embebidos y cámaras comerciales.
+    \item \emph{Inconvenientes:} mayor variabilidad entre píxeles y, en diseños antiguos, niveles de ruido superior al de los CCD; requiere calibraciones (corrección de offset, ganancia y ruido fijo) para obtener resultados homogéneos.
+\end{itemize}
+
+\paragraph{Consideraciones prácticas:}
+Las diferencias entre CCD y CMOS se han ido reduciendo gracias a técnicas modernas (sensores retroiluminados, ADC por píxel/columna, mitigación de ruido y diseños avanzados de shutter). La elección final depende de los requisitos concretos: ruido y sensibilidad para aplicaciones científicas, o velocidad, coste y consumo para aplicaciones comerciales o embebidas. Además, hay que valorar características como tipo de shutter (rolling vs. global), tamaño de píxel, rango dinámico y sensibilidad espectral.
 
 % \begin{marginfigure}
 %     \centering
@@ -1060,12 +1070,12 @@ Basan su funcionamiento en el desplazamiento de paquetes de carga analógica a t
 
 
 
-\paragraph{CMOS (\textit{Complementary Metal-Oxide-Semiconductor}):}\label{par:cmos}
-Utilizan la arquitectura APS (\textit{Active Pixel Sensor}), donde cada píxel integra su propio amplificador y conversor A/D. La lectura es digital y paralela, similar al acceso a una memoria RAM.
-\begin{itemize}
-    \item \emph{Ventaja}: Bajo coste de fabricación, mínima disipación de potencia y altísima velocidad de muestreo. Permiten integrar lógica de procesado en el mismo chip (\textit{Smart Sensors}).
-    \item \emph{Desventaja}: Mayor presencia de ruido de patrón fijo (\textit{Fixed Pattern Noise}) debido a las ligeras variaciones de ganancia entre los amplificadores individuales de cada píxel.
-\end{itemize}
+% \paragraph{CMOS (\textit{Complementary Metal-Oxide-Semiconductor}):}\label{par:cmos}
+% Utilizan la arquitectura APS (\textit{Active Pixel Sensor}), donde cada píxel integra su propio amplificador y conversor A/D. La lectura es digital y paralela, similar al acceso a una memoria RAM.
+% \begin{itemize}
+%     \item \emph{Ventaja}: Bajo coste de fabricación, mínima disipación de potencia y altísima velocidad de muestreo. Permiten integrar lógica de procesado en el mismo chip (\textit{Smart Sensors}).
+%     \item \emph{Desventaja}: Mayor presencia de ruido de patrón fijo (\textit{Fixed Pattern Noise}) debido a las ligeras variaciones de ganancia entre los amplificadores individuales de cada píxel.
+% \end{itemize}
 % \begin{marginfigure}
 %     \centering
 %     \shorthandoff{>}
@@ -1123,5 +1133,8 @@ Utilizan la arquitectura APS (\textit{Active Pixel Sensor}), donde cada píxel i
 
 \marginnote{\textbf{Ruido de Disparo (\textit{Shot Noise}):} Es el ruido dominante en sensores ópticos. Se debe a la naturaleza discreta de los fotones y electrones. Su valor eficaz es $I_n = \sqrt{2qI\Delta f}$.
 }
+
+\section{Resumen y Conclusiones}\label{sec:resumen}
+En este capítulo se han explorado en profundidad los sensores ópticos, desde los principios físicos que rigen su funcionamiento hasta las aplicaciones prácticas en instrumentación. Se ha analizado la fotoconductividad y el efecto fotoeléctrico, destacando cómo estos fenómenos permiten la conversión de luz en señales eléctricas. Se han comparado diferentes tipos de sensores, como fotodiodos, fototransistores y LDRs, evaluando sus características técnicas y aplicaciones típicas. Además, se ha profundizado en los encoders ópticos, diferenciando entre incrementales y absolutos, y se han descrito las barreras de detección (fotocélulas) en sus distintas configuraciones. Finalmente, se ha realizado una comparativa detallada entre sensores de imagen CCD y CMOS, destacando sus arquitecturas, ventajas e inconvenientes. Este conocimiento es fundamental para seleccionar el sensor óptico adecuado en función de los requisitos específicos de cada aplicación en instrumentación y automatización industrial.
 
 \cleardoublepage

@@ -372,7 +372,7 @@ El funcionamiento es sencillo, como se muestra en la Figura~\ref{fig:optoacoplad
 
 \subsection{Encoders Ópticos}\label{sub:encoders}
 
-Los encoders ópticos transforman el movimiento rotativo de un eje en una serie de pulsos digitales. Constan de un disco ranurado unido al eje que interrumpe el paso de luz entre un emisor y un receptor.
+Los encoders ópticos transforman el movimiento rotativo de un eje en una serie de pulsos digitales. Constan de un disco ranurado unido al eje que interrumpe el paso de luz entre un emisor y un receptor. Existen dos tipos principales,como se muestra en la Figura~\ref{fig:encoder}:
 
 % \begin{marginfigure}
 %     \centering
@@ -760,9 +760,11 @@ Los encoders ópticos transforman el movimiento rotativo de un eje en una serie 
     Comparativa de encoders ópticos. \emph{Izquierda}: el encoder \emph{incremental} genera señales en cuadratura A y B para determinar velocidad y sentido. \emph{Derecha}: el encoder \emph{absoluto} utiliza pistas concéntricas codificadas (ej. código Gray) para identificar la posición angular exacta de forma unívoca y permanente.}\label{fig:encoder}
 \end{marginfigure}
 
+
+
 \marginnote{\textbf{Codificación en Cuadratura:} Al usar dos sensores desfasados \qty{90}{\degree} (Canales A y B), el sistema puede determinar no solo la velocidad, sino también el \emph{sentido de giro} analizando qué señal adelanta a la otra.}
 
-Existen dos tipos principales,como se muestra en la Figura~\ref{fig:encoder}:
+
 
     \paragraph{\emph{Incremental}:} El disco cuenta con ranuras equidistantes que generan un tren de pulsos cuya frecuencia es proporcional a la velocidad angular. La resolución viene definida por el número de pulsos por revolución (PPR). Para determinar el sentido de giro, se emplean dos receptores desfasados \qty{90}{\degree} eléctricos (canales A y B); si la señal A adelanta a la B el giro es en un sentido, y viceversa. Además, suelen incluir un canal de índice (Z) que emite un pulso único por vuelta para establecer un cero de referencia. Su principal desventaja es que solo proporcionan información relativa: si el sistema pierde la alimentación o se produce un error de conteo por ruido, se pierde la posición real y es necesario realizar un proceso de búsqueda de referencia (\textit{homing}).
     \paragraph{\emph{Absolutos}:} Utilizan un disco con múltiples pistas concéntricas codificadas, de modo que cada posición angular se corresponde con un valor binario único. A diferencia de los incrementales, retienen la posición real de forma permanente (memoria física), por lo que no requieren un proceso de búsqueda de referencia (\textit{homing}) tras un fallo de alimentación. Para evitar lecturas erróneas en las transiciones entre sectores —donde el cambio simultáneo de varios bits en binario natural podría generar estados transitorios falsos debido a ligeras desalineaciones de los sensores—, se emplea el \emph{código Gray}, que garantiza que solo varíe un bit entre posiciones adyacentes. La resolución viene determinada por el número de bits (pistas); un encoder de 12~bits, por ejemplo, ofrece una resolución de \num{4096} pasos por revolución.
@@ -838,65 +840,199 @@ Las barreras de detección, o fotocélulas, constituyen una familia de sensores 
 
 \section{Sensores de Imagen: CCD y CMOS}\label{sec:sensores_imagen}
 
-Los sensores de imagen son matrices de millones de fotodetectores (píxeles). Aunque ambos se basan en el silicio, su arquitectura de lectura es radicalmente distinta.
+Los sensores de imagen son matrices de millones de fotodetectores (píxeles). Aunque ambos se basan en el silicio, su arquitectura de lectura es radicalmente distinta. Existen dos tecnologías principales, como se muestra en la Figura~\ref{fig:ccd_cmos}:
+
+\begin{marginfigure}
+\centering
+\begin{tikzpicture}[
+    font=\sffamily\scriptsize,
+    pixel/.style={rectangle, draw=black!50, minimum size=0.6cm, inner sep=2pt},
+    bluepixel/.style={pixel, fill=blue!20},
+    greenpixel/.style={pixel, fill=green!40!gray!40},
+    dot/.style={circle, fill=blue!70!black, inner sep=1pt},
+    box/.style={rectangle, draw=black!50, fill=blue!30, inner sep=2pt, align=center},
+    arrow/.style={-Stealth, thick, black!70},
+    greenarrow/.style={-{Stealth[scale=1]}, line width=2pt, green!60!black!70}
+]
+
+% Background
+%\fill[gray!5] (-7,-4.5) rectangle (7,4.5);
+
+% Main Title
+%\node[font=\sffamily\bfseries] at (0,4) {CMOS vs. CCD Sensor: Principios de Funcionamiento};
+
+% Vertical Separator
+%\draw[gray!30, line width=1pt] (0,3.5) -- (0,-3.5);
+
+% --- CCD SENSOR (LEFT) ---
+\begin{scope}[shift={(0,0)}]
+    \node[font=\sffamily\bfseries] at (0,3.2) {CCD Sensor};
+    \node at (0,2.9) {Charge-Coupled Device};
+    %\node at (0,2.5) {Photosite (pixels)};
+    \node at (0,2) {Luz (fotones convertidos en paquetes de carga)};
+
+    % Grid 5x5
+    \foreach \x in {0,1,2,3} {
+        \foreach \y in {0,1,2,3} {
+            \node[bluepixel] (p\x\y) at (\x*0.6-1.2, \y*0.6-0.5) {};
+            \node[circle, draw=black!50, fill=blue!30, inner sep=1.5pt] at (p\x\y.center) {};
+            \draw[arrow] ($(p\x\y.north west)+(-0.1,0.1)$) -- (p\x\y.center);
+        }
+    }
+    % Green column and row
+    \foreach \y in {0,1,2,3} \node[greenpixel] at (1.2, \y*0.6-0.5) {};
+    \foreach \x in {0,1,2,3,4} \node[greenpixel] at (\x*0.6-1.2, -1.1) {};
+
+    \node[rotate=90] at (-1.8, 0.4) {Photosites (pixels)};
+
+    % Bucket Brigade
+    \foreach \x in {0,1,2,3,4} {
+        \node[circle, draw=black!50, fill=blue!30, inner sep=1.5pt] (b\x) at (\x*0.6-1.2, -1.1) {};
+        \ifnum\x<5
+            \draw[-Stealth, blue!70!black] (\x*0.6-1.0, -1.1) -- (\x*0.6-0.8, -1.1);
+        \fi
+    }
+    \node at (0, -1.6) {Bucket Brigade};
+
+    % Serial Register
+    \node[box, minimum width=1.2cm, minimum height=0.5cm] (sr) at (2.5, -1.1) {Registro Serie};
+    %\draw[arrow] (1.4, -1.7) -- (sr.west);
+
+    % Output Amplifier & ADC
+    \node[box, minimum width=2.5cm] (adc) at (1, -3.1) {Output Amplifier \& ADC\\(Analog-to-Digital Converter)};
+    
+    % Path from Serial Register to ADC
+    \draw[arrow] (sr.east) -- ++(0.2,0) -- ++(0,-0.7) -| (adc.north);
+    \node[circle, draw=black!50, fill=blue!30, inner sep=1.5pt] at (3, -1.6) {};
+    \node[circle, draw=black!50, fill=blue!30, inner sep=1.5pt] at (2.4, -1.6) {};
+    \node[circle, draw=black!50, fill=blue!30, inner sep=1.5pt] at (1.8, -1.6) {};
+    \node[circle, draw=black!50, fill=blue!30, inner sep=1.5pt] at (1.2, -1.6) {};
+
+    % Digital Data Output
+    \draw[arrow] (adc.east) -- ++(1.5,0) node[above, pos=0.5] {Digital Data};
+
+    % Bottom Legend CCD
+    \begin{scope}[shift={(-1.5,-3.8)}]
+        \node (l1) {Serial Transfer};
+        \node[right=0.8cm of l1] (l2) {Single ADC};
+        \node[right=0.8cm of l2] (l3) {Data};
+        \draw[greenarrow] (l1) -- (l2);
+        \draw[greenarrow] (l2) -- (l3);
+    \end{scope}
+\end{scope}
+
+% --- CMOS SENSOR (RIGHT) ---
+\begin{scope}[shift={(0,-8)}]
+    \node[font=\sffamily\bfseries] at (0,3.2) {CMOS Sensor};
+    \node at (0,2.9) {Complementary Metal-Oxide-Semiconductor};
+
+    % Grid 5x5
+    \foreach \x in {0,1,2,3} {
+        \foreach \y in {0,1,2,3,4} {
+            \node[bluepixel] (cp\x\y) at (\x*0.6-1.5, \y*0.6-1.1) {};
+            \node[circle, draw=black!50, fill=blue!30, inner sep=1.5pt] at (cp\x\y.center) {};
+            \draw[arrow] ($(cp\x\y.north west)+(-0.1,0.1)$) -- (cp\x\y.center);
+        }
+    }
+    
+    % In-pixel components
+    \foreach \x in {3,4} {
+        \foreach \y in {0,1,2,3,4} {
+            \node[pixel, fill=white] (cp\x\y) at (\x*0.6-1.5, \y*0.6-1.1) {};
+            % Amp triangle
+            \draw[fill=green!40, draw=green!60!black] ($(cp\x\y.west)+(0.1,0.15)$) -- ++(0.2,-0.15) -- ++(-0.2,-0.15) -- cycle;
+            % ADC box
+            \node[draw=green!60!black, fill=green!40, inner sep=0.5pt, font=\tiny, scale=0.6] at ($(cp\x\y.east)+(-0.15,-0.1)$) {ADC};
+        }
+    }
+
+    \node[rotate=90] at (-2.1, 0.1) {Photosite (pixels)};
+    \node at (0, -1.6) {Photosit (pixel)};
+    \node at (-1.8, 2) {Luz};
+
+    % Digital Data Bus
+    \draw[line width=3pt, blue!70!black, -{Stealth[scale=1]}] (2.4, 1.6) -- (2.4, -1.8);
+    \node[rotate=90] at (2.7, 0) {Digital Data};
+
+    % Horizontal arrows to bus
+    \foreach \y in {0,1,2,3,4} {
+        \draw[-Stealth, black!70] (1.2, \y*0.6-1.1) -- (2.3, \y*0.6-1.1);
+        \node[font=\tiny] at (1.8, \y*0.6-0.9) {Digital Data};
+    }
+
+    % Bottom Legend CMOS
+    \begin{scope}[shift={(-2.5,-2.5)}]
+        \node (m1) {Luz};
+        \node[right=0.6cm of m1] (m2) {Charge};
+        \node[right=0.6cm of m2, align=center] (m3) {In-pixel\\Amp \& ADC};
+        \node[right=0.6cm of m3] (m4) {Digital Data};
+        \draw[greenarrow] (m1) -- (m2);
+        \draw[greenarrow] (m2) -- (m3);
+        \draw[greenarrow] (m3) -- (m4);
+    \end{scope}
+\end{scope}
+
+\end{tikzpicture}
+\caption[Comparativa de sensores CCD y CMOS.]{%
+    Comparativa de sensores CCD y CMOS. El sensor CCD transfiere la carga de cada pixel a través de un proceso secuencial (bucket brigade) hacia un único amplificador y ADC, lo que puede generar ruido adicional y limitaciones en velocidad. En contraste, el sensor CMOS integra amplificadores y ADCs dentro de cada pixel, permitiendo lecturas aleatorias, mayor velocidad y menor consumo energético, aunque con una complejidad de diseño superior.}\label{fig:ccd_cmos}
+\end{marginfigure}
 
 \paragraph{CCD (\textit{Charge-Coupled Device}):}\label{par:ccd}
-Basan su funcionamiento en el desplazamiento de paquetes de carga analógica a través de la matriz hasta un único amplificador de salida (técnica \textit{Bucket Brigade}), como se ilustra en la Figura~\ref{fig:ccd_bucket_brigade}.
+Basan su funcionamiento en el desplazamiento de paquetes de carga analógica a través de la matriz hasta un único amplificador de salida (técnica \textit{Bucket Brigade}).
 \begin{itemize}
     \item \emph{Ventaja}: Extraordinaria uniformidad entre píxeles y bajo nivel de ruido, lo que los mantiene como la opción preferida en instrumentación científica y astronomía.
     \item \emph{Desventaja}: Proceso de fabricación costoso, elevado consumo de potencia y velocidad de lectura limitada por su naturaleza secuencial.
 \end{itemize}
 
-\begin{marginfigure}
-    \centering
-    \shorthandoff{>}
-    \begin{tikzpicture}[scale=0.60, >=stealth]
-        \ctikzset{amplifiers/fill=blue!5, capacitors/scale=0.6, resistors/scale=0.8, sources/scale=0.6, diodes/scale=0.3, diodes/fill=orange!5}
-        \ctikzset{diodes/scale=0.5, diodes/fill=orange!10}
-        \def\px{2.4} \def\py{2.4} \def\ox{0} \def\oy{0}
-        \foreach \col in {0,1,2}{
-            \foreach \row in {0,1,2}{
-                \pgfmathsetmacro\cx{\ox + \col*\px}
-                \pgfmathsetmacro\cy{\oy - \row*\py}
-                % Fondo del píxel
-                \fill[cellbg] (\cx-1.1, \cy-1.1) rectangle (\cx+1.1, \cy+1.1);
-                \draw[gray!60] (\cx-1.1, \cy-1.1) rectangle (\cx+1.1, \cy+1.1);
-                %\node[font=\tiny] at (\cx, \cy+0.5) {Píxel};
-                % Bloque APS (Amplificador/ADC)
-                %\draw[fill=white] (\cx-0.7, \cy-0.8) rectangle (\cx+0.7, -0.2+\cy);
-                %\node[scale=0.5] at (\cx, \cy-0.5) {APS (ADC)};
+% \begin{marginfigure}
+%     \centering
+%     \shorthandoff{>}
+%     \begin{tikzpicture}[scale=0.60, >=stealth]
+%         \ctikzset{amplifiers/fill=blue!5, capacitors/scale=0.6, resistors/scale=0.8, sources/scale=0.6, diodes/scale=0.3, diodes/fill=orange!5}
+%         \ctikzset{diodes/scale=0.5, diodes/fill=orange!10}
+%         \def\px{2.4} \def\py{2.4} \def\ox{0} \def\oy{0}
+%         \foreach \col in {0,1,2}{
+%             \foreach \row in {0,1,2}{
+%                 \pgfmathsetmacro\cx{\ox + \col*\px}
+%                 \pgfmathsetmacro\cy{\oy - \row*\py}
+%                 % Fondo del píxel
+%                 \fill[cellbg] (\cx-1.1, \cy-1.1) rectangle (\cx+1.1, \cy+1.1);
+%                 \draw[gray!60] (\cx-1.1, \cy-1.1) rectangle (\cx+1.1, \cy+1.1);
+%                 %\node[font=\tiny] at (\cx, \cy+0.5) {Píxel};
+%                 % Bloque APS (Amplificador/ADC)
+%                 %\draw[fill=white] (\cx-0.7, \cy-0.8) rectangle (\cx+0.7, -0.2+\cy);
+%                 %\node[scale=0.5] at (\cx, \cy-0.5) {APS (ADC)};
                 
-                % Dibujar el fotodiodo (usando 'to' para que se vea)
-                \draw (\cx, \cy-0.5) coordinate (catode) to[photodiode] (\cx, \cy+0.5) coordinate (anode);
-                \draw(catode) node[ground, scale=0.4] {};
-                %\draw (0,0) \node[ground, scale=0.5, anchor=north]{}; % Conectar cátodo a tierra
-                %\node[photodiode](ph) at (\cx, \cy){};
+%                 % Dibujar el fotodiodo (usando 'to' para que se vea)
+%                 \draw (\cx, \cy-0.5) coordinate (catode) to[photodiode] (\cx, \cy+0.5) coordinate (anode);
+%                 \draw(catode) node[ground, scale=0.4] {};
+%                 %\draw (0,0) \node[ground, scale=0.5, anchor=north]{}; % Conectar cátodo a tierra
+%                 %\node[photodiode](ph) at (\cx, \cy){};
 
 
-                % Fotodiodo
-                % \draw (\cx-0.6, \cy-0.5) coordinate (anode) to[photodiode] (\cx-0.6, \cy+0.5);
+%                 % Fotodiodo
+%                 % \draw (\cx-0.6, \cy-0.5) coordinate (anode) to[photodiode] (\cx-0.6, \cy+0.5);
 
-                % FET (MOSFET de selección) conectado al ánodo
-                \node [nmos, anchor=S, scale=0.4,rotate=-90] (mos) at (anode) {};
-                % \draw (anode) -- (mos.S);
-                \draw (mos.G) -- (mos.G |- \cx, \cy+1.2) node[circ,scale=0.4,blue]{}; % Puerta a línea azul (fila)
-                \draw (mos.D) -- (mos.D -|\cx+1.2, \cy) node[circ,scale=0.4,red]{}; % Drenador a línea roja (columna)
+%                 % FET (MOSFET de selección) conectado al ánodo
+%                 \node [nmos, anchor=S, scale=0.4,rotate=-90] (mos) at (anode) {};
+%                 % \draw (anode) -- (mos.S);
+%                 \draw (mos.G) -- (mos.G |- \cx, \cy+1.2) node[circ,scale=0.4,blue]{}; % Puerta a línea azul (fila)
+%                 \draw (mos.D) -- (mos.D -|\cx+1.2, \cy) node[circ,scale=0.4,red]{}; % Drenador a línea roja (columna)
                 
-                % % Bloque APS local en cada píxel
-                % \draw[fill=white, thin] (\cx+0.1, \cy-0.8) rectangle (\cx+0.9, \cy-0.1);
-                % \node[scale=0.4, font=\bfseries] at (\cx+0.5, \cy-0.45) {APS};
-            }
-        }
-        % Bus digital
-        \draw[fill=cyan!50!white] (6.5, 1.5) rectangle (7.5, -6.25) node[midway, white, font=\bfseries, rotate=-90] {Vertical Shift Register};
-        \draw[fill=red!50!white] (-1.5, 2.75) rectangle (6.4, 1.75) node[midway, white, font=\bfseries] {Horizontal Shift Register};
-        \foreach \r in {0,2,4,6} { \draw[->, blue] (-1.5, -1.2*\r +1.2) -- (6.5, -1.2*\r +1.2); }
-        \foreach \r in {0,2,4,6} { \draw[->, red] (1.2*\r-1.2,1.75) -- (1.2*\r -1.2,-6.25); }
+%                 % % Bloque APS local en cada píxel
+%                 % \draw[fill=white, thin] (\cx+0.1, \cy-0.8) rectangle (\cx+0.9, \cy-0.1);
+%                 % \node[scale=0.4, font=\bfseries] at (\cx+0.5, \cy-0.45) {APS};
+%             }
+%         }
+%         % Bus digital
+%         \draw[fill=cyan!50!white] (6.5, 1.5) rectangle (7.5, -6.25) node[midway, white, font=\bfseries, rotate=-90] {Vertical Shift Register};
+%         \draw[fill=red!50!white] (-1.5, 2.75) rectangle (6.4, 1.75) node[midway, white, font=\bfseries] {Horizontal Shift Register};
+%         \foreach \r in {0,2,4,6} { \draw[->, blue] (-1.5, -1.2*\r +1.2) -- (6.5, -1.2*\r +1.2); }
+%         \foreach \r in {0,2,4,6} { \draw[->, red] (1.2*\r-1.2,1.75) -- (1.2*\r -1.2,-6.25); }
         
-    \end{tikzpicture}
-    \caption[Arquitectura de un sensor CMOS APS.]{Arquitectura de un sensor CMOS de píxel activo (APS). Cada píxel de la matriz integra un fotodiodo junto a un transistor MOSFET de selección. El registro vertical (derecha) activa las filas mediante las líneas azules, mientras que el registro horizontal (arriba) coordina la lectura de la señal de cada píxel a través del bus de columnas (líneas rojas).}\label{fig:cmos_active_pixel}
-\end{marginfigure}
- 
+%     \end{tikzpicture}
+%     \caption[Arquitectura de un sensor CMOS APS.]{Arquitectura de un sensor CMOS de píxel activo (APS). Cada píxel de la matriz integra un fotodiodo junto a un transistor MOSFET de selección. El registro vertical (derecha) activa las filas mediante las líneas azules, mientras que el registro horizontal (arriba) coordina la lectura de la señal de cada píxel a través del bus de columnas (líneas rojas).}\label{fig:cmos_active_pixel}
+% \end{marginfigure}
     
 %     \begin{marginfigure}
 %     \centering
@@ -925,7 +1061,7 @@ Basan su funcionamiento en el desplazamiento de paquetes de carga analógica a t
 
 
 \paragraph{CMOS (\textit{Complementary Metal-Oxide-Semiconductor}):}\label{par:cmos}
-Utilizan la arquitectura APS (\textit{Active Pixel Sensor}), donde cada píxel integra su propio amplificador y conversor A/D. La lectura es digital y paralela, similar al acceso a una memoria RAM, como se muestra en la Figura~\ref{fig:cmos_active_pixel}.
+Utilizan la arquitectura APS (\textit{Active Pixel Sensor}), donde cada píxel integra su propio amplificador y conversor A/D. La lectura es digital y paralela, similar al acceso a una memoria RAM.
 \begin{itemize}
     \item \emph{Ventaja}: Bajo coste de fabricación, mínima disipación de potencia y altísima velocidad de muestreo. Permiten integrar lógica de procesado en el mismo chip (\textit{Smart Sensors}).
     \item \emph{Desventaja}: Mayor presencia de ruido de patrón fijo (\textit{Fixed Pattern Noise}) debido a las ligeras variaciones de ganancia entre los amplificadores individuales de cada píxel.
@@ -967,21 +1103,23 @@ Utilizan la arquitectura APS (\textit{Active Pixel Sensor}), donde cada píxel i
 %     \caption[Funcionamiento de un sensor CMOS.]{Funcionamiento de un sensor CMOS (Complementary Metal-Oxide-Semiconductor). Cada píxel integra su propio amplificador y conversor A/D, permitiendo una lectura digital y paralela. Esto se traduce en alta velocidad y bajo consumo, pero puede introducir ruido de patrón fijo.}\label{fig:cmos_active_pixel}
 % \end{marginfigure}
 
-\begin{table}[ht]
-    \centering
-    \small
-    \caption{Comparativa técnica de sensores ópticos para instrumentación.}\label{tab:comparativa_optica}
-    \begin{tabularx}{\linewidth}{l X X X}
-        \toprule
-        \textbf{Parámetro} & \textbf{Fotodiodo} & \textbf{Fototransistor} & \textbf{LDR} \\
-        \midrule
-        Linealidad & Excelente & Regular & Pobre (log) \\
-        Velocidad & Muy alta (\unit{ns}) & Media (\unit{\mu s}) & Muy baja (\unit{ms}) \\
-        Sensibilidad & Baja (\unit{nA/lux}) & Alta (\unit{mA/lux}) & Variable \\
-        Acondic. & Crítico (TIA) & Sencillo & Divisor tensión \\
-        \bottomrule
-    \end{tabularx}
-\end{table}
+
+
+% \begin{table}[ht]
+%     \centering
+%     \small
+%     \caption{Comparativa técnica de sensores ópticos para instrumentación.}\label{tab:comparativa_optica}
+%     \begin{tabularx}{\linewidth}{l X X X}
+%         \toprule
+%         \textbf{Parámetro} & \textbf{Fotodiodo} & \textbf{Fototransistor} & \textbf{LDR} \\
+%         \midrule
+%         Linealidad & Excelente & Regular & Pobre (log) \\
+%         Velocidad & Muy alta (\unit{ns}) & Media (\unit{\mu s}) & Muy baja (\unit{ms}) \\
+%         Sensibilidad & Baja (\unit{nA/lux}) & Alta (\unit{mA/lux}) & Variable \\
+%         Acondic. & Crítico (TIA) & Sencillo & Divisor tensión \\
+%         \bottomrule
+%     \end{tabularx}
+% \end{table}
 
 \marginnote{\textbf{Ruido de Disparo (\textit{Shot Noise}):} Es el ruido dominante en sensores ópticos. Se debe a la naturaleza discreta de los fotones y electrones. Su valor eficaz es $I_n = \sqrt{2qI\Delta f}$.
 }

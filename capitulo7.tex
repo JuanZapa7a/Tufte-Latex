@@ -1134,6 +1134,28 @@ Las diferencias entre CCD y CMOS se han ido reduciendo gracias a técnicas moder
 \marginnote{\textbf{Ruido de Disparo (\textit{Shot Noise}):} Es el ruido dominante en sensores ópticos. Se debe a la naturaleza discreta de los fotones y electrones. Su valor eficaz es $I_n = \sqrt{2qI\Delta f}$.
 }
 
+\section{Resumen de Errores en Sensores Ópticos}\label{sec:errores_opticos}
+
+El diseño de sistemas ópticos exige considerar fuentes de incertidumbre específicas de la naturaleza cuántica de la luz y de la física de semiconductores.
+
+\begin{table}[ht]
+    \centering
+    \small
+    \begin{tabularx}{\linewidth}{l X X}
+        \toprule
+        \textbf{Fuente de Error} & \textbf{Efecto en la Medida} & \textbf{Técnica de Mitigación} \\
+        \midrule
+        Corriente de Oscuridad & Offset sistemático que depende de la temperatura. & Modo fotovoltaico ($V_D=0$) o refrigeración. \\
+        Ruido de Disparo (\textit{Shot}) & Fluctuación estadística de la señal (ruido blanco). & Aumentar tiempo de integración o reducir $\Delta f$. \\
+        Respuesta Espectral & Error de escala si la fuente no es monocromática. & Uso de filtros ópticos o calibración por $\lambda$. \\
+        Capacidad de Unión & Limitación del ancho de banda y velocidad. & Modo fotoconductivo ($V_{bias} < 0$). \\
+        \bottomrule
+    \end{tabularx}
+    \caption{Clasificación de errores en instrumentación óptica.}
+\end{table}
+
+\marginnote{\textbf{Shot Noise:} Recuerda que el ruido de disparo es el límite físico último. No se puede eliminar con mejor electrónica, ya que es intrínseco a la llegada aleatoria de los fotones.}
+
 \section{Resumen y Conclusiones}\label{sec:resumen}
 En este capítulo se han explorado en profundidad los sensores ópticos, desde los principios físicos que rigen su funcionamiento hasta las aplicaciones prácticas en instrumentación. Se ha analizado la fotoconductividad y el efecto fotoeléctrico, destacando cómo estos fenómenos permiten la conversión de luz en señales eléctricas. Se han comparado diferentes tipos de sensores, como fotodiodos, fototransistores y LDRs, evaluando sus características técnicas y aplicaciones típicas. Además, se ha profundizado en los encoders ópticos, diferenciando entre incrementales y absolutos, y se han descrito las barreras de detección (fotocélulas) en sus distintas configuraciones. Finalmente, se ha realizado una comparativa detallada entre sensores de imagen CCD y CMOS, destacando sus arquitecturas, ventajas e inconvenientes. Este conocimiento es fundamental para seleccionar el sensor óptico adecuado en función de los requisitos específicos de cada aplicación en instrumentación y automatización industrial.
 

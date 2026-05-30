@@ -626,8 +626,10 @@
 \@writefile{lot}{\contentsline {table}{\numberline {7.1}{\ignorespaces Clasificación de errores en instrumentación óptica.}}{84}{table.7.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {7.6}Resumen y Conclusiones}{84}{section.7.6}\protected@file@percent }
 \newlabel{sec:resumen}{{7.6}{84}{Resumen y Conclusiones}{section.7.6}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8.1}{\ignorespaces Esquema circuital de un S\&H.}}{87}{figure.8.1}\protected@file@percent }
-\newlabel{fig:circuito_sh_esquema}{{8.1}{87}{Arquitectura Básica del S\&H}{figure.8.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8.1}{\ignorespaces Proceso de muestreo y reconstrucción de una señal continua}}{87}{figure.8.1}\protected@file@percent }
+\newlabel{fig:muestreo-zoh}{{8.1}{87}{Muestreo y Retención (Sample and Hold)}{figure.8.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8.2}{\ignorespaces Esquema de un circuito S\&H.}}{87}{figure.8.2}\protected@file@percent }
+\newlabel{fig:circuito_sh_esquema}{{8.2}{87}{Arquitectura Básica del S\&H}{figure.8.2}{}}
 \@writefile{toc}{\contentsline {chapter}{\numberline {8}Adquisición de Datos (DAQ)}{87}{chapter.8}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
@@ -636,30 +638,35 @@
 \newlabel{sec:muestreo}{{8.1}{87}{Muestreo y Retención (Sample and Hold)}{section.8.1}{}}
 \@writefile{toc}{\contentsline {paragraph}{Arquitectura Básica del S\&H}{87}{paragraph*.148}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Dinámica del Muestreo: Tiempo de Adquisición}{87}{paragraph*.149}\protected@file@percent }
-\newlabel{eq:tacq}{{8.1}{87}{Dinámica del Muestreo: Tiempo de Adquisición}{equation.8.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8.2}{\ignorespaces Efecto de la tasa de caída (\textit  {droop}) durante la fase de retención. Este error limita el tiempo máximo que el ADC puede tardar en convertir sin perder precisión.}}{88}{figure.8.2}\protected@file@percent }
-\newlabel{fig:droop_effect}{{8.2}{88}{Imperfecciones en la Fase de Retención (\textit {Hold})}{figure.8.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8.3}{\ignorespaces Relación entre el jitter temporal ($\Delta t_a$) y el error de amplitud ($\Delta V$). A mayor pendiente de la señal, más crítico es el ruido de fase del reloj.}}{88}{figure.8.3}\protected@file@percent }
-\newlabel{fig:jitter_error}{{8.3}{88}{Incertidumbre Temporal: Aperture Jitter}{figure.8.3}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8.4}{\ignorespaces Función de transferencia de un ADC.}}{88}{figure.8.4}\protected@file@percent }
-\newlabel{fig:escalera_cuant}{{8.4}{88}{Resolución y LSB}{figure.8.4}{}}
-\@writefile{toc}{\contentsline {paragraph}{Imperfecciones en la Fase de Retención (\textit  {Hold})}{88}{paragraph*.150}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {8.3}{\ignorespaces Efecto de la tasa de caída (\textit  {droop}) durante la fase de retención. Este error limita el tiempo máximo que el ADC puede tardar en convertir sin perder precisión.}}{88}{figure.8.3}\protected@file@percent }
+\newlabel{fig:droop_effect}{{8.3}{88}{Dinámica de Muestreo: Fase de Retención (\textit {Hold})}{figure.8.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8.4}{\ignorespaces Relación entre el jitter temporal ($\Delta t_a$) y el error de amplitud ($\Delta V$). A mayor pendiente de la señal, más crítico es el ruido de fase del reloj.}}{88}{figure.8.4}\protected@file@percent }
+\newlabel{fig:jitter_error}{{8.4}{88}{Incertidumbre Temporal: Aperture Jitter}{figure.8.4}{}}
+\newlabel{eq:tacq}{{8.2}{88}{Dinámica del Muestreo: Tiempo de Adquisición}{equation.8.2}{}}
+\@writefile{toc}{\contentsline {paragraph}{Dinámica de Muestreo: Fase de Retención (\textit  {Hold})}{88}{paragraph*.150}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Incertidumbre Temporal: Aperture Jitter}{88}{paragraph*.151}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Teorema de Nyquist y Aliasing}{88}{paragraph*.152}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Error de Apertura y Jitter}{88}{paragraph*.153}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {8.2}Cuantificación: El Límite en Amplitud}{88}{section.8.2}\protected@file@percent }
-\newlabel{sec:cuantificacion}{{8.2}{88}{Cuantificación: El Límite en Amplitud}{section.8.2}{}}
+\newlabel{eq:nyquist}{{8.5}{88}{Teorema de Nyquist y Aliasing}{equation.8.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8.5}{\ignorespaces Espectro de una señal muestreada. \textbf  {(a)}~Cuando $f_s > 2f_{max}$ las réplicas espectrales (triángulos azules) quedan separadas y la señal original es recuperable con un filtro paso bajo. \textbf  {(b)}~Cuando $f_s < 2f_{max}$ las réplicas se solapan (zona roja): la información de alta frecuencia contamina la banda base de forma irreversible.}}{89}{figure.8.5}\protected@file@percent }
+\newlabel{fig:aliasing}{{8.5}{89}{Teorema de Nyquist y Aliasing}{figure.8.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8.6}{\ignorespaces Reconstrucción de $x(t) = \sin (2\pi \cdot 0{,}9\,t)$ ($f_{max} = 0{,}9\,\text  {Hz}$, frecuencia de Nyquist $= 1{,}8\,\text  {Hz}$) a partir de sus muestras (puntos). \textbf  {(a)}~Con $f_s = 4\,\text  {Hz}$ las muestras (azul) son suficientes para reconstruir fielmente la señal original (gris) mediante interpolación sinc~---~ambas curvas se superponen. \textbf  {(b)}~Con $f_s = 1{,}4\,\text  {Hz}$ las escasas muestras (rojo) son compatibles con una sinusoide de $0{,}5\,\text  {Hz}$ ($= f_s - f_{max}$), la frecuencia alias, en lugar de la original de $0{,}9\,\text  {Hz}$: la información se ha perdido de forma irreversible.}}{89}{figure.8.6}\protected@file@percent }
+\newlabel{fig:reconstruccion-nyquist}{{8.6}{89}{Teorema de Nyquist y Aliasing}{figure.8.6}{}}
+\@writefile{toc}{\contentsline {paragraph}{Error de Apertura y Jitter}{89}{paragraph*.153}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8.2}Cuantificación: El Límite en Amplitud}{89}{section.8.2}\protected@file@percent }
+\newlabel{sec:cuantificacion}{{8.2}{89}{Cuantificación: El Límite en Amplitud}{section.8.2}{}}
 \@writefile{toc}{\contentsline {paragraph}{Resolución y LSB}{89}{paragraph*.154}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Ruido de Cuantificación}{89}{paragraph*.155}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {8.3}Arquitecturas de Convertidores A/D}{89}{section.8.3}\protected@file@percent }
-\newlabel{sec:arquitecturas_adc}{{8.3}{89}{Arquitecturas de Convertidores A/D}{section.8.3}{}}
-\@writefile{toc}{\contentsline {paragraph}{ADC de Aproximaciones Sucesivas (SAR)}{89}{paragraph*.156}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{ADC Sigma-Delta ($\Sigma \Delta $)}{89}{paragraph*.157}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{ADC de Doble Rampa (Integración)}{89}{paragraph*.158}\protected@file@percent }
-\newpmemlabel{^_76}{89}
-\newpmemlabel{^_77}{89}
-\newlabel{tab:comparativa_adc}{{8.3}{89}{ADC de Doble Rampa (Integración)}{paragraph*.158}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {8.1}{\ignorespaces Comparativa de arquitecturas ADC.}}{89}{table.8.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {8.7}{\ignorespaces Función de transferencia de un ADC.}}{90}{figure.8.7}\protected@file@percent }
+\newlabel{fig:escalera_cuant}{{8.7}{90}{Resolución y LSB}{figure.8.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {8.3}Arquitecturas de Convertidores A/D}{90}{section.8.3}\protected@file@percent }
+\newlabel{sec:arquitecturas_adc}{{8.3}{90}{Arquitecturas de Convertidores A/D}{section.8.3}{}}
+\@writefile{toc}{\contentsline {paragraph}{ADC de Aproximaciones Sucesivas (SAR)}{90}{paragraph*.156}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{ADC Sigma-Delta ($\Sigma \Delta $)}{90}{paragraph*.157}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{ADC de Doble Rampa (Integración)}{90}{paragraph*.158}\protected@file@percent }
+\newpmemlabel{^_76}{90}
+\newpmemlabel{^_77}{90}
+\@writefile{lot}{\contentsline {table}{\numberline {8.1}{\ignorespaces Comparativa de arquitecturas ADC.}}{90}{table.8.1}\protected@file@percent }
+\newlabel{tab:comparativa_adc}{{8.3}{90}{ADC de Doble Rampa (Integración)}{paragraph*.158}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {8.4}Parámetros Reales y ENOB}{90}{section.8.4}\protected@file@percent }
 \newlabel{sec:enob}{{8.4}{90}{Parámetros Reales y ENOB}{section.8.4}{}}
 \bibdata{references}

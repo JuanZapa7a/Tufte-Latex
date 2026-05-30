@@ -94,10 +94,13 @@
 \contentsline {figure}{\numberline {7.8}{\ignorespaces Encoders ópticos incremental y absoluto.}}{83}{figure.7.8}%
 \contentsline {figure}{\numberline {7.9}{\ignorespaces Comparativa de configuraciones ópticas de proximidad: (1) Barrera (Through-beam), (2) Réflex y (3) Difuso. La elección depende del alcance requerido y de las propiedades del objeto.}}{83}{figure.7.9}%
 \contentsline {figure}{\numberline {7.10}{\ignorespaces Comparativa de sensores CCD y CMOS.}}{84}{figure.7.10}%
-\contentsline {figure}{\numberline {8.1}{\ignorespaces Esquema circuital de un S\&H.}}{87}{figure.8.1}%
+\contentsline {figure}{\numberline {8.1}{\ignorespaces Proceso de muestreo y reconstrucción de una señal continua}}{87}{figure.8.1}%
+\contentsline {figure}{\numberline {8.2}{\ignorespaces Esquema de un circuito S\&H.}}{87}{figure.8.2}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {8.2}{\ignorespaces Efecto de la tasa de caída (\textit {droop}) durante la fase de retención. Este error limita el tiempo máximo que el ADC puede tardar en convertir sin perder precisión.}}{88}{figure.8.2}%
-\contentsline {figure}{\numberline {8.3}{\ignorespaces Relación entre el jitter temporal ($\Delta t_a$) y el error de amplitud ($\Delta V$). A mayor pendiente de la señal, más crítico es el ruido de fase del reloj.}}{88}{figure.8.3}%
-\contentsline {figure}{\numberline {8.4}{\ignorespaces Función de transferencia de un ADC.}}{88}{figure.8.4}%
+\contentsline {figure}{\numberline {8.3}{\ignorespaces Efecto de la tasa de caída (\textit {droop}) durante la fase de retención. Este error limita el tiempo máximo que el ADC puede tardar en convertir sin perder precisión.}}{88}{figure.8.3}%
+\contentsline {figure}{\numberline {8.4}{\ignorespaces Relación entre el jitter temporal ($\Delta t_a$) y el error de amplitud ($\Delta V$). A mayor pendiente de la señal, más crítico es el ruido de fase del reloj.}}{88}{figure.8.4}%
+\contentsline {figure}{\numberline {8.5}{\ignorespaces Espectro de una señal muestreada. \textbf {(a)}~Cuando $f_s > 2f_{max}$ las réplicas espectrales (triángulos azules) quedan separadas y la señal original es recuperable con un filtro paso bajo. \textbf {(b)}~Cuando $f_s < 2f_{max}$ las réplicas se solapan (zona roja): la información de alta frecuencia contamina la banda base de forma irreversible.}}{89}{figure.8.5}%
+\contentsline {figure}{\numberline {8.6}{\ignorespaces Reconstrucción de $x(t) = \sin (2\pi \cdot 0{,}9\,t)$ ($f_{max} = 0{,}9\,\text {Hz}$, frecuencia de Nyquist $= 1{,}8\,\text {Hz}$) a partir de sus muestras (puntos). \textbf {(a)}~Con $f_s = 4\,\text {Hz}$ las muestras (azul) son suficientes para reconstruir fielmente la señal original (gris) mediante interpolación sinc~---~ambas curvas se superponen. \textbf {(b)}~Con $f_s = 1{,}4\,\text {Hz}$ las escasas muestras (rojo) son compatibles con una sinusoide de $0{,}5\,\text {Hz}$ ($= f_s - f_{max}$), la frecuencia alias, en lugar de la original de $0{,}9\,\text {Hz}$: la información se ha perdido de forma irreversible.}}{89}{figure.8.6}%
+\contentsline {figure}{\numberline {8.7}{\ignorespaces Función de transferencia de un ADC.}}{90}{figure.8.7}%
 \addvspace {10\p@ }
 \contentsfinish 

@@ -9,7 +9,97 @@ Una vez acondicionada la señal analógica, el siguiente paso es su digitalizaci
 
 \section{Muestreo y Retención (Sample and Hold)}\label{sec:muestreo}
 
-El proceso de digitalización comienza con el muestreo. Para que un convertidor A/D pueda procesar una señal que varía continuamente, es necesario \emph{congelar} su valor durante el tiempo que dura la conversión. El bloque \emph{Sample and Hold (S\&H)} actúa como una memoria analógica que captura el valor instantáneo de la señal y lo mantiene estable. 
+El proceso de digitalización comienza con el muestreo. Para que un convertidor A/D pueda procesar una señal que varía continuamente, es necesario \emph{congelar} su valor durante el tiempo que dura la conversión. El bloque \emph{Sample and Hold (S\&H)} actúa como una memoria analógica que captura el valor instantáneo de la señal y lo mantiene estable. Como se muestra en la Figura~\ref{fig:muestreo-zoh}, el S\&H produce una señal escalonada que representa la secuencia de muestras tomadas a intervalos regulares. 
+
+\begin{marginfigure}
+  \begin{tikzpicture}[
+      >=Stealth,
+      scale=0.8,
+      declare function={
+        f(\x) = 0.9*sin(deg(1.1*\x - 0.3)) * exp(-0.05*\x) + 0.05;
+      }
+    ]
+ 
+    % ── SCOPE SUPERIOR: Muestreo ideal ──────────────────────
+    \begin{scope}
+ 
+      % Etiqueta interna
+      \node[anchor=north west, font=\itshape, gray]
+        at (0.1, 2.45) {(a) muestreo ideal};
+ 
+      % Ejes
+      \draw[->] (0,0) -- (7.2,0) node[right] {$t$};
+      \draw[->] (0,-0.1) -- (0,2.3) node[above] {$f(t)$};
+ 
+      % Señal continua
+      \draw[gray!60, thick]
+        plot[domain=0:7, samples=200, smooth] (\x, {f(\x)+1});
+ 
+      % Rejilla punteada
+      \foreach \k in {0.4,0.9,...,6.6}{
+        \draw[gray!35, dashed, very thin] (\k,0) -- (\k,2.2);
+      }
+ 
+      % Impulsos rojos
+      \foreach \k in {0.4,0.9,...,6.4}{
+        \draw[->, red!75!black, thick] (\k,0) -- (\k,{f(\k)+1});
+      }
+ 
+    \end{scope}
+ 
+    % ── SCOPE INFERIOR: Reconstrucción ZOH ──────────────────
+    \begin{scope}[yshift=-3.6cm]
+ 
+      % Etiqueta interna
+      \node[anchor=north west, font=\itshape, gray]
+        at (0.1, 2.45) {(b) retención de orden cero};
+ 
+      % Ejes
+      \draw[->] (0,0) -- (7.2,0) node[right] {$t$};
+      \draw[->] (0,-0.1) -- (0,2.3) node[above] {$f(t)$};
+ 
+      % Señal continua de referencia
+      \draw[gray!50, thick]
+        plot[domain=0:7, samples=200, smooth] (\x, {f(\x)+1});
+ 
+      % Rejilla punteada
+      \foreach \k in {0.4,0.9,...,6.6}{
+        \draw[gray!35, dashed, very thin] (\k,0) -- (\k,2.2);
+      }
+ 
+      % Escalones ZOH
+      \draw[red!75!black, thick]
+        (0.4,  {f(0.4)+1}) --
+        (0.9,  {f(0.4)+1}) -- (0.9,  {f(0.9)+1}) --
+        (1.4,  {f(0.9)+1}) -- (1.4,  {f(1.4)+1}) --
+        (1.9,  {f(1.4)+1}) -- (1.9,  {f(1.9)+1}) --
+        (2.4,  {f(1.9)+1}) -- (2.4,  {f(2.4)+1}) --
+        (2.9,  {f(2.4)+1}) -- (2.9,  {f(2.9)+1}) --
+        (3.4,  {f(2.9)+1}) -- (3.4,  {f(3.4)+1}) --
+        (3.9,  {f(3.4)+1}) -- (3.9,  {f(3.9)+1}) --
+        (4.4,  {f(3.9)+1}) -- (4.4,  {f(4.4)+1}) --
+        (4.9,  {f(4.4)+1}) -- (4.9,  {f(4.9)+1}) --
+        (5.4,  {f(4.9)+1}) -- (5.4,  {f(5.4)+1}) --
+        (5.9,  {f(5.4)+1}) -- (5.9,  {f(5.9)+1}) --
+        (6.4,  {f(5.9)+1}) -- (6.4,  {f(6.4)+1}) --
+        (6.9,  {f(6.4)+1});
+ 
+    \end{scope}
+ 
+  \end{tikzpicture}
+ 
+  \caption[Proceso de muestreo y reconstrucción de una señal continua]{Proceso de muestreo y reconstrucción de una señal continua
+    $f(t)$ (curva gris).
+    \emph{(a)}~Muestreo ideal: en cada instante $kT_s$ se toma una
+    muestra representada como un impulso (flecha roja) cuya altura es
+    proporcional al valor instantáneo de la señal.
+    \emph{(b)}~Reconstrucción por retención de orden cero (\textsc{zero order hold, zoh}):
+    cada muestra se mantiene constante hasta el siguiente instante de
+    muestreo, produciendo una aproximación escalonada de $f(t)$.
+    La diferencia entre la curva gris y la roja ilustra el error de
+    reconstrucción inherente al \textsc{zoh}.}\label{fig:muestreo-zoh}
+ 
+\end{marginfigure}
 
 \paragraph{Arquitectura Básica del S\&H}
 El circuito fundamental consta de cuatro elementos críticos, como se detalla en la Figura~\ref{fig:circuito_sh_esquema}:
@@ -23,55 +113,169 @@ El circuito fundamental consta de cuatro elementos críticos, como se detalla en
 \begin{marginfigure}
     \centering
     \shorthandoff{>}
-    \begin{tikzpicture}[american, scale=0.9, font=\scriptsize]
-        \ctikzset{amplifiers/fill=blue!5, resistors/scale=0.6, capacitors/scale=0.7}
+    \begin{tikzpicture}[american, scale=1]
+        \ctikzset{amplifiers/fill=blue!5, resistors/scale=0.4, capacitors/scale=0.6, switches/scale=1}
         
         % Buffers
         \draw (0,2) node[op amp, scale=0.6] (OA1) {};
-        \draw (4,2) node[op amp, scale=0.6] (OA2) {};
+        %\draw (4,2) node[op amp, scale=0.6] (OA2) {};
         
         % Conexiones OA1
-        \draw (OA1.+) -- ++(-0.5,0) node[left] {$V_{in}$};
-        \draw (OA1.out) -- ++(0,-0.4) -| (OA1.-);
+        \draw (OA1.+) to[short, -o] ++(-0.5,0) node[above] {$V_{in}$};
+        \draw (OA1.out) to[short] ++(0,0.8) -| (OA1.-);
         
-        % Interruptor
-        \draw (OA1.out) to[cspst, l=SW, *-*] ++(1.5,0) coordinate (nodeC);
+        % Resistencia de conducción e interruptor
+        \draw (OA1.out) to[R, l=$R_{on}$] ++(0.7,0) to[cspst, l_=SW, *-*] ++(0.8,0) coordinate (nodeC);
         
         % Condensador Ch
         \draw (nodeC) to[C, l=$C_h$, *-] ++(0,-1.2) node[ground] {};
         
         % Conexión OA2
-        \draw (nodeC) -- (OA2.+);
-        \draw (OA2.out) -- ++(0,-0.4) -| (OA2.-);
-        \draw (OA2.out) to[short, -o] ++(0.5,0) node[right] {$V_{out}$};
+        \draw (nodeC) to[short] ++(0.5,0) node[op amp, scale=0.6, anchor=+] (OA2) {};
+        \draw (OA2.out) to[short,*-] ++(0,0.8) -| (OA2.-);
+        \draw (OA2.out) to[short, -o] ++(0.5,0) node[above] {$V_{out}$};
         
         % Control lógico
-        \draw[dashed, ->, >=stealth] (1.3, 3) node[above] {Control} -- (1.3, 2.2);
+        \draw[dashed, ->, >=stealth] (1.8, 3) node[above] {Control} -- (1.8, 2.2);
 
     \end{tikzpicture}
-    \caption[Esquema circuital de un S\&H.]{Configuración clásica de un circuito de muestreo y retención. El uso de dos seguidores de tensión garantiza el aislamiento de la carga almacenada en $C_h$. El interruptor SW es una puerta de transmisión CMOS. El amplificador de salida evita que el propio ADC descargue el condensador durante la medida.}\label{fig:circuito_sh_esquema}
+    \caption[Esquema de un circuito S\&H.]{Configuración clásica de un circuito de muestreo y retención. Los dos seguidores de tensión aíslan el condensador de retención $C_h$; la resistencia de conducción $R_{on}$ y el interruptor SW, implementado como una puerta de transmisión CMOS, controlan la fase de muestreo, y el buffer de salida evita que el propio ADC descargue el condensador durante la conversión.}\label{fig:circuito_sh_esquema}
 \end{marginfigure}
 
 \paragraph{Dinámica del Muestreo: Tiempo de Adquisición}
-Cuando el interruptor se cierra (fase de \textit{Sample}), el condensador se carga a través de la resistencia $R_{on}$. Este proceso sigue una dinámica de primer orden con una constante de tiempo $\tau = R_{on} \cdot C_h$.
-
-Se define el \emph{Tiempo de Adquisición} ($t_{acq}$) como el tiempo necesario para que el voltaje en $C_h$ alcance el valor de entrada con un error menor a $1/2$ LSB. Para un ADC de $n$ bits, se requiere:
-\begin{equation}\label{eq:tacq}
-    t_{acq} > \tau \cdot \ln(2^{n+1}) \approx \tau \cdot 0,7 \cdot (n+1)
+Cuando el interruptor se cierra (fase de \textit{sample}), el condensador $C_h$
+se carga a través de la resistencia de conducción $R_{on}$ del interruptor.
+La tensión en $C_h$ evoluciona según una dinámica de primer orden:
+%
+\begin{equation}
+  v_{C}(t) = V_{in}\!\left(1 - e^{-t/\tau}\right), \qquad \tau = R_{on}\,C_h.
 \end{equation}
+%
+La exponencial negativa describe cómo la tensión parte de cero y se aproxima
+asintóticamente a $V_{in}$: tras $1\tau$ ha alcanzado el $63\,\text{\%}$ del valor
+final, tras $3\tau$ el $95\,\text{\%}$, y tras $5\tau$ el $99{,}3\,\text{\%}$.
+La velocidad de este proceso queda fijada por $\tau = R_{on}\,C_h$~---~valores
+pequeños de $R_{on}$ o de $C_h$ aceleran la carga, pero reducen la capacidad
+de retención durante la fase de \textit{hold}.
+
+Se define el \emph{tiempo de adquisición} $t_{acq}$ como el intervalo mínimo
+que debe permanecer cerrado el interruptor para que el error de seguimiento
+$|V_{in} - v_C(t_{acq})|$ sea inferior a $\tfrac{1}{2}$\,LSB.
+Imponiendo esa cota sobre la respuesta exponencial se obtiene:
+%
+\begin{equation}\label{eq:tacq}
+  t_{acq} \;>\; \tau\ln\!\left(2^{n+1}\right) \;\approx\; 0{,}693\,\tau\,(n+1),
+\end{equation}
+%
+donde $n$ es la resolución del ADC en bits.
+El factor $(n+1)$ refleja que cada bit adicional de resolución exige
+aproximadamente $0{,}693\,\tau$ de tiempo extra: un convertidor de
+$12$\,bits necesita del orden de $9\,\tau$, mientras que uno de $16$\,bits
+requiere cerca de $12\,\tau$.
+En la práctica, $t_{acq}$ impone un límite superior a la frecuencia de
+muestreo, ya que el período de muestreo $T_s$ debe satisfacer
+$T_s \geq t_{acq} + t_{conv}$, siendo $t_{conv}$ el tiempo de conversión
+del ADC.
 
 \marginnote{\textbf{Compromiso de diseño en $C_h$:} 
     Si $C_h$ es muy \emph{grande}, el tiempo de adquisición es lento. Si $C_h$ es muy \emph{pequeño}, las corrientes de fuga descargarán el condensador demasiado rápido durante la fase de retención.
 }
 
-\paragraph{Imperfecciones en la Fase de Retención (\textit{Hold})}
+%faltaria una imagen que muestre la dinámica de carga del condensador durante el tiempo de adquisición, con una curva exponencial y una línea que marque el nivel de $1/2$ LSB para ilustrar el concepto de tiempo de adquisición.
+% \begin{marginfigure}
+%   \begin{tikzpicture}[
+%       >=Stealth,
+%       scale=0.72,
+%       declare function={
+%         f(\x) = 0.9*sin(deg(1.1*\x - 0.3)) * exp(-0.05*\x) + 0.05;
+%       }
+%     ]
+ 
+%     % Ejes
+%     \draw[->] (0,0) -- (7.2,0) node[right] {$t$};
+%     \draw[->] (0,-0.1) -- (0,2.2) node[above] {$f(t)$};
+ 
+%     % Señal continua (gris)
+%     \draw[gray!60, thick]
+%       plot[domain=0:7, samples=200, smooth] (\x, {f(\x)+1});
+ 
+%     % Líneas punteadas de muestreo
+%     \foreach \k in {0.4, 0.9, 1.4, 1.9, 2.4, 2.9, 3.4, 3.9, 4.4, 4.9, 5.4, 5.9, 6.4} {
+%       \draw[gray!40, dashed, thin] (\k, 0) -- (\k, 2.1);
+%     }
+ 
+%     % Impulsos (flechas rojas)
+%     \foreach \k in {0.4, 0.9, 1.4, 1.9, 2.4, 2.9, 3.4, 3.9, 4.4, 4.9, 5.4, 5.9, 6.4} {
+%       \draw[->, red!80!black, thick]
+%         (\k, 0) -- (\k, {f(\k)+1});
+%     }
+ 
+%   \end{tikzpicture}
+%   \caption{Muestreo ideal: la señal continua $f(t)$ se muestrea
+%            mediante un tren de impulsos a intervalos regulares $T_s$.}
+%   \label{fig:muestreo-ideal}
+% \end{marginfigure}
+% \begin{marginfigure}
+%   \begin{tikzpicture}[
+%       >=Stealth,
+%       scale=0.72,
+%       declare function={
+%         f(\x) = 0.9*sin(deg(1.1*\x - 0.3)) * exp(-0.05*\x) + 0.05;
+%       }
+%     ]
+ 
+%     % Ejes
+%     \draw[->] (0,0) -- (7.2,0) node[right] {$t$};
+%     \draw[->] (0,-0.1) -- (0,2.2) node[above] {$f(t)$};
+ 
+%     % Señal continua de fondo (gris, referencia)
+%     \draw[gray!50, thick]
+%       plot[domain=0:7, samples=200, smooth] (\x, {f(\x)+1});
+ 
+%     % Líneas punteadas de muestreo
+%     \foreach \k in {0.4, 0.9, 1.4, 1.9, 2.4, 2.9, 3.4, 3.9, 4.4, 4.9, 5.4, 5.9, 6.4} {
+%       \draw[gray!40, dashed, thin] (\k, 0) -- (\k, 2.1);
+%     }
+ 
+%     % Escalones ZOH (rojo)
+%     \def\samples{0.4, 0.9, 1.4, 1.9, 2.4, 2.9, 3.4, 3.9, 4.4, 4.9, 5.4, 5.9, 6.4}
+%     \draw[red!80!black, thick]
+%       (0.4,  {f(0.4)+1})  --
+%       (0.9,  {f(0.4)+1})  -- (0.9,  {f(0.9)+1})  --
+%       (1.4,  {f(0.9)+1})  -- (1.4,  {f(1.4)+1})  --
+%       (1.9,  {f(1.4)+1})  -- (1.9,  {f(1.9)+1})  --
+%       (2.4,  {f(1.9)+1})  -- (2.4,  {f(2.4)+1})  --
+%       (2.9,  {f(2.4)+1})  -- (2.9,  {f(2.9)+1})  --
+%       (3.4,  {f(2.9)+1})  -- (3.4,  {f(3.4)+1})  --
+%       (3.9,  {f(3.4)+1})  -- (3.9,  {f(3.9)+1})  --
+%       (4.4,  {f(3.9)+1})  -- (4.4,  {f(4.4)+1})  --
+%       (4.9,  {f(4.4)+1})  -- (4.9,  {f(4.9)+1})  --
+%       (5.4,  {f(4.9)+1})  -- (5.4,  {f(5.4)+1})  --
+%       (5.9,  {f(5.4)+1})  -- (5.9,  {f(5.9)+1})  --
+%       (6.4,  {f(5.9)+1})  -- (6.4,  {f(6.4)+1})  --
+%       (6.9,  {f(6.4)+1});
+ 
+%   \end{tikzpicture}
+%   \caption{Reconstrucción escalonada (\textsc{zoh}): cada muestra
+%            se mantiene constante hasta el siguiente instante de muestreo.}
+%   \label{fig:zoh}
+% \end{marginfigure}
+
+
+
+
+
+\paragraph{Dinámica de Muestreo: Fase de Retención (\textit{Hold})}
 Una vez abierto el interruptor, el circuito debería mantener $V_{out}$ constante, pero aparecen dos errores sistemáticos críticos:
 \begin{itemize}
-    \item \emph{Droop Rate} (Tasa de caída): Debido a la corriente de polarización del operacional de salida y a las fugas del interruptor ($I_{leak}$), el condensador se descarga lentamente. La deriva de tensión se calcula como:
+    \item \emph{Droop Rate} (Tasa de caída): Como se muestra en la Figura~\ref{fig:droop_effect}, debido a la corriente de polarización del operacional de salida y a las fugas del interruptor ($I_{leak}$), el condensador se descarga lentamente. La deriva de tensión se calcula como:
     \begin{equation}
         \frac{dV}{dt} = \frac{I_{leak}}{C_h}
     \end{equation}
-    \item \emph{Feedthrough} (Acoplamiento): Una parte de la señal de entrada puede "filtrarse" a la salida a través de la capacidad parásita del interruptor abierto, degradando el aislamiento.
+    Este error limita el tiempo máximo que el ADC puede tardar en convertir sin perder precisión, especialmente en convertidores de alta resolución donde el LSB es muy pequeño.
+
+
+    \item \emph{Feedthrough} (Acoplamiento): Una parte de la señal de entrada puede \emph{filtrarse} a la salida a través de la capacidad parásita del interruptor abierto, degradando el aislamiento. Este efecto es especialmente problemático en señales de alta frecuencia, donde el acoplamiento capacitivo es más pronunciado. Para minimizarlo, se utilizan técnicas de diseño como la implementación de interruptores diferenciales o la adición de etapas de filtrado pasivo.
 \end{itemize}
 
 \begin{marginfigure}
@@ -99,7 +303,7 @@ Una vez abierto el interruptor, el circuito debería mantener $V_{out}$ constant
 \end{marginfigure}
 
 \paragraph{Incertidumbre Temporal: Aperture Jitter}
-Como se muestra en la Figura~\ref{fig:jitter_error}, el instante exacto en el que el interruptor se abre no es constante debido al ruido en el reloj de muestreo. Esta variación ($\Delta t_a$) produce un error de amplitud que depende de la velocidad de variación de la señal. 
+Se define Jitter de apertura como la variación aleatoria del instante de muestreo debido al ruido en el reloj de sincronismo. Como se muestra en la Figura~\ref{fig:jitter_error}, el instante exacto en el que el interruptor se abre no es constante debido al ruido en el reloj de muestreo. Esta variación ($\Delta t_a$) produce un error de amplitud que depende de la velocidad de variación de la señal. 
 
 Para que este error sea inferior a un escalón de cuantificación ($Q$), la frecuencia máxima de la señal está limitada por:
 \begin{equation}
@@ -151,7 +355,233 @@ Para que este error sea inferior a un escalón de cuantificación ($Q$), la frec
 % \end{marginfigure}
 
 \paragraph{Teorema de Nyquist y Aliasing}
-Como se introdujo en el Capítulo 5, para evitar la pérdida de información, la frecuencia de muestreo $f_s$ debe ser estrictamente superior al doble de la frecuencia máxima de la señal $f_{max}$. Si no se cumple esta condición, las componentes de alta frecuencia se solapan en la banda base, un fenómeno irreversible conocido como \emph{aliasing}.
+Como se introdujo en el Capítulo~\ref{cap:opamps}, para recuperar una señal banda limitada
+a partir de sus muestras es necesario que la frecuencia de muestreo satisfaga:
+%
+\begin{equation}\label{eq:nyquist}
+  f_s > 2\,f_{max},
+\end{equation}
+%
+donde $f_{max}$ es la frecuencia más alta presente en la señal.
+La cota $f_N = 2\,f_{max}$ recibe el nombre de \emph{frecuencia de Nyquist}.
+Cuando se cumple~\eqref{eq:nyquist}, el espectro de la señal muestreada
+consiste en réplicas del espectro original centradas en los múltiplos de
+$f_s$, separadas entre sí y recuperables mediante un filtro paso bajo ideal.
+
+Si, por el contrario, $f_s \leq 2\,f_{max}$, las réplicas espectrales se
+solapan: componentes de alta frecuencia caen dentro de la banda base y se
+confunden con frecuencias legítimas de la señal.
+Este fenómeno, conocido como \emph{aliasing}, es \emph{irreversible}~---~una
+vez submuestreada la señal no es posible distinguir la componente original de
+su imagen solapada~---~y se manifiesta perceptualmente como distorsión tonal
+en audio o como patrones de moiré en imagen.
+La solución estándar es anteponer un \emph{filtro antialiasing} paso bajo con
+frecuencia de corte $f_c \leq f_s/2$ antes del muestreador, garantizando que
+ninguna componente supere la frecuencia de Nyquist.
+
+ 
+\begin{marginfigure}
+  \begin{tikzpicture}[>=Stealth, scale=0.75,
+      declare function={
+        tri(\x) = max(0, 1 - abs(\x));
+      }]
+
+    % ── (a) Sin aliasing ──────────────────────────────
+    \begin{scope}
+
+      \node[anchor=north west, font=\itshape, gray]
+        at (-3.6, 1.35) {(a) $f_s > 2f_{max}$: sin aliasing};
+
+      \draw[->] (-3.8,0) -- (3.8,0) node[right,font=\tiny] {$f$};
+      \draw[->] (0,-0.1) -- (0,1.5) node[above,font=\tiny] {$|X(f)|$};
+
+      % Réplicas espectrales (bien separadas)
+      \foreach \c in {-3, 0, 3}{
+        \draw[blue!70!black, thick]
+          plot[domain={\c-1}:{\c+1}, samples=40]
+            (\x, {tri(\x-\c)});
+      }
+
+      % Etiquetas
+      \node[font=\tiny, below] at ( 1, 0) {$f_{max}$};
+      \node[font=\tiny, below] at (-1, 0) {$-f_{max}$};
+      \node[font=\tiny, below] at ( 3, 0) {$f_s$};
+      \node[font=\tiny, below] at (-3, 0) {$-f_s$};
+
+    \end{scope}
+
+    % ── (b) Con aliasing ─────────────────────────────
+    \begin{scope}[yshift=-3.0cm]
+
+      \node[anchor=north west, font=\itshape, gray]
+        at (-3.6, 1.35) {(b) $f_s < 2f_{max}$: aliasing};
+
+      \draw[->] (-3.8,0) -- (3.8,0) node[right,font=\tiny] {$f$};
+      \draw[->] (0,-0.1) -- (0,1.5) node[above,font=\tiny] {$|X(f)|$};
+
+      % Réplicas solapadas (fs demasiado pequeño → réplicas en ±1.8)
+      \foreach \c in {-1.8, 0, 1.8}{
+        \draw[red!70!black, thick]
+          plot[domain={\c-1.2}:{\c+1.2}, samples=60]
+            (\x, {tri((\x-\c)/1.2)});
+      }
+
+      % Zona de solapamiento sombreada
+      \fill[red!20, opacity=0.6]
+        plot[domain=0.6:1.8, samples=40]
+          (\x, {max(tri(\x), tri((\x-1.8)/1.2))})
+        -- (1.8,0) -- (0.6,0) -- cycle;
+      \fill[red!20, opacity=0.6]
+        plot[domain=-1.8:-0.6, samples=40]
+          (\x, {max(tri(\x), tri((\x+1.8)/1.2))})
+        -- (-0.6,0) -- (-1.8,0) -- cycle;
+
+      % Flecha y etiqueta de solapamiento
+      \draw[->, red!60!black, thin]
+        (1.2, 0.55) -- (1.0, 0.28);
+      \node[font=\tiny, red!60!black, anchor=west]
+        at (1.25, 0.58) {solapamiento};
+
+      % Etiquetas de frecuencia
+      \node[font=\tiny, below] at ( 1.2, 0) {$f_{max}$};
+      \node[font=\tiny, below] at ( 1.8, 0) {$f_s$};
+
+    \end{scope}
+
+  \end{tikzpicture}
+
+  \caption{Espectro de una señal muestreada.
+    \textbf{(a)}~Cuando $f_s > 2f_{max}$ las réplicas espectrales
+    (triángulos azules) quedan separadas y la señal original es
+    recuperable con un filtro paso bajo.
+    \textbf{(b)}~Cuando $f_s < 2f_{max}$ las réplicas se solapan
+    (zona roja): la información de alta frecuencia contamina la banda
+    base de forma irreversible.}
+  \label{fig:aliasing}
+
+\end{marginfigure}
+
+En la Figura~\ref{fig:reconstruccion-nyquist} se muestra una una señal que la muestreamos a mas y menos de la frecuencia de Nyquist. ¿Cual seria su recomposición a partir de las muestras que se obyienen a ambas frecuencias?
+
+\begin{marginfigure}
+  \begin{tikzpicture}[>=Stealth, scale=1,
+      declare function={
+        f(\x)  = sin(deg(2*3.14159*0.9*\x));
+        % Reconstrucción sinc (suma de sincs centradas en cada muestra)
+        srec(\x,\fs) = 0;
+      }]
+
+    % Señal: seno de 0.9 Hz
+    % Caso (a): fs = 4 Hz  → por encima de Nyquist (2×0.9 = 1.8 Hz) ✓
+    % Caso (b): fs = 1.4 Hz → por debajo de Nyquist ✗  →  alias a 0.5 Hz
+
+    % ── (a) fs > 2·fmax : reconstrucción correcta ────────────────
+    \begin{scope}
+
+      \node[anchor=north west, font=\tiny\itshape, gray]
+        at (0, 2.45) {(a) $f_s = 4\,\text{Hz} > 2f_{max}$};
+
+      \draw[->] (0,0) -- (5.6,0) node[right,font=\tiny] {$t$};
+      \draw[->] (0,-1.35) -- (0,1.55) node[above,font=\tiny] {$x$};
+
+      % Señal original (gris)
+      \draw[gray!55, thick]
+        plot[domain=0:5.4, samples=300, smooth] (\x, {f(\x)});
+
+      % Muestras a fs = 4 Hz  → T = 0.25 s
+      \foreach \k in {0, 0.25, 0.5, ..., 5.25}{
+        \fill[blue!70!black] (\k, {f(\k)}) circle (1.2pt);
+        \draw[blue!40, very thin] (\k, 0) -- (\k, {f(\k)});
+      }
+
+      % Reconstrucción sinc (suma de 22 sincs)
+      % Reconstrucción sinc — argumento normalizado: π·(t/T − k)
+% T = 0.25 s  →  t/T = 4t
+\draw[blue!70!black, thick]
+  plot[domain=0.05:5.4, samples=300, smooth] (\x, {
+    f(0.00)*sin(3.14159*(4*\x- 0))/(3.14159*(4*\x- 0)+0.0001) +
+    f(0.25)*sin(3.14159*(4*\x- 1))/(3.14159*(4*\x- 1)+0.0001) +
+    f(0.50)*sin(3.14159*(4*\x- 2))/(3.14159*(4*\x- 2)+0.0001) +
+    f(0.75)*sin(3.14159*(4*\x- 3))/(3.14159*(4*\x- 3)+0.0001) +
+    f(1.00)*sin(3.14159*(4*\x- 4))/(3.14159*(4*\x- 4)+0.0001) +
+    f(1.25)*sin(3.14159*(4*\x- 5))/(3.14159*(4*\x- 5)+0.0001) +
+    f(1.50)*sin(3.14159*(4*\x- 6))/(3.14159*(4*\x- 6)+0.0001) +
+    f(1.75)*sin(3.14159*(4*\x- 7))/(3.14159*(4*\x- 7)+0.0001) +
+    f(2.00)*sin(3.14159*(4*\x- 8))/(3.14159*(4*\x- 8)+0.0001) +
+    f(2.25)*sin(3.14159*(4*\x- 9))/(3.14159*(4*\x- 9)+0.0001) +
+    f(2.50)*sin(3.14159*(4*\x-10))/(3.14159*(4*\x-10)+0.0001) +
+    f(2.75)*sin(3.14159*(4*\x-11))/(3.14159*(4*\x-11)+0.0001) +
+    f(3.00)*sin(3.14159*(4*\x-12))/(3.14159*(4*\x-12)+0.0001) +
+    f(3.25)*sin(3.14159*(4*\x-13))/(3.14159*(4*\x-13)+0.0001) +
+    f(3.50)*sin(3.14159*(4*\x-14))/(3.14159*(4*\x-14)+0.0001) +
+    f(3.75)*sin(3.14159*(4*\x-15))/(3.14159*(4*\x-15)+0.0001) +
+    f(4.00)*sin(3.14159*(4*\x-16))/(3.14159*(4*\x-16)+0.0001) +
+    f(4.25)*sin(3.14159*(4*\x-17))/(3.14159*(4*\x-17)+0.0001) +
+    f(4.50)*sin(3.14159*(4*\x-18))/(3.14159*(4*\x-18)+0.0001) +
+    f(4.75)*sin(3.14159*(4*\x-19))/(3.14159*(4*\x-19)+0.0001) +
+    f(5.00)*sin(3.14159*(4*\x-20))/(3.14159*(4*\x-20)+0.0001) +
+    f(5.25)*sin(3.14159*(4*\x-21))/(3.14159*(4*\x-21)+0.0001)
+  });
+
+    \end{scope}
+
+    % ── (b) fs < 2·fmax : alias a 0.5 Hz ────────────────────────
+    \begin{scope}[yshift=-3.5cm]
+
+      \node[anchor=north west, font=\tiny\itshape, gray]
+        at (0, 2.45) {(b) $f_s = 1{,}4\,\text{Hz} < 2f_{max}$};
+
+      \draw[->] (0,0) -- (5.6,0) node[right,font=\tiny] {$t$};
+      \draw[->] (0,-1.35) -- (0,1.55) node[above,font=\tiny] {$x$};
+
+      % Señal original (gris)
+      \draw[gray!55, thick]
+        plot[domain=0:5.4, samples=300, smooth] (\x, {f(\x)});
+
+      % Muestras a fs = 1.4 Hz → T ≈ 0.714 s
+      \foreach \k in {0, 0.714, 1.428, 2.142, 2.857, 3.571, 4.285, 5.0}{
+        \fill[red!70!black] (\k, {f(\k)}) circle (1.2pt);
+        \draw[red!30, very thin] (\k, 0) -- (\k, {f(\k)});
+      }
+
+    % Señal alias con fase correcta
+    % f_alias = fs - fmax = 1.4 - 0.9 = 0.5 Hz
+    % La fase se determina porque en t=T/2=0.357 la muestra debe coincidir:
+    % sin(2π·0.9·0.357) ≈ sin(2.02) ≈ 0.90
+    % sin(2π·0.5·0.357 + φ) = 0.90  → φ ≈ π  → alias = -sin(2π·0.5·t)
+    \draw[red!70!black, thick]
+    plot[domain=0:5.4, samples=300, smooth]
+        (\x, {-sin(deg(2*3.14159*0.5*\x))}); 
+
+      % Flecha anotada
+      \draw[->, red!50!black, thin] (3.0, -1.1) -- (2.2, {sin(deg(2*3.14159*0.5*2.2))-0.08});
+      \node[font=\tiny, red!60!black, anchor=north] at (3.1,-1.1)
+        {alias: $0{,}5\,\text{Hz}$};
+
+      % Leyenda
+      \draw[gray!55, thick]  (3.6, 1.35) -- (4.1, 1.35)
+        node[right, font=\tiny, gray] {original};
+      \draw[red!70!black, thick] (3.6, 1.05) -- (4.1, 1.05)
+        node[right, font=\tiny, red!70!black] {alias};
+
+    \end{scope}
+
+  \end{tikzpicture}
+
+  \caption{Reconstrucción de $x(t) = \sin(2\pi \cdot 0{,}9\,t)$
+    ($f_{max} = 0{,}9\,\text{Hz}$, frecuencia de Nyquist $= 1{,}8\,\text{Hz}$)
+    a partir de sus muestras (puntos).
+    \textbf{(a)}~Con $f_s = 4\,\text{Hz}$ las muestras (azul)
+    son suficientes para reconstruir fielmente la señal original (gris)
+    mediante interpolación sinc~---~ambas curvas se superponen.
+    \textbf{(b)}~Con $f_s = 1{,}4\,\text{Hz}$ las escasas muestras
+    (rojo) son compatibles con una sinusoide de $0{,}5\,\text{Hz}$
+    ($= f_s - f_{max}$), la frecuencia alias, en lugar de la original
+    de $0{,}9\,\text{Hz}$: la información se ha perdido de forma
+    irreversible.}\label{fig:reconstruccion-nyquist}
+
+\end{marginfigure}
+
 
 % ejemplo de aliasing con una señal de 1 kHz muestreada a 1.5 kHz y de no aliasing con la misma señal muestreada a 3 kHz. caption explicativa de porque la informacón se pierde en el primer caso y se conserva en el segundo.
 % \begin{marginfigure}

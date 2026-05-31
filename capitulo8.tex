@@ -390,34 +390,34 @@ ninguna componente supere la frecuencia de Nyquist.
     \begin{scope}
 
       \node[anchor=north west, font=\itshape, gray]
-        at (-3.6, 1.35) {(a) $f_s > 2f_{max}$: sin aliasing};
+        at (-3.6, 2.65) {(a) $f_s > 2f_{max}$: sin aliasing};
 
-      \draw[->] (-3.8,0) -- (3.8,0) node[right,font=\tiny] {$f$};
-      \draw[->] (0,-0.1) -- (0,1.5) node[above,font=\tiny] {$|X(f)|$};
+      \draw[->] (-3.8,0) -- (3.8,0) node[right] {$f$};
+      \draw[->] (0,-0.1) -- (0,1.5) node[above] {$|X(f)|$};
 
       % Réplicas espectrales (bien separadas)
-      \foreach \c in {-3, 0, 3}{
+      \foreach \c in {-2.5, 0, 2.5}{
         \draw[blue!70!black, thick]
           plot[domain={\c-1}:{\c+1}, samples=40]
             (\x, {tri(\x-\c)});
       }
 
       % Etiquetas
-      \node[font=\tiny, below] at ( 1, 0) {$f_{max}$};
-      \node[font=\tiny, below] at (-1, 0) {$-f_{max}$};
-      \node[font=\tiny, below] at ( 3, 0) {$f_s$};
-      \node[font=\tiny, below] at (-3, 0) {$-f_s$};
+      \node[below] at ( 1, 0) {$f_{max}$};
+      \node[below] at (-1, 0) {$-f_{max}$};
+      \node[below] at ( 2.5, 0) {$f_s$};
+      \node[below] at (-2.5, 0) {$-f_s$};
 
     \end{scope}
 
     % ── (b) Con aliasing ─────────────────────────────
-    \begin{scope}[yshift=-3.0cm]
+    \begin{scope}[yshift=-4.0cm]
 
       \node[anchor=north west, font=\itshape, gray]
-        at (-3.6, 1.35) {(b) $f_s < 2f_{max}$: aliasing};
+        at (-3.6, 2.65) {(b) $f_s < 2f_{max}$: aliasing};
 
-      \draw[->] (-3.8,0) -- (3.8,0) node[right,font=\tiny] {$f$};
-      \draw[->] (0,-0.1) -- (0,1.5) node[above,font=\tiny] {$|X(f)|$};
+      \draw[->] (-3.8,0) -- (3.8,0) node[right] {$f$};
+      \draw[->] (0,-0.1) -- (0,1.5) node[above] {$|X(f)|$};
 
       % Réplicas solapadas (fs demasiado pequeño → réplicas en ±1.8)
       \foreach \c in {-1.8, 0, 1.8}{
@@ -428,36 +428,48 @@ ninguna componente supere la frecuencia de Nyquist.
 
       % Zona de solapamiento sombreada
       \fill[red!20, opacity=0.6]
-        plot[domain=0.6:1.8, samples=40]
-          (\x, {max(tri(\x), tri((\x-1.8)/1.2))})
-        -- (1.8,0) -- (0.6,0) -- cycle;
+        plot[domain=0.6:1.2, samples=40]
+          (\x, {min(tri(\x/1.2), tri((\x-1.8)/1.2))})
+        -- (1.2,0) -- (0.6,0) -- cycle;
       \fill[red!20, opacity=0.6]
-        plot[domain=-1.8:-0.6, samples=40]
-          (\x, {max(tri(\x), tri((\x+1.8)/1.2))})
-        -- (-0.6,0) -- (-1.8,0) -- cycle;
+        plot[domain=-1.2:-0.6, samples=40]
+          (\x, {min(tri(\x/1.2), tri((\x+1.8)/1.2))})
+        -- (-0.6,0) -- (-1.2,0) -- cycle;
 
       % Flecha y etiqueta de solapamiento
       \draw[->, red!60!black, thin]
-        (1.2, 0.55) -- (1.0, 0.28);
+        (1.5, 0.45) -- (1.0, 0.2);
       \node[font=\tiny, red!60!black, anchor=west]
         at (1.25, 0.58) {solapamiento};
 
+% \fill[red!20, opacity=0.6]
+%     \foreach \c in {-1.8, 0, 1.8}{
+%         \foreach \d in {-1.2, 1.2}{
+%             \ifdim\pgfplotspointmeta pt > \d pt
+%                 \pgfpathrectangle{\pgfpointanchor{\c}{center}}{\d pt-\pgf@x}{1.2 pt}
+%             \else
+%                 \pgfpathrectangle{\pgfpointanchor{\c}{center}}{\pgf@x-\d pt}{1.2 pt}
+%             \fi
+%         }
+%     }
+%     -- cycle;
+      
+
       % Etiquetas de frecuencia
-      \node[font=\tiny, below] at ( 1.2, 0) {$f_{max}$};
-      \node[font=\tiny, below] at ( 1.8, 0) {$f_s$};
+      \node[ below] at ( 1.2, 0) {$f_{max}$};
+      \node[ below] at ( 1.8, 0) {$f_s$};
 
     \end{scope}
 
   \end{tikzpicture}
 
   \caption{Espectro de una señal muestreada.
-    \textbf{(a)}~Cuando $f_s > 2f_{max}$ las réplicas espectrales
+    \emph{(a)}~Cuando $f_s > 2f_{max}$ las réplicas espectrales
     (triángulos azules) quedan separadas y la señal original es
     recuperable con un filtro paso bajo.
-    \textbf{(b)}~Cuando $f_s < 2f_{max}$ las réplicas se solapan
+    \emph{(b)}~Cuando $f_s < 2f_{max}$ las réplicas se solapan
     (zona roja): la información de alta frecuencia contamina la banda
-    base de forma irreversible.}
-  \label{fig:aliasing}
+    base de forma irreversible.}\label{fig:aliasing}
 
 \end{marginfigure}
 
@@ -478,11 +490,11 @@ En la Figura~\ref{fig:reconstruccion-nyquist} se muestra una una señal que la m
     % ── (a) fs > 2·fmax : reconstrucción correcta ────────────────
     \begin{scope}
 
-      \node[anchor=north west, font=\tiny\itshape, gray]
+      \node[anchor=north west, font=\itshape, gray]
         at (0, 2.45) {(a) $f_s = 4\,\text{Hz} > 2f_{max}$};
 
-      \draw[->] (0,0) -- (5.6,0) node[right,font=\tiny] {$t$};
-      \draw[->] (0,-1.35) -- (0,1.55) node[above,font=\tiny] {$x$};
+      \draw[->] (0,0) -- (5.6,0) node[right] {$t$};
+      \draw[->] (0,-1.35) -- (0,1.55) node[above] {$x$};
 
       % Señal original (gris)
       \draw[gray!55, thick]
@@ -526,13 +538,13 @@ En la Figura~\ref{fig:reconstruccion-nyquist} se muestra una una señal que la m
     \end{scope}
 
     % ── (b) fs < 2·fmax : alias a 0.5 Hz ────────────────────────
-    \begin{scope}[yshift=-3.5cm]
+    \begin{scope}[yshift=-4cm]
 
-      \node[anchor=north west, font=\tiny\itshape, gray]
+      \node[anchor=north west, font=\itshape, gray]
         at (0, 2.45) {(b) $f_s = 1{,}4\,\text{Hz} < 2f_{max}$};
 
       \draw[->] (0,0) -- (5.6,0) node[right,font=\tiny] {$t$};
-      \draw[->] (0,-1.35) -- (0,1.55) node[above,font=\tiny] {$x$};
+      \draw[->] (0,-1.35) -- (0,1.55) node[above] {$x$};
 
       % Señal original (gris)
       \draw[gray!55, thick]
@@ -554,31 +566,23 @@ En la Figura~\ref{fig:reconstruccion-nyquist} se muestra una una señal que la m
         (\x, {-sin(deg(2*3.14159*0.5*\x))}); 
 
       % Flecha anotada
-      \draw[->, red!50!black, thin] (3.0, -1.1) -- (2.2, {sin(deg(2*3.14159*0.5*2.2))-0.08});
+      \draw[->, red!50!black, thin] (3.0, -1.1) -- (2.6, {-sin(deg(2*3.14159*0.5*2.6))-0.08});
       \node[font=\tiny, red!60!black, anchor=north] at (3.1,-1.1)
         {alias: $0{,}5\,\text{Hz}$};
 
       % Leyenda
-      \draw[gray!55, thick]  (3.6, 1.35) -- (4.1, 1.35)
-        node[right, font=\tiny, gray] {original};
-      \draw[red!70!black, thick] (3.6, 1.05) -- (4.1, 1.05)
-        node[right, font=\tiny, red!70!black] {alias};
+      \draw[gray!55, thick]  (3.6, 1.65) -- (4.1, 1.65)
+        node[right,  gray] {original};
+      \draw[red!70!black, thick] (3.6, 1.35) -- (4.1, 1.35)
+        node[right,  red!70!black] {alias};
 
     \end{scope}
 
   \end{tikzpicture}
 
-  \caption{Reconstrucción de $x(t) = \sin(2\pi \cdot 0{,}9\,t)$
-    ($f_{max} = 0{,}9\,\text{Hz}$, frecuencia de Nyquist $= 1{,}8\,\text{Hz}$)
-    a partir de sus muestras (puntos).
-    \textbf{(a)}~Con $f_s = 4\,\text{Hz}$ las muestras (azul)
-    son suficientes para reconstruir fielmente la señal original (gris)
-    mediante interpolación sinc~---~ambas curvas se superponen.
-    \textbf{(b)}~Con $f_s = 1{,}4\,\text{Hz}$ las escasas muestras
-    (rojo) son compatibles con una sinusoide de $0{,}5\,\text{Hz}$
-    ($= f_s - f_{max}$), la frecuencia alias, en lugar de la original
-    de $0{,}9\,\text{Hz}$: la información se ha perdido de forma
-    irreversible.}\label{fig:reconstruccion-nyquist}
+  \caption{Impacto de la tasa de muestreo en la reconstrucción de una señal de $0{,}9\,\text{Hz}$ (Tasa de Nyquist $= 1{,}8\,\text{Hz}$).
+    \emph{(a)}~Muestreo a $f_s = 4\,\text{Hz}$: se cumple el criterio de Nyquist; la reconstrucción (azul) coincide exactamente con la señal original (gris).
+    \emph{(b)}~Muestreo a $f_s = 1{,}4\,\text{Hz}$: al submuestrear, las muestras (rojas) resultan compatibles con una señal de menor frecuencia ($0{,}5\,\text{Hz}$), induciendo un error de \textit{aliasing} irreversible.}\label{fig:reconstruccion-nyquist}
 
 \end{marginfigure}
 
@@ -676,16 +680,16 @@ El S\&H ideal es instantáneo, pero los circuitos reales sufren limitaciones tem
 
 \section{Cuantificación: El Límite en Amplitud}\label{sec:cuantificacion}
 
-La cuantificación es el proceso de asignar un valor numérico discreto a la muestra analógica retenida. Este proceso introduce inherentemente un error, ya que existe una pérdida de información al mapear un rango continuo en un número finito de niveles.
+La cuantificación es el proceso de asignar un valor numérico discreto a la muestra analógica retenida. Como se ilustra en la Figura~\ref{fig:escalera_cuant}, este proceso introduce inherentemente un error de cuantificación ($\epsilon_q$), ya que existe una pérdida de información al mapear un rango continuo en un número finito de niveles.
 
 \paragraph{Resolución y LSB}
 Un convertidor de $n$ bits dispone de $2^n$ niveles de salida. El salto mínimo de tensión detectable se denomina \emph{escalón de cuantificación} o \emph{Peso del Bit Menos Significativo} (LSB):
 \begin{equation}
     Q = V_{LSB} = \frac{V_{FS}}{2^n}
 \end{equation}
-donde $V_{FS}$ es el rango de fondo de escala (\textit{Full Scale}).
+donde $Q$ es la resolución, $V_{LSB}$ es el peso del LSB y $V_{FS}$ es el rango de fondo de escala (\textit{Full Scale}).
 
-\begin{marginfigure}[2em]
+\begin{marginfigure}
     \centering
     \shorthandoff{>}
     \begin{tikzpicture}
@@ -704,45 +708,130 @@ donde $V_{FS}$ es el rango de fondo de escala (\textit{Full Scale}).
             \addplot[thick, gray, dashed, domain=0:4] {x - 0.5};
         \end{axis}
     \end{tikzpicture}
-    \caption[Función de transferencia de un ADC.]{Función de transferencia ideal de un cuantificador. La característica de "escalera" muestra cómo múltiples valores de entrada mapean al mismo código digital, originando el error de cuantificación.}\label{fig:escalera_cuant}
+    \caption[Función de transferencia de un ADC.]{Función de transferencia ideal de un cuantificador. La característica de \emph{escalera} de cuantificación muestra cómo múltiples valores de entrada mapean al mismo código digital, originando el error de cuantificación.}\label{fig:escalera_cuant}
 \end{marginfigure}
 
 \paragraph{Ruido de Cuantificación}
-El error de cuantificación $\epsilon_q$ oscila entre $\pm Q/2$. Si la señal es compleja y cubre muchos niveles, este error se modela como un ruido blanco con distribución uniforme. Su valor eficaz (RMS) es:
+El error de cuantificación $\epsilon_q$ oscila entre $\pm Q/2$. Para señales suficientemente complejas que recorren múltiples niveles, este error deja de verse como un salto determinista y se modela como una variable aleatoria con distribución uniforme (ruido blanco). Su valor eficaz (RMS) se obtiene como la desviación típica de dicha distribución; el factor $\sqrt{12}$ surge analíticamente al integrar el cuadrado del error en su rango de existencia:
 \begin{equation}
-    V_{q,RMS} = \frac{Q}{\sqrt{12}}
+    V_{q,RMS} = \sqrt{\frac{1}{Q} \int_{-Q/2}^{Q/2} \epsilon^2 \, d\epsilon} = \frac{Q}{\sqrt{12}}
 \end{equation}
 
-A partir de este valor, se deduce la relación señal-ruido teórica máxima para un ADC ideal de $n$ bits:
+A partir de este resultado, y considerando una señal senoidal que ocupa todo el rango dinámico del ADC ($V_{p} = V_{FS}/2$), se deduce la relación señal-ruido (\textit{SNR}) teórica máxima. El término $1{,}76$ no es una constante arbitraria, sino que proviene de la relación logarítmica entre el valor eficaz de la sinusoide ($1/\sqrt{2}$) y el del ruido de cuantificación ($1/\sqrt{12}$):
 \begin{equation}
-    \text{SNR}_{max} \approx 6,02 \cdot n + 1,76 \text{ dB}
+    \text{SNR}_{max} = 20 \log_{10} \left( \frac{V_{FS}/(2\sqrt{2})}{Q/\sqrt{12}} \right) \approx 6,02 \cdot n + 1,76 \text{ dB}
 \end{equation}
 
 \marginnote{\textbf{La Regla de los 6 dB:} Por cada bit adicional que añadimos a nuestro convertidor, mejoramos la relación señal-ruido en aproximadamente \qty{6}{dB} (un factor de 2 en amplitud).}
 
 \section{Arquitecturas de Convertidores A/D}\label{sec:arquitecturas_adc}
 
-No existe el ADC perfecto; la elección de la arquitectura depende del compromiso entre velocidad de muestreo y resolución en bits.
+En instrumentación no existe el convertidor \emph{universal}. La elección de la arquitectura ADC es un compromiso de ingeniería entre tres variables fundamentales: la velocidad de muestreo, la resolución (número de bits) y el consumo energético.
+
+\paragraph{ADC Flash (Conversión Directa)}
+Es la arquitectura más rápida posible. Utiliza una red de resistencias en cascada para generar $2^n - 1$ niveles de referencia, los cuales se comparan simultáneamente con la señal de entrada mediante una matriz de comparadores. Como se ilustra en la Figura~\ref{fig:adc_flash}, el resultado es un código "termómetro" que un encoder lógico traduce instantáneamente a binario.
+\begin{itemize}
+    \item \emph{Ventajas:} Latencia mínima y velocidades en el rango de los \unit{GHz}.
+    \item \emph{Limitación:} El hardware crece exponencialmente ($2^n$). Un ADC de 8 bits requiere 255 comparadores, lo que limita su resolución práctica a 8 o 10 bits por el tamaño y consumo del chip.
+\end{itemize}
+
+\begin{marginfigure}
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}[american, scale=0.8]
+        \ctikzset{resistors/scale=0.6, amplifiers/scale=0.6}
+        % Escala de resistencias
+        \foreach \i in {1,2,3,4} {
+            \draw (0,\i) to[R] (0,\i-1);
+        }
+        \draw (0,4) node[above] {$V_{ref}$};
+        \draw (0,0) node[ground]{};
+        
+        % Comparadores
+        \foreach \i in {1,2,3} {
+            \draw (0,\i) -- (0.8,\i) node[op amp, anchor=+, scale=0.5] (c\i) {};
+            \draw (c\i.-) -- ++(-1,0) node[left, font=\tiny] {$V_{in}$};
+            \draw (c\i.out) -- ++(0.3,0) node[right, font=\tiny] {$b_\i$};
+        }
+        \node[gray, font=\tiny, align=center] at (1.5, 4.2) {Matriz de\\Comparadores};
+    \end{tikzpicture}
+    \caption{Arquitectura Flash. La señal se compara simultáneamente con todos los niveles de referencia generados por la red divisora.}\label{fig:adc_flash}
+\end{marginfigure}
 
 \paragraph{ADC de Aproximaciones Sucesivas (SAR)}
-Es el estándar para propósito general y el que integran la mayoría de microcontroladores. Utiliza una estrategia de búsqueda binaria mediante un DAC interno y un comparador. 
+Es la arquitectura más equilibrada y la que encontramos habitualmente en los microcontroladores. Como se detalla en la Figura~\ref{fig:adc_sar}, utiliza un algoritmo de búsqueda binaria (\textit{bisección}) para hallar el código digital. En cada ciclo de reloj, la lógica SAR ajusta un bit (empezando por el más significativo, MSB) y compara la salida de un DAC interno con la muestra retenida.
 \begin{itemize}
-    \item \emph{Ventajas:} Buen equilibrio velocidad/consumo/precio.
-    \item \emph{Limitación:} Requiere un S\&H externo o integrado y su resolución suele estancarse en los \qty{16}{bits}.
+    \item \emph{Ventajas:} Excelente compromiso entre velocidad (\unit{MHz}) y resolución (12-16 bits).
+    \item \emph{Limitación:} Requiere obligatoriamente un circuito S\&H muy estable durante todo el ciclo de conversión.
 \end{itemize}
+
+\begin{marginfigure}
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}[american, scale=0.85]
+        \ctikzset{amplifiers/scale=0.6, resistors/scale=0.6}
+        \draw (0,0) node[op amp, anchor=-, scale=0.7] (comp) {};
+        \draw (1.5,-0.5) rectangle (3.5,0.5) node[midway, font=\tiny, align=center] {Lógica\\SAR};
+        \draw (1.5,-2.2) rectangle (3.5,-1.2) node[midway, font=\tiny] {DAC};
+        \draw (comp.+) to[short, -o] ++(-0.5,0) node[left, font=\tiny] {$V_{SH}$};
+        \draw (comp.out) -- (1.5,0);
+        \draw (2.5,-0.5) -- (2.5,-1.2) node[midway, right, font=\tiny] {$n$ bits};
+        \draw (1.5,-1.7) -| (comp.-);
+        \draw (3.5,0) to[short, -o] ++(0.5,0) node[right, font=\tiny] {Código};
+    \end{tikzpicture}
+    \caption{Arquitectura SAR. Un algoritmo de búsqueda binaria ajusta el DAC interno bit a bit hasta aproximarse a la tensión de entrada.}\label{fig:adc_sar}
+\end{marginfigure}
 
 \paragraph{ADC Sigma-Delta ($\Sigma\Delta$)}
-Es la arquitectura reina en instrumentación de precisión (balanzas, termometría). Se basa en el sobremuestreo masivo y el filtrado digital (conformado de ruido).
+Es la arquitectura reina en instrumentación de precisión (balanzas, termometría). A diferencia de los anteriores, no mide el valor absoluto en un paso, sino el \textit{error} acumulado. Mediante el sobremuestreo (\textit{oversampling}) y el filtrado digital, desplaza el ruido de cuantificación hacia frecuencias altas donde es eliminado (Figura~\ref{fig:adc_sigmadelta}).
 \begin{itemize}
     \item \emph{Ventajas:} Resoluciones altísimas (hasta \qty{24}{bits}).
-    \item \emph{Limitación:} Muy lento comparado con otras arquitecturas.
+    \item \emph{Limitación:} Muy lento y con una latencia de procesado significativa.
 \end{itemize}
 
+\begin{marginfigure}
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}[>=stealth, scale=0.8]
+        \node (in) [font=\tiny] {$V_{in}$};
+        \node[draw, circle, right=0.3cm of in, inner sep=1pt] (sum) {\tiny $\Sigma$};
+        \node[draw, rectangle, right=0.4cm of sum, font=\tiny] (int) {$\int$};
+        \node[draw, rectangle, right=0.4cm of int, font=\tiny] (q) {Comp.};
+        \node[right=0.4cm of q, font=\tiny] (out) {Bitstream};
+        \node[draw, rectangle, below=0.6cm of int, font=\tiny] (dac) {1-bit DAC};
+        \draw[->] (in) -- (sum);
+        \draw[->] (sum) -- (int);
+        \draw[->] (int) -- (q);
+        \draw[->] (q) -- (out);
+        \draw[->] (q.east) -- ++(0.2,0) |- (dac.east);
+        \draw[->] (dac.west) -| (sum.south) node[left, pos=0.8, font=\tiny] {$-$};
+    \end{tikzpicture}
+    \caption{Modulador Sigma-Delta. El integrador acumula el error entre la entrada y la estimación, forzando al comparador a generar un tren de pulsos cuya densidad de unos es proporcional a $V_{in}$.}\label{fig:adc_sigmadelta}
+\end{marginfigure}
+
 \paragraph{ADC de Doble Rampa (Integración)}
-Es la arquitectura utilizada en los multímetros digitales de banco. Su principio de funcionamiento cancela ruidos periódicos.
+Es la arquitectura estándar en multímetros digitales de precisión. Como se ve en la Figura~\ref{fig:adc_dualslope}, basa su medida en integrar la señal durante un tiempo fijo y luego descargar el condensador con una referencia conocida.
 \begin{itemize}
-    \item \emph{Ventaja:} Excelente rechazo al ruido de red (\qty{50}{Hz} / \qty{60}{Hz}).
+    \item \emph{Ventaja:} Su naturaleza integradora promedia el ruido térmico y cancela totalmente el zumbido de la red eléctrica (\unit{50/60}{Hz}) si el tiempo de integración se ajusta a múltiplos del periodo de red.
 \end{itemize}
+
+\begin{marginfigure}
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}[american, scale=0.85]
+        \ctikzset{amplifiers/scale=0.6, resistors/scale=0.6}
+        \draw (0,0) node[op amp, scale=0.7] (int) {};
+        \draw (int.-) -- ++(0,0.8) to[C, l=$C$] ++(1.4,0) -| (int.out);
+        \draw (int.-) to[R, l_=$R$] ++(-1.4,0) coordinate (sw);
+        \draw (sw) to[cspst] ++(-0.8,0.4) node[left, font=\tiny] {$V_{in}$};
+        \draw (sw) to[cspst] ++(-0.8,-0.4) node[left, font=\tiny] {$-V_{ref}$};
+        \draw (int.+) node[ground]{};
+        \draw (int.out) -- ++(0.4,0) node[op amp, anchor=+, scale=0.5] (comp) {};
+        \draw (comp.-) node[ground]{};
+        \draw (comp.out) -- ++(0.3,0) node[right, font=\tiny] {A Control};
+    \end{tikzpicture}
+    \caption{ADC de Doble Rampa. El tiempo de descarga es directamente proporcional al voltaje medio de entrada, eliminando ruidos de alta frecuencia.}\label{fig:adc_dualslope}
+\end{marginfigure}
 
 \begin{table}[ht]
     \centering

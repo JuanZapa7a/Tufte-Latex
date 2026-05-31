@@ -200,9 +200,10 @@
 \contentsline {paragraph}{Resolución y LSB}{89}{paragraph*.154}%
 \contentsline {paragraph}{Ruido de Cuantificación}{89}{paragraph*.155}%
 \contentsline {section}{\numberline {8.3}Arquitecturas de Convertidores A/D}{90}{section.8.3}%
-\contentsline {paragraph}{ADC de Aproximaciones Sucesivas (SAR)}{90}{paragraph*.156}%
-\contentsline {paragraph}{ADC Sigma-Delta ($\Sigma \Delta $)}{90}{paragraph*.157}%
-\contentsline {paragraph}{ADC de Doble Rampa (Integración)}{90}{paragraph*.158}%
-\contentsline {section}{\numberline {8.4}Parámetros Reales y ENOB}{90}{section.8.4}%
-\contentsline {chapter}{Bibliograf\'{\i }a}{91}{appendix*.159}%
+\contentsline {paragraph}{ADC Flash (Conversión Directa)}{90}{paragraph*.156}%
+\contentsline {paragraph}{ADC de Aproximaciones Sucesivas (SAR)}{90}{paragraph*.157}%
+\contentsline {paragraph}{ADC Sigma-Delta ($\Sigma \Delta $)}{90}{paragraph*.158}%
+\contentsline {paragraph}{ADC de Doble Rampa (Integración)}{91}{paragraph*.159}%
+\contentsline {section}{\numberline {8.4}Parámetros Reales y ENOB}{91}{section.8.4}%
+\contentsline {chapter}{Bibliograf\'{\i }a}{93}{appendix*.160}%
 \contentsfinish 

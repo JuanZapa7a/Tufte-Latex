@@ -647,9 +647,9 @@
 \@writefile{toc}{\contentsline {paragraph}{Incertidumbre Temporal: Aperture Jitter}{88}{paragraph*.151}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Teorema de Nyquist y Aliasing}{88}{paragraph*.152}\protected@file@percent }
 \newlabel{eq:nyquist}{{8.5}{88}{Teorema de Nyquist y Aliasing}{equation.8.5}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8.5}{\ignorespaces Espectro de una señal muestreada. \textbf  {(a)}~Cuando $f_s > 2f_{max}$ las réplicas espectrales (triángulos azules) quedan separadas y la señal original es recuperable con un filtro paso bajo. \textbf  {(b)}~Cuando $f_s < 2f_{max}$ las réplicas se solapan (zona roja): la información de alta frecuencia contamina la banda base de forma irreversible.}}{89}{figure.8.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {8.5}{\ignorespaces Espectro de una señal muestreada. \emph  {(a)}~Cuando $f_s > 2f_{max}$ las réplicas espectrales (triángulos azules) quedan separadas y la señal original es recuperable con un filtro paso bajo. \emph  {(b)}~Cuando $f_s < 2f_{max}$ las réplicas se solapan (zona roja): la información de alta frecuencia contamina la banda base de forma irreversible.}}{89}{figure.8.5}\protected@file@percent }
 \newlabel{fig:aliasing}{{8.5}{89}{Teorema de Nyquist y Aliasing}{figure.8.5}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8.6}{\ignorespaces Reconstrucción de $x(t) = \sin (2\pi \cdot 0{,}9\,t)$ ($f_{max} = 0{,}9\,\text  {Hz}$, frecuencia de Nyquist $= 1{,}8\,\text  {Hz}$) a partir de sus muestras (puntos). \textbf  {(a)}~Con $f_s = 4\,\text  {Hz}$ las muestras (azul) son suficientes para reconstruir fielmente la señal original (gris) mediante interpolación sinc~---~ambas curvas se superponen. \textbf  {(b)}~Con $f_s = 1{,}4\,\text  {Hz}$ las escasas muestras (rojo) son compatibles con una sinusoide de $0{,}5\,\text  {Hz}$ ($= f_s - f_{max}$), la frecuencia alias, en lugar de la original de $0{,}9\,\text  {Hz}$: la información se ha perdido de forma irreversible.}}{89}{figure.8.6}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {8.6}{\ignorespaces Impacto de la tasa de muestreo en la reconstrucción de una señal de $0{,}9\,\text  {Hz}$ (Tasa de Nyquist $= 1{,}8\,\text  {Hz}$). \emph  {(a)}~Muestreo a $f_s = 4\,\text  {Hz}$: se cumple el criterio de Nyquist; la reconstrucción (azul) coincide exactamente con la señal original (gris). \emph  {(b)}~Muestreo a $f_s = 1{,}4\,\text  {Hz}$: al submuestrear, las muestras (rojas) resultan compatibles con una señal de menor frecuencia ($0{,}5\,\text  {Hz}$), induciendo un error de \textit  {aliasing} irreversible.}}{89}{figure.8.6}\protected@file@percent }
 \newlabel{fig:reconstruccion-nyquist}{{8.6}{89}{Teorema de Nyquist y Aliasing}{figure.8.6}{}}
 \@writefile{toc}{\contentsline {paragraph}{Error de Apertura y Jitter}{89}{paragraph*.153}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {8.2}Cuantificación: El Límite en Amplitud}{89}{section.8.2}\protected@file@percent }
@@ -658,22 +658,31 @@
 \@writefile{toc}{\contentsline {paragraph}{Ruido de Cuantificación}{89}{paragraph*.155}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {8.7}{\ignorespaces Función de transferencia de un ADC.}}{90}{figure.8.7}\protected@file@percent }
 \newlabel{fig:escalera_cuant}{{8.7}{90}{Resolución y LSB}{figure.8.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8.8}{\ignorespaces Arquitectura Flash. La señal se compara simultáneamente con todos los niveles de referencia generados por la red divisora.}}{90}{figure.8.8}\protected@file@percent }
+\newlabel{fig:adc_flash}{{8.8}{90}{ADC Flash (Conversión Directa)}{figure.8.8}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8.9}{\ignorespaces Arquitectura SAR. Un algoritmo de búsqueda binaria ajusta el DAC interno bit a bit hasta aproximarse a la tensión de entrada.}}{90}{figure.8.9}\protected@file@percent }
+\newlabel{fig:adc_sar}{{8.9}{90}{ADC de Aproximaciones Sucesivas (SAR)}{figure.8.9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8.10}{\ignorespaces Modulador Sigma-Delta. El integrador acumula el error entre la entrada y la estimación, forzando al comparador a generar un tren de pulsos cuya densidad de unos es proporcional a $V_{in}$.}}{90}{figure.8.10}\protected@file@percent }
+\newlabel{fig:adc_sigmadelta}{{8.10}{90}{ADC Sigma-Delta ($\Sigma \Delta $)}{figure.8.10}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {8.3}Arquitecturas de Convertidores A/D}{90}{section.8.3}\protected@file@percent }
 \newlabel{sec:arquitecturas_adc}{{8.3}{90}{Arquitecturas de Convertidores A/D}{section.8.3}{}}
-\@writefile{toc}{\contentsline {paragraph}{ADC de Aproximaciones Sucesivas (SAR)}{90}{paragraph*.156}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{ADC Sigma-Delta ($\Sigma \Delta $)}{90}{paragraph*.157}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{ADC de Doble Rampa (Integración)}{90}{paragraph*.158}\protected@file@percent }
-\newpmemlabel{^_76}{90}
-\newpmemlabel{^_77}{90}
-\@writefile{lot}{\contentsline {table}{\numberline {8.1}{\ignorespaces Comparativa de arquitecturas ADC.}}{90}{table.8.1}\protected@file@percent }
-\newlabel{tab:comparativa_adc}{{8.3}{90}{ADC de Doble Rampa (Integración)}{paragraph*.158}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {8.4}Parámetros Reales y ENOB}{90}{section.8.4}\protected@file@percent }
-\newlabel{sec:enob}{{8.4}{90}{Parámetros Reales y ENOB}{section.8.4}{}}
+\@writefile{toc}{\contentsline {paragraph}{ADC Flash (Conversión Directa)}{90}{paragraph*.156}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{ADC de Aproximaciones Sucesivas (SAR)}{90}{paragraph*.157}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{ADC Sigma-Delta ($\Sigma \Delta $)}{90}{paragraph*.158}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {8.11}{\ignorespaces ADC de Doble Rampa. El tiempo de descarga es directamente proporcional al voltaje medio de entrada, eliminando ruidos de alta frecuencia.}}{91}{figure.8.11}\protected@file@percent }
+\newlabel{fig:adc_dualslope}{{8.11}{91}{ADC de Doble Rampa (Integración)}{figure.8.11}{}}
+\@writefile{toc}{\contentsline {paragraph}{ADC de Doble Rampa (Integración)}{91}{paragraph*.159}\protected@file@percent }
+\newpmemlabel{^_76}{91}
+\newpmemlabel{^_77}{91}
+\newlabel{tab:comparativa_adc}{{8.3}{91}{ADC de Doble Rampa (Integración)}{figure.8.11}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {8.1}{\ignorespaces Comparativa de arquitecturas ADC.}}{91}{table.8.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8.4}Parámetros Reales y ENOB}{91}{section.8.4}\protected@file@percent }
+\newlabel{sec:enob}{{8.4}{91}{Parámetros Reales y ENOB}{section.8.4}{}}
 \bibdata{references}
 \bibcite{WHO2025}{{1}{2025}{{de~la Salud}}{{}}}
 \bibstyle{plainnat}
-\@writefile{toc}{\contentsline {chapter}{Bibliograf\'{\i }a}{91}{appendix*.159}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{Bibliograf\'{\i }a}{93}{appendix*.160}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \ttl@finishall
-\gdef \@abspage@last{93}
+\gdef \@abspage@last{95}

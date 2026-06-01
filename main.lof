@@ -104,7 +104,7 @@
 \contentsline {figure}{\numberline {8.7}{\ignorespaces Función de transferencia de un ADC.}}{90}{figure.8.7}%
 \contentsline {figure}{\numberline {8.8}{\ignorespaces Arquitectura Flash. La señal se compara simultáneamente con todos los niveles de referencia generados por la red divisora.}}{90}{figure.8.8}%
 \contentsline {figure}{\numberline {8.9}{\ignorespaces Arquitectura SAR. Un algoritmo de búsqueda binaria ajusta el DAC interno bit a bit hasta aproximarse a la tensión de entrada.}}{90}{figure.8.9}%
-\contentsline {figure}{\numberline {8.10}{\ignorespaces Modulador Sigma-Delta. El integrador acumula el error entre la entrada y la estimación, forzando al comparador a generar un tren de pulsos cuya densidad de unos es proporcional a $V_{in}$.}}{90}{figure.8.10}%
+\contentsline {figure}{\numberline {8.10}{\ignorespaces Modulador Sigma-Delta. El integrador acumula el error entre la entrada y la estimación, forzando al comparador a generar un tren de pulsos cuya densidad de unos es proporcional a $V_{in}$.}}{91}{figure.8.10}%
 \contentsline {figure}{\numberline {8.11}{\ignorespaces ADC de Doble Rampa. El tiempo de descarga es directamente proporcional al voltaje medio de entrada, eliminando ruidos de alta frecuencia.}}{91}{figure.8.11}%
 \addvspace {10\p@ }
 \contentsfinish 

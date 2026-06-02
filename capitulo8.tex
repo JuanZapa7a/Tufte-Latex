@@ -742,19 +742,27 @@ Es la arquitectura más rápida posible. Utiliza una red de resistencias en casc
         \ctikzset{resistors/scale=0.4, amplifiers/scale=0.6}
         % Escala de resistencias
         \foreach \i in {0,1,2,3,4,5,6,7} {
-            \draw (0,\i) to[R] (0,\i+1);
+            \draw (0,\i) to[R,-*] (0,\i+1);
         }
         \draw (0,8) --++(0,1) node[ocirc]{} node[above] {$V_{ref}$};
-        \draw (1,8) --++(0,1) node[ocirc]{} node[above] {$V_{in}$};
+        \draw (1,8) --++(0,1) coordinate (Vin);
         \draw (0,0) node[ground]{};
         
         % Comparadores
         \foreach \i in {1,2,3,4,5,6,7,8} {
-            \draw (0,\i) to[short,*-] (1.5,\i) node[op amp, anchor=-, scale=0.8,yscale=-1] (c\i) {};
-            %\draw (c\i.-) -- ++(-1,0) node[left, font=\tiny] {$V_{in}$};
-            %\draw (c\i.out) -- ++(0.3,0) node[right, font=\tiny] {$b_\i$};
+            \draw (0,\i) to[short] (1.5,\i) node[op amp, anchor=-, scale=0.8,yscale=-1] (c\i) {};
+            \ifnum\i>1
+                \draw (c\i.+) to[short,-*] (c\i.+ -| Vin);
+            \else
+                \draw (c\i.+) to[short] (c\i.+ -| Vin) -- (Vin) node[ocirc]{} node[above]{$V_{in}$};
+            \fi
         }
-        \node[gray, font=\tiny, align=center] at (1.5, 8.2) {Matriz de\\Comparadores};
+        \node[gray, align=center] at (1.9, 10) {Matriz de\\Comparadores};
+        \draw (3.5,2.75) rectangle (4.5,6.75) node[pos=0.5,align=center,rotate=90] {Encoder\\Lógico} node[ocirc] at (2.5,4) {};
+        \foreach \i in {1,2,3,4} {
+          \draw (c\i.out) --++(1-0.2*\i,0)|- (3.5,2.75+\i/5);
+        }
+        %\node[gray, align=center] at (2.9, 4) {Código\\Binario};
     \end{tikzpicture}
 %     \begin{tikzpicture}[transform shape]
 % 	% Paths, nodes and wires:

@@ -760,7 +760,7 @@ Es la arquitectura más rápida posible. Utiliza una red de resistencias en casc
         \node[gray, align=center] at (1.9, 10) {Matriz de\\Comparadores};
         \draw (3.5,2.75) rectangle (4.5,6.75) node[pos=0.5,align=center,rotate=90] {Encoder\\Lógico} node[ocirc] at (2.5,4) {};
         \foreach \i in {1,2,3,4} {
-          \draw (c\i.out) --++(1-0.2*\i,0)|- (3.5,2.75+\i/5);
+          \draw (c\i.out) --++(1-0.2*\i,0)|- (3.5,2.25+\i/2);
         }
         %\node[gray, align=center] at (2.9, 4) {Código\\Binario};
     \end{tikzpicture}

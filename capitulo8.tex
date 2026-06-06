@@ -114,7 +114,7 @@ El circuito fundamental consta de cuatro elementos críticos, como se detalla en
     \centering
     \shorthandoff{>}
     \begin{tikzpicture}[american, scale=1]
-        \ctikzset{amplifiers/fill=blue!5, resistors/scale=0.4, capacitors/scale=0.6, switches/scale=1}
+        \ctikzset{amplifiers/fill=blue!5, resistors/scale=0.4, capacitors/scale=0.6, switches/scale=1, amplifiers/plus={\tiny $+$}, amplifiers/minus={\tiny $-$}}
         
         % Buffers
         \draw (0,2) node[op amp, scale=0.6] (OA1) {};
@@ -739,7 +739,7 @@ Es la arquitectura más rápida posible. Utiliza una red de resistencias en casc
     \centering
     \shorthandoff{>}
     \begin{tikzpicture}[american, scale=1]
-        \ctikzset{resistors/scale=0.4, amplifiers/scale=0.6}
+        \ctikzset{resistors/scale=0.4, amplifiers/scale=0.6, amplifiers/plus={\tiny $+$}, amplifiers/minus={\tiny $-$}}
         % Escala de resistencias
         \foreach \i in {0,1,2,3,4,5,6,7} {
             \draw (0,\i) to[R,-*] (0,\i+1);
@@ -758,10 +758,40 @@ Es la arquitectura más rápida posible. Utiliza una red de resistencias en casc
             \fi
         }
         \node[gray, align=center] at (1.9, 10) {Matriz de\\Comparadores};
-        \draw (3.5,2.75) rectangle (4.5,6.75) node[pos=0.5,align=center,rotate=90] {Encoder\\Lógico} node[ocirc] at (2.5,4) {};
+        %\draw (3.5,2.75) rectangle (4.5,6.75) node[pos=0.5,align=center,rotate=90] {Encoder\\Lógico} node[ocirc] at (2.5,4) {};
+        \node[draw, minimum width=1cm, minimum height=4cm, 
+        align=center] (encoder) at (4, 4.75) {Encoder\\Lógico};
+
+        % Dividir la mitad sur del lado oeste en 5 partes iguales
+        \coordinate (norte) at (encoder.north west);
+        \coordinate (sur) at (encoder.south west);
+        \coordinate (mitad) at ($(encoder.south west)!0.5!(encoder.north west)$);
+        % Dividir la parte este en tres partes iguales para colocar las tres salidas del encoder
+          \coordinate (este) at (encoder.east);
+          \coordinate (norteeste) at ($(encoder.north east)!0.5!(encoder.east)$);
+          \coordinate (suroeste) at ($(encoder.south east)!0.5!(encoder.east)$);
+
+    
+        % Crear los 5 puntos de conexión (4 divisiones)
         \foreach \i in {1,2,3,4} {
-          \draw (c\i.out) --++(1-0.2*\i,0)|- (3.5,2.25+\i/2);
+            \coordinate (s\i) at ($(sur)!{\i*0.2}!(mitad)$);
+            \coordinate (n\i) at ($(norte)!{\i*0.2}!(mitad)$);
         }
+
+        \foreach \i in {1,2,3,4} {
+          %\draw (c\i.out) --++(1-0.2*\i,0)|- (3.5,2.24+\i/2);
+          \draw (c\i.out) --++(0.8-0.2*\i,0) |- (s\i);
+          
+        }
+      \foreach \i in {5,6,7,8} {
+        \pgfmathsetmacro{\targetidx}{int(9-\i)}
+        \draw (c\i.out) --++(-1+0.2*\i,0) |- (n\targetidx);
+      }
+      %salida del encoder
+      \draw (este) --++(0.5,0) node[ocirc]{} node[right] {$Q_1$};
+      \draw (norteeste) --++(0.5,0) node[ocirc]{} node[right] {$Q_0$};
+      \draw (suroeste) --++(0.5,0) node[ocirc]{} node[right] {$Q_2$};
+
         %\node[gray, align=center] at (2.9, 4) {Código\\Binario};
     \end{tikzpicture}
 %     \begin{tikzpicture}[transform shape]
@@ -854,7 +884,7 @@ Es la arquitectura más rápida posible. Utiliza una red de resistencias en casc
 % 	\node[shape=rectangle, minimum width=2.715cm, minimum height=0.965cm] at (22.625, 20.5){} node[anchor=center, align=center, text width=2.327cm, inner sep=6pt] at (22.625, 20.5){Salida binaria};
 % 	\path[draw={rgb,255:red,119;green,118;blue,123}] (21, 22.5) -- (21.25, 22.5) -- (21.25, 18.5) -- (21, 18.5);
 % \end{tikzpicture}
-    \caption{Arquitectura Flash. La señal se compara simultáneamente con todos los niveles de referencia generados por la red divisora.}\label{fig:adc_flash}
+    \caption{Arquitectura Flash para tres bits. La señal se compara simultáneamente con todos los niveles de referencia generados por la red divisora.}\label{fig:adc_flash}
 \end{marginfigure}
 
 \paragraph{ADC de Aproximaciones Sucesivas (SAR)}
@@ -868,7 +898,7 @@ Es la arquitectura más equilibrada y la que encontramos habitualmente en los mi
     \centering
     \shorthandoff{>}
     \begin{tikzpicture}[american, scale=0.85]
-        \ctikzset{amplifiers/scale=0.6, resistors/scale=0.6}
+        \ctikzset{amplifiers/scale=0.6, resistors/scale=0.6, amplifiers/plus={\tiny $+$}, amplifiers/minus={\tiny $-$}}
         \draw (0,0) node[op amp, anchor=-, scale=0.7] (comp) {};
         \draw (1.5,-0.5) rectangle (3.5,0.5) node[midway, font=\tiny, align=center] {Lógica\\SAR};
         \draw (1.5,-2.2) rectangle (3.5,-1.2) node[midway, font=\tiny] {DAC};
@@ -918,7 +948,7 @@ Es la arquitectura estándar en multímetros digitales de precisión. Como se ve
     \centering
     \shorthandoff{>}
     \begin{tikzpicture}[american, scale=0.85]
-        \ctikzset{amplifiers/scale=0.6, resistors/scale=0.6}
+        \ctikzset{amplifiers/scale=0.6, resistors/scale=0.6, amplifiers/plus={\tiny $+$}, amplifiers/minus={\tiny $-$}}
         \draw (0,0) node[op amp, scale=0.7] (int) {};
         \draw (int.-) -- ++(0,0.8) to[C, l=$C$] ++(1.4,0) -| (int.out);
         \draw (int.-) to[R, l_=$R$] ++(-1.4,0) coordinate (sw);

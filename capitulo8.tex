@@ -897,16 +897,16 @@ Es la arquitectura más equilibrada y la que encontramos habitualmente en los mi
 \begin{marginfigure}
     \centering
     \shorthandoff{>}
-    \begin{tikzpicture}[american, scale=0.85]
+    \begin{tikzpicture}[american, scale=1]
         \ctikzset{amplifiers/scale=0.6, resistors/scale=0.6, amplifiers/plus={\tiny $+$}, amplifiers/minus={\tiny $-$}}
-        \draw (0,0) node[op amp, anchor=-, scale=0.7] (comp) {};
-        \draw (1.5,-0.5) rectangle (3.5,0.5) node[midway, font=\tiny, align=center] {Lógica\\SAR};
-        \draw (1.5,-2.2) rectangle (3.5,-1.2) node[midway, font=\tiny] {DAC};
-        \draw (comp.+) to[short, -o] ++(-0.5,0) node[left, font=\tiny] {$V_{SH}$};
+        \draw (0,0) node[op amp, anchor=-, scale=0.7, yscale=-1] (comp) {};
+        \draw (1.5,-0.5) rectangle (3.5,0.5) node[midway, align=center] {Lógica\\SAR};
+        \draw (1.5,-2.2) rectangle (3.5,-1.2) node[midway] {DAC};
+        \draw (comp.+) to[short, -o] ++(-0.5,0) node[left] {$V_{SH}$};
         \draw (comp.out) -- (1.5,0);
-        \draw (2.5,-0.5) -- (2.5,-1.2) node[midway, right, font=\tiny] {$n$ bits};
+        \draw (2.5,-0.5) -- (2.5,-1.2) node[midway, right] {$n$ bits};
         \draw (1.5,-1.7) -| (comp.-);
-        \draw (3.5,0) to[short, -o] ++(0.5,0) node[right, font=\tiny] {Código};
+        \draw (3.5,0) to[short, -o] ++(0.5,0) node[right] {Código};
     \end{tikzpicture}
     \caption{Arquitectura SAR. Un algoritmo de búsqueda binaria ajusta el DAC interno bit a bit hasta aproximarse a la tensión de entrada.}\label{fig:adc_sar}
 \end{marginfigure}

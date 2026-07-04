@@ -204,6 +204,6 @@
 \contentsline {paragraph}{ADC de Aproximaciones Sucesivas (SAR)}{90}{paragraph*.157}%
 \contentsline {paragraph}{ADC Sigma-Delta ($\Sigma \Delta $)}{90}{paragraph*.158}%
 \contentsline {paragraph}{ADC de Doble Rampa (Integración)}{91}{paragraph*.159}%
-\contentsline {section}{\numberline {8.4}Parámetros Reales y ENOB}{91}{section.8.4}%
+\contentsline {section}{\numberline {8.4}Parámetros Reales y ENOB}{92}{section.8.4}%
 \contentsline {chapter}{Bibliograf\'{\i }a}{93}{appendix*.160}%
 \contentsfinish 

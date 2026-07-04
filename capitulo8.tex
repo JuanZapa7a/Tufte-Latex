@@ -4,7 +4,7 @@
 \chapter{Adquisición de Datos (DAQ)}\label{cap:daq}
 
 
-Una vez acondicionada la señal analógica, el siguiente paso es su digitalización. El sistema de adquisición de datos (DAQ) es el encargado de realizar la discretización de la señal tanto en el tiempo (muestreo) como en la amplitud (cuantificación). En este capítulo analizaremos las arquitecturas de los convertidores A/D, los errores intrínsecos al proceso de conversión y los criterios de diseño para garantizar la integridad de la información en el dominio digital.
+Una vez acondicionada la señal analógica, el siguiente paso es su digitalización. El sistema de adquisición de datos (DAQ) es el encargado de realizar la discretización de la señal tanto en el tiempo (muestreo) como en la amplitud (cuantificación)~\cite{pallasareny2000sensors}. En este capítulo analizaremos las arquitecturas de los convertidores A/D, los errores intrínsecos al proceso de conversión y los criterios de diseño para garantizar la integridad de la información en el dominio digital.
 
 
 \section{Muestreo y Retención (Sample and Hold)}\label{sec:muestreo}
@@ -726,7 +726,7 @@ A partir de este resultado, y considerando una señal senoidal que ocupa todo el
 
 \section{Arquitecturas de Convertidores A/D}\label{sec:arquitecturas_adc}
 
-En instrumentación no existe el convertidor \emph{universal}. La elección de la arquitectura ADC es un compromiso de ingeniería entre tres variables fundamentales: la velocidad de muestreo, la resolución (número de bits) y el consumo energético.
+En instrumentación no existe el convertidor \emph{universal}. La elección de la arquitectura ADC es un compromiso de ingeniería entre tres variables fundamentales: la velocidad de muestreo, la resolución (número de bits) y el consumo energético~\cite{kester2005dataconversion}.
 
 \paragraph{ADC Flash (Conversión Directa)}
 Es la arquitectura más rápida posible. Utiliza una red de resistencias en cascada para generar $2^n - 1$ niveles de referencia, los cuales se comparan simultáneamente con la señal de entrada mediante una matriz de comparadores. Como se ilustra en la Figura~\ref{fig:adc_flash}, el resultado es un código "termómetro" que un encoder lógico traduce instantáneamente a binario.
@@ -888,7 +888,7 @@ Es la arquitectura más rápida posible. Utiliza una red de resistencias en casc
 \end{marginfigure}
 
 \paragraph{ADC de Aproximaciones Sucesivas (SAR)}
-Es la arquitectura más equilibrada y la que encontramos habitualmente en los microcontroladores. Como se detalla en la Figura~\ref{fig:adc_sar}, utiliza un algoritmo de búsqueda binaria (\textit{bisección}) para hallar el código digital. En cada ciclo de reloj, la lógica SAR ajusta un bit (empezando por el más significativo, MSB) y compara la salida de un DAC interno con la muestra retenida.
+Es la arquitectura más equilibrada y la que encontramos habitualmente en los microcontroladores. Como se detalla en la Figura~\ref{fig:adc_sar}, utiliza un algoritmo de búsqueda binaria (\textit{bisección}) para hallar el código digital. En cada ciclo de reloj, la lógica SAR ajusta un bit (empezando por el más significativo, MSB) y compara la salida de un DAC interno con la muestra retenida. A diferencia del ADC Flash, la conversión no se resuelve en un único paso: se necesitan $n$ ciclos de reloj para un código de $n$ bits, de modo que la velocidad de conversión decrece linealmente con la resolución.
 \begin{itemize}
     \item \emph{Ventajas:} Excelente compromiso entre velocidad (\unit{MHz}) y resolución (12-16 bits).
     \item \emph{Limitación:} Requiere obligatoriamente un circuito S\&H muy estable durante todo el ciclo de conversión.
@@ -898,8 +898,8 @@ Es la arquitectura más equilibrada y la que encontramos habitualmente en los mi
     \centering
     \shorthandoff{>}
     \begin{tikzpicture}[american, scale=1]
-        \ctikzset{amplifiers/scale=0.6, resistors/scale=0.6, amplifiers/plus={\tiny $+$}, amplifiers/minus={\tiny $-$}}
-        \draw (0,0) node[op amp, anchor=-, scale=0.7, yscale=-1] (comp) {};
+        \ctikzset{amplifiers/scale=0.8, resistors/scale=0.6, amplifiers/plus={\tiny $+$}, amplifiers/minus={\tiny $-$}}
+        \draw (1,0) node[op amp, anchor=out, scale=0.7, yscale=-1] (comp) {};
         \draw (1.5,-0.5) rectangle (3.5,0.5) node[midway, align=center] {Lógica\\SAR};
         \draw (1.5,-2.2) rectangle (3.5,-1.2) node[midway] {DAC};
         \draw (comp.+) to[short, -o] ++(-0.5,0) node[left] {$V_{SH}$};
@@ -912,55 +912,135 @@ Es la arquitectura más equilibrada y la que encontramos habitualmente en los mi
 \end{marginfigure}
 
 \paragraph{ADC Sigma-Delta ($\Sigma\Delta$)}
-Es la arquitectura reina en instrumentación de precisión (balanzas, termometría). A diferencia de los anteriores, no mide el valor absoluto en un paso, sino el \textit{error} acumulado. Mediante el sobremuestreo (\textit{oversampling}) y el filtrado digital, desplaza el ruido de cuantificación hacia frecuencias altas donde es eliminado (Figura~\ref{fig:adc_sigmadelta}).
+Es la arquitectura de la cual se obtienen las muestras digitales más comunes. En la Figura~\ref{fig:adc_sigma_delta} se detallan las etapas de la cadena de instrumentación.
+\begin{marginfigure}
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}[>=stealth, scale=1, every node/.style={font=\scriptsize}]
+        \node (in) {$V_{in}$};
+        \node[draw, circle, right=0.6cm of in, inner sep=3pt, minimum size=0.6cm] (sum) {$\Sigma$};
+        \node[draw, rectangle, right=0.6cm of sum, minimum size=0.6cm] (int) {$\displaystyle\int$};
+        \node[draw, rectangle, right=0.6cm of int, minimum width=1.1cm, minimum height=0.6cm] (q) {Comp.};
+        \node[right=0.6cm of q] (out) {Bitstr.};
+        \node[draw, rectangle, below=1.1cm of $(int)!0.5!(q)$, minimum width=1.3cm, minimum height=0.6cm] (dac) {1-bit DAC};
+        \draw[->, thick] (in) -- (sum);
+        \draw[->, thick] (sum) -- (int);
+        \draw[->, thick] (int) -- (q);
+        \draw[->, thick] (q) -- (out);
+        \draw[->, thick] (q.east) -- ++(0.3,0) |- (dac.east);
+        \draw[->, thick] (dac.west) -| (sum.south) node[left, pos=0.8] {$-$};
+    \end{tikzpicture}
+    \caption{Modulador Sigma-Delta. El integrador acumula el error entre la entrada y la estimación, forzando al comparador a generar un tren de pulsos cuya densidad de unos es proporcional a $V_{in}$.}\label{fig:adc_sigmadelta}
+\end{marginfigure}
+
+Es la arquitectura reina en instrumentación de precisión (balanzas, termometría). A diferencia de los anteriores, no mide el valor absoluto en un paso, sino el \textit{error} acumulado. Como se ve en la Figura~\ref{fig:adc_sigmadelta}, el lazo resta continuamente la salida de un DAC de 1 bit a la entrada; el integrador acumula ese error y fuerza al comparador a generar un tren de pulsos cuya densidad de unos sigue, en promedio, la tensión de entrada como se ilustra en la Figura~\ref{fig:sigma_bitstream}. Esta misma integración desplaza el ruido de cuantificación hacia frecuencias altas (\textit{noise shaping}), y mediante el sobremuestreo (\textit{oversampling}) y un filtrado digital paso-bajo dicho ruido se elimina, obteniendo una resolución muy superior a la de un cuantificador de 1 bit.
+
+\begin{marginfigure}
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}[font=\scriptsize]
+        \draw[-latex] (-0.2,0.75) -- (-0.2,2.0) node[above] {$V_{in}$};
+        \draw[gray, dashed] (-0.2,0.85) -- (5.3,0.85) node[right, black] {$0$};
+        \draw[gray, dashed] (-0.2,1.85) -- (5.3,1.85) node[right, black] {$V_{ref}$};
+        \draw[thick, blue, smooth] plot coordinates {
+            (0.000,1.35) (0.111,1.415) (0.221,1.478) (0.332,1.539) (0.443,1.597)
+            (0.553,1.651) (0.664,1.700) (0.774,1.743) (0.885,1.779) (0.996,1.807)
+            (1.106,1.828) (1.217,1.841) (1.328,1.845) (1.438,1.841) (1.549,1.828)
+            (1.660,1.807) (1.770,1.779) (1.881,1.743) (1.991,1.700) (2.102,1.651)
+            (2.213,1.597) (2.323,1.539) (2.434,1.478) (2.545,1.415) (2.655,1.350)
+            (2.766,1.285) (2.877,1.222) (2.987,1.161) (3.098,1.103) (3.209,1.049)
+            (3.319,1.000) (3.430,0.957) (3.540,0.921) (3.651,0.893) (3.762,0.872)
+            (3.872,0.859) (3.983,0.855) (4.094,0.859) (4.204,0.872) (4.315,0.893)
+            (4.426,0.921) (4.536,0.957) (4.647,1.000) (4.757,1.049) (4.868,1.102)
+            (4.979,1.161) (5.089,1.222) (5.200,1.285)
+        };
+        \draw[-latex] (-0.2,0) -- (5.4,0) node[right] {$t$};
+        \node[left] at (2.5,-0.25) {Bitstream};
+        \draw[thick] (0.000,0) -- (0.000,0.5);
+        \draw[thick] (0.111,0) -- (0.111,0.5);
+        \draw[thick] (0.332,0) -- (0.332,0.5);
+        \draw[thick] (0.443,0) -- (0.443,0.5);
+        \draw[thick] (0.664,0) -- (0.664,0.5);
+        \draw[thick] (0.774,0) -- (0.774,0.5);
+        \draw[thick] (0.885,0) -- (0.885,0.5);
+        \draw[thick] (0.996,0) -- (0.996,0.5);
+        \draw[thick] (1.106,0) -- (1.106,0.5);
+        \draw[thick] (1.217,0) -- (1.217,0.5);
+        \draw[thick] (1.328,0) -- (1.328,0.5);
+        \draw[thick] (1.438,0) -- (1.438,0.5);
+        \draw[thick] (1.549,0) -- (1.549,0.5);
+        \draw[thick] (1.770,0) -- (1.770,0.5);
+        \draw[thick] (1.881,0) -- (1.881,0.5);
+        \draw[thick] (1.991,0) -- (1.991,0.5);
+        \draw[thick] (2.102,0) -- (2.102,0.5);
+        \draw[thick] (2.213,0) -- (2.213,0.5);
+        \draw[thick] (2.434,0) -- (2.434,0.5);
+        \draw[thick] (2.655,0) -- (2.655,0.5);
+        \draw[thick] (2.877,0) -- (2.877,0.5);
+        \draw[thick] (3.209,0) -- (3.209,0.5);
+        \draw[thick] (4.426,0) -- (4.426,0.5);
+        \draw[thick] (4.979,0) -- (4.979,0.5);
+    \end{tikzpicture}
+    \caption{Comportamiento del modulador ante una entrada senoidal. La densidad de unos del \textit{bitstream} sigue la amplitud de $V_{in}$: máxima cerca de $V_{ref}$, mínima cerca de 0.}\label{fig:sigma_bitstream}
+\end{marginfigure}
+
 \begin{itemize}
     \item \emph{Ventajas:} Resoluciones altísimas (hasta \qty{24}{bits}).
     \item \emph{Limitación:} Muy lento y con una latencia de procesado significativa.
 \end{itemize}
 
+\paragraph{ADC de Doble Rampa (Integración)}
+
 \begin{marginfigure}
     \centering
     \shorthandoff{>}
-    \begin{tikzpicture}[>=stealth, scale=0.8]
-        \node (in) [font=\tiny] {$V_{in}$};
-        \node[draw, circle, right=0.3cm of in, inner sep=1pt] (sum) {\tiny $\Sigma$};
-        \node[draw, rectangle, right=0.4cm of sum, font=\tiny] (int) {$\int$};
-        \node[draw, rectangle, right=0.4cm of int, font=\tiny] (q) {Comp.};
-        \node[right=0.4cm of q, font=\tiny] (out) {Bitstream};
-        \node[draw, rectangle, below=0.6cm of int, font=\tiny] (dac) {1-bit DAC};
-        \draw[->] (in) -- (sum);
-        \draw[->] (sum) -- (int);
-        \draw[->] (int) -- (q);
-        \draw[->] (q) -- (out);
-        \draw[->] (q.east) -- ++(0.2,0) |- (dac.east);
-        \draw[->] (dac.west) -| (sum.south) node[left, pos=0.8, font=\tiny] {$-$};
+    \begin{tikzpicture}[american, scale=1]
+        \ctikzset{amplifiers/scale=0.6, resistors/scale=0.6, capacitors/scale=0.5, switches/scale=0.5, amplifiers/plus={\scriptsize $+$}, amplifiers/minus={\scriptsize $-$}}
+        \draw (0,0) node[op amp] (int) {};
+        \draw (int.-) -- ++(0,0.8) coordinate (ctop) to[C, l=$C$] (int.out |- ctop) -- (int.out);
+        \node[circ] at (int.-) {};
+        \node[circ] at (int.out) {};
+        \draw (int.-) to[R, l_=$R$] ++(-1.4,0) coordinate (Rleft);
+        \node[cute spdt down, rotate=180, anchor=in] (sw) at (Rleft) {};
+        \draw (sw.out 2) -- ++(-0.4,0) node[above] {$V_{in}$};
+        \draw (sw.out 1) -- ++(-0.4,0) node[below] {$-V_{ref}$};
+        \draw (int.+) node[ground]{};
+        \draw (int.out) -- ++(0.2,0) node[op amp, anchor=+, yscale=-1] (comp) {};
+        \draw (comp.-) node[ground]{};
+        \draw (comp.out) to[short, -o] ++(0.1,0) node[above] {$V_{out}$};
     \end{tikzpicture}
-    \caption{Modulador Sigma-Delta. El integrador acumula el error entre la entrada y la estimación, forzando al comparador a generar un tren de pulsos cuya densidad de unos es proporcional a $V_{in}$.}\label{fig:adc_sigmadelta}
+    \caption{ADC de Doble Rampa. El tiempo de descarga es directamente proporcional al voltaje medio de entrada, eliminando ruidos de alta frecuencia.}\label{fig:adc_dualslope}
 \end{marginfigure}
 
-\paragraph{ADC de Doble Rampa (Integración)}
-Es la arquitectura estándar en multímetros digitales de precisión. Como se ve en la Figura~\ref{fig:adc_dualslope}, basa su medida en integrar la señal durante un tiempo fijo y luego descargar el condensador con una referencia conocida.
+Es la arquitectura estándar en multí\-metros digitales de precisión. Como se ve en la Figura~\ref{fig:adc_dualslope}, la conversión ocurre en dos fases bien diferenciadas. En la primera, el integrador acumula la tensión de entrada durante un tiempo fijo $T_1$, cargando el condensador $C$ hasta un valor proporcional al promedio de $V_{in}$. En la segunda fase, el comparador conmuta la entrada del integrador hacia una referencia conocida $-V_{ref}$ y mide el tiempo $T_2$ que tarda la rampa en descargarse hasta cero. Puesto que $T_2$ depende únicamente del cociente $V_{in}/V_{ref}$ y no de los valores absolutos de $R$ o $C$, las tolerancias y derivas térmicas de estos componentes se cancelan en la medida final. La Figura~\ref{fig:adc_dualslope_wave} muestra esta doble rampa para dos valores distintos de $V_{in}$: $T_1$ es siempre el mismo, la pendiente de bajada depende de $V_{in}$, y la pendiente de subida (fijada por $V_{ref}$) es idéntica en ambos casos, de modo que $T_2$ resulta proporcional a $V_{in}$.
+
 \begin{itemize}
     \item \emph{Ventaja:} Su naturaleza integradora promedia el ruido térmico y cancela totalmente el zumbido de la red eléctrica (\unit{50/60}{Hz}) si el tiempo de integración se ajusta a múltiplos del periodo de red.
+    \item \emph{Limitación:} Es, con diferencia, la arquitectura más lenta: cada conversión exige completar las dos fases de integración, lo que la relega a aplicaciones donde la precisión importa mucho más que la velocidad.
 \end{itemize}
 
 \begin{marginfigure}
     \centering
     \shorthandoff{>}
-    \begin{tikzpicture}[american, scale=0.85]
-        \ctikzset{amplifiers/scale=0.6, resistors/scale=0.6, amplifiers/plus={\tiny $+$}, amplifiers/minus={\tiny $-$}}
-        \draw (0,0) node[op amp, scale=0.7] (int) {};
-        \draw (int.-) -- ++(0,0.8) to[C, l=$C$] ++(1.4,0) -| (int.out);
-        \draw (int.-) to[R, l_=$R$] ++(-1.4,0) coordinate (sw);
-        \draw (sw) to[cspst] ++(-0.8,0.4) node[left, font=\tiny] {$V_{in}$};
-        \draw (sw) to[cspst] ++(-0.8,-0.4) node[left, font=\tiny] {$-V_{ref}$};
-        \draw (int.+) node[ground]{};
-        \draw (int.out) -- ++(0.4,0) node[op amp, anchor=+, scale=0.5] (comp) {};
-        \draw (comp.-) node[ground]{};
-        \draw (comp.out) -- ++(0.3,0) node[right, font=\tiny] {A Control};
+    \begin{tikzpicture}[font=\scriptsize]
+        \draw[-latex] (0,-2.3) -- (0,0.4) node[above] {$V_{int}$};
+        \draw[-latex] (-0.2,0) -- (4.6,0) node[right] {$t$};
+        \node[left] at (0,0) {$0$};
+        \draw[thick, blue] (0,0) -- (2.2,-1.17) -- (4.18,0);
+        \draw[thick, gray, dashed] (0,0) -- (2.2,-0.39) -- (2.86,0);
+        \draw[gray, dotted] (2.2,0) -- (2.2,-1.17);
+        \draw[<->] (0,-1.6) -- (2.2,-1.6) node[midway, below] {$T_1$ (fijo)};
+        \draw[<->] (2.2,-1.9) -- (2.86,-1.9) node[midway, below] {$T_2$};
+        \draw[<->] (2.2,-2.2) -- (4.18,-2.2) node[midway, below] {$T_2'$};
+        \node[blue, right] at (2.2,-1.17) {$V_{in}$ alto};
+        \node[gray, right] at (2.2,-0.39) {$V_{in}$ bajo};
     \end{tikzpicture}
-    \caption{ADC de Doble Rampa. El tiempo de descarga es directamente proporcional al voltaje medio de entrada, eliminando ruidos de alta frecuencia.}\label{fig:adc_dualslope}
+    \caption{Forma de onda del integrador para dos valores de $V_{in}$. $T_1$ es fijo; la pendiente de subida (fijada por $V_{ref}$) es la misma en ambos casos, por lo que $T_2$ crece proporcionalmente a $V_{in}$.}\label{fig:adc_dualslope_wave}
 \end{marginfigure}
+
+La Figura~\ref{fig:adc_dualslope_wave} representa la tensión de salida del integrador frente al tiempo para dos valores de $V_{in}$. Durante $T_1$ (fijo, marcado por el reloj del sistema) la rampa desciende con una pendiente $-V_{in}/RC$: cuanto mayor es $V_{in}$, más rápido cae la tensión y más bajo es el valor alcanzado al final de $T_1$. En ese instante, el comparador conmuta la entrada a $-V_{ref}$ y la rampa sube con una pendiente fija $V_{ref}/RC$, igual en ambos casos. Como el punto de partida de esta segunda rampa es proporcional a $V_{in}$ pero su pendiente de subida es constante, el tiempo $T_2$ que tarda en volver a cruzar el cero también es proporcional a $V_{in}$: geométricamente, $T_2 = T_1 \cdot V_{in}/V_{ref}$. Basta con contar los ciclos de reloj durante $T_2$ para obtener el código digital, sin que el valor absoluto de $R$ o $C$ intervenga en el resultado.
+
+Las cuatro arquitecturas anteriores no compiten entre sí de forma absoluta, sino que ocupan regiones distintas del compromiso velocidad-resolución-consumo: la Tabla~\ref{tab:comparativa_adc} resume sus cifras típicas y las aplicaciones donde cada una resulta la elección natural. Existen además arquitecturas híbridas, como el \emph{ADC Pipeline} (varias etapas tipo Flash de pocos bits en cascada, cada una con su propio amplificador de residuo), que ocupan el hueco de alta velocidad con resolución media-alta (decenas-cientos de \unit{MHz}, 8--14 bits) típico de vídeo y comunicaciones; quedan fuera del alcance de este curso, pero el lector interesado puede profundizar en los tutoriales de Analog Devices citados al margen.\footnote{Serie \emph{MT} de tutoriales de Analog Devices sobre arquitecturas de ADC: \url{https://www.analog.com/media/en/training-seminars/tutorials/MT-024.pdf} (Pipeline/Subranging) y \url{https://www.analog.com/media/en/training-seminars/tutorials/MT-025.pdf} (Folding).}
 
 \begin{table}[ht]
     \centering

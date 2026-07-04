@@ -1,13 +1,56 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{8}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
-\bibitem[de~la Salud(2025)]{WHO2025}
-Organización~Mundial de~la Salud.
-\newblock Cáncer.
-\newblock \url{https://www.who.int/es/health-topics/cancer}, 2025.
+\bibitem[Bentley(2004)]{bentley2004measurement}
+John~P. Bentley.
+\newblock \emph{Principles of Measurement Systems}.
+\newblock Pearson Education, Harlow, 4th edition, 2004.
+\newblock ISBN 978-0-13-043028-1.
+
+\bibitem[Fraden(2015)]{fraden2015sensors}
+Jacob Fraden.
+\newblock \emph{Handbook of Modern Sensors: Physics, Designs, and Applications}.
+\newblock Springer, Cham, 5th edition, 2015.
+\newblock ISBN 978-3-319-19302-1.
+
+\bibitem[Franco(2015)]{franco2015opamps}
+Sergio Franco.
+\newblock \emph{Design with Operational Amplifiers and Analog Integrated Circuits}.
+\newblock McGraw-Hill, New York, 4th edition, 2015.
+\newblock ISBN 978-0-07-802816-8.
+
+\bibitem[{International Electrotechnical Commission (IEC)}(2013)]{iec60584_1_2013}
+{International Electrotechnical Commission (IEC)}.
+\newblock Thermocouples --- part 1: Emf specifications and tolerances.
+\newblock Technical Report IEC 60584-1:2013, IEC, 2013.
+
+\bibitem[{Joint Committee for Guides in Metrology (JCGM)}(2008)]{jcgm100_2008_gum}
+{Joint Committee for Guides in Metrology (JCGM)}.
+\newblock Evaluation of measurement data --- guide to the expression of uncertainty in measurement (gum).
+\newblock Technical Report JCGM 100:2008, BIPM, 2008.
+\newblock URL \url{https://www.bipm.org/documents/20126/2071204/JCGM_100_2008_E.pdf}.
+
+\bibitem[{Joint Committee for Guides in Metrology (JCGM)}(2012)]{jcgm200_2012_vim}
+{Joint Committee for Guides in Metrology (JCGM)}.
+\newblock International vocabulary of metrology --- basic and general concepts and associated terms (vim).
+\newblock Technical Report JCGM 200:2012, BIPM, 2012.
+\newblock URL \url{https://www.bipm.org/documents/20126/2071204/JCGM_200_2012.pdf}.
+
+\bibitem[Kester and {Analog Devices, Inc.}(2005)]{kester2005dataconversion}
+Walt Kester and {Analog Devices, Inc.}
+\newblock \emph{The Data Conversion Handbook}.
+\newblock Newnes, Burlington, MA, 2005.
+\newblock ISBN 978-0-7506-7841-4.
+\newblock Referencia estándar de la industria sobre arquitecturas de ADC y DAC.
+
+\bibitem[Pall{\'a}s-Areny and Webster(2000)]{pallasareny2000sensors}
+Ram{\'o}n Pall{\'a}s-Areny and John~G. Webster.
+\newblock \emph{Sensors and Signal Conditioning}.
+\newblock Wiley-Interscience, New York, 2nd edition, 2000.
+\newblock ISBN 978-0-471-33232-9.
 
 \end{thebibliography}

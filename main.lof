@@ -103,8 +103,10 @@
 \contentsline {figure}{\numberline {8.6}{\ignorespaces Impacto de la tasa de muestreo en la reconstrucción de una señal de $0{,}9\,\text {Hz}$ (Tasa de Nyquist $= 1{,}8\,\text {Hz}$). \emph {(a)}~Muestreo a $f_s = 4\,\text {Hz}$: se cumple el criterio de Nyquist; la reconstrucción (azul) coincide exactamente con la señal original (gris). \emph {(b)}~Muestreo a $f_s = 1{,}4\,\text {Hz}$: al submuestrear, las muestras (rojas) resultan compatibles con una señal de menor frecuencia ($0{,}5\,\text {Hz}$), induciendo un error de \textit {aliasing} irreversible.}}{89}{figure.8.6}%
 \contentsline {figure}{\numberline {8.7}{\ignorespaces Función de transferencia de un ADC.}}{90}{figure.8.7}%
 \contentsline {figure}{\numberline {8.8}{\ignorespaces Arquitectura Flash para tres bits. La señal se compara simultáneamente con todos los niveles de referencia generados por la red divisora.}}{90}{figure.8.8}%
-\contentsline {figure}{\numberline {8.9}{\ignorespaces Arquitectura SAR. Un algoritmo de búsqueda binaria ajusta el DAC interno bit a bit hasta aproximarse a la tensión de entrada.}}{90}{figure.8.9}%
+\contentsline {figure}{\numberline {8.9}{\ignorespaces Arquitectura SAR. Un algoritmo de búsqueda binaria ajusta el DAC interno bit a bit hasta aproximarse a la tensión de entrada.}}{91}{figure.8.9}%
 \contentsline {figure}{\numberline {8.10}{\ignorespaces Modulador Sigma-Delta. El integrador acumula el error entre la entrada y la estimación, forzando al comparador a generar un tren de pulsos cuya densidad de unos es proporcional a $V_{in}$.}}{91}{figure.8.10}%
-\contentsline {figure}{\numberline {8.11}{\ignorespaces ADC de Doble Rampa. El tiempo de descarga es directamente proporcional al voltaje medio de entrada, eliminando ruidos de alta frecuencia.}}{91}{figure.8.11}%
+\contentsline {figure}{\numberline {8.11}{\ignorespaces Comportamiento del modulador ante una entrada senoidal. La densidad de unos del \textit {bitstream} sigue la amplitud de $V_{in}$: máxima cerca de $V_{ref}$, mínima cerca de 0.}}{91}{figure.8.11}%
+\contentsline {figure}{\numberline {8.12}{\ignorespaces ADC de Doble Rampa. El tiempo de descarga es directamente proporcional al voltaje medio de entrada, eliminando ruidos de alta frecuencia.}}{91}{figure.8.12}%
+\contentsline {figure}{\numberline {8.13}{\ignorespaces Forma de onda del integrador para dos valores de $V_{in}$. $T_1$ es fijo; la pendiente de subida (fijada por $V_{ref}$) es la misma en ambos casos, por lo que $T_2$ crece proporcionalmente a $V_{in}$.}}{91}{figure.8.13}%
 \addvspace {10\p@ }
 \contentsfinish 

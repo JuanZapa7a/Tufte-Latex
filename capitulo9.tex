@@ -13,10 +13,7 @@
 
 \chapter{Ruido e Interferencias}\label{cap:ruido}
 
-% TODO: párrafo introductorio. Contextualizar por qué, tras ver sensores y
-% acondicionamiento (caps. 3-7) y el ADC (cap. 8), el ruido/interferencia es
-% el último eslabón que limita la resolución REAL del sistema completo
-% (enlaza con el concepto de ENOB visto en sec:enob del capítulo 8).
+A lo largo de los Capítulos~\ref{cap:resistivos} a~\ref{cap:opticos} hemos perseguido un mismo objetivo: elegir el sensor más adecuado y acondicionar su señal con amplificadores y filtros de precisión para minimizar el error entre la magnitud física y la tensión que finalmente llega al conversor. El Capítulo~\ref{cap:daq} cerraba ese proceso con la digitalización, y su ENOB (Sección~\ref{sec:enob}) nos recordaba que el número de bits nominal de un ADC rara vez coincide con el número de bits real. Pero ninguna de estas decisiones sobrevive si, en el camino entre el sensor y el ADC, la señal recoge el ruido y las interferencias del propio entorno: un cable mal apantallado o un bucle de tierra puede introducir, en unos pocos centímetros de cableado, más error del que hemos conseguido eliminar con todo el diseño anterior. Este capítulo cierra, por tanto, el eslabón que faltaba: de dónde procede el ruido, cómo se acopla al circuito, y qué técnicas --blindaje, conexión a tierra, filtrado y protección frente a descargas electrostáticas-- permiten que el ENOB calculado en el papel se mantenga también cuando el circuito está montado y funcionando~\cite{ott1988noise}.
 
 \section{Fuentes y Clasificación del Ruido}\label{sec:fuentes_ruido}
 % TODO: ruido intrínseco (térmico/Johnson-Nyquist, shot, 1/f o flicker)
@@ -46,10 +43,29 @@
 % \label{sub:optoacopladores} del capítulo 7 -- o amplificadores de
 % aislamiento).
 
+\section{Filtrado EMI}\label{sec:filtrado_emi}
+% TODO: tercera técnica clásica de mitigación (junto a blindaje y tierras):
+% condensadores de desacoplo (decoupling) cerca de cada CI para el ruido de
+% modo diferencial, y ferritas / bobinas de modo común en cables de entrada
+% y salida para el ruido de modo común conducido. Distinguir explícitamente
+% modo diferencial vs. modo común del ruido conducido y qué componente
+% ataca a cada uno (enlazar con \label{sec:medida_diferencial} del
+% capítulo 3, donde ya se definieron ambos modos para la señal útil).
+
 \section{Protección Frente a Descargas Electrostáticas (ESD)}\label{sec:esd}
 % TODO: modelo del cuerpo humano (HBM), normativa IEC 61000-4-2, y
 % componentes de protección típicos (TVS, varistores) en las entradas de
 % un sistema de instrumentación.
+
+\section{Normativa y Certificación EMC}\label{sec:normativa_emc}
+% TODO: de la técnica a la obligación legal. Panorama de la normativa de
+% Compatibilidad Electromagnética: emisiones radiadas/conducidas
+% (CISPR 32 / EN 55032) e inmunidad (familia IEC 61000-4-X, de la que
+% el ESD de la sección anterior --IEC 61000-4-2-- es solo un ensayo más).
+% Marcado CE y necesidad de "diseñar para la EMC" desde el principio
+% (aplicando lo visto en blindaje, tierras y filtrado) en vez de
+% depender de una corrección a posteriori tras fallar el ensayo en
+% cámara anecoica/célula GTEM.
 
 \section{Resumen}\label{sec:resumen_ruido}
 % TODO: itemize de cierre, mismo formato que sec:resumen_opamp (cap. 5)

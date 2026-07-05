@@ -218,8 +218,10 @@
 \contentsline {section}{\numberline {9.2}Mecanismos de Acoplamiento de Interferencias}{99}{section.9.2}%
 \contentsline {section}{\numberline {9.3}Técnicas de Apantallamiento (Blindaje)}{99}{section.9.3}%
 \contentsline {section}{\numberline {9.4}Estrategias de Conexión a Tierra}{99}{section.9.4}%
-\contentsline {section}{\numberline {9.5}Protección Frente a Descargas Electrostáticas (ESD)}{99}{section.9.5}%
-\contentsline {section}{\numberline {9.6}Resumen}{99}{section.9.6}%
+\contentsline {section}{\numberline {9.5}Filtrado EMI}{99}{section.9.5}%
+\contentsline {section}{\numberline {9.6}Protección Frente a Descargas Electrostáticas (ESD)}{99}{section.9.6}%
+\contentsline {section}{\numberline {9.7}Normativa y Certificación EMC}{99}{section.9.7}%
+\contentsline {section}{\numberline {9.8}Resumen}{99}{section.9.8}%
 \contentsline {chapter}{\numberline {10}Sensores Industriales, Sensores Inteligentes y Buses Digitales}{101}{chapter.10}%
 \contentsline {section}{\numberline {10.1}El Lazo de Corriente 4-20 mA}{101}{section.10.1}%
 \contentsline {section}{\numberline {10.2}El Protocolo HART}{101}{section.10.2}%

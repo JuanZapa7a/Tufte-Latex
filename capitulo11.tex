@@ -1,0 +1,42 @@
+% !TeX root = main.tex
+% !TEX program = pdflatex
+
+% =============================================================
+% CAPÍTULO 11 — ESQUELETO (pendiente de redactar)
+% Mapea con el descriptor oficial: RA8 (Diseñar un sistema de
+% instrumentación... con instrumentación programable y virtual,
+% procesando la información disponible).
+% Curso de Telecomunicaciones: priorizar ejemplos de banco de laboratorio
+% de RF/óptica (analizador de espectros, fuente óptica, multímetro de
+% precisión) frente a ejemplos de automatización industrial.
+% =============================================================
+
+\chapter{Instrumentación Virtual y Programable}\label{cap:instrumentacion_virtual}
+
+% TODO: párrafo introductorio. Contraste entre el instrumento de sobremesa
+% tradicional (panel físico) y el instrumento controlado por PC/software,
+% que permite automatizar medidas repetitivas y registrar datos.
+
+\section{El Concepto de Instrumentación Virtual}\label{sec:instrumentacion_virtual}
+% TODO: la "instrumentación virtual" como software que sustituye/extiende
+% el panel frontal físico; el instrumento real sigue haciendo la
+% adquisición (cap. 8), el PC hace el procesado y la interfaz.
+
+\section{Buses de Control y el Estándar SCPI}\label{sec:scpi}
+% TODO: buses físicos (GPIB/IEEE-488, USB, Ethernet/LXI) y la capa VISA
+% que los abstrae; el estándar de comandos SCPI (Standard Commands for
+% Programmable Instruments), sintaxis jerárquica tipo
+% ":MEASure:VOLTage:DC?".
+
+\section{Control de Instrumentos con Python (PyVISA)}\label{sec:pyvisa}
+% TODO: ejemplo mínimo de script Python con PyVISA: abrir sesión,
+% enviar comando SCPI, leer respuesta. Enlazar con el flujo completo
+% sensor -> acondicionamiento -> ADC -> PC.
+
+\section{Entornos Gráficos de Programación: LabVIEW}\label{sec:labview}
+% TODO: paradigma de programación gráfica (dataflow) frente a texto;
+% cuándo conviene LabVIEW (prototipado rápido, HW de National Instruments)
+% frente a Python (flexibilidad, integración con otras herramientas).
+
+\section{Resumen}\label{sec:resumen_instrumentacion_virtual}
+% TODO: itemize de cierre, mismo formato que sec:resumen_opamp (cap. 5).

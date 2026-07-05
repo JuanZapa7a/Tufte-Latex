@@ -1,0 +1,52 @@
+% !TeX root = main.tex
+% !TEX program = pdflatex
+
+% =============================================================
+% CAPÍTULO 12 — ESQUELETO (pendiente de redactar)
+% Capítulo de cierre/síntesis del curso. Mapea con RA5 (Acotar el error de
+% medida cometido en un sistema de instrumentación y adquisición de datos)
+% y RA8 (Diseñar un sistema de instrumentación completo, desde sensor y
+% acondicionador hasta adquisición y visualización, elaborando un plan
+% coherente para resolver la situación planteada).
+% Este capítulo NO introduce teoría nueva: recopila y aplica los
+% "presupuestos de errores" (Error Budget) ya vistos sueltos en cada
+% familia de sensores (caps. 3, 4, 6, 7) sobre 1-2 casos de estudio
+% completos, de principio a fin.
+% =============================================================
+
+\chapter{Integración y Diseño de Sistemas de Instrumentación}\label{cap:integracion}
+
+% TODO: párrafo introductorio. Este capítulo es la síntesis del curso:
+% recorre la cadena sensor -> acondicionamiento -> transmisión/protección
+% -> ADC -> bus digital/instrumentación virtual, tal y como se ha visto
+% capítulo a capítulo, pero ahora como un único sistema con un
+% presupuesto de error de extremo a extremo.
+
+\section{Metodología de Diseño de un Sistema de Instrumentación}\label{sec:metodologia_diseno}
+% TODO: pasos de diseño: (1) especificar el mensurando y el rango,
+% (2) elegir sensor, (3) diseñar acondicionamiento, (4) elegir ADC/ENOB
+% necesario (enlazar con \label{sec:enob} cap. 8), (5) elegir transmisión
+% y protección (cap. 9-10), (6) validar con presupuesto de error global.
+
+\section{El Presupuesto de Errores de Extremo a Extremo}\label{sec:presupuesto_global}
+% TODO: combinar en cuadratura (RSS) los presupuestos de error parciales
+% ya calculados en los capítulos anteriores:
+%   \label{sec:errores_resistivos} (cap. 3), \label{sec:errores_reactivos}
+%   (cap. 4), \label{sec:errores_opamp} (cap. 5), \label{sec:errores_opticos}
+%   (cap. 7) y el ENOB del ADC (cap. 8) -- mostrar que el error dominante
+%   NO siempre es el del sensor, a veces es el del ADC o el del ruido de
+%   interferencia (cap. 9).
+
+\section{Caso de Estudio 1: Medida de Potencia Óptica en un Enlace de Fibra}\label{sec:caso_fibra}
+% TODO: caso orientado a Telecomunicaciones -- fotodiodo (cap. 7) +
+% amplificador de transimpedancia (enlazar con amp. de carga, cap. 5) +
+% ADC (cap. 8) + lectura remota vía SCPI/PyVISA (cap. 11).
+
+\section{Caso de Estudio 2: Monitorización de Temperatura con Salida 4-20 mA}\label{sec:caso_temperatura}
+% TODO: caso más "industrial" -- RTD/termopar (cap. 3/6) + acondicionamiento
+% + transmisor 4-20mA/HART (cap. 10) + protección ESD (cap. 9).
+
+\section{Resumen}\label{sec:conclusiones_curso}
+% TODO: cierre general del libro (no solo del capítulo). Recapitular el
+% hilo conductor: del sensor físico al dato digital fiable, y cómo el
+% error de medida se acota, se presupuesta y se comunica.

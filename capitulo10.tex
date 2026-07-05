@@ -1,0 +1,45 @@
+% !TeX root = main.tex
+% !TEX program = pdflatex
+
+% =============================================================
+% CAPÍTULO 10 — ESQUELETO (pendiente de redactar)
+% Mapea con el descriptor oficial: "Sensores industriales" (contenido
+% suelto en el descriptor, sin capítulo propio -- se aloja aquí junto al
+% lazo 4-20mA/HART) + RA9 (Configurar un sensor inteligente industrial,
+% modificando sus parámetros con software especializado).
+% Al ser un curso de Telecomunicaciones, priorizar los buses de campo
+% relevantes en instrumentación de laboratorio/RF-óptica sobre la
+% automatización puramente fabril.
+% =============================================================
+
+\chapter{Sensores Industriales, Sensores Inteligentes y Buses Digitales}\label{cap:buses}
+
+% TODO: párrafo introductorio. Motivar el paso de la señal analógica
+% acondicionada (caps. 3-7) y digitalizada (cap. 8) a su transmisión en
+% entornos industriales/de laboratorio, donde el cable largo y el ruido
+% (cap. 9) hacen inviable la transmisión analógica directa.
+
+\section{El Lazo de Corriente 4-20 mA}\label{sec:lazo_420}
+% TODO: por qué corriente y no tensión (inmunidad al ruido inductivo y a
+% la caída de tensión en el cable -- enlazar con el puente alimentado por
+% corriente, \label{sec:puente_wheatstone} cap. 3, mismo argumento físico).
+% Rango vivo (4 mA = 0%, no 0 mA) para distinguir sensor vivo de cable roto.
+
+\section{El Protocolo HART}\label{sec:hart}
+% TODO: HART como señal digital FSK superpuesta al lazo 4-20mA
+% (Highway Addressable Remote Transducer). Coexistencia analógico+digital.
+
+\section{Buses de Comunicación de Sensores: I2C y SPI}\label{sec:i2c_spi}
+% TODO: comparativa I2C (2 hilos, direccionable, half-duplex) vs. SPI
+% (4 hilos, full-duplex, más rápido, sin direccionamiento estándar).
+% Ejemplo típico: sensores MEMS (acelerómetro de \label{fig:mems_acelerometro}
+% cap. 3) que en la práctica exponen su salida vía I2C/SPI en vez de
+% analógica.
+
+\section{Sensores Inteligentes (\textit{Smart Sensors})}\label{sec:smart_sensors}
+% TODO: concepto de sensor con electrónica de acondicionamiento, ADC y
+% microcontrolador integrados en el mismo encapsulado; normativa IEEE 1451
+% (TEDS -- Transducer Electronic Data Sheet) para autodescripción del sensor.
+
+\section{Resumen}\label{sec:resumen_buses}
+% TODO: itemize de cierre, mismo formato que sec:resumen_opamp (cap. 5).

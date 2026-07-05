@@ -1029,9 +1029,9 @@ Es la arquitectura estándar en multí\-metros digitales de precisión. Como se 
         \draw[thick, blue] (0,0) -- (2.2,-1.17) -- (4.18,0);
         \draw[thick, gray, dashed] (0,0) -- (2.2,-0.39) -- (2.86,0);
         \draw[gray, dotted] (2.2,0) -- (2.2,-1.17);
-        \draw[<->] (0,-1.6) -- (2.2,-1.6) node[midway, below] {$T_1$ (fijo)};
-        \draw[<->] (2.2,-1.9) -- (2.86,-1.9) node[midway, below] {$T_2$};
-        \draw[<->] (2.2,-2.2) -- (4.18,-2.2) node[midway, below] {$T_2'$};
+        \draw[<->] (0,-1.6) -- (2.2,-1.6) node[midway, above] {$T_1$ (fijo)};
+        \draw[<->] (2.2,-1.9) -- (2.86,-1.9) node[midway, above] {$T_2$};
+        \draw[<->] (2.2,-2.2) -- (4.18,-2.2) node[midway, above] {$T_2'$};
         \node[blue, right] at (2.2,-1.17) {$V_{in}$ alto};
         \node[gray, right] at (2.2,-0.39) {$V_{in}$ bajo};
     \end{tikzpicture}
@@ -1065,3 +1065,169 @@ En 4º curso, el ingeniero debe saber que un ADC de 16 bits rara vez entrega 16 
 \end{equation}
 
 \marginnote{\textbf{SINAD:} Es la relación entre la señal y la suma de ruido más distorsión. Es el parámetro real que debemos buscar en un \textit{datasheet} para conocer la calidad del componente.}
+
+\subsection{No Linealidad Integral y Diferencial (INL/DNL)}\label{sec:inl_dnl}
+
+Mientras que el ENOB resume el comportamiento dinámico del convertidor en una única cifra, la Comisión Electrotécnica y los fabricantes de silicio definen dos parámetros estáticos que explican \emph{de dónde} proviene esa pérdida de bits: el INL y el DNL~\cite{kester2005dataconversion}.
+
+\begin{description}
+    \item[INL (\textit{Integral Non-Linearity})] Es la máxima desviación de la curva de transferencia real respecto a la recta ideal (trazada entre los puntos de fondo de escala), expresada en fracciones de LSB. Un INL elevado indica que el convertidor introduce una distorsión armónica adicional, independiente del ruido térmico, que también degrada el SINAD y por tanto el ENOB.
+    \item[DNL (\textit{Differential Non-Linearity})] Es la desviación del ancho de \emph{un} escalón de código respecto al valor ideal de 1 LSB. Un DNL de $0$ significa que ese escalón mide exactamente 1 LSB; un DNL positivo indica un escalón más ancho de lo esperado.
+\end{description}
+
+\begin{marginfigure}
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}
+        \begin{axis}[
+            width=\linewidth, height=5cm,
+            xlabel={$V_{in}$}, ylabel={Código Digital},
+            xmin=0, xmax=8, ymin=0, ymax=8,
+            axis lines=left,
+            xtick=\empty, ytick={0,1,2,3,4,5,6,7},
+            grid=both, font=\scriptsize
+        ]
+            % Recta ideal
+            \addplot[thick, gray, dashed, domain=0:8] {x};
+            % Transferencia real: un escalón ancho (DNL+), uno estrecho (DNL-)
+            % y un código perdido (missing code) por DNL <= -1 LSB
+            \addplot[ultra thick, blue, no marks] coordinates {
+                (0,0) (1,0) (1,1) (2.3,1) (2.3,2) (3,2) (3,3)
+                (3,4) (4,4) (4,5) (4.7,5) (4.7,7) (6,7) (6,8) (8,8)
+            };
+            \node[red, font=\tiny] at (axis cs:3.6,3.6) {código perdido};
+            \draw[red,->] (axis cs:3.5,3.4) -- (axis cs:3.1,3.05);
+        \end{axis}
+    \end{tikzpicture}
+    \caption[Efecto del DNL sobre la transferencia real de un ADC.]{Curva de transferencia real (azul) frente a la ideal (gris). El escalón entre los códigos 3 y 4 nunca llega a producirse: es un \emph{código perdido} (\textit{missing code}), síntoma de un DNL $\leq -1$ LSB. Cuando esto ocurre el convertidor deja de ser monótono.}\label{fig:inl_dnl}
+\end{marginfigure}
+
+Como ilustra la Figura~\ref{fig:inl_dnl}, el caso patológico se da cuando $\text{DNL} \leq -1$ LSB: el escalón de código se estrecha hasta desaparecer por completo, y ese código digital nunca aparece en la salida por mucho que se varíe $V_{in}$ (\emph{missing code}). Un convertidor con códigos perdidos deja además de ser \emph{monótono}: al aumentar $V_{in}$ de forma continua, el código digital de salida podría, en teoría, retroceder en algún punto. En instrumentación de control (por ejemplo, un lazo cerrado que usa el ADC para realimentación) la falta de monotonicidad es mucho más grave que un simple error de linealidad, ya que puede inducir oscilaciones en el sistema de control.
+
+\subsection{Errores de Offset y Ganancia}\label{sec:offset_ganancia}
+
+A diferencia del INL y el DNL, que son distorsiones \emph{no lineales} y por tanto no se pueden corregir con una simple recta de calibración, el convertidor real presenta otros dos errores que sí admiten corrección:
+
+\begin{itemize}
+    \item \emph{Error de \textit{Offset}}: Desplazamiento constante de toda la curva de transferencia; el código de salida para $V_{in}=0$ no es $0$. Se corrige restando una constante (calibración a un punto).
+    \item \emph{Error de Ganancia}: Diferencia entre la pendiente real de la curva de transferencia y la ideal. El error crece proporcionalmente con $V_{in}$ y es nulo en el origen. Se corrige multiplicando por un factor de escala (calibración a dos puntos: cero y fondo de escala).
+\end{itemize}
+
+\marginnote{Offset y ganancia se eliminan con una calibración de dos puntos (recta $y=mx+b$). El INL y el DNL, en cambio, son \emph{errores de forma}: ninguna recta de calibración los corrige, solo se reducen mejorando el diseño interno del convertidor.}
+
+\subsection{Ejemplo de Cálculo del ENOB}\label{sec:ejemplo_enob}
+
+Supongamos un ADC nominal de 16 bits cuyo \textit{datasheet} especifica, para una señal de entrada próxima a fondo de escala, un $\text{SINAD} = \qty{74}{\decibel}$. Aplicando la fórmula del ENOB:
+\begin{equation}
+    \text{ENOB} = \frac{74 - 1,76}{6,02} \approx 12,0 \text{ bits}
+\end{equation}
+De los 16 bits nominales que el fabricante marca en el encapsulado, solo 12 son información útil: los 4 bits menos significativos están, en la práctica, dominados por el ruido y la distorsión del propio sistema (ruido térmico, INL/DNL, jitter de apertura del S/H) y no aportan información fiable sobre la señal medida. Es un error común de alumno de 4º asumir que un ADC de 16 bits siempre implica una resolución real de 16 bits; el ENOB, obtenido a partir del SINAD del \textit{datasheet}, es el dato que debe usarse en cualquier presupuesto de errores del sistema.
+
+\begin{table}[ht]
+    \centering
+    \small
+    \begin{tabularx}{\linewidth}{l X X}
+        \toprule
+        \textbf{Parámetro Real} & \textbf{Naturaleza del Error} & \textbf{¿Corregible por calibración?} \\
+        \midrule
+        Offset & Desplazamiento constante de la curva. & Sí (un punto). \\
+        Ganancia & Error de pendiente, proporcional a $V_{in}$. & Sí (dos puntos). \\
+        INL & Desviación de forma respecto a la recta ideal. & No; distorsión armónica. \\
+        DNL & Anchura irregular del escalón de código. & No; puede causar códigos perdidos. \\
+        ENOB & Resolución efectiva real (a partir del SINAD). & No; es un límite del propio silicio. \\
+        \bottomrule
+    \end{tabularx}
+    \caption{Parámetros reales de un ADC y su corregibilidad.}\label{tab:parametros_adc}
+\end{table}
+
+\section{Conversión D/A: El Camino de Vuelta}\label{sec:dac}
+
+En un sistema de instrumentación no toda la información fluye en un único sentido. El generador de funciones que excita un puente de Wheatstone, la fuente de tensión programable de un banco de pruebas o la señal de control que corrige un actuador necesitan el proceso inverso al estudiado hasta ahora: convertir un código digital en una tensión (o corriente) analógica proporcional. De hecho, ya hemos visto el DAC \emph{trabajando por dentro} de un ADC: como se esquematiza en la Figura~\ref{fig:adc_sar}, la arquitectura SAR compara la entrada contra la salida de un DAC interno, y, tal y como se ilustra en la Figura~\ref{fig:adc_sigmadelta}, el modulador Sigma-Delta realimenta un DAC de 1 bit. En esta sección lo tratamos como bloque de salida por derecho propio~\cite{kester2005dataconversion}.
+
+\subsection{Arquitectura R-2R}\label{sec:dac_r2r}
+
+La topología más habitual es la red \textbf{R-2R}: una escalera de resistencias que solo necesita dos valores (\(R\) y \(2R\)), frente al DAC de resistencias ponderadas en binario, que requeriría un valor distinto para cada bit (con una dispersión de hasta \(2^n\) entre el LSB y el MSB, inviable de fabricar con precisión a partir de unos 8--10 bits). En la red R-2R, cada bit del registro digital gobierna un conmutador que dirige su rama hacia $V_{ref}$ o hacia tierra; la suma ponderada de corrientes resultante se convierte en tensión mediante un amplificador operacional en configuración de transimpedancia.
+
+\begin{marginfigure}
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}[american, scale=0.72]
+        \ctikzset{resistors/scale=0.55, amplifiers/scale=0.75, amplifiers/plus={\tiny $+$}, amplifiers/minus={\tiny $-$}, switches/scale=0.55}
+
+        % Escalera principal: todas las resistencias en serie valen R
+        \draw (0,0) coordinate (n0) to[R, l=$R$] (0,2.5) coordinate (n1);
+        \draw (0,2.5) to[R, l=$R$] (0,5) coordinate (n2);
+        \draw (0,5) to[R, l_=$2R$] ++(0,2.0) node[ground,yscale=-1]{};
+
+        % Rama del bit 0 (LSB)
+        \draw (n0) to[R, l=$2R$] ++(1.9,0) coordinate (sw0);
+        \node[cute spdt down, anchor=in] (s0) at (sw0) {};
+        \draw (s0.out 1) -- ++(0.35,0.3) node[ocirc, left]{} node[right] {$V_{ref}$};
+        \draw (s0.out 2) -- ++(0.35,-0.3) node[ocirc, left]{} node[right] {$0$};
+        \node[left=0.15cm] at (n0) {\small $b_0$};
+        \node[circ] at (n0) {};
+
+        % Rama del bit 1
+        \draw (n1) to[R, l=$2R$] ++(1.9,0) coordinate (sw1);
+        \node[cute spdt down, anchor=in] (s1) at (sw1) {};
+        \draw (s1.out 1) -- ++(0.35,0.3) node[ocirc, left]{} node[right] {$V_{ref}$};
+        \draw (s1.out 2) -- ++(0.35,-0.3) node[ocirc, left]{} node[right] {$0$};
+        \node[left=0.15cm] at (n1) {\small $b_1$};
+        \node[circ] at (n1) {};
+
+        % Rama del bit 2 (MSB)
+        \draw (n2) to[R, l=$2R$] ++(1.9,0) coordinate (sw2);
+        \node[cute spdt down, anchor=in] (s2) at (sw2) {};
+        \draw (s2.out 1) -- ++(0.35,0.3) node[ocirc, left]{} node[right] {$V_{ref}$};
+        \draw (s2.out 2) -- ++(0.35,-0.3) node[ocirc, left]{} node[right] {$0$};
+        \node[left=0.15cm] at (n2) {\small $b_2$};
+        \node[circ] at (n2) {};
+
+        % Amplificador de transimpedancia, colgando por debajo de n0
+        \draw (n0) to[short] ++(0,-1.9) node[op amp, anchor=-, scale=0.75] (oa) {};
+        \draw (oa.+) node[ground]{};
+        \draw (oa.out) to[R, l=$R_f$] ([yshift=1.5cm]oa.out) coordinate(FB) --(FB -| oa.-) node[circ] {};
+        \draw (oa.out) to[short, -o] ++(0.8,0) node[right] {$V_{out}$};
+        \node[circ] at (oa.out) {};
+    \end{tikzpicture}
+    \caption[Arquitectura de un DAC de red R-2R.]{Arquitectura de un DAC de red R-2R (simplificado a 3 bits). Cada conmutador dirige la rama de su bit hacia $V_{ref}$ (`1' lógico) o hacia tierra (`0' lógico); la escalera de resistencias $R$/$2R$ pondera la contribución de cada bit en potencias de 2, y el amplificador de transimpedancia convierte la corriente resultante en $V_{out}$.}\label{fig:dac_r2r}
+\end{marginfigure}
+
+\paragraph{Por qué precisamente $R$ y $2R$}
+La elección de estos dos valores concretos no es arbitraria: es lo que permite que la escalera divida la corriente exactamente a la mitad en cada nodo, sin necesidad de calcular ni fabricar una resistencia distinta por bit. La propiedad clave es que, mirando \emph{hacia arriba} desde cualquier nodo de la escalera (hacia el resto de bits más significativos), la red siempre presenta una resistencia equivalente de $2R$, exactamente igual a la de la rama del propio bit. Esto se demuestra por recurrencia desde el extremo superior: la resistencia de terminación es $2R$ a tierra; en el nodo $b_2$, esa terminación queda en paralelo con la rama $2R$ del propio conmutador, dando $2R \parallel 2R = R$; al sumarle en serie la resistencia $R$ que baja hasta $b_1$, se obtiene de nuevo $R + R = 2R$ mirando desde $b_1$ hacia arriba --- idéntica a la rama $2R$ de $b_1$. El patrón se repite en cada nodo hasta llegar al amplificador.
+
+\marginnote{\textbf{Consecuencia práctica:} como en cada nodo coinciden dos resistencias equivalentes de $2R$ (la rama del bit y el resto de la escalera), la corriente que aporta cada conmutador se divide exactamente entre dos por cada nodo que debe atravesar hasta llegar al amplificador. El bit más significativo ($b_2$), al estar más cerca del amplificador, apenas se divide; el menos significativo ($b_0$), al tener que atravesar toda la escalera, se divide varias veces. Así se reproduce el peso binario ($2^0, 2^1, 2^2, \ldots$) de cada bit usando un único valor de resistencia (y su doble), sin depender de la precisión absoluta de $R$, solo de que todas las resistencias del mismo tipo sean iguales entre sí.}
+
+Esta es también la razón por la que la resistencia de terminación del extremo superior debe valer $2R$ y conectarse a tierra (Figura~\ref{fig:dac_r2r}): si faltara, o si tuviera otro valor, el nodo $b_2$ dejaría de ver $2R$ hacia arriba y su bit quedaría mal ponderado respecto a los demás. Es, además, la misma razón por la que los conmutadores dirigen su rama entre \emph{tierra real} y $V_{ref}$ y nunca se dejan en circuito abierto: un contacto abierto tendría resistencia infinita, no $2R$, y rompería la propiedad recursiva en ese nodo.
+
+Una alternativa de bajo coste, muy usada cuando no se necesita gran ancho de banda (por ejemplo, para generar una referencia de continua ajustable por software), es el DAC por \textbf{PWM}: se genera un tren de pulsos cuyo ciclo de trabajo (\textit{duty cycle}) codifica el valor digital, y un simple filtro paso-bajo RC recupera la componente continua promedio.
+
+Al igual que ocurría con el ADC, existen otras arquitecturas de DAC que quedan fuera del alcance de este curso, pero conviene al menos conocer su existencia y su campo de aplicación natural. Ambas arquitecturas se tratan en detalle en la referencia~\cite{kester2005dataconversion}. Estas son las más habituales:
+\begin{itemize}
+    \item \emph{DAC Sigma-Delta}: es el equivalente, en generación de señal, del modulador Sigma-Delta que ya vimos para el ADC, tal y como se ilustra en la Figura~\ref{fig:adc_sigmadelta}. Un DAC de 1 bit conmuta a muy alta frecuencia (sobremuestreo) generando un tren de pulsos cuya densidad de unos codifica la señal; un filtro de reconstrucción analógico recupera la componente continua. Al prescindir de una escalera de resistencias apareadas, consigue una linealidad excelente con muy bajo coste, lo que la convierte en la arquitectura dominante en audio (reproductores de CD, tarjetas de sonido, \textit{streaming}).
+    \item \emph{DAC de conmutación de corriente (\textit{current-steering})}: en lugar de conmutar tensiones sobre una red resistiva, cada bit gobierna una fuente de corriente que se \emph{dirige} hacia la salida o hacia tierra mediante un par diferencial de transistores. Al no depender de un amplificador operacional realimentado, alcanza velocidades de conversión de cientos de \unit{MHz} a varios \unit{GHz}, por lo que es la arquitectura estándar en los generadores de forma de onda arbitraria (\textit{AWG}) y los sistemas de síntesis digital directa (DDS) de un banco de instrumentación de RF.
+\end{itemize}
+
+
+\subsection{Parámetros Reales de un DAC}\label{sec:dac_parametros}
+
+Igual que el ADC, el DAC real se caracteriza por un INL y un DNL propios (misma definición que en la Sección~\ref{sec:inl_dnl}, aplicada ahora a la curva de transferencia código-a-tensión), además de dos parámetros dinámicos específicos de la conversión D/A:
+
+\begin{itemize}
+    \item \emph{Tiempo de Establecimiento (\textit{Settling Time})}: Tiempo que tarda $V_{out}$ en entrar y permanecer dentro de una banda de error (típicamente $\pm 1/2$ LSB) tras un cambio de código. Limita la máxima frecuencia de actualización del DAC.
+    \item \emph{Impulso de \textit{Glitch}}: Pico transitorio de tensión que aparece cuando varios bits conmutan a la vez y sus tiempos de conmutación no están perfectamente sincronizados (el caso peor es el cambio de código $011\ldots1 \to 100\ldots0$). Se cuantifica en \unit{nV\text{-}s} y es crítico en aplicaciones de generación de señal donde ese pico se traduce en distorsión armónica audible o visible.
+\end{itemize}
+
+\marginnote{\textbf{Aplicación típica en telecomunicaciones:} Los generadores de funciones y de formas de onda arbitrarias (\textit{AWG}) de un banco de instrumentación (Capítulo~\ref{cap:instrumentacion_virtual}) son, en esencia, un DAC de alta velocidad seguido de un filtro de reconstrucción \textit{antialiasing} de salida --- la contraparte exacta del filtro \textit{antialiasing} de entrada visto en el Capítulo~\ref{cap:opamps}.}
+
+\section{Resumen}\label{sec:resumen_daq}
+
+En este capítulo se ha recorrido la cadena completa de adquisición de datos, desde la señal analógica continua hasta el código digital que finalmente procesa el sistema, y de vuelta:
+
+\begin{itemize}
+    \item \emph{Muestreo y Retención}: El teorema de Nyquist-Shannon exige muestrear a más del doble de la frecuencia máxima de la señal para evitar el \textit{aliasing}; el circuito de \textit{Sample and Hold} congela la muestra durante la conversión, y su tiempo de apertura y su \textit{jitter} limitan la precisión con señales rápidas.
+    \item \emph{Cuantificación}: El paso de una magnitud continua a un número finito de niveles introduce un error inevitable de $\pm Q/2$, que se comporta como un ruido de fondo y fija el límite teórico de SNR en $6{,}02\cdot n + 1{,}76$ dB.
+    \item \emph{Arquitecturas ADC}: No existe el convertidor universal. Flash, SAR, Sigma-Delta e Integración ocupan regiones distintas del compromiso velocidad-resolución-consumo (Tabla~\ref{tab:comparativa_adc}), y la elección depende de la aplicación concreta.
+    \item \emph{Parámetros Reales y ENOB}: El número de bits nominal de un ADC es solo una etiqueta comercial. El ENOB, calculado a partir del SINAD real del \textit{datasheet}, junto con el INL, el DNL y los errores de offset/ganancia (Tabla~\ref{tab:parametros_adc}), son los datos que determinan la resolución efectiva que realmente llega al sistema de instrumentación.
+    \item \emph{Conversión D/A}: El proceso inverso, dominado por la red R-2R, comparte con el ADC los conceptos de INL/DNL pero añade limitaciones propias (tiempo de establecimiento, \textit{glitch}) relevantes en la generación de señales de test.
+\end{itemize}

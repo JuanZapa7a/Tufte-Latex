@@ -1,0 +1,56 @@
+% !TeX root = main.tex
+% !TEX program = pdflatex
+
+% =============================================================
+% CAPÍTULO 9 — ESQUELETO (pendiente de redactar)
+% Mapea con el descriptor oficial: "Protección frente a interferencias
+% y descargas electrostáticas" + Resultado de Aprendizaje RA6
+% (Clasificar los principales métodos de transmisión de señal detectando
+% las posibles fuentes de interferencias y proponiendo técnicas para reducirlas).
+% Referencias candidatas: Ott, Henry W. "Noise Reduction Techniques in
+% Electronic Systems" (Wiley) — añadir a references.bib cuando se redacte.
+% =============================================================
+
+\chapter{Ruido e Interferencias}\label{cap:ruido}
+
+% TODO: párrafo introductorio. Contextualizar por qué, tras ver sensores y
+% acondicionamiento (caps. 3-7) y el ADC (cap. 8), el ruido/interferencia es
+% el último eslabón que limita la resolución REAL del sistema completo
+% (enlaza con el concepto de ENOB visto en sec:enob del capítulo 8).
+
+\section{Fuentes y Clasificación del Ruido}\label{sec:fuentes_ruido}
+% TODO: ruido intrínseco (térmico/Johnson-Nyquist, shot, 1/f o flicker)
+% frente a ruido extrínseco/interferencia (acoplado desde el entorno).
+% Enlazar con \label{sec:noise_floor} y \label{sec:snr} del capítulo 2
+% (suelo de ruido, SNR) para no repetir contenido ya dado.
+
+\section{Mecanismos de Acoplamiento de Interferencias}\label{sec:acoplamientos}
+% TODO: los cuatro mecanismos clásicos:
+%   - Acoplamiento capacitivo (campo eléctrico, dV/dt alto)
+%   - Acoplamiento inductivo (campo magnético, dI/dt alto, bucles de masa)
+%   - Acoplamiento por impedancia común (tierras compartidas)
+%   - Acoplamiento por radiación (RF, campo lejano)
+% Ejemplo numérico recomendado: el caso del zumbido de red de 50 Hz ya
+% introducido en \label{subsec:ejemplo_zumbido} (capítulo 3) — referenciarlo,
+% no duplicarlo.
+
+\section{Técnicas de Apantallamiento (Blindaje)}\label{sec:apantallamiento}
+% TODO: blindaje electrostático (jaula de Faraday, conexión del blindaje
+% a un único extremo para evitar bucles) vs. blindaje magnético a baja
+% frecuencia (mu-metal, trenzado de cables -- twisted pair).
+
+\section{Estrategias de Conexión a Tierra}\label{sec:tierras}
+% TODO: tierra en un único punto (single-point) vs. múltiples puntos
+% (multi-point), el problema del "bucle de tierra" (ground loop) y su
+% solución mediante aislamiento galvánico (optoacopladores -- enlazar con
+% \label{sub:optoacopladores} del capítulo 7 -- o amplificadores de
+% aislamiento).
+
+\section{Protección Frente a Descargas Electrostáticas (ESD)}\label{sec:esd}
+% TODO: modelo del cuerpo humano (HBM), normativa IEC 61000-4-2, y
+% componentes de protección típicos (TVS, varistores) en las entradas de
+% un sistema de instrumentación.
+
+\section{Resumen}\label{sec:resumen_ruido}
+% TODO: itemize de cierre, mismo formato que sec:resumen_opamp (cap. 5)
+% y sec:resumen (cap. 7).

@@ -340,7 +340,7 @@ En el Capítulo~\ref{cap:caracteristicas_sistemas_medida}, analizamos sistemas m
 
 El mismo comportamiento de filtrado puede implementarse como un filtro activo sin inductores, usando un amplificador operacional y sólo resistencias y condensadores. El filtro Sallen-Key de la Figura~\ref{fig:sallen_key} es un ejemplo típico de esta conversión, manteniendo la respuesta de segundo orden y facilitando el diseño en instrumentación.
 
-El filtro Sallen-Key de segundo orden (Figura~\ref{fig:sallen_key}) se basa en una configuración de \emph{fuente de tensión controlada por tensión} (VCVS). Sus componentes principales son:
+Como se esquematiza en la Figura~\ref{fig:sallen_key}, el filtro Sallen-Key de segundo orden se basa en una configuración de \emph{fuente de tensión controlada por tensión} (VCVS). Sus componentes principales son:
 \begin{itemize}
     \item \emph{Red RC ($R_1, R_2, C_1, C_2$)}: Determinan la respuesta en frecuencia y el amortiguamiento.
     \item \emph{Amplificador Operacional}: Configurado como amplificador no inversor, proporciona ganancia y aísla la carga de la red de filtrado.
@@ -635,7 +635,7 @@ En instrumentación de precisión, el amplificador operacional ideal es una abst
 \marginnote{\textbf{Selección de componentes:} Para un sensor de alta impedancia (pH, fotodiodos), elegimos operacionales con entrada \emph{FET} o \emph{CMOS} debido a sus extremadamente bajas corrientes de polarización ($I_b$). Para señales de muy baja tensión (termopares, galgas), preferimos operacionales \emph{Bipolares} de bajo ruido o tipo \em{phChopper} (que minimizan la deriva y el offset) para mantener la integridad de la señal.
 }
 
-\section{Resumen del Capítulo}\label{sec:resumen_opamp}
+\section{Resumen}\label{sec:resumen_opamp}
 
 En este capítulo se han analizado las etapas fundamentales para transformar una señal analógica cruda en una magnitud procesable por un sistema digital:
 

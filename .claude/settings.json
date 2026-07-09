@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 /tmp/claude-1000/-home-juan-Documentos-Tufte-Latex/5d72c4fa-7d0b-4554-8c35-e9e856d73b5a/scratchpad/remove_midrule.py capitulo1.tex capitulo2.tex capitulo3.tex capitulo4.tex capitulo5.tex capitulo6.tex capitulo7.tex capitulo8.tex capitulo9.tex)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)"
+    ]
+  }
+}

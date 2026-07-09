@@ -13,13 +13,91 @@
 
 \chapter{Ruido e Interferencias}\label{cap:ruido}
 
-A lo largo de los Capítulos~\ref{cap:resistivos} a~\ref{cap:opticos} hemos perseguido un mismo objetivo: elegir el sensor más adecuado y acondicionar su señal con amplificadores y filtros de precisión para minimizar el error entre la magnitud física y la tensión que finalmente llega al conversor. El Capítulo~\ref{cap:daq} cerraba ese proceso con la digitalización, y su ENOB (Sección~\ref{sec:enob}) nos recordaba que el número de bits nominal de un ADC rara vez coincide con el número de bits real. Pero ninguna de estas decisiones sobrevive si, en el camino entre el sensor y el ADC, la señal recoge el ruido y las interferencias del propio entorno: un cable mal apantallado o un bucle de tierra puede introducir, en unos pocos centímetros de cableado, más error del que hemos conseguido eliminar con todo el diseño anterior. Este capítulo cierra, por tanto, el eslabón que faltaba: de dónde procede el ruido, cómo se acopla al circuito, y qué técnicas --blindaje, conexión a tierra, filtrado y protección frente a descargas electrostáticas-- permiten que el ENOB calculado en el papel se mantenga también cuando el circuito está montado y funcionando~\cite{ott1988noise}.
+A lo largo de los Capítulos~\ref{cap:resistivos} a~\ref{cap:opticos} hemos perseguido un mismo objetivo: elegir el sensor más adecuado y acondicionar su señal con amplificadores y filtros de precisión para minimizar el error entre la magnitud física y la tensión que finalmente llega al conversor. El Capítulo~\ref{cap:daq} cerraba ese proceso con la digitalización, y su ENOB (Sección~\ref{sec:enob}) nos recordaba que el número de bits nominal de un ADC rara vez coincide con el número de bits real. Pero ninguna de estas decisiones sobrevive si, en el camino entre el sensor y el ADC, la señal recoge el ruido y las interferencias del propio entorno: un cable mal apantallado o un bucle de tierra puede introducir, en unos pocos centímetros de cableado, más error del que hemos conseguido eliminar con todo el diseño anterior. Este capítulo cierra, por tanto, el eslabón que faltaba: de dónde procede el ruido, cómo se acopla al circuito, y qué técnicas --blindaje, conexión a tierra, filtrado y protección frente a descargas electrostáticas-- permiten que el ENOB calculado teóricamente se mantenga también cuando el circuito está montado y funcionando~\cite{ott1988noise}.
 
 \section{Fuentes y Clasificación del Ruido}\label{sec:fuentes_ruido}
-% TODO: ruido intrínseco (térmico/Johnson-Nyquist, shot, 1/f o flicker)
-% frente a ruido extrínseco/interferencia (acoplado desde el entorno).
-% Enlazar con \label{sec:noise_floor} y \label{sec:snr} del capítulo 2
-% (suelo de ruido, SNR) para no repetir contenido ya dado.
+
+En el Capítulo~\ref{cap:caracteristicas_sistemas_medida} definimos el suelo de ruido (Sección~\ref{sec:noise_floor}) y la relación señal-ruido (Sección~\ref{sec:snr}) como los límites que, junto a la saturación, acotan el rango dinámico de cualquier sistema de medida. Lo que no hicimos entonces fue distinguir \emph{de dónde} procede ese ruido, una pregunta que condiciona por completo la estrategia para reducirlo. Conviene separar dos familias de origen completamente distinto:
+
+\begin{itemize}
+    \item \emph{Ruido intrínseco}: generado por los propios procesos físicos de conducción en los componentes del circuito (resistencias, semiconductores). Es de naturaleza aleatoria (estocástica), está siempre presente --incluso en un circuito perfectamente apantallado y aislado-- y no puede eliminarse, solo minimizarse mediante la elección de componentes, temperatura y ancho de banda.
+    \item \emph{Ruido extrínseco o interferencia}: acoplado desde el entorno a través de mecanismos físicos concretos (Sección~\ref{sec:acoplamientos}). A menudo es determinista o cuasi-periódico (el zumbido de red de la Sección~\ref{subsec:ejemplo_zumbido} es el ejemplo canónico) y, a diferencia del ruido intrínseco, sí puede reducirse drásticamente --en el límite, eliminarse-- con un buen diseño: blindaje, conexión a tierra y filtrado son las tres técnicas que ocupan el resto de este capítulo.
+\end{itemize}
+
+\subsection{Ruido Intrínseco}\label{sub:ruido_intrinseco}
+
+Dentro del ruido intrínseco conviven tres mecanismos con orígenes físicos distintos, resumidos en la Tabla~\ref{tab:ruido_intrinseco}.
+
+
+
+\paragraph{Ruido Térmico (Johnson-Nyquist)}
+Es la agitación aleatoria de los portadores de carga por efecto de la temperatura en cualquier elemento resistivo. Su densidad espectral de potencia es blanca (constante con la frecuencia) y ya cuantificamos su tensión eficaz en la ecuación~\eqref{eq:noise_floor} del Capítulo~\ref{cap:caracteristicas_sistemas_medida}: $N_f = \sqrt{4kTR\Delta f}$. No depende de que circule corriente por el componente --está presente incluso con la resistencia en circuito abierto-- y es, salvo en aplicaciones criogénicas, el límite de ruido más difícil de evitar.
+
+\begin{table}
+    \centering
+    \begin{tabularx}{\linewidth}{@{}l>{\centering\arraybackslash}Xcc@{}}
+        \toprule
+        \textbf{Tipo} & \shortstack{\textbf{Origen}\\\textbf{físico}} & \shortstack{\textbf{Densidad}\\\textbf{espectral}} & \textbf{¿Requiere $I$?} \\
+        \midrule
+        Térmico (Johnson) & Agitación térmica en $R$ & Blanca & No \\
+        Disparo (\textit{shot}) & Cruce discreto de barrera & Blanca & Sí \\
+        Flicker ($1/f$) & Trampas superficiales & $\propto 1/f$ & Sí (típ.) \\
+        \bottomrule
+    \end{tabularx}
+    \caption[Mecanismos de ruido intrínseco.]{Comparación de los tres mecanismos de ruido intrínseco. El térmico está presente en cualquier resistencia con solo elevar su temperatura, sin necesidad de corriente; el de disparo y el de flicker, en cambio, solo aparecen cuando circula corriente $I$ por una unión semiconductora. Térmico y disparo comparten densidad espectral blanca (constante con la frecuencia), mientras que el flicker crece como $1/f$ y domina únicamente por debajo de la frecuencia de esquina $f_c$ (Figura~\ref{fig:psd_ruido}).}\label{tab:ruido_intrinseco}
+\end{table}
+
+\paragraph{Ruido de Disparo (\textit{Shot Noise})}
+A diferencia del térmico, este ruido \emph{sí} requiere corriente: aparece cuando los portadores de carga cruzan una barrera de potencial de forma discreta (la unión de un diodo o de un transistor bipolar), de modo que la corriente instantánea fluctúa alrededor de su valor medio $I_{DC}$. Su valor eficaz es
+\begin{equation}\label{eq:shot_noise}
+    I_n = \sqrt{2 q I_{DC} \Delta f}
+\end{equation}
+donde $q$ es la carga del electrón. Como el térmico, tiene densidad espectral blanca; a diferencia del térmico, escala con la corriente de polarización, por lo que es especialmente relevante en fotodiodos y otros sensores de baja corriente (Capítulo~\ref{cap:opticos}).
+
+\paragraph{Ruido de Flicker o $1/f$}
+Es un ruido de origen menos fundamental --ligado a imperfecciones y trampas en la superficie de los semiconductores-- y de naturaleza empírica: su densidad espectral de potencia crece aproximadamente como $1/f$ al bajar en frecuencia, en vez de ser constante. Por ello domina a bajas frecuencias y resulta prácticamente irrelevante a partir de la \emph{frecuencia de esquina} $f_c$, punto en el que su densidad espectral iguala a la del ruido blanco (térmico y de disparo), como se ilustra en la Figura~\ref{fig:psd_ruido}. Es el motivo por el que las medidas de continua o cuasiestática (galgas extensométricas, termopares) son especialmente sensibles a la deriva de baja frecuencia, y por el que técnicas como el \textit{chopping} desplazan la señal útil a una frecuencia portadora por encima de $f_c$.
+
+\begin{marginfigure}
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}
+        \begin{axis}[
+            width=\linewidth, height=5.5cm,
+            xlabel={Frecuencia (Hz)},
+            ylabel={DEP (dB)},
+            xmode=log, ymode=linear,
+            xmin=1, xmax=1e6,
+            ymin=-10, ymax=30,
+            axis lines=left,
+            grid=both,
+            grid style={line width=.1pt, draw=gray!10},
+            major grid style={line width=.2pt,draw=gray!30},
+            font=\scriptsize,
+            xtick={1,1e2,1e4,1e6},
+            every axis y label/.style={at=(current axis.above origin), anchor=south},
+            every axis x label/.style={at=(current axis.right of origin), anchor=west},
+        ]
+            % Ruido 1/f: pendiente -10 dB/dec en escala log-log equivalente
+            \addplot[thick, red, domain=1:1000, samples=100] {20 - 10*log10(x)};
+            % Suelo de ruido blanco (térmico + shot)
+            \addplot[thick, blue, domain=1:1e6] {-10};
+            % Frecuencia de esquina
+            \draw[dashed, gray] (axis cs:1000,-10) -- (axis cs:1000,30);
+            \node[gray, font=\tiny, anchor=south west] at (axis cs:1000,15) {$f_c$};
+            \node[red!70!black, font=\tiny, anchor=south] at (axis cs:5,25) {$1/f$};
+            \node[blue!70!black, font=\tiny, anchor=south west] at (axis cs:1e4,-10) {Ruido blanco};
+        \end{axis}
+    \end{tikzpicture}
+    \caption[Densidad espectral de potencia del ruido intrínseco.]{Densidad espectral de potencia (DEP) del ruido intrínseco. A baja frecuencia domina el ruido de flicker ($1/f$); por encima de la frecuencia de esquina $f_c$ predomina el suelo de ruido blanco (térmico y de disparo).}\label{fig:psd_ruido}
+\end{marginfigure}
+
+
+
+\subsection{Ruido Extrínseco o Interferencia}\label{sub:ruido_extrinseco}
+
+Frente a los tres mecanismos anteriores --propios del circuito y, por tanto, irreducibles más allá de cierto límite físico-- el ruido extrínseco tiene un origen externo: procede de otros circuitos, máquinas o fenómenos electromagnéticos del entorno y llega al sistema de medida a través de un acoplamiento no deseado con el cableado o el propio circuito impreso. A diferencia del ruido intrínseco, suele ser determinista o cuasi-periódico --el ejemplo más habitual es el zumbido de \SI{50}{\hertz} de la red eléctrica ya visto en la Sección~\ref{subsec:ejemplo_zumbido}-- y, sobre todo, \emph{evitable}: no está impuesto por la física del componente, sino por decisiones de diseño (trazado de pistas, blindaje, tierras, filtrado) que si se toman correctamente pueden reducirlo a niveles despreciables frente al ruido intrínseco. La Sección~\ref{sec:acoplamientos} detalla los cuatro mecanismos por los que esta interferencia llega al circuito, y las Secciones~\ref{sec:apantallamiento} a~\ref{sec:filtrado_emi} las técnicas para combatirlos.
+
+\marginnote{\textbf{La pregunta clave:} ante un ruido medido en el laboratorio, lo primero es distinguir si es intrínseco o extrínseco. Si desaparece al apagar un equipo cercano o al reorientar un cable, es interferencia acoplada y tiene solución de diseño. Si persiste en un circuito aislado y apantallado, es ruido intrínseco y solo cabe reducir $R$, $T$ o $\Delta f$, o cambiar de componente.}
 
 \section{Mecanismos de Acoplamiento de Interferencias}\label{sec:acoplamientos}
 % TODO: los cuatro mecanismos clásicos:

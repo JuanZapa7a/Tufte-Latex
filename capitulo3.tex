@@ -807,7 +807,7 @@ Es la configuración de máxima precisión, obligatoria en laboratorios y metrol
 %               to[R, l=$R_s$, color=blue] (2.5,3)
 %               -- (2,3) to[R, l=$R_w$] (0.5,3)
 %               to[short, *-o] (0,3) node[left]{GND};
-%         \node at (1.25, 2.5) {\textbf{2 Hilos}};
+%         \node at (1.25, 2.5) {\emph{2 Hilos}};
 
 %         % --- 3 HILOS ---
 %         \begin{scope}[yshift=-3.5cm]
@@ -815,7 +815,7 @@ Es la configuración de máxima precisión, obligatoria en laboratorios y metrol
 %             \draw (0,3.5) node[left]{$V_{out}$} to[short, o-] (2,3.5) -- (A);
 %             \draw (A) to[R, l=$R_s$, color=blue] (2,2.5) coordinate (B);
 %             \draw (B) to[R, l=$R_w$] (0.5,2.5) to[short, -o] (0,2.5) node[left]{$R_2$};
-%             \node at (1, 1.8) {\textbf{3 Hilos}};
+%             \node at (1, 1.8) {\emph{3 Hilos}};
 %         \end{scope}
 
 %         % --- 4 HILOS ---
@@ -825,7 +825,7 @@ Es la configuración de máxima precisión, obligatoria en laboratorios y metrol
 %             \draw (C) to[R, l=$R_s$, color=blue] (2,2.5) coordinate (D);
 %             \draw (0,3) node[left]{$I^-$} to[short, o-] (0.5,3) to[R, l=$R_w$] (2,3) -- (D);
 %             \draw (0,2.5) node[left]{$V^-$} to[short, o-] (1.5,2.5) -- (1.5,3);
-%             \node at (1, 1.8) {\textbf{4 Hilos}};
+%             \node at (1, 1.8) {\emph{4 Hilos}};
 %         \end{scope}
 %     \end{tikzpicture}
 %     \caption{Comparativa de conexiones para RTD. El sistema de 4 hilos (Kelvin) es el único que garantiza independencia total de la longitud del cable.}\label{fig:conexiones_detalladas}
@@ -876,10 +876,10 @@ en cada caso. Desde el punto de vista de la ingeniería de sistemas, la elecció
     \caption[Comparativa de configuraciones de conexión para sensores RTD.]{Comparativa de configuraciones de conexión para sensores RTD.\ El error residual se expresa en términos de tensión medida adicional debido a los cables.\protect\label{tab:resumen_hilos}}
     %reducir ancho intercolumnas en tabularx
     \setlength{\tabcolsep}{3pt} % Reducimos el espacio entre columnas
-    \small
     \begin{tabularx}{\linewidth}{l l l X}
         \toprule 
-        \textbf{Conf.} & \textbf{Error($V$)} & \textbf{Simetría} & \textbf{Aplicación Típica} \\ \midrule
+        \textbf{Conf.} & \textbf{Error($V$)} & \textbf{Simetría} & \textbf{Aplicación Típica} \\
+        \midrule
         \emph{2 hilos} & $I \cdot (2R_w)$ & No requerida & Distancias cortas (< \qty{3}{m}) y baja precisión. \\ 
         \emph{3 hilos} & $I \cdot (R_{w1} - R_{w3})$ &
         \emph{Crítica} & Estándar industrial (PLCs, control de procesos). \\ 
@@ -1245,7 +1245,6 @@ Es un efecto mecánico-cuántico observado en estructuras de multicapas delgadas
 
 \begin{table}[!htbp]
     \centering
-    \small
     %reducir ancho intercolumnas en tabularx
     \setlength{\tabcolsep}{3pt} % Reducimos el espacio entre columnas
     \begin{tabularx}{\linewidth}{l l X}
@@ -1340,7 +1339,7 @@ Las señales originales pueden reconstruirse a partir de estos modos como:
                 node[pos=0.25, left] {$V_{dm}$};
         \end{axis}
     \end{tikzpicture}
-    \caption{Visualización de señales en modo diferencial. La información útil ($V_{dm}$) es la separación entre las trazas roja y azul. El ruido de modo común (gris) afecta a ambos hilos por igual y es cancelado mediante la resta diferencial.}\label{fig:modos_visual}
+    \caption[Visualización de señales en modo diferencial.]{Visualización de señales en modo diferencial. La información útil ($V_{dm}$) es la separación entre las trazas roja y azul. El ruido de modo común (gris) afecta a ambos hilos por igual y es cancelado mediante la resta diferencial.}\label{fig:modos_visual}
 \end{marginfigure}
 
 \subsection{Ventajas de la Medida Diferencial}
@@ -1545,9 +1544,7 @@ La elección de la configuración del puente de Wheatstone representa un comprom
 
 \begin{table}[ht]
     \centering
-    \small
-    \caption{Comparativa de configuraciones del puente de Wheatstone.}\label{tab:resumen_puentes}
-    %\footnotesize
+    \caption[Configuraciones del puente de Wheatstone.]{Comparativa de configuraciones del puente de Wheatstone.}\label{tab:resumen_puentes}
     \setlength{\tabcolsep}{3pt} % Reducimos el espacio entre columnas
     \begin{tabularx}{\linewidth}{l l l X}
         \toprule
@@ -1561,7 +1558,7 @@ La elección de la configuración del puente de Wheatstone representa un comprom
     
 \end{table}
 
-\marginnote[0em]{\textbf{Problema de Célula de Carga:}
+\marginnote[0em]{\emph{Problema de Célula de Carga:}
     Un puente completo de galgas ($\qty{350}{\Omega}$) se alimenta con $V_{exc} = \qty{10}{V}$. Si la sensibilidad del sensor es $\qty{2}{mV/V}$ a fondo de escala, calcule la variación $\Delta R$ de cada galga.
     
     \emph{1. Tensión de salida a FS:} \\
@@ -1601,7 +1598,6 @@ La Tabla~\ref{tab:resumen_errores_resistivos} sintetiza los principales retos a 
 
 \begin{table}[ht]
     \centering
-    \small
     \caption[Clasificación y mitigación de errores en sistemas de medida resistivos.]{Clasificación y mitigación de errores en sistemas de medida resistivos.}\label{tab:resumen_errores_resistivos}
     \setlength{\tabcolsep}{3pt} % Reducimos el espacio entre columnas
     \begin{tabularx}{\linewidth}{l X X}
@@ -1609,15 +1605,10 @@ La Tabla~\ref{tab:resumen_errores_resistivos} sintetiza los principales retos a 
         \textbf{Fuente de Error} & \textbf{Manifestación en Medida} & \textbf{Técnica de Mitigación} \\
         \midrule
         Resistencia de hilos & Desplazamiento del cero (\textit{offset}) y deriva térmica del cableado. & Conexión a 3 o 4 hilos (Kelvin). \\
-        \midrule
         Autocalentamiento & Error sistemático positivo debido a la potencia disipada ($I^2R$). & Limitar $I_{exc} \le \unit{1}{mA}$ o usar medida pulsada. \\
-        \midrule
         Efecto de Carga & No linealidad cóncava por la impedancia de entrada finita del equipo. & Uso de amplificadores de instrumentación ($Z_{in} > \unit{10}{G\Omega}$). \\
-        \midrule
         No linealidad del puente & Error de escala al alejarse del punto de equilibrio (cuarto de puente). & Alimentación por fuente de corriente o corrección algorítmica. \\
-        \midrule
         Tolerancia y Drift & Incertidumbre en el valor nominal de las resistencias del puente. & Calibración de cero y uso de resistencias de bajo coeficiente térmico. \\
-        \midrule
         Ruido Térmico & Límite fundamental de resolución (\textit{flicker} en los bits del ADC). & Reducción del ancho de banda y filtrado analógico paso bajo. \\
         \bottomrule
     \end{tabularx}

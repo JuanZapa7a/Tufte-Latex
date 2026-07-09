@@ -83,10 +83,10 @@ Es vital que se utilice la terminología profesional, especialmente en un contex
     \caption[Representación del Error de Medida.]{Representación del Error de Medida: diferencia entre el valor medido y el valor verdadero. El error puede ser positivo o negativo. El error es la diferencia entre el valor medido y el valor verdadero. }\label{fig:error_medida}
     \end{marginfigure}
 
-  \item \textbf{Valor Verdadero}: Valor ideal sin errores (inaccesible en la práctica).
-  \item \textbf{Valor Medido}: Resultado obtenido del proceso de medida.
-  \item \textbf{Error de Medida}: Diferencia entre el valor medido y el valor verdadero o de referencia. $e = V_{\text{med}} - V_{\text{ref}}$
-  \item \textbf{Exactitud (Accuracy)}: Grado de concordancia entre el valor medido y el valor verdadero. La figura~\ref{fig:acc_prec} ilustra la relación entre exactitud y precisión.
+  \item \emph{Valor Verdadero}: Valor ideal sin errores (inaccesible en la práctica).
+  \item \emph{Valor Medido}: Resultado obtenido del proceso de medida.
+  \item \emph{Error de Medida}: Diferencia entre el valor medido y el valor verdadero o de referencia. $e = V_{\text{med}} - V_{\text{ref}}$
+  \item \emph{Exactitud (Accuracy)}: Grado de concordancia entre el valor medido y el valor verdadero. La figura~\ref{fig:acc_prec} ilustra la relación entre exactitud y precisión.
     
   \begin{marginfigure}
     \centering
@@ -134,16 +134,16 @@ Es vital que se utilice la terminología profesional, especialmente en un contex
     \caption[Relación entre Exactitud y Precisión.]{Relación entre Exactitud y Precisión. Un sistema puede ser preciso pero no exacto (resultados con baja dispersión -consistentes- pero promedio incorrecto), o exacto pero no preciso (resultados con promedio correcto pero alta dispersión -inconsistentes-). En general, un sistema es preciso y exacto al mismo tiempo cuando se cumplen ambas condiciones simultaneamente promedio correcto y baja dispersion. El peor de los casos es que el sistema no sea preciso ni exacto al mismo tiempo lo que trae como consecuencia un promedio incorrecto y alta dispersion e implica un mayor riesgo de error.}\label{fig:acc_prec}
     \end{marginfigure}
 
-  \item \textbf{Precisión (Precision)}: Grado de concordancia entre resultados repetidos. 
-  \item \textbf{Veracidad (Trueness)}: Grado de concordancia entre la media de muchas medidas y el valor verdadero. 
-  \item \textbf{Resolución (Resolution)}: Mínimo cambio detectable por el sistema de medida. Ejemplo: En un ADC de \SI{10}{bits} con rango \SI{0}{V} a \SI{5}{V}, la resolución es \SI{5}{V}/$2^{10}$ bits  \(\approx\) \SI{0.05}{V/\bit}.
-  \item \textbf{Sensibilidad}: Relación entre el cambio en la salida y el cambio en la magnitud medida.Pendiente de la curva de transferencia ($S = \frac{\Delta \text{Output}}{\Delta \text{Input}}$).
-  \item \textbf{Linealidad}: Grado en que la salida es proporcional a la entrada.
-  \item \textbf{Repetibilidad}: Capacidad de obtener el mismo resultado bajo las mismas condiciones.
-  \item \textbf{Reproducibilidad}: Capacidad de obtener resultados similares bajo condiciones diferentes (operadores, equipos, etc.).
-  \item \textbf{Calibración}: Proceso de ajustar el sistema de medida para minimizar errores, comparándolo con un estándar de referencia. Calibrar es solo comparar con un patrón (ver el error), mientras que Ajustar es actuar sobre el instrumento para que mida bien.
-  \item \textbf{Trazabilidad}: Capacidad de relacionar las mediciones con estándares internacionales a través de una cadena documentada de calibraciones.
-  \item \textbf{Incertidumbre de Medida}: Rango dentro del cual se espera que se encuentre el valor verdadero con un nivel de confianza específico. Se expresa como $U = k \cdot u_c$, donde $u_c$ es la incertidumbre combinada y $k$ es el factor de cobertura (ej. $k=2$ para aproximadamente 95\% de confianza).
+  \item \emph{Precisión (Precision)}: Grado de concordancia entre resultados repetidos. 
+  \item \emph{Veracidad (Trueness)}: Grado de concordancia entre la media de muchas medidas y el valor verdadero. 
+  \item \emph{Resolución (Resolution)}: Mínimo cambio detectable por el sistema de medida. Ejemplo: En un ADC de \SI{10}{bits} con rango \SI{0}{V} a \SI{5}{V}, la resolución es \SI{5}{V}/$2^{10}$ bits  \(\approx\) \SI{0.05}{V/\bit}.
+  \item \emph{Sensibilidad}: Relación entre el cambio en la salida y el cambio en la magnitud medida.Pendiente de la curva de transferencia ($S = \frac{\Delta \text{Output}}{\Delta \text{Input}}$).
+  \item \emph{Linealidad}: Grado en que la salida es proporcional a la entrada.
+  \item \emph{Repetibilidad}: Capacidad de obtener el mismo resultado bajo las mismas condiciones.
+  \item \emph{Reproducibilidad}: Capacidad de obtener resultados similares bajo condiciones diferentes (operadores, equipos, etc.).
+  \item \emph{Calibración}: Proceso de ajustar el sistema de medida para minimizar errores, comparándolo con un estándar de referencia. Calibrar es solo comparar con un patrón (ver el error), mientras que Ajustar es actuar sobre el instrumento para que mida bien.
+  \item \emph{Trazabilidad}: Capacidad de relacionar las mediciones con estándares internacionales a través de una cadena documentada de calibraciones.
+  \item \emph{Incertidumbre de Medida}: Rango dentro del cual se espera que se encuentre el valor verdadero con un nivel de confianza específico. Se expresa como $U = k \cdot u_c$, donde $u_c$ es la incertidumbre combinada y $k$ es el factor de cobertura (ej. $k=2$ para aproximadamente 95\% de confianza).
 \end{itemize}
 
 \section{Modelo de Error Total}\label{sec:modelo_error}
@@ -159,7 +159,7 @@ Un error sistemático es un sesgo constante que desvía las mediciones en una di
     \begin{tabularx}{\linewidth}{l X X}
         \toprule
         \textbf{Término} & \textbf{Definición} & \textbf{Relación con el Error} \\
-       \midrule
+        \midrule
         Exactitud & Proximidad al valor verdadero. & Error Sistemático + Aleatorio. \\
         %\midrule
         Veracidad & Proximidad de la media de muchas medidas al valor verdadero. & Error Sistemático únicamente. \\
@@ -322,9 +322,7 @@ Se basa en la distribución de probabilidad asumida para el error indicado por e
 \textbf{Distribución} & \textbf{Cuándo usarla} & \textbf{Cálculo de $\mathbf{U_B}$} \\
 \midrule
 Rectangular & El error es igualmente probable dentro de un rango. & $u = a/\sqrt{3}$ \\
-\midrule
 Triangular & El error es más probable cerca del valor central.  & $u = a/\sqrt{6}$ \\
-\midrule
 Normal & El error sigue una distribución gaussiana. & $u = a/s$ \\
 \bottomrule
 \end{tabularx}

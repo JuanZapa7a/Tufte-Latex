@@ -299,7 +299,7 @@ Una vez abierto el interruptor, el circuito debería mantener $V_{out}$ constant
             \node[blue] at (axis cs:2.5, 1.3) {Fase de Retención};
         \end{axis}
     \end{tikzpicture}
-    \caption{Efecto de la tasa de caída (\textit{droop}) durante la fase de retención. Este error limita el tiempo máximo que el ADC puede tardar en convertir sin perder precisión.}\label{fig:droop_effect}
+    \caption[Efecto de la tasa de caída (droop) en la retención.]{Efecto de la tasa de caída (\textit{droop}) durante la fase de retención. Este error limita el tiempo máximo que el ADC puede tardar en convertir sin perder precisión.}\label{fig:droop_effect}
 \end{marginfigure}
 
 \paragraph{Incertidumbre Temporal: Aperture Jitter}
@@ -337,7 +337,7 @@ Para que este error sea inferior a un escalón de cuantificación ($Q$), la frec
             \draw[dashed, gray] (axis cs:1.1, 0) -- (axis cs:1.1, 1.3) -- (axis cs:1.6, 1.3);
         \end{axis}
     \end{tikzpicture}
-    \caption{Relación entre el jitter temporal ($\Delta t_a$) y el error de amplitud ($\Delta V$). A mayor pendiente de la señal, más crítico es el ruido de fase del reloj.}\label{fig:jitter_error}
+    \caption[Relación entre jitter temporal y error de amplitud.]{Relación entre el jitter temporal ($\Delta t_a$) y el error de amplitud ($\Delta V$). A mayor pendiente de la señal, más crítico es el ruido de fase del reloj.}\label{fig:jitter_error}
 \end{marginfigure}
 
 %figura de un circuito S\&H
@@ -463,7 +463,7 @@ ninguna componente supere la frecuencia de Nyquist.
 
   \end{tikzpicture}
 
-  \caption{Espectro de una señal muestreada.
+  \caption[Espectro de una señal muestreada (aliasing).]{Espectro de una señal muestreada.
     \emph{(a)}~Cuando $f_s > 2f_{max}$ las réplicas espectrales
     (triángulos azules) quedan separadas y la señal original es
     recuperable con un filtro paso bajo.
@@ -580,7 +580,7 @@ En la Figura~\ref{fig:reconstruccion-nyquist} se muestra una una señal que la m
 
   \end{tikzpicture}
 
-  \caption{Impacto de la tasa de muestreo en la reconstrucción de una señal de $0{,}9\,\text{Hz}$ (Tasa de Nyquist $= 1{,}8\,\text{Hz}$).
+  \caption[Impacto de la tasa de muestreo en la reconstrucción de una señal.]{Impacto de la tasa de muestreo en la reconstrucción de una señal de $0{,}9\,\text{Hz}$ (Tasa de Nyquist $= 1{,}8\,\text{Hz}$).
     \emph{(a)}~Muestreo a $f_s = 4\,\text{Hz}$: se cumple el criterio de Nyquist; la reconstrucción (azul) coincide exactamente con la señal original (gris).
     \emph{(b)}~Muestreo a $f_s = 1{,}4\,\text{Hz}$: al submuestrear, las muestras (rojas) resultan compatibles con una señal de menor frecuencia ($0{,}5\,\text{Hz}$), induciendo un error de \textit{aliasing} irreversible.}\label{fig:reconstruccion-nyquist}
 
@@ -884,7 +884,7 @@ Es la arquitectura más rápida posible. Utiliza una red de resistencias en casc
 % 	\node[shape=rectangle, minimum width=2.715cm, minimum height=0.965cm] at (22.625, 20.5){} node[anchor=center, align=center, text width=2.327cm, inner sep=6pt] at (22.625, 20.5){Salida binaria};
 % 	\path[draw={rgb,255:red,119;green,118;blue,123}] (21, 22.5) -- (21.25, 22.5) -- (21.25, 18.5) -- (21, 18.5);
 % \end{tikzpicture}
-    \caption{Arquitectura Flash para tres bits. La señal se compara simultáneamente con todos los niveles de referencia generados por la red divisora.}\label{fig:adc_flash}
+    \caption[Arquitectura ADC Flash de tres bits.]{Arquitectura Flash para tres bits. La señal se compara simultáneamente con todos los niveles de referencia generados por la red divisora.}\label{fig:adc_flash}
 \end{marginfigure}
 
 \paragraph{ADC de Aproximaciones Sucesivas (SAR)}
@@ -908,7 +908,7 @@ Es la arquitectura más equilibrada y la que encontramos habitualmente en los mi
         \draw (1.5,-1.7) -| (comp.-);
         \draw (3.5,0) to[short, -o] ++(0.5,0) node[right] {Código};
     \end{tikzpicture}
-    \caption{Arquitectura SAR. Un algoritmo de búsqueda binaria ajusta el DAC interno bit a bit hasta aproximarse a la tensión de entrada.}\label{fig:adc_sar}
+    \caption[Arquitectura ADC SAR.]{Arquitectura SAR. Un algoritmo de búsqueda binaria ajusta el DAC interno bit a bit hasta aproximarse a la tensión de entrada.}\label{fig:adc_sar}
 \end{marginfigure}
 
 \paragraph{ADC Sigma-Delta ($\Sigma\Delta$)}
@@ -930,7 +930,7 @@ Es la arquitectura de la cual se obtienen las muestras digitales más comunes. E
         \draw[->, thick] (q.east) -- ++(0.3,0) |- (dac.east);
         \draw[->, thick] (dac.west) -| (sum.south) node[left, pos=0.8] {$-$};
     \end{tikzpicture}
-    \caption{Modulador Sigma-Delta. El integrador acumula el error entre la entrada y la estimación, forzando al comparador a generar un tren de pulsos cuya densidad de unos es proporcional a $V_{in}$.}\label{fig:adc_sigmadelta}
+    \caption[Modulador Sigma-Delta.]{Modulador Sigma-Delta. El integrador acumula el error entre la entrada y la estimación, forzando al comparador a generar un tren de pulsos cuya densidad de unos es proporcional a $V_{in}$.}\label{fig:adc_sigmadelta}
 \end{marginfigure}
 
 Es la arquitectura reina en instrumentación de precisión (balanzas, termometría). A diferencia de los anteriores, no mide el valor absoluto en un paso, sino el \textit{error} acumulado. Como se ve en la Figura~\ref{fig:adc_sigmadelta}, el lazo resta continuamente la salida de un DAC de 1 bit a la entrada; el integrador acumula ese error y fuerza al comparador a generar un tren de pulsos cuya densidad de unos sigue, en promedio, la tensión de entrada como se ilustra en la Figura~\ref{fig:sigma_bitstream}. Esta misma integración desplaza el ruido de cuantificación hacia frecuencias altas (\textit{noise shaping}), y mediante el sobremuestreo (\textit{oversampling}) y un filtrado digital paso-bajo dicho ruido se elimina, obteniendo una resolución muy superior a la de un cuantificador de 1 bit.
@@ -981,7 +981,7 @@ Es la arquitectura reina en instrumentación de precisión (balanzas, termometr�
         \draw[thick] (4.426,0) -- (4.426,0.5);
         \draw[thick] (4.979,0) -- (4.979,0.5);
     \end{tikzpicture}
-    \caption{Comportamiento del modulador ante una entrada senoidal. La densidad de unos del \textit{bitstream} sigue la amplitud de $V_{in}$: máxima cerca de $V_{ref}$, mínima cerca de 0.}\label{fig:sigma_bitstream}
+    \caption[Comportamiento del modulador Sigma-Delta ante una senoidal.]{Comportamiento del modulador ante una entrada senoidal. La densidad de unos del \textit{bitstream} sigue la amplitud de $V_{in}$: máxima cerca de $V_{ref}$, mínima cerca de 0.}\label{fig:sigma_bitstream}
 \end{marginfigure}
 
 \begin{itemize}
@@ -1009,7 +1009,7 @@ Es la arquitectura reina en instrumentación de precisión (balanzas, termometr�
         \draw (comp.-) node[ground]{};
         \draw (comp.out) to[short, -o] ++(0.1,0) node[above] {$V_{out}$};
     \end{tikzpicture}
-    \caption{ADC de Doble Rampa. El tiempo de descarga es directamente proporcional al voltaje medio de entrada, eliminando ruidos de alta frecuencia.}\label{fig:adc_dualslope}
+    \caption[ADC de doble rampa.]{ADC de Doble Rampa. El tiempo de descarga es directamente proporcional al voltaje medio de entrada, eliminando ruidos de alta frecuencia.}\label{fig:adc_dualslope}
 \end{marginfigure}
 
 Es la arquitectura estándar en multí\-metros digitales de precisión. Como se ve en la Figura~\ref{fig:adc_dualslope}, la conversión ocurre en dos fases bien diferenciadas. En la primera, el integrador acumula la tensión de entrada durante un tiempo fijo $T_1$, cargando el condensador $C$ hasta un valor proporcional al promedio de $V_{in}$. En la segunda fase, el comparador conmuta la entrada del integrador hacia una referencia conocida $-V_{ref}$ y mide el tiempo $T_2$ que tarda la rampa en descargarse hasta cero. Puesto que $T_2$ depende únicamente del cociente $V_{in}/V_{ref}$ y no de los valores absolutos de $R$ o $C$, las tolerancias y derivas térmicas de estos componentes se cancelan en la medida final. La Figura~\ref{fig:adc_dualslope_wave} muestra esta doble rampa para dos valores distintos de $V_{in}$: $T_1$ es siempre el mismo, la pendiente de bajada depende de $V_{in}$, y la pendiente de subida (fijada por $V_{ref}$) es idéntica en ambos casos, de modo que $T_2$ resulta proporcional a $V_{in}$.
@@ -1035,7 +1035,7 @@ Es la arquitectura estándar en multí\-metros digitales de precisión. Como se 
         \node[blue, right] at (2.2,-1.17) {$V_{in}$ alto};
         \node[gray, right] at (2.2,-0.39) {$V_{in}$ bajo};
     \end{tikzpicture}
-    \caption{Forma de onda del integrador para dos valores de $V_{in}$. $T_1$ es fijo; la pendiente de subida (fijada por $V_{ref}$) es la misma en ambos casos, por lo que $T_2$ crece proporcionalmente a $V_{in}$.}\label{fig:adc_dualslope_wave}
+    \caption[Forma de onda del integrador en el ADC de doble rampa.]{Forma de onda del integrador para dos valores de $V_{in}$. $T_1$ es fijo; la pendiente de subida (fijada por $V_{ref}$) es la misma en ambos casos, por lo que $T_2$ crece proporcionalmente a $V_{in}$.}\label{fig:adc_dualslope_wave}
 \end{marginfigure}
 
 La Figura~\ref{fig:adc_dualslope_wave} representa la tensión de salida del integrador frente al tiempo para dos valores de $V_{in}$. Durante $T_1$ (fijo, marcado por el reloj del sistema) la rampa desciende con una pendiente $-V_{in}/RC$: cuanto mayor es $V_{in}$, más rápido cae la tensión y más bajo es el valor alcanzado al final de $T_1$. En ese instante, el comparador conmuta la entrada a $-V_{ref}$ y la rampa sube con una pendiente fija $V_{ref}/RC$, igual en ambos casos. Como el punto de partida de esta segunda rampa es proporcional a $V_{in}$ pero su pendiente de subida es constante, el tiempo $T_2$ que tarda en volver a cruzar el cero también es proporcional a $V_{in}$: geométricamente, $T_2 = T_1 \cdot V_{in}/V_{ref}$. Basta con contar los ciclos de reloj durante $T_2$ para obtener el código digital, sin que el valor absoluto de $R$ o $C$ intervenga en el resultado.
@@ -1044,8 +1044,7 @@ Las cuatro arquitecturas anteriores no compiten entre sí de forma absoluta, sin
 
 \begin{table}[ht]
     \centering
-    \small
-    \caption{Comparativa de arquitecturas ADC.}\label{tab:comparativa_adc}
+    \caption[Comparativa de arquitecturas ADC.]{Comparativa de arquitecturas ADC.}\label{tab:comparativa_adc}
     \begin{tabularx}{\linewidth}{l X X X}
         \toprule
         \textbf{Tipo} & \textbf{Velocidad} & \textbf{Resolución} & \textbf{Uso Típico} \\
@@ -1059,7 +1058,7 @@ Las cuatro arquitecturas anteriores no compiten entre sí de forma absoluta, sin
 \end{table}
 
 \section{Parámetros Reales y ENOB}\label{sec:enob}
-En 4º curso, el ingeniero debe saber que un ADC de 16 bits rara vez entrega 16 bits de información útil. El ruido térmico, la no linealidad integral (INL) y la no linealidad diferencial (DNL) degradan el rendimiento. Se define el \textbf{ENOB} (\textit{Effective Number of Bits}):
+En 4º curso, el ingeniero debe saber que un ADC de 16 bits rara vez entrega 16 bits de información útil. El ruido térmico, la no linealidad integral (INL) y la no linealidad diferencial (DNL) degradan el rendimiento. Se define el \emph{ENOB} (\textit{Effective Number of Bits}):
 \begin{equation}
     \text{ENOB} = \frac{\text{SINAD}_{dB} - 1,76}{6,02}
 \end{equation}
@@ -1125,7 +1124,6 @@ De los 16 bits nominales que el fabricante marca en el encapsulado, solo 12 son 
 
 \begin{table}[ht]
     \centering
-    \small
     \begin{tabularx}{\linewidth}{l X X}
         \toprule
         \textbf{Parámetro Real} & \textbf{Naturaleza del Error} & \textbf{¿Corregible por calibración?} \\
@@ -1137,7 +1135,7 @@ De los 16 bits nominales que el fabricante marca en el encapsulado, solo 12 son 
         ENOB & Resolución efectiva real (a partir del SINAD). & No; es un límite del propio silicio. \\
         \bottomrule
     \end{tabularx}
-    \caption{Parámetros reales de un ADC y su corregibilidad.}\label{tab:parametros_adc}
+    \caption[Parámetros reales de un ADC y su corregibilidad.]{Parámetros reales de un ADC y su corregibilidad.}\label{tab:parametros_adc}
 \end{table}
 
 \section{Conversión D/A: El Camino de Vuelta}\label{sec:dac}
@@ -1146,7 +1144,7 @@ En un sistema de instrumentación no toda la información fluye en un único sen
 
 \subsection{Arquitectura R-2R}\label{sec:dac_r2r}
 
-La topología más habitual es la red \textbf{R-2R}: una escalera de resistencias que solo necesita dos valores (\(R\) y \(2R\)), frente al DAC de resistencias ponderadas en binario, que requeriría un valor distinto para cada bit (con una dispersión de hasta \(2^n\) entre el LSB y el MSB, inviable de fabricar con precisión a partir de unos 8--10 bits). En la red R-2R, cada bit del registro digital gobierna un conmutador que dirige su rama hacia $V_{ref}$ o hacia tierra; la suma ponderada de corrientes resultante se convierte en tensión mediante un amplificador operacional en configuración de transimpedancia.
+La topología más habitual es la red \emph{R-2R}: una escalera de resistencias que solo necesita dos valores (\(R\) y \(2R\)), frente al DAC de resistencias ponderadas en binario, que requeriría un valor distinto para cada bit (con una dispersión de hasta \(2^n\) entre el LSB y el MSB, inviable de fabricar con precisión a partir de unos 8--10 bits). En la red R-2R, cada bit del registro digital gobierna un conmutador que dirige su rama hacia $V_{ref}$ o hacia tierra; la suma ponderada de corrientes resultante se convierte en tensión mediante un amplificador operacional en configuración de transimpedancia.
 
 \begin{marginfigure}
     \centering
@@ -1200,7 +1198,7 @@ La elección de estos dos valores concretos no es arbitraria: es lo que permite 
 
 Esta es también la razón por la que la resistencia de terminación del extremo superior debe valer $2R$ y conectarse a tierra (Figura~\ref{fig:dac_r2r}): si faltara, o si tuviera otro valor, el nodo $b_2$ dejaría de ver $2R$ hacia arriba y su bit quedaría mal ponderado respecto a los demás. Es, además, la misma razón por la que los conmutadores dirigen su rama entre \emph{tierra real} y $V_{ref}$ y nunca se dejan en circuito abierto: un contacto abierto tendría resistencia infinita, no $2R$, y rompería la propiedad recursiva en ese nodo.
 
-Una alternativa de bajo coste, muy usada cuando no se necesita gran ancho de banda (por ejemplo, para generar una referencia de continua ajustable por software), es el DAC por \textbf{PWM}: se genera un tren de pulsos cuyo ciclo de trabajo (\textit{duty cycle}) codifica el valor digital, y un simple filtro paso-bajo RC recupera la componente continua promedio.
+Una alternativa de bajo coste, muy usada cuando no se necesita gran ancho de banda (por ejemplo, para generar una referencia de continua ajustable por software), es el DAC por \emph{PWM}: se genera un tren de pulsos cuyo ciclo de trabajo (\textit{duty cycle}) codifica el valor digital, y un simple filtro paso-bajo RC recupera la componente continua promedio.
 
 Al igual que ocurría con el ADC, existen otras arquitecturas de DAC que quedan fuera del alcance de este curso, pero conviene al menos conocer su existencia y su campo de aplicación natural. Ambas arquitecturas se tratan en detalle en la referencia~\cite{kester2005dataconversion}. Estas son las más habituales:
 \begin{itemize}

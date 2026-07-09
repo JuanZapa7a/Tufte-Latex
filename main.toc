@@ -48,11 +48,11 @@
 \contentsline {paragraph}{Conexión a 4 hilos: Medida Kelvin:}{40}{paragraph*.36}%
 \contentsline {subsection}{Resumen Comparativo de Topologías de Medida}{41}{subsection*.37}%
 \contentsline {subsection}{Error por Autocalentamiento}{41}{subsection*.38}%
-\contentsline {paragraph}{Factores que afectan a $\delta $:}{41}{paragraph*.39}%
+\contentsline {paragraph}{Factores que afectan a $\delta $:}{42}{paragraph*.39}%
 \contentsline {paragraph}{Ejemplo de cálculo de corriente máxima:}{42}{paragraph*.40}%
 \contentsline {section}{\numberline {3.5}Termistores (NTC y PTC)}{42}{section.3.5}%
 \contentsline {subsection}{Termistores NTC: Modelo Exponencial y Parámetro $\beta $}{42}{subsection*.41}%
-\contentsline {subsection}{Ecuación de Steinhart-Hart}{42}{subsection*.42}%
+\contentsline {subsection}{Ecuación de Steinhart-Hart}{43}{subsection*.42}%
 \contentsline {subsection}{Linealización de la Respuesta NTC}{43}{subsection*.43}%
 \contentsline {subsection}{Termistores PTC y aplicaciones de protección}{43}{subsection*.44}%
 \contentsline {section}{\numberline {3.6}Sensores de Luz y Campos Magnéticos}{44}{section.3.6}%
@@ -61,24 +61,24 @@
 \contentsline {subsection}{Magnetorresistencias (AMR y GMR)}{44}{subsection*.47}%
 \contentsline {paragraph}{AMR (Magnetorresistencia Anisotrópica):}{44}{paragraph*.48}%
 \contentsline {paragraph}{Efecto Hall:}{44}{paragraph*.49}%
-\contentsline {paragraph}{GMR (Magnetorresistencia Gigante):}{44}{paragraph*.50}%
+\contentsline {paragraph}{GMR (Magnetorresistencia Gigante):}{45}{paragraph*.50}%
 \contentsline {section}{\numberline {3.7}Medida Diferencial y Conceptos de Modo}{45}{section.3.7}%
 \contentsline {subsection}{Definiciones Matemáticas: Modo Diferencial y Modo Común}{45}{subsection*.51}%
 \contentsline {subsection}{Ventajas de la Medida Diferencial}{45}{subsection*.52}%
 \contentsline {subsection}{Ejemplo: El Problema del Zumbido de Red (\unit {50}{Hz})}{46}{subsection*.53}%
 \contentsline {paragraph}{Escenario A: Medida \textit {Single-Ended}.}{46}{paragraph*.54}%
 \contentsline {paragraph}{Escenario B: Medida Diferencial.}{46}{paragraph*.55}%
-\contentsline {section}{\numberline {3.8}Circuitos de Medida: El Puente de Wheatstone}{46}{section.3.8}%
+\contentsline {section}{\numberline {3.8}Circuitos de Medida: El Puente de Wheatstone}{47}{section.3.8}%
 \contentsline {subsection}{Análisis del Puente Desequilibrado}{47}{subsection*.56}%
 \contentsline {subsection}{Configuraciones: Cuarto, Medio y Puente Completo}{47}{subsection*.57}%
 \contentsline {paragraph}{Cuarto de Puente (1 brazo activo).}{47}{paragraph*.58}%
 \contentsline {paragraph}{Medio Puente (2 brazos activos).}{47}{paragraph*.59}%
 \contentsline {paragraph}{Puente Completo (4 brazos activos).}{47}{paragraph*.60}%
-\contentsline {subsection}{Linealidad según el tipo de excitación (Voltaje vs. Corriente)}{47}{subsection*.61}%
+\contentsline {subsection}{Linealidad según el tipo de excitación (Voltaje vs. Corriente)}{48}{subsection*.61}%
 \contentsline {subsection}{Resumen de Sensibilidad y Aplicación}{48}{subsection*.62}%
 \contentsline {section}{\numberline {3.9}Resumen de Errores en Sensores Resistivos}{48}{section.3.9}%
 \contentsline {subsection}{El Presupuesto de Errores (\textit {Error Budget})}{48}{subsection*.63}%
-\contentsline {section}{\numberline {3.10}Resumen}{48}{section.3.10}%
+\contentsline {section}{\numberline {3.10}Resumen}{49}{section.3.10}%
 \contentsline {chapter}{\numberline {4}Sensores Reactivos: Capacitivos e Inductivos}{51}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Fundamentos de los Sensores Reactivos}{51}{section.4.1}%
 \contentsline {paragraph}{El Inductor: La tensión adelanta a la corriente}{52}{paragraph*.64}%
@@ -101,36 +101,36 @@
 \contentsline {paragraph}{Blindaje Activo o Técnica de Guarda (\textit {Guarding})}{55}{paragraph*.80}%
 \contentsline {paragraph}{Implementación en PCB: El Anillo de Guarda}{55}{paragraph*.81}%
 \contentsline {subsection}{Aplicaciones Típicas de los Sensores Capacitivos}{55}{subsection*.82}%
-\contentsline {paragraph}{1. Medida de Nivel de Líquidos}{55}{paragraph*.83}%
+\contentsline {paragraph}{1. Medida de Nivel de Líquidos}{56}{paragraph*.83}%
 \contentsline {paragraph}{2. Sensores de Humedad Relativa}{56}{paragraph*.84}%
 \contentsline {paragraph}{3. Pantallas Táctiles y Sensores de Proximidad}{56}{paragraph*.85}%
 \contentsline {paragraph}{4. Acelerómetros MEMS y Sensores de Presión}{56}{paragraph*.86}%
 \contentsline {paragraph}{5. Micrófonos de Condensador}{56}{paragraph*.87}%
 \contentsline {section}{\numberline {4.3}Sensores Inductivos y Electromagnéticos}{56}{section.4.3}%
-\contentsline {subsection}{Sensores de Inductancia Variable (Reluctancia Variable)}{56}{subsection*.88}%
-\contentsline {paragraph}{Modelo Magnético del Circuito}{56}{paragraph*.89}%
+\contentsline {subsection}{Sensores de Inductancia Variable (Reluctancia Variable)}{57}{subsection*.88}%
+\contentsline {paragraph}{Modelo Magnético del Circuito}{57}{paragraph*.89}%
 \contentsline {paragraph}{Curva de Transferencia y No Linealidad}{57}{paragraph*.90}%
 \contentsline {paragraph}{Aplicaciones}{57}{paragraph*.91}%
 \contentsline {subsection}{Transformador Diferencial de Variación Lineal (LVDT)}{57}{subsection*.92}%
-\contentsline {paragraph}{Estructura Interna}{57}{paragraph*.93}%
+\contentsline {paragraph}{Estructura Interna}{58}{paragraph*.93}%
 \contentsline {paragraph}{Análisis de Transferencia}{58}{paragraph*.94}%
 \contentsline {paragraph}{Rangos típicos de especificación}{59}{paragraph*.95}%
 \contentsline {subsection}{Sensores de Corrientes de Foucault (\textit {Eddy Currents})}{59}{subsection*.96}%
 \contentsline {paragraph}{Fenómeno Físico}{59}{paragraph*.97}%
 \contentsline {paragraph}{Profundidad de Penetración (\textit {Skin Depth})}{59}{paragraph*.98}%
-\contentsline {paragraph}{Circuito Equivalente y Medida}{59}{paragraph*.99}%
+\contentsline {paragraph}{Circuito Equivalente y Medida}{60}{paragraph*.99}%
 \contentsline {paragraph}{Características y Aplicaciones}{60}{paragraph*.100}%
 \contentsline {subsection}{Sensores de Efecto Hall y Magnetorresistivos}{60}{subsection*.101}%
 \contentsline {paragraph}{Efecto Hall}{60}{paragraph*.102}%
 \contentsline {paragraph}{Sensores Magnetorresistivos (AMR/GMR)}{60}{paragraph*.103}%
-\contentsline {section}{\numberline {4.4}Acondicionamiento de Sensores Reactivos}{61}{section.4.4}%
-\contentsline {subsection}{Puentes de Alterna}{61}{subsection*.104}%
-\contentsline {paragraph}{Puente de Maxwell}{61}{paragraph*.105}%
-\contentsline {subsection}{Circuitos Resonantes y Osciladores}{61}{subsection*.106}%
-\contentsline {subsection}{Demodulación Síncrona (Detección de Fase)}{62}{subsection*.107}%
-\contentsline {section}{\numberline {4.5}Resumen y Comparativa de Sensores Reactivos}{62}{section.4.5}%
+\contentsline {section}{\numberline {4.4}Acondicionamiento de Sensores Reactivos}{62}{section.4.4}%
+\contentsline {subsection}{Puentes de Alterna}{62}{subsection*.104}%
+\contentsline {paragraph}{Puente de Maxwell}{62}{paragraph*.105}%
+\contentsline {subsection}{Circuitos Resonantes y Osciladores}{63}{subsection*.106}%
+\contentsline {subsection}{Demodulación Síncrona (Detección de Fase)}{63}{subsection*.107}%
+\contentsline {section}{\numberline {4.5}Resumen y Comparativa de Sensores Reactivos}{63}{section.4.5}%
 \contentsline {section}{\numberline {4.6}Resumen}{63}{section.4.6}%
-\contentsline {subsection}{El Presupuesto de Errores (\textit {Error Budget})}{63}{subsection*.108}%
+\contentsline {subsection}{El Presupuesto de Errores (\textit {Error Budget})}{64}{subsection*.108}%
 \contentsline {chapter}{\numberline {5}Acondicionamiento de Señal: Amplificadores Operacionales}{65}{chapter.5}%
 \contentsline {section}{\numberline {5.1}El Amplificador de Instrumentación (In-Amp)}{65}{section.5.1}%
 \contentsline {paragraph}{Estructura de Tres Operacionales}{65}{paragraph*.109}%
@@ -187,7 +187,7 @@
 \contentsline {paragraph}{CMOS:}{86}{paragraph*.146}%
 \contentsline {paragraph}{Consideraciones prácticas:}{86}{paragraph*.147}%
 \contentsline {section}{\numberline {7.5}Resumen de Errores en Sensores Ópticos}{86}{section.7.5}%
-\contentsline {section}{\numberline {7.6}Resumen}{86}{section.7.6}%
+\contentsline {section}{\numberline {7.6}Resumen}{87}{section.7.6}%
 \contentsline {chapter}{\numberline {8}Adquisición de Datos (DAQ)}{89}{chapter.8}%
 \contentsline {section}{\numberline {8.1}Muestreo y Retención (Sample and Hold)}{89}{section.8.1}%
 \contentsline {paragraph}{Arquitectura Básica del S\&H}{89}{paragraph*.148}%
@@ -211,34 +211,39 @@
 \contentsline {section}{\numberline {8.5}Conversión D/A: El Camino de Vuelta}{95}{section.8.5}%
 \contentsline {subsection}{Arquitectura R-2R}{95}{subsection*.163}%
 \contentsline {paragraph}{Por qué precisamente $R$ y $2R$}{96}{paragraph*.164}%
-\contentsline {subsection}{Parámetros Reales de un DAC}{96}{subsection*.165}%
+\contentsline {subsection}{Parámetros Reales de un DAC}{97}{subsection*.165}%
 \contentsline {section}{\numberline {8.6}Resumen}{97}{section.8.6}%
 \contentsline {chapter}{\numberline {9}Ruido e Interferencias}{99}{chapter.9}%
 \contentsline {section}{\numberline {9.1}Fuentes y Clasificación del Ruido}{99}{section.9.1}%
-\contentsline {section}{\numberline {9.2}Mecanismos de Acoplamiento de Interferencias}{99}{section.9.2}%
-\contentsline {section}{\numberline {9.3}Técnicas de Apantallamiento (Blindaje)}{99}{section.9.3}%
-\contentsline {section}{\numberline {9.4}Estrategias de Conexión a Tierra}{99}{section.9.4}%
-\contentsline {section}{\numberline {9.5}Filtrado EMI}{99}{section.9.5}%
-\contentsline {section}{\numberline {9.6}Protección Frente a Descargas Electrostáticas (ESD)}{99}{section.9.6}%
-\contentsline {section}{\numberline {9.7}Normativa y Certificación EMC}{99}{section.9.7}%
-\contentsline {section}{\numberline {9.8}Resumen}{99}{section.9.8}%
-\contentsline {chapter}{\numberline {10}Sensores Industriales, Sensores Inteligentes y Buses Digitales}{101}{chapter.10}%
-\contentsline {section}{\numberline {10.1}El Lazo de Corriente 4-20 mA}{101}{section.10.1}%
-\contentsline {section}{\numberline {10.2}El Protocolo HART}{101}{section.10.2}%
-\contentsline {section}{\numberline {10.3}Buses de Comunicación de Sensores: I2C y SPI}{101}{section.10.3}%
-\contentsline {section}{\numberline {10.4}Sensores Inteligentes (\textit {Smart Sensors})}{101}{section.10.4}%
-\contentsline {section}{\numberline {10.5}Resumen}{101}{section.10.5}%
-\contentsline {chapter}{\numberline {11}Instrumentación Virtual y Programable}{103}{chapter.11}%
-\contentsline {section}{\numberline {11.1}El Concepto de Instrumentación Virtual}{103}{section.11.1}%
-\contentsline {section}{\numberline {11.2}Buses de Control y el Estándar SCPI}{103}{section.11.2}%
-\contentsline {section}{\numberline {11.3}Control de Instrumentos con Python (PyVISA)}{103}{section.11.3}%
-\contentsline {section}{\numberline {11.4}Entornos Gráficos de Programación: LabVIEW}{103}{section.11.4}%
-\contentsline {section}{\numberline {11.5}Resumen}{103}{section.11.5}%
-\contentsline {chapter}{\numberline {12}Integración y Diseño de Sistemas de Instrumentación}{105}{chapter.12}%
-\contentsline {section}{\numberline {12.1}Metodología de Diseño de un Sistema de Instrumentación}{105}{section.12.1}%
-\contentsline {section}{\numberline {12.2}El Presupuesto de Errores de Extremo a Extremo}{105}{section.12.2}%
-\contentsline {section}{\numberline {12.3}Caso de Estudio 1: Medida de Potencia Óptica en un Enlace de Fibra}{105}{section.12.3}%
-\contentsline {section}{\numberline {12.4}Caso de Estudio 2: Monitorización de Temperatura con Salida 4-20 mA}{105}{section.12.4}%
-\contentsline {section}{\numberline {12.5}Resumen}{105}{section.12.5}%
-\contentsline {chapter}{Bibliograf\'{\i }a}{107}{appendix*.166}%
+\contentsline {subsection}{Ruido Intrínseco}{99}{subsection*.166}%
+\contentsline {paragraph}{Ruido Térmico (Johnson-Nyquist)}{100}{paragraph*.167}%
+\contentsline {paragraph}{Ruido de Disparo (\textit {Shot Noise})}{100}{paragraph*.168}%
+\contentsline {paragraph}{Ruido de Flicker o $1/f$}{100}{paragraph*.169}%
+\contentsline {subsection}{Ruido Extrínseco o Interferencia}{100}{subsection*.170}%
+\contentsline {section}{\numberline {9.2}Mecanismos de Acoplamiento de Interferencias}{101}{section.9.2}%
+\contentsline {section}{\numberline {9.3}Técnicas de Apantallamiento (Blindaje)}{101}{section.9.3}%
+\contentsline {section}{\numberline {9.4}Estrategias de Conexión a Tierra}{101}{section.9.4}%
+\contentsline {section}{\numberline {9.5}Filtrado EMI}{101}{section.9.5}%
+\contentsline {section}{\numberline {9.6}Protección Frente a Descargas Electrostáticas (ESD)}{101}{section.9.6}%
+\contentsline {section}{\numberline {9.7}Normativa y Certificación EMC}{101}{section.9.7}%
+\contentsline {section}{\numberline {9.8}Resumen}{101}{section.9.8}%
+\contentsline {chapter}{\numberline {10}Sensores Industriales, Sensores Inteligentes y Buses Digitales}{103}{chapter.10}%
+\contentsline {section}{\numberline {10.1}El Lazo de Corriente 4-20 mA}{103}{section.10.1}%
+\contentsline {section}{\numberline {10.2}El Protocolo HART}{103}{section.10.2}%
+\contentsline {section}{\numberline {10.3}Buses de Comunicación de Sensores: I2C y SPI}{103}{section.10.3}%
+\contentsline {section}{\numberline {10.4}Sensores Inteligentes (\textit {Smart Sensors})}{103}{section.10.4}%
+\contentsline {section}{\numberline {10.5}Resumen}{103}{section.10.5}%
+\contentsline {chapter}{\numberline {11}Instrumentación Virtual y Programable}{105}{chapter.11}%
+\contentsline {section}{\numberline {11.1}El Concepto de Instrumentación Virtual}{105}{section.11.1}%
+\contentsline {section}{\numberline {11.2}Buses de Control y el Estándar SCPI}{105}{section.11.2}%
+\contentsline {section}{\numberline {11.3}Control de Instrumentos con Python (PyVISA)}{105}{section.11.3}%
+\contentsline {section}{\numberline {11.4}Entornos Gráficos de Programación: LabVIEW}{105}{section.11.4}%
+\contentsline {section}{\numberline {11.5}Resumen}{105}{section.11.5}%
+\contentsline {chapter}{\numberline {12}Integración y Diseño de Sistemas de Instrumentación}{107}{chapter.12}%
+\contentsline {section}{\numberline {12.1}Metodología de Diseño de un Sistema de Instrumentación}{107}{section.12.1}%
+\contentsline {section}{\numberline {12.2}El Presupuesto de Errores de Extremo a Extremo}{107}{section.12.2}%
+\contentsline {section}{\numberline {12.3}Caso de Estudio 1: Medida de Potencia Óptica en un Enlace de Fibra}{107}{section.12.3}%
+\contentsline {section}{\numberline {12.4}Caso de Estudio 2: Monitorización de Temperatura con Salida 4-20 mA}{107}{section.12.4}%
+\contentsline {section}{\numberline {12.5}Resumen}{107}{section.12.5}%
+\contentsline {chapter}{Bibliograf\'{\i }a}{109}{appendix*.171}%
 \contentsfinish 

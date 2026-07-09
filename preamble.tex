@@ -27,6 +27,13 @@
 \usepackage{tabularx}
 \usepackage{cancel} % Para cancelar un termino en una ecuación
 \usepackage{multirow} % Para tablas con celdas de varias líneas
+
+% Las columnas X de tabularx son, por definición, p{ancho} (alineación
+% superior). Redefinimos el hook oficial \tabularxcolumn para que usen
+% m{ancho} (alineación centrada verticalmente) en su lugar, de modo que en
+% cualquier tabla las celdas de una sola línea queden a media altura
+% respecto a la celda de la misma fila que ocupa varias líneas (párrafo).
+\renewcommand\tabularxcolumn[1]{m{#1}}
 %\usepackage{math} 
 
 % \usepackage[most]{tcolorbox}

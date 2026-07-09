@@ -95,7 +95,6 @@ La elección de los valores de $R_1$, $R_G$, $R_2$ y $R_3$ determina la ganancia
 \begin{table}[h]
     \centering
     \caption[Componentes clave del amplificador de instrumentación y su función en la ganancia total.]{Componentes clave del amplificador de instrumentación y su función en la ganancia total.}\label{tab:inamp_componentes}
-    \small
     \begin{tabularx}{\linewidth}{l X}
         \toprule
         \textbf{Componente} & \textbf{Función en la Ganancia} \\
@@ -158,7 +157,7 @@ $$q_{in} = - (C_f \cdot -V_{out}) \implies V_{out} = \frac{q_{in}}{C_f}$$
         % Output V_out
         \draw (out_ext) to[short, -o] ++(0.5,0) node[right] {$V_{out}$};
     \end{tikzpicture}
-    \caption{Amplificador de carga para sensores capacitivos o piezoeléctricos. La salida es proporcional a la carga de entrada e inversamente proporcional a la capacidad de realimentación $C_f$.}\label{fig:amp_carga}
+    \caption[Amplificador de carga para sensores capacitivos/piezoeléctricos.]{Amplificador de carga para sensores capacitivos o piezoeléctricos. La salida es proporcional a la carga de entrada e inversamente proporcional a la capacidad de realimentación $C_f$.}\label{fig:amp_carga}
 \end{marginfigure}
 
 \section{Filtros Activos en Instrumentación}\label{sec:filtros}
@@ -188,7 +187,7 @@ El hecho de no usar inductores es una gran ventaja, ya que los inductores son vo
         \draw (0,0) to[C, l=$C$] (1,0) to[R, l=$R$] (2,0) node[circ, scale=0.6]{} -- ++(1,0) node[ocirc]{} node[right] {$V_{out}$};
         \draw (2,0) to[L, l=$L$] (2,-1) node[ground]{};
     \end{tikzpicture}
-    \caption{Filtros pasivos RLC: paso bajo (arriba) y paso alto (abajo).}\label{fig:filtros_pasivos_rlc}
+    \caption[Filtros pasivos RLC paso bajo y paso alto.]{Filtros pasivos RLC: paso bajo (arriba) y paso alto (abajo).}\label{fig:filtros_pasivos_rlc}
 \end{marginfigure}
 
 Aunque ambos filtros comparten el mismo denominador (y por tanto la misma frecuencia natural $\omega_0$ y factor de amortiguamiento $\zeta$), difieren en su numerador. Mientras que el filtro paso bajo busca mantener la componente continua, el paso alto la elimina. Matemáticamente, las funciones de transferencia normalizadas son:
@@ -304,7 +303,7 @@ En el Capítulo~\ref{cap:caracteristicas_sistemas_medida}, analizamos sistemas m
 \begin{margintable}
     \centering
     %\small
-    \caption{Analogía de parámetros físicos entre sistemas mecánicos y eléctricos.\protect\label{tab:analogias}}
+    \caption[Analogía entre sistemas mecánicos y eléctricos.]{Analogía de parámetros físicos entre sistemas mecánicos y eléctricos.\protect\label{tab:analogias}}
     \setlength{\tabcolsep}{3pt}
     \begin{tabularx}{\linewidth}{l X X}
         \toprule
@@ -360,7 +359,7 @@ Como se esquematiza en la Figura~\ref{fig:sallen_key}, el filtro Sallen-Key de s
         \draw (mid)  -- ++(0,1) node[](Ab){} to[C, l=$C_1$] (Ab -| oa.out) -- (oa.out)-- ++(0.35,0) node[ocirc]{} node[above] {$V_{out}$};
         \draw (oa.+) -- ++(-0.5,0) node[circ]{}  to[C, l_=$C_2$] ++(0,-1.25) node[ground]{};
     \end{tikzpicture}
-    \caption{Filtro activo paso bajo Sallen-Key de segundo orden equivalente al filtro RLC pasivo. Presenta una caída de \qty{40}{dB/decada} tras la frecuencia de corte.}\label{fig:sallen_key}
+    \caption[Filtro activo paso bajo Sallen-Key de segundo orden.]{Filtro activo paso bajo Sallen-Key de segundo orden equivalente al filtro RLC pasivo. Presenta una caída de \qty{40}{dB/decada} tras la frecuencia de corte.}\label{fig:sallen_key}
 \end{marginfigure}
 
 Para demostrar el comportamiento de este filtro, aplicaremos la \emph{Ley de Corrientes de Kirchhoff (KCL)} en el dominio de Laplace ($s$). Definimos $V_A$ como el nodo entre las dos resistencias de entrada y $V_B$ como el nodo de la entrada no inversora.
@@ -488,18 +487,18 @@ Ambas expresiones son representaciones válidas y equivalentes de un sistema de 
 Ahora, podemos comparar directamente los coeficientes de esta forma con los de la ecuación \eqref{eq:tf_rlc_standard}.
 
 \begin{itemize}
-    \item \textbf{Frecuencia Natural ($\omega_n$ o $\omega_0$):}
+    \item \emph{Frecuencia Natural ($\omega_n$ o $\omega_0$):}
     \[ \omega_n^2 = \omega_0^2 = \frac{1}{R_1R_2C_1C_2}\]  
     \[ \omega_n = \omega_0 = \frac{1}{\sqrt{R_1R_2C_1C_2}}\]
     
-    \item \textbf{Factor de Amortiguamiento ($\zeta$) y Factor de Calidad ($Q$):}
+    \item \emph{Factor de Amortiguamiento ($\zeta$) y Factor de Calidad ($Q$):}
     \[ 2\zeta\omega_0 = \frac{R_1C_2 + R_2C_2 + R_1C_1(1-K)}{R_1R_2C_1C_2} \]
     %Sustituyendo $\omega_0 = \frac{1}{\sqrt{R_1R_2C_1C_2}}$ y despejando $\zeta$, obtenemos:
     \[ \zeta = \frac{1}{2} \left( \frac{R_1C_2 + R_2C_2 + R_1C_1(1-K)}{\sqrt{R_1R_2C_1C_2}} \right) \]
     El factor de calidad $Q$ está relacionado con $\zeta$ por $Q = \frac{1}{2\zeta}$. Por lo tanto:
     \[ Q = \frac{\sqrt{R_1R_2C_1C_2}}{R_1C_2 + R_2C_2 + R_1C_1(1-K)} \]
 
-    \item \textbf{Ganancia DC ($K_{DC}$):}
+    \item \emph{Ganancia DC ($K_{DC}$):}
     Si dividimos \eqref{eq:tf_rlc_standard} por $\omega_0^2$, obtenemos:
     \[ H(s) = \dfrac{1}{\dfrac{s^2}{\omega_0^2} + \dfrac{2\zeta}{\omega_0}s + 1} \]
     Para $s \to 0$ (frecuencia cero o DC), esta forma da una ganancia de $1$. Es decir, está normalizada para una ganancia DC unitaria.

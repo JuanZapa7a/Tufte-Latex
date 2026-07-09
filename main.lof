@@ -12,7 +12,7 @@
 \contentsline {figure}{\numberline {2.3}{\ignorespaces Recta de referencia y recta de ajuste}}{26}{figure.2.3}%
 \contentsline {figure}{\numberline {2.4}{\ignorespaces Efecto de histéresis.}}{26}{figure.2.4}%
 \contentsline {figure}{\numberline {2.5}{\ignorespaces Ejemplo de banda de muerta.}}{26}{figure.2.5}%
-\contentsline {figure}{\numberline {2.6}{\ignorespaces Ejemplo de repetibilidad. Un sensor con buena repetibilidad producirá resultados consistentes bajo las mismas condiciones de prueba.}}{27}{figure.2.6}%
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Ejemplo de repetibilidad.}}{27}{figure.2.6}%
 \contentsline {figure}{\numberline {2.7}{\ignorespaces Característica de saturación.}}{27}{figure.2.7}%
 \contentsline {figure}{\numberline {2.8}{\ignorespaces Respuesta al escalón de un sistema de orden 0.}}{28}{figure.2.8}%
 \contentsline {figure}{\numberline {2.9}{\ignorespaces Respuesta al escalón de un sistema de 1er orden.}}{28}{figure.2.9}%
@@ -36,47 +36,47 @@
 \contentsline {figure}{\numberline {3.13}{\ignorespaces Curva característica de un termistor NTC.}}{42}{figure.3.13}%
 \contentsline {figure}{\numberline {3.14}{\ignorespaces Caracterización de una NTC mediante Steinhart-Hart}}{43}{figure.3.14}%
 \contentsline {figure}{\numberline {3.15}{\ignorespaces Circuito de linealización pasiva.}}{43}{figure.3.15}%
-\contentsline {figure}{\numberline {3.16}{\ignorespaces Efecto de la linealización analógica.}}{43}{figure.3.16}%
+\contentsline {figure}{\numberline {3.16}{\ignorespaces Efecto de la linealización analógica.}}{44}{figure.3.16}%
 \contentsline {figure}{\numberline {3.17}{\ignorespaces Rspuesta log-log de una fotorresistencia.}}{44}{figure.3.17}%
-\contentsline {figure}{\numberline {3.18}{\ignorespaces Estructura simplificada de una celda GMR.}}{44}{figure.3.18}%
-\contentsline {figure}{\numberline {3.19}{\ignorespaces Visualización de señales en modo diferencial. La información útil ($V_{dm}$) es la separación entre las trazas roja y azul. El ruido de modo común (gris) afecta a ambos hilos por igual y es cancelado mediante la resta diferencial.}}{45}{figure.3.19}%
+\contentsline {figure}{\numberline {3.18}{\ignorespaces Estructura simplificada de una celda GMR.}}{45}{figure.3.18}%
+\contentsline {figure}{\numberline {3.19}{\ignorespaces Visualización de señales en modo diferencial.}}{45}{figure.3.19}%
 \contentsline {figure}{\numberline {3.20}{\ignorespaces Cancelación de ruido mediante medida diferencial.}}{46}{figure.3.20}%
 \contentsline {figure}{\numberline {3.21}{\ignorespaces Topología en diamante del puente de Wheatstone.}}{47}{figure.3.21}%
-\contentsline {figure}{\numberline {3.22}{\ignorespaces Puente Wheatstone alimentado por corriente.}}{47}{figure.3.22}%
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Representación en el plano complejo de las impedancias para circuitos RL y RC serie. La parte real representa la resistencia (disipativa) y la parte imaginaria la reactancia (almacenamiento).}}{51}{figure.4.1}%
+\contentsline {figure}{\numberline {3.22}{\ignorespaces Puente Wheatstone alimentado por corriente.}}{48}{figure.3.22}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Impedancias en el plano complejo para RL y RC serie.}}{51}{figure.4.1}%
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.2}{\ignorespaces Representación temporal del desfase en un inductor ideal.}}{52}{figure.4.2}%
 \contentsline {figure}{\numberline {4.3}{\ignorespaces Métodos de transducción en sensores capacitivos.}}{53}{figure.4.3}%
 \contentsline {figure}{\numberline {4.4}{\ignorespaces Comparativa de respuesta variación Área y Distancia.}}{54}{figure.4.4}%
 \contentsline {figure}{\numberline {4.5}{\ignorespaces Esquema de un sensor capacitivo diferencial.}}{54}{figure.4.5}%
 \contentsline {figure}{\numberline {4.6}{\ignorespaces Efecto de la capacidad parásita del cable.}}{54}{figure.4.6}%
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Modelo equivalente del sensor y el cable. La gran magnitud de $C_p$ enmascara los pequeños cambios de $C_s$.}}{55}{figure.4.7}%
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Esquema de guarda activa. El buffer de ganancia unidad asegura que la malla del cable esté al mismo potencial que el hilo de señal ($V_{sig} \approx V_{guard}$), eliminando la corriente a través de $C_p$. Al no haber diferencia de tensión entre los terminales de $C_p$, esta capacidad no se carga ni descarga, eliminando su efecto en la medida del sensor.}}{55}{figure.4.8}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Modelo equivalente del sensor y el cable.}}{55}{figure.4.7}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Esquema de guarda activa.}}{55}{figure.4.8}%
 \contentsline {figure}{\numberline {4.9}{\ignorespaces Diseño de un anillo de guarda en PCB.}}{55}{figure.4.9}%
 \contentsline {figure}{\numberline {4.10}{\ignorespaces Medida de nivel capacitiva.}}{56}{figure.4.10}%
-\contentsline {figure}{\numberline {4.11}{\ignorespaces Principio del \textit {touchscreen} capacitivo. El cuerpo humano altera el campo eléctrico proyectado por la matriz de electrodos.}}{56}{figure.4.11}%
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Principio del touchscreen capacitivo.}}{56}{figure.4.11}%
 \contentsline {figure}{\numberline {4.12}{\ignorespaces Sensor de reluctancia variable.}}{57}{figure.4.12}%
 \contentsline {figure}{\numberline {4.13}{\ignorespaces Respuesta $L(g)$ del sensor de reluctancia variable.}}{57}{figure.4.13}%
 \contentsline {figure}{\numberline {4.14}{\ignorespaces Sensor de velocidad de rueda ABS.}}{57}{figure.4.14}%
-\contentsline {figure}{\numberline {4.15}{\ignorespaces Sección transversal del LVDT. El primario está alimentado con una señal alterna y las secundarias están conectadas en oposición de serie. La varilla de accionamiento controla la posición del núcleo ferromagnético.}}{58}{figure.4.15}%
+\contentsline {figure}{\numberline {4.15}{\ignorespaces Sección transversal del LVDT.}}{58}{figure.4.15}%
 \contentsline {figure}{\numberline {4.16}{\ignorespaces Curvas de transferencia del LVDT.}}{58}{figure.4.16}%
-\contentsline {figure}{\numberline {4.17}{\ignorespaces Principio de funcionamiento de los sensores de corrientes de Foucault. El campo magnético primario ($\vec {B}_{exc}$) generado por la bobina induce corrientes de Foucault circulares en el target conductor. Estas generan, por la ley de Lenz, un campo de reacción ($\vec {B}_{reac}$) que se opone al original, alterando la impedancia compleja de la sonda según la distancia de separación $\delta $.}}{59}{figure.4.17}%
-\contentsline {figure}{\numberline {4.18}{\ignorespaces Profundidad de penetración $\delta _{skin}$ frente a frecuencia de excitación para aluminio y acero. El acero, al ser ferromagnético ($\mu _r \gg 1$), confina las corrientes en una capa mucho más delgada.}}{59}{figure.4.18}%
-\contentsline {figure}{\numberline {4.19}{\ignorespaces Principio del efecto Hall. El campo magnético $\vec {B}$ atraviesa verticalmente el material. La fuerza de Lorentz desvía los portadores mayoritarios (huecos en tipo P) hacia la cara posterior, estableciendo una diferencia de potencial transversal $V_H$.}}{60}{figure.4.19}%
-\contentsline {figure}{\numberline {4.20}{\ignorespaces Puente de Maxwell.}}{61}{figure.4.20}%
-\contentsline {figure}{\numberline {4.21}{\ignorespaces Acondicionamiento mediante conversión a frecuencia. El sensor forma parte de la red de realimentación de un oscilador.}}{62}{figure.4.21}%
-\contentsline {figure}{\numberline {4.22}{\ignorespaces Diagrama de bloques de un demodulador síncrono. Esta estructura actúa como un filtro de banda estrecha extremadamente selectivo, eliminando cualquier ruido que no esté en fase con la referencia.}}{62}{figure.4.22}%
+\contentsline {figure}{\numberline {4.17}{\ignorespaces Principio de los sensores de corrientes de Foucault.}}{59}{figure.4.17}%
+\contentsline {figure}{\numberline {4.18}{\ignorespaces Profundidad de penetración frente a frecuencia (efecto skin).}}{59}{figure.4.18}%
+\contentsline {figure}{\numberline {4.19}{\ignorespaces Principio del efecto Hall.}}{60}{figure.4.19}%
+\contentsline {figure}{\numberline {4.20}{\ignorespaces Puente de Maxwell.}}{62}{figure.4.20}%
+\contentsline {figure}{\numberline {4.21}{\ignorespaces Acondicionamiento mediante conversión a frecuencia.}}{63}{figure.4.21}%
+\contentsline {figure}{\numberline {4.22}{\ignorespaces Diagrama de bloques de un demodulador síncrono.}}{63}{figure.4.22}%
 \contentsline {figure}{\numberline {5.1}{\ignorespaces Circuito completo del amplificador de instrumentación.}}{65}{figure.5.1}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Amplificador de carga para sensores capacitivos o piezoeléctricos. La salida es proporcional a la carga de entrada e inversamente proporcional a la capacidad de realimentación $C_f$.}}{67}{figure.5.2}%
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Filtros pasivos RLC: paso bajo (arriba) y paso alto (abajo).}}{67}{figure.5.3}%
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Filtro activo paso bajo Sallen-Key de segundo orden equivalente al filtro RLC pasivo. Presenta una caída de \qty {40}{dB/decada} tras la frecuencia de corte.}}{68}{figure.5.4}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Amplificador de carga para sensores capacitivos/piezoeléctricos.}}{67}{figure.5.2}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Filtros pasivos RLC paso bajo y paso alto.}}{67}{figure.5.3}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Filtro activo paso bajo Sallen-Key de segundo orden.}}{68}{figure.5.4}%
 \contentsline {figure}{\numberline {5.5}{\ignorespaces Acción del filtro antialiasing.}}{71}{figure.5.5}%
-\contentsline {figure}{\numberline {6.1}{\ignorespaces Lazo termoeléctrico básico. La tensión de Seebeck $V_{AB}$ es proporcional a la diferencia de temperatura entre la unión de medida ($T_1$) y la unión de referencia ($T_2$).}}{73}{figure.6.1}%
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Lazo termoeléctrico básico.}}{73}{figure.6.1}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {6.2}{\ignorespaces Curvas de respuesta para termopares estándar. El tipo K es casi lineal y sensible, mientras que el tipo S (metales nobles) es menos sensible pero extremadamente estable a altas temperaturas.}}{74}{figure.6.2}%
-\contentsline {figure}{\numberline {6.3}{\ignorespaces Comparativa de salida de tensión. El Tipo E ofrece la mayor relación señal-ruido, mientras que el Tipo S se reserva para aplicaciones donde la estabilidad es prioritaria sobre la amplitud de señal.}}{75}{figure.6.3}%
-\contentsline {figure}{\numberline {6.4}{\ignorespaces Esquema de un bloque de compensación. Un sensor auxiliar (NTC o RTD) mide la temperatura de los terminales de cobre para permitir la corrección por software o hardware.}}{75}{figure.6.4}%
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Curvas de respuesta para termopares estándar.}}{74}{figure.6.2}%
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Comparativa de salida de tensión entre termopares.}}{75}{figure.6.3}%
+\contentsline {figure}{\numberline {6.4}{\ignorespaces Esquema de un bloque de compensación de unión fría.}}{75}{figure.6.4}%
 \contentsline {figure}{\numberline {6.5}{\ignorespaces Principio de transducción piezoeléctrica.}}{76}{figure.6.5}%
 \contentsline {figure}{\numberline {6.6}{\ignorespaces Circuito equivalente del sensor piezoeléctrico.}}{76}{figure.6.6}%
 \contentsline {figure}{\numberline {6.7}{\ignorespaces Respuesta en frecuencia cualitativa.}}{77}{figure.6.7}%
@@ -92,25 +92,26 @@
 \contentsline {figure}{\numberline {7.6}{\ignorespaces Configuración de fototransistor.}}{84}{figure.7.6}%
 \contentsline {figure}{\numberline {7.7}{\ignorespaces Esquema de un optoacoplador.}}{84}{figure.7.7}%
 \contentsline {figure}{\numberline {7.8}{\ignorespaces Encoders ópticos incremental y absoluto.}}{85}{figure.7.8}%
-\contentsline {figure}{\numberline {7.9}{\ignorespaces Comparativa de configuraciones ópticas de proximidad: (1) Barrera (Through-beam), (2) Réflex y (3) Difuso. La elección depende del alcance requerido y de las propiedades del objeto.}}{85}{figure.7.9}%
+\contentsline {figure}{\numberline {7.9}{\ignorespaces Configuraciones ópticas de proximidad.}}{85}{figure.7.9}%
 \contentsline {figure}{\numberline {7.10}{\ignorespaces Comparativa de sensores CCD y CMOS.}}{86}{figure.7.10}%
 \contentsline {figure}{\numberline {8.1}{\ignorespaces Proceso de muestreo y reconstrucción de una señal continua}}{89}{figure.8.1}%
 \contentsline {figure}{\numberline {8.2}{\ignorespaces Esquema de un circuito S\&H.}}{89}{figure.8.2}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {8.3}{\ignorespaces Efecto de la tasa de caída (\textit {droop}) durante la fase de retención. Este error limita el tiempo máximo que el ADC puede tardar en convertir sin perder precisión.}}{90}{figure.8.3}%
-\contentsline {figure}{\numberline {8.4}{\ignorespaces Relación entre el jitter temporal ($\Delta t_a$) y el error de amplitud ($\Delta V$). A mayor pendiente de la señal, más crítico es el ruido de fase del reloj.}}{90}{figure.8.4}%
-\contentsline {figure}{\numberline {8.5}{\ignorespaces Espectro de una señal muestreada. \emph {(a)}~Cuando $f_s > 2f_{max}$ las réplicas espectrales (triángulos azules) quedan separadas y la señal original es recuperable con un filtro paso bajo. \emph {(b)}~Cuando $f_s < 2f_{max}$ las réplicas se solapan (zona roja): la información de alta frecuencia contamina la banda base de forma irreversible.}}{91}{figure.8.5}%
-\contentsline {figure}{\numberline {8.6}{\ignorespaces Impacto de la tasa de muestreo en la reconstrucción de una señal de $0{,}9\,\text {Hz}$ (Tasa de Nyquist $= 1{,}8\,\text {Hz}$). \emph {(a)}~Muestreo a $f_s = 4\,\text {Hz}$: se cumple el criterio de Nyquist; la reconstrucción (azul) coincide exactamente con la señal original (gris). \emph {(b)}~Muestreo a $f_s = 1{,}4\,\text {Hz}$: al submuestrear, las muestras (rojas) resultan compatibles con una señal de menor frecuencia ($0{,}5\,\text {Hz}$), induciendo un error de \textit {aliasing} irreversible.}}{91}{figure.8.6}%
+\contentsline {figure}{\numberline {8.3}{\ignorespaces Efecto de la tasa de caída (droop) en la retención.}}{90}{figure.8.3}%
+\contentsline {figure}{\numberline {8.4}{\ignorespaces Relación entre jitter temporal y error de amplitud.}}{90}{figure.8.4}%
+\contentsline {figure}{\numberline {8.5}{\ignorespaces Espectro de una señal muestreada (aliasing).}}{91}{figure.8.5}%
+\contentsline {figure}{\numberline {8.6}{\ignorespaces Impacto de la tasa de muestreo en la reconstrucción de una señal.}}{91}{figure.8.6}%
 \contentsline {figure}{\numberline {8.7}{\ignorespaces Función de transferencia de un ADC.}}{92}{figure.8.7}%
-\contentsline {figure}{\numberline {8.8}{\ignorespaces Arquitectura Flash para tres bits. La señal se compara simultáneamente con todos los niveles de referencia generados por la red divisora.}}{92}{figure.8.8}%
-\contentsline {figure}{\numberline {8.9}{\ignorespaces Arquitectura SAR. Un algoritmo de búsqueda binaria ajusta el DAC interno bit a bit hasta aproximarse a la tensión de entrada.}}{93}{figure.8.9}%
-\contentsline {figure}{\numberline {8.10}{\ignorespaces Modulador Sigma-Delta. El integrador acumula el error entre la entrada y la estimación, forzando al comparador a generar un tren de pulsos cuya densidad de unos es proporcional a $V_{in}$.}}{93}{figure.8.10}%
-\contentsline {figure}{\numberline {8.11}{\ignorespaces Comportamiento del modulador ante una entrada senoidal. La densidad de unos del \textit {bitstream} sigue la amplitud de $V_{in}$: máxima cerca de $V_{ref}$, mínima cerca de 0.}}{93}{figure.8.11}%
-\contentsline {figure}{\numberline {8.12}{\ignorespaces ADC de Doble Rampa. El tiempo de descarga es directamente proporcional al voltaje medio de entrada, eliminando ruidos de alta frecuencia.}}{93}{figure.8.12}%
-\contentsline {figure}{\numberline {8.13}{\ignorespaces Forma de onda del integrador para dos valores de $V_{in}$. $T_1$ es fijo; la pendiente de subida (fijada por $V_{ref}$) es la misma en ambos casos, por lo que $T_2$ crece proporcionalmente a $V_{in}$.}}{93}{figure.8.13}%
+\contentsline {figure}{\numberline {8.8}{\ignorespaces Arquitectura ADC Flash de tres bits.}}{92}{figure.8.8}%
+\contentsline {figure}{\numberline {8.9}{\ignorespaces Arquitectura ADC SAR.}}{93}{figure.8.9}%
+\contentsline {figure}{\numberline {8.10}{\ignorespaces Modulador Sigma-Delta.}}{93}{figure.8.10}%
+\contentsline {figure}{\numberline {8.11}{\ignorespaces Comportamiento del modulador Sigma-Delta ante una senoidal.}}{93}{figure.8.11}%
+\contentsline {figure}{\numberline {8.12}{\ignorespaces ADC de doble rampa.}}{93}{figure.8.12}%
+\contentsline {figure}{\numberline {8.13}{\ignorespaces Forma de onda del integrador en el ADC de doble rampa.}}{93}{figure.8.13}%
 \contentsline {figure}{\numberline {8.14}{\ignorespaces Efecto del DNL sobre la transferencia real de un ADC.}}{94}{figure.8.14}%
 \contentsline {figure}{\numberline {8.15}{\ignorespaces Arquitectura de un DAC de red R-2R.}}{96}{figure.8.15}%
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {9.1}{\ignorespaces Densidad espectral de potencia del ruido intrínseco.}}{100}{figure.9.1}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

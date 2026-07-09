@@ -8,27 +8,28 @@
 \contentsline {table}{\numberline {3.1}{\ignorespaces Comparativa de configuraciones de conexión para sensores RTD.}}{41}{table.3.1}%
 \contentsline {table}{\numberline {3.2}{\ignorespaces Aplicaciones típicas de termistores PTC.}}{44}{table.3.2}%
 \contentsline {table}{\numberline {3.3}{\ignorespaces Comparativa de tecnologías de detección magnética.}}{45}{table.3.3}%
-\contentsline {table}{\numberline {3.4}{\ignorespaces Comparativa de configuraciones del puente de Wheatstone.}}{48}{table.3.4}%
+\contentsline {table}{\numberline {3.4}{\ignorespaces Configuraciones del puente de Wheatstone.}}{48}{table.3.4}%
 \contentsline {table}{\numberline {3.5}{\ignorespaces Clasificación y mitigación de errores en sistemas de medida resistivos.}}{49}{table.3.5}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces Comparativa de modelos de sensibilidad. La variación de distancia ofrece una sensibilidad mucho mayor a costa de una respuesta no lineal.\label {tab:sensibilidad_capacitiva}}}{54}{table.4.1}%
-\contentsline {table}{\numberline {4.2}{\ignorespaces Comparativa de ventajas e inconvenientes del LVDT para el diseñador de sistemas de instrumentación.\label {tab:lvdt_pro}}}{59}{table.4.2}%
-\contentsline {table}{\numberline {4.3}{\ignorespaces Especificaciones típicas de los sensores de corrientes de Foucault industriales (familia Micro-Epsilon eddyNCDT).}}{60}{table.4.3}%
-\contentsline {table}{\numberline {4.4}{\ignorespaces Comparativa Hall / AMR / GMR para el diseño de instrumentación magnética. Los valores son aproximados. La variación de resistencia se expresa en \% de la resistencia de la capa libre. \label {tab:hall_vs_mr}}}{61}{table.4.4}%
-\contentsline {table}{\numberline {4.5}{\ignorespaces Comparativa general de tecnologías reactivas.}}{62}{table.4.5}%
-\contentsline {table}{\numberline {4.6}{\ignorespaces Clasificación y mitigación de errores en sistemas de medida reactivos.}}{63}{table.4.6}%
+\contentsline {table}{\numberline {4.1}{\ignorespaces Comparativa de modelos de sensibilidad capacitiva.}}{54}{table.4.1}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces Ventajas e inconvenientes del LVDT.}}{59}{table.4.2}%
+\contentsline {table}{\numberline {4.3}{\ignorespaces Especificaciones típicas de sensores de corrientes de Foucault.}}{60}{table.4.3}%
+\contentsline {table}{\numberline {4.4}{\ignorespaces Comparativa Hall / AMR / GMR.}}{62}{table.4.4}%
+\contentsline {table}{\numberline {4.5}{\ignorespaces Comparativa general de tecnologías reactivas.}}{64}{table.4.5}%
+\contentsline {table}{\numberline {4.6}{\ignorespaces Clasificación y mitigación de errores en sistemas de medida reactivos.}}{64}{table.4.6}%
 \addvspace {10\p@ }
 \contentsline {table}{\numberline {5.1}{\ignorespaces Componentes clave del amplificador de instrumentación y su función en la ganancia total.}}{65}{table.5.1}%
-\contentsline {table}{\numberline {5.2}{\ignorespaces Analogía de parámetros físicos entre sistemas mecánicos y eléctricos.\label {tab:analogias}}}{68}{table.5.2}%
+\contentsline {table}{\numberline {5.2}{\ignorespaces Analogía entre sistemas mecánicos y eléctricos.}}{68}{table.5.2}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {6.1}{\ignorespaces Características de los termopares estándar según IEC. Los valores de sensibilidad son promedios en sus rangos lineales.}}{74}{table.6.1}%
-\contentsline {table}{\numberline {6.2}{\ignorespaces Comparativa de sensores generadores. Nótese la diversidad de señales de salida (tensión, carga o corriente), lo que exige etapas de acondicionamiento específicas para cada tecnología.}}{79}{table.6.2}%
+\contentsline {table}{\numberline {6.1}{\ignorespaces Características de los termopares estándar según IEC.}}{74}{table.6.1}%
+\contentsline {table}{\numberline {6.2}{\ignorespaces Comparativa de sensores generadores.}}{79}{table.6.2}%
 \addvspace {10\p@ }
 \contentsline {table}{\numberline {7.1}{\ignorespaces Clasificación de errores en instrumentación óptica.}}{86}{table.7.1}%
 \addvspace {10\p@ }
 \contentsline {table}{\numberline {8.1}{\ignorespaces Comparativa de arquitecturas ADC.}}{94}{table.8.1}%
 \contentsline {table}{\numberline {8.2}{\ignorespaces Parámetros reales de un ADC y su corregibilidad.}}{95}{table.8.2}%
 \addvspace {10\p@ }
+\contentsline {table}{\numberline {9.1}{\ignorespaces Mecanismos de ruido intrínseco.}}{100}{table.9.1}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

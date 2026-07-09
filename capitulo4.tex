@@ -87,7 +87,7 @@ Donde $R$ es la parte real y $X$ es la parte imaginaria. Como se ilustra en la F
             \end{scope}
         \end{scope}
     \end{tikzpicture}
-    \caption{Representación en el plano complejo de las impedancias para circuitos RL y RC serie. La parte real representa la resistencia (disipativa) y la parte imaginaria la reactancia (almacenamiento).}\label{fig:impedancia_compleja}
+    \caption[Impedancias en el plano complejo para RL y RC serie.]{Representación en el plano complejo de las impedancias para circuitos RL y RC serie. La parte real representa la resistencia (disipativa) y la parte imaginaria la reactancia (almacenamiento).}\label{fig:impedancia_compleja}
 \end{marginfigure}
 
 En la práctica, un sensor reactivo de alta calidad busca que la magnitud de la reactancia $|X|$ sea mucho mayor que la resistencia serie $R$, lo que se traduce en un \emph{ángulo de fase} cercano a los $\qty{90}{\degree}$. Este desfase será el parámetro fundamental utilizado en las técnicas de \emph{demodulación síncrona} para recuperar la información de la magnitud física medida.
@@ -165,7 +165,7 @@ En los capítulos siguientes veremos que el \emph{LVDT} utiliza precisamente est
 %                 \draw[blue, -stealth, thin] (\x, 0.78) -- (\x, 0.22);
 %             }
 %             \node[blue, font=\tiny] at (2.3, 0.4) {$\vec{E}$};
-%             \node at (1, -0.6) {\textbf{(a) Almacenamiento en } $\vec{E}$};
+%             \node at (1, -0.6) {\emph{(a) Almacenamiento en } $\vec{E}$};
 %         \end{scope}
 
 %         % --- DIBUJO (b): INDUCTIVO ---
@@ -175,7 +175,7 @@ En los capítulos siguientes veremos que el \emph{LVDT} utiliza precisamente est
 %             \draw[red!70!black, dashed, thin] (1,0.5) ellipse (1.2cm and 0.5cm);
 %             \draw[red!70!black, dashed, thin] (1,0.5) ellipse (0.8cm and 0.3cm);
 %             \node[red!70!black, font=\tiny] at (2.2, 1.1) {$\vec{B}$};
-%             \node at (1, -0.6) {\textbf{(b) Almacenamiento en } $\vec{B}$};
+%             \node at (1, -0.6) {\emph{(b) Almacenamiento en } $\vec{B}$};
 %         \end{scope}
 %     \end{tikzpicture}
 %     \caption{Interacción con los campos en sensores reactivos. La variación de la capacidad depende de la permitividad y la geometría de las placas, mientras que la inductancia depende de la permeabilidad del núcleo y la configuración del devanado.}\label{fig:fundamentos_reactivos}
@@ -287,15 +287,13 @@ El diseño de un sistema de instrumentación capacitivo exige evaluar el comprom
 
 \begin{table}[!ht]
     \centering
-    \caption{Comparativa de modelos de sensibilidad. La variación de distancia ofrece una sensibilidad mucho mayor a costa de una respuesta no lineal.\protect\label{tab:sensibilidad_capacitiva}}
+    \caption[Comparativa de modelos de sensibilidad capacitiva.]{Comparativa de modelos de sensibilidad. La variación de distancia ofrece una sensibilidad mucho mayor a costa de una respuesta no lineal.\protect\label{tab:sensibilidad_capacitiva}}
     \setlength{\tabcolsep}{3pt} % Reducimos el espacio entre columnas
-    \small
     \begin{tabularx}{\linewidth}{l c c X}
         \toprule
         \textbf{Modo} & \textbf{Ecuación $C(x)$} & \textbf{Sensibilidad ($S$)} & \textbf{Linealidad} \\
         \midrule
         \emph{Área} ($A$) & $C_0 (1 - \dfrac{x}{L})$ & $-\dfrac{\epsilon w}{d}$ (Constante) & Excelente (Lineal) \\
-        \midrule
         \emph{Distancia ($d$)} & $\dfrac{C_0}{1 - x/d_0}$ & $\dfrac{C_0 / d_0}{(1 - x/d_0)^2}$ (Variable) & Pobre (Hiperbólica) \\
         \bottomrule
     \end{tabularx}
@@ -453,7 +451,7 @@ Para un ingeniero, el problema no es que la capacidad total sea mayor, sino que 
         % Flecha de suma
         \draw[thick, ->, >=stealth] (3.3,1) -- (3.6,1) node[right] {$C_{total} = \unit{101}{pF}$};
     \end{tikzpicture}
-    \caption{Modelo equivalente del sensor y el cable. La gran magnitud de $C_p$ enmascara los pequeños cambios de $C_s$.}\label{fig:paralelo_capacitivo}
+    \caption[Modelo equivalente del sensor y el cable.]{Modelo equivalente del sensor y el cable. La gran magnitud de $C_p$ enmascara los pequeños cambios de $C_s$.}\label{fig:paralelo_capacitivo}
 \end{marginfigure}
 
 \paragraph{Estrategias de Mitigación}
@@ -500,7 +498,7 @@ En esta técnica, se utiliza un seguidor de tensión (buffer) para alimentar el 
 %         \draw[red, dashed] (1.5, 2) to[C, l=$C_p$, color=red] (1.5, 1.8);
         
 %     \end{tikzpicture}
-%     \caption{Esquema de guarda activa. El amplificador asegura que el potencial de la guarda sea idéntico al de la señal, anulando la corriente a través de $C_p$.}\label{fig:guarda_activa}
+%     \caption[Esquema de guarda activa.]{Esquema de guarda activa. El amplificador asegura que el potencial de la guarda sea idéntico al de la señal, anulando la corriente a través de $C_p$.}\label{fig:guarda_activa}
 % \end{marginfigure}
 
 \begin{marginfigure}
@@ -543,7 +541,7 @@ En esta técnica, se utiliza un seguidor de tensión (buffer) para alimentar el 
         \node[red, font=\tiny, align=center] at (4.3, 1.7) {$V_{sig} \approx V_{guard}$  $\implies I_{Cp} \approx 0$};
 
     \end{tikzpicture}
-    \caption{Esquema de guarda activa. El buffer de ganancia unidad asegura que la malla del cable esté al mismo potencial que el hilo de señal ($V_{sig} \approx V_{guard}$), eliminando la corriente a través de $C_p$. Al no haber diferencia de tensión entre los terminales de $C_p$, esta capacidad no se carga ni descarga, eliminando su efecto en la medida del sensor.}\label{fig:guarda_activa}
+    \caption[Esquema de guarda activa.]{Esquema de guarda activa. El buffer de ganancia unidad asegura que la malla del cable esté al mismo potencial que el hilo de señal ($V_{sig} \approx V_{guard}$), eliminando la corriente a través de $C_p$. Al no haber diferencia de tensión entre los terminales de $C_p$, esta capacidad no se carga ni descarga, eliminando su efecto en la medida del sensor.}\label{fig:guarda_activa}
 \end{marginfigure}
 
 \paragraph{Implementación en PCB: El Anillo de Guarda}
@@ -642,7 +640,7 @@ En las pantallas capacitivas, el dedo humano actúa como una ``tercera placa'' o
         % Capacidad inducida
         \draw[red, dashed, thick] (2.5, 1.7) to[C, l=$C_{touch}$] (2.5, 0.7);
     \end{tikzpicture}
-    \caption{Principio del \textit{touchscreen} capacitivo. El cuerpo humano altera el campo eléctrico proyectado por la matriz de electrodos.}\label{fig:touch_capacitivo}
+    \caption[Principio del touchscreen capacitivo.]{Principio del \textit{touchscreen} capacitivo. El cuerpo humano altera el campo eléctrico proyectado por la matriz de electrodos.}\label{fig:touch_capacitivo}
 \end{marginfigure}
 
 \paragraph{4. Acelerómetros MEMS y Sensores de Presión}
@@ -1004,7 +1002,7 @@ El \emph{Linear Variable Differential Transformer} (LVDT) es el sensor de despla
     \draw[dashed, gray] (2.5, 0) -- (2.5, 3.5)
         node[above, gray] {$x=0$};
 \end{tikzpicture}
-\caption{Sección transversal del LVDT. El primario está alimentado con una señal alterna y las secundarias están conectadas en oposición de serie. La varilla de accionamiento controla la posición del núcleo ferromagnético.}\label{fig:lvdt_estructura}
+\caption[Sección transversal del LVDT.]{Sección transversal del LVDT. El primario está alimentado con una señal alterna y las secundarias están conectadas en oposición de serie. La varilla de accionamiento controla la posición del núcleo ferromagnético.}\label{fig:lvdt_estructura}
 \end{marginfigure}
 
 Como se muestra en la figura~\ref{fig:lvdt_estructura}, el LVDT consta de tres bobinas coaxiales: un \emph{primario} central excitado con una portadora $V_p \sin(\omega t)$ (típicamente entre \qty{1}{kHz} y \qty{10}{kHz}) y dos \emph{secundarios} (S1 y S2) situados simétricamente, conectados en oposición de serie:
@@ -1102,8 +1100,7 @@ Un LVDT industrial estándar (p.ej. familia HCD de Sensata o Series 100 de Measu
 
 \begin{table}[!ht]
     \centering
-    \caption{Comparativa de ventajas e inconvenientes del LVDT para el diseñador de sistemas de instrumentación.\protect\label{tab:lvdt_pro}}
-    \small
+    \caption[Ventajas e inconvenientes del LVDT.]{Comparativa de ventajas e inconvenientes del LVDT para el diseñador de sistemas de instrumentación.\protect\label{tab:lvdt_pro}}
     \begin{tabularx}{\linewidth}{X X}
         \toprule
         \textbf{Ventajas} & \textbf{Inconvenientes} \\
@@ -1176,7 +1173,7 @@ donde $\delta$ es la distancia entre la bobina y el conductor objetivo (\textit{
         % --- Cota delta (Ajustada al nuevo tamaño) ---
         \draw[<->, black, thin] (5.1, 1.1) -- (5.1, 2.8) node[midway, right ] {$\delta$};
     \end{tikzpicture}
-    \caption{Principio de funcionamiento de los sensores de corrientes de Foucault. El campo magnético primario ($\vec{B}_{exc}$) generado por la bobina induce corrientes de Foucault circulares en el target conductor. Estas generan, por la ley de Lenz, un campo de reacción ($\vec{B}_{reac}$) que se opone al original, alterando la impedancia compleja de la sonda según la distancia de separación $\delta$.}\label{fig:eddy_principio}
+    \caption[Principio de los sensores de corrientes de Foucault.]{Principio de funcionamiento de los sensores de corrientes de Foucault. El campo magnético primario ($\vec{B}_{exc}$) generado por la bobina induce corrientes de Foucault circulares en el target conductor. Estas generan, por la ley de Lenz, un campo de reacción ($\vec{B}_{reac}$) que se opone al original, alterando la impedancia compleja de la sonda según la distancia de separación $\delta$.}\label{fig:eddy_principio}
 \end{marginfigure}
 
 \paragraph{Profundidad de Penetración (\textit{Skin Depth})}
@@ -1227,7 +1224,7 @@ donde $\rho$ es la resistividad del material y $f$ la frecuencia de excitación.
            node[above, font=\tiny] {\qty{10}{kHz}};
     \end{axis}
   \end{tikzpicture}
-  \caption{Profundidad de penetración $\delta_{skin}$ frente a frecuencia de excitación para aluminio y acero. El acero, al ser ferromagnético ($\mu_r \gg 1$), confina las corrientes en una capa mucho más delgada.}\label{fig:skin_depth}
+  \caption[Profundidad de penetración frente a frecuencia (efecto skin).]{Profundidad de penetración $\delta_{skin}$ frente a frecuencia de excitación para aluminio y acero. El acero, al ser ferromagnético ($\mu_r \gg 1$), confina las corrientes en una capa mucho más delgada.}\label{fig:skin_depth}
 \end{marginfigure}
 
 \paragraph{Circuito Equivalente y Medida}
@@ -1245,8 +1242,7 @@ Ambas partes (resistiva e inductiva) dependen de $\delta$ a través del acoplami
 
 \begin{table}[ht]
     \centering
-    \caption{Especificaciones típicas de los sensores de corrientes de Foucault industriales (familia Micro-Epsilon eddyNCDT).}\label{tab:eddy_specs}
-    \small
+    \caption[Especificaciones típicas de sensores de corrientes de Foucault.]{Especificaciones típicas de los sensores de corrientes de Foucault industriales (familia Micro-Epsilon eddyNCDT).}\label{tab:eddy_specs}
     \begin{tabularx}{\linewidth}{l X}
         \toprule
         \textbf{Parámetro} & \textbf{Valor típico} \\
@@ -1355,7 +1351,7 @@ donde $R_H = 1/(n_e q)$ es la constante de Hall del material ($n_e$ densidad de 
         \draw[<->, gray] (0, -0.4, \D) -- (\W, -0.4, \D) node[midway, below] {$w$};
 
     \end{tikzpicture}
-    \caption{Principio del efecto Hall. El campo magnético $\vec{B}$ atraviesa verticalmente el material. La fuerza de Lorentz desvía los portadores mayoritarios (huecos en tipo P) hacia la cara posterior, estableciendo una diferencia de potencial transversal $V_H$.}\label{fig:hall_vectorial}
+    \caption[Principio del efecto Hall.]{Principio del efecto Hall. El campo magnético $\vec{B}$ atraviesa verticalmente el material. La fuerza de Lorentz desvía los portadores mayoritarios (huecos en tipo P) hacia la cara posterior, estableciendo una diferencia de potencial transversal $V_H$.}\label{fig:hall_vectorial}
 \end{marginfigure}
 
 \paragraph{Sensores Magnetorresistivos (AMR/GMR)}
@@ -1376,8 +1372,7 @@ Los \emph{sensores GMR} (Giant Magnetoresistance) alcanzan variaciones de hasta 
 
 \begin{table}[!ht]
     \centering
-    \caption{Comparativa Hall / AMR / GMR para el diseño de instrumentación magnética. Los valores son aproximados. La variación de resistencia se expresa en \% de la resistencia de la capa libre. \protect\label{tab:hall_vs_mr}}
-    \small
+    \caption[Comparativa Hall / AMR / GMR.]{Comparativa Hall / AMR / GMR para el diseño de instrumentación magnética. Los valores son aproximados. La variación de resistencia se expresa en \% de la resistencia de la capa libre. \protect\label{tab:hall_vs_mr}}
     \setlength{\tabcolsep}{4pt}
     \begin{tabularx}{\linewidth}{l c c X X}
         \toprule
@@ -1476,7 +1471,7 @@ Cualquier cambio en la magnitud física que altere la capacidad del sensor provo
         % Estímulo
         \draw[->, ultra thick, red] (1.25, -2.2) -- (1.25, -1.7) node[below, pos=0] {Magnitud Física};
     \end{tikzpicture}
-    \caption{Acondicionamiento mediante conversión a frecuencia. El sensor forma parte de la red de realimentación de un oscilador.}\label{fig:oscilador_sensor}
+    \caption[Acondicionamiento mediante conversión a frecuencia.]{Acondicionamiento mediante conversión a frecuencia. El sensor forma parte de la red de realimentación de un oscilador.}\label{fig:oscilador_sensor}
 \end{marginfigure}
 
 \subsection{Demodulación Síncrona (Detección de Fase)}
@@ -1498,7 +1493,7 @@ Como se muestra en la Figura~\ref{fig:block_demod}, tras pasar por un filtro pas
     V_{out, DC} = \frac{V_s V_r}{2} \cos(\phi)
 \end{equation}
 
-\marginnote[-10em]{\textbf{Detección de dirección:} En el LVDT, si el núcleo se mueve a la derecha, $\phi=0^\circ \implies \cos(0)=1$ (V positiva). Si se mueve a la izquierda, $\phi=180^\circ \implies \cos(180)=-1$ (V negativa). Así recuperamos el signo del desplazamiento.}
+\marginnote[-10em]{\emph{Detección de dirección:} En el LVDT, si el núcleo se mueve a la derecha, $\phi=0^\circ \implies \cos(0)=1$ (V positiva). Si se mueve a la izquierda, $\phi=180^\circ \implies \cos(180)=-1$ (V negativa). Así recuperamos el signo del desplazamiento.}
 
 \begin{marginfigure}[-2em]
     \centering
@@ -1518,7 +1513,7 @@ Como se muestra en la Figura~\ref{fig:block_demod}, tras pasar por un filtro pas
         \draw [->] (lpf) -- (out);
         \draw [->] (ref) -- (mult);
     \end{tikzpicture}
-    \caption{Diagrama de bloques de un demodulador síncrono. Esta estructura actúa como un filtro de banda estrecha extremadamente selectivo, eliminando cualquier ruido que no esté en fase con la referencia.}\label{fig:block_demod}
+    \caption[Diagrama de bloques de un demodulador síncrono.]{Diagrama de bloques de un demodulador síncrono. Esta estructura actúa como un filtro de banda estrecha extremadamente selectivo, eliminando cualquier ruido que no esté en fase con la referencia.}\label{fig:block_demod}
 \end{marginfigure}
 
 \section{Resumen y Comparativa de Sensores Reactivos}\label{sec:resumen_reactivos}
@@ -1529,7 +1524,6 @@ Para concluir el estudio de los sensores reactivos, la Tabla~\ref{tab:comparativ
 \begin{table}[!ht]
     \centering
     \caption[Comparativa general de tecnologías reactivas.]{Comparativa general de tecnologías reactivas. Se resaltan las ventajas y limitaciones de cada tecnología. Destacamos que la elección dependerá de la precisión requerida y las condiciones ambientales.}\label{tab:comparativa_final}
-    \small
     \setlength{\tabcolsep}{3pt}
     \begin{tabularx}{\linewidth}{l l X X}
         \toprule
@@ -1560,7 +1554,6 @@ Donde cada $E_i$ representa una fuente de error específica (capacidad parásita
 
 \begin{table}[!ht]
     \centering
-    \small
     \caption[Clasificación y mitigación de errores en sistemas de medida reactivos.]{Clasificación y mitigación de errores en sistemas de medida reactivos.}\label{tab:resumen_errores_reactivos}
     \setlength{\tabcolsep}{2pt} % Reducimos el espacio entre columnas
     \begin{tabularx}{\linewidth}{l X X}
@@ -1568,11 +1561,8 @@ Donde cada $E_i$ representa una fuente de error específica (capacidad parásita
         \textbf{Fuente de Error} & \textbf{Manifestación Medida} & \textbf{Técnica de Mitigación} \\
         \midrule
         Capacidades parásitas & Atenuación masiva de la sensibilidad relativa ($\Delta C/C$). & Guarda activa (\textit{driven shield}) y anillos de guarda. \\
-        \midrule
         Tensión residual & Salida no nula en el centro del LVDT ($x=0$). & Ajuste del punto nulo y demodulación síncrona. \\
-        \midrule
         Acoplamientos magnéticos & Ruido inducido por maquinaria cercana. & Blindaje magnético (mu-metal) y cables de par trenzado. \\
-        \midrule
         Deriva de la portadora & Error de ganancia por inestabilidad de la amplitud de excitación. & Uso de referencias de tensión de alterna estables o medida ratiométrica. \\
         \bottomrule
     \end{tabularx}

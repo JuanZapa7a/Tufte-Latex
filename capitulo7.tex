@@ -205,13 +205,13 @@ La elección del modo de trabajo determina el punto de operación sobre la curva
 
             % --- MODO FOTOCONDUCTIVO ---
             \fill[red!20, opacity=0.5] (axis cs:-4,-2.5) rectangle (axis cs:-1,-1.5);
-            \node[red, align=center] at (axis cs:-2.5, -1) {\textbf{Modo}\\\textbf{Fotoconductivo}};
+            \node[red, align=center] at (axis cs:-2.5, -1) {\emph{Modo}\\\emph{Fotoconductivo}};
             \draw[red, thick, ->] (axis cs:-2.5, -1.3) -- (axis cs:-2.5, -1.95);
             \node[red, font=\small] at (axis cs:-4, -3.2) {$V_{bias} < 0$};
 
             % --- MODO FOTOVOLTAICO ---
             \fill[green!60!black] (axis cs:0,-2) circle (2.5pt);
-            \node[green!60!black, anchor=west, align=left] at (axis cs:0.2, -2) {\textbf{Modo}\\\textbf{Fotovoltaico}\\($V_D = 0$)};
+            \node[green!60!black, anchor=west, align=left] at (axis cs:0.2, -2) {\emph{Modo}\\\emph{Fotovoltaico}\\($V_D = 0$)};
             
             % Flecha de Iph
             \draw[<->, blue] (axis cs:-4.3, 0) -- (axis cs:-4.3, -2) node[midway, left] {$I_{ph}$};
@@ -831,7 +831,7 @@ Las barreras de detección, o fotocélulas, constituyen una familia de sensores 
             \draw[haz, orange!70!black] (1.8, 1.35) -- (0.4, 1.15);
         \end{scope}
     \end{tikzpicture}
-    \caption{Comparativa de configuraciones ópticas de proximidad: (1) Barrera (Through-beam), (2) Réflex y (3) Difuso. La elección depende del alcance requerido y de las propiedades del objeto.}\label{fig:barrera}
+    \caption[Configuraciones ópticas de proximidad.]{Comparativa de configuraciones ópticas de proximidad: (1) Barrera (Through-beam), (2) Réflex y (3) Difuso. La elección depende del alcance requerido y de las propiedades del objeto.}\label{fig:barrera}
 \end{marginfigure}
 
 \marginnote{\textbf{Reflector Catadióptrico:} Es un espejo formado por micro-prismas (parecido a los reflectantes de las bicicletas) que devuelve la luz exactamente en la misma dirección de incidencia. Esto permite que el sensor funcione aunque el reflector no esté perfectamente alineado.}
@@ -1140,7 +1140,6 @@ El diseño de sistemas ópticos exige considerar fuentes de incertidumbre espec�
 
 \begin{table}[ht]
     \centering
-    \small
     \begin{tabularx}{\linewidth}{l X X}
         \toprule
         \textbf{Fuente de Error} & \textbf{Efecto en la Medida} & \textbf{Técnica de Mitigación} \\
@@ -1151,7 +1150,7 @@ El diseño de sistemas ópticos exige considerar fuentes de incertidumbre espec�
         Capacidad de Unión & Limitación del ancho de banda y velocidad. & Modo fotoconductivo ($V_{bias} < 0$). \\
         \bottomrule
     \end{tabularx}
-    \caption{Clasificación de errores en instrumentación óptica.}
+    \caption[Clasificación de errores en instrumentación óptica.]{Clasificación de errores en instrumentación óptica.}\label{tab:errores_optica}
 \end{table}
 
 \marginnote{\textbf{Shot Noise:} Recuerda que el ruido de disparo es el límite físico último. No se puede eliminar con mejor electrónica, ya que es intrínseco a la llegada aleatoria de los fotones.}

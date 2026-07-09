@@ -144,7 +144,7 @@ Sustituyendo en las expresiones de la pendiente ($m$) y la ordenada en el origen
     b = \frac{10.2}{5} - 0.95\left(\frac{10}{5}\right) = 2.04 - 1.9 = \mathbf{0.14}
 \end{equation}
 
-La recta de ajuste resultante es \textbf{$y = 0.95x + 0.14$} y está representada en la Figura~\ref{fig:grafico_ejemplo}.
+La recta de ajuste resultante es \emph{$y = 0.95x + 0.14$} y está representada en la Figura~\ref{fig:grafico_ejemplo}.
 \begin{marginfigure}
     \centering
     \begin{tikzpicture}
@@ -217,8 +217,8 @@ Esto indica que el error de no linealidad del sensor es aproximadamente del 5.38
 
 
 % \begin{itemize}
-%     \item \textbf{Error de No Linealidad}: Máxima desviación de los puntos experimentales respecto a la recta de ajuste, expresado normalmente como porcentaje sobre el fondo de escala (\textit{Full Scale}, FS).
-%     \item \textbf{Error de Histeresis}: Máxima diferencia en la salida para un mismo valor de entrada según el sentido de la variación (ascendente o descendente).
+%     \item \emph{Error de No Linealidad}: Máxima desviación de los puntos experimentales respecto a la recta de ajuste, expresado normalmente como porcentaje sobre el fondo de escala (\textit{Full Scale}, FS).
+%     \item \emph{Error de Histeresis}: Máxima diferencia en la salida para un mismo valor de entrada según el sentido de la variación (ascendente o descendente).
 % \end{itemize}
 
 
@@ -296,9 +296,9 @@ La recta de referencia, como se ilustra en la Figura~\ref{fig:recta_referencia},
 
 % Existen diferentes formas de definir la recta de referencia. La recta de referencia puede ser elegida basada en las siguientes características dinámicas:
 % \begin{enumerate}
-%     \item \textbf{Linealidad de terminales}: Recta que une el origen y el punto máximo.
-%     \item \textbf{Linealidad a través de cero}: Obliga a que $b=0$.
-%     \item \textbf{Mejor recta de ajuste}: La obtenida por mínimos cuadrados (la más común).
+%     \item \emph{Linealidad de terminales}: Recta que une el origen y el punto máximo.
+%     \item \emph{Linealidad a través de cero}: Obliga a que $b=0$.
+%     \item \emph{Mejor recta de ajuste}: La obtenida por mínimos cuadrados (la más común).
 % \end{enumerate}
 
 \subsection{Histéresis y Repetibilidad}\label{sec:histeresis_repetibilidad}
@@ -376,7 +376,7 @@ La \emph{repetibilidad} es la capacidad de un sensor para entregar la misma sali
         \node[blue] at (1.5,1.95) {*};        
         \node[blue] at (1.5,2.5) {Repetibilidad};
     \end{tikzpicture}
-    \caption{Ejemplo de repetibilidad. Un sensor con buena repetibilidad producirá resultados consistentes bajo las mismas condiciones de prueba.}\label{fig:repetibilidad}
+    \caption[Ejemplo de repetibilidad.]{Ejemplo de repetibilidad. Un sensor con buena repetibilidad producirá resultados consistentes bajo las mismas condiciones de prueba.}\label{fig:repetibilidad}
 \end{marginfigure}
 
 \subsection{Error de Histeresis}
@@ -665,7 +665,7 @@ A partir de este valor, podemos predecir el instante en el que ocurrirá el prim
 La caracterización dinámica obtenida para el sistema ($\zeta = 0.3$ y $\omega_n = \SI{3}{rad/s}$) permite extraer conclusiones críticas sobre la calidad de la medida en régimen transitorio:
 
 \begin{itemize}
-    \item \emph{Frecuencia Amortiguada ($\omega_d$)}: El valor de $\omega_d \approx \SI{2.86}{rad/s}$ determina la \textit{periodicidad del transitorio}. Físicamente, representa la velocidad a la que el sistema oscila antes de alcanzar el equilibrio. Una $\omega_d$ más elevada es un indicador directo de una \textbf{respuesta más rápida}, reduciendo el tiempo necesario para que el sensor reaccione inicialmente, aunque puede comprometer la estabilidad si el amortiguamiento es bajo.
+    \item \emph{Frecuencia Amortiguada ($\omega_d$)}: El valor de $\omega_d \approx \SI{2.86}{rad/s}$ determina la \textit{periodicidad del transitorio}. Físicamente, representa la velocidad a la que el sistema oscila antes de alcanzar el equilibrio. Una $\omega_d$ más elevada es un indicador directo de una \emph{respuesta más rápida}, reduciendo el tiempo necesario para que el sensor reaccione inicialmente, aunque puede comprometer la estabilidad si el amortiguamiento es bajo.
     
     \item \emph{Sobreoscilación Máxima ($M_p$)}: El resultado de \SI{37.2}{\percent} indica que el sensor experimentará un \textit{error dinámico temporal} considerable, superando el valor real de la magnitud física en más de un tercio de su valor de estado estacionario ($K$). 
     

@@ -100,14 +100,108 @@ Frente a los tres mecanismos anteriores --propios del circuito y, por tanto, irr
 \marginnote{\textbf{La pregunta clave:} ante un ruido medido en el laboratorio, lo primero es distinguir si es intrínseco o extrínseco. Si desaparece al apagar un equipo cercano o al reorientar un cable, es interferencia acoplada y tiene solución de diseño. Si persiste en un circuito aislado y apantallado, es ruido intrínseco y solo cabe reducir $R$, $T$ o $\Delta f$, o cambiar de componente.}
 
 \section{Mecanismos de Acoplamiento de Interferencias}\label{sec:acoplamientos}
-% TODO: los cuatro mecanismos clásicos:
-%   - Acoplamiento capacitivo (campo eléctrico, dV/dt alto)
-%   - Acoplamiento inductivo (campo magnético, dI/dt alto, bucles de masa)
-%   - Acoplamiento por impedancia común (tierras compartidas)
-%   - Acoplamiento por radiación (RF, campo lejano)
-% Ejemplo numérico recomendado: el caso del zumbido de red de 50 Hz ya
-% introducido en \label{subsec:ejemplo_zumbido} (capítulo 3) — referenciarlo,
-% no duplicarlo.
+
+Para combatir una interferencia hay que saber primero cómo ha llegado hasta el circuito. La energía de un ruido externo no se transmite por arte de magia: se acopla a través de uno (o varios) de cuatro mecanismos físicos bien definidos, cada uno gobernado por una magnitud eléctrica distinta del circuito agresor y neutralizado por una técnica de diseño diferente~\cite{ott1988noise,paul2006emc}. Los dos primeros --capacitivo e inductivo-- son mecanismos de \emph{campo cercano}: no requieren conexión física alguna entre el agresor y la víctima, y dominan cuando la distancia entre ambos es pequeña frente a la longitud de onda de la interferencia. El tercero, la impedancia común, es en cambio puramente \emph{conducido}: exige que agresor y víctima compartan, aunque solo sea parcialmente, el mismo camino de retorno a tierra. El cuarto, la radiación, solo se vuelve relevante cuando la distancia a la fuente crece lo suficiente como para que los campos eléctrico y magnético dejen de poder analizarse por separado y se propaguen acoplados como una única onda electromagnética. Distinguir cuál de los cuatro está actuando --antes de intentar ninguna solución-- es el paso más rentable del diseño EMC, porque una técnica muy eficaz contra un mecanismo (p. ej. un blindaje electrostático) puede ser completamente inútil contra otro (p. ej. un campo magnético de baja frecuencia). La Tabla~\ref{tab:mecanismos_acoplamiento} resume los cuatro mecanismos, que se detallan uno a uno en el resto de esta sección y que dan pie, cada uno, a una técnica de mitigación distinta desarrollada en las Secciones~\ref{sec:apantallamiento} a~\ref{sec:filtrado_emi}.
+
+\begin{table}
+    \centering
+    \begin{tabularx}{\linewidth}{@{}l>{\centering\arraybackslash}Xcc@{}}
+        \toprule
+        \textbf{Mecanismo} & \shortstack{\textbf{Campo}\\\textbf{dominante}} & \shortstack{\textbf{Variable}\\\textbf{de acoplo}} & \shortstack{\textbf{Condición}\\\textbf{del agresor}} \\
+        \midrule
+        Capacitivo & Eléctrico & $C_p$ & $dV/dt$ alto \\
+        Inductivo & Magnético & $M$ & $dI/dt$ alto \\
+        Impedancia común & Conducido & $Z_g$ & Retorno compartido \\
+        Radiado & Electromagnético & --- & Campo lejano \\
+        \bottomrule
+    \end{tabularx}
+    \caption[Los cuatro mecanismos de acoplamiento de interferencias.]{Los cuatro mecanismos por los que una interferencia llega a un circuito de medida. Los dos primeros son de campo cercano (predominan a corta distancia); el tercero es puramente conducido; el cuarto solo es relevante cuando la distancia a la fuente supera la frontera de campo lejano de la ecuación~\eqref{eq:frontera_campo_lejano}.}\label{tab:mecanismos_acoplamiento}
+\end{table}
+
+\subsection{Acoplamiento Capacitivo}\label{sub:acoplamiento_capacitivo}
+
+Dos conductores próximos, aunque no estén unidos eléctricamente, forman siempre un pequeño condensador parásito $C_p$ a través del aire o del propio circuito impreso. Si uno de ellos (el agresor) tiene una tensión que cambia rápidamente en el tiempo, $C_p$ inyecta una corriente de ruido en el segundo conductor (la víctima):
+\begin{equation}\label{eq:acoplo_capacitivo}
+    i_n(t) = C_p \frac{dV_n}{dt}
+\end{equation}
+Esta corriente, al circular por la impedancia de entrada $Z_{in}$ de la etapa víctima, genera una tensión de ruido $v_n \approx i_n \cdot Z_{in}$. De la ecuación~\eqref{eq:acoplo_capacitivo} se extraen las dos variables que agravan el problema: cuanto mayor sea $dV/dt$ (conmutación rápida, alta tensión) y cuanto mayor sea $Z_{in}$ del circuito víctima, mayor es el ruido acoplado. Por eso los nodos de alta impedancia --como la entrada de un amplificador de carga o de un sensor capacitivo-- son los más vulnerables a este mecanismo.
+
+\begin{marginfigure}
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}[american, scale=1]
+        \ctikzset{capacitors/scale=0.7}
+        \draw[thick, red] (0,3) -- (3,3);
+        \node[red, right] at (2.9,3.3) {$V_n(t)$ (agresor)};
+        \draw (1.5,3) to[C, l_=$C_p$] (1.5,1.5);
+        \draw[thick, blue] (0,1.5) -- (3,1.5);
+        \node[blue, right] at (2.9,1.2) {víctima};
+        \draw (0.4,1.5) to[R, l_=$Z_{in}$] (0.4,0) node[ground]{};
+        \draw[->, thick] (1.9,1.5) -- (1.9,0.7) node[midway, right]{$i_n$};
+    \end{tikzpicture}
+    \caption[Modelo del acoplamiento capacitivo.]{Modelo del acoplamiento capacitivo. La capacidad parásita $C_p$ entre el conductor agresor y la línea víctima inyecta una corriente $i_n$ proporcional a $dV_n/dt$, que se convierte en tensión de ruido al circular por $Z_{in}$.}\label{fig:acoplamiento_capacitivo}
+\end{marginfigure}
+
+Es, de hecho, el mismo mecanismo que ya vimos en el Capítulo~\ref{cap:reactivos} al estudiar la capacidad parásita del cable de un sensor capacitivo (Figura~\ref{fig:cable_parasito}): allí el problema era la atenuación de la señal útil, aquí es la inyección de una señal ajena, pero en ambos casos la física es idéntica. Por eso la misma solución --la guarda activa de la Figura~\ref{fig:guarda_activa}, que mantiene a igual potencial el conductor de señal y su entorno para anular el $dV/dt$ efectivo entre ambos-- es también la primera línea de defensa contra el acoplamiento capacitivo, junto con el blindaje electrostático de la Sección~\ref{sec:apantallamiento}.
+
+\subsection{Acoplamiento Inductivo}\label{sub:acoplamiento_inductivo}
+
+Si el conductor agresor transporta una corriente $i_A(t)$ que varía rápidamente, genera un campo magnético que enlaza cualquier bucle cercano a través de la inductancia mutua $M$, induciendo en él una fuerza electromotriz de ruido:
+\begin{equation}\label{eq:acoplo_inductivo}
+    v_n(t) = -M \frac{di_A}{dt} = -\frac{d\Phi}{dt}
+\end{equation}
+A diferencia del acoplamiento capacitivo, aquí la variable crítica no es la tensión sino la corriente del agresor ($dI/dt$ alto: motores, relés, conmutación de potencia) y, sobre todo, el \emph{área del bucle víctima}: a mayor superficie encerrada por el cableado de medida, mayor flujo $\Phi$ capturado y mayor $v_n$ inducida.
+
+\begin{marginfigure}
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}[scale=1]
+        \draw[thick, red] (0,0) rectangle (1.6,1.6);
+        \node[red] at (0.8,1.9) {$i_A(t)$};
+        \draw[red, ->] (0.8,1.6) -- (1.0,1.6);
+        \draw[<->, gray, dashed] (1.8,0.8) -- (2.6,0.8);
+        \node[gray, above] at (2.2,0.9) {$M$};
+        \draw[thick, blue] (2.8,0) rectangle (4.4,1.6);
+        \node[blue] at (3.6,1.9) {$v_n(t)$};
+    \end{tikzpicture}
+    \caption[Modelo del acoplamiento inductivo.]{Modelo del acoplamiento inductivo. La corriente variable del bucle agresor genera un flujo magnético que, a través de la inductancia mutua $M$, induce una tensión de ruido $v_n$ en el bucle víctima.}\label{fig:acoplamiento_inductivo}
+\end{marginfigure}
+
+Este es precisamente el mecanismo detrás del ejemplo del zumbido de red que ya resolvimos en la Sección~\ref{subsec:ejemplo_zumbido} del Capítulo~\ref{cap:resistivos}: el campo variable de un motor cercano induce una tensión prácticamente idéntica en ambos hilos del cableado (Figura~\ref{fig:ejemplo_diferencial}), porque ambos encierran casi el mismo bucle con la masa de referencia. Trenzar los dos conductores (par trenzado) no elimina $M$, pero sí consigue que bucles consecutivos capturen flujos de signo alterno que se cancelan entre sí, reduciendo el área de bucle neta a casi cero --la razón física, más allá del argumento de modo común de la Sección~\ref{sec:medida_diferencial}, por la que el par trenzado es tan eficaz.
+
+\subsection{Acoplamiento por Impedancia Común}\label{sub:acoplamiento_impedancia_comun}
+
+Los dos mecanismos anteriores son de \emph{campo}: no requieren conexión física entre agresor y víctima. El acoplamiento por impedancia común es distinto porque es \emph{conducido}: ocurre cuando dos circuitos comparten, aunque sea parcialmente, el mismo camino de retorno a tierra. Ese tramo compartido nunca es una impedancia nula --tiene una resistencia y una inductancia parásita $Z_g$-- por lo que la corriente de retorno de un circuito A genera, al atravesar $Z_g$, una caída de tensión que se suma directamente a la referencia de tierra del circuito B:
+\begin{equation}\label{eq:acoplo_impedancia_comun}
+    v_n = Z_g \cdot i_A
+\end{equation}
+
+\begin{marginfigure}
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}[american, scale=1]
+        \draw[thick, red, ->] (-1.3,2) -- (0,2) node[midway, above, black]{$i_A$};
+        \node[red, left] at (-1.4,2) {A};
+        \draw[thick, blue, ->] (-1.3,0) -- (0,0) node[midway, below, black]{$i_B$};
+        \node[blue, left] at (-1.4,0) {B};
+        \draw (0,2) to[R, l=$Z_g$] (0,0);
+        \draw (0,0) -- (0,-0.7) node[ground]{};
+        \node[gray, right] at (0.1,1) {$v_n = Z_g \, i_A$};
+    \end{tikzpicture}
+    \caption[Modelo del acoplamiento por impedancia común.]{Modelo del acoplamiento por impedancia común. Los retornos de los circuitos A y B comparten un tramo de tierra con impedancia $Z_g$; la corriente de retorno de A ($i_A$) contamina la referencia de B con una tensión $v_n = Z_g\, i_A$.}\label{fig:acoplamiento_impedancia_comun}
+\end{marginfigure}
+
+Cuanto más ruidoso sea el circuito A (una etapa de potencia, un motor, un relé) y más larga o fina --por tanto, más resistiva e inductiva-- sea la pista o el cable de tierra compartido, mayor es $v_n$. Es el mecanismo detrás del célebre \emph{bucle de tierra} (\textit{ground loop}), y su solución de fondo no es un componente sino una topología: la conexión a tierra en un único punto (\textit{single-point}), que estudiaremos en la Sección~\ref{sec:tierras}.
+
+\subsection{Acoplamiento por Radiación}\label{sub:acoplamiento_radiacion}
+
+Los tres mecanismos anteriores son de \emph{campo cercano}: dominan cuando la distancia $d$ entre la fuente y la víctima es mucho menor que la longitud de onda $\lambda$ de la interferencia. Cuando $d$ crece --o cuando la frecuencia es lo bastante alta como para que $\lambda$ se haga comparable a las dimensiones del circuito-- los campos eléctrico y magnético dejan de poder tratarse por separado y se propagan acoplados como una onda electromagnética completa: la fuente actúa como una antena, radiando energía que cualquier cable o pista suficientemente largo --actuando ahora como antena receptora-- puede captar. La frontera convencional entre campo cercano y campo lejano se sitúa en
+\begin{equation}\label{eq:frontera_campo_lejano}
+    d_{far} = \frac{\lambda}{2\pi}, \qquad \lambda = \frac{c}{f}
+\end{equation}
+por debajo de la cual predominan los mecanismos capacitivo e inductivo ya vistos, y por encima de la cual el problema pasa a tratarse como radiación en sentido estricto. Este es el mecanismo dominante en interferencias de radiofrecuencia (telefonía móvil, Wi-Fi, equipos de soldadura por RF) y es también la vía por la que un circuito digital de conmutación rápida puede convertirse, él mismo, en fuente de emisiones no intencionadas. La Sección~\ref{sec:normativa_emc} retoma esta frontera --emisión radiada frente a conducida-- al presentar la normativa de compatibilidad electromagnética que obliga a limitar ambas.
+
+\marginnote{\textbf{Diagnóstico rápido en el laboratorio:} si el ruido desaparece al separar físicamente cables (capacitivo o inductivo), al reordenar el cableado de tierra (impedancia común) o al alejarse de una fuente de RF conocida (radiado), ya se sabe qué mecanismo atacar, y por tanto qué técnica de las Secciones~\ref{sec:apantallamiento} a~\ref{sec:filtrado_emi} aplicar primero.}
 
 \section{Técnicas de Apantallamiento (Blindaje)}\label{sec:apantallamiento}
 % TODO: blindaje electrostático (jaula de Faraday, conexión del blindaje

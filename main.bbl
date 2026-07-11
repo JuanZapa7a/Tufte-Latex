@@ -1,4 +1,4 @@
-\begin{thebibliography}{9}
+\begin{thebibliography}{10}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -59,5 +59,12 @@ Ram{\'o}n Pall{\'a}s-Areny and John~G. Webster.
 \newblock \emph{Sensors and Signal Conditioning}.
 \newblock Wiley-Interscience, New York, 2nd edition, 2000.
 \newblock ISBN 978-0-471-33232-9.
+
+\bibitem[Paul(2006)]{paul2006emc}
+Clayton~R. Paul.
+\newblock \emph{Introduction to Electromagnetic Compatibility}.
+\newblock Wiley-Interscience, Hoboken, NJ, 2nd edition, 2006.
+\newblock ISBN 978-0-471-75500-5.
+\newblock Referencia estándar sobre los mecanismos físicos de acoplamiento (capacitivo, inductivo, impedancia común y radiado) en compatibilidad electromagnética.
 
 \end{thebibliography}

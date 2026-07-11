@@ -752,6 +752,8 @@
 \newlabel{sec:fuentes_ruido}{{9.1}{99}{Fuentes y Clasificación del Ruido}{section.9.1}{}}
 \@writefile{toc}{\contentsline {subsection}{Ruido Intrínseco}{99}{subsection*.166}\protected@file@percent }
 \newlabel{sub:ruido_intrinseco}{{9.1}{99}{Ruido Intrínseco}{subsection*.166}{}}
+\citation{ott1988noise}
+\citation{paul2006emc}
 \@writefile{lof}{\contentsline {figure}{\numberline {9.1}{\ignorespaces Densidad espectral de potencia del ruido intrínseco.}}{100}{figure.9.1}\protected@file@percent }
 \newlabel{fig:psd_ruido}{{9.1}{100}{Ruido de Flicker o $1/f$}{figure.9.1}{}}
 \@writefile{toc}{\contentsline {paragraph}{Ruido Térmico (Johnson-Nyquist)}{100}{paragraph*.167}\protected@file@percent }
@@ -764,62 +766,84 @@
 \@writefile{toc}{\contentsline {paragraph}{Ruido de Flicker o $1/f$}{100}{paragraph*.169}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{Ruido Extrínseco o Interferencia}{100}{subsection*.170}\protected@file@percent }
 \newlabel{sub:ruido_extrinseco}{{9.1}{100}{Ruido Extrínseco o Interferencia}{subsection*.170}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9.2}{\ignorespaces Modelo del acoplamiento capacitivo.}}{101}{figure.9.2}\protected@file@percent }
+\newlabel{fig:acoplamiento_capacitivo}{{9.2}{101}{Acoplamiento Capacitivo}{figure.9.2}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {9.2}Mecanismos de Acoplamiento de Interferencias}{101}{section.9.2}\protected@file@percent }
 \newlabel{sec:acoplamientos}{{9.2}{101}{Mecanismos de Acoplamiento de Interferencias}{section.9.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {9.3}Técnicas de Apantallamiento (Blindaje)}{101}{section.9.3}\protected@file@percent }
-\newlabel{sec:apantallamiento}{{9.3}{101}{Técnicas de Apantallamiento (Blindaje)}{section.9.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {9.4}Estrategias de Conexión a Tierra}{101}{section.9.4}\protected@file@percent }
-\newlabel{sec:tierras}{{9.4}{101}{Estrategias de Conexión a Tierra}{section.9.4}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {9.5}Filtrado EMI}{101}{section.9.5}\protected@file@percent }
-\newlabel{sec:filtrado_emi}{{9.5}{101}{Filtrado EMI}{section.9.5}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {9.6}Protección Frente a Descargas Electrostáticas (ESD)}{101}{section.9.6}\protected@file@percent }
-\newlabel{sec:esd}{{9.6}{101}{Protección Frente a Descargas Electrostáticas (ESD)}{section.9.6}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {9.7}Normativa y Certificación EMC}{101}{section.9.7}\protected@file@percent }
-\newlabel{sec:normativa_emc}{{9.7}{101}{Normativa y Certificación EMC}{section.9.7}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {9.8}Resumen}{101}{section.9.8}\protected@file@percent }
-\newlabel{sec:resumen_ruido}{{9.8}{101}{Resumen}{section.9.8}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {10}Sensores Industriales, Sensores Inteligentes y Buses Digitales}{103}{chapter.10}\protected@file@percent }
+\newpmemlabel{^_107}{101}
+\newpmemlabel{^_108}{101}
+\newlabel{tab:mecanismos_acoplamiento}{{9.2}{101}{Mecanismos de Acoplamiento de Interferencias}{section.9.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {9.2}{\ignorespaces Los cuatro mecanismos de acoplamiento de interferencias.}}{101}{table.9.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{Acoplamiento Capacitivo}{101}{subsection*.171}\protected@file@percent }
+\newlabel{sub:acoplamiento_capacitivo}{{9.2}{101}{Acoplamiento Capacitivo}{subsection*.171}{}}
+\newlabel{eq:acoplo_capacitivo}{{9.2}{101}{Acoplamiento Capacitivo}{equation.9.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9.3}{\ignorespaces Modelo del acoplamiento inductivo.}}{102}{figure.9.3}\protected@file@percent }
+\newlabel{fig:acoplamiento_inductivo}{{9.3}{102}{Acoplamiento Inductivo}{figure.9.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9.4}{\ignorespaces Modelo del acoplamiento por impedancia común.}}{102}{figure.9.4}\protected@file@percent }
+\newlabel{fig:acoplamiento_impedancia_comun}{{9.4}{102}{Acoplamiento por Impedancia Común}{figure.9.4}{}}
+\@writefile{toc}{\contentsline {subsection}{Acoplamiento Inductivo}{102}{subsection*.172}\protected@file@percent }
+\newlabel{sub:acoplamiento_inductivo}{{9.2}{102}{Acoplamiento Inductivo}{subsection*.172}{}}
+\newlabel{eq:acoplo_inductivo}{{9.3}{102}{Acoplamiento Inductivo}{equation.9.3}{}}
+\@writefile{toc}{\contentsline {subsection}{Acoplamiento por Impedancia Común}{102}{subsection*.173}\protected@file@percent }
+\newlabel{sub:acoplamiento_impedancia_comun}{{9.2}{102}{Acoplamiento por Impedancia Común}{subsection*.173}{}}
+\newlabel{eq:acoplo_impedancia_comun}{{9.4}{102}{Acoplamiento por Impedancia Común}{equation.9.4}{}}
+\@writefile{toc}{\contentsline {subsection}{Acoplamiento por Radiación}{102}{subsection*.174}\protected@file@percent }
+\newlabel{sub:acoplamiento_radiacion}{{9.2}{102}{Acoplamiento por Radiación}{subsection*.174}{}}
+\newlabel{eq:frontera_campo_lejano}{{9.5}{103}{Acoplamiento por Radiación}{equation.9.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {9.3}Técnicas de Apantallamiento (Blindaje)}{103}{section.9.3}\protected@file@percent }
+\newlabel{sec:apantallamiento}{{9.3}{103}{Técnicas de Apantallamiento (Blindaje)}{section.9.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {9.4}Estrategias de Conexión a Tierra}{103}{section.9.4}\protected@file@percent }
+\newlabel{sec:tierras}{{9.4}{103}{Estrategias de Conexión a Tierra}{section.9.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {9.5}Filtrado EMI}{103}{section.9.5}\protected@file@percent }
+\newlabel{sec:filtrado_emi}{{9.5}{103}{Filtrado EMI}{section.9.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {9.6}Protección Frente a Descargas Electrostáticas (ESD)}{103}{section.9.6}\protected@file@percent }
+\newlabel{sec:esd}{{9.6}{103}{Protección Frente a Descargas Electrostáticas (ESD)}{section.9.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {9.7}Normativa y Certificación EMC}{103}{section.9.7}\protected@file@percent }
+\newlabel{sec:normativa_emc}{{9.7}{103}{Normativa y Certificación EMC}{section.9.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {9.8}Resumen}{103}{section.9.8}\protected@file@percent }
+\newlabel{sec:resumen_ruido}{{9.8}{103}{Resumen}{section.9.8}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {10}Sensores Industriales, Sensores Inteligentes y Buses Digitales}{105}{chapter.10}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{cap:buses}{{10}{103}{Sensores Industriales, Sensores Inteligentes y Buses Digitales}{chapter.10}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {10.1}El Lazo de Corriente 4-20 mA}{103}{section.10.1}\protected@file@percent }
-\newlabel{sec:lazo_420}{{10.1}{103}{El Lazo de Corriente 4-20 mA}{section.10.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {10.2}El Protocolo HART}{103}{section.10.2}\protected@file@percent }
-\newlabel{sec:hart}{{10.2}{103}{El Protocolo HART}{section.10.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {10.3}Buses de Comunicación de Sensores: I2C y SPI}{103}{section.10.3}\protected@file@percent }
-\newlabel{sec:i2c_spi}{{10.3}{103}{Buses de Comunicación de Sensores: I2C y SPI}{section.10.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {10.4}Sensores Inteligentes (\textit  {Smart Sensors})}{103}{section.10.4}\protected@file@percent }
-\newlabel{sec:smart_sensors}{{10.4}{103}{Sensores Inteligentes (\textit {Smart Sensors})}{section.10.4}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {10.5}Resumen}{103}{section.10.5}\protected@file@percent }
-\newlabel{sec:resumen_buses}{{10.5}{103}{Resumen}{section.10.5}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {11}Instrumentación Virtual y Programable}{105}{chapter.11}\protected@file@percent }
+\newlabel{cap:buses}{{10}{105}{Sensores Industriales, Sensores Inteligentes y Buses Digitales}{chapter.10}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {10.1}El Lazo de Corriente 4-20 mA}{105}{section.10.1}\protected@file@percent }
+\newlabel{sec:lazo_420}{{10.1}{105}{El Lazo de Corriente 4-20 mA}{section.10.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {10.2}El Protocolo HART}{105}{section.10.2}\protected@file@percent }
+\newlabel{sec:hart}{{10.2}{105}{El Protocolo HART}{section.10.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {10.3}Buses de Comunicación de Sensores: I2C y SPI}{105}{section.10.3}\protected@file@percent }
+\newlabel{sec:i2c_spi}{{10.3}{105}{Buses de Comunicación de Sensores: I2C y SPI}{section.10.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {10.4}Sensores Inteligentes (\textit  {Smart Sensors})}{105}{section.10.4}\protected@file@percent }
+\newlabel{sec:smart_sensors}{{10.4}{105}{Sensores Inteligentes (\textit {Smart Sensors})}{section.10.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {10.5}Resumen}{105}{section.10.5}\protected@file@percent }
+\newlabel{sec:resumen_buses}{{10.5}{105}{Resumen}{section.10.5}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {11}Instrumentación Virtual y Programable}{107}{chapter.11}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{cap:instrumentacion_virtual}{{11}{105}{Instrumentación Virtual y Programable}{chapter.11}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {11.1}El Concepto de Instrumentación Virtual}{105}{section.11.1}\protected@file@percent }
-\newlabel{sec:instrumentacion_virtual}{{11.1}{105}{El Concepto de Instrumentación Virtual}{section.11.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {11.2}Buses de Control y el Estándar SCPI}{105}{section.11.2}\protected@file@percent }
-\newlabel{sec:scpi}{{11.2}{105}{Buses de Control y el Estándar SCPI}{section.11.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {11.3}Control de Instrumentos con Python (PyVISA)}{105}{section.11.3}\protected@file@percent }
-\newlabel{sec:pyvisa}{{11.3}{105}{Control de Instrumentos con Python (PyVISA)}{section.11.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {11.4}Entornos Gráficos de Programación: LabVIEW}{105}{section.11.4}\protected@file@percent }
-\newlabel{sec:labview}{{11.4}{105}{Entornos Gráficos de Programación: LabVIEW}{section.11.4}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {11.5}Resumen}{105}{section.11.5}\protected@file@percent }
-\newlabel{sec:resumen_instrumentacion_virtual}{{11.5}{105}{Resumen}{section.11.5}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {12}Integración y Diseño de Sistemas de Instrumentación}{107}{chapter.12}\protected@file@percent }
+\newlabel{cap:instrumentacion_virtual}{{11}{107}{Instrumentación Virtual y Programable}{chapter.11}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {11.1}El Concepto de Instrumentación Virtual}{107}{section.11.1}\protected@file@percent }
+\newlabel{sec:instrumentacion_virtual}{{11.1}{107}{El Concepto de Instrumentación Virtual}{section.11.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {11.2}Buses de Control y el Estándar SCPI}{107}{section.11.2}\protected@file@percent }
+\newlabel{sec:scpi}{{11.2}{107}{Buses de Control y el Estándar SCPI}{section.11.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {11.3}Control de Instrumentos con Python (PyVISA)}{107}{section.11.3}\protected@file@percent }
+\newlabel{sec:pyvisa}{{11.3}{107}{Control de Instrumentos con Python (PyVISA)}{section.11.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {11.4}Entornos Gráficos de Programación: LabVIEW}{107}{section.11.4}\protected@file@percent }
+\newlabel{sec:labview}{{11.4}{107}{Entornos Gráficos de Programación: LabVIEW}{section.11.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {11.5}Resumen}{107}{section.11.5}\protected@file@percent }
+\newlabel{sec:resumen_instrumentacion_virtual}{{11.5}{107}{Resumen}{section.11.5}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {12}Integración y Diseño de Sistemas de Instrumentación}{109}{chapter.12}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{cap:integracion}{{12}{107}{Integración y Diseño de Sistemas de Instrumentación}{chapter.12}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {12.1}Metodología de Diseño de un Sistema de Instrumentación}{107}{section.12.1}\protected@file@percent }
-\newlabel{sec:metodologia_diseno}{{12.1}{107}{Metodología de Diseño de un Sistema de Instrumentación}{section.12.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {12.2}El Presupuesto de Errores de Extremo a Extremo}{107}{section.12.2}\protected@file@percent }
-\newlabel{sec:presupuesto_global}{{12.2}{107}{El Presupuesto de Errores de Extremo a Extremo}{section.12.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {12.3}Caso de Estudio 1: Medida de Potencia Óptica en un Enlace de Fibra}{107}{section.12.3}\protected@file@percent }
-\newlabel{sec:caso_fibra}{{12.3}{107}{Caso de Estudio 1: Medida de Potencia Óptica en un Enlace de Fibra}{section.12.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {12.4}Caso de Estudio 2: Monitorización de Temperatura con Salida 4-20 mA}{107}{section.12.4}\protected@file@percent }
-\newlabel{sec:caso_temperatura}{{12.4}{107}{Caso de Estudio 2: Monitorización de Temperatura con Salida 4-20 mA}{section.12.4}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {12.5}Resumen}{107}{section.12.5}\protected@file@percent }
-\newlabel{sec:conclusiones_curso}{{12.5}{107}{Resumen}{section.12.5}{}}
+\newlabel{cap:integracion}{{12}{109}{Integración y Diseño de Sistemas de Instrumentación}{chapter.12}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {12.1}Metodología de Diseño de un Sistema de Instrumentación}{109}{section.12.1}\protected@file@percent }
+\newlabel{sec:metodologia_diseno}{{12.1}{109}{Metodología de Diseño de un Sistema de Instrumentación}{section.12.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {12.2}El Presupuesto de Errores de Extremo a Extremo}{109}{section.12.2}\protected@file@percent }
+\newlabel{sec:presupuesto_global}{{12.2}{109}{El Presupuesto de Errores de Extremo a Extremo}{section.12.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {12.3}Caso de Estudio 1: Medida de Potencia Óptica en un Enlace de Fibra}{109}{section.12.3}\protected@file@percent }
+\newlabel{sec:caso_fibra}{{12.3}{109}{Caso de Estudio 1: Medida de Potencia Óptica en un Enlace de Fibra}{section.12.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {12.4}Caso de Estudio 2: Monitorización de Temperatura con Salida 4-20 mA}{109}{section.12.4}\protected@file@percent }
+\newlabel{sec:caso_temperatura}{{12.4}{109}{Caso de Estudio 2: Monitorización de Temperatura con Salida 4-20 mA}{section.12.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {12.5}Resumen}{109}{section.12.5}\protected@file@percent }
+\newlabel{sec:conclusiones_curso}{{12.5}{109}{Resumen}{section.12.5}{}}
 \bibdata{references}
 \bibcite{bentley2004measurement}{{1}{2004}{{Bentley}}{{}}}
 \bibcite{fraden2015sensors}{{2}{2015}{{Fraden}}{{}}}
@@ -830,9 +854,10 @@
 \bibcite{kester2005dataconversion}{{7}{2005}{{Kester and {Analog Devices, Inc.}}}{{}}}
 \bibcite{ott1988noise}{{8}{1988}{{Ott}}{{}}}
 \bibcite{pallasareny2000sensors}{{9}{2000}{{Pall{\'a}s-Areny and Webster}}{{}}}
+\bibcite{paul2006emc}{{10}{2006}{{Paul}}{{}}}
 \bibstyle{plainnat}
-\@writefile{toc}{\contentsline {chapter}{Bibliograf\'{\i }a}{109}{appendix*.171}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{Bibliograf\'{\i }a}{111}{appendix*.175}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \ttl@finishall
-\gdef \@abspage@last{111}
+\gdef \@abspage@last{113}

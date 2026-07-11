@@ -221,29 +221,33 @@
 \contentsline {paragraph}{Ruido de Flicker o $1/f$}{100}{paragraph*.169}%
 \contentsline {subsection}{Ruido Extrínseco o Interferencia}{100}{subsection*.170}%
 \contentsline {section}{\numberline {9.2}Mecanismos de Acoplamiento de Interferencias}{101}{section.9.2}%
-\contentsline {section}{\numberline {9.3}Técnicas de Apantallamiento (Blindaje)}{101}{section.9.3}%
-\contentsline {section}{\numberline {9.4}Estrategias de Conexión a Tierra}{101}{section.9.4}%
-\contentsline {section}{\numberline {9.5}Filtrado EMI}{101}{section.9.5}%
-\contentsline {section}{\numberline {9.6}Protección Frente a Descargas Electrostáticas (ESD)}{101}{section.9.6}%
-\contentsline {section}{\numberline {9.7}Normativa y Certificación EMC}{101}{section.9.7}%
-\contentsline {section}{\numberline {9.8}Resumen}{101}{section.9.8}%
-\contentsline {chapter}{\numberline {10}Sensores Industriales, Sensores Inteligentes y Buses Digitales}{103}{chapter.10}%
-\contentsline {section}{\numberline {10.1}El Lazo de Corriente 4-20 mA}{103}{section.10.1}%
-\contentsline {section}{\numberline {10.2}El Protocolo HART}{103}{section.10.2}%
-\contentsline {section}{\numberline {10.3}Buses de Comunicación de Sensores: I2C y SPI}{103}{section.10.3}%
-\contentsline {section}{\numberline {10.4}Sensores Inteligentes (\textit {Smart Sensors})}{103}{section.10.4}%
-\contentsline {section}{\numberline {10.5}Resumen}{103}{section.10.5}%
-\contentsline {chapter}{\numberline {11}Instrumentación Virtual y Programable}{105}{chapter.11}%
-\contentsline {section}{\numberline {11.1}El Concepto de Instrumentación Virtual}{105}{section.11.1}%
-\contentsline {section}{\numberline {11.2}Buses de Control y el Estándar SCPI}{105}{section.11.2}%
-\contentsline {section}{\numberline {11.3}Control de Instrumentos con Python (PyVISA)}{105}{section.11.3}%
-\contentsline {section}{\numberline {11.4}Entornos Gráficos de Programación: LabVIEW}{105}{section.11.4}%
-\contentsline {section}{\numberline {11.5}Resumen}{105}{section.11.5}%
-\contentsline {chapter}{\numberline {12}Integración y Diseño de Sistemas de Instrumentación}{107}{chapter.12}%
-\contentsline {section}{\numberline {12.1}Metodología de Diseño de un Sistema de Instrumentación}{107}{section.12.1}%
-\contentsline {section}{\numberline {12.2}El Presupuesto de Errores de Extremo a Extremo}{107}{section.12.2}%
-\contentsline {section}{\numberline {12.3}Caso de Estudio 1: Medida de Potencia Óptica en un Enlace de Fibra}{107}{section.12.3}%
-\contentsline {section}{\numberline {12.4}Caso de Estudio 2: Monitorización de Temperatura con Salida 4-20 mA}{107}{section.12.4}%
-\contentsline {section}{\numberline {12.5}Resumen}{107}{section.12.5}%
-\contentsline {chapter}{Bibliograf\'{\i }a}{109}{appendix*.171}%
+\contentsline {subsection}{Acoplamiento Capacitivo}{101}{subsection*.171}%
+\contentsline {subsection}{Acoplamiento Inductivo}{102}{subsection*.172}%
+\contentsline {subsection}{Acoplamiento por Impedancia Común}{102}{subsection*.173}%
+\contentsline {subsection}{Acoplamiento por Radiación}{102}{subsection*.174}%
+\contentsline {section}{\numberline {9.3}Técnicas de Apantallamiento (Blindaje)}{103}{section.9.3}%
+\contentsline {section}{\numberline {9.4}Estrategias de Conexión a Tierra}{103}{section.9.4}%
+\contentsline {section}{\numberline {9.5}Filtrado EMI}{103}{section.9.5}%
+\contentsline {section}{\numberline {9.6}Protección Frente a Descargas Electrostáticas (ESD)}{103}{section.9.6}%
+\contentsline {section}{\numberline {9.7}Normativa y Certificación EMC}{103}{section.9.7}%
+\contentsline {section}{\numberline {9.8}Resumen}{103}{section.9.8}%
+\contentsline {chapter}{\numberline {10}Sensores Industriales, Sensores Inteligentes y Buses Digitales}{105}{chapter.10}%
+\contentsline {section}{\numberline {10.1}El Lazo de Corriente 4-20 mA}{105}{section.10.1}%
+\contentsline {section}{\numberline {10.2}El Protocolo HART}{105}{section.10.2}%
+\contentsline {section}{\numberline {10.3}Buses de Comunicación de Sensores: I2C y SPI}{105}{section.10.3}%
+\contentsline {section}{\numberline {10.4}Sensores Inteligentes (\textit {Smart Sensors})}{105}{section.10.4}%
+\contentsline {section}{\numberline {10.5}Resumen}{105}{section.10.5}%
+\contentsline {chapter}{\numberline {11}Instrumentación Virtual y Programable}{107}{chapter.11}%
+\contentsline {section}{\numberline {11.1}El Concepto de Instrumentación Virtual}{107}{section.11.1}%
+\contentsline {section}{\numberline {11.2}Buses de Control y el Estándar SCPI}{107}{section.11.2}%
+\contentsline {section}{\numberline {11.3}Control de Instrumentos con Python (PyVISA)}{107}{section.11.3}%
+\contentsline {section}{\numberline {11.4}Entornos Gráficos de Programación: LabVIEW}{107}{section.11.4}%
+\contentsline {section}{\numberline {11.5}Resumen}{107}{section.11.5}%
+\contentsline {chapter}{\numberline {12}Integración y Diseño de Sistemas de Instrumentación}{109}{chapter.12}%
+\contentsline {section}{\numberline {12.1}Metodología de Diseño de un Sistema de Instrumentación}{109}{section.12.1}%
+\contentsline {section}{\numberline {12.2}El Presupuesto de Errores de Extremo a Extremo}{109}{section.12.2}%
+\contentsline {section}{\numberline {12.3}Caso de Estudio 1: Medida de Potencia Óptica en un Enlace de Fibra}{109}{section.12.3}%
+\contentsline {section}{\numberline {12.4}Caso de Estudio 2: Monitorización de Temperatura con Salida 4-20 mA}{109}{section.12.4}%
+\contentsline {section}{\numberline {12.5}Resumen}{109}{section.12.5}%
+\contentsline {chapter}{Bibliograf\'{\i }a}{111}{appendix*.175}%
 \contentsfinish 

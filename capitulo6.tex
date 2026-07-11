@@ -36,7 +36,7 @@ El principio físico subyacente es el \emph{efecto Seebeck}, descubierto en 1821
         % Conexión al voltímetro
         \draw[thick] (2,2) -- (2.5,2);
         \draw[thick] (2,0) -- (2.5,0);
-        \draw (2.7,1) circle (0.3) node[font=\tiny] {V};
+        \draw (2.7,1) circle (0.3) node {V};
         \draw (2.5,2) |- (2.7,1.3);
         \draw (2.5,0) |- (2.7,0.7);
         
@@ -162,19 +162,19 @@ Es el único que utiliza cobre en uno de sus hilos, lo que facilita enormemente 
             axis lines=left, grid=both,
             grid style={line width=.1pt, draw=gray!10},
             font=\scriptsize,
-            legend style={at={(0.05,0.95)}, anchor=north west, font=\tiny, draw=none}
+            legend style={at={(0.05,0.95)}, anchor=north west, draw=none}
         ]
             % E: ~68uV/C
             \addplot[ultra thick, purple, domain=0:900] {0.068*x};
-            \node[purple, font=\tiny] at (axis cs:700, 65) {Tipo E};
-            
+            \node[purple] at (axis cs:700, 65) {Tipo E};
+
             % K: ~41uV/C
             \addplot[ultra thick, red, domain=0:1200] {0.041*x};
-            \node[red, font=\tiny] at (axis cs:1000, 48) {Tipo K};
-            
+            \node[red] at (axis cs:1000, 48) {Tipo K};
+
             % S: ~10uV/C (más curvado)
             \addplot[ultra thick, blue, domain=0:1200] {0.008*x + 0.000004*x^2};
-            \node[blue, font=\tiny] at (axis cs:1000, 18) {Tipo S};
+            \node[blue] at (axis cs:1000, 18) {Tipo S};
         \end{axis}
     \end{tikzpicture}
     \caption[Comparativa de salida de tensión entre termopares.]{Comparativa de salida de tensión. El Tipo E ofrece la mayor relación señal-ruido, mientras que el Tipo S se reserva para aplicaciones donde la estabilidad es prioritaria sobre la amplitud de señal.}\label{fig:comparativa_mv}
@@ -234,7 +234,7 @@ Dentro del bloque isotérmico se coloca un sensor de temperatura auxiliar (típi
         \fill[black] (2.2,2) circle (2pt) node[above right] {Cu};
         \fill[black] (2.2,1) circle (2pt) node[below right] {Cu};
         \draw[blue, thick] (3.5, 0.99) to[R, l=NTC, color=blue] (3.5, 2.01);
-        \node[blue, align=center, font=\tiny] at (3.5, 0.6) {Sensor \\ $T_{ref}$};
+        \node[blue, align=center] at (3.5, 0.6) {Sensor \\ $T_{ref}$};
         
         % Hacia el voltímetro
         \draw (2.2,2) -- (4.5,2);
@@ -312,8 +312,8 @@ donde $d$ es el \emph{coeficiente piezoeléctrico} del material (expresado en \q
         
         % Cargas generadas
         \foreach \x in {0.3, 0.7, 1, 1.3, 1.7} {
-            \node[red] at (\x, 1.35) {\tiny $+$};
-            \node[blue] at (\x, 0.15) {\tiny $-$};
+            \node[red] at (\x, 1.35) {$+$};
+            \node[blue] at (\x, 0.15) {$-$};
         }
         
         % Terminales
@@ -373,7 +373,7 @@ Físicamente, el sensor se comporta como un \emph{filtro paso alto}. La frecuenc
             % Curva característica pasa-alto
             \addplot[thick, blue, domain=0.1:1000, samples=100] {1/sqrt(1 + (1/x)^2)};
             \draw[dashed, red] (axis cs:1, 0.1) -- (axis cs:1, 0.707) -- (axis cs:0.1, 0.707);
-            \node[red, font=\tiny, anchor=west] at (axis cs:1.2, 0.4) {$f_c$};
+            \node[red, anchor=west] at (axis cs:1.2, 0.4) {$f_c$};
         \end{axis}
     \end{tikzpicture}
     \caption[Respuesta en frecuencia cualitativa.]{Respuesta en frecuencia cualitativa. El sensor es insensible a la componente continua. La medida estática es imposible debido a la descarga a través de $R_s$.}\label{fig:bode_piezo}
@@ -404,7 +404,7 @@ Si conectamos el sensor a un amplificador de tensión convencional, la capacidad
         \draw (oa.-) node[circ]{} -- ++(0,0.8) coordinate (top) to[C, l=$C_f$] (top -| oa.out) -- (oa.out) node[circ]{};
         \draw (oa.out) to[short, -o] ++(0.3,0) node[above] {$V_{out}$};
         % Tierra virtual highlight
-        \node[red, font=\tiny, align=center] at (2, 2) {Tierra\\Virtual};
+        \node[red, align=center, font=\tiny] at (2, 2) {Tierra\\Virtual};
         %\draw[red, thick, <-] (2.2, 1.6) -- (2.2, 2.0);
     \end{tikzpicture}
     \caption[Efecto de la tierra virtual en el cable.]{Configuración de amplificador de carga. Al mantener el nodo inversor a potencial de masa (tierra virtual), la capacidad del cable $C_c$ no almacena carga ($q=C \cdot 0 = 0$), eliminando su influencia en la medida.}\label{fig:tierra_virtual_carga}
@@ -448,8 +448,8 @@ Como se ilustra en la Figura~\ref{fig:celda_fotovoltaica}, la incidencia de luz 
     \shorthandoff{>}
     \begin{tikzpicture}[scale=1]
         % Unión PN
-        \draw[fill=red!15] (0,0.5) rectangle (3,1); \node[red!70!black, font=\tiny] at (2.8,0.85) {Capa P};
-        \draw[fill=blue!15] (0,0) rectangle (3,0.5); \node[blue!70!black, font=\tiny] at (0.3,0.15) {Capa N};
+        \draw[fill=red!15] (0,0.5) rectangle (3,1); \node[red!70!black, font=\scriptsize] at (2.8,0.85) {Capa P};
+        \draw[fill=blue!15] (0,0) rectangle (3,0.5); \node[blue!70!black, font=\scriptsize] at (0.3,0.15) {Capa N};
         
         % Pares electrón-hueco y su movimiento
         \foreach \xpos [count=\i] in {0.7, 1.5, 2.3} {
@@ -461,7 +461,7 @@ Como se ilustra en la Figura~\ref{fig:celda_fotovoltaica}, la incidencia de luz 
             \node[circle, fill=blue, inner sep=0.5pt, font=\tiny, text=white] (e\i) at (\xpos+0.2, 0.4) {-};
             \draw[-stealth, blue, very thin] (e\i.south) -- ++(0, -0.2);
         }
-        \node[font=\tiny, align=center] at (0.35, 0.5) {Pares\\$e^-/h^+$};
+        \node[align=center, font=\tiny] at (0.35, 0.5) {Pares\\$e^-/h^+$};
         
         % Fotones (h*nu)
         \foreach \x in {0.5, 1.5, 2.5} {
@@ -482,7 +482,7 @@ Como se ilustra en la Figura~\ref{fig:celda_fotovoltaica}, la incidencia de luz 
         \draw (bot_left) -- (1.2, -1);
         \draw (bot_right) -- (1.8, -1);
         
-        \node[blue!70!black, font=\tiny, align=center] at (1.5, -1.5) {Modo de medida\\(Baja impedancia)};
+        \node[blue!70!black, align=center, font=\scriptsize] at (1.5, -1.5) {Modo de medida\\(Baja impedancia)};
     \end{tikzpicture}
     \caption[Principio del sensor fotovoltaico.]{Operación de un sensor fotovoltaico. La energía de los fotones genera portadores de carga que dan lugar a la corriente de fotodiodo $I_{ph}$.}\label{fig:celda_fotovoltaica}
 \end{marginfigure}
@@ -531,7 +531,7 @@ Cuando el objeto se mueve a velocidad constante, la tensión de salida es contin
             \draw[ultra thick, blue, <->, >=stealth] (2.2, 2) -- (2.2, 2.6) node[above] {$\vec{v}(t)$};
             
             % Salida
-            \draw (2.2, 0.3) -- (2.2, -0.4) node[ocirc, scale=0.6] {} node[below, font=\tiny] {$V_{out} \propto \vec{v}(t)$};
+            \draw (2.2, 0.3) -- (2.2, -0.4) node[ocirc, scale=0.6] {} node[below] {$V_{out} \propto \vec{v}(t)$};
             \node at (1.2, -1.6) {(a) Transductor lineal};
         \end{scope}
 
@@ -539,25 +539,25 @@ Cuando el objeto se mueve a velocidad constante, la tensión de salida es contin
         \begin{scope}[ xshift=1.5cm]
             % Carcasa
             \draw[thick] (0,0) rectangle (2.5,3.5);
-            \node[font=\tiny, gray] at (1.25, 3.7) {Carcasa (Unida al suelo)};
+            \node[gray] at (1.25, 3.7) {Carcasa (Unida al suelo)};
 
             % Imán central (Fijo a la carcasa)
             \draw[fill=red!20] (0.9, 1.2) rectangle (1.6, 1.9);
             \draw[fill=blue!20] (0.9, 0.5) rectangle (1.6, 1.2);
-            \node[red, font=\tiny] at (1.25, 1.55) {N};
-            \node[blue, font=\tiny] at (1.25, 0.85) {S};
+            \node[red] at (1.25, 1.55) {N};
+            \node[blue] at (1.25, 0.85) {S};
 
             % Bobina (Suspendida)
             \draw[ultra thick, orange!80!black] (0.6, 0.8) rectangle (1.9, 2.3);
-            \node[orange!80!black, font=\tiny, rotate=90] at (0.4, 1.55) {Bobina (Masa)};
+            \node[orange!80!black, rotate=90] at (0.4, 1.55) {Bobina (Masa)};
 
             % Muelles (Superior e inferior)
             \draw[decoration={zigzag,amplitude=2pt, segment length=4pt}, decorate, blue!60] (1.25, 3.5) -- (1.25, 2.3);
             \draw[decoration={zigzag,amplitude=2pt, segment length=4pt}, decorate, blue!60] (1.25, 0.5) -- (1.25, 0);
-            \node[blue!60, font=\tiny] at (1.6, 3) {$k$};
-            
+            \node[blue!60] at (1.6, 3) {$k$};
+
             % Vibración
-            \draw[<->, thick, gray] (1.25, -0.4) -- (1.25, -1) node[below, font=\tiny] {Vibración};
+            \draw[<->, thick, gray] (1.25, -0.4) -- (1.25, -1) node[below] {Vibración};
             \node at (1.25, -1.6) {(b) Estructura geófono};
         \end{scope}
     \end{tikzpicture}

@@ -56,7 +56,7 @@ En ingeniería, siempre preferimos sistemas lineales de la forma $y = mx + b$, y
             
             % Línea de error (ejemplo)
             \draw[dashed, gray] (axis cs:3, 3.1) -- (axis cs:3, 3.25);
-            \node[right, font=\tiny] at (axis cs:3, 3.15) {$e_i$};
+            \node[right] at (axis cs:3, 3.15) {$e_i$};
         \end{axis}
     \end{tikzpicture}
     \caption[Ajuste lineal por mínimos cuadrados.]{Ajuste lineal por mínimos cuadrados. La recta minimiza la distancia vertical al cuadrado de cada punto experimental.}\label{fig:minimos_cuadrados}
@@ -309,8 +309,8 @@ Un sistema presenta \emph{histéresis} cuando la salida depende de la dirección
     \centering
     \begin{tikzpicture}
       \shorthandoff{>}
-        \draw[->] (0,0) -- (2.5,0) node[right, font=\tiny] {$x$};
-        \draw[->] (0,0) -- (0,2.5) node[above, font=\tiny] {$y$};
+        \draw[->] (0,0) -- (2.5,0) node[right] {$x$};
+        \draw[->] (0,0) -- (0,2.5) node[above] {$y$};
         % Curva ascendente
         \draw[blue, thick, ->] (0.2,0.2) .. controls (1,0.8) .. (2,2);
         % Curva descendente
@@ -329,8 +329,8 @@ El \emph{banda de muerta} es un fenómeno relacionado con la histéresis, donde 
     \centering
     \begin{tikzpicture}
       \shorthandoff{>}
-        \draw[->] (0,0) -- (2.5,0) node[right, font=\tiny] {$x$};
-        \draw[->] (0,0) -- (0,2.5) node[above, font=\tiny] {$y$};
+        \draw[->] (0,0) -- (2.5,0) node[right] {$x$};
+        \draw[->] (0,0) -- (0,2.5) node[above] {$y$};
         % Curva con banda de muerta
         \draw[blue, thick] (0.2,0.2) -- (1,0.2) -- (1.5,1.5) -- (2,2);
         % Banda de muerta
@@ -365,8 +365,8 @@ La \emph{repetibilidad} es la capacidad de un sensor para entregar la misma sali
     \centering
     \begin{tikzpicture}
       \shorthandoff{>}
-        \draw[->] (0,0) -- (2.5,0) node[right, font=\tiny] {$x$};
-        \draw[->] (0,0) -- (0,2.5) node[above, font=\tiny] {$y$};
+        \draw[->] (0,0) -- (2.5,0) node[right] {$x$};
+        \draw[->] (0,0) -- (0,2.5) node[above] {$y$};
         % Puntos de repetibilidad dibujados con node como puntos azules 
         \node[blue] at (1.5,2.1) {*};
         \node[blue] at (1.5,2.0) {*};
@@ -418,8 +418,8 @@ La saturación es una característica no lineal que ocurre cuando la entrada exc
             % Línea discontinua ideal (prolongación)
             \addplot[dashed, gray, domain=3:4.5] {x};
             
-            \node[blue, font=\tiny, rotate=43] at (axis cs:1.2,1.6) {Zona Lineal};
-            \node[red, font=\tiny] at (axis cs:4,3.2) {Saturación};
+            \node[blue, rotate=43] at (axis cs:1.2,1.6) {Zona Lineal};
+            \node[red] at (axis cs:4,3.2) {Saturación};
         \end{axis}
     \end{tikzpicture}
     \caption[Característica de saturación.]{Característica de saturación. Físicamente, suele estar impuesta por los límites de alimentación de la electrónica o la deformación máxima del material del sensor.}\label{fig:saturacion}
@@ -595,7 +595,7 @@ que representa la máxima desviación de la salida respecto al valor final duran
             % Etiquetas correctas para 2º orden
             xtick=\empty,
             ytick={1, 1.36}, yticklabels={$K$, $y_{max}$},
-            legend style={at={(1,0.1)}, anchor=south east, font=\tiny, cells={anchor=west}}
+            legend style={at={(1,0.1)}, anchor=south east, cells={anchor=west}}
         ]
             % 1. ESCALÓN DE ENTRADA
             \addplot[thick, red, dashed, domain=0:6] {1};
@@ -608,7 +608,7 @@ que representa la máxima desviación de la salida respecto al valor final duran
             
             % Marcador de Sobreoscilación para el azul
             \draw[dotted, gray] (axis cs:0,1.36) -- (axis cs:1.1,1.36);
-            \node[anchor=south, font=\tiny, blue] at (axis cs:1.1, 1.36) {$M_p$};
+            \node[anchor=south, blue] at (axis cs:1.1, 1.36) {$M_p$};
 
             % 3. CRÍTICAMENTE AMORTIGUADO (zeta = 1, wn = 3)
             % Fórmula: y(t) = 1 - (1 + wn*t)*exp(-wn*t)
@@ -690,7 +690,7 @@ En resumen, el sistema analizado es capaz de seguir cambios con una rapidez mode
             every axis y label/.style={at=(current axis.above origin),anchor=south},            
             every axis x label/.style={at=(current axis.right of origin),anchor=west},            
             enlargelimits=false, clip=false, axis on top,
-            legend style={at={(1,0.1)}, anchor=south east, font=\tiny, cells={anchor=west}},
+            legend style={at={(1,0.1)}, anchor=south east, cells={anchor=west}},
             % Etiquetas correctas para 2º orden
             xtick=\empty,
             ytick={1, 1.36}, yticklabels={$K$, $y_{max}$},
@@ -706,7 +706,7 @@ En resumen, el sistema analizado es capaz de seguir cambios con una rapidez mode
             
             % Marcador de Sobreoscilación para el azul
             \draw[dotted, gray] (axis cs:0,1.36) -- (axis cs:1.1,1.36);
-            \node[anchor=south, font=\tiny, blue] at (axis cs:1.1, 1.36) {$M_p$};
+            \node[anchor=south, blue] at (axis cs:1.1, 1.36) {$M_p$};
 
             % Línea de valor final
             \draw[dashed, gray] (axis cs:0,1) -- (axis cs:6,1);
@@ -802,7 +802,7 @@ Como se observa en la Figura~\ref{fig:noise_floor}, el diseño de un sistema de 
 
             % 2. ZONA DE SATURACIÓN (Sombreado)
             \fill[orange!10] (axis cs:1e-7,0) rectangle (axis cs:2,20);
-            \node[orange!70!black, font=\tiny] at (axis cs:1e-4,10) {ZONA DE SATURACIÓN};
+            \node[orange!70!black] at (axis cs:1e-4,10) {ZONA DE SATURACIÓN};
 
             % 3. CURVA DE SEÑAL
             \addplot[thick, blue, domain=1e-7:1, samples=100] {20*log10(x)};
@@ -821,7 +821,7 @@ Como se observa en la Figura~\ref{fig:noise_floor}, el diseño de un sistema de 
             \draw[<->, >=stealth, blue, thick] (axis cs:1e-2,-120) -- (axis cs:1e-2,-40) 
                 node[midway, left] {SNR};
                 
-            \node[blue, font=\tiny, align=center] at (axis cs:1e-2, -30) {Señal\\actual};
+            \node[blue, align=center, font=\footnotesize] at (axis cs:1e-2, -30) {Señal\\actual};
 
         \end{axis}    
     \end{tikzpicture}        

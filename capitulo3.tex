@@ -142,8 +142,8 @@ El error de linealidad absoluto se define como la diferencia entre la salida rea
         \draw (3.5,1.5) to[short, -o] (4,1.5) node[right] {$V_o$};
         
         % Etiquetas de resistencia
-        \node[left, font=\tiny] at (1.75,2.25) {$(1-k)R_t$};
-        \node[left, font=\tiny] at (1.75,0.75) {$k R_t$};
+        \node[left] at (1.75,2.25) {$(1-k)R_t$};
+        \node[left] at (1.75,0.75) {$k R_t$};
     \end{tikzpicture}
     
     \vspace{1cm}
@@ -554,8 +554,8 @@ El aspecto principal es que el dispositivo de medición de la resistencia en sí
         \draw (3,2) to[short, i=$I$] (4,2) to[R, l=$R_s$, v=$V_s$] (4,0) to[short] (3,0);
 
         % Terminales de conexión
-        \fill[black] (3,2) circle (2pt) node[above, font=\tiny] {$HI$};
-        \fill[black] (3,0) circle (2pt) node[below, font=\tiny] {$LO$};
+        \fill[black] (3,2) circle (2pt) node[above] {$HI$};
+        \fill[black] (3,0) circle (2pt) node[below] {$LO$};
 
     \end{tikzpicture}
     \caption[Principio de medida de resistencia.]{Principio de medida de resistencia. El equipo (zona sombreada) actúa como una fuente de corriente en paralelo con un voltímetro. La corriente $I$ se inyecta en la resistencia externa $R_s$, generando una tensión $V_s$ proporcional a su valor.}\label{fig:equipo_medida}
@@ -609,8 +609,8 @@ La configuración que se muestra en la Figura \ref{fig:conexion_2hilos} es la m�
         \draw (5,0) to[R, l_=$R_w$] (3,0);
 
         % Terminales de conexión (Bornes del equipo)
-        \fill[black] (3,2) circle (2pt) node[above, font=\tiny] {$HI$};
-        \fill[black] (3,0) circle (2pt) node[below, font=\tiny] {$LO$};
+        \fill[black] (3,2) circle (2pt) node[above] {$HI$};
+        \fill[black] (3,0) circle (2pt) node[below] {$LO$};
 
     \end{tikzpicture}
     \caption[Conexión a 2 hilos.]{Conexión a 2 hilos. Las resistencias de los cables $R_w$ están en serie con el sensor. El voltímetro interno $V_m$ mide la suma de las caídas de tensión: $V_m = I(R_w + R_s + R_w)$, lo que introduce el error sistemático discutido.}\label{fig:conexion_2hilos}
@@ -637,9 +637,9 @@ Es la configuración más extendida en la industria. Se basa en el supuesto de q
         \draw (0.5,0) -- (3,0);
         
         % Terminales del equipo
-        \fill[black] (3,3) circle (2pt) node[above, font=\tiny] {$HI$};
-        \fill[black] (3,2) circle (2pt) node[above, font=\tiny] {$SENSE$};
-        \fill[black] (3,0) circle (2pt) node[below, font=\tiny] {$LO$};
+        \fill[black] (3,3) circle (2pt) node[above] {$HI$};
+        \fill[black] (3,2) circle (2pt) node[above] {$SENSE$};
+        \fill[black] (3,0) circle (2pt) node[below] {$LO$};
 
         % Voltímetro Interno (Conectado entre SENSE y LO)
         \draw (2,2) to[voltmeter, l_=$V_m$] (2,0) node[circ]{};
@@ -713,10 +713,10 @@ Es la configuración de máxima precisión, obligatoria en laboratorios y metrol
         \draw (0.5,-1) -- (3,-1);
         
         % Terminales del equipo
-        \fill[black] (3,3) circle (2pt) node[above, font=\tiny] {$HI$};
-        \fill[black] (3,2) circle (2pt) node[above, font=\tiny] {$S+$};
-        \fill[black] (3,0) circle (2pt) node[below, font=\tiny] {$S-$};
-        \fill[black] (3,-1) circle (2pt) node[below, font=\tiny] {$LO$};
+        \fill[black] (3,3) circle (2pt) node[above] {$HI$};
+        \fill[black] (3,2) circle (2pt) node[above] {$S+$};
+        \fill[black] (3,0) circle (2pt) node[below] {$S-$};
+        \fill[black] (3,-1) circle (2pt) node[below] {$LO$};
 
         % Voltímetro Interno (Conectado entre SENSE y LO)
         \draw (2,2) to[voltmeter, l_=$V_m$] (2,0)--(3,0);
@@ -1100,7 +1100,7 @@ Matemáticamente, existe una temperatura $T_c$ donde la derivada segunda de la r
             axis lines=left, grid=both,
             grid style={line width=.1pt, draw=gray!10},
             font=\scriptsize,
-            legend style={at={(0.5,-0.25)}, anchor=north, font=\tiny}
+            legend style={at={(0.5,-0.25)}, anchor=north}
         ]
             % NTC Pura (Exponencial Beta=3500)
             \addplot[thick, red, domain=0:100, samples=100] 
@@ -1115,7 +1115,7 @@ Matemáticamente, existe una temperatura $T_c$ donde la derivada segunda de la r
             
             % Punto de inflexión
             \draw[dashed, gray] (axis cs:50,0) -- (axis cs:50,1.2);
-            \node[blue, font=\tiny, align=center] at (axis cs:70, 0.9) {Zona\\Lineal};
+            \node[blue, align=center] at (axis cs:70, 0.9) {Zona\\Lineal};
         \end{axis}
     \end{tikzpicture}
     \caption[Efecto de la linealización analógica.]{Efecto de la linealización analógica. La curva azul muestra cómo el sacrificio de sensibilidad global permite obtener una respuesta lineal en el rango central del diseño.}\label{fig:linealizacion_ntc}
@@ -1189,7 +1189,7 @@ donde $A$ es una constante dependiente del material y $\gamma$ es el índice de 
             % Curva LDR típica: R = 50000 * E^-0.8
             \addplot[thick, blue!70!black, domain=1:1000, samples=50] {50000 * x^(-0.8)};
             
-            \node[blue!70!black, font=\tiny, rotate=-35] at (axis cs:10, 10000) {Pendiente $= -\gamma$};
+            \node[blue!70!black, rotate=-35] at (axis cs:10, 10000) {Pendiente $= -\gamma$};
         \end{axis}
     \end{tikzpicture}
     \caption[Rspuesta log-log de una fotorresistencia.]{Respuesta log-log de una fotorresistencia. La linealidad en esta escala permite procesar la señal mediante amplificadores logarítmicos o algoritmos de potencia.}\label{fig:ldr_log}
@@ -1216,7 +1216,7 @@ Se basa en la presencia de un campo magnético externo $\vec{B}$ en el dispositi
 \end{equation}
 donde $R_{\perp}$ y $R_{\parallel}$ son las resistencias paralelas y perpendiculares al campo magnético.
 
-La tabla~\ref{tab:resumen_gmr} muestra un resumen de los principales efectos de los sensores de magnetorresistencia así como sus aplicaciones principales.
+La Tabla~\ref{tab:resumen_gmr} muestra un resumen de los principales efectos de los sensores de magnetorresistencia así como sus aplicaciones principales.
 
 
 \paragraph{GMR (Magnetorresistencia Gigante):}

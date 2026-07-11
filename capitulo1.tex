@@ -193,7 +193,8 @@ Un ejemplo clásico, como se ilustra en la Figura~\ref{fig:ejemplo_balanza}, es 
     \node[orange!70!black] at (2.5,-.9) {$+0.5$\,kg};
     
     % Flecha de error sistemático
-    \draw[<->, orange, thick] (2,0.8) -- (2.5,0.8) node[midway, above, font=\tiny] {$e_{sys}$};
+    % font=\scriptsize necesario: el tamaño ambiente del marginfigure ya es \footnotesize (tufte-common.def) y a ese tamaño "e_{sys}" se solapa con la etiqueta "Error Sistemático" (espacio muy reducido)
+    \draw[<->, orange, thick] (2,0.8) -- (2.5,0.8) node[midway, above, font=\scriptsize] {$e_{sys}$};
     
     % Puntos de medición con error aleatorio (alrededor de 2.5)
     \foreach \x/\y in {0/-0.1, 0.05/0.15, -0.08/0.05, 0.03/-0.12, -0.05/0.08}
@@ -205,7 +206,8 @@ Un ejemplo clásico, como se ilustra en la Figura~\ref{fig:ejemplo_balanza}, es 
     \node[blue!60!black] at (2.5,-0.5) {$2.5$\,kg};
     
     % Error total
-    \draw[<->, red, thick] (2,0.3) -- (2.5,0.3) node[midway, above, font=\tiny] {$e_{total}$};
+    % font=\scriptsize necesario: el tamaño ambiente del marginfigure ya es \footnotesize (tufte-common.def) y a ese tamaño "e_{total}" se solapa con la etiqueta "Media Medida" (espacio muy reducido)
+    \draw[<->, red, thick] (2,0.3) -- (2.5,0.3) node[midway, above, font=\scriptsize] {$e_{total}$};
     
     % Leyenda
     % \node[anchor=north west, font=\tiny] at (-0.8,-1.5) {

@@ -439,7 +439,7 @@ ninguna componente supere la frecuencia de Nyquist.
       % Flecha y etiqueta de solapamiento
       \draw[->, red!60!black, thin]
         (1.5, 0.45) -- (1.0, 0.2);
-      \node[font=\tiny, red!60!black, anchor=west]
+      \node[red!60!black, anchor=west]
         at (1.25, 0.58) {solapamiento};
 
 % \fill[red!20, opacity=0.6]
@@ -543,7 +543,7 @@ En la Figura~\ref{fig:reconstruccion-nyquist} se muestra una una señal que la m
       \node[anchor=north west, font=\itshape, gray]
         at (0, 2.45) {(b) $f_s = 1{,}4\,\text{Hz} < 2f_{max}$};
 
-      \draw[->] (0,0) -- (5.6,0) node[right,font=\tiny] {$t$};
+      \draw[->] (0,0) -- (5.6,0) node[right] {$t$};
       \draw[->] (0,-1.35) -- (0,1.55) node[above] {$x$};
 
       % Señal original (gris)
@@ -567,7 +567,7 @@ En la Figura~\ref{fig:reconstruccion-nyquist} se muestra una una señal que la m
 
       % Flecha anotada
       \draw[->, red!50!black, thin] (3.0, -1.1) -- (2.6, {-sin(deg(2*3.14159*0.5*2.6))-0.08});
-      \node[font=\tiny, red!60!black, anchor=north] at (3.1,-1.1)
+      \node[red!60!black, anchor=north] at (3.1,-1.1)
         {alias: $0{,}5\,\text{Hz}$};
 
       % Leyenda
@@ -1094,7 +1094,7 @@ Mientras que el ENOB resume el comportamiento dinámico del convertidor en una �
                 (0,0) (1,0) (1,1) (2.3,1) (2.3,2) (3,2) (3,3)
                 (3,4) (4,4) (4,5) (4.7,5) (4.7,7) (6,7) (6,8) (8,8)
             };
-            \node[red, font=\tiny] at (axis cs:3.6,3.6) {código perdido};
+            \node[red] at (axis cs:3.6,3.6) {código perdido};
             \draw[red,->] (axis cs:3.5,3.4) -- (axis cs:3.1,3.05);
         \end{axis}
     \end{tikzpicture}
@@ -1196,7 +1196,7 @@ La elección de estos dos valores concretos no es arbitraria: es lo que permite 
 
 \marginnote{\textbf{Consecuencia práctica:} como en cada nodo coinciden dos resistencias equivalentes de $2R$ (la rama del bit y el resto de la escalera), la corriente que aporta cada conmutador se divide exactamente entre dos por cada nodo que debe atravesar hasta llegar al amplificador. El bit más significativo ($b_2$), al estar más cerca del amplificador, apenas se divide; el menos significativo ($b_0$), al tener que atravesar toda la escalera, se divide varias veces. Así se reproduce el peso binario ($2^0, 2^1, 2^2, \ldots$) de cada bit usando un único valor de resistencia (y su doble), sin depender de la precisión absoluta de $R$, solo de que todas las resistencias del mismo tipo sean iguales entre sí.}
 
-Esta es también la razón por la que la resistencia de terminación del extremo superior debe valer $2R$ y conectarse a tierra (Figura~\ref{fig:dac_r2r}): si faltara, o si tuviera otro valor, el nodo $b_2$ dejaría de ver $2R$ hacia arriba y su bit quedaría mal ponderado respecto a los demás. Es, además, la misma razón por la que los conmutadores dirigen su rama entre \emph{tierra real} y $V_{ref}$ y nunca se dejan en circuito abierto: un contacto abierto tendría resistencia infinita, no $2R$, y rompería la propiedad recursiva en ese nodo.
+Esta es también la razón por la que, como se ve en la Figura~\ref{fig:dac_r2r}, la resistencia de terminación del extremo superior debe valer $2R$ y conectarse a tierra: si faltara, o si tuviera otro valor, el nodo $b_2$ dejaría de ver $2R$ hacia arriba y su bit quedaría mal ponderado respecto a los demás. Es, además, la misma razón por la que los conmutadores dirigen su rama entre \emph{tierra real} y $V_{ref}$ y nunca se dejan en circuito abierto: un contacto abierto tendría resistencia infinita, no $2R$, y rompería la propiedad recursiva en ese nodo.
 
 Una alternativa de bajo coste, muy usada cuando no se necesita gran ancho de banda (por ejemplo, para generar una referencia de continua ajustable por software), es el DAC por \emph{PWM}: se genera un tren de pulsos cuyo ciclo de trabajo (\textit{duty cycle}) codifica el valor digital, y un simple filtro paso-bajo RC recupera la componente continua promedio.
 
@@ -1216,7 +1216,7 @@ Igual que el ADC, el DAC real se caracteriza por un INL y un DNL propios (misma 
     \item \emph{Impulso de \textit{Glitch}}: Pico transitorio de tensión que aparece cuando varios bits conmutan a la vez y sus tiempos de conmutación no están perfectamente sincronizados (el caso peor es el cambio de código $011\ldots1 \to 100\ldots0$). Se cuantifica en \unit{nV\text{-}s} y es crítico en aplicaciones de generación de señal donde ese pico se traduce en distorsión armónica audible o visible.
 \end{itemize}
 
-\marginnote{\textbf{Aplicación típica en telecomunicaciones:} Los generadores de funciones y de formas de onda arbitrarias (\textit{AWG}) de un banco de instrumentación (Capítulo~\ref{cap:instrumentacion_virtual}) son, en esencia, un DAC de alta velocidad seguido de un filtro de reconstrucción \textit{antialiasing} de salida --- la contraparte exacta del filtro \textit{antialiasing} de entrada visto en el Capítulo~\ref{cap:opamps}.}
+\marginnote{\textbf{Aplicación típica en telecomunicaciones:} Los generadores de funciones y de formas de onda arbitrarias (\textit{AWG}) de un banco de instrumentación, como se describe en el Capítulo~\ref{cap:instrumentacion_virtual}, son, en esencia, un DAC de alta velocidad seguido de un filtro de reconstrucción \textit{antialiasing} de salida --- la contraparte exacta del filtro \textit{antialiasing} de entrada visto en el Capítulo~\ref{cap:opamps}.}
 
 \section{Resumen}\label{sec:resumen_daq}
 
@@ -1225,7 +1225,7 @@ En este capítulo se ha recorrido la cadena completa de adquisición de datos, d
 \begin{itemize}
     \item \emph{Muestreo y Retención}: El teorema de Nyquist-Shannon exige muestrear a más del doble de la frecuencia máxima de la señal para evitar el \textit{aliasing}; el circuito de \textit{Sample and Hold} congela la muestra durante la conversión, y su tiempo de apertura y su \textit{jitter} limitan la precisión con señales rápidas.
     \item \emph{Cuantificación}: El paso de una magnitud continua a un número finito de niveles introduce un error inevitable de $\pm Q/2$, que se comporta como un ruido de fondo y fija el límite teórico de SNR en $6{,}02\cdot n + 1{,}76$ dB.
-    \item \emph{Arquitecturas ADC}: No existe el convertidor universal. Flash, SAR, Sigma-Delta e Integración ocupan regiones distintas del compromiso velocidad-resolución-consumo (Tabla~\ref{tab:comparativa_adc}), y la elección depende de la aplicación concreta.
-    \item \emph{Parámetros Reales y ENOB}: El número de bits nominal de un ADC es solo una etiqueta comercial. El ENOB, calculado a partir del SINAD real del \textit{datasheet}, junto con el INL, el DNL y los errores de offset/ganancia (Tabla~\ref{tab:parametros_adc}), son los datos que determinan la resolución efectiva que realmente llega al sistema de instrumentación.
+    \item \emph{Arquitecturas ADC}: No existe el convertidor universal. Flash, SAR, Sigma-Delta e Integración ocupan regiones distintas del compromiso velocidad-resolución-consumo, como se resume en la Tabla~\ref{tab:comparativa_adc}, y la elección depende de la aplicación concreta.
+    \item \emph{Parámetros Reales y ENOB}: El número de bits nominal de un ADC es solo una etiqueta comercial. El ENOB, calculado a partir del SINAD real del \textit{datasheet}, junto con el INL, el DNL y los errores de offset/ganancia, como se resume en la Tabla~\ref{tab:parametros_adc}, son los datos que determinan la resolución efectiva que realmente llega al sistema de instrumentación.
     \item \emph{Conversión D/A}: El proceso inverso, dominado por la red R-2R, comparte con el ADC los conceptos de INL/DNL pero añade limitaciones propias (tiempo de establecimiento, \textit{glitch}) relevantes en la generación de señales de test.
 \end{itemize}

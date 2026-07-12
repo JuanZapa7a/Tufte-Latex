@@ -606,7 +606,7 @@ Si la señal de entrada contiene componentes de frecuencia superiores a la frecu
 
 Puesto que en la práctica es imposible garantizar que una señal física o el ruido ambiental no contengan componentes por encima de $f_s/2$, es obligatorio situar un filtro paso bajo analógico \emph{antes} del convertidor ADC. Este filtro se denomina \textit{Filtro Antialiasing} (AAF).
 
-Su función es limpiar el espectro, eliminando cualquier componente que pudiera causar solapamiento. En instrumentación, un filtro Sallen-Key de segundo orden (como el analizado en la sección anterior) es la opción predilecta. Al ofrecer una caída de \qty{40}{dB/decada}, permite una atenuación suficiente del ruido de alta frecuencia. 
+Su función es limpiar el espectro, eliminando cualquier componente que pudiera causar solapamiento. Como se aprecia en la Figura~\ref{fig:espectro_aaf}, el filtro atenúa selectivamente el ruido situado más allá de la frecuencia de Nyquist $f_s/2$, dejando intacta la señal útil antes de que esta llegue al conversor. En instrumentación, un filtro Sallen-Key de segundo orden (como el analizado en la sección anterior) es la opción predilecta. Al ofrecer una caída de \qty{40}{dB/decada}, permite una atenuación suficiente del ruido de alta frecuencia.
 
 En sistemas de precisión, es común utilizar técnicas de \emph{sobremuestreo} ($f_s \gg 2 f_{max}$) para relajar las exigencias del filtro analógico. Al muestrear mucho más rápido de lo estrictamente necesario, la banda de transición del filtro puede ser más ancha, permitiendo diseños más sencillos y con menor distorsión de fase en la banda de paso.
 

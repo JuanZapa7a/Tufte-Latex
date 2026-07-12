@@ -370,7 +370,11 @@ $f_s$, separadas entre sí y recuperables mediante un filtro paso bajo ideal.
 
 Si, por el contrario, $f_s \leq 2\,f_{max}$, las réplicas espectrales se
 solapan: componentes de alta frecuencia caen dentro de la banda base y se
-confunden con frecuencias legítimas de la señal.
+confunden con frecuencias legítimas de la señal, tal como se aprecia en la
+Figura~\ref{fig:aliasing}: cuando se respeta el criterio de Nyquist las
+réplicas del espectro quedan separadas entre sí, pero en cuanto $f_s$ cae por
+debajo de $2f_{max}$ dichas réplicas se superponen (zona roja), contaminando
+irremediablemente la banda base con información de alta frecuencia.
 Este fenómeno, conocido como \emph{aliasing}, es \emph{irreversible}~---~una
 vez submuestreada la señal no es posible distinguir la componente original de
 su imagen solapada~---~y se manifiesta perceptualmente como distorsión tonal
@@ -473,7 +477,7 @@ ninguna componente supere la frecuencia de Nyquist.
 
 \end{marginfigure}
 
-En la Figura~\ref{fig:reconstruccion-nyquist} se muestra una una señal que la muestreamos a mas y menos de la frecuencia de Nyquist. ¿Cual seria su recomposición a partir de las muestras que se obyienen a ambas frecuencias?
+La Figura~\ref{fig:reconstruccion-nyquist} traslada este mismo efecto al dominio del tiempo: una señal senoidal se muestrea primero por encima y después por debajo de la frecuencia de Nyquist, mostrando cómo la reconstrucción a partir de las muestras obtenidas en cada caso coincide con la señal original o, por el contrario, converge hacia una senoidal de menor frecuencia.
 
 \begin{marginfigure}
   \begin{tikzpicture}[>=Stealth, scale=1,
@@ -912,7 +916,7 @@ Es la arquitectura más equilibrada y la que encontramos habitualmente en los mi
 \end{marginfigure}
 
 \paragraph{ADC Sigma-Delta ($\Sigma\Delta$)}
-Es la arquitectura de la cual se obtienen las muestras digitales más comunes. En la Figura~\ref{fig:adc_sigma_delta} se detallan las etapas de la cadena de instrumentación.
+Es la arquitectura de la cual se obtienen las muestras digitales más comunes. En la Figura~\ref{fig:adc_sigmadelta} se detallan las etapas de la cadena de instrumentación.
 \begin{marginfigure}
     \centering
     \shorthandoff{>}

@@ -676,7 +676,7 @@ V_{final} = \underbrace{(V_s + I \cdot R_w)}_{\text{\scriptsize Lectura } V_m} -
 
 \paragraph{Conexión a 4 hilos: Medida Kelvin:}
 
-Es la configuración de máxima precisión, obligatoria en laboratorios y metrología. Separa completamente el camino de la corriente de excitación del camino de medida de tensión. A diferencia de los 3 hilos, aquí no dependemos de que las resistencias de los cables sean idénticas. El secreto reside en que el voltímetro se conecta mediante hilos independientes directamente a los bornes del sensor. Como la impedancia de entrada del voltímetro es idealmente infinita, por los hilos de medida no circula corriente ($I \approx0$).
+Es la configuración de máxima precisión, obligatoria en laboratorios y metrología. Separa completamente el camino de la corriente de excitación del camino de medida de tensión. A diferencia de los 3 hilos, aquí no dependemos de que las resistencias de los cables sean idénticas. El secreto reside en que el voltímetro se conecta mediante hilos independientes directamente a los bornes del sensor. Como la impedancia de entrada del voltímetro es idealmente infinita, por los hilos de medida no circula corriente ($I \approx0$). La Figura~\ref{fig:conexion_4hilos} muestra esta disposición: los hilos exteriores ($HI$ y $LO$) transportan la corriente de excitación, mientras que los hilos interiores ($S+$ y $S-$) llevan la señal hasta el voltímetro sin circular corriente por ellos, de modo que ni $R_{w2}$ ni $R_{w3}$ introducen caída de tensión alguna en la lectura.
 
 % \begin{equation}
 %     V_{sense} = I_{source} \cdot R_s + \cancel{2 \cdot I_{sense} \cdot R_w}
@@ -893,7 +893,7 @@ en cada caso. Desde el punto de vista de la ingeniería de sistemas, la elecció
 
 Al ser los RTD y termistores sensores pasivos, requieren una corriente de excitación $I_{exc}$ para convertir su variación de resistencia en una señal de tensión medible. Por efecto Joule, el sensor disipa una potencia $P = I_{exc}^2 \cdot R$, lo que provoca un incremento de su temperatura interna ($\Delta T$) por encima de la temperatura del medio que se desea medir.
 
-Este fenómeno introduce un \emph{error sistemático positivo} que se modela mediante la siguiente expresión:
+Este fenómeno introduce un \emph{error sistemático positivo} que se modela mediante la siguiente expresión, cuyo crecimiento cuadrático con la corriente de excitación se aprecia en la Figura~\ref{fig:curva_autocalentamiento}:
 
 \begin{equation}\label{eq:autocalentamiento}
     \Delta T = T_{sensor} - T_{medio} = \frac{P}{\delta} = \frac{I_{exc}^2 \cdot R}{\delta}
@@ -1305,7 +1305,9 @@ Las señales originales pueden reconstruirse a partir de estos modos como:
     V_1 = V_{cm} + \frac{V_{dm}}{2} \quad ; \quad V_2 = V_{cm} - \frac{V_{dm}}{2}
 \end{equation}
 
-\marginnote{\textbf{La Figura de Mérito CMRR:} 
+La Figura~\ref{fig:modos_visual} representa gráficamente esta descomposición: las trazas azul y roja corresponden a $V_1$ y $V_2$, ambas montadas sobre el mismo ruido de modo común (en gris), mientras que la separación vertical entre ellas es precisamente $V_{dm}$, la magnitud que interesa recuperar.
+
+\marginnote{\textbf{La Figura de Mérito CMRR:}
     Un amplificador ideal de instrumentación debería tener una ganancia infinita para el modo diferencial ($A_d$) y cero para el común. La capacidad de un equipo para ignorar el ruido de modo común se mide mediante el \textbf{CMRR} (\textit{Common Mode Rejection Ratio}), expresado en decibelios:
     \[ \text{CMRR}_{dB} = 20 \log_{10} \left| \frac{A_d}{A_{cm}} \right| \]
 }
@@ -1355,7 +1357,7 @@ La implementación de medidas diferenciales aporta tres beneficios fundamentales
 
 \subsection{Ejemplo: El Problema del Zumbido de Red (\unit{50}{Hz})}\label{subsec:ejemplo_zumbido}
 
-Para comprender la superioridad de la medida diferencial, consideremos un escenario real de instrumentación industrial. Como se muestra en la Figura~\ref{fig:ejemplo_diferencial}, Supongamos que deseamos medir la deformación de una estructura mediante una galga extensiométrica que entrega una señal útil de tan solo \unit{10}{mV}. El sensor se encuentra conectado al equipo mediante cables de \unit{10}{m} que atraviesan un entorno con motores eléctricos, los cuales inducen por acoplamiento electromagnético un ruido de \unit{2}{V} a la frecuencia de red (\unit{50}{Hz}), es decir entrega una señal $2.0 \sin(\omega t)$ siendo $\omega = 2\pi f$.
+Para comprender la superioridad de la medida diferencial, consideremos el escenario real de instrumentación industrial representado en la Figura~\ref{fig:ejemplo_diferencial}. Supongamos que deseamos medir la deformación de una estructura mediante una galga extensiométrica que entrega una señal útil de tan solo \unit{10}{mV}. El sensor se encuentra conectado al equipo mediante cables de \unit{10}{m} que atraviesan un entorno con motores eléctricos, los cuales inducen por acoplamiento electromagnético un ruido de \unit{2}{V} a la frecuencia de red (\unit{50}{Hz}), es decir entrega una señal $2.0 \sin(\omega t)$ siendo $\omega = 2\pi f$.
 
 \paragraph{Escenario A: Medida \textit{Single-Ended}.}
 Si conectamos el sensor referenciándolo a la masa local (GND), el ruido inducido se suma directamente a la señal. La tensión que llega al amplificador será:
@@ -1477,7 +1479,7 @@ El puente está \emph{equilibrado} cuando $V_o = 0$, lo que implica que las rela
 
 \subsection{Configuraciones: Cuarto, Medio y Puente Completo}
 
-En diseño de sensores, sustituimos una o más resistencias fijas por elementos activos (sensores). Supondremos un puente inicialmente equilibrado donde todas las resistencias valen $R$. Como se muestra en la Figura~\ref{fig:puente_basico}.
+En diseño de sensores, sustituimos una o más resistencias fijas por elementos activos (sensores), conservando la topología en diamante de la Figura~\ref{fig:puente_basico}. Supondremos un puente inicialmente equilibrado donde todas las resistencias valen $R$.
 
 \paragraph{Cuarto de Puente (1 brazo activo).}
 Típico para medir una Pt100 o una galga solitaria. Sea $R_4 = R + \Delta R$:
@@ -1504,7 +1506,7 @@ Máxima sensibilidad y precisión, común en células de carga de pesaje:
 
 \subsection{Linealidad según el tipo de excitación (Voltaje vs. Corriente)}
 
-Un problema recurrente en el cuarto de puente es la no linealidad debida al término $\Delta R$ en el denominador. Para un ingeniero electrónico, existe una solución elegante: alimentar el puente con una \emph{fuente de corriente constante} $I_{exc}$ en lugar de tensión.
+Un problema recurrente en el cuarto de puente es la no linealidad debida al término $\Delta R$ en el denominador. Para un ingeniero electrónico, existe una solución elegante: alimentar el puente con una \emph{fuente de corriente constante} $I_{exc}$ en lugar de tensión, tal como se representa en la Figura~\ref{fig:puente_corriente}, donde la fuente de corriente sustituye a la fuente de tensión de excitación del puente.
 
 \begin{marginfigure}
     \centering

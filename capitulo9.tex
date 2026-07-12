@@ -124,7 +124,7 @@ Dos conductores próximos, aunque no estén unidos eléctricamente, forman siemp
 \begin{equation}\label{eq:acoplo_capacitivo}
     i_n(t) = C_p \frac{dV_n}{dt}
 \end{equation}
-Esta corriente, al circular por la impedancia de entrada $Z_{in}$ de la etapa víctima, genera una tensión de ruido $v_n \approx i_n \cdot Z_{in}$. De la ecuación~\eqref{eq:acoplo_capacitivo} se extraen las dos variables que agravan el problema: cuanto mayor sea $dV/dt$ (conmutación rápida, alta tensión) y cuanto mayor sea $Z_{in}$ del circuito víctima, mayor es el ruido acoplado. Por eso los nodos de alta impedancia --como la entrada de un amplificador de carga o de un sensor capacitivo-- son los más vulnerables a este mecanismo.
+Esta corriente, al circular por la impedancia de entrada $Z_{in}$ de la etapa víctima --tal como recoge el modelo de la Figura~\ref{fig:acoplamiento_capacitivo}--, genera una tensión de ruido $v_n \approx i_n \cdot Z_{in}$. De la ecuación~\eqref{eq:acoplo_capacitivo} se extraen las dos variables que agravan el problema: cuanto mayor sea $dV/dt$ (conmutación rápida, alta tensión) y cuanto mayor sea $Z_{in}$ del circuito víctima, mayor es el ruido acoplado. Por eso los nodos de alta impedancia --como la entrada de un amplificador de carga o de un sensor capacitivo-- son los más vulnerables a este mecanismo.
 
 \begin{marginfigure}
     \centering
@@ -136,8 +136,7 @@ Esta corriente, al circular por la impedancia de entrada $Z_{in}$ de la etapa v�
         \draw (1.5,3) to[C, l_=$C_p$] (1.5,1.5);
         \draw[thick, blue] (0,1.5) -- (3,1.5);
         \node[blue, right] at (2.9,1.2) {víctima};
-        \draw (0.4,1.5) to[R, l_=$Z_{in}$] (0.4,0) node[ground]{};
-        \draw[->, thick] (1.9,1.5) -- (1.9,0.7) node[midway, right]{$i_n$};
+        \draw (0.4,1.5) to[R, l_=$Z_{in}$, i^=$i_n$] (0.4,0) node[ground]{};
     \end{tikzpicture}
     \caption[Modelo del acoplamiento capacitivo.]{Modelo del acoplamiento capacitivo. La capacidad parásita $C_p$ entre el conductor agresor y la línea víctima inyecta una corriente $i_n$ proporcional a $dV_n/dt$, que se convierte en tensión de ruido al circular por $Z_{in}$.}\label{fig:acoplamiento_capacitivo}
 \end{marginfigure}
@@ -150,24 +149,25 @@ Si el conductor agresor transporta una corriente $i_A(t)$ que varía rápidament
 \begin{equation}\label{eq:acoplo_inductivo}
     v_n(t) = -M \frac{di_A}{dt} = -\frac{d\Phi}{dt}
 \end{equation}
-A diferencia del acoplamiento capacitivo, aquí la variable crítica no es la tensión sino la corriente del agresor ($dI/dt$ alto: motores, relés, conmutación de potencia) y, sobre todo, el \emph{área del bucle víctima}: a mayor superficie encerrada por el cableado de medida, mayor flujo $\Phi$ capturado y mayor $v_n$ inducida.
+A diferencia del acoplamiento capacitivo, aquí la variable crítica no es la tensión sino la corriente del agresor ($dI/dt$ alto: motores, relés, conmutación de potencia) y, sobre todo, el \emph{área del bucle víctima}: a mayor superficie encerrada por el cableado de medida, mayor flujo $\Phi$ capturado y mayor $v_n$ inducida. La Figura~\ref{fig:acoplamiento_inductivo} esquematiza este acoplamiento: el bucle agresor y el bucle víctima no están unidos eléctricamente, pero comparten una inductancia mutua $M$ que traduce la variación de $i_A$ en una fem $v_n$ dentro del segundo lazo.
 
 \begin{marginfigure}
     \centering
     \shorthandoff{>}
     \begin{tikzpicture}[scale=1]
-        \draw[thick, red] (0,0) rectangle (1.6,1.6);
-        \node[red] at (0.8,1.9) {$i_A(t)$};
-        \draw[red, ->] (0.8,1.6) -- (1.0,1.6);
-        \draw[<->, gray, dashed] (1.8,0.8) -- (2.6,0.8);
-        \node[gray, above] at (2.2,0.9) {$M$};
-        \draw[thick, blue] (2.8,0) rectangle (4.4,1.6);
-        \node[blue] at (3.6,1.9) {$v_n(t)$};
+        \ctikzset{sources/scale=0.85}
+        \draw[thick, red] (0,0) rectangle (2.2,2.2);
+        \node[red] at (1.1,2.5) {$i_A(t)$};
+        \draw[red, ->] (1.1,2.2) -- (1.35,2.2);
+        \draw[<->, gray, dashed] (2.4,1.1) -- (2.9,1.1);
+        \node[gray, above] at (2.65,1.2) {$M$};
+        \draw[thick, blue] (3.4,2.2) -- (5.6,2.2) -- (5.6,0) -- (3.4,0);
+        \draw[thick, blue] (3.4,0) to[vsource, l_=$v_n(t)$] (3.4,2.2);
     \end{tikzpicture}
     \caption[Modelo del acoplamiento inductivo.]{Modelo del acoplamiento inductivo. La corriente variable del bucle agresor genera un flujo magnético que, a través de la inductancia mutua $M$, induce una tensión de ruido $v_n$ en el bucle víctima.}\label{fig:acoplamiento_inductivo}
 \end{marginfigure}
 
-Este es precisamente el mecanismo detrás del ejemplo del zumbido de red que ya resolvimos en la Sección~\ref{subsec:ejemplo_zumbido} del Capítulo~\ref{cap:resistivos}: el campo variable de un motor cercano induce una tensión prácticamente idéntica en ambos hilos del cableado (Figura~\ref{fig:ejemplo_diferencial}), porque ambos encierran casi el mismo bucle con la masa de referencia. Trenzar los dos conductores (par trenzado) no elimina $M$, pero sí consigue que bucles consecutivos capturen flujos de signo alterno que se cancelan entre sí, reduciendo el área de bucle neta a casi cero --la razón física, más allá del argumento de modo común de la Sección~\ref{sec:medida_diferencial}, por la que el par trenzado es tan eficaz.
+Este es precisamente el mecanismo detrás del ejemplo del zumbido de red que ya resolvimos en la Sección~\ref{subsec:ejemplo_zumbido} del Capítulo~\ref{cap:resistivos}: el campo variable de un motor cercano induce una tensión prácticamente idéntica en ambos hilos del cableado, tal como se aprecia en la Figura~\ref{fig:ejemplo_diferencial}, porque ambos encierran casi el mismo bucle con la masa de referencia. Trenzar los dos conductores (par trenzado) no elimina $M$, pero sí consigue que bucles consecutivos capturen flujos de signo alterno que se cancelan entre sí, reduciendo el área de bucle neta a casi cero --la razón física, más allá del argumento de modo común de la Sección~\ref{sec:medida_diferencial}, por la que el par trenzado es tan eficaz.
 
 \subsection{Acoplamiento por Impedancia Común}\label{sub:acoplamiento_impedancia_comun}
 
@@ -175,6 +175,7 @@ Los dos mecanismos anteriores son de \emph{campo}: no requieren conexión físic
 \begin{equation}\label{eq:acoplo_impedancia_comun}
     v_n = Z_g \cdot i_A
 \end{equation}
+La Figura~\ref{fig:acoplamiento_impedancia_comun} representa esta situación: los circuitos A y B, aunque eléctricamente independientes en apariencia, comparten un tramo de retorno a tierra de impedancia $Z_g$, de modo que la corriente de retorno de A modula directamente la referencia de tierra que ve B.
 
 \begin{marginfigure}
     \centering
@@ -184,7 +185,7 @@ Los dos mecanismos anteriores son de \emph{campo}: no requieren conexión físic
         \node[red, left] at (-1.4,2) {A};
         \draw[thick, blue, ->] (-1.3,0) -- (0,0) node[midway, below, black]{$i_B$};
         \node[blue, left] at (-1.4,0) {B};
-        \draw (0,2) to[R, l=$Z_g$] (0,0);
+        \draw (0,2) to[R, l_=$Z_g$] (0,0);
         \draw (0,0) -- (0,-0.7) node[ground]{};
         \node[gray, right] at (0.1,1) {$v_n = Z_g \, i_A$};
     \end{tikzpicture}
@@ -199,7 +200,28 @@ Los tres mecanismos anteriores son de \emph{campo cercano}: dominan cuando la di
 \begin{equation}\label{eq:frontera_campo_lejano}
     d_{far} = \frac{\lambda}{2\pi}, \qquad \lambda = \frac{c}{f}
 \end{equation}
-por debajo de la cual predominan los mecanismos capacitivo e inductivo ya vistos, y por encima de la cual el problema pasa a tratarse como radiación en sentido estricto. Este es el mecanismo dominante en interferencias de radiofrecuencia (telefonía móvil, Wi-Fi, equipos de soldadura por RF) y es también la vía por la que un circuito digital de conmutación rápida puede convertirse, él mismo, en fuente de emisiones no intencionadas. La Sección~\ref{sec:normativa_emc} retoma esta frontera --emisión radiada frente a conducida-- al presentar la normativa de compatibilidad electromagnética que obliga a limitar ambas.
+por debajo de la cual predominan los mecanismos capacitivo e inductivo ya vistos, y por encima de la cual el problema pasa a tratarse como radiación en sentido estricto. La Figura~\ref{fig:acoplamiento_radiacion} esquematiza esta situación límite: a diferencia de los tres mecanismos anteriores, aquí no hace falta proximidad ni camino de retorno compartido, basta con que la fuente y la víctima actúen como un par transmisor-receptor de antenas.
+
+\begin{marginfigure}
+    \centering
+    \shorthandoff{>}
+    \begin{tikzpicture}[scale=1]
+        \node[red, above] at (0,1.6) {fuente};
+        \filldraw[red] (0,1.3) circle (2.2pt);
+        \foreach \r in {0.6,1.0,1.4,1.8} {
+            \draw[gray, thick] (0,1.3) ++(-30:\r) arc (-30:30:\r);
+        }
+        \draw[<->, black, thin] (1.0,1.3) -- (1.4,1.3);
+        \node[black, above] at (1.2,1.32) {\scriptsize $\lambda$};
+        \draw[thick, blue] (3.4,0.6) -- (3.4,2.0);
+        \node[blue, above] at (3.4,2.1) {víctima};
+        \draw[<->, dashed] (0,0) -- (3.4,0);
+        \node[below] at (1.7,0) {$d$};
+    \end{tikzpicture}
+    \caption[Modelo del acoplamiento por radiación.]{Modelo del acoplamiento por radiación. Cuando la distancia $d$ a la fuente es comparable o mayor que la longitud de onda $\lambda$, la fuente actúa como una antena transmisora y cualquier conductor suficientemente largo de la víctima --actuando como antena receptora-- capta energía electromagnética, sin necesidad de conexión física ni de proximidad de campo cercano.}\label{fig:acoplamiento_radiacion}
+\end{marginfigure}
+
+Este es el mecanismo dominante en interferencias de radiofrecuencia (telefonía móvil, Wi-Fi, equipos de soldadura por RF) y es también la vía por la que un circuito digital de conmutación rápida puede convertirse, él mismo, en fuente de emisiones no intencionadas. La Sección~\ref{sec:normativa_emc} retoma esta frontera --emisión radiada frente a conducida-- al presentar la normativa de compatibilidad electromagnética que obliga a limitar ambas.
 
 \marginnote{\textbf{Diagnóstico rápido en el laboratorio:} si el ruido desaparece al separar físicamente cables (capacitivo o inductivo), al reordenar el cableado de tierra (impedancia común) o al alejarse de una fuente de RF conocida (radiado), ya se sabe qué mecanismo atacar, y por tanto qué técnica de las Secciones~\ref{sec:apantallamiento} a~\ref{sec:filtrado_emi} aplicar primero.}
 

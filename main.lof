@@ -32,7 +32,7 @@
 \contentsline {figure}{\numberline {3.9}{\ignorespaces Conexión a 2 hilos.}}{40}{figure.3.9}%
 \contentsline {figure}{\numberline {3.10}{\ignorespaces Conexión a 3 hilos.}}{40}{figure.3.10}%
 \contentsline {figure}{\numberline {3.11}{\ignorespaces Conexión a 4 hilos.}}{41}{figure.3.11}%
-\contentsline {figure}{\numberline {3.12}{\ignorespaces Error por autocalentamiento.}}{41}{figure.3.12}%
+\contentsline {figure}{\numberline {3.12}{\ignorespaces Error por autocalentamiento.}}{42}{figure.3.12}%
 \contentsline {figure}{\numberline {3.13}{\ignorespaces Curva característica de un termistor NTC.}}{42}{figure.3.13}%
 \contentsline {figure}{\numberline {3.14}{\ignorespaces Caracterización de una NTC mediante Steinhart-Hart}}{43}{figure.3.14}%
 \contentsline {figure}{\numberline {3.15}{\ignorespaces Circuito de linealización pasiva.}}{43}{figure.3.15}%
@@ -46,23 +46,23 @@
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Impedancias en el plano complejo para RL y RC serie.}}{51}{figure.4.1}%
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.2}{\ignorespaces Representación temporal del desfase en un inductor ideal.}}{52}{figure.4.2}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Métodos de transducción en sensores capacitivos.}}{53}{figure.4.3}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Métodos de transducción en sensores capacitivos.}}{54}{figure.4.3}%
 \contentsline {figure}{\numberline {4.4}{\ignorespaces Comparativa de respuesta variación Área y Distancia.}}{54}{figure.4.4}%
 \contentsline {figure}{\numberline {4.5}{\ignorespaces Esquema de un sensor capacitivo diferencial.}}{54}{figure.4.5}%
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Efecto de la capacidad parásita del cable.}}{54}{figure.4.6}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Efecto de la capacidad parásita del cable.}}{55}{figure.4.6}%
 \contentsline {figure}{\numberline {4.7}{\ignorespaces Modelo equivalente del sensor y el cable.}}{55}{figure.4.7}%
 \contentsline {figure}{\numberline {4.8}{\ignorespaces Esquema de guarda activa.}}{55}{figure.4.8}%
-\contentsline {figure}{\numberline {4.9}{\ignorespaces Diseño de un anillo de guarda en PCB.}}{55}{figure.4.9}%
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Diseño de un anillo de guarda en PCB.}}{56}{figure.4.9}%
 \contentsline {figure}{\numberline {4.10}{\ignorespaces Medida de nivel capacitiva.}}{56}{figure.4.10}%
 \contentsline {figure}{\numberline {4.11}{\ignorespaces Principio del touchscreen capacitivo.}}{56}{figure.4.11}%
 \contentsline {figure}{\numberline {4.12}{\ignorespaces Sensor de reluctancia variable.}}{57}{figure.4.12}%
 \contentsline {figure}{\numberline {4.13}{\ignorespaces Respuesta $L(g)$ del sensor de reluctancia variable.}}{57}{figure.4.13}%
-\contentsline {figure}{\numberline {4.14}{\ignorespaces Sensor de velocidad de rueda ABS.}}{57}{figure.4.14}%
+\contentsline {figure}{\numberline {4.14}{\ignorespaces Sensor de velocidad de rueda ABS.}}{58}{figure.4.14}%
 \contentsline {figure}{\numberline {4.15}{\ignorespaces Sección transversal del LVDT.}}{58}{figure.4.15}%
-\contentsline {figure}{\numberline {4.16}{\ignorespaces Curvas de transferencia del LVDT.}}{58}{figure.4.16}%
+\contentsline {figure}{\numberline {4.16}{\ignorespaces Curvas de transferencia del LVDT.}}{59}{figure.4.16}%
 \contentsline {figure}{\numberline {4.17}{\ignorespaces Principio de los sensores de corrientes de Foucault.}}{59}{figure.4.17}%
-\contentsline {figure}{\numberline {4.18}{\ignorespaces Profundidad de penetración frente a frecuencia (efecto skin).}}{59}{figure.4.18}%
-\contentsline {figure}{\numberline {4.19}{\ignorespaces Principio del efecto Hall.}}{60}{figure.4.19}%
+\contentsline {figure}{\numberline {4.18}{\ignorespaces Profundidad de penetración frente a frecuencia (efecto skin).}}{60}{figure.4.18}%
+\contentsline {figure}{\numberline {4.19}{\ignorespaces Principio del efecto Hall.}}{61}{figure.4.19}%
 \contentsline {figure}{\numberline {4.20}{\ignorespaces Puente de Maxwell.}}{62}{figure.4.20}%
 \contentsline {figure}{\numberline {4.21}{\ignorespaces Acondicionamiento mediante conversión a frecuencia.}}{63}{figure.4.21}%
 \contentsline {figure}{\numberline {4.22}{\ignorespaces Diagrama de bloques de un demodulador síncrono.}}{63}{figure.4.22}%
@@ -115,6 +115,7 @@
 \contentsline {figure}{\numberline {9.2}{\ignorespaces Modelo del acoplamiento capacitivo.}}{101}{figure.9.2}%
 \contentsline {figure}{\numberline {9.3}{\ignorespaces Modelo del acoplamiento inductivo.}}{102}{figure.9.3}%
 \contentsline {figure}{\numberline {9.4}{\ignorespaces Modelo del acoplamiento por impedancia común.}}{102}{figure.9.4}%
+\contentsline {figure}{\numberline {9.5}{\ignorespaces Modelo del acoplamiento por radiación.}}{103}{figure.9.5}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

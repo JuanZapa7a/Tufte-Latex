@@ -61,7 +61,7 @@ Por encima de la banda de valencia se sitúa la \emph{banda de conducción}, que
     \caption[Efecto fotoeléctrico interno.]{Representación esquemática del efecto fotoeléctrico interno. Un fotón con energía suficiente ($h \cdot f > E_g$) excita un electrón de la banda de valencia a la banda de conducción, generando un par electrón-hueco. La \emph{banda de valencia} contiene los electrones ligados a los átomos, mientras que la \emph{banda de conducción} contiene los electrones libres que pueden conducir electricidad.}\label{fig:efecto_fotoelectrico_interno}
 \end{marginfigure}
 
-Este salto energético genera un \emph{par electrón-hueco}, transformando instantáneamente un estímulo óptico en portadores de carga eléctrica móviles. La importancia de este descubrimiento es incalculable: es el eslabón fundamental que permite convertir la luz en información, siendo la base de la imagen digital, las comunicaciones por fibra óptica y la energía solar fotovoltaica.
+Este salto energético, esquematizado en la Figura~\ref{fig:efecto_fotoelectrico_interno}, genera un \emph{par electrón-hueco}, transformando instantáneamente un estímulo óptico en portadores de carga eléctrica móviles. La importancia de este descubrimiento es incalculable: es el eslabón fundamental que permite convertir la luz en información, siendo la base de la imagen digital, las comunicaciones por fibra óptica y la energía solar fotovoltaica.
 
 \paragraph{Respuesta Espectral}
 La sensibilidad de un sensor óptico no es constante para todas las longitudes de onda. Se define mediante la \emph{responsividad} ($R$), que relaciona la corriente generada con la potencia óptica incidente (\unit{A/W}). Como se muestra en la Figura~\ref{fig:curva_espectral}, los sensores de Silicio (Si) son ideales para el espectro visible e infrarrojo cercano, mientras que el Arseniuro de Galio-Indio (InGaAs) se emplea en comunicaciones por fibra óptica.
@@ -237,7 +237,7 @@ En este modo, el ánodo y el cátodo se mantienen al mismo potencial, normalment
 Como consecuencia, la \emph{corriente de oscuridad} ($I_{dark}$) se reduce al mínimo teórico, eliminando el principal componente de ruido sistemático. Esta configuración es obligatoria cuando se pretenden medir flujos luminosos extremadamente bajos, donde cualquier fuga térmica enmascararía la señal generada por los fotones.
 
 
-El Amplificador de Transimpedancia (\emph{Transimpedance Amplifier}, TIA) es el componente principal de un fotodiodo operado en modo fotovoltaico. Su función principal es convertir una corriente de entrada en una tensión de salida. Dado que un fotodiodo se comporta esencialmente como una fuente de corriente proporcional a la luz, y que la mayoría de los sistemas de adquisición (ADC) requieren una entrada de tensión, es necesario un bloque convertidor corriente-tensión ($I \to V$). El funcionamiento  es el siguiente, cuando el diodo recibe luz, genera una corriente fotogenerada ($I_{ph}$) que fluye del cátodo al ánodo hacia tierra. El TIA mantiene el terminal inversor a tierra virtual (tensión nula) para maximizar la linealidad. La corriente $I_{ph}$ debe provenir de la resistencia de realimentación ($R_f$), generando una tensión de salida proporcional a la corriente de entrada.
+El Amplificador de Transimpedancia (\emph{Transimpedance Amplifier}, TIA) es el componente principal de un fotodiodo operado en modo fotovoltaico. Su función principal es convertir una corriente de entrada en una tensión de salida. Dado que un fotodiodo se comporta esencialmente como una fuente de corriente proporcional a la luz, y que la mayoría de los sistemas de adquisición (ADC) requieren una entrada de tensión, es necesario un bloque convertidor corriente-tensión ($I \to V$). El funcionamiento, representado en la Figura~\ref{fig:tia_pd}, es el siguiente: cuando el diodo recibe luz, genera una corriente fotogenerada ($I_{ph}$) que fluye del cátodo al ánodo hacia tierra. El TIA mantiene el terminal inversor a tierra virtual (tensión nula) para maximizar la linealidad. La corriente $I_{ph}$ debe provenir de la resistencia de realimentación ($R_f$), generando una tensión de salida proporcional a la corriente de entrada.
 
 \begin{equation}
 G = \frac{V_{out}}{I_{ph}} \implies [\text{V}/{\text{A}}] = [\Omega]
@@ -1139,7 +1139,7 @@ Las diferencias entre CCD y CMOS se han ido reduciendo gracias a técnicas moder
 
 \section{Resumen de Errores en Sensores Ópticos}\label{sec:errores_opticos}
 
-El diseño de sistemas ópticos exige considerar fuentes de incertidumbre específicas de la naturaleza cuántica de la luz y de la física de semiconductores.
+El diseño de sistemas ópticos exige considerar fuentes de incertidumbre específicas de la naturaleza cuántica de la luz y de la física de semiconductores. La Tabla~\ref{tab:errores_optica} recoge estas fuentes de error junto con su efecto característico sobre la medida y la técnica de mitigación recomendada en cada caso.
 
 \begin{table}[ht]
     \centering

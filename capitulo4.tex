@@ -216,7 +216,7 @@ donde $\epsilon_0$ es la permitividad del vacío, $\epsilon_r$ la permitividad r
 \subsection{Principios de Funcionamiento}
 % Variación de distancia (d), área (A) y constante dieléctrica (epsilon).
 
-Los sensores capacitivos basan su funcionamiento en la modificación de uno o más parámetros de la ecuación fundamental del condensador de placas paralelas:
+Los sensores capacitivos basan su funcionamiento en la modificación de uno o más parámetros de la ecuación fundamental del condensador de placas paralelas. Como resume la Figura~\ref{fig:modos_capacitivos}, existen tres estrategias de transducción: variar la distancia entre placas, variar su área de solapamiento o modificar el dieléctrico interpuesto, cada una con implicaciones distintas de sensibilidad y linealidad que se detallan a continuación:
 
 \paragraph{Variación de la Distancia ($d$):}
 Es el método más común para medir desplazamientos microscópicos o presiones. Si una placa se desplaza una distancia $x$ respecto a la posición inicial $d_0$, la capacidad es:
@@ -297,8 +297,10 @@ El diseño de un sistema de instrumentación capacitivo exige evaluar el comprom
         \emph{Distancia ($d$)} & $\dfrac{C_0}{1 - x/d_0}$ & $\dfrac{C_0 / d_0}{(1 - x/d_0)^2}$ (Variable) & Pobre (Hiperbólica) \\
         \bottomrule
     \end{tabularx}
-    
+
 \end{table}
+
+La diferencia de comportamiento entre ambos modos se aprecia claramente en la Figura~\ref{fig:curvas_sensibilidad}, donde la curva de variación de distancia crece de forma hiperbólica al aproximarse las placas, mientras que la de variación de área mantiene una pendiente constante en todo el rango.
 
 \begin{marginfigure}
     \centering
@@ -330,7 +332,7 @@ El diseño de un sistema de instrumentación capacitivo exige evaluar el comprom
 
 \paragraph{Linealización mediante Configuraciones Diferenciales:}
 
-En ingeniería de precisión, el problema de la no linealidad hiperbólica de los sensores de distancia se resuelve mediante el uso de un \emph{condensador diferencial} o configuración \textit{Push-Pull}. Este sistema consta de tres placas: dos fijas y una central móvil.
+En ingeniería de precisión, el problema de la no linealidad hiperbólica de los sensores de distancia se resuelve mediante el uso de un \emph{condensador diferencial} o configuración \textit{Push-Pull}. Este sistema, esquematizado en la Figura~\ref{fig:sensor_diferencial}, consta de tres placas: dos fijas y una central móvil que se desplaza entre ambas.
 
 Si la placa central se desplaza una distancia $x$ desde el centro equilibrado ($d_0$), las capacidades resultantes son:
 \begin{equation}
@@ -394,7 +396,7 @@ La medida de la capacidad plantea un reto tecnológico mayor que la de la resist
 
 \paragraph{El Efecto del Cable de Conexión} El principal enemigo de un sensor capacitivo es el cable que lo une a la electrónica. Un cable coaxial estándar presenta una capacidad parásita de entre \qtyrange{50}{100}{pF/m}. 
 
-Si intentamos medir un sensor de \unit{1}{pF} mediante un cable de \unit{1}{m}, la capacidad del cable es \emph{100 veces superior} a la del sensor, actuando como un condensador en paralelo que enmascara la señal y degrada la sensibilidad. 
+Si intentamos medir un sensor de \unit{1}{pF} mediante un cable de \unit{1}{m}, la capacidad del cable es \emph{100 veces superior} a la del sensor, actuando como un condensador en paralelo que, tal como se modela en la Figura~\ref{fig:cable_parasito}, enmascara la señal y degrada la sensibilidad.
 %
 \begin{marginfigure}[0em]
     \centering
@@ -428,6 +430,8 @@ Para un ingeniero, el problema no es que la capacidad total sea mayor, sino que 
     La capacidad total es $C_T = C_s + C_p = \unit{101}{pF}$. La variación relativa que detecta la electrónica ahora es:
     \[ \frac{\Delta C}{C_T} = \frac{\unit{0,1}{pF}}{\unit{101}{pF}} \approx \mathbf{\unit{0,1}{\%}} \]
 \end{enumerate}
+
+Este modelo equivalente, representado en la Figura~\ref{fig:paralelo_capacitivo}, ilustra cómo la gran magnitud de $C_p$ enmascara la pequeña variación útil $\Delta C_s$ dentro de la capacidad total que ve la electrónica de acondicionamiento.
 
 \marginnote{\textbf{Solución a la atenuación de la sensibilidad:}
         La presencia de la capacidad parásita ha \emph{atenuado la sensibilidad en un factor de 100}. Para recuperar la medida, necesitaríamos un ADC con 7 bits adicionales de resolución o un amplificador con una ganancia masiva que, inevitablemente, amplificaría también el ruido.
@@ -470,7 +474,7 @@ Para eliminar el efecto de $C_p$, no basta con blindar el cable (conectando la m
     Si mantenemos los dos conductores de un condensador al \textbf{mismo potencial} ($V_1 = V_2$), la diferencia de tensión es nula. Según $Q = C \cdot \Delta V$, la carga acumulada es cero y, por tanto, no circula corriente a través de esa capacidad. \textit{Físicamente, la capacidad parásita sigue ahí, pero el circuito no la ``ve''}.
 }
 
-En esta técnica, se utiliza un seguidor de tensión (buffer) para alimentar el blindaje interno con exactamente la misma tensión que lleva el hilo de señal.
+En esta técnica, tal como se detalla en la Figura~\ref{fig:guarda_activa}, se utiliza un seguidor de tensión (buffer) para alimentar el blindaje interno con exactamente la misma tensión que lleva el hilo de señal.
 
 % \begin{marginfigure}
 %     \centering
@@ -545,7 +549,7 @@ En esta técnica, se utiliza un seguidor de tensión (buffer) para alimentar el 
 \end{marginfigure}
 
 \paragraph{Implementación en PCB: El Anillo de Guarda}
-En el diseño de circuitos impresos (PCB), las corrientes de fuga por la superficie de la placa y las capacidades entre pistas también falsean la medida. Para evitarlo, se rodea la pista de alta impedancia del sensor con un \emph{anillo de guarda} conectado al mismo potencial.
+En el diseño de circuitos impresos (PCB), las corrientes de fuga por la superficie de la placa y las capacidades entre pistas también falsean la medida. Para evitarlo, se rodea la pista de alta impedancia del sensor con un \emph{anillo de guarda} conectado al mismo potencial, como se ilustra en la Figura~\ref{fig:anillo_guarda}.
 
 \begin{marginfigure}
     \centering

@@ -226,9 +226,67 @@ Este es el mecanismo dominante en interferencias de radiofrecuencia (telefonía 
 \marginnote{\textbf{Diagnóstico rápido en el laboratorio:} si el ruido desaparece al separar físicamente cables (capacitivo o inductivo), al reordenar el cableado de tierra (impedancia común) o al alejarse de una fuente de RF conocida (radiado), ya se sabe qué mecanismo atacar, y por tanto qué técnica de las Secciones~\ref{sec:apantallamiento} a~\ref{sec:filtrado_emi} aplicar primero.}
 
 \section{Técnicas de Apantallamiento (Blindaje)}\label{sec:apantallamiento}
-% TODO: blindaje electrostático (jaula de Faraday, conexión del blindaje
-% a un único extremo para evitar bucles) vs. blindaje magnético a baja
-% frecuencia (mu-metal, trenzado de cables -- twisted pair).
+\subsection{Blindaje Electroestático (Jaula de Faraday)}\label{sub:blindaje_electrostatico}
+El acoplamiento capacitivo y la radiación de alta frecuencia pueden bloquearse rodeando al conductor de señal con una pantalla conductora (cobre, aluminio o malla de cobre estañado) que actúe como jaula de Faraday. La pantalla debe conectarse a tierra en un único punto --preferiblemente cerca de la entrada del amplificador-- para evitar la creación de bucles de tierra que convertirían la propia pantalla en una antena receptora de ruido por impedancia común. Si el entorno presenta interferencias de alta frecuencia ($>\SI{1}{\mega\hertz}$) o la distancia al agresor es grande, es habitual conectar el blindaje a tierra en ambos extremos, siempre que la impedancia entre puntos de tierra sea baja; de lo contrario, la conexión en un solo extremo maximiza la atenuación sin introducir nuevos bucles. La Figura~\ref{fig:blindaje_electrostatico} ilustra un cable apantallado con conexión a tierra en un único extremo.
+
+\begin{marginfigure}
+    \centering
+    \begin{tikzpicture}[scale=0.85]
+        % Conductor de señal
+        \draw[blue, very thick] (0,0) -- (4.2,0);
+        % Blindaje (jaula de Faraday)
+        \draw[thick, gray!70!black, fill=gray!10] (0.2,-0.45) rectangle (3.8,0.45);
+        \node[gray!70!black, above, font=\small] at (2,0.45) {Blindaje (Cu)};
+        % Tierra en un solo extremo
+        \draw (3.8,0) -- (3.8,-0.75) node[ground]{};
+        \node[below, font=\small] at (3.8,-1.05) {Tierra (un punto)};
+        % Ruido bloqueado
+        \draw[dashed, red, thick, ->] (-0.6,1.1) -- (1.2,0.25);
+        \node[red, above, font=\small] at (-0.2,1.2) {$V_n(t)$};
+        \draw[dashed, red, thick, ->] (5,1.1) -- (4.0,0.25) node[pos=0.8, right, red, font=\small] {bloqueado};
+    \end{tikzpicture}
+    \caption[Blindaje electrostático de un cable de señal.]{Blindaje electrostático (jaula de Faraday). El conductor de señal está rodeado por una pantalla conductora que desvía las líneas de campo eléctrico; la conexión a tierra en un solo extremo evita los bucles de tierra.}\label{fig:blindaje_electrostatico}
+\end{marginfigure}
+
+\subsection{Blindaje Magnético (Mu-metal y Par Trenzado)}\label{sub:blindaje_magnetico}
+A baja frecuencia ($<\SI{10}{\kilo\hertz}$) los campos magnéticos penetran fácilmente en conductores no magnéticos, por lo que el blindaje electrostático es ineficaz contra el acoplamiento inductivo. La solución pasa por aumentar la reluctancia magnética del camino del flujo: materiales de alta permeabilidad relativa ($\mu_r \approx 10^4\!-\!10^5$, como mu-metal, permalloy o ferritas de alta permeabilidad) rodean el cable o el circuito, desviando las líneas de fuerza antes de que intercepten el bucle de la víctima. Además, el uso de cable de par trenzado (\textit{twisted pair}) minimiza el área efectiva del bucle de señal, reduciendo directamente la inductancia mutua $M$ con agresores externos. La Figura~\ref{fig:blindaje_magnetico} muestra un tubo de mu-metal que envuelve un par trenzado, desviando el flujo magnético.
+
+\begin{marginfigure}
+    \centering
+    \begin{tikzpicture}[scale=0.85]
+        % Par trenzado
+        \draw[blue, very thick] (0,0.25) -- (3.8,0.25);
+        \draw[blue, very thick] (0,-0.25) -- (3.8,-0.25);
+        \node[blue, above, font=\small] at (1.9,0.25) {Par trenzado};
+        % Tubo de mu-metal
+        \draw[thick, gray!70!black, fill=gray!10] (0.2,-0.65) rectangle (3.6,0.65);
+        \node[gray!70!black, above, font=\small] at (1.9,0.65) {Mu-metal ($\mu_r \gg 1$)};
+        % Campo magnético desviado
+        \draw[red, thick, ->] (-0.7,1.1) -- (1.3,0.45) node[midway, above, red, font=\small] {$\Phi_B$};
+        \node[red, right, font=\small] at (1.4,1.0) {campo desviado};
+    \end{tikzpicture}
+    \caption[Blindaje magnético con mu-metal.]{Blindaje magnético. Un tubo de mu-metal de alta permeabilidad desvía el flujo magnético externo antes de que atraviese el bucle del par trenzado, reduciendo la tensión inducida por inductancia mutua.}\label{fig:blindaje_magnetico}
+\end{marginfigure}
+
+Además de la geometría del blindaje, la conexión de la pantalla a tierra debe diseñarse según la frecuencia de la interferencia y la impedancia entre puntos de tierra. La Tabla~\ref{tab:tecnicas_blindaje} resume las principales técnicas, los mecanismos que atenúan y las condiciones de conexión recomendadas.
+
+\begin{table}[ht]
+    \centering
+    \small
+    \setlength{\tabcolsep}{3pt}
+    \begin{tabularx}{\linewidth}{@{}p{2.2cm} >{\raggedright\arraybackslash}X p{3.4cm} p{3.4cm}@{}}
+        \toprule
+        \shortstack{\textbf{Técnica}} & \shortstack{\textbf{Mecanismo}\\\textbf{atacado}} & \shortstack{\textbf{Material /}\\\textbf{geometría}} & \shortstack{\textbf{Conexión de}\\\textbf{pantalla}} \\
+        \midrule
+        \multirow{2}{*}{\shortstack{Jaula\\de Faraday}} & \shortstack{Capacitivo /\\Radiado} & \shortstack{Cobre, Al,\\malla de Cu} & \shortstack{1 punto (baja $f$) /\\2 puntos (alta $f$)} \\
+        & & & \\
+        \midrule
+        \multirow{2}{*}{\shortstack{Mu-metal\\+ twisted pair}} & \shortstack{Inductivo (baja $f$)} & \shortstack{Mu-metal,\\permalloy, ferrita} & \shortstack{Pantalla magnética\\aislada de tierra} \\
+        & & & \\
+        \bottomrule
+    \end{tabularx}
+    \caption{Resumen de las principales técnicas de blindaje, el mecanismo de acoplamiento que mitigan y las condiciones típicas de conexión.}\label{tab:tecnicas_blindaje}
+\end{table}
 
 \section{Estrategias de Conexión a Tierra}\label{sec:tierras}
 % TODO: tierra en un único punto (single-point) vs. múltiples puntos

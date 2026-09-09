@@ -240,10 +240,11 @@ El acoplamiento capacitivo y la radiación de alta frecuencia pueden bloquearse 
         % Tierra en un solo extremo
         \draw (3.8,0) -- (3.8,-0.75) node[ground]{};
         \node[below, font=\small] at (3.8,-1.05) {Tierra (un punto)};
-        % Ruido bloqueado
-        \draw[dashed, red, thick, ->] (-0.6,1.1) -- (1.2,0.25);
-        \node[red, above, font=\small] at (-0.2,1.2) {$V_n(t)$};
-        \draw[dashed, red, thick, ->] (5,1.1) -- (4.0,0.25) node[pos=0.8, right, red, font=\small] {bloqueado};
+        % Ruido bloqueado - Flechas más claras
+        \draw[dashed, red, thick, ->] (-0.6,1.2) -- (0.5,0.45);
+        \node[red, above, font=\small] at (-0.2,1.3) {$V_n(t)$};
+        \draw[dashed, red, thick, ->] (4.5,1.2) -- (3.5,0.45);
+        \draw[dashed, red, thick, ->] (3.5,0.45) -- (4.2,1.2) node[right, red, font=\small] {bloqueado};
     \end{tikzpicture}
     \caption[Blindaje electrostático de un cable de señal.]{Blindaje electrostático (jaula de Faraday). El conductor de señal está rodeado por una pantalla conductora que desvía las líneas de campo eléctrico; la conexión a tierra en un solo extremo evita los bucles de tierra.}\label{fig:blindaje_electrostatico}
 \end{marginfigure}
@@ -254,16 +255,20 @@ A baja frecuencia ($<\SI{10}{\kilo\hertz}$) los campos magnéticos penetran fác
 \begin{marginfigure}
     \centering
     \begin{tikzpicture}[scale=0.85]
-        % Par trenzado
+        % Par trenzado (líneas entrelazadas simuladas)
         \draw[blue, very thick] (0,0.25) -- (3.8,0.25);
         \draw[blue, very thick] (0,-0.25) -- (3.8,-0.25);
-        \node[blue, above, font=\small] at (1.9,0.25) {Par trenzado};
+        \foreach \x in {0.5,1.5,2.5,3.5} {
+            \draw[blue, very thick] (\x-0.2, 0.25) .. controls (\x, 0) .. (\x+0.2, -0.25);
+            \draw[blue, very thick] (\x-0.2, -0.25) .. controls (\x, 0) .. (\x+0.2, 0.25);
+        }
+        \node[blue, above, font=\small] at (1.9,0.35) {Par trenzado};
         % Tubo de mu-metal
         \draw[thick, gray!70!black, fill=gray!10] (0.2,-0.65) rectangle (3.6,0.65);
         \node[gray!70!black, above, font=\small] at (1.9,0.65) {Mu-metal ($\mu_r \gg 1$)};
-        % Campo magnético desviado
-        \draw[red, thick, ->] (-0.7,1.1) -- (1.3,0.45) node[midway, above, red, font=\small] {$\Phi_B$};
-        \node[red, right, font=\small] at (1.4,1.0) {campo desviado};
+        % Campo magnético desviado - Trayectoria curva
+        \draw[red, thick, ->] (-0.7,1.1) .. controls (0.5,1.1) .. (1.3,0.45) node[midway, above, red, font=\small] {$\Phi_B$};
+        \draw[red, thick, ->] (1.3,0.45) .. controls (2.5,0.2) .. (3.8,0.8) node[right, red, font=\small] {campo desviado};
     \end{tikzpicture}
     \caption[Blindaje magnético con mu-metal.]{Blindaje magnético. Un tubo de mu-metal de alta permeabilidad desvía el flujo magnético externo antes de que atraviese el bucle del par trenzado, reduciendo la tensión inducida por inductancia mutua.}\label{fig:blindaje_magnetico}
 \end{marginfigure}
@@ -274,35 +279,194 @@ Además de la geometría del blindaje, la conexión de la pantalla a tierra debe
     \centering
     \small
     \setlength{\tabcolsep}{3pt}
-    \begin{tabularx}{\linewidth}{@{}p{2.2cm} >{\raggedright\arraybackslash}X p{3.4cm} p{3.4cm}@{}}
+    \renewcommand{\tabularxcolumn}[1]{m{#1}}
+    \begin{tabularx}{\linewidth}{@{} >{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}X @{}}
         \toprule
-        \shortstack{\textbf{Técnica}} & \shortstack{\textbf{Mecanismo}\\\textbf{atacado}} & \shortstack{\textbf{Material /}\\\textbf{geometría}} & \shortstack{\textbf{Conexión de}\\\textbf{pantalla}} \\
+        \textbf{Técnica} & \textbf{Mecanismo atacado} & \textbf{Material / geometría} & \textbf{Conexión de pantalla} \\
         \midrule
-        \multirow{2}{*}{\shortstack{Jaula\\de Faraday}} & \shortstack{Capacitivo /\\Radiado} & \shortstack{Cobre, Al,\\malla de Cu} & \shortstack{1 punto (baja $f$) /\\2 puntos (alta $f$)} \\
-        & & & \\
-        \midrule
-        \multirow{2}{*}{\shortstack{Mu-metal\\+ twisted pair}} & \shortstack{Inductivo (baja $f$)} & \shortstack{Mu-metal,\\permalloy, ferrita} & \shortstack{Pantalla magnética\\aislada de tierra} \\
-        & & & \\
+        Jaula de Faraday & Capacitivo / Radiado & Cobre, Al, malla de Cu & 1 punto (baja $f$) / 2 puntos (alta $f$) \\
+        Mu-metal + twisted pair & Inductivo (baja $f$) & Mu-metal, permalloy, ferrita & Pantalla magnética aislada de tierra \\
         \bottomrule
     \end{tabularx}
     \caption{Resumen de las principales técnicas de blindaje, el mecanismo de acoplamiento que mitigan y las condiciones típicas de conexión.}\label{tab:tecnicas_blindaje}
 \end{table}
 
 \section{Estrategias de Conexión a Tierra}\label{sec:tierras}
-% TODO: tierra en un único punto (single-point) vs. múltiples puntos
-% (multi-point), el problema del "bucle de tierra" (ground loop) y su
-% solución mediante aislamiento galvánico (optoacopladores -- enlazar con
-% \label{sub:optoacopladores} del capítulo 7 -- o amplificadores de
-% aislamiento).
+
+En la teoría ideal, la «tierra» se conceptualiza como un nodo de potencial nulo y resistencia cero. En la práctica de la instrumentación, la tierra es simplemente un conductor de retorno que posee una impedancia finita $Z_g$ (resistencia e inductancia parásita). Cuando el sistema es complejo, el modo en que conectamos los retornos de corriente a la masa del sistema determina si la tierra actúa como un refugio seguro para el ruido o como una fuente adicional de interferencias.
+
+Existen dos filosofías principales de conexión, cuya elección depende fundamentalmente de la frecuencia de las señales manejadas y de la longitud de las pistas, como se resume en la Tabla~\ref{tab:comparativa_tierras}.
+
+\subsection{Tierra de Punto Único (Star Ground)}\label{sub:tierra_punto_unico}
+
+En sistemas de baja frecuencia (típicamente $<\SI{1}{\mega\hertz}$), la estrategia más eficaz es la \emph{conexión en estrella}. En esta topología, cada módulo del circuito tiene su propio camino de retorno dedicado hacia un único punto común de masa. 
+
+La ventaja fundamental es que se eliminan los caminos redundantes de retorno, impidiendo que la corriente de un módulo (por ejemplo, una etapa de potencia) fluya a través de la impedancia de retorno de otro módulo (por ejemplo, la entrada de un sensor). De este modo, se evita que la caída de tensión $v = i \cdot Z_g$ de un circuito contaminte la referencia de otro. Como se observa en la Figura~\ref{fig:tierra_estrella}, la topología en estrella garantiza que el único punto de contacto entre los retornos sea el nodo central, eliminando cualquier lazo cerrado.
+
+\begin{marginfigure}
+    \centering
+    \begin{tikzpicture}[american, scale=0.9]
+        % Nodo central de tierra
+        \node[ground] (GND) at (0,0) {};
+        \node[below=0.2cm of GND, font=\small] {Tierra Central};
+        
+        % Módulo A
+        \draw[thick, blue] (-2,1) -- (-2,0) -- (0,0);
+        \node[blue, above] at (-2,1) {Módulo A};
+        
+        % Módulo B
+        \draw[thick, blue] (2,1) -- (2,0) -- (0,0);
+        \node[blue, above] at (2,1) {Módulo B};
+        
+        % Módulo C
+        \draw[thick, blue] (0,1.5) -- (0,0);
+        \node[blue, above] at (0,1.5) {Módulo C};
+        
+        \draw[dashed, gray] (-2.2,-0.2) rectangle (2.2,1.7);
+        \node[gray, anchor=south west, font=\scriptsize] at (-2.2,1.7) {Tierra en estrella: sin lazos};
+    \end{tikzpicture}
+    \caption[Esquema de tierra en estrella.]{Conexión de tierra de punto único. Cada módulo tiene un camino radial hacia la masa, evitando que las corrientes de retorno se mezclen antes de llegar al punto central.}\label{fig:tierra_estrella}
+\end{marginfigure}
+
+\subsection{Bucles de Tierra (Ground Loops)}\label{sub:ground_loops}
+
+El error más común en el diseño de sistemas de medida es la creación involuntaria de un \emph{bucle de tierra} (\textit{ground loop}). Esto ocurre cuando dos puntos de un circuito, que deberían estar al mismo potencial, se conectan a tierra en lugares físicamente distintos a través de caminos con impedancia no nula.
+
+Si el sistema se encuentra en un entorno con campos magnéticos variables (como el zumbido de red de $\SI{50}{\hertz}$), el bucle formado por los cables de tierra actúa como una antena receptora. Por la ley de Faraday, se induce una tensión de ruido en el lazo, que se suma directamente a la señal de medida. La Figura~\ref{fig:bucle_tierra} ilustra cómo una conexión redundante transforma una tierra segura en un lazo inductor.
+
+\begin{marginfigure}
+    \centering
+    \begin{tikzpicture}[scale=0.9]
+        % Rectángulo del bucle
+        \draw[thick, blue] (0,0) -- (4,0) -- (4,2) -- (0,2) -- cycle;
+        
+        % Puntos de tierra
+        \draw (0,0) -- (0,-0.5) node[ground]{};
+        \draw (4,0) -- (4,-0.5) node[ground]{};
+        
+        % Campo magnético
+        \draw[red, thick, ->] (2,2.5) -- (2,1.5);
+        \node[red, above] at (2,2.5) {$\vec{B}$ externo};
+        
+        % Corriente inducida
+        \draw[red, thick, ->] (0.2,0.1) -- (3.8,0.1);
+        \draw[red, thick, ->] (3.9,0.2) -- (3.9,1.8);
+        \draw[red, thick, ->] (3.8,1.9) -- (0.2,1.9);
+        \draw[red, thick, ->] (0.1,1.8) -- (0.1,0.2);
+        
+        \node[red, font=\small] at (2,1) {Corriente inducida $i_n$};
+    \end{tikzpicture}
+    \caption[Esquema de un bucle de tierra.]{Bucle de tierra. Al conectar la masa en dos puntos distantes, se crea un área que captura el flujo magnético externo, induciendo una tensión de ruido que contamina la referencia del sistema.}\label{fig:bucle_tierra}
+\end{marginfigure}
+
+\subsection{Tierra de Multipunto y Aislamiento}\label{sub:tierra_multipunto}
+
+A frecuencias muy altas ($>\SI{10}{\mega\hertz}$), la inductancia de los cables de retorno de una estrella se vuelve prohibitiva, haciendo que la tierra de punto único sea ineficaz. En estos casos se emplea la \emph{tierra de multipunto}, donde el circuito se conecta a un plano de masa continuo (típicamente un plano de cobre en la PCB), minimizando la inductancia total.
+
+Cuando es inevitable conectar módulos con referencias de tierra muy distintas o ruidosas, la solución definitiva es el \emph{aislamiento galvánico}. Como se detalló en el Capítulo~\ref{cap:opticos} (Sección~\ref{sub:optoacopladores}), el uso de optoacopladores o amplificadores de aislamiento rompe físicamente el camino eléctrico, eliminando la posibilidad de crear bucles de tierra mientras se mantiene la transmisión de la información.
+
+\begin{table}[ht]
+    \centering
+    \small
+    \setlength{\tabcolsep}{3pt}
+    \renewcommand{\tabularxcolumn}[1]{m{#1}}
+    \begin{tabularx}{\linewidth}{@{} >{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}X @{}}
+        \toprule
+        \textbf{Estrategia} & \textbf{Frecuencia Ideal} & \textbf{Ventaja Principal} \\
+        \midrule
+        Punto único (Estrella) & Baja ($\le \SI{1}{\mega\hertz}$) & Elimina bucles de tierra y crosstalk \\
+        Multipunto (Plano) & Alta ($> \SI{10}{\mega\hertz}$) & Minimiza la inductancia parásita \\
+        Aislamiento Galvánico & Cualquiera & Ruptura total de lazos de corriente \\
+        \bottomrule
+    \end{tabularx}
+    \caption{Comparativa de estrategias de conexión a tierra según el régimen de frecuencia y el objetivo de diseño.}\label{tab:comparativa_tierras}
+\end{table}
 
 \section{Filtrado EMI}\label{sec:filtrado_emi}
-% TODO: tercera técnica clásica de mitigación (junto a blindaje y tierras):
-% condensadores de desacoplo (decoupling) cerca de cada CI para el ruido de
-% modo diferencial, y ferritas / bobinas de modo común en cables de entrada
-% y salida para el ruido de modo común conducido. Distinguir explícitamente
-% modo diferencial vs. modo común del ruido conducido y qué componente
-% ataca a cada uno (enlazar con \label{sec:medida_diferencial} del
-% capítulo 3, donde ya se definieron ambos modos para la señal útil).
+
+El blindaje y la conexión a tierra actúan como barreras pasivas que impiden que la interferencia entre en el sistema. Sin embargo, cuando el ruido ya ha penetrado en el cableado o es generado internamente por la propia fuente de alimentación, es necesario recurrir al filtrado activo y pasivo. Para diseñar un filtro eficaz, es imperativo distinguir primero entre las dos formas en que el ruido se propaga por los conductores, conceptos que ya introdujimos en el Capítulo~\ref{cap:caracteristicas_sistemas_medida} (Sección~\ref{sec:medida_diferencial}).
+
+\subsection{Ruido de Modo Diferencial vs. Modo Común}\label{sub:modos_ruido}
+
+El ruido \emph{de modo diferencial} es aquel que circula en sentidos opuestos por los dos conductores de un par (señal y retorno), comportándose como una señal útil pero no deseada. El ruido \emph{de modo común}, en cambio, es aquel que circula en el mismo sentido por ambos conductores respecto a una referencia externa (típicamente la tierra).
+
+La peligrosidad del modo común radica en que puede saltar entre circuitos a través de capacitancias parásitas, incluso si no hay conexión eléctrica directa. La Tabla~\ref{tab:modos_filtrado} resume la naturaleza de ambos y el componente electrónico diseñado para combatirlos.
+
+\begin{table}[ht]
+    \centering
+    \small
+    \setlength{\tabcolsep}{3pt}
+    \renewcommand{\tabularxcolumn}[1]{m{#1}}
+    \begin{tabularx}{\linewidth}{@{} >{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}X @{}}
+        \toprule
+        \textbf{Tipo de Ruido} & \textbf{Trayectoria} & \textbf{Componente de Filtrado} \\
+        \midrule
+        Modo Diferencial & Entre conductores (opuestos) & Condensadores de desacoplo / Filtros LC \\
+        Modo Común & Ambos conductores $\to$ Tierra & Inductores de modo común (Ferritas) \\
+        \bottomrule
+    \end{tabularx}
+    \caption{Relación entre el modo de propagación del ruido EMI y la técnica de filtrado recomendada.}\label{tab:modos_filtrado}
+\end{table}
+
+\subsection{Condensadores de Desacoplo (Decoupling)}\label{sub:desacoplo}
+
+El ruido de modo diferencial generado por la conmutación rápida de circuitos integrados (como los ADC o microcontroladores) crea picos de corriente que, al circular por la inductancia parásita de las pistas de alimentación, generan caídas de tensión transitorias. Para mitigar esto, se utilizan \emph{condensadores de desacoplo}.
+
+Un condensador colocado lo más cerca posible de los pines de alimentación del CI actúa como un reservorio de energía local, proporcionando la corriente de alta frecuencia necesaria y cortocircuitando el ruido de modo diferencial a tierra antes de que se propague por el resto de la placa. Como se observa en la Figura~\ref{fig:desacoplo}, el condensador crea un camino de baja impedancia para las frecuencias altas, estabilizando la tensión de alimentación.
+
+\begin{marginfigure}
+    \centering
+    \begin{tikzpicture}[american, scale=0.9]
+        % Línea de VCC - Etiqueta al inicio para evitar el CI
+        \draw[thick] (0,1) -- (5,1);
+        \node[left] at (0,1) {$V_{CC}$};
+        % Condensador de desacoplo - Posición centrada
+        \draw (2,1) to[C, l=$C_{dec}$, *-*] (2,0);
+        % Tierra
+        \draw (2,0) node[ground]{};
+        % CI (Caja) - Posición final
+        \draw[thick] (3.8,0.5) rectangle (5.8,1.5);
+        \node at (4.8,1) {CI};
+        \draw (4.3,0.5) -- (4.3,0) node[ground]{};
+        % Flechas de ruido - Reposicionadas para evitar solapamientos
+        \draw[red, thick, ->] (0.5,1.5) -- (1.5,1.5) node[midway, above, font=\scriptsize] {Ruido Dif.};
+        \draw[red, thick, ->] (1.6,1.5) .. controls (1.8,1.5) .. (1.8,1.1);
+        % Texto "Derivado a tierra" movido significativamente a la izquierda
+        \node[red, font=\scriptsize, anchor=east] at (1.2,0.5) {Derivado a tierra};
+    \end{tikzpicture}
+    \caption[Esquema de condensador de desacoplo.]{Ubicación y función de un condensador de desacoplo. Al colocarse inmediatamente antes del consumidor, absorbe los transitorios de corriente y evita que el ruido de modo diferencial contamine la línea de alimentación común.}\label{fig:desacoplo}
+\end{marginfigure}
+
+\subsection{Inductores de Modo Común y Ferritas}\label{sub:ferritas}
+
+Para combatir el ruido de modo común, el componente fundamental es el \emph{inductor de modo común} (o \emph{choque de modo común}). Este consiste en dos bobinas enrolladas sobre un mismo núcleo ferromagnético. 
+
+Debido a que las corrientes de modo común circulan en el mismo sentido, sus campos magnéticos se suman, creando una alta impedancia que bloquea el ruido. En cambio, las corrientes de modo diferencial (señal útil) circulan en sentidos opuestos, sus campos se cancelan mutuamente y la señal pasa sin apenas atenuación. La Figura~\ref{fig:ferrita_modo_comun} muestra la estructura de un núcleo de ferrita y cómo actúa selectivamente sobre la corriente de modo común.
+
+\begin{marginfigure}
+    \centering
+    \begin{tikzpicture}[scale=1.2]
+        % Núcleo de ferrita (Toroide)
+        \draw[thick, fill=gray!20] (0,0) circle (1.0cm);
+        \draw[thick, fill=white] (0,0) circle (0.5cm);
+        
+        % Conductores
+        \draw[thick, blue] (-2.0,0) -- (-1.0,0);
+        \draw[thick, blue] (1.0,0) -- (2.0,0);
+        
+        % Enrollados
+        \draw[thick, blue] (-1.0,0) arc (180:360:1.0cm and 0.5cm);
+        \draw[thick, blue] (1.0,0) arc (0:180:1.0cm and 0.5cm);
+        
+        % Etiquetas de modo - Elevadas y separadas
+        \draw[red, thick, ->] (-2.5,0.8) -- (-1.5,0.8) node[midway, above, font=\scriptsize] {$i_{cm} \to$};
+        \draw[red, thick, ->] (1.5,0.8) -- (2.5,0.8) node[midway, above, font=\scriptsize] {$i_{cm} \to$};
+        
+        \node[font=\small] at (0,-1.5) {Núcleo de Ferrita};
+        \node[font=\scriptsize, blue] at (0,0) {$\text{Señal Útil}$};
+    \end{tikzpicture}
+    \caption[Esquema de inductor de modo común.]{Inductor de modo común. La suma de campos magnéticos en el núcleo crea una impedancia elevada para las corrientes que viajan en el mismo sentido (modo común), mientras que la señal diferencial permanece inalterada.}\label{fig:ferrita_modo_comun}
+\end{marginfigure}
 
 \section{Protección Frente a Descargas Electrostáticas (ESD)}\label{sec:esd}
 % TODO: modelo del cuerpo humano (HBM), normativa IEC 61000-4-2, y

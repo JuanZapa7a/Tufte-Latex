@@ -1143,7 +1143,9 @@ El diseño de sistemas ópticos exige considerar fuentes de incertidumbre espec�
 
 \begin{table}[ht]
     \centering
-    \begin{tabularx}{\linewidth}{l X X}
+    \forcerectofloat % la tabla cae en el arranque de una página impar (recto); fuerza el caption a la derecha
+    \caption[Clasificación de errores en instrumentación óptica.]{Clasificación de errores en instrumentación óptica.\protect\label{tab:errores_optica}}
+    \begin{tabularx}{\linewidth}{@{} >{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}X @{}}
         \toprule
         \textbf{Fuente de Error} & \textbf{Efecto en la Medida} & \textbf{Técnica de Mitigación} \\
         \midrule
@@ -1153,7 +1155,7 @@ El diseño de sistemas ópticos exige considerar fuentes de incertidumbre espec�
         Capacidad de Unión & Limitación del ancho de banda y velocidad. & Modo fotoconductivo ($V_{bias} < 0$). \\
         \bottomrule
     \end{tabularx}
-    \caption[Clasificación de errores en instrumentación óptica.]{Clasificación de errores en instrumentación óptica.}\label{tab:errores_optica}
+    
 \end{table}
 
 \marginnote{\textbf{Shot Noise:} Recuerda que el ruido de disparo es el límite físico último. No se puede eliminar con mejor electrónica, ya que es intrínseco a la llegada aleatoria de los fotones.}

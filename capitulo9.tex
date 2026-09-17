@@ -469,20 +469,110 @@ Debido a que las corrientes de modo común circulan en el mismo sentido, sus cam
 \end{marginfigure}
 
 \section{Protección Frente a Descargas Electrostáticas (ESD)}\label{sec:esd}
-% TODO: modelo del cuerpo humano (HBM), normativa IEC 61000-4-2, y
-% componentes de protección típicos (TVS, varistores) en las entradas de
-% un sistema de instrumentación.
+
+La protección contra descargas electrostáticas (ESD, \textit{Electrostatic Discharge}) es crítica en sistemas de instrumentación, donde las entradas analógicas suelen estar expuestas a interacciones humanas o entornos industriales. Una descarga no controlada puede provocar el colapso dieléctrico de las uniones semiconductoras o errores transitorios en la lectura de datos.
+
+\subsection{Modelos de Descarga y Normativa}
+
+Para el diseño de circuitos de protección, se utilizan modelos que simulan la fuente de la descarga. El Modelo del Cuerpo Humano (HBM, \textit{Human Body Model}) es el estándar más común; representa la descarga de una persona mediante un condensador de $100\text{ pF}$ en serie con una resistencia de $1.5\text{ k}\Omega$, simulando la descarga de la capacitancia del cuerpo a través de la piel \cite{ott1988noise}.
+
+A nivel industrial, la normativa \emph{IEC 61000-4-2} define los requisitos de inmunidad contra ESD. Esta norma establece niveles de prueba (típicamente desde $2\text{ kV}$ hasta $8\text{ kV}$ para contacto y hasta $15\text{ kV}$ para descarga al aire) para asegurar que el equipo mantenga su funcionalidad sin daños permanentes.
+
+\subsection{Componentes de Protección}
+
+En las etapas de entrada de un sistema de instrumentación, se implementan componentes capaces de derivar la corriente del transitorio hacia tierra antes de que alcance los componentes sensibles (como ADC o amplificadores operacionales).
+
+Como se observa en la Tabla~\ref{tab:comparativa_esd}, la elección entre diodos TVS y varistores depende de la energía del transitorio y la velocidad de respuesta requerida.
+
+\begin{table}[!ht]
+    \centering
+    \small
+    \forcerectofloat % la tabla cae en el arranque de una página impar (recto); fuerza el caption a la derecha
+    \caption[Comparativa entre componentes de protección ESD.]{Comparativa entre componentes de protección ESD comunes. Los diodos TVS son la opción preferida para señales de alta velocidad debido a su respuesta en picosegundos, mientras que los varistores gestionan mejor transitorios de mayor energía en etapas de potencia.\protect\label{tab:comparativa_esd}}
+    \setlength{\tabcolsep}{3pt}
+    \begin{tabularx}{\linewidth}{@{} >{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}X @{}}
+        \toprule
+        \textbf{Característica} & \textbf{Diodo TVS} & \textbf{Varistor (MOV)} \\
+        \midrule
+        Tiempo de respuesta & Muy rápido ($\text{ps}$) & Rápido ($\text{ns}$) \\
+        Capacitancia & Baja/Media & Alta \\
+        Capacidad de Energía & Baja/Media & Muy Alta \\
+        Aplicación típica & Señales de datos/alta velocidad & Alimentación/Protección bruta \\
+        \bottomrule
+    \end{tabularx}
+   
+\end{table}
+
+Los diodos supresores de transitorios (TVS, \textit{Transient Voltage Suppressors}) son preferidos en instrumentación debido a su bajísima impedancia en estado de conducción y su capacidad de limitar la tensión a un valor seguro (\textit{clamping voltage}) en nanosegundos. Por otro lado, los varistores de óxido metálico (MOV) se reservan para protecciones de mayor energía en la etapa de alimentación.
+
+La Figura~\ref{fig:esd_circuit} ilustra la configuración típica de un nodo de entrada protegido. El diodo TVS se coloca lo más cerca posible del conector físico para interceptar la descarga antes de que se propague por la placa de circuito impreso (PCB).
+
+\begin{marginfigure}
+    \centering
+    \begin{tikzpicture}[circuitikz, american, scale=0.8]
+        \draw (0,0) node[left] {Entrada}
+              to[short, o-*] (1,0)
+              to[R, l=$\text{R}_{lim}$] (3,0)
+              to[short, -o] (4,0) node[right] {Sist. Interno};
+
+        \ctikzset{bipoles/diode/height=.35, bipoles/diode/width=.28}
+        \draw (1,0) to[D, l=TVS, invert] (1,-2)
+              node[ground] {};
+    \end{tikzpicture}
+    \caption[Esquema típico de protección ESD.]{Esquema típico de protección ESD en una entrada de instrumentación. El diodo TVS deriva la corriente del transitorio a tierra antes de que esta atraviese la resistencia limitadora y alcance el sistema interno.}\label{fig:esd_circuit}
+\end{marginfigure}
 
 \section{Normativa y Certificación EMC}\label{sec:normativa_emc}
-% TODO: de la técnica a la obligación legal. Panorama de la normativa de
-% Compatibilidad Electromagnética: emisiones radiadas/conducidas
-% (CISPR 32 / EN 55032) e inmunidad (familia IEC 61000-4-X, de la que
-% el ESD de la sección anterior --IEC 61000-4-2-- es solo un ensayo más).
-% Marcado CE y necesidad de "diseñar para la EMC" desde el principio
-% (aplicando lo visto en blindaje, tierras y filtrado) en vez de
-% depender de una corrección a posteriori tras fallar el ensayo en
-% cámara anecoica/célula GTEM.
+
+Todo lo visto en este capítulo --blindaje, conexión a tierra, filtrado y protección ESD-- deja de ser una simple buena práctica de diseño en el momento en que un equipo electrónico debe salir al mercado: la \emph{Compatibilidad Electromagnética} (EMC, \textit{Electromagnetic Compatibility}) es una exigencia legal, no opcional, recogida en la Directiva EMC europea (2014/30/UE) y equivalentes en otras regiones. El ensayo de inmunidad ESD de la Sección~\ref{sec:esd} (norma IEC 61000-4-2) no es más que uno de los muchos ensayos normalizados que un producto debe superar antes de poder comercializarse~\cite{paul2006emc}.
+
+\subsection{Emisiones: Radiadas y Conducidas}\label{sub:emisiones_emc}
+
+La normativa de EMC se divide en dos grandes familias, según si evalúa lo que el equipo \emph{emite} al entorno o cómo \emph{soporta} lo que el entorno le impone. Las \emph{emisiones} acotan la cantidad de ruido electromagnético que un equipo puede inyectar en su entorno, ya sea por el aire (\emph{radiadas}, medidas en una cámara anecoica con una antena a una distancia normalizada) o a través del propio cable de alimentación (\emph{conducidas}, medidas con una red de estabilización de impedancia de línea o LISN). La norma genérica de referencia para equipos electrónicos e informáticos es la \emph{CISPR 32} (armonizada en Europa como \emph{EN 55032}), que fija los límites máximos de emisión en distintas bandas de frecuencia.
+
+\subsection{Inmunidad: La Familia IEC 61000-4-X}\label{sub:inmunidad_emc}
+
+La \emph{inmunidad}, en cambio, evalúa si el equipo sigue funcionando correctamente cuando es el entorno quien le agrede con una perturbación. Aquí es donde aparece la familia de normas \emph{IEC 61000-4-X}: cada sufijo \emph{-X} define un fenómeno físico distinto y un procedimiento de ensayo específico para reproducirlo de forma repetible en laboratorio. La Tabla~\ref{tab:normativa_emc} sitúa el ensayo ESD ya conocido junto a sus vecinos más habituales en instrumentación industrial.
+
+\begin{table}[ht]
+    \centering
+    \small
+    \forceversofloat % cae en página 108 (par); sin forzar, el chequeo de paridad queda obsoleto (se evalúa antes de saltar de página) y el caption sale al lado equivocado
+    \caption[Principales ensayos de la familia IEC 61000-4.]{Principales ensayos de inmunidad de la familia IEC 61000-4 aplicables a un sistema de instrumentación, junto con la norma de emisiones de referencia.}\label{tab:normativa_emc}
+    \setlength{\tabcolsep}{3pt}
+    \begin{tabularx}{\linewidth}{@{} >{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}X @{}}
+        \toprule
+        \textbf{Norma} & \textbf{Categoría} & \textbf{Fenómeno evaluado} \\
+        \midrule
+        CISPR 32 / EN 55032 & Emisiones & Perturbaciones radiadas y conducidas por RF \\
+        IEC 61000-4-2 & Inmunidad & Descargas electrostáticas (ESD, Sección~\ref{sec:esd}) \\
+        IEC 61000-4-3 & Inmunidad & Campos electromagnéticos de RF radiados \\
+        IEC 61000-4-4 & Inmunidad & Transitorios eléctricos rápidos en ráfagas (\textit{burst}) \\
+        IEC 61000-4-5 & Inmunidad & Sobretensiones transitorias de gran energía (\textit{surge}) \\
+        IEC 61000-4-6 & Inmunidad & Perturbaciones de RF conducidas por cableado \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+Nótese que, salvo el ESD (descarga puntual) y el \textit{burst} (ráfaga de transitorios rápidos, típica de la conmutación de cargas inductivas), el resto de ensayos de la tabla reproducen en el laboratorio, de forma controlada, los mismos mecanismos de acoplamiento --radiado y conducido-- que se presentaron en la Sección~\ref{sec:acoplamientos}.
+
+\subsection{Marcado CE y Diseño para la EMC}\label{sub:marcado_ce}
+
+Superar estos ensayos --normalmente en una cámara anecoica o en una célula GTEM (\textit{Gigahertz Transverse Electromagnetic}, una alternativa más compacta y económica para pre-cumplimiento)-- es requisito indispensable para obtener el marcado CE y poder comercializar el equipo legalmente en la Unión Europea. La lección de fondo, sin embargo, es de gestión del diseño: la EMC debe \emph{diseñarse desde el principio}, aplicando sistemáticamente el blindaje (Sección~\ref{sec:apantallamiento}), la estrategia de tierras (Sección~\ref{sec:tierras}) y el filtrado (Sección~\ref{sec:filtrado_emi}) vistos en este capítulo, y no tratarse como una corrección de última hora. Un fallo detectado en el laboratorio de certificación, con el diseño de PCB ya cerrado, suele obligar a rediseños costosos y a repetir --con su correspondiente coste-- el ensayo completo.
+
+\marginnote{\textbf{EMC \textit{by design}:} Cada euro invertido en blindaje, tierras y filtrado durante el diseño ahorra, típicamente, un orden de magnitud en costes de re-diseño y re-ensayo si el fallo se descubre en la cámara anecoica.}
 
 \section{Resumen}\label{sec:resumen_ruido}
-% TODO: itemize de cierre, mismo formato que sec:resumen_opamp (cap. 5)
-% y sec:resumen (cap. 7).
+
+En este capítulo se ha cerrado la cadena de instrumentación frente a la agresión del entorno, complementando el diseño del sensor, el acondicionamiento y la digitalización de los capítulos anteriores con las técnicas que garantizan que esa señal llega intacta hasta el ADC:
+
+\begin{itemize}
+    \item \emph{Ruido Intrínseco vs. Interferencia}: el ruido térmico, de disparo y de \textit{flicker} (Tabla~\ref{tab:ruido_intrinseco}) son inevitables y solo pueden minimizarse; la interferencia, en cambio, se acopla desde el exterior por mecanismos físicos concretos (Tabla~\ref{tab:mecanismos_acoplamiento}) y sí puede eliminarse con un buen diseño.
+    \item \emph{Blindaje}: la jaula de Faraday detiene el acoplamiento capacitivo y radiado, mientras que el mu-metal protege frente a campos magnéticos de baja frecuencia (Tabla~\ref{tab:tecnicas_blindaje}); ningún blindaje es universal para todos los mecanismos.
+    \item \emph{Conexión a Tierra}: la tierra de punto único evita bucles a baja frecuencia, la de multipunto reduce la inductancia parásita a alta frecuencia, y el aislamiento galvánico rompe el camino eléctrico por completo (Tabla~\ref{tab:comparativa_tierras}).
+    \item \emph{Filtrado EMI}: distinguir el modo diferencial del modo común es el primer paso para elegir entre condensadores de desacoplo e inductores de modo común (Tabla~\ref{tab:modos_filtrado}).
+    \item \emph{Protección ESD}: los diodos TVS y los varistores derivan a tierra la energía de una descarga (Tabla~\ref{tab:comparativa_esd}) antes de que esta alcance los componentes sensibles del sistema.
+    \item \emph{Normativa EMC}: superar los ensayos de emisión (CISPR 32/EN 55032) e inmunidad (familia IEC 61000-4-X, Tabla~\ref{tab:normativa_emc}) es un requisito legal para el marcado CE, no una opción de diseño.
+\end{itemize}
+
+\marginnote{\textbf{Conclusión:} El ruido y las interferencias no se combaten con un único truco, sino con una estrategia de defensa en profundidad --blindaje, tierras, filtrado y protección ESD-- pensada desde el primer boceto del sistema, y no añadida a última hora cuando el ensayo de certificación ya ha fallado.}

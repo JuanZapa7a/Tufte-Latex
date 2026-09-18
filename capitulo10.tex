@@ -87,7 +87,7 @@ A las dos ventajas anteriores se añade una tercera, de carácter práctico: com
         Distancia típica & Metros, dentro del equipo & Hasta \SI{2}{\kilo\meter} \\
         \bottomrule
     \end{tabularx}
-    \caption[Transmisión en tensión frente a lazo de corriente 4-20 mA.]{Comparación entre la transmisión de una señal acondicionada como tensión y como corriente. La ventaja del lazo no reside en la electrónica del transmisor, sino en que la magnitud transmitida no depende de la resistencia del camino: ni la caída de tensión en el cable (ecuación~\eqref{eq:error_cable_tension}) ni las tensiones inducidas en serie (ecuación~\eqref{eq:ruido_serie_lazo}) alteran una corriente que la fuente mantiene regulada.}\label{tab:tension_vs_corriente}
+    \caption[Transmisión en tensión frente a lazo de corriente 4-20 mA.]{Comparación entre la transmisión de una señal acondicionada como tensión y como corriente. La ventaja del lazo no reside en la electrónica del transmisor, sino en que la magnitud transmitida no depende de la resistencia del camino: ni la caída de tensión en el cable (ecuación~\eqref{eq:error_cable_tension}) ni las tensiones inducidas en serie (ecuación~\eqref{eq:ruido_serie_lazo}) alteran una corriente que la fuente mantiene regulada.\protect\label{tab:tension_vs_corriente}}
 \end{table}
 
 \marginnote{\textbf{La clave física:} el lazo no elimina la resistencia del cable ni las perturbaciones inducidas, sino que las hace irrelevantes al regular la corriente: mientras la fuente pueda forzar los \SI{20}{\milli\ampere}, el receptor recibe la misma corriente que generó el transmisor, con independencia de lo que ocurra en el camino.}
@@ -256,7 +256,7 @@ HART es un protocolo maestro-esclavo y semidúplex: en cada momento habla un sol
         Compatibilidad & Total con el 4-20 mA previamente instalado & Exige maestro HART y una dirección distinta por instrumento \\
         \bottomrule
     \end{tabularx}
-    \caption[Modos de operación de HART: punto a punto frente a multidrop.]{Comparación de los dos modos de operación de HART. El modo punto a punto conserva intacta la vía analógica y añade información por el canal digital; el modo multidrop concentra varios instrumentos en un solo par a costa de renunciar a la medida analógica y de repartir una velocidad de comunicación de \SI{1200}{\bit\per\second} entre todos ellos.}\label{tab:modos_hart}
+    \caption[Modos de operación de HART: punto a punto frente a multidrop.]{Comparación de los dos modos de operación de HART. El modo punto a punto conserva intacta la vía analógica y añade información por el canal digital; el modo multidrop concentra varios instrumentos en un solo par a costa de renunciar a la medida analógica y de repartir una velocidad de comunicación de \SI{1200}{\bit\per\second} entre todos ellos.\protect\label{tab:modos_hart}}
 \end{table}
 
 \begin{marginfigure}
@@ -459,7 +459,7 @@ La elección entre ambos buses rara vez es libre: viene impuesta por lo que ofre
         Normalización & Especificación de NXP; derivados SMBus y PMBus & Estándar de hecho, con variantes por fabricante \\
         \bottomrule
     \end{tabularx}
-    \caption[Comparación entre los buses I2C y SPI.]{Comparación entre los dos buses de corto alcance. La ventaja de I2C es el cableado y el protocolo --dos hilos compartidos, direccionamiento, reconocimiento y arbitraje--, mientras que la de SPI es el caudal: cuatro hilos sin resistencias externas, dúplex completo y velocidades uno o dos órdenes de magnitud superiores, a cambio de un pin de selección por dispositivo y de ningún mecanismo de confirmación.}\label{tab:i2c_vs_spi}
+    \caption[Comparación entre los buses I2C y SPI.]{Comparación entre los dos buses de corto alcance. La ventaja de I2C es el cableado y el protocolo --dos hilos compartidos, direccionamiento, reconocimiento y arbitraje--, mientras que la de SPI es el caudal: cuatro hilos sin resistencias externas, dúplex completo y velocidades uno o dos órdenes de magnitud superiores, a cambio de un pin de selección por dispositivo y de ningún mecanismo de confirmación.\protect\label{tab:i2c_vs_spi}}
 \end{table}
 
 Los sensores digitales llevan esta idea un paso más allá de lo que sugieren sus registros de configuración. Muchos incorporan un identificador único, guardan en memoria sus propios coeficientes de calibración y publican un mapa de registros con las unidades y el rango de cada magnitud: el dispositivo, en definitiva, sabe describirse a sí mismo. Generalizar esa autodescripción para cualquier sensor, con independencia del fabricante y del bus, es el objetivo de la norma que se estudia en la Sección~\ref{sec:smart_sensors}.
@@ -537,7 +537,7 @@ Esa hoja de datos electrónica --el \emph{teds} (\textsc{transducer electronic d
         Área de usuario & Texto libre: punto de medida, ubicación, notas de mantenimiento & Documentar el canal y su trazabilidad \\
         \bottomrule
     \end{tabularx}
-    \caption[Contenido de la hoja de datos electrónica del sensor (TEDS).]{Contenido de la hoja de datos electrónica de un sensor. Los tres primeros bloques describen qué es el dispositivo, cómo hay que interpretar su salida y cómo corregirla; el cuarto queda a disposición del usuario para documentar el canal.}\label{tab:teds}
+    \caption[Contenido de la hoja de datos electrónica del sensor (TEDS).]{Contenido de la hoja de datos electrónica de un sensor. Los tres primeros bloques describen qué es el dispositivo, cómo hay que interpretar su salida y cómo corregirla; el cuarto queda a disposición del usuario para documentar el canal.\protect\label{tab:teds}}
 \end{table}
 
 La parte dedicada al modo mixto (norma 1451.4) merece una atención especial en instrumentación de laboratorio, porque permite que un sensor esencialmente analógico se describa a sí mismo sin renunciar a su salida analógica~\cite{ieee1451_4_2004}. En la clase 1, la memoria del TEDS comparte el mismo hilo que la señal y se lee mediante una breve excursión negativa de la tensión; en la clase 2 ocupa un par propio, compatible con los dispositivos de un solo hilo, lo que simplifica el circuito. El caso típico es el de los acelerómetros piezoeléctricos con electrónica integrada (\textsc{integrated electronics piezo-electric, iepe}) del Capítulo~\ref{cap:generadores}: por el mismo cable coaxial viajan la alimentación de continua --una corriente constante de unos miliamperios-- y la señal de alterna, y junto a ellos un pequeño chip de memoria guarda la sensibilidad del sensor y la fecha de su última calibración, como se esquematiza en la Figura~\ref{fig:teds_mixed}. Al conectar el acelerómetro, el sistema lee primero el TEDS y ya sabe a cuántos milivoltios por unidad de aceleración corresponde su señal; después digitaliza esa señal analógica. La tensión de polarización de continua sirve, además, como el cero vivo del lazo de corriente (Sección~\ref{sec:lazo_420}): un valor anómalo delata un cable abierto o un cortocircuito en la entrada.

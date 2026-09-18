@@ -25,6 +25,41 @@ Esta característica es fundamental para entender la precisión y el rango de op
 
 En cuanto a la resolución, es importante considerar que un sistema con alta resolución no garantiza una medición precisa si el ruido es significativo, ya que el ruido puede enmascarar las pequeñas variaciones que el sistema es capaz de detectar. Por ejemplo, en un sistema de adquisición de datos con un ADC de 12 bits y un rango de entrada de 0 a 10 V, la resolución teórica sería de aproximadamente 2.44 mV por bit. Sin embargo, si el ruido del sistema es del orden de varios milivoltios, la resolución efectiva se verá reducida, ya que las pequeñas variaciones en la entrada podrían no ser distinguibles debido al ruido.
 
+\subsection{Error de Cero y Error de Span}\label{sub:error_cero_span}
+
+Una curva de calibración puede ser perfectamente lineal y, aun así, estar equivocada de dos maneras distintas que conviene no confundir, porque no se corrigen igual. Si la recta tiene la pendiente correcta pero está desplazada, el sistema tiene un \emph{error de cero} (o de \emph{offset}): todas las lecturas se desvían la misma cantidad, de modo que el error absoluto es constante y el relativo crece al acercarse al fondo del rango. Si lo que está mal es la pendiente, el error es de \emph{span} o de ganancia: nulo en el punto de referencia y proporcional a la lectura en el resto del rango. Un sistema que presenta ambos defectos responde a
+\begin{equation}\label{eq:error_cero_span}
+    x_{ind} = (1 + \epsilon_s)\,x + e_0
+\end{equation}
+donde $e_0$ es el error de cero y $\epsilon_s$ el error relativo de span. La Figura~\ref{fig:errores_cero_span} compara los dos casos con la recta ideal.
+
+\begin{marginfigure}
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            width=\linewidth, height=4.8cm,
+            xlabel={$x$}, ylabel={$x_{ind}$},
+            xmin=0, xmax=5, ymin=0, ymax=7.2,
+            axis lines=left, font=\scriptsize,
+            xtick=\empty, ytick=\empty,
+            every axis y label/.style={at=(current axis.above origin),anchor=south},
+            every axis x label/.style={at=(current axis.right of origin),anchor=east},
+        ]
+            \addplot[gray, dashed, thick, domain=0:5] {x};
+            \addplot[blue, thick, domain=0:5] {x+0.8};
+            \addplot[red!75!black, thick, domain=0:5] {1.3*x};
+            \node[gray, font=\tiny, anchor=north west] at (axis cs:2.0,1.5) {recta ideal};
+            \node[blue, font=\tiny, anchor=south east] at (axis cs:4.9,5.55) {error de cero};
+            \node[red!75!black, font=\tiny, anchor=south east] at (axis cs:4.9,6.7) {error de span};
+        \end{axis}
+    \end{tikzpicture}
+    \caption[Error de cero y error de span sobre la recta de calibración.]{Los dos defectos de una recta de calibración lineal. El error de cero desplaza la recta entera el mismo valor absoluto --el error relativo es mayor en el fondo del rango--, mientras que el error de span cambia su pendiente y el error crece con la lectura.}\label{fig:errores_cero_span}
+\end{marginfigure}
+
+La distinción no es académica: la calibración de un instrumento consiste precisamente en medir esos dos parámetros y corregirlos, ajustando el cero y el span contra un patrón, y por eso el certificado de calibración de cualquier instrumento de laboratorio los declara por separado (Capítulo~\ref{cap:metrologia}). También explica por qué las especificaciones se escriben de dos formas a la vez: los errores de cero se dan en unidades absolutas --milivoltios, grados-- y los de span en tanto por ciento.
+
+\marginnote{\textbf{Ejemplo:} un sensor con un error de span del \SI{0.5}{\percent} sobre un fondo de escala de \SI{100}{\milli\volt} y un error de cero de \SI{1}{\milli\volt}. En el fondo de escala el error combinado es de \SI{1.5}{\milli\volt}, es decir, el \SI{1.5}{\percent} de la lectura; pero a una décima parte del rango, con una lectura de \SI{10}{\milli\volt}, el error sigue siendo de \SI{1.05}{\milli\volt} y ahora representa el \SI{10.5}{\percent} de lo indicado. El error de cero manda en el fondo del rango y el de span, en el extremo superior.}
+
 \subsection{Linealidad y Ajuste por Mínimos Cuadrados}
 
 En ingeniería, siempre preferimos sistemas lineales de la forma $y = mx + b$, ya que facilitan el procesado posterior. Sin embargo, los sensores reales presentan desviaciones. Para obtener la \emph{mejor recta} de ajuste, que se considera la curva de calibración que representa a un sensor en el laboratorio, utilizamos el \emph{Método de los Mínimos Cuadrados}, como se muestra en la Figura~\ref{fig:minimos_cuadrados}.
@@ -113,7 +148,7 @@ En la Tabla~\ref{tab:datos_ejemplo} del siguiente ejemplo se muestra un conjunto
 \begin{margintable}
     \centering
     %\footnotesize
-    \caption[Datos experimentales del sensor.]{Datos experimentales del sensor. Se muestra un conjunto de $n=5$ pares de medidas $(x_i, y_i)$ y la recta de ajuste encontrada por el Método de los Mínimos Cuadrados.}\label{tab:datos_ejemplo}
+    \caption[Datos experimentales del sensor.]{Datos experimentales del sensor. Se muestra un conjunto de $n=5$ pares de medidas $(x_i, y_i)$ y la recta de ajuste encontrada por el Método de los Mínimos Cuadrados.\protect\label{tab:datos_ejemplo}}
     \begin{tabular}{c c}
         \\
         \toprule
@@ -323,7 +358,7 @@ Un sistema presenta \emph{histéresis} cuando la salida depende de la dirección
 
 %banda de Muerta
 
-El \emph{banda de muerta} es un fenómeno relacionado con la histéresis, donde existe un rango de valores de entrada que no produce ningún cambio en la salida. Esto es común en sistemas mecánicos con fricción o en sensores que requieren una fuerza mínima para activar la salida. Por ejemplo, en un reductor mecánico, puede haber una banda de muerta debido a la fricción interna, lo que significa que pequeñas variaciones en la entrada no se traducen en cambios en la salida hasta que se supera un umbral específico. En la Figura~\ref{fig:banda_muerta} se muestra un ejemplo gráfico de una banda de muerta, donde la curva azul representa la respuesta del sistema a variaciones de entrada. En el rango marcado como \emph{Banda de Muerta}, la salida permanece constante a pesar de las variaciones en la entrada, lo que ilustra claramente este fenómeno.\marginnote{\textbf{Ejemplo de Banda de Muerta.} Un ejemplo típico de banda de muerta es el comportamiento de un reductor mecánico, donde puede haber una banda de muerta debido a la fricción interna, lo que significa que pequeñas variaciones en la entrada no se traducen en cambios en la salida hasta que se supera un umbral específico. Otro ejemplo típico de banda de muerta es el comportamiento de un sensor de presión, donde puede haber una banda de muerta debido a la necesidad de superar una presión mínima para activar la salida del sensor.}
+La \emph{banda muerta} es un fenómeno relacionado con la histéresis, donde existe un rango de valores de entrada que no produce ningún cambio en la salida. Esto es común en sistemas mecánicos con fricción o en sensores que requieren una fuerza mínima para activar la salida. Por ejemplo, en un reductor mecánico, puede haber una banda de muerta debido a la fricción interna, lo que significa que pequeñas variaciones en la entrada no se traducen en cambios en la salida hasta que se supera un umbral específico. En la Figura~\ref{fig:banda_muerta} se muestra un ejemplo gráfico de una banda de muerta, donde la curva azul representa la respuesta del sistema a variaciones de entrada. En el rango marcado como \emph{Banda de Muerta}, la salida permanece constante a pesar de las variaciones en la entrada, lo que ilustra claramente este fenómeno.\marginnote{\textbf{Ejemplo de Banda de Muerta.} Un ejemplo típico de banda de muerta es el comportamiento de un reductor mecánico, donde puede haber una banda de muerta debido a la fricción interna, lo que significa que pequeñas variaciones en la entrada no se traducen en cambios en la salida hasta que se supera un umbral específico. Otro ejemplo típico de banda de muerta es el comportamiento de un sensor de presión, donde puede haber una banda de muerta debido a la necesidad de superar una presión mínima para activar la salida del sensor.}
 
 \begin{marginfigure}
     \centering
@@ -337,7 +372,7 @@ El \emph{banda de muerta} es un fenómeno relacionado con la histéresis, donde 
         \draw[dashed, red] (1,0.2) -- (1.5,1.5);
         \node[red] at (1.25,0.8) {Banda de Muerta};
     \end{tikzpicture}
-    \caption[Ejemplo de banda de muerta.]{Ejemplo de banda de muerta. Es común en sistemas mecánicos con fricción o en sensores que requieren una fuerza mínima para activar la salida.}\label{fig:banda_muerta}
+    \caption[Ejemplo de banda muerta.]{Ejemplo de banda muerta. Es común en sistemas mecánicos con fricción o en sensores que requieren una fuerza mínima para activar la salida.}\label{fig:banda_muerta}
 \end{marginfigure}
 
 La \emph{repetibilidad} es la capacidad de un sensor para entregar la misma salida al aplicar la misma entrada varias veces en periodos cortos de tiempo. Un sensor con buena repetibilidad producirá resultados consistentes bajo las mismas condiciones de prueba, lo que es crucial para aplicaciones donde se requiere alta precisión y confiabilidad. La repetibilidad se puede evaluar realizando múltiples mediciones con el mismo valor de entrada y analizando la variación en las salidas obtenidas. Un sensor con alta repetibilidad tendrá una desviación estándar baja en sus mediciones, lo que indica que las salidas son consistentes y confiables. En la Figura~\ref{fig:repetibilidad} se muestra un ejemplo gráfico de repetibilidad, donde se realizan varias mediciones con el mismo valor de entrada. La dispersión de los puntos alrededor de la media indica el nivel de repetibilidad del sensor, siendo una dispersión menor indicativa de una mejor repetibilidad.\marginnote{\textbf{Ejemplo de repetibilidad.} Un ejemplo típico de repetibilidad es el comportamiento de un sensor de temperatura, donde se espera que el sensor entregue la misma salida para la misma temperatura en múltiples mediciones realizadas en periodos cortos de tiempo. Otro ejemplo típico de repetibilidad es el comportamiento de un sensor de presión, donde se espera que el sensor entregue la misma salida para la misma presión en múltiples mediciones realizadas en periodos cortos de tiempo.} 
@@ -379,7 +414,7 @@ La \emph{repetibilidad} es la capacidad de un sensor para entregar la misma sali
     \caption[Ejemplo de repetibilidad.]{Ejemplo de repetibilidad. Un sensor con buena repetibilidad producirá resultados consistentes bajo las mismas condiciones de prueba.}\label{fig:repetibilidad}
 \end{marginfigure}
 
-\subsection{Error de Histeresis}
+\subsection{Error de Histéresis}
 
 
 Además, el \emph{Error de Histeresis} se puede evaluar comparando las salidas para un mismo valor de entrada según el sentido de la variación (ascendente o descendente). Este error se define como la máxima diferencia en la salida para un mismo valor de entrada según el sentido de la variación, y se expresa también como porcentaje sobre el fondo de escala:
@@ -425,9 +460,18 @@ La saturación es una característica no lineal que ocurre cuando la entrada exc
     \caption[Característica de saturación.]{Característica de saturación. Físicamente, suele estar impuesta por los límites de alimentación de la electrónica o la deformación máxima del material del sensor.}\label{fig:saturacion}
 \end{marginfigure}
 
+\subsection{Efecto de Carga e Impedancias}\label{sub:efecto_carga_general}
+
+Al conectar la salida de una etapa con la entrada de la siguiente --el sensor con el acondicionador, el acondicionador con el convertidor, el instrumento con el sistema de registro-- no se unen dos terminales ideales, sino una fuente con impedancia de salida $R_{out}$ y una carga con impedancia de entrada $R_{in}$. Ambas forman un divisor de tensión, y la señal que llega al receptor ya no es la que salió de la fuente:
+\begin{equation}\label{eq:error_carga}
+    v_{rx} = v_{tx}\,\frac{R_{in}}{R_{in} + R_{out}}, \qquad \frac{\Delta v}{v_{tx}} \approx -\frac{R_{out}}{R_{in}} \quad \text{si } R_{in} \gg R_{out}
+\end{equation}
+La regla de diseño es, por tanto, que la impedancia de entrada sea mucho mayor que la de salida: dos órdenes de magnitud de diferencia dejan un error del orden del \SI{1}{\percent}. La gravedad del efecto depende de la impedancia de la fuente, y por eso conviene conocerla antes de elegir la etapa siguiente: un sensor pasivo de \SI{1}{\kilo\ohm} no puede leerse con una entrada de \SI{1}{\kilo\ohm} --se pierde la mitad de la señal--, mientras que un termopar de unos pocos ohmios apenas acusa una entrada de \SI{10}{\kilo\ohm}. En los sensores resistivos este mismo efecto es el que obliga a las configuraciones de tres y cuatro hilos (Figura~\ref{fig:efecto_carga}) y en el acondicionamiento es la razón de ser de la etapa de entrada del amplificador de instrumentación (Sección~\ref{sec:inamp}).
+
+\marginnote{\textbf{Efecto de carga en cifras:} una fuente de \SI{1}{\kilo\ohm} leída por una entrada de \SI{100}{\kilo\ohm} pierde el \SI{1}{\percent} de la señal; con una entrada de \SI{1}{\mega\ohm}, pierde el \SI{0.1}{\percent}. Como el error es sistemático y depende de una impedancia que a su vez cambia con la temperatura, no se corrige en el software: se combate con una etapa de entrada de alta impedancia, como un seguidor de tensión o un amplificador de instrumentación.}
+
 \section{Características Dinámicas}\label{sec:caract_dinamicas} 
 
-%que son las características dinamicas y diferencia con las estaticas
 Las características dinámicas describen el comportamiento de un sistema de medida cuando la magnitud física varía con el tiempo. A diferencia de las características estáticas, que se centran en la relación entre entrada y salida en condiciones de equilibrio o variaciones lentas, las características dinámicas analizan cómo el sistema responde a cambios rápidos en la magnitud medida, incluyendo aspectos como la velocidad de respuesta, la estabilidad y la capacidad para seguir señales de alta frecuencia.
 
 Las características dinámicas analizan la respuesta del sistema cuando la entrada $x(t)$ varía rápidamente. Matemáticamente, se modelan mediante una ecuación diferencial lineal de coeficientes constantes:
@@ -715,6 +759,57 @@ En resumen, el sistema analizado es capaz de seguir cambios con una rapidez mode
     \caption[Respuesta al escalón de un sistema de segundo orden.]{Ejemplo de cálculo de la respuesta al escalón de un sistema de segundo orden subamortiguado, con $\zeta = 0.3$ y $\omega_n = 3$. La curva azul representa la salida $y(t)$ que se aproxima a su valor final $K$ de manera exponencial amortiguada y oscilatoria, donde la magnitud de la sobreoscilación $M_p$ y la frecuencia de las oscilaciones dependen del factor de amortiguamiento $\zeta$ y la frecuencia natural $\omega_n$ del sistema.}\label{fig:ejemplo_segundo_orden}
 \end{marginfigure}
 
+\subsection{Prestaciones Dinámicas Normalizadas}\label{sub:prestaciones_dinamicas}
+
+Los parámetros de las secciones anteriores --la constante de tiempo $\tau$, la frecuencia natural $\omega_n$ y el amortiguamiento $\zeta$-- describen el sistema, pero las hojas de características de los instrumentos y los pliegos de los ensayos no se escriben con ellos, sino con cifras medidas sobre la respuesta al escalón, que es lo que resume la Figura~\ref{fig:prestaciones_dinamicas}:
+
+\begin{itemize}
+    \item \emph{Tiempo de subida} ($t_r$): lo que tarda la salida en pasar del \SI{10}{\percent} al \SI{90}{\percent} de su valor final. Para un sistema de segundo orden vale aproximadamente $t_r \approx 1{,}8/\omega_n$: la frecuencia natural fija la rapidez.
+    \item \emph{Sobreoscilación máxima} ($M_p$): el exceso sobre el valor final en el primer pico, en porcentaje. Depende solo del amortiguamiento,
+\begin{equation}\label{eq:sobreoscilacion}
+    M_p = e^{-\pi\zeta/\sqrt{1-\zeta^2}}
+\end{equation}
+y cae deprisa: un \SI{30.9}{\percent} para $\zeta = 0{,}35$, un \SI{16.3}{\percent} para $\zeta = 0{,}5$ y ninguna sobreoscilación para $\zeta \ge 1$.
+    \item \emph{Tiempo de establecimiento} ($t_s$): lo que tarda la salida en quedarse dentro de una banda alrededor del valor final, del \SI{5}{\percent} o del \SI{2}{\percent} según lo que exija la especificación. Vale aproximadamente $t_s \approx 3/(\zeta\omega_n)$ al \SI{5}{\percent} y $t_s \approx 4/(\zeta\omega_n)$ al \SI{2}{\percent}: el amortiguamiento manda en la duración y la frecuencia natural, en la velocidad.
+    \item \emph{Ancho de banda} ($f_c$): la frecuencia a la que la ganancia cae un factor $\sqrt{2}$ respecto a la de continua. Para $\zeta$ en torno a $0{,}7$ coincide, con buena aproximación, con la frecuencia natural.
+\end{itemize}
+
+\begin{marginfigure}
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            width=\linewidth, height=5cm,
+            xlabel={$t\,\omega_n$}, ylabel={$y$},
+            xmin=0, xmax=9.5, ymin=0, ymax=1.55,
+            axis lines=left, font=\scriptsize,
+            xtick={2,4,6,8}, ytick={0.5,1},
+            every axis y label/.style={at=(current axis.above origin),anchor=south},
+            every axis x label/.style={at=(current axis.right of origin),anchor=east},
+        ]
+            \addplot[blue, thick, domain=0:9.5, samples=250]
+                {1 - exp(-0.35*x)*(cos(deg(0.937*x)) + 0.374*sin(deg(0.937*x)))};
+            % banda del 5 %
+            \draw[dashed, gray] (axis cs:0,0.95) -- (axis cs:9.5,0.95);
+            \draw[dashed, gray] (axis cs:0,1.05) -- (axis cs:9.5,1.05);
+            \node[gray, font=\tiny, anchor=south west] at (axis cs:0.15,1.06) {banda del \SI{5}{\percent}};
+            % sobreoscilación máxima
+            \draw[<->, red!75!black, thick] (axis cs:3.35,1) -- (axis cs:3.35,1.309);
+            \node[red!75!black, font=\tiny, anchor=west] at (axis cs:3.5,1.1) {$M_p$};
+            % tiempo de subida (10 % a 90 %)
+            \draw[dashed, gray] (axis cs:0.48,0) -- (axis cs:0.48,0.10);
+            \draw[dashed, gray] (axis cs:1.87,0) -- (axis cs:1.87,0.90);
+            \draw[<->, thick] (axis cs:0.48,0.2) -- (axis cs:1.87,0.2);
+            \node[font=\tiny, anchor=south] at (axis cs:1.18,0.21) {$t_r$};
+            % tiempo de establecimiento al 5 %
+            \draw[dashed, gray] (axis cs:7.88,0) -- (axis cs:7.88,1.55);
+            \node[gray, font=\tiny, anchor=north east] at (axis cs:7.75,1.5) {$t_s$ (al \SI{5}{\percent})};
+        \end{axis}
+    \end{tikzpicture}
+    \caption[Prestaciones dinámicas medidas sobre la respuesta al escalón.]{Las prestaciones dinámicas que se especifican en una hoja de características, medidas sobre la respuesta al escalón de un sistema de segundo orden con $\zeta = 0{,}35$: el tiempo de subida $t_r$ (del \SI{10}{\percent} al \SI{90}{\percent}), la sobreoscilación máxima $M_p$ y el tiempo de establecimiento $t_s$ hasta entrar en la banda del \SI{5}{\percent}. El tiempo de subida y el de establecimiento fijan la rapidez; la sobreoscilación, el amortiguamiento.}\label{fig:prestaciones_dinamicas}
+\end{marginfigure}
+
+De los cuatro parámetros hay uno que merece una recomendación, porque aparece en todas las especificaciones y casi nunca se explica por qué: el amortiguamiento en torno a $\zeta \approx 0{,}7$ es el compromiso clásico, ya que da la respuesta más rápida sin sobreoscilación apreciable --menos de un \SI{5}{\percent}-- y un ancho de banda bien definido, con $f_c \approx \omega_n$. Es el valor que se busca cuando el ingeniero puede elegirlo --el amortiguamiento de un galvanómetro, la constante de tiempo de un filtro, el lazo de un circuito de disparo-- y el que conviene identificar en las especificaciones cuando viene impuesto.
+
 \section{Límites de la Medida: Ruido y Rango Dinámico}\label{sec:limites_medida}
 
 En esta sección se analizan los límites fundamentales de la medida, centrándonos en el ruido y el rango dinámico. Estos conceptos son cruciales para entender las limitaciones inherentes a cualquier sistema de medida y para diseñar sensores que puedan operar de manera efectiva dentro de estas limitaciones.
@@ -894,3 +989,58 @@ El comportamiento del sistema se puede clasificar en dos tipos de regímenes:
     \item \emph{Sistema limitado por cuantificación} ($V_{n,RMS} \ll \Delta$): El ruido es tan bajo que queda \emph{escondido} dentro de un escalón de cuantificación. En este caso, la resolución real coincide con la nominal. Los bits menos significativos (\textit{Least Significant Bits}, LSB) son estables y contienen información útil de la magnitud física.
     \item \emph{Sistema limitado por ruido} ($V_{n,RMS} > \Delta$): El nivel de ruido es superior al escalón de cuantificación. La resolución real se degrada y el número efectivo de bits (ENOB, \emph{Effective Number of Bits}) es menor que el nominal ($n$). Los bits afectados por el ruido fluctúan aleatoriamente y no proporcionan información válida sobre la medida.
 \end{enumerate}\marginnote{\textbf{Conclusión para el diseño:} No tiene sentido económico ni técnico utilizar un ADC de alta resolución (ej. 24 bits) si el ruido del sensor o de la etapa de acondicionamiento es muy elevado. El ingeniero debe equilibrar el suelo de ruido del hardware con la resolución del cuantificador.}
+
+\section{Cómo se Lee una Hoja de Características}\label{sec:hoja_caracteristicas}
+
+Todas las características anteriores acaban en una hoja de especificaciones, y leerla bien es tan importante como medir: dos instrumentos que anuncian la misma «exactitud del \SI{0.1}{\percent}» pueden comportarse de forma muy distinta según cómo esté referido ese número y en qué condiciones se haya medido. Conviene, por tanto, hacer tres preguntas a cada especificación.
+
+\paragraph{¿Referida a la lectura o al fondo de escala?}
+Una exactitud del \SI{0.1}{\percent} referida al fondo de escala es un error absoluto constante --siempre el mismo número de milivoltios--, mientras que referida a la lectura es proporcional al valor medido. La diferencia se aprecia al trabajar cerca del origen del rango, donde el error referido al fondo de escala se dispara en términos relativos:
+\begin{equation}\label{eq:error_fs_lectura}
+    e_{lectura} = e_{FS}\cdot\frac{\text{fondo de escala}}{\text{lectura}}
+\end{equation}
+de modo que un instrumento del \SI{0.1}{\percent} del fondo de escala empleado a una décima parte del rango se equivoca en un \SI{1}{\percent} de lo que indica. Por eso los multímetros de laboratorio especifican siempre dos términos: uno proporcional a la lectura y otro absoluto, con el que se cubren la deriva del cero y la resolución.
+
+\paragraph{¿En qué condiciones?}
+Toda especificación va referida a unas condiciones ambiente --habitualmente \SI{23}{\celsius} con una tolerancia de $\pm$\SI{5}{\celsius}-- y a una alimentación dadas. Fuera de ellas hay que añadir los coeficientes de las \emph{magnitudes de influencia}: la deriva térmica, en unidades por grado, y la sensibilidad a la tensión de alimentación. Ese término es el que arruina muchas medidas de campo y el que obliga a estabilizar la temperatura de una referencia o de un patrón (Capítulos~\ref{cap:metrologia} y~\ref{cap:ruido}).
+
+\paragraph{¿Garantizada o típica?}
+Un valor \emph{típico} es el que se obtiene en la mayoría de las unidades; un valor \emph{garantizado} o de peor caso es el que ninguna debe superar, y es el único que sirve para elaborar un presupuesto de errores como el de la Sección~\ref{sec:presupuesto_global}. La misma lógica se aplica a la estabilidad: una exactitud del \SI{0.01}{\percent} en veinticuatro horas puede degradarse a diez veces más en un año si el instrumento no se recalibra, de modo que el intervalo de calibración forma parte de la especificación tanto como el propio número.
+
+La Tabla~\ref{tab:caracteristicas_medida} recoge, como resumen del capítulo, las características estudiadas, su símbolo y la forma habitual en que se especifican.
+
+\begin{table}[ht]
+    \centering
+    \small
+    \setlength{\tabcolsep}{3pt}
+    \forcerectofloat % la tabla cae en página impar (recto); sin forzar, el caption sale al lado contrario
+    \begin{tabularx}{\linewidth}{@{} >{\raggedright\arraybackslash}p{0.24\linewidth} >{\centering\arraybackslash}X >{\centering\arraybackslash}X @{}}
+        \toprule
+        \textbf{Característica} & \textbf{Se especifica como} & \textbf{Dónde se estudia} \\
+        \midrule
+        Sensibilidad ($S$) & Pendiente de la curva de calibración: unidades de salida por unidad de entrada & Sección~\ref{sec:caract_estaticas} \\
+        Linealidad & Desviación máxima respecto a la recta de referencia, en \% del fondo de escala & Sección~\ref{sec:error_no_linealidad} \\
+        Histéresis y repetibilidad & Diferencia máxima entre las ramas y dispersión con entrada constante, en \% del fondo de escala & Sección~\ref{sec:histeresis_repetibilidad} \\
+        Error de cero y de span ($e_0$, $\epsilon_s$) & El de cero en unidades absolutas; el de span en \% de la lectura & Sección~\ref{sub:error_cero_span} \\
+        Resolución ($\Delta$) & Escalón más pequeño discernible, nominal y efectivo & Sección~\ref{sec:resolucion_real_vs_nominal} \\
+        Efecto de carga & Error por la impedancia de entrada, en \% de la lectura & Sección~\ref{sub:efecto_carga_general} \\
+        Prestaciones dinámicas ($t_r$, $M_p$, $t_s$, $f_c$) & Tiempos medidos sobre la respuesta al escalón y frecuencia de corte & Sección~\ref{sub:prestaciones_dinamicas} \\
+        Suelo de ruido y rango dinámico ($N_f$, $DR$) & Nivel mínimo detectable y cociente con el máximo, en decibelios & Sección~\ref{sec:limites_medida} \\
+        Deriva térmica & Unidades por grado centígrado, fuera de las condiciones de referencia & Sección~\ref{sec:hoja_caracteristicas} \\
+        \bottomrule
+    \end{tabularx}
+    \caption[Características de un sistema de medida y su forma de especificarlas.]{Resumen de las características de un sistema de medida, la forma habitual de especificarlas y la sección donde se estudian. Es la lista que hay que recorrer al leer una hoja de características y la misma que se necesita, término a término, para elaborar un presupuesto de errores.\protect\label{tab:caracteristicas_medida}}
+\end{table}
+
+\section{Resumen}\label{sec:resumen_caracteristicas}
+
+En este capítulo se ha fijado el vocabulario con el que se describe un sistema de medida, que es el que aparece después en las hojas de características, en los pliegos de condiciones y en los presupuestos de error del resto del libro:
+
+\begin{itemize}
+    \item \emph{Características estáticas} (Sección~\ref{sec:caract_estaticas}): la curva de calibración y su sensibilidad, la linealidad y la recta de referencia, la histéresis, la repetibilidad y la reproducibilidad, el rango y la saturación, y los dos defectos de la recta --error de cero y error de span (Figura~\ref{fig:errores_cero_span})--, junto con el efecto de carga, que aparece siempre que dos etapas con impedancias comparables se conectan entre sí.
+    \item \emph{Características dinámicas} (Sección~\ref{sec:caract_dinamicas}): la respuesta al escalón de los sistemas de orden cero, primero y segundo, con la constante de tiempo, la frecuencia natural y el amortiguamiento como parámetros; y las prestaciones con las que se especifican --tiempo de subida, sobreoscilación máxima, tiempo de establecimiento y ancho de banda (Figura~\ref{fig:prestaciones_dinamicas})--, con $\zeta \approx 0{,}7$ como el compromiso recomendado entre rapidez y estabilidad.
+    \item \emph{Límites de la medida} (Sección~\ref{sec:limites_medida}): el suelo de ruido, el rango dinámico y la relación señal-ruido, junto con la diferencia entre resolución nominal y resolución real (Figura~\ref{fig:noise_floor}), que es lo que fija hasta dónde se puede medir y no solo qué se puede medir.
+    \item \emph{Cómo se lee una hoja de características} (Sección~\ref{sec:hoja_caracteristicas}): si la especificación está referida a la lectura o al fondo de escala (ecuación~\eqref{eq:error_fs_lectura}), en qué condiciones de referencia se ha medido, si el valor es típico o garantizado y qué magnitudes de influencia hay que añadir en cada caso; la Tabla~\ref{tab:caracteristicas_medida} reúne todas las características del capítulo con su forma de especificarlas.
+\end{itemize}
+
+\marginnote{\textbf{Conclusión:} ninguna de las características de este capítulo se puede mejorar más adelante. La exactitud de un sistema de medida queda fijada cuando se eligen el sensor y su acondicionamiento, y lo que hace el resto del libro es conservarla: digitalizarla sin degradarla (Capítulo~\ref{cap:daq}), protegerla del entorno (Capítulo~\ref{cap:ruido}) y transmitirla sin perderla (Capítulo~\ref{cap:buses}).}

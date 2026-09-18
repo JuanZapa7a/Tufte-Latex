@@ -72,7 +72,7 @@ El grado de virtualización no es el mismo en todos los casos, y conviene distin
         Instrumento definido por software & Conversión y, si acaso, traslación de frecuencia & Define el instrumento: filtrado, detección, unidades y análisis & Analizador por FFT; radio definida por software \\
         \bottomrule
     \end{tabularx}
-    \caption[Tres grados de instrumentación virtual.]{Los tres grados de instrumentación virtual. Cuanto más abajo, más hardware se sustituye por software y más flexible --y también más dependiente del programa-- es el sistema de medida. En los tres casos la exactitud sigue acotada por la parte analógica, que no desaparece.}\label{tab:niveles_virtual}
+    \caption[Tres grados de instrumentación virtual.]{Los tres grados de instrumentación virtual. Cuanto más abajo, más hardware se sustituye por software y más flexible --y también más dependiente del programa-- es el sistema de medida. En los tres casos la exactitud sigue acotada por la parte analógica, que no desaparece.\protect\label{tab:niveles_virtual}}
 \end{table}
 
 \marginnote{\textbf{Ejemplo:} un barrido de la respuesta en frecuencia de un filtro con cien puntos exige, a mano, ajustar la frecuencia, esperar la lectura y anotarla: unos \SI{20}{\second} por punto, algo más de media hora de trabajo repetitivo y cien ocasiones de equivocarse al copiar. El mismo barrido programado tarda unas décimas de segundo por punto, medio minuto en total, y deja los datos en un fichero y la gráfica hecha. La diferencia no es de velocidad, sino de que el procedimiento queda escrito y es el mismo cada vez.}
@@ -148,7 +148,7 @@ A partir de los años noventa, los buses del ordenador fueron desplazándolo. El
         Módulos (PXI, VXI) & Chasis con bus de alta velocidad & Muy alta, con sincronización entre módulos \\
         \bottomrule
     \end{tabularx}
-    \caption[Comparación de los buses de control de instrumentos.]{Comparación de los buses de control de instrumentos. El GPIB, diseñado para encadenar aparatos en un banco, sigue siendo el más común en el instrumental antiguo; el USB ha ocupado su lugar en los equipos nuevos, y Ethernet lo desplaza cuando hay que reunir muchos instrumentos o separarlos por distancias grandes.}\label{tab:buses_instrumentacion}
+    \caption[Comparación de los buses de control de instrumentos.]{Comparación de los buses de control de instrumentos. El GPIB, diseñado para encadenar aparatos en un banco, sigue siendo el más común en el instrumental antiguo; el USB ha ocupado su lugar en los equipos nuevos, y Ethernet lo desplaza cuando hay que reunir muchos instrumentos o separarlos por distancias grandes.\protect\label{tab:buses_instrumentacion}}
 \end{table}
 
 \subsection{La Capa de Abstracción: VISA}\label{sub:visa}
@@ -345,7 +345,7 @@ La Tabla~\ref{tab:buenas_practicas} recoge las reglas que distinguen un guion de
         Cerrar las sesiones y guardar los datos con su cabecera & Libera los instrumentos y convierte el guion en el registro del procedimiento \\
         \bottomrule
     \end{tabularx}
-    \caption[Buenas prácticas al programar una medida automatizada.]{Buenas prácticas al escribir un guion de medida. Ninguna afecta a la calidad metrológica del instrumento, y todas afectan a la fiabilidad del resultado: son las que evitan que el programa entregue números que parecen correctos y no lo son.}\label{tab:buenas_practicas}
+    \caption[Buenas prácticas al programar una medida automatizada.]{Buenas prácticas al escribir un guion de medida. Ninguna afecta a la calidad metrológica del instrumento, y todas afectan a la fiabilidad del resultado: son las que evitan que el programa entregue números que parecen correctos y no lo son.\protect\label{tab:buenas_practicas}}
 \end{table}
 
 \marginnote{\textbf{Higiene de medida, no de programación:} hay ajustes que el instrumento ofrece y que el guion debe usar. El tiempo de integración del multímetro conviene fijarlo en un número entero de ciclos de la red (\textsc{nplc} $\ge$ 1), porque así la integración abarca un periodo completo del zumbido de \SI{50}{\hertz} que estudiamos en el Capítulo~\ref{cap:ruido} y este se cancela; y los instrumentos de precisión deben trabajar con su tiempo de calentamiento, que en los multímetros de laboratorio llega a ser de media hora y es la causa más común de una deriva inexplicable al empezar la jornada.}
@@ -431,7 +431,7 @@ Con dos herramientas que resuelven el mismo problema, la pregunta útil no es cu
         Licencias & Propietario; gratis solo para uso no comercial & Libre y gratuito \\
         \bottomrule
     \end{tabularx}
-    \caption[Entorno gráfico frente a lenguaje de texto en instrumentación.]{Comparación entre el entorno gráfico y el lenguaje de texto para el control de instrumentos. La elección suele decidirse por el hardware disponible, por el determinismo que exija la medida y por el uso posterior que se vaya a hacer de los datos.}\label{tab:labview_vs_python}
+    \caption[Entorno gráfico frente a lenguaje de texto en instrumentación.]{Comparación entre el entorno gráfico y el lenguaje de texto para el control de instrumentos. La elección suele decidirse por el hardware disponible, por el determinismo que exija la medida y por el uso posterior que se vaya a hacer de los datos.\protect\label{tab:labview_vs_python}}
 \end{table}
 
 Hay un criterio que no aparece en la tabla y que en la práctica pesa más que ninguno: el determinismo. El ordenador de sobremesa no es un sistema de tiempo real, como ya se advirtió en la Sección~\ref{sec:instrumentacion_virtual}, y por eso, cuando la medida exige temporización estricta --muestrear a intervalos exactos, cerrar un lazo de control en microsegundos--, hay que salir del sistema operativo de propósito general. Los entornos gráficos resolvieron ese problema con módulos de tiempo real y con lógica programable, que ejecutan el diagrama sobre un sistema operativo de tiempo real o directamente sobre hardware, con dispersiones de temporización despreciables; en Python, ese terreno se cubre con hardware dedicado y controladores específicos. La consecuencia práctica es que muchas instalaciones acaban siendo híbridas: el entorno gráfico gobierna el hardware y el tiempo, y el lenguaje de texto analiza los datos, con los dos mundos llamándose mutuamente --desde 2018, LabVIEW incorpora un nodo para ejecutar funciones de Python desde el propio diagrama--.

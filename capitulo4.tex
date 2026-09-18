@@ -1094,7 +1094,6 @@ La ecuación~\eqref{eq:lvdt_lineal} revela dos propiedades fundamentales del LVD
 
 Desde el punto de vista de la implementación industrial, la robustez del LVDT frente a condiciones ambientales adversas lo convierte en la solución predilecta para la monitorización de estructuras y el control de posición en actuadores hidráulicos. A diferencia de otros sensores de desplazamiento, la ausencia de contacto físico entre el núcleo móvil y las bobinas elimina el desgaste mecánico, garantizando una vida útil virtualmente infinita y una histéresis despreciable. No obstante, el ingeniero debe prestar especial atención al diseño de la etapa de excitación y a la estabilidad de la frecuencia de la portadora, ya que cualquier variación en la amplitud de la señal del primario se traduciría directamente en un error de escala en la medida final, comprometiendo la precisión del sistema en aplicaciones de metrología avanzada.
 
-\marginnote{\textbf{Punto nulo eléctrico:} En la posición central ($x=0$), la salida ideal es $V_{out} = 0$. En la práctica, siempre existe una pequeña tensión residual de cuadratura (en fase con $dV_p/dt$) debida a acoplamientos capacitivos parásitos entre bobinas. Esta tensión de cuadratura es el indicador de calidad de fabricación del LVDT.}
 
 La Tabla~\ref{tab:lvdt_pro} resume las ventajas e inconvenientes del LVDT para el diseñador de sistemas de instrumentación. Su linealidad intrínseca y robustez lo convierten en la opción preferida para aplicaciones de alta precisión, aunque su complejidad de señal y sensibilidad a campos magnéticos externos pueden ser limitantes en entornos industriales ruidosos.
 
@@ -1116,6 +1115,8 @@ Un LVDT industrial estándar (p.ej. familia HCD de Sensata o Series 100 de Measu
         \bottomrule
     \end{tabularx}
 \end{table}
+
+\marginnote{\textbf{Punto nulo eléctrico:} En la posición central ($x=0$), la salida ideal es $V_{out} = 0$. En la práctica, siempre existe una pequeña tensión residual de cuadratura (en fase con $dV_p/dt$) debida a acoplamientos capacitivos parásitos entre bobinas. Esta tensión de cuadratura es el indicador de calidad de fabricación del LVDT.}
 
 % -----------------------------------------------------------
 \subsection{Sensores de Corrientes de Foucault (\textit{Eddy Currents})}\label{sub:eddy}
@@ -1527,6 +1528,7 @@ Para concluir el estudio de los sensores reactivos, la Tabla~\ref{tab:comparativ
 
 \begin{table}[!ht]
     \centering
+    \forceversofloat % la tabla cae en página par (verso); sin forzar, el chequeo de paridad se evalúa antes del salto de página y el caption sale al lado contrario
     \caption[Comparativa general de tecnologías reactivas.]{Comparativa general de tecnologías reactivas. Se resaltan las ventajas y limitaciones de cada tecnología. Destacamos que la elección dependerá de la precisión requerida y las condiciones ambientales.}\label{tab:comparativa_final}
     \setlength{\tabcolsep}{3pt}
     \begin{tabularx}{\linewidth}{l l X X}

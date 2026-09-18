@@ -901,7 +901,7 @@ Es la arquitectura más equilibrada y la que encontramos habitualmente en los mi
 \begin{marginfigure}
     \centering
     \shorthandoff{>}
-    \begin{tikzpicture}[american, scale=1]
+    \begin{tikzpicture}[american, scale=0.9]
         \ctikzset{amplifiers/scale=0.8, resistors/scale=0.6, amplifiers/plus={\tiny $+$}, amplifiers/minus={\tiny $-$}}
         \draw (1,0) node[op amp, anchor=out, scale=0.7, yscale=-1] (comp) {};
         \draw (1.5,-0.5) rectangle (3.5,0.5) node[midway, align=center] {Lógica\\SAR};
@@ -1046,7 +1046,7 @@ La Figura~\ref{fig:adc_dualslope_wave} representa la tensión de salida del inte
 
 Las cuatro arquitecturas anteriores no compiten entre sí de forma absoluta, sino que ocupan regiones distintas del compromiso velocidad-resolución-consumo: la Tabla~\ref{tab:comparativa_adc} resume sus cifras típicas y las aplicaciones donde cada una resulta la elección natural. Existen además arquitecturas híbridas, como el \emph{ADC Pipeline} (varias etapas tipo Flash de pocos bits en cascada, cada una con su propio amplificador de residuo), que ocupan el hueco de alta velocidad con resolución media-alta (decenas-cientos de \unit{MHz}, 8--14 bits) típico de vídeo y comunicaciones; quedan fuera del alcance de este curso, pero el lector interesado puede profundizar en los tutoriales de Analog Devices citados al margen.\footnote{Serie \emph{MT} de tutoriales de Analog Devices sobre arquitecturas de ADC: \url{https://www.analog.com/media/en/training-seminars/tutorials/MT-024.pdf} (Pipeline/Subranging) y \url{https://www.analog.com/media/en/training-seminars/tutorials/MT-025.pdf} (Folding).}
 
-\begin{table}[ht]
+\begin{table}[b]
     \centering
     \caption[Comparativa de arquitecturas ADC.]{Comparativa de arquitecturas ADC.}\label{tab:comparativa_adc}
     \begin{tabularx}{\linewidth}{l X X X}

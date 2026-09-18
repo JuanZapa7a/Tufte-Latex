@@ -583,6 +583,7 @@ Para finalizar el capítulo, la Tabla~\ref{tab:resumen_generadores} presenta una
 
 \begin{table}[ht]
     \centering
+    \forcerectofloat % la tabla cae en página impar (recto); sin forzar, el chequeo de paridad se evalúa antes del salto de página y el caption sale al lado contrario
     \caption[Comparativa de sensores generadores.]{Comparativa de sensores generadores. Nótese la diversidad de señales de salida (tensión, carga o corriente), lo que exige etapas de acondicionamiento específicas para cada tecnología.}\label{tab:resumen_generadores}
     \setlength{\tabcolsep}{1pt}
     \begin{tabularx}{\linewidth}{l l l X}

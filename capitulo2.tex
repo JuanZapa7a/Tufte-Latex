@@ -3,7 +3,7 @@
 
 \chapter{Características de los Sistemas de Medida}\label{cap:caracteristicas_sistemas_medida}
 
-En este capítulo se analiza el comportamiento de los sistemas de instrumentación desde dos perspectivas: la \emph{estática}, que describe la relación entrada-salida cuando la magnitud es constante o varía lentamente, y la \emph{dinámica}, que estudia la respuesta temporal y frecuencial ante cambios rápidos de la magnitud física~\cite{bentley2004measurement}.
+En este capítulo se analiza el comportamiento de los sistemas de instrumentación desde dos perspectivas: la \emph{estática}, que describe la relación entrada-salida cuando la magnitud es constante o varía lentamente, y la \emph{dinámica}, que estudia la respuesta temporal y frecuencial ante cambios rápidos de la magnitud física~\cite{bentley2004measurement,pallasareny2000sensors}.
 
 
 \section{Características Estáticas}\label{sec:caract_estaticas}
@@ -62,7 +62,7 @@ La distinción no es académica: la calibración de un instrumento consiste prec
 
 \subsection{Linealidad y Ajuste por Mínimos Cuadrados}
 
-En ingeniería, siempre preferimos sistemas lineales de la forma $y = mx + b$, ya que facilitan el procesado posterior. Sin embargo, los sensores reales presentan desviaciones. Para obtener la \emph{mejor recta} de ajuste, que se considera la curva de calibración que representa a un sensor en el laboratorio, utilizamos el \emph{Método de los Mínimos Cuadrados}, como se muestra en la Figura~\ref{fig:minimos_cuadrados}.
+En ingeniería, siempre preferimos sistemas lineales de la forma $y = mx + b$, ya que facilitan el procesado posterior. Sin embargo, los sensores reales presentan desviaciones. Para obtener la \emph{mejor recta} de ajuste, que se considera la curva de calibración que representa a un sensor en el laboratorio, utilizamos el \emph{Método de los Mínimos Cuadrados}~\cite{taylor1997erroranalysis}, como se muestra en la Figura~\ref{fig:minimos_cuadrados}.
 \begin{marginfigure}
     \centering
     \begin{tikzpicture}
@@ -150,7 +150,6 @@ En la Tabla~\ref{tab:datos_ejemplo} del siguiente ejemplo se muestra un conjunto
     %\footnotesize
     \caption[Datos experimentales del sensor.]{Datos experimentales del sensor. Se muestra un conjunto de $n=5$ pares de medidas $(x_i, y_i)$ y la recta de ajuste encontrada por el Método de los Mínimos Cuadrados.\protect\label{tab:datos_ejemplo}}
     \begin{tabular}{c c}
-        \\
         \toprule
         $x_i$ (bar) & $y_i$ (V) \\
         \midrule
@@ -173,10 +172,10 @@ Para aplicar las fórmulas de mínimos cuadrados, calculamos primero las sumator
 
 Sustituyendo en las expresiones de la pendiente ($m$) y la ordenada en el origen ($b$):
 \begin{equation}
-    m = \frac{5(29.9) - (10)(10.2)}{5(30) - (10)^2} = \frac{149.5 - 102}{150 - 100} = \mathbf{0.95}
+    m = \frac{5(29.9) - (10)(10.2)}{5(30) - (10)^2} = \frac{149.5 - 102}{150 - 100} = 0.95
 \end{equation}
 \begin{equation}
-    b = \frac{10.2}{5} - 0.95\left(\frac{10}{5}\right) = 2.04 - 1.9 = \mathbf{0.14}
+    b = \frac{10.2}{5} - 0.95\left(\frac{10}{5}\right) = 2.04 - 1.9 = 0.14
 \end{equation}
 
 La recta de ajuste resultante es \emph{$y = 0.95x + 0.14$} y está representada en la Figura~\ref{fig:grafico_ejemplo}.
@@ -237,7 +236,7 @@ para el ejemplo anterior, el error de no linealidad se calcularía evaluando el 
 donde $y_{\max} = 3.9$ V y $y_{\min} = 0.1$ V son los valores máximo y mínimo de la salida respectivamente. Este cálculo proporciona una medida cuantitativa de la desviación máxima de los puntos experimentales respecto a la recta de ajuste, lo que es crucial para evaluar la precisión del sensor en su rango de operación. Como $y_i$ valen 0.1, 1.2, 1.9, 3.1 y 3.9 V para $x_i$ igual a 0, 1, 2, 3 y 4 bar respectivamente, se evaluaría el residuo para cada punto y se identificaría el máximo para calcular el error de no linealidad. Así tenemos que el error de no linealidad se calcula evaluando el residuo para cada punto:
 \begin{itemize}
     \item Para $x_0 = 0$ bar: $|0.1 - (0.95\cdot 0 + 0.14)| = |0.1 - 0.14| = 0.04$ V
-    \item Para $x_1 = 1$ bar: $|1.2 - (0.95\cdot 1 + 0.14)| = |1.2 - 1.09               | = 0.11$ V
+    \item Para $x_1 = 1$ bar: $|1.2 - (0.95\cdot 1 + 0.14)| = |1.2 - 1.09| = 0.11$ V
     \item Para $x_2 = 2$ bar: $|1.9 - (0.95\cdot 2 + 0.14)| = |1.9 - 2.04| = 0.14$ V
     \item Para $x_3 = 3$ bar: $|3.1 - (0.95\cdot 3 + 0.14)| = |3.1 - 2.85| = 0.19$ V    
     \item Para $x_4 = 4$ bar: $|3.9 - (0.95\cdot 4 + 0.14)| = |3.9 - 3.64| = 0.21$ V
@@ -815,58 +814,57 @@ De los cuatro parámetros hay uno que merece una recomendación, porque aparece 
 En esta sección se analizan los límites fundamentales de la medida, centrándonos en el ruido y el rango dinámico. Estos conceptos son cruciales para entender las limitaciones inherentes a cualquier sistema de medida y para diseñar sensores que puedan operar de manera efectiva dentro de estas limitaciones.
 
 \subsection{El suelo de Ruido (\textit{Noise Floor})}\label{sec:noise_floor}
-Una vez definidos los límites superiores (saturación), es necesario definir el límite inferior de la medida, el cual no es cero, sino que está impuesto por el \emph{suelo de ruido}. El suelo de ruido, o \textit{noise floor}, es el nivel mínimo de señal que un sistema de medida puede detectar por encima del ruido inherente al sistema. Este ruido puede ser causado por diversas fuentes, como el ruido térmico, el ruido de disparo, el ruido de flicker, entre otros. El suelo de ruido se expresa comúnmente en unidades de la magnitud medida (por ejemplo, voltios para señales eléctricas) o en decibelios (dB) para señales acústicas o electromagnéticas. Matemáticamente, el suelo de ruido se puede definir como:
+Una vez definidos los límites superiores (saturación), falta el límite inferior de la medida, que no es cero sino el \emph{suelo de ruido}: el nivel mínimo de señal que el sistema puede detectar por encima de su propio ruido --térmico, de disparo, de \textit{flicker}...--~\cite{ott1988noise}. Se expresa en las unidades de la magnitud medida, o en decibelios cuando conviene comparar rangos amplios. Su componente más predecible, el ruido térmico, se calcula como:
 \begin{equation}\label{eq:noise_floor}
     N_f = \sqrt{4 k T R \Delta f}
 \end{equation}
-donde $k$ es la constante de Boltzmann, $T$ es la temperatura absoluta, $R$ es la resistencia del sistema y $\Delta f$ es el ancho de banda del sistema de medida. Este cálculo proporciona una medida cuantitativa del nivel de ruido presente en el sistema, lo que es fundamental para determinar la capacidad del sensor para detectar señales débiles y para diseñar sistemas de medida que puedan operar de manera efectiva dentro de las limitaciones del ruido.
+donde $k$ es la constante de Boltzmann, $T$ la temperatura absoluta, $R$ la resistencia del sistema y $\Delta f$ su ancho de banda: cuanto mayor sea cualquiera de los tres, mayor el ruido y peor la capacidad del sensor para detectar señales débiles.
 
-\subsection{Ejemplo de Cálculo del Suelo de Ruido}\label{sec:ejemplo_suelo_ruido}   
-Supongamos que tenemos un sistema de medida con una resistencia de $R = \SI{1}{\kilo\ohm}$, una temperatura de $T = \SI{300}{\kelvin}$ y un ancho de banda de $\Delta f = \SI{1}{\kilo\hertz}$. El suelo de ruido se calcula a partir de la expresión~\eqref{eq:noise_floor} de la siguiente manera:
+\subsection{Ejemplo de Cálculo del Suelo de Ruido}\label{sec:ejemplo_suelo_ruido}
+Con $R = \SI{1}{\kilo\ohm}$, $T = \SI{300}{\kelvin}$ y $\Delta f = \SI{1}{\kilo\hertz}$, la expresión~\eqref{eq:noise_floor} da:
 \begin{equation}\label{eq:ejemplo_suelo_ruido}
     N_f = \sqrt{4 \cdot 1.38 \times 10^{-23} \cdot 300 \cdot 1000 \cdot 1000} \approx \SI{1.14}{\micro\volt}
 \end{equation}
-El suelo de ruido de este sistema de medida es de aproximadamente \SI{1.14}{\micro\volt}, lo que significa que cualquier señal por debajo de este nivel no podrá ser detectada de manera confiable debido a la presencia del ruido. Este cálculo ilustra cómo el suelo de ruido depende de factores como la resistencia, la temperatura y el ancho de banda del sistema, y cómo estos factores pueden ser controlados para minimizar el ruido y mejorar la capacidad del sensor para detectar señales débiles. En aplicaciones donde se requiere medir señales muy débiles, es fundamental diseñar el sistema de medida de manera que el suelo de ruido sea lo más bajo posible, lo que puede implicar el uso de componentes de alta calidad, técnicas de amplificación adecuadas y un diseño cuidadoso del circuito para minimizar las fuentes de ruido. En resumen, el suelo de ruido es un parámetro crítico que define el límite inferior de la capacidad de detección de un sistema de medida, y su minimización es esencial para garantizar la precisión y confiabilidad de las mediciones en aplicaciones de instrumentación.
+Ninguna señal por debajo de \SI{1.14}{\micro\volt} es fiable en este sistema. Bajar el suelo de ruido --componentes de bajo ruido, menor ancho de banda, un diseño de circuito cuidadoso-- es la única forma de detectar señales más débiles.
 
 \subsection{Rango Dinámico}\label{sec:rango_dinamico}
-El rango dinámico de un sistema de medida es la relación entre la señal más fuerte que el sistema puede medir sin saturarse y la señal más débil que puede detectar por encima del suelo de ruido. Se expresa comúnmente en decibelios (dB) y se calcula utilizando la siguiente fórmula:
+El rango dinámico es la relación, en decibelios, entre la señal más fuerte que el sistema puede medir sin saturarse y la más débil que puede detectar por encima del suelo de ruido:
 \begin{equation}\label{eq:rango_dinamico}
     R_D = 20 \log_{10} \left( \frac{S_{\max}}{N_f} \right)
 \end{equation}
-donde $S_{\max}$ es la señal máxima que el sistema puede medir sin saturarse y $N_f$ es el suelo de ruido del sistema. Este cálculo proporciona una medida cuantitiva del rango de señales que el sistema de medida puede manejar, lo que es esencial para evaluar laversatilidad y aplicabilidad del sensor en diferentes escenarios de medición. Un rango dinámico amplio indica que el sensor puede medir tanto señales muy débiles como señales muy fuertes, lo que es deseable en muchas aplicaciones de instrumentación. En definitiva, el Rango Dinámico define la capacidad del sistema para medir simultáneamente señales muy grandes y muy pequeñas. Es la relación entre el valor máximo medible (sin saturación) y el valor mínimo detectable (limitado por el ruido).\marginnote{\textbf{Importancia del Rango Dinámico:} Un rango dinámico amplio es crucial para aplicaciones donde las señales pueden variar significativamente en magnitud. Por ejemplo, en la medición de señales acústicas, un micrófono con un rango dinámico amplio puede capturar tanto susurros como gritos sin distorsión ni pérdida de información. De ahí que se utilice los dB para expresar el rango dinámico, ya que permite manejar de manera más conveniente las grandes diferencias en magnitud entre la señal máxima y el suelo de ruido.}   
+donde $S_{\max}$ es la señal máxima sin saturación y $N_f$ el suelo de ruido. Es una propiedad fija del sistema --no de la señal que se esté midiendo en cada momento-- y define su capacidad para medir simultáneamente señales muy grandes y muy pequeñas.\marginnote{\textbf{Importancia del Rango Dinámico:} Un micrófono con rango dinámico amplio captura tanto un susurro como un grito sin distorsión ni pérdida de información; de ahí que el rango dinámico se exprese en decibelios, que comprimen esas diferencias de varios órdenes de magnitud a una escala manejable.}
 
 \subsection{Ejemplo de Cálculo del Rango Dinámico}
-Supongamos que tenemos un sistema de medida con un suelo de ruido de $N_f = \SI{1}{\micro\volt}$ y una señal máxima medible de $S_{\max} = \SI{1}{\volt}$. El rango dinámico se calcula de la siguiente manera:
+Con $N_f = \SI{1}{\micro\volt}$ y $S_{\max} = \SI{1}{\volt}$:
 \begin{equation}
-    R_D = 20 \log_{10} \left( \frac{1}{1 \times 10^{-6}} \right) = 20 \log_{10} (1000000) = 60 \, dB    
-\end{equation}    
-El rango dinámico de este sistema de medida es de $60 \, dB$, lo que significa que podemos medir significativas amplitudes de señales acústicas. Sin embargo, si el suelo de ruido fuera más alto, por ejemplo $N_f = \SI{10}{\micro\volt}$, el rango dinámico se reduciría a:
-\begin{equation}
-    R_D = 20 \log_{10} \left( \frac{1}{10 \times 10^{-6}} \right) = 20 \log_{10} (100000) = 40 \, dB    
+    R_D = 20 \log_{10} \left( \frac{1}{1 \times 10^{-6}} \right) = 20 \log_{10} (1000000) = \SI{60}{\decibel}
 \end{equation}
-lo que indica una capacidad reducida para medir señales débiles. Este ejemplo ilustra cómo el suelo de ruido afecta directamente al rango dinámico del sistema de medida, y por ende, a su capacidad para detectar señales de diferentes magnitudes. En aplicaciones donde se requiere medir señales muy débiles, es fundamental minimizar el suelo de ruido para maximizar el rango dinámico y garantizar la precisión de las mediciones.  
+Si el suelo de ruido sube a $N_f = \SI{10}{\micro\volt}$, el rango dinámico cae a:
+\begin{equation}
+    R_D = 20 \log_{10} \left( \frac{1}{10 \times 10^{-6}} \right) = 20 \log_{10} (100000) = \SI{40}{\decibel}
+\end{equation}
+Diez veces más ruido cuesta \SI{20}{\decibel} de rango: al ser una escala logarítmica, reducir el suelo de ruido a la mitad no duplica el rango dinámico utilizable.
 
 \subsection{Relación Señal a Ruido (SNR)}\label{sec:snr}
-La relación señal a ruido (SNR) es una medida que compara el nivel de la señal deseada con el nivel del ruido presente en el sistema. Se expresa comúnmente en decibelios (dB) y se calcula utilizando la siguiente fórmula:
+La relación señal a ruido (SNR) compara, también en decibelios, el nivel de una señal concreta con el suelo de ruido del sistema:
 \begin{equation}
     SNR = 20 \log_{10} \left( \frac{S}{N_f} \right)
 \end{equation}
-donde $S$ es el nivel de la señal que se desea medir y $N_f$ es el suelo de ruido del sistema. La SNR proporciona una medida cuantitativa de la calidad de la señal en presencia de ruido, lo que es esencial para evaluar la precisión y confiabilidad de las mediciones. Un SNR alto indica que la señal es mucho más fuerte que el ruido, lo que generalmente se traduce en mediciones más precisas y confiables. Por otro lado, un SNR bajo indica que el ruido es comparable o incluso mayor que la señal, lo que puede resultar en mediciones imprecisas o incluso imposibles de interpretar. En resumen, la relación señal a ruido es un indicador clave de la calidad de las mediciones y es fundamental para el diseño de sistemas de medida que puedan operar de manera efectiva en entornos ruidosos.    
+donde $S$ es el nivel de la señal que se desea medir y $N_f$ el suelo de ruido. A diferencia del rango dinámico --fijo para el sistema--, el SNR depende de la señal: cae a medida que esta se acerca al suelo de ruido, y con ella la fiabilidad de la medida.
 
 \subsection{Ejemplo de Cálculo de la Relación Señal a Ruido (SNR)}\label{sec:ejemplo_snr}
 
-Supongamos que tenemos un sistema de medida con un suelo de ruido de $N_f = \SI{1}{\micro\volt}$ y una señal que se desea medir de $S = \SI{100}{\micro\volt}$. La relación señal a ruido se calcula de la siguiente manera:
+Con $N_f = \SI{1}{\micro\volt}$ y $S = \SI{100}{\micro\volt}$:
 \begin{equation}
-    SNR = 20 \log_{10} \left( \frac{100 \times 10^{-6}}{1 \times 10^{-6}} \right) = 20 \log_{10} (100) = 40 \, dB    
+    SNR = 20 \log_{10} \left( \frac{100 \times 10^{-6}}{1 \times 10^{-6}} \right) = 20 \log_{10} (100) = \SI{40}{\decibel}
 \end{equation}
-El SNR de este sistema de medida es de $40 \, dB$, lo que indica que la señal es 100 veces más fuerte que el ruido, lo que generalmente se traduce en mediciones precisas y confiables. Si la señal que se desea medir fuera más débil, por ejemplo $S = \SI{10}{\micro\volt}$, la SNR se reduciría a:
-\begin{equation}    
-    SNR = 20 \log_{10} \left( \frac{10 \times 10^{-6}}{1 \times 10^{-6}} \right) = 20 \log_{10} (10) = 20 \, dB    
-\end{equation}  
+Si la señal cae a $S = \SI{10}{\micro\volt}$ --diez veces más débil--, el SNR baja a:
+\begin{equation}
+    SNR = 20 \log_{10} \left( \frac{10 \times 10^{-6}}{1 \times 10^{-6}} \right) = 20 \log_{10} (10) = \SI{20}{\decibel}
+\end{equation}
+El mismo suelo de ruido da lecturas mucho menos fiables cuando la señal es pequeña: es justo lo que distingue al SNR, que varía con la señal, del rango dinámico, que es fijo para el sistema.
 
-lo que indica que la señal es solo 10 veces más fuerte que el ruido, lo que puede resultar en mediciones menos precisas y confiables. Este ejemplo ilustra cómo la relación señal a ruido depende tanto del nivel de la señal como del suelo de ruido del sistema, y cómo un SNR más alto generalmente se traduce en una mejor calidad de las mediciones. En aplicaciones donde se requiere medir señales muy débiles, es fundamental minimizar el suelo de ruido para maximizar el SNR y garantizar la precisión de las mediciones.
-
-Como se observa en la Figura~\ref{fig:noise_floor}, el diseño de un sistema de instrumentación es una lucha constante entre dos límites físicos. Por arriba, la Saturación limita la amplitud máxima que los amplificadores o el ADC pueden procesar sin distorsión. Por abajo, el Suelo de Ruido ($N_f$) establece el umbral mínimo de detectabilidad. La distancia total entre estos dos límites se conoce como Rango Dinámico (DR) y define la versatilidad del instrumento. Por el contrario, la Relación Señal-Ruido (SNR) es un parámetro operativo: cuanto más pequeña sea la señal de entrada, más cerca estará del suelo de ruido y menor será su SNR, lo que se traduce en una mayor incertidumbre en la medida..
+Como se observa en la Figura~\ref{fig:noise_floor}, el diseño de un sistema de instrumentación es una lucha constante entre dos límites físicos. Por arriba, la Saturación limita la amplitud máxima que los amplificadores o el ADC pueden procesar sin distorsión. Por abajo, el Suelo de Ruido ($N_f$) establece el umbral mínimo de detectabilidad. La distancia total entre estos dos límites se conoce como Rango Dinámico (DR) y define la versatilidad del instrumento. Por el contrario, la Relación Señal-Ruido (SNR) es un parámetro operativo: cuanto más pequeña sea la señal de entrada, más cerca estará del suelo de ruido y menor será su SNR, lo que se traduce en una mayor incertidumbre en la medida.
 
 \begin{marginfigure}
     \centering
@@ -920,7 +918,7 @@ Como se observa en la Figura~\ref{fig:noise_floor}, el diseño de un sistema de 
 
         \end{axis}    
     \end{tikzpicture}        
-    \caption[Diagrama de niveles de un sistema de medida.]{Diagrama de niveles de un sistema de medida. El \emph{Suelo de Ruido} ($N_f$) marca el límite inferior de detección, mientras que el nivel de \emph{Saturación} marca el límite superior. El \emph{Rango Dinámico} es una propiedad fija del sistema (120 dB en este ejemplo), mientras que la \emph{SNR} varía según la magnitud de la señal actual.}\label{fig:noise_floor}    
+    \caption[Diagrama de niveles de un sistema de medida.]{Diagrama de niveles de un sistema de medida. El \emph{Suelo de Ruido} ($N_f$) marca el límite inferior de detección, mientras que el nivel de \emph{Saturación} marca el límite superior. El \emph{Rango Dinámico} es una propiedad fija del sistema (\SI{120}{\decibel} en este ejemplo), mientras que la \emph{SNR} varía según la magnitud de la señal actual.}\label{fig:noise_floor}    
 \end{marginfigure}
 
 % \subsection{Resolución Real vs. Resolución Nominal}\label{sec:resolucion_real_vs_nominal}
@@ -1014,7 +1012,7 @@ La Tabla~\ref{tab:caracteristicas_medida} recoge, como resumen del capítulo, la
     \small
     \setlength{\tabcolsep}{3pt}
     \forcerectofloat % la tabla cae en página impar (recto); sin forzar, el caption sale al lado contrario
-    \begin{tabularx}{\linewidth}{@{} >{\raggedright\arraybackslash}p{0.24\linewidth} >{\centering\arraybackslash}X >{\centering\arraybackslash}X @{}}
+    \begin{tabularx}{\linewidth}{@{} L{0.24\linewidth} >{\centering\arraybackslash}X >{\centering\arraybackslash}X @{}}
         \toprule
         \textbf{Característica} & \textbf{Se especifica como} & \textbf{Dónde se estudia} \\
         \midrule

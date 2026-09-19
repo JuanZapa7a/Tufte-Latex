@@ -3,6 +3,10 @@
 
 \chapter{Metrología y Caracterización de Sistemas de Medida}\label{cap:metrologia}
 
+\begin{quotation}
+\noindent\textbf{Resumen.} Este capítulo presenta los conceptos fundamentales de la metrología aplicada a sistemas de medida. Se introduce la cadena de instrumentación, se establecen los términos clave del VIM y se analiza cómo los errores sistemáticos y aleatorios afectan a la exactitud, precisión, veracidad y resolución. Asimismo, se describe la incertidumbre de medida y su evaluación según la guía GUM, con especial atención a la relación entre el error total y la calidad del sistema.
+\end{quotation}
+
 \section{El Sistema de Medida de Ingeniería}\label{sec:sistema-medida}
 
 Un sistema de instrumentación no es solo un sensor; es una cadena de bloques que transforma una variable física en una información útil~\cite{bentley2004measurement}. Esta cadena como se ilustra en la Figura~\ref{fig:cadena_instrumentacion} incluye:
@@ -57,28 +61,36 @@ Es vital que se utilice la terminología profesional, especialmente en un contex
     \begin{marginfigure}
     \centering
     \shorthandoff{>}
-    \begin{tikzpicture}[scale=1, transform shape]
+    % Zoom sobre la zona de interés (0 a 1.5): se escalan las coordenadas
+    % ("x=...cm") en vez de usar "scale + transform shape", para aprovechar
+    % el ancho del margen sin encoger el texto, que se queda a su tamaño
+    % por defecto.
+    \begin{tikzpicture}[x=1.8cm, y=1cm]
     % Eje horizontal
-    \draw[->] (-3,0) -- (3,0) node[right] {$x$};
-    \foreach \x in {-2,-1,0,1,2}
-        \draw (\x,0.1) -- (\x,-0.1) node[below] {$\x$};
-    
-    % Valor verdadero (centro)
-    \draw[thick, green!60!black] (0,0.5) -- (0,-0.5);
-    \node[green!60!black, above] at (0,0.75) {Valor Verdadero ($V_v$)};
-    \node[green!60!black] at (0,-0.7) {$0$};
-    
-    % Valor medido (a la derecha)
-    \draw[thick, blue!60!black] (1.5,0.5) -- (1.5,-0.5);
-    \node[blue!60!black, above] at (1.5,0.45) {Valor Medido ($V_m$)};
-    \node[blue!60!black] at (1.5,-0.7) {$1.5$};
-    
+    \draw[->] (-0.6,0) -- (2.3,0) node[right] {$x$};
+
+    % Valor verdadero (en x=0)
+    \draw[thick, green!60!black] (0,0.6) -- (0,-0.6);
+    \node[green!60!black, above] at (0,0.95) {Valor Verdadero ($V_v$)};
+    \node[green!60!black, below] at (0,-0.65) {$0$};
+
+    % Valor  (en x=1)
+    \draw[thick, blue!60!black] (1,0.2) -- (1,-0.2);
+    \node[blue!60!black, below] at (1,-0.25) {$1.0$};
+    \draw[thick, blue!60!black] (2,0.2) -- (2,-0.2);
+    \node[blue!60!black, below] at (2,-0.25) {$2.0$};
+
+    % Valor medido (en x=1.5)
+    \draw[thick, blue!60!black] (1.5,0.6) -- (1.5,-0.6);
+    \node[blue!60!black, above] at (1.5,0.65) {Valor Medido ($V_m$)};
+    \node[blue!60!black, below] at (1.5,-0.65) {$1.5$};
+
     % Flecha de error
-    \draw[->, red, thick] (0,0) -- (1.5,0);
-    \node[red, above] at (0.75,0.1) {Error ($e$)};
-    
+    \draw[->, red, thick] (0,0.3) -- (1.5,0.3);
+    \node[red, above] at (0.75,0.32) {Error ($e$)};
+
     % Fórmula del error
-    \node[red] at (0.75,-1.2) {$e = V_m - V_v = 1.5$};
+    \node[red] at (0.75,-1.15) {$e = V_m - V_v = 1.5$};
     \end{tikzpicture}
     \caption[Representación del Error de Medida.]{Representación del Error de Medida: diferencia entre el valor medido y el valor verdadero. El error puede ser positivo o negativo. El error es la diferencia entre el valor medido y el valor verdadero. }\label{fig:error_medida}
     \end{marginfigure}
@@ -154,19 +166,17 @@ Un error sistemático es un sesgo constante que desvía las mediciones en una di
 
 \begin{table}[!htbp]
     \centering
-    \caption[Comparativa de términos metrológicos]{Comparativa de términos metrológicos. Exactitud se refiere a la cercanía al valor verdadero, precisión a la consistencia entre medidas repetidas, veracidad a la cercanía de la media de muchas medidas al valor verdadero, y resolución al mínimo cambio detectable por el sistema. Veracidad y Precisión no es lo mismo. Veracidad refiere a la cercanía de la media de muchas medidas al valor verdadero, mientras que Precisión se refiere a la cercanía entre medidas independientes repetidas. Por último Resolución es el mínimo cambio detectable por el sistema. \protect\label{tab:terminos_metrologicos}}
-    \setlength{\tabcolsep}{3pt} % Reducimos el espacio entre columnas
-    \begin{tabularx}{\linewidth}{l X X}
+    \small
+    \caption[Comparativa de términos metrológicos]{Comparativa de términos metrológicos. Exactitud se refiere a la cercanía al valor verdadero, precisión a la consistencia entre medidas repetidas, veracidad a la cercanía de la media de muchas medidas al valor verdadero, y resolución al mínimo cambio detectable por el sistema. Veracidad y precisión no son lo mismo: la veracidad indica la cercanía de la media al valor verdadero, mientras que la precisión mide la dispersión entre medidas repetidas. \protect\label{tab:terminos_metrologicos}}
+    \setlength{\tabcolsep}{4pt}
+    \begin{tabularx}{\linewidth}{L{0.22\linewidth}X X}
         \toprule
-        \textbf{Término} & \textbf{Definición} & \textbf{Relación con el Error} \\
+        \textbf{Término} & \textbf{Definición} & \textbf{Relación con el error} \\
         \midrule
-        Exactitud & Proximidad al valor verdadero. & Error Sistemático + Aleatorio. \\
-        %\midrule
-        Veracidad & Proximidad de la media de muchas medidas al valor verdadero. & Error Sistemático únicamente. \\
-        %\midrule
-        Precisión & Proximidad entre medidas independientes repetidas. & Error Aleatorio únicamente. \\
-        %\midrule
-        Resolución & Mínimo incremento detectable por el sistema. & Umbral de ruido / Cuantificación. \\
+        Exactitud & Proximidad al valor verdadero. & Error sistemático + aleatorio. \\
+        Veracidad & Proximidad de la media de muchas medidas al valor verdadero. & Error sistemático únicamente. \\
+        Precisión & Proximidad entre medidas independientes repetidas. & Error aleatorio únicamente. \\
+        Resolución & Mínimo incremento detectable por el sistema. & Umbral de ruido / cuantificación. \\
         \bottomrule
     \end{tabularx}
 \end{table}
@@ -176,48 +186,43 @@ Un ejemplo clásico, como se ilustra en la Figura~\ref{fig:ejemplo_balanza}, es 
 \begin{marginfigure}
     \centering
     \shorthandoff{>}
-    \begin{tikzpicture}[scale=0.9, transform shape]
+    % Zoom sobre la zona de interés (2.0 a 2.5 kg), igual que en la Fig. 1.2:
+    % se escalan las coordenadas ("x=...cm") en vez de "scale + transform
+    % shape", así el texto se queda a su tamaño por defecto (footnotesize del
+    % marginfigure) y no hacen falta \scriptsize para evitar solapes.
+    \begin{tikzpicture}[x=3cm, y=1cm]
     % Eje horizontal
-    \draw[->] (-1,0) -- (5,0) node[right] {Masa (kg)};
-    \foreach \x in {0,1,2,3,4}
-        \draw (\x,0.1) -- (\x,-0.1) node[below] {$\x$};
-    
-    % Valor verdadero (en 2 kg)
-    \draw[thick, green!60!black] (2,1) -- (2,-0.8);
-    \node[green!60!black, above] at (1,1) {Valor Verdadero};
-    \node[green!60!black] at (2,-1.1) {$2.0$\,kg};
-    
+    \draw[->] (1.6,0) -- (2.75,0) node[below right] {Masa (kg)};
+    %\draw (2,0.05) -- (2,-0.05) node[below=2pt] {$2$};
+
+    % Valor verdadero (en 2.0 kg)
+    \draw[thick, green!60!black] (2,1.35) -- (2,-0.6);
+    \node[green!60!black, anchor=south east] at (2,1.4) {Valor Verdadero};
+    \node[green!60!black, anchor=north] at (2,-0.65) {$2.0$\,kg};
+
     % Error sistemático (desplazamiento de 0.5 kg)
-    \draw[thick, orange!70!black, dashed] (2.5,1) -- (2.5,-0.8);
-    \node[orange!70!black, above] at (3.5,1) {Error Sistemático};
-    \node[orange!70!black] at (2.5,-.9) {$+0.5$\,kg};
-    
+    \draw[thick, orange!70!black, dashed] (2.5,1.35) -- (2.5,-0.1);
+    \node[orange!70!black, anchor=south west] at (2.5,1.4) {Error Sistemático};
+    \node[orange!70!black, anchor=north] at (2.5,-0.65) {$+0.5$\,kg};
+
     % Flecha de error sistemático
-    % font=\scriptsize necesario: el tamaño ambiente del marginfigure ya es \footnotesize (tufte-common.def) y a ese tamaño "e_{sys}" se solapa con la etiqueta "Error Sistemático" (espacio muy reducido)
-    \draw[<->, orange, thick] (2,0.8) -- (2.5,0.8) node[midway, above, font=\scriptsize] {$e_{sys}$};
-    
-    % Puntos de medición con error aleatorio (alrededor de 2.5)
-    \foreach \x/\y in {0/-0.1, 0.05/0.15, -0.08/0.05, 0.03/-0.12, -0.05/0.08}
-        \fill[blue] (2.5+\x, \y) circle (1pt);
-    
-    % Media de las mediciones
-    \draw[thick, blue!60!black] (2.5,0.5) -- (2.5,-0.3);
-    \node[blue!60!black, above] at (3.5,0.3) {Media Medida};
-    \node[blue!60!black] at (2.5,-0.5) {$2.5$\,kg};
-    
+    \draw[<->, orange!70!black, thick] (2,0.95) -- (2.5,0.95) node[midway, above] {$e_{sys}$};
+
     % Error total
-    % font=\scriptsize necesario: el tamaño ambiente del marginfigure ya es \footnotesize (tufte-common.def) y a ese tamaño "e_{total}" se solapa con la etiqueta "Media Medida" (espacio muy reducido)
-    \draw[<->, red, thick] (2,0.3) -- (2.5,0.3) node[midway, above, font=\scriptsize] {$e_{total}$};
-    
-    % Leyenda
-    % \node[anchor=north west, font=\tiny] at (-0.8,-1.5) {
-    %     \begin{tabular}{l}
-    %     \textcolor{green!60!black}{\bullet} Valor Verdadero: 2.0 kg\\
-    %     \textcolor{orange!70!black}{\bullet} Error Sistemático: +0.5 kg\\
-    %     \textcolor{blue!60!black}{\bullet} Error Aleatorio: ±0.1 kg\\
-    %     \textcolor{red}{\bullet} Error Total: +0.5 kg
-    %     \end{tabular}
-    % };
+    \draw[<->, red, thick] (2,0.55) -- (2.5,0.55) node[midway, above] {$e_{total}$};
+
+    % Media de las mediciones
+    \draw[thick, blue!60!black] (2.5,0.15) -- (2.5,-.15);
+    \node[blue!60!black, anchor=south west, xshift=2pt] at (2.5,0.15) {Media Medida};
+    \node[blue!60!black, anchor=north] at (2.5,-1.05) {$2.5$\,kg};
+
+    % Puntos de medición con error aleatorio (dispersión real de ±0.1 kg
+    % en torno a la media, para que la nube refleje la cifra de la leyenda)
+    \foreach \x/\y in {-0.09/-0.05, -0.04/0.05, 0.02/-0.06, 0.06/0.04, 0.09/-0.03, -0.01/0.06}
+        \fill[blue] (2.5+\x, \y) circle (1.1pt);
+
+    % Dispersión del error aleatorio
+    \draw[<->, blue!60!black, thick] (2.4,-0.25) -- (2.6,-0.25) node[midway, below] {$\epsilon = \pm0.1$\,kg};
     \end{tikzpicture}
     \caption[Ejemplo de errores en una balanza.]{Ejemplo de errores en una balanza: valor verdadero 2.0 kg, error sistemático de +0.5 kg (desplazamiento constante), y error aleatorio de ±0.1 kg (fluctuaciones).}\label{fig:ejemplo_balanza}
 \end{marginfigure}
@@ -276,27 +281,31 @@ Estos valores se utilizan para evaluar la incertidumbre de la medida. La incerti
 
 \begin{marginfigure}[-10em]
     \centering
-    \begin{tikzpicture}
-      \shorthandoff{>}
+    \shorthandoff{>}
+    % Ancho completo del margen (marginparwidth ≈ 5 cm): se amplía la escala
+    % horizontal ("x=...cm") en vez de encoger el texto, y las tres
+    % distribuciones comparten el mismo rango de eje para que se puedan
+    % comparar entre sí de un vistazo.
+    \begin{tikzpicture}[x=1.45cm, y=1cm]
     % Distribución Rectangular
-    \draw[->] (-1.5,0) -- (1.5,0) node[right] {$x$};
+    \draw[->] (-1.6,0) -- (1.6,0) node[right] {$x$};
     \draw[blue, thick] (-1,0) -- (-1,1) -- (1,1) -- (1,0);
-    \node at (0,1.2) {Rectangular (Uniforme) $u_B = \frac{a}{\sqrt{3}}$};
-    
+    \node[align=center] at (0,1.5) {Rectangular (Uniforme)\\$u_B = \dfrac{a}{\sqrt{3}}$};
+
     % Distribución triangular
-    \begin{scope}[yshift=-2cm]
-        \draw[->] (-1.5,0) -- (1.5,0) node[right] {$x$};
+    \begin{scope}[yshift=-2.6cm]
+        \draw[->] (-1.6,0) -- (1.6,0) node[right] {$x$};
         \draw[orange, thick] (-1,0) -- (0,1) -- (1,0);
-        \node at (0,1.2) {Triangular $u_B = \frac{a}{\sqrt{6}}$};
+        \node[align=center] at (0,1.5) {Triangular\\$u_B = \dfrac{a}{\sqrt{6}}$};
     \end{scope}
 
     % Distribución Normal
-    \begin{scope}[yshift=-4cm]
-        \draw[->] (-2,0) -- (2,0) node[right] {$x$};
-        \draw[red, thick, smooth, domain=-1.8:1.8] plot (\x, {exp(-(\x)^2/0.5)});
-        \node at (0,1.2) {Normal (Gaussiana) $u_B = \frac{a}{s}$};
+    \begin{scope}[yshift=-5.2cm]
+        \draw[->] (-1.6,0) -- (1.6,0) node[right] {$x$};
+        \draw[red, thick, smooth, domain=-1.6:1.6] plot (\x, {exp(-(\x)^2/0.5)});
+        \node[align=center] at (0,1.5) {Normal (Gaussiana)\\$u_B = \dfrac{a}{s}$};
     \end{scope}
-\end{tikzpicture}
+    \end{tikzpicture}
 \caption[Ejemplos de distribuciones de probabilidad para la evaluación tipo B de la incertidumbre]{Ejemplos de distribuciones de probabilidad para la evaluación tipo B de la incertidumbre. La distribución rectangular (uniforme) se utiliza cuando el error es igualmente probable dentro de un rango, la distribución triangular se utiliza cuando el error es más probable cerca del valor central, y la distribución normal se utiliza cuando el error sigue una distribución gaussiana. En la distribución gaussiana s es la desviación típica.}\label{fig:distribuciones_tipoB}
 \end{marginfigure}
 
@@ -318,8 +327,9 @@ Se basa en la distribución de probabilidad asumida para el error indicado por e
 \centering
 %\small
 \caption[Distribuciones de probabilidad para la evaluación tipo B de la incertidumbre.]{Distribución de probabilidad para la evaluación tipo B de la incertidumbre. La distribución normal se utiliza cuando el error sigue una distribución gaussiana. En la distribución gaussiana s es la desviación típica. En la distribución triangular se utiliza cuando el error es más probable cerca del valor central y en la distribución rectangular se utiliza cuando el error es igualmente probable dentro de un rango.\protect\label{tab:distribuciones_tipoB}}
+\forcerectofloat % la tabla cae en página impar (recto); sin forzar, el chequeo de paridad se evalúa antes del salto de página y el caption sale al lado contrario
 \setlength{\tabcolsep}{3pt} % Reducimos el espacio entre columnas
-\begin{tabularx}{\linewidth}{l X c}    
+\begin{tabularx}{\linewidth}{M{2cm} X M{2cm}}    
 \toprule
 \textbf{Distribución} & \textbf{Cuándo usarla} & \textbf{Cálculo de $\mathbf{U_B}$} \\
 \midrule
@@ -399,25 +409,27 @@ La incertidumbre expandida proporciona una forma de comunicar la incertidumbre d
         axis lines=left, xlabel=$x$, ylabel=$P(x)$,
         every axis y label/.style={at=(current axis.above origin),anchor=south},
         every axis x label/.style={at=(current axis.right of origin),anchor=west},
-        height=5cm, width=\linewidth,
+        height=5cm, width=\marginparwidth,
         xtick={-3,-2, -1, 0, 1, 2, 3},
         xticklabels={$-3\sigma$, $-2\sigma$, $-\sigma$, $\mu$, $\sigma$, $2\sigma$, $3\sigma$},
         ytick=\empty,
         enlargelimits=false, clip=false, axis on top,
         grid = none
     ]
-    
+
     % Área k=2 (95%)
     \addplot [fill=blue!10, domain=-2:2] {gauss(x, 0, 1)} \closedcycle;
     % Área k=1 (68%)
     \addplot [fill=blue!30, domain=-1:1] {gauss(x, 0, 1)} \closedcycle;
-    
+
     % Curva principal
     \addplot [thick,cyan!50!black] {gauss(x, 0, 1)};
 
-    % Anotaciones
-    \node[anchor=north] at (axis cs: 0, 0.2) {68\% ($k=1$)};
-    \draw[<->, >=stealth] (axis cs: -2, 0.05) -- node[below] {95\% de confianza ($k=2$)} (axis cs: 2, 0.05);
+    % Anotaciones: en dos líneas y compactas, porque el margen (±1σ y ±2σ
+    % de ancho disponible) es demasiado estrecho para el texto en una sola
+    % línea sin invadir las líneas divisorias o las marcas del eje.
+    \node[anchor=north, align=center] at (axis cs: 0, 0.32) {68\%\\($k=1$)};
+    \draw[<->, >=stealth] (axis cs: -2, 0.06) -- node[anchor=south, align=center] {95\%\\($k=2$)} (axis cs: 2, 0.06);
 
     \end{axis}
 \end{tikzpicture}
@@ -430,4 +442,18 @@ En este punto final de la discusión es necesario aclarar la diferencia entre lo
 
 Sin embargo, la incertidumbre típica $u_A$ representa la dispersión de la media de las medidas, y esta sí disminuye al aumentar el número de medidas $n$, ya que se calcula como $u_A = \frac{s(x)}{\sqrt{n}}$. Al promediar, los errores aleatorios (positivos y negativos) tienden a cancelarse. Por eso, cuantas más muestras $n$, más estrecha es la distribución de la media y más \emph{seguros} estamos del resultado. Esto significa que al aumentar el número de medidas independientes, podemos reducir la incertidumbre asociada a la media de las medidas, lo que nos permite obtener una estimación más precisa del valor verdadero. 
 
-En resumen, el sensor mide con una desviación típica $s(x)$ que representa el ruido intrínseco del sistema, mientras que nosotros podemos reducir la incertidumbre de la media de las medidas aumentando el número de mediciones independientes $n$, lo que se refleja en la disminución de la incertidumbre típica $u_A$.
+
+\section{Resumen}\label{sec:resumen_metrologia}
+
+En este capítulo se han sentado las bases de la metrología y la caracterización de los sistemas de medida, definiendo los conceptos fundamentales para evaluar la calidad de cualquier proceso de instrumentación:
+
+\begin{itemize}
+    \item \emph{El sistema de medida}: la instrumentación es una cadena de bloques donde el eslabón más débil determina la precisión global. El flujo de información va desde la magnitud física hasta el procesamiento digital, pasando obligatoriamente por la transducción y el acondicionamiento de señal.
+    \item \emph{Terminología VIM}: es fundamental distinguir entre \emph{exactitud} (cercanía al valor verdadero), \emph{precisión} (consistencia entre medidas repetidas) y \emph{veracidad} (cercanía de la media de muchas medidas al valor verdadero). La \emph{resolución} marca el límite inferior de detección del sistema.
+    \item \emph{Modelo de error}: el error total se modela como la suma de un error \emph{sistemático} (sesgo predecible que afecta la veracidad) y un error \emph{aleatorio} (fluctuaciones impredecibles que afectan la precisión). Mientras el primero requiere calibración, el segundo se reduce mediante el promediado de $N$ muestras.
+    \item \emph{Evaluación de la incertidumbre}: siguiendo la Guía GUM, la incertidumbre se evalúa mediante el \emph{Tipo A} (análisis estadístico de la repetibilidad) y el \emph{Tipo B} (basado en hojas de datos y distribuciones de probabilidad como la rectangular, triangular o normal).
+    \item \emph{Propagación e Incertidumbre Expandida}: la incertidumbre de una magnitud calculada se obtiene mediante la suma cuadrática de las incertidumbres de las entradas ponderadas por sus coeficientes de sensibilidad. El resultado final se expresa como una \emph{incertidumbre expandida} $U = k \cdot u_c$, definiendo así un intervalo de confianza sobre el valor medido.
+\end{itemize}
+
+\marginnote{\textbf{Conclusión:} la metrología no busca la inexistencia del error, sino su cuantificación y control. Un resultado de medida sin su incertidumbre asociada carece de valor técnico, ya que es la incertidumbre la que define la calidad, la fiabilidad y la trazabilidad de la información obtenida.}
+

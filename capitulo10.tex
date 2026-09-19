@@ -74,7 +74,7 @@ A las dos ventajas anteriores se añade una tercera, de carácter práctico: com
     \centering
     \small
     \setlength{\tabcolsep}{3pt}
-    \begin{tabularx}{\linewidth}{@{} >{\raggedright\arraybackslash}p{0.24\linewidth} >{\centering\arraybackslash}X >{\centering\arraybackslash}X @{}}
+    \begin{tabularx}{\linewidth}{@{} L{0.24\linewidth} >{\centering\arraybackslash}X >{\centering\arraybackslash}X @{}}
         \toprule
         \textbf{Aspecto} & \textbf{Señal en tensión} & \textbf{Lazo 4-20 mA} \\
         \midrule
@@ -243,7 +243,7 @@ HART es un protocolo maestro-esclavo y semidúplex: en cada momento habla un sol
     \centering
     \small
     \setlength{\tabcolsep}{3pt}
-    \begin{tabularx}{\linewidth}{@{} >{\centering\arraybackslash}p{0.2\linewidth} >{\centering\arraybackslash}X >{\centering\arraybackslash}X @{}}
+    \begin{tabularx}{\linewidth}{@{} M{0.2\linewidth} >{\centering\arraybackslash}X >{\centering\arraybackslash}X @{}}
         \toprule
         \textbf{Aspecto} & \textbf{Punto a punto} & \textbf{Multidrop} \\
         \midrule
@@ -443,7 +443,7 @@ La elección entre ambos buses rara vez es libre: viene impuesta por lo que ofre
     \small
     \setlength{\tabcolsep}{3pt}
     \forceversofloat % la tabla cae en página par (verso); sin forzar, el chequeo de paridad se evalúa antes del salto de página y el caption sale al lado contrario
-    \begin{tabularx}{\linewidth}{@{} >{\raggedright\arraybackslash}p{0.24\linewidth} >{\centering\arraybackslash}X >{\centering\arraybackslash}X @{}}
+    \begin{tabularx}{\linewidth}{@{} L{0.24\linewidth} >{\centering\arraybackslash}X >{\centering\arraybackslash}X @{}}
         \toprule
         \textbf{Aspecto} & \textbf{I2C} & \textbf{SPI} \\
         \midrule
@@ -527,7 +527,7 @@ Esa hoja de datos electrónica --el \emph{teds} (\textsc{transducer electronic d
     \small
     \setlength{\tabcolsep}{3pt}
     \forceversofloat % la tabla cae en página par (verso); sin forzar, el caption sale al lado contrario
-    \begin{tabularx}{\linewidth}{@{} >{\raggedright\arraybackslash}p{0.26\linewidth} >{\centering\arraybackslash}X >{\centering\arraybackslash}X @{}}
+    \begin{tabularx}{\linewidth}{@{} L{0.26\linewidth} >{\centering\arraybackslash}X >{\centering\arraybackslash}X @{}}
         \toprule
         \textbf{Bloque} & \textbf{Campos típicos} & \textbf{Para qué sirve} \\
         \midrule

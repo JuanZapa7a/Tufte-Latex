@@ -32,10 +32,18 @@
 
 % Las columnas X de tabularx son, por definición, p{ancho} (alineación
 % superior). Redefinimos el hook oficial \tabularxcolumn para que usen
-% m{ancho} (alineación centrada verticalmente) en su lugar, de modo que en
-% cualquier tabla las celdas de una sola línea queden a media altura
-% respecto a la celda de la misma fila que ocupa varias líneas (párrafo).
-\renewcommand\tabularxcolumn[1]{m{#1}}
+% m{ancho} (alineación centrada verticalmente) y además centrado horizontal.
+\renewcommand\tabularxcolumn[1]{>{\centering\arraybackslash}m{#1}}
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+% Separación vertical entre filas: por defecto (arraystretch=1) las tablas
+% con celdas de varias líneas quedan apelotonadas. Se aplica a todas las
+% tablas del libro para mantener la misma respiración entre filas.
+\renewcommand{\arraystretch}{1.3}
+% Columna de ancho fijo con texto alineado a la izquierda pero, igual que M,
+% centrada verticalmente: evita que la primera columna de una fila (a menudo
+% de ancho fijo) quede pegada arriba mientras las columnas X vecinas se
+% centran, lo que rompía la coherencia vertical de las tablas.
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}m{#1}}
 %\usepackage{math} 
 
 % \usepackage[most]{tcolorbox}

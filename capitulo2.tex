@@ -71,7 +71,7 @@ En ingeniería, siempre preferimos sistemas lineales de la forma $y = mx + b$, y
             height=5cm,
             xlabel={$x$ (Entrada)},
             ylabel={$y$ (Salida)},
-            %font=\small,
+            font=\scriptsize,
             axis lines=left,
             scatter/classes={a={mark=o,draw=blue}},
             legend style={at={(0.5,-0.3)},anchor=north,legend columns=-1}
@@ -88,10 +88,10 @@ En ingeniería, siempre preferimos sistemas lineales de la forma $y = mx + b$, y
                 };
             % Recta de ajuste
             \addplot[thick, red, domain=0:5.5] {1.05*x + 0.1};
-            
+
             % Línea de error (ejemplo)
             \draw[dashed, gray] (axis cs:3, 3.1) -- (axis cs:3, 3.25);
-            \node[right] at (axis cs:3, 3.15) {$e_i$};
+            \node[font=\tiny, anchor=west] at (axis cs:3.15, 3.175) {$e_i$};
         \end{axis}
     \end{tikzpicture}
     \caption[Ajuste lineal por mínimos cuadrados.]{Ajuste lineal por mínimos cuadrados. La recta minimiza la distancia vertical al cuadrado de cada punto experimental.}\label{fig:minimos_cuadrados}
@@ -105,7 +105,7 @@ El objetivo es encontrar los coeficientes $m$ y $b$ que minimizan la suma de los
     \sum_{i=1}^n e_i^2 = \sum_{i=1}^n {(y_i - (mx_i + b))}^2 = \sum_{i=1}^n {(y_i - mx_i - b)}^2
 \end{equation}
 
-Para obtener la mejor representación lineal de los datos obtenidos en el laboratorio, utilizamos el \emph{Método de los Mínimos Cuadrados}.\marginnote{\emph{Método de los Mínimos Cuadrados $m$ y $b$:}  La demostración de la Ecuación~\ref{eq:m_final} y~\ref{eq:b_final} se basa en la minimización de la función de error cuadrático proporcionada por la Ecuación~\ref{eq:error_cuadratico}, que es la suma de los cuadrados de los residuos. Al derivar esta función con respecto a $m$ y $b$ y establecer las derivadas iguales a cero, se obtienen las fórmulas mencionadas para $m$ y $b$. Este proceso asegura que se encuentra el punto mínimo de la función de error, lo que corresponde a la mejor recta de ajuste para los datos experimentales.
+Para obtener la mejor representación lineal de los datos obtenidos en el laboratorio se aplica el \emph{Método de los Mínimos Cuadrados}.\marginnote{\textbf{Método de los Mínimos Cuadrados ($m$ y $b$):} las fórmulas de las Ecuaciones~\eqref{eq:m_final} y~\eqref{eq:b_final} se obtienen minimizando la función de error cuadrático de la Ecuación~\eqref{eq:error_cuadratico} --la suma de los cuadrados de los residuos-- e igualando a cero sus derivadas parciales respecto de $m$ y de $b$, tal como se desarrolla a continuación. Ese punto es el mínimo de la función y corresponde a la recta de mejor ajuste de los datos experimentales.}
 
 Para minimizar la función de error cuadrático $E(m, b) = \sum_{i=1}^n {(y_i - mx_i - b)}^2$, buscamos el punto donde las derivadas parciales se anulan:
 
@@ -114,7 +114,7 @@ Para minimizar la función de error cuadrático $E(m, b) = \sum_{i=1}^n {(y_i - 
     \item $\frac{\partial E}{\partial b} = -2\sum (y_i - mx_i - b) = 0$
 \end{enumerate}
 
-Reorganizando términos (Ecuaciones Normales):
+Reorganizando los términos se obtienen las \emph{ecuaciones normales}, Ecuaciones~\eqref{eq:normal1} y~\eqref{eq:normal2}:
 \begin{equation} \label{eq:normal1}
     m\sum x_i^2 + b\sum x_i = \sum x_i y_i
 \end{equation}
@@ -122,16 +122,9 @@ Reorganizando términos (Ecuaciones Normales):
     m\sum x_i + nb = \sum y_i
 \end{equation}
 
-Despejando $b$ de (\ref{eq:normal2}):
+Despejando $b$ de la Ecuación~\eqref{eq:normal2}:
 \[ b = \frac{\sum y_i - m\sum x_i}{n} = \bar{y} - m\bar{x} \]
-
-Sustituyendo $b$ en (\ref{eq:normal1}) y resolviendo para $m$:
-\begin{equation} \label{eq:m_final_note}
-    m = \frac{n\sum x_i y_i - \sum x_i \sum y_i}{n\sum x_i^2 - {(\sum x_i)}^2}
-\end{equation}
-
-Estas expresiones permiten calcular la recta de mejor ajuste para cualquier conjunto de datos experimentales.
-} Este método garantiza que la recta de ajuste $y = mx + b$ minimice la suma de los cuadrados de las distancias verticales (residuos) de cada punto experimental a la recta. Las fórmulas para calcular la pendiente ($m$) y la ordenada en el origen ($b$) son:
+y sustituyendo ese valor en la Ecuación~\eqref{eq:normal1} se obtiene la pendiente. Este método garantiza que la recta de ajuste $y = mx + b$ minimice la suma de los cuadrados de las distancias verticales (residuos) de cada punto experimental a la recta. Las fórmulas para calcular la pendiente ($m$) y la ordenada en el origen ($b$) son:
 
 \begin{equation} \label{eq:m_final}
     m = \frac{n \sum\limits_{i=1}^n x_i y_i - \left(\sum\limits_{i=1}^n x_i\right) \left(\sum\limits_{i=1}^n y_i\right)}{n \sum\limits_{i=1}^n x_i^2 - {\left(\sum\limits_{i=1}^n x_i\right)}^2}
@@ -225,7 +218,7 @@ La recta de ajuste resultante es \emph{$y = 0.95x + 0.14$} y está representada 
 \subsection{Error de No Linealidad}\label{sec:error_no_linealidad}
 Una vez calculados estos parámetros, el \emph{Error de No Linealidad}  se puede evaluar analizando el residuo máximo entre los valores medidos y los valores predichos por la recta de ajuste. El Error de No Linealidad se define como la máxima desviación de los puntos experimentales respecto a la recta de ajuste, expresado normalmente como porcentaje sobre el fondo de escala (\textit{Full Scale}, FS):
 
-\begin{equation}
+\begin{equation}\label{eq:error_no_linealidad}
     \epsilon_{lin} = \frac{|y_i - (mx_i + b)|_{\max}}{y_{\max} - y_{\min}} \times 100\%
 \end{equation}
 para el ejemplo anterior, el error de no linealidad se calcularía evaluando el residuo máximo entre los valores medidos ($y_i$) y los valores predichos por la recta de ajuste ($mx_i + b$), y luego dividiendo por el rango total de salida ($y_{\max} - y_{\min}$) para obtener un porcentaje. Por lo tanto, el error de no linealidad se puede expresar como:
@@ -272,7 +265,7 @@ La recta de referencia, como se ilustra en la Figura~\ref{fig:recta_referencia},
             height=5cm,
             xlabel={$x$ (bar)},
             ylabel={$y$ (V)},
-            %font=\scriptsize,
+            font=\scriptsize,
             grid=both,
             grid style={line width=.1pt, draw=gray!10},
             major grid style={line width=.2pt,draw=gray!30},
@@ -341,7 +334,7 @@ Un sistema presenta \emph{histéresis} cuando la salida depende de la dirección
 
 \begin{marginfigure}
     \centering
-    \begin{tikzpicture}
+    \begin{tikzpicture}[x={\linewidth/2.8}, y={\linewidth/2.8}]
       \shorthandoff{>}
         \draw[->] (0,0) -- (2.5,0) node[right] {$x$};
         \draw[->] (0,0) -- (0,2.5) node[above] {$y$};
@@ -349,8 +342,8 @@ Un sistema presenta \emph{histéresis} cuando la salida depende de la dirección
         \draw[blue, thick, ->] (0.2,0.2) .. controls (1,0.8) .. (2,2);
         % Curva descendente
         \draw[red, thick, ->] (2,2) .. controls (1.2,1.4) .. (0.2,0.2);
-        \node[blue] at (1.5,1) {asc.};
-        \node[red] at (.5,1.2) {desc.};
+        \node[blue, anchor=north west] at (1.6,0.55) {asc.};
+        \node[red, anchor=south east] at (0.6,1.85) {desc.};
     \end{tikzpicture}
     \caption[Efecto de histéresis.]{Efecto de histéresis. Es común en sensores magnéticos y mecánicos debido a la fricción o deformación elástica.}\label{fig:histeresis}
 \end{marginfigure}
@@ -361,7 +354,7 @@ La \emph{banda muerta} es un fenómeno relacionado con la histéresis, donde exi
 
 \begin{marginfigure}
     \centering
-    \begin{tikzpicture}
+    \begin{tikzpicture}[x={\linewidth/2.8}, y={\linewidth/2.8}]
       \shorthandoff{>}
         \draw[->] (0,0) -- (2.5,0) node[right] {$x$};
         \draw[->] (0,0) -- (0,2.5) node[above] {$y$};
@@ -369,48 +362,60 @@ La \emph{banda muerta} es un fenómeno relacionado con la histéresis, donde exi
         \draw[blue, thick] (0.2,0.2) -- (1,0.2) -- (1.5,1.5) -- (2,2);
         % Banda de muerta
         \draw[dashed, red] (1,0.2) -- (1.5,1.5);
-        \node[red] at (1.25,0.8) {Banda de Muerta};
+        \node[red, anchor=east, align=right] at (0.9,1.1) {Banda de\\Muerta};
     \end{tikzpicture}
     \caption[Ejemplo de banda muerta.]{Ejemplo de banda muerta. Es común en sistemas mecánicos con fricción o en sensores que requieren una fuerza mínima para activar la salida.}\label{fig:banda_muerta}
 \end{marginfigure}
 
-La \emph{repetibilidad} es la capacidad de un sensor para entregar la misma salida al aplicar la misma entrada varias veces en periodos cortos de tiempo. Un sensor con buena repetibilidad producirá resultados consistentes bajo las mismas condiciones de prueba, lo que es crucial para aplicaciones donde se requiere alta precisión y confiabilidad. La repetibilidad se puede evaluar realizando múltiples mediciones con el mismo valor de entrada y analizando la variación en las salidas obtenidas. Un sensor con alta repetibilidad tendrá una desviación estándar baja en sus mediciones, lo que indica que las salidas son consistentes y confiables. En la Figura~\ref{fig:repetibilidad} se muestra un ejemplo gráfico de repetibilidad, donde se realizan varias mediciones con el mismo valor de entrada. La dispersión de los puntos alrededor de la media indica el nivel de repetibilidad del sensor, siendo una dispersión menor indicativa de una mejor repetibilidad.\marginnote{\textbf{Ejemplo de repetibilidad.} Un ejemplo típico de repetibilidad es el comportamiento de un sensor de temperatura, donde se espera que el sensor entregue la misma salida para la misma temperatura en múltiples mediciones realizadas en periodos cortos de tiempo. Otro ejemplo típico de repetibilidad es el comportamiento de un sensor de presión, donde se espera que el sensor entregue la misma salida para la misma presión en múltiples mediciones realizadas en periodos cortos de tiempo.} 
+La \emph{repetibilidad} es la capacidad de un sensor para entregar la misma salida al aplicar la misma entrada varias veces en periodos cortos de tiempo y en las mismas condiciones de prueba --mismo operador, mismo instrumento, mismo laboratorio--. Cuando lo que cambia es alguna de esas condiciones --otro operador, otro instrumento, otro laboratorio o, simplemente, otro día-- deja de hablarse de repetibilidad y se habla de \emph{reproducibilidad}, que es siempre peor que la repetibilidad del propio instrumento y es la cifra que importa cuando la medida la va a repetir otra persona (Capítulo~\ref{cap:metrologia}). Como la dispersión de la repetibilidad es un error aleatorio, no se corrige por calibración: solo se reduce promediando lecturas o filtrando. Un sensor con alta repetibilidad tendrá una desviación estándar baja en sus mediciones, lo que indica que las salidas son consistentes y confiables. La repetibilidad se evalúa realizando varias mediciones con el mismo valor de entrada y analizando la dispersión de las salidas obtenidas: la Tabla~\ref{tab:repetibilidad} recoge cinco lecturas de la misma presión. En la Figura~\ref{fig:repetibilidad} se muestra un ejemplo gráfico de repetibilidad, donde se realizan varias mediciones con el mismo valor de entrada. La dispersión de los puntos alrededor de la media indica el nivel de repetibilidad del sensor, siendo una dispersión menor indicativa de una mejor repetibilidad.\marginnote{\textbf{Ejemplo de repetibilidad.} Un ejemplo típico de repetibilidad es el comportamiento de un sensor de temperatura, donde se espera que el sensor entregue la misma salida para la misma temperatura en múltiples mediciones realizadas en periodos cortos de tiempo. Otro ejemplo típico de repetibilidad es el comportamiento de un sensor de presión, donde se espera que el sensor entregue la misma salida para la misma presión en múltiples mediciones realizadas en periodos cortos de tiempo.} 
 
-% \begin{margintable}
-%     \centering
-%     %\footnotesize
-%     \begin{tabular}{c c}
-%         \toprule
-%         Medición (20 ºC) & Salida (V) \\
-%         \midrule
-%         1 & 2.0 \\
-%         2 & 1.9 \\
-%         3 & 2.1 \\
-%         4 & 2.0 \\
-%         5 & 1.95 \\
-%         \bottomrule
-%         \\
-%     \end{tabular}
-%     \caption{Ejemplo de repetibilidad. Se muestran varias mediciones con el mismo valor de entrada y la variación en las salidas obtenidas para evaluar la repetibilidad del sensor.}
-%     \label{tab:repetibilidad}
-% \end{margintable}
+\begin{margintable}
+    \centering
+    \caption[Cinco lecturas de la misma presión para evaluar la repetibilidad.]{Cinco lecturas consecutivas de la misma presión, con el sensor trabajando sobre un fondo de escala de \SI{0}{\volt} a \SI{5}{\volt}. \protect\label{tab:repetibilidad}}
+    \begin{tabular}{c c}
+        \toprule
+        Medición & Salida (V) \\
+        \midrule
+        1 & 2.0000 \\
+        2 & 2.0012 \\
+        3 & 1.9994 \\
+        4 & 2.0006 \\
+        5 & 1.9988 \\
+        \bottomrule
+    \end{tabular}
+\end{margintable}
+
+De las cinco lecturas se obtiene una media de \SI{2.0000}{\volt} y una desviación estándar de \SI{0.95}{\milli\volt}, de modo que el \emph{índice de repetibilidad} $r$ --que resume el efecto del ruido y de la deriva a corto plazo-- es el doble de esa desviación:
+\begin{equation}\label{eq:repetibilidad}
+    \bar{y} = \SI{2.0000}{\volt}, \qquad s = \sqrt{\frac{\sum_{i=1}^{n}{(y_i - \bar{y})}^2}{n-1}} = \SI{0.95}{\milli\volt}, \qquad r = 2s = \SI{1.9}{\milli\volt}
+\end{equation}
+El índice se declara casi siempre en porcentaje del fondo de escala --\SI{1.9}{\milli\volt} sobre \SI{5}{\volt} son el \SI{0.04}{\percent}--, aunque también puede referirse a la lectura, en cuyo caso el mismo error absoluto pesa más cuanto menor es la lectura: sobre los \SI{2}{\volt} medidos representa el \SI{0.1}{\percent}.
 
 \begin{marginfigure}
     \centering
     \begin{tikzpicture}
-      \shorthandoff{>}
-        \draw[->] (0,0) -- (2.5,0) node[right] {$x$};
-        \draw[->] (0,0) -- (0,2.5) node[above] {$y$};
-        % Puntos de repetibilidad dibujados con node como puntos azules 
-        \node[blue] at (1.5,2.1) {*};
-        \node[blue] at (1.5,2.0) {*};
-        \node[blue] at (1.5,1.9) {*};
-        \node[blue] at (1.5,2.1) {*};
-        \node[blue] at (1.5,2.05) {*};
-        \node[blue] at (1.5,1.95) {*};        
-        \node[blue] at (1.5,2.5) {Repetibilidad};
+        \begin{axis}[
+            width=\linewidth, height=4.5cm,
+            xlabel={Medición}, ylabel={Salida (V)},
+            font=\scriptsize,
+            axis lines=left,
+            xmin=0.5, xmax=5.5, ymin=1.995, ymax=2.005,
+            xtick={1,2,3,4,5},
+            ytick={1.995,2.000,2.005},
+            yticklabels={$1{,}995$,$2{,}000$,$2{,}005$},
+            every axis y label/.style={at=(current axis.above origin),anchor=south},
+            every axis x label/.style={at=(current axis.right of origin),anchor=west},
+        ]
+            % Media (recta de referencia)
+            \addplot[gray, dashed, thick, domain=0.5:5.5] {2.000};
+            \node[gray, font=\tiny, anchor=south west] at (axis cs:0.55,2.0005) {media};
+            % Cinco lecturas consecutivas (Tabla 2.2)
+            \addplot[only marks, mark=*, blue, mark size=1.3pt] coordinates {
+                (1, 2.0000) (2, 2.0012) (3, 1.9994) (4, 2.0006) (5, 1.9988)
+            };
+        \end{axis}
     \end{tikzpicture}
-    \caption[Ejemplo de repetibilidad.]{Ejemplo de repetibilidad. Un sensor con buena repetibilidad producirá resultados consistentes bajo las mismas condiciones de prueba.}\label{fig:repetibilidad}
+    \caption[Ejemplo de repetibilidad.]{Ejemplo de repetibilidad. Un sensor con buena repetibilidad producirá resultados consistentes bajo las mismas condiciones de prueba: las cinco lecturas de la Tabla~\ref{tab:repetibilidad} se agrupan estrechamente en torno a la media.}\label{fig:repetibilidad}
 \end{marginfigure}
 
 \subsection{Error de Histéresis}
@@ -418,7 +423,7 @@ La \emph{repetibilidad} es la capacidad de un sensor para entregar la misma sali
 
 Además, el \emph{Error de Histeresis} se puede evaluar comparando las salidas para un mismo valor de entrada según el sentido de la variación (ascendente o descendente). Este error se define como la máxima diferencia en la salida para un mismo valor de entrada según el sentido de la variación, y se expresa también como porcentaje sobre el fondo de escala:
 
-\begin{equation}    
+\begin{equation}\label{eq:error_histeresis}    
     \epsilon_{his} = \frac{|y_{asc} - y_{desc}|_{\max}}{y_{\max} - y_{\min}} \times 100\%
 \end{equation}
 donde $y_{asc}$ y $y_{desc}$ son las salidas correspondientes a un mismo valor de entrada durante la variación ascendente y descendente respectivamente. Este cálculo proporciona una medida cuantitativa de la diferencia máxima en la salida para un mismo valor de entrada según el sentido de la variación, lo que es fundamental para evaluar la estabilidad y confiabilidad del sensor en aplicaciones donde se esperan cambios frecuentes en la magnitud medida.
@@ -452,8 +457,8 @@ La saturación es una característica no lineal que ocurre cuando la entrada exc
             % Línea discontinua ideal (prolongación)
             \addplot[dashed, gray, domain=3:4.5] {x};
             
-            \node[blue, rotate=43] at (axis cs:1.2,1.6) {Zona Lineal};
-            \node[red] at (axis cs:4,3.2) {Saturación};
+            \node[blue, rotate=43] at (axis cs:1.05,1.85) {Zona Lineal};
+            \node[red] at (axis cs:4.2,3.35) {Saturación};
         \end{axis}
     \end{tikzpicture}
     \caption[Característica de saturación.]{Característica de saturación. Físicamente, suele estar impuesta por los límites de alimentación de la electrónica o la deformación máxima del material del sensor.}\label{fig:saturacion}
@@ -465,9 +470,30 @@ Al conectar la salida de una etapa con la entrada de la siguiente --el sensor co
 \begin{equation}\label{eq:error_carga}
     v_{rx} = v_{tx}\,\frac{R_{in}}{R_{in} + R_{out}}, \qquad \frac{\Delta v}{v_{tx}} \approx -\frac{R_{out}}{R_{in}} \quad \text{si } R_{in} \gg R_{out}
 \end{equation}
+\marginnote{\textbf{Efecto de carga en cifras:} una fuente de \SI{1}{\kilo\ohm} leída por una entrada de \SI{100}{\kilo\ohm} pierde el \SI{1}{\percent} de la señal; con una entrada de \SI{1}{\mega\ohm}, pierde el \SI{0.1}{\percent}. Como el error es sistemático y depende de una impedancia que a su vez cambia con la temperatura, no se corrige en el software: se combate con una etapa de entrada de alta impedancia, como un seguidor de tensión o un amplificador de instrumentación.}
 La regla de diseño es, por tanto, que la impedancia de entrada sea mucho mayor que la de salida: dos órdenes de magnitud de diferencia dejan un error del orden del \SI{1}{\percent}. La gravedad del efecto depende de la impedancia de la fuente, y por eso conviene conocerla antes de elegir la etapa siguiente: un sensor pasivo de \SI{1}{\kilo\ohm} no puede leerse con una entrada de \SI{1}{\kilo\ohm} --se pierde la mitad de la señal--, mientras que un termopar de unos pocos ohmios apenas acusa una entrada de \SI{10}{\kilo\ohm}. En los sensores resistivos este mismo efecto es el que obliga a las configuraciones de tres y cuatro hilos (Figura~\ref{fig:efecto_carga}) y en el acondicionamiento es la razón de ser de la etapa de entrada del amplificador de instrumentación (Sección~\ref{sec:inamp}).
 
-\marginnote{\textbf{Efecto de carga en cifras:} una fuente de \SI{1}{\kilo\ohm} leída por una entrada de \SI{100}{\kilo\ohm} pierde el \SI{1}{\percent} de la señal; con una entrada de \SI{1}{\mega\ohm}, pierde el \SI{0.1}{\percent}. Como el error es sistemático y depende de una impedancia que a su vez cambia con la temperatura, no se corrige en el software: se combate con una etapa de entrada de alta impedancia, como un seguidor de tensión o un amplificador de instrumentación.}
+Los defectos de la curva de calibración descritos en esta sección --cero, span, no linealidad, histéresis y repetibilidad-- son los que el certificado de calibración de un instrumento declara por separado, junto con la banda muerta y el efecto de carga, que dependen de cómo se instala el sensor. La Tabla~\ref{tab:errores_estaticos} reúne su expresión cuantitativa y la forma de combatirlos.
+
+\begin{table}[ht]
+    \centering
+    \small
+    \setlength{\tabcolsep}{3pt}
+    \begin{tabularx}{\linewidth}{@{} L{0.22\linewidth} >{\centering\arraybackslash}X >{\centering\arraybackslash}X @{}}
+        \toprule
+        \textbf{Error} & \textbf{Expresión cuantitativa} & \textbf{Cómo se combate y se declara} \\
+        \midrule
+        Error de cero ($e_0$) & $e_0 = x_{ind} - x$, con la pendiente ya corregida & Ajuste de cero contra un patrón; se declara en unidades absolutas (Ecuación~\eqref{eq:error_cero_span}). \\
+        Error de span ($\epsilon_s$) & $\epsilon_s = \frac{m - m_{nom}}{m_{nom}}$ & Ajuste de span o de ganancia; se declara en \% de la lectura (Ecuación~\eqref{eq:error_cero_span}). \\
+        No linealidad ($\epsilon_{lin}$) & $\frac{|y_i - (mx_i+b)|_{\max}}{y_{\max}-y_{\min}}\times 100$\,\% & Un ajuste de dos puntos no la corrige: exige un polinomio de linealización o una tabla de corrección (Ecuación~\eqref{eq:error_no_linealidad}). \\
+        Histéresis ($\epsilon_{his}$) & $\frac{|y_{asc}-y_{desc}|_{\max}}{y_{\max}-y_{\min}}\times 100$\,\% & Es un defecto mecánico o magnético del propio sensor: se combate en el diseño, no en el software (Ecuación~\eqref{eq:error_histeresis}). \\
+        Repetibilidad ($r$) & $r = 2s$ sobre $n$ medidas con la misma entrada & La degradan el ruido y la deriva a corto plazo; se declara en \% del fondo de escala (Ecuación~\eqref{eq:repetibilidad}). \\
+        Banda muerta & Entrada mínima que produce un cambio apreciable en la salida & La fijan la fricción o el umbral de disparo: conviene trabajar con entradas muy por encima de ella (Figura~\ref{fig:banda_muerta}). \\
+        Efecto de carga & $\frac{\Delta v}{v_{tx}} \approx -\frac{R_{out}}{R_{in}}$ & Se combate con una etapa de entrada de alta impedancia (Ecuación~\eqref{eq:error_carga}). \\
+        \bottomrule
+    \end{tabularx}
+    \caption[Errores estáticos de un sistema de medida.][3cm]{Errores estáticos de un sistema de medida, su expresión cuantitativa y la forma de combatirlos y declararlos. Los cinco primeros son defectos de la curva de calibración y aparecen separados en el certificado del instrumento; los dos últimos dependen de la instalación y del campo de medida. \protect\label{tab:errores_estaticos}}
+\end{table}
 
 \section{Características Dinámicas}\label{sec:caract_dinamicas} 
 
@@ -482,7 +508,7 @@ Las características dinámicas analizan la respuesta del sistema cuando la entr
 \subsection{Sistema de Orden 0}
 Un sistema de orden 0 es un sensor ideal. La salida sigue a la entrada instantáneamente sin retardo ni error dinámico como se muestra en la Figura~\ref{fig:orden_0}. Su ecuación es:
 \[ y(t) = K \cdot x(t) \]
-donde $K$ es una constante de ganancia. La sensibilidad estática $K     = b_0/a_0$ es la sensibilidad estática.
+donde $K = b_0/a_0$ es una constante de ganancia: la sensibilidad estática del sistema.
 %Figura de larespuesta escalon de un sistema de orden 0, que es una linea recta que sigue a la entrada sin retardo ni error dinamico.
 \begin{marginfigure}
     \centering
@@ -512,9 +538,13 @@ donde $K$ es una constante de ganancia. La sensibilidad estática $K     = b_0/a
 \end{marginfigure}
 
 \subsection{Sistema de Primer Orden}
-Corresponde a sensores con almacenamiento de energía (ej.\ una capacidad térmica de un termómetro o condensador en un circuito). En este caso la salida $y(t)$ depende de la entrada $x(t)$ y de la constante de tiempo $\tau$. Matemáticamente, se modela mediante una ecuación diferencial lineal de primer orden. Su ecuación es:
+Corresponde a sensores con almacenamiento de energía (ej.\ una capacidad térmica de un termómetro o un condensador en un circuito). En este caso la salida $y(t)$ depende de la entrada $x(t)$ y de la constante de tiempo $\tau$. Matemáticamente, se modela mediante una ecuación diferencial lineal de primer orden:
 \[ \tau \frac{dy(t)}{dt} + y(t) = K \cdot x(t) \]
-donde $K$ es una constante de ganancia. La sensibilidad estática $K = b_0/a_0$ es la sensibilidad estática. En la Figura~\ref{fig:primer_orden} se muestra la respuesta al escalón de un sistema de primer orden. La respuesta al escalón de un sistema de primer orden es una curva exponencial que se aproxima a un valor final $K \cdot x(t)$ con una constante de tiempo $\tau$ que es un parámetro crucial que define la rapidez del sensor, ya que determina cuánto tiempo tarda la salida en responder a un cambio en la entrada. Un valor de $\tau$ más pequeño indica una respuesta más rápida, mientras que un valor de $\tau$ más grande indica una respuesta más lenta.\marginnote{\textbf{Constante de Tiempo ($\tau$):} Es el parámetro que define la rapidez del sensor. Representa el tiempo necesario para que la salida alcance el \qty{63.2}{\percent} de su valor final ante un escalón.
+donde $K = b_0/a_0$ es una constante de ganancia: la sensibilidad estática del sistema. Si la entrada es un escalón de amplitud $A$ --es decir, $x(t) = A$ a partir de $t = 0$--, la solución de esa ecuación diferencial es
+\begin{equation}\label{eq:primer_orden}
+    y(t) = K A \left( 1 - e^{-t/\tau} \right)
+\end{equation}
+de modo que la salida se aproxima exponencialmente al valor final $K\,A$, como muestra la Figura~\ref{fig:primer_orden}. La constante de tiempo $\tau$ es el parámetro que define la rapidez del sensor: un valor de $\tau$ más pequeño indica una respuesta más rápida, mientras que un valor de $\tau$ más grande indica una respuesta más lenta. Las cifras que conviene recordar se deducen directamente de la Ecuación~\eqref{eq:primer_orden}: la salida alcanza el \SI{63.2}{\percent} del valor final en $t = \tau$, el \SI{95}{\percent} en $t = 3\tau$ y el \SI{99.3}{\percent} en $t = 5\tau$, de donde el tiempo de establecimiento al \SI{5}{\percent} de un sistema de primer orden se estima en $t_s \approx 3\tau$.\marginnote{\textbf{Constante de Tiempo ($\tau$):} Es el parámetro que define la rapidez del sensor. Representa el tiempo necesario para que la salida alcance el \qty{63.2}{\percent} de su valor final ante un escalón.
 }
 
 % Figura que muestra el escalon en rojo y en azul la respuesta al escalon de un sistema de primer orden, que es una curva exponencial que se aproxima a un valor final $K \cdot x(t)$ con una constante de tiempo $\tau$ que determina la rapidez de la respuesta. Las líneas punteadas indican el tiempo $\tau$ necesario para que la salida alcance el \SI{63.2}{\percent} de su valor final. La constante de tiempo $\tau$ es un parámetro crucial que define la rapidez del sensor, ya que determina cuánto tiempo tarda la salida en responder a un cambio en la entrada. Un valor de $\tau$ más pequeño indica una respuesta más rápida, mientras que un valor de $\tau$ más grande indica una respuesta más lenta.
@@ -524,7 +554,7 @@ donde $K$ es una constante de ganancia. La sensibilidad estática $K = b_0/a_0$ 
         \begin{axis}[
             width=\linewidth, height=4.5cm,
             xlabel={$t$}, ylabel={$y(t)$},
-            %font=\scriptsize,
+            font=\scriptsize,
             %rango del eje y es 0 a 2
             ymin=0, ymax=1.5,
             axis lines=left,
@@ -542,7 +572,7 @@ donde $K$ es una constante de ganancia. La sensibilidad estática $K = b_0/a_0$ 
             \addplot[thick, red, dashed, domain=0:4] {1};
         \end{axis}
     \end{tikzpicture}
-    \caption[Respuesta al escalón de un sistema de 1er orden.]{Respuesta al escalón de un sistema de 1er orden. La curva azul representa la salida $y(t)$ que se aproxima a su valor final $K \cdot x(t)$ de manera exponencial, y las líneas punteadas indican el tiempo $\tau$ necesario para que la salida alcance el \SI{63.2}{\percent} de su valor final. }\label{fig:primer_orden}
+    \caption[Respuesta al escalón de un sistema de primer orden.]{Respuesta al escalón de un sistema de primer orden, gobernada por la Ecuación~\eqref{eq:primer_orden}. La curva azul representa la salida $y(t)$, que se aproxima a su valor final $K\,A$ de manera exponencial, y las líneas punteadas indican el tiempo $\tau$ necesario para que la salida alcance el \SI{63.2}{\percent} de su valor final.}\label{fig:primer_orden}
 \end{marginfigure}
 
 \subsection{Sistema de Segundo Orden}\label{sec:segundo_orden}
@@ -628,16 +658,16 @@ que representa la máxima desviación de la salida respecto al valor final duran
         \begin{axis}[
             width=\linewidth, height=4.5cm,
             xlabel={$t$}, ylabel={$y(t)$},
-            %font=\scriptsize,
+            font=\scriptsize,
             ymin=0, ymax=1.5, xmin=0, xmax=6,
             axis lines=left,
             % IMPORTANTE: Usar radianes para las funciones trigonométricas
-            trig format plots=rad, 
+            trig format plots=rad,
             every axis y label/.style={at=(current axis.above origin),anchor=south},
             every axis x label/.style={at=(current axis.right of origin),anchor=west},
             % Etiquetas correctas para 2º orden
             xtick=\empty,
-            ytick={1, 1.36}, yticklabels={$K$, $y_{max}$},
+            ytick={1, 1.37}, yticklabels={$K$, $y_{max}$},
             legend style={at={(1,0.1)}, anchor=south east, cells={anchor=west}}
         ]
             % 1. ESCALÓN DE ENTRADA
@@ -645,13 +675,13 @@ que representa la máxima desviación de la salida respecto al valor final duran
             \addlegendentry{Entrada}
 
             % 2. SUBAMORTIGUADO (zeta = 0.3, wn = 3) - CORRECTO
-            \addplot[thick, blue, domain=0:6, samples=200] 
+            \addplot[thick, blue, domain=0:6, samples=200]
                 {1 - exp(-0.9*x) * (cos(2.86*x) + 0.314*sin(2.86*x))};
             \addlegendentry{$\zeta < 1$}
-            
+
             % Marcador de Sobreoscilación para el azul
-            \draw[dotted, gray] (axis cs:0,1.36) -- (axis cs:1.1,1.36);
-            \node[anchor=south, blue] at (axis cs:1.1, 1.36) {$M_p$};
+            \draw[dotted, gray] (axis cs:0,1.37) -- (axis cs:1.1,1.37);
+            \node[anchor=south east, blue, font=\tiny] at (axis cs:0.5, 1.37) {$M_p$};
 
             % 3. CRÍTICAMENTE AMORTIGUADO (zeta = 1, wn = 3)
             % Fórmula: y(t) = 1 - (1 + wn*t)*exp(-wn*t)
@@ -691,7 +721,47 @@ En esta ecuación, el término $\frac{s_2}{s_2 - s_1} e^{s_1 t}$ y $\frac{s_1}{s
 
 \subsection{Ejemplo de Cálculo de la Respuesta al Escalón de un Sistema de Segundo Orden con $\zeta = 0.3$ y $\omega_n = 3$}\label{sec:ejemplo_segundo_orden}
 
-A modo de ejemplo, en la Figura~\ref{fig:ejemplo_segundo_orden} se muestra el cálculo de la respuesta al escalón de un sistema de segundo orden con $\zeta = 0.3$ y $\omega_n = 3$. El sistema es subamortiguado ($\zeta < 1$) y la salida oscila antes de estabilizarse en su valor final. La curva azul representa la salida $y(t)$ que se aproxima a su valor final $K$ de manera exponencial amortiguada y oscilatoria, donde la magnitud de la sobreoscilación $M_p$ y la frecuencia de las oscilaciones dependen del factor de amortiguamiento $\zeta=0.3$ y la frecuencia natural $\omega_n=3$ del sistema. En este caso, se observa que la salida oscila antes de estabilizarse en su valor final, lo que es característico de un sistema subamortiguado. 
+A modo de ejemplo, en la Figura~\ref{fig:ejemplo_segundo_orden} se muestra el cálculo de la respuesta al escalón de un sistema de segundo orden con $\zeta = 0.3$ y $\omega_n = 3$. El sistema es subamortiguado ($\zeta < 1$) y la salida oscila antes de estabilizarse en su valor final. La curva azul representa la salida $y(t)$ que se aproxima a su valor final $K$ de manera exponencial amortiguada y oscilatoria, donde la magnitud de la sobreoscilación $M_p$ y la frecuencia de las oscilaciones dependen del factor de amortiguamiento $\zeta=0.3$ y la frecuencia natural $\omega_n=3$ del sistema. En este caso, se observa que la salida oscila antes de estabilizarse en su valor final, lo que es característico de un sistema subamortiguado.
+
+%ejemplo de calculo de la respuesta al escalon de un sistema de segundo orden subamortiguado, con $\zeta = 0.3$ y $\omega_n = 3$.
+\begin{marginfigure}
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            width=\linewidth, height=4.5cm,
+            xlabel={$t$}, ylabel={$y(t)$},
+            font=\scriptsize,
+            ymin=0, ymax=1.5, xmin=0, xmax=6,
+            axis lines=left,
+            % IMPORTANTE: Usar radianes para las funciones trigonométricas
+            trig format plots=rad,
+            every axis y label/.style={at=(current axis.above origin),anchor=south},
+            every axis x label/.style={at=(current axis.right of origin),anchor=west},
+            enlargelimits=false, clip=false, axis on top,
+            legend style={at={(1,0.1)}, anchor=south east, cells={anchor=west}},
+            % Etiquetas correctas para 2º orden
+            xtick=\empty,
+            ytick={1, 1.37}, yticklabels={$K$, $y_{max}$},
+        ]
+            % 1. ESCALÓN DE ENTRADA
+            \addplot[thick, red, dashed, domain=0:6] {1};
+            \addlegendentry{Entrada}
+
+            % 2. SUBAMORTIGUADO (zeta = 0.3, wn = 3) - CORRECTO
+            \addplot[thick, blue, domain=0:6, samples=200]
+                {1 - exp(-0.9*x) * (cos(2.86*x) + 0.314*sin(2.86*x))};
+            \addlegendentry{$\zeta < 1$}
+
+            % Marcador de Sobreoscilación para el azul
+            \draw[dotted, gray] (axis cs:0,1.37) -- (axis cs:1.1,1.37);
+            \node[anchor=south east, blue, font=\tiny] at (axis cs:0.5, 1.37) {$M_p$};
+
+            % Línea de valor final
+            \draw[dashed, gray] (axis cs:0,1) -- (axis cs:6,1);
+        \end{axis}
+    \end{tikzpicture}
+    \caption[Ejemplo numérico de respuesta al escalón de un sistema subamortiguado.]{Ejemplo de cálculo de la respuesta al escalón de un sistema de segundo orden subamortiguado, con $\zeta = 0.3$ y $\omega_n = 3$. La curva azul representa la salida $y(t)$ que se aproxima a su valor final $K$ de manera exponencial amortiguada y oscilatoria, donde la magnitud de la sobreoscilación $M_p$ y la frecuencia de las oscilaciones dependen del factor de amortiguamiento $\zeta$ y la frecuencia natural $\omega_n$ del sistema.}\label{fig:ejemplo_segundo_orden}
+\end{marginfigure}
 
 La magnitud de la sobreoscilación $M_p$ se calcula de la siguiente forma:
 \begin{equation}
@@ -718,52 +788,30 @@ La caracterización dinámica obtenida para el sistema ($\zeta = 0.3$ y $\omega_
 
 En resumen, el sistema analizado es capaz de seguir cambios con una rapidez moderada ($\omega_d \approx \SI{2.86}{rad/s}$), pero a costa de un transitorio oscilatorio pronunciado que requiere esperar al menos hasta el \emph{tiempo de establecimiento} ($t_s$) para que la medida se considere válida y dentro de una banda de error aceptable.
 
-%ejemplo de calculo de la respuesta al escalon de un sistema de segundo orden subamortiguado, con $\zeta = 0.3$ y $\omega_n = 3$.
-\begin{marginfigure}
+Los tres modelos anteriores --orden cero, uno y dos-- describen la práctica totalidad de los sensores industriales. La Tabla~\ref{tab:ordenes_sistemas} reúne su ecuación, los parámetros que los caracterizan y el aspecto de su respuesta al escalón.
+
+\begin{table}[ht]
     \centering
-    \begin{tikzpicture}
-        \begin{axis}[
-            width=\linewidth, height=4.5cm,
-            xlabel={$t$}, ylabel={$y(t)$},
-            %font=\scriptsize,
-            ymin=0, ymax=1.5, xmin=0, xmax=6,            
-            axis lines=left,            
-            % IMPORTANTE: Usar radianes para las funciones trigonométricas
-            trig format plots=rad,            
-            every axis y label/.style={at=(current axis.above origin),anchor=south},            
-            every axis x label/.style={at=(current axis.right of origin),anchor=west},            
-            enlargelimits=false, clip=false, axis on top,
-            legend style={at={(1,0.1)}, anchor=south east, cells={anchor=west}},
-            % Etiquetas correctas para 2º orden
-            xtick=\empty,
-            ytick={1, 1.36}, yticklabels={$K$, $y_{max}$},
-        ]
-            % 1. ESCALÓN DE ENTRADA
-            \addplot[thick, red, dashed, domain=0:6] {1};
-            \addlegendentry{Entrada}
-
-            % 2. SUBAMORTIGUADO (zeta = 0.3, wn = 3) - CORRECTO
-            \addplot[thick, blue, domain=0:6, samples=200] 
-                {1 - exp(-0.9*x) * (cos(2.86*x) + 0.314*sin(2.86*x))};
-            \addlegendentry{$\zeta < 1$}
-            
-            % Marcador de Sobreoscilación para el azul
-            \draw[dotted, gray] (axis cs:0,1.36) -- (axis cs:1.1,1.36);
-            \node[anchor=south, blue] at (axis cs:1.1, 1.36) {$M_p$};
-
-            % Línea de valor final
-            \draw[dashed, gray] (axis cs:0,1) -- (axis cs:6,1);
-        \end{axis}
-    \end{tikzpicture}
-    \caption[Respuesta al escalón de un sistema de segundo orden.]{Ejemplo de cálculo de la respuesta al escalón de un sistema de segundo orden subamortiguado, con $\zeta = 0.3$ y $\omega_n = 3$. La curva azul representa la salida $y(t)$ que se aproxima a su valor final $K$ de manera exponencial amortiguada y oscilatoria, donde la magnitud de la sobreoscilación $M_p$ y la frecuencia de las oscilaciones dependen del factor de amortiguamiento $\zeta$ y la frecuencia natural $\omega_n$ del sistema.}\label{fig:ejemplo_segundo_orden}
-\end{marginfigure}
+    \small
+    \setlength{\tabcolsep}{3pt}
+    \begin{tabularx}{\linewidth}{@{} >{\centering\arraybackslash}m{1.1cm} L{0.26\linewidth} >{\centering\arraybackslash}X >{\centering\arraybackslash}X @{}}
+        \toprule
+        \textbf{Orden} & \textbf{Ecuación que lo gobierna} & \textbf{Parámetros característicos} & \textbf{Respuesta al escalón y ejemplos} \\
+        \midrule
+        Cero & $y(t) = K\,x(t)$ & $K$ (sensibilidad estática) & Réplica instantánea de la entrada, sin retardo ni error dinámico (Figura~\ref{fig:orden_0}). Divisores de tensión y potenciómetros. \\
+        Uno & $\tau \frac{dy}{dt} + y = K\,x(t)$ & $\tau$ (constante de tiempo) y $K$ & Exponencial: \SI{63.2}{\percent} del valor final en $t = \tau$ y $t_s$ al \SI{5}{\percent} en $t \approx 3\tau$ (Figura~\ref{fig:primer_orden}). Termómetros encapsulados, RTD en vaina y termopares con funda. \\
+        Dos & $\frac{d^2y}{dt^2} + 2\zeta\omega_n\frac{dy}{dt} + \omega_n^2 y = \omega_n^2 K\,x(t)$ & $\omega_n$ (frecuencia natural), $\zeta$ (amortiguamiento) y $K$ & Oscilatoria si $\zeta < 1$, con $M_p = e^{-\pi\zeta/\sqrt{1-\zeta^2}}$ (Figuras~\ref{fig:segundo_orden} y~\ref{fig:ejemplo_segundo_orden}). Acelerómetros piezoeléctricos y sensores de presión de diafragma. \\
+        \bottomrule
+    \end{tabularx}
+    \caption[Los tres modelos dinámicos de un sensor.][3cm]{Los tres modelos dinámicos de un sensor: ecuación, parámetros característicos y respuesta al escalón, con los ejemplos más frecuentes de cada uno. La constante de tiempo $\tau$ fija la rapidez del sistema de primer orden; en el de segundo orden, la rapidez la fija la frecuencia natural $\omega_n$ y la estabilidad, el amortiguamiento $\zeta$. \protect\label{tab:ordenes_sistemas}}
+\end{table}
 
 \subsection{Prestaciones Dinámicas Normalizadas}\label{sub:prestaciones_dinamicas}
 
 Los parámetros de las secciones anteriores --la constante de tiempo $\tau$, la frecuencia natural $\omega_n$ y el amortiguamiento $\zeta$-- describen el sistema, pero las hojas de características de los instrumentos y los pliegos de los ensayos no se escriben con ellos, sino con cifras medidas sobre la respuesta al escalón, que es lo que resume la Figura~\ref{fig:prestaciones_dinamicas}:
 
 \begin{itemize}
-    \item \emph{Tiempo de subida} ($t_r$): lo que tarda la salida en pasar del \SI{10}{\percent} al \SI{90}{\percent} de su valor final. Para un sistema de segundo orden vale aproximadamente $t_r \approx 1{,}8/\omega_n$: la frecuencia natural fija la rapidez.
+    \item \emph{Tiempo de subida} ($t_r$): lo que tarda la salida en pasar del \SI{10}{\percent} al \SI{90}{\percent} de su valor final. Depende de los dos parámetros --crece con el amortiguamiento y se acorta al subir la frecuencia natural-- y vale entre $1{,}2/\omega_n$ y $2{,}1/\omega_n$ para amortiguamientos entre $0{,}2$ y $0{,}7$ (con el $\zeta = 0{,}35$ de la Figura~\ref{fig:prestaciones_dinamicas}, $t_r \approx 1{,}4/\omega_n$): la frecuencia natural fija la escala de rapidez del sensor.
     \item \emph{Sobreoscilación máxima} ($M_p$): el exceso sobre el valor final en el primer pico, en porcentaje. Depende solo del amortiguamiento,
 \begin{equation}\label{eq:sobreoscilacion}
     M_p = e^{-\pi\zeta/\sqrt{1-\zeta^2}}
@@ -883,11 +931,10 @@ Como se observa en la Figura~\ref{fig:noise_floor}, el diseño de un sistema de 
             major grid style={line width=.2pt,draw=gray!30},
             font=\scriptsize,
             xtick={1e-6, 1e-4, 1e-2, 1},
-            ytick={-120, -60, 0},
+            ytick={-60},
             extra y ticks={-120, 0},
             extra y tick labels={$N_f$, $S_{max}$},
             every axis y label/.style={at=(current axis.above origin), anchor=south},
-            every axis x label/.style={at=(current axis.right of origin), anchor=east},
         ]
             % 1. ZONA DE RUIDO (Sombreado)
             \fill[red!10] (axis cs:1e-7,-140) rectangle (axis cs:2,-120);
@@ -895,7 +942,7 @@ Como se observa en la Figura~\ref{fig:noise_floor}, el diseño de un sistema de 
 
             % 2. ZONA DE SATURACIÓN (Sombreado)
             \fill[orange!10] (axis cs:1e-7,0) rectangle (axis cs:2,20);
-            \node[orange!70!black] at (axis cs:1e-4,10) {ZONA DE SATURACIÓN};
+            \node[orange!70!black, font=\tiny] at (axis cs:1e-4,10) {ZONA DE SATURACIÓN};
 
             % 3. CURVA DE SEÑAL
             \addplot[thick, blue, domain=1e-7:1, samples=100] {20*log10(x)};
@@ -921,72 +968,60 @@ Como se observa en la Figura~\ref{fig:noise_floor}, el diseño de un sistema de 
     \caption[Diagrama de niveles de un sistema de medida.]{Diagrama de niveles de un sistema de medida. El \emph{Suelo de Ruido} ($N_f$) marca el límite inferior de detección, mientras que el nivel de \emph{Saturación} marca el límite superior. El \emph{Rango Dinámico} es una propiedad fija del sistema (\SI{120}{\decibel} en este ejemplo), mientras que la \emph{SNR} varía según la magnitud de la señal actual.}\label{fig:noise_floor}    
 \end{marginfigure}
 
-% \subsection{Resolución Real vs. Resolución Nominal}\label{sec:resolucion_real_vs_nominal}
-
-% Es importante comprender que la resolución real de un sistema no es la que indica el número de bits del convertidor analógico a digital (ADC) o resolución nominal, sino la que impone el ruido. Si el ruido cuadrático médio o \textit{Root Mean Square} (RMS) es menor que el paso de cuantificación ($\Delta$), la resolución del sistema será la nominal y los bits menos significativos contendrán información sistemática. En cambio, si el RMS es mayor que el paso de cuantificación ($\Delta$), la resolución real del sistema estará degradada, sera inferior a la resolución nominal y los bits menos significativos solo contendrán información aleatoria.
-
-% \begin{marginfigure}
-%     \centering
-%     \shorthandoff{>}
-%     \begin{tikzpicture}
-%         \begin{axis}[            
-%             width=\linewidth, height=4.5cm,
-%             xlabel={$t$}, ylabel={$y(t)$},
-%             every axis y label/.style={at=(current axis.above origin),anchor=south},
-%             every axis x label/.style={at=(current axis.right of origin),anchor=west},
-%             axis lines=left,
-%             grid=both,
-%             grid style={line width=.1pt,draw=gray!10},
-%             major grid style={line width=.2pt,draw=gray!30},
-%             font=\scriptsize,
-%             xtick={0, 1, 2, 3, 4, 5},
-%             ytick={0, 0.5, 1},
-%             legend style={at={(1,0.1)}, anchor=south east, font=\tiny, cells={anchor=west}}
-%         ]
-%             % 1. SEÑAL REAL (con ruido)
-%             \addplot[thick, blue, domain=0:5, samples=200] {0.5 + 0.5*sin(deg(2*pi*0.5*x)) + 0.1*rand};
-%             \addlegendentry{Señal con ruido}
-
-%             % 2. SEÑAL NOMINAL (sin ruido)
-%             \addplot[thick, red, domain=0:5, samples=200] {0.5 + 0.5*sin(deg(2*pi*0.5*x))};
-%             \addlegendentry{Señal nominal}
-
-%             % 3. PASO DE CUANTIFICACIÓN (Línea horizontal)
-%             \addplot[thick, black, domain=0:5] {0.25};
-%             \addlegendentry{Paso de cuantificación ($\Delta$)}
-
-%             % 4. RESOLUCIÓN REAL            
-%             \addplot[thick, green, domain=0:5, samples=200] {0.5 + 0.5*sin(deg(2*pi*0.5*x)) + 0.1*rand};
-%             \addplot[thick, green, domain=0:5, samples=200] {0.5 + 0.5*sin(deg(2*pi*0.5*x))};
-%             \addplot[thick, green, domain=0:5] {0.25};
-%             \addlegendentry{Resolución real}
-
-%             % 5. RESOLUCIÓN NOMINAL (Línea horizontal)
-%             \addplot[thick, orange, domain=0:5] {0.0625};
-%             \addlegendentry{Resolución nominal (4 bits)}
-%         \end{axis}    
-%     \end{tikzpicture}    
-%     \caption{Resolución real vs. resolución nominal.}\label{fig:resolucion_real_vs_nominal}    
-% \end{marginfigure}
-
-
 \subsection{Resolución Nominal frente a Resolución Real}\label{sec:resolucion_real_vs_nominal}
 
-En un sistema de medida digital, es fundamental distinguir entre el límite teórico impuesto por el hardware y el límite práctico impuesto por la física del ruido. La \emph{Resolución Nominal } viene determinada por el diseño del convertidor analógico a digital (ADC). Si el rango de entrada es $FS$ (\textit{Full Scale}) y el convertidor tiene $n$ bits, el paso de cuantificación $\Delta$ es:
-    \begin{equation}
-        \Delta = \frac{FS}{2^n}
-    \end{equation}
-    Este representa el \emph{peldaño} mínimo o \emph{paso de cuantificación} del sistema en ausencia total de ruido. La \emph{Resolución Real o Efectiva} es la resolución que el sistema puede alcanzar en la práctica. Depende de la relación entre el ruido cuadrático medio (\textit{Root Mean Square}, RMS) presente en la señal, $V_{n,RMS}$, y el paso de cuantificación $\Delta$.\marginnote{\textbf{Ruido \emph{pico a pico}:} Para que una medida sea estable en un display, el ruido pico a pico ($V_{pp}$) debe ser menor que $\Delta$. En una distribución gaussiana, se estima que $V_{pp} \approx 6.6 \cdot V_{n,RMS}$. Si $V_{pp} > \Delta$, los bits menos significativos oscilarán aleatoriamente, un fenómeno conocido como \textit{flicker} o parpadeo.} La variable $V_{n,RMS}$ representa el valor eficaz del ruido en la medida del cuantificador. En general, $V_{n,RMS}$ puede ser calculada con la siguiente fórmula:
-    \begin{equation}
-        V_{n,RMS} = \sqrt{4 k T R \Delta f}
-    \end{equation}
-    donde $k$ es la constante de Boltzmann, $T$ es la temperatura ambiente, $R$ es la resistencia del convertidor (o más exactamente la resistencia del sistema o resistencia equivalente de entrada) y $\Delta f$ es el ancho de banda del sistema. El ruido suelo o \textit{noise floor} es precisamente el valor de $V_{n,RMS}$, que representa el nivel mínimo de señal que el sistema puede detectar por encima del ruido inherente. Sólo una última aclaración, la ecuación del ruido cuadrático medio,  $V_{n,RMS}$, se basa en el modelo de ruido térmico (o de Johnson-Nyquist), pero en la práctica, el ruido total del sistema puede incluir otras fuentes de ruido, como el ruido de disparo, el ruido de flicker, entre otros. Por lo tanto, el valor real de $V_{n,RMS}$ puede ser mayor que el calculado solo con el ruido térmico, dependiendo de las características específicas del sistema y las condiciones de operación.
+En un sistema de medida digital hay que distinguir entre el límite teórico que impone el hardware y el límite práctico que impone la física del ruido. La \emph{resolución nominal} la fija el diseño del convertidor analógico a digital (ADC): si el rango de entrada es $FS$ (\textit{Full Scale}) y el convertidor tiene $n$ bits, el paso de cuantificación o \emph{escalón} $\Delta$ vale
+\begin{equation}\label{eq:resolucion_nominal}
+    \Delta = \frac{FS}{2^n}
+\end{equation}
+y es el cambio más pequeño que el convertidor puede representar en ausencia total de ruido; los detalles de la cuantificación se estudian en el Capítulo~\ref{cap:daq} (Sección~\ref{sec:cuantificacion}). La \emph{resolución real} o \emph{efectiva} es la que el sistema alcanza en la práctica y depende de la relación entre el ruido presente en la señal, expresado por su valor eficaz (\textit{Root Mean Square}, RMS) $V_{n,RMS}$, y ese escalón. El ruido eficaz no es más que el suelo de ruido de la Ecuación~\eqref{eq:noise_floor}, $V_{n,RMS} = \sqrt{4kTR\,\Delta f}$, con $k$ la constante de Boltzmann, $T$ la temperatura absoluta, $R$ la resistencia equivalente del sistema y $\Delta f$ su ancho de banda, de modo que $V_{n,RMS}$ representa el nivel mínimo de señal que el sistema puede detectar por encima de su propio ruido.\marginnote{\textbf{Ruido \emph{pico a pico}:} Para que una medida sea estable en un display, el ruido pico a pico ($V_{pp}$) debe ser menor que $\Delta$. En una distribución gaussiana, se estima que $V_{pp} \approx 6.6 \cdot V_{n,RMS}$. Si $V_{pp} > \Delta$, los bits menos significativos oscilarán aleatoriamente, un fenómeno conocido como \textit{flicker} o parpadeo.} Ese modelo de ruido es solo el térmico (o de Johnson-Nyquist): el ruido de disparo, el de \textit{flicker} y los acoplamientos externos se suman a él, por lo que el valor real de $V_{n,RMS}$ es siempre mayor que el que predice la ecuación (Capítulo~\ref{cap:ruido}).
 
-El comportamiento del sistema se puede clasificar en dos tipos de regímenes:     
+En la Figura~\ref{fig:resolucion_real_vs_nominal} se representa el efecto de ese escalón sobre una señal: la salida digital solo puede tomar múltiplos de $\Delta$ y sustituye la curva analógica por una escalera.
+
+\begin{marginfigure}
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            width=\linewidth, height=5cm,
+            xlabel={$t$}, ylabel={$y$},
+            xmin=0, xmax=10, ymin=0.15, ymax=1.4,
+            axis lines=left, font=\scriptsize,
+            trig format plots=rad,
+            xtick=\empty,
+            ytick={0.25,0.5,0.75,1,1.25},
+            every axis y label/.style={at=(current axis.above origin),anchor=south},
+            every axis x label/.style={at=(current axis.right of origin),anchor=east},
+        ]
+            % Niveles de cuantificación
+            \draw[gray!40, dashed] (axis cs:0,0.25) -- (axis cs:10,0.25);
+            \draw[gray!40, dashed] (axis cs:0,0.5) -- (axis cs:10,0.5);
+            \draw[gray!40, dashed] (axis cs:0,0.75) -- (axis cs:10,0.75);
+            \draw[gray!40, dashed] (axis cs:0,1) -- (axis cs:10,1);
+            \draw[gray!40, dashed] (axis cs:0,1.25) -- (axis cs:10,1.25);
+
+            % Señal analógica
+            \addplot[thick, blue, domain=0:10, samples=200]
+                {0.7 + 0.5*sin(0.6*x) + 0.01*sin(9*x)};
+
+            % Salida cuantificada (Δ = 0.25)
+            \addplot[thick, red!75!black, domain=0:10, samples=800]
+                {0.25*floor((0.7 + 0.5*sin(0.6*x) + 0.01*sin(9*x))/0.25 + 0.5)};
+
+            % Escalón de cuantificación
+            \draw[<->, thick, gray] (axis cs:2.6,1) -- (axis cs:2.6,1.25);
+            \node[gray, font=\tiny, anchor=west] at (axis cs:2.7,1.1) {$\Delta$};
+        \end{axis}
+    \end{tikzpicture}
+    \caption[Resolución nominal frente a resolución real.]{Resolución nominal frente a resolución real. La curva azul es la señal analógica y la escalera roja, la salida del convertidor, que solo puede tomar múltiplos del escalón $\Delta = FS/2^n$. Si el ruido eficaz es mucho menor que $\Delta$, como en la figura, la resolución real coincide con la nominal; si lo supera, los bits menos significativos fluctúan y la resolución efectiva se degrada por debajo de la nominal.}\label{fig:resolucion_real_vs_nominal}
+\end{marginfigure}
+
+El comportamiento del sistema se clasifica, por tanto, en dos regímenes:
 \begin{enumerate}
-    \item \emph{Sistema limitado por cuantificación} ($V_{n,RMS} \ll \Delta$): El ruido es tan bajo que queda \emph{escondido} dentro de un escalón de cuantificación. En este caso, la resolución real coincide con la nominal. Los bits menos significativos (\textit{Least Significant Bits}, LSB) son estables y contienen información útil de la magnitud física.
-    \item \emph{Sistema limitado por ruido} ($V_{n,RMS} > \Delta$): El nivel de ruido es superior al escalón de cuantificación. La resolución real se degrada y el número efectivo de bits (ENOB, \emph{Effective Number of Bits}) es menor que el nominal ($n$). Los bits afectados por el ruido fluctúan aleatoriamente y no proporcionan información válida sobre la medida.
+    \item \emph{Sistema limitado por cuantificación} ($V_{n,RMS} \ll \Delta$): el ruido es tan bajo que queda \emph{escondido} dentro de un escalón de cuantificación. La resolución real coincide con la nominal y los bits menos significativos (\textit{Least Significant Bits}, LSB) son estables y contienen información útil de la magnitud física.
+    \item \emph{Sistema limitado por ruido} ($V_{n,RMS} > \Delta$): el ruido supera el escalón de cuantificación, la resolución real se degrada y el número efectivo de bits (ENOB, \emph{Effective Number of Bits}) queda por debajo del nominal ($n$). Los bits afectados por el ruido fluctúan aleatoriamente y no aportan información válida sobre la medida.
 \end{enumerate}\marginnote{\textbf{Conclusión para el diseño:} No tiene sentido económico ni técnico utilizar un ADC de alta resolución (ej. 24 bits) si el ruido del sensor o de la etapa de acondicionamiento es muy elevado. El ingeniero debe equilibrar el suelo de ruido del hardware con la resolución del cuantificador.}
+
+El ENOB cuantifica esa pérdida de bits a partir del SINAD del convertidor, y se calcula como se detalla en la Sección~\ref{sec:enob} del Capítulo~\ref{cap:daq}: la conclusión práctica es que la resolución que hay que comparar con los requisitos de la aplicación no es la del \textit{datasheet} del ADC, sino la que deja el ruido de toda la cadena de medida.
 
 \section{Cómo se Lee una Hoja de Características}\label{sec:hoja_caracteristicas}
 
@@ -1018,10 +1053,12 @@ La Tabla~\ref{tab:caracteristicas_medida} recoge, como resumen del capítulo, la
         \midrule
         Sensibilidad ($S$) & Pendiente de la curva de calibración: unidades de salida por unidad de entrada & Sección~\ref{sec:caract_estaticas} \\
         Linealidad & Desviación máxima respecto a la recta de referencia, en \% del fondo de escala & Sección~\ref{sec:error_no_linealidad} \\
-        Histéresis y repetibilidad & Diferencia máxima entre las ramas y dispersión con entrada constante, en \% del fondo de escala & Sección~\ref{sec:histeresis_repetibilidad} \\
+        Histéresis, repetibilidad y reproducibilidad & Diferencia máxima entre las ramas, dispersión con la misma entrada y dispersión al cambiar de operador, equipo o laboratorio, en \% del fondo de escala & Sección~\ref{sec:histeresis_repetibilidad} \\
+        Banda muerta & Entrada mínima que produce un cambio apreciable en la salida & Sección~\ref{sec:histeresis_repetibilidad} \\
         Error de cero y de span ($e_0$, $\epsilon_s$) & El de cero en unidades absolutas; el de span en \% de la lectura & Sección~\ref{sub:error_cero_span} \\
         Resolución ($\Delta$) & Escalón más pequeño discernible, nominal y efectivo & Sección~\ref{sec:resolucion_real_vs_nominal} \\
         Efecto de carga & Error por la impedancia de entrada, en \% de la lectura & Sección~\ref{sub:efecto_carga_general} \\
+        Modelo dinámico (orden 0, 1 y 2) & Orden de la ecuación diferencial y sus parámetros: $\tau$, o $\omega_n$ y $\zeta$, con la ganancia $K$ & Sección~\ref{sec:caract_dinamicas} y Tabla~\ref{tab:ordenes_sistemas} \\
         Prestaciones dinámicas ($t_r$, $M_p$, $t_s$, $f_c$) & Tiempos medidos sobre la respuesta al escalón y frecuencia de corte & Sección~\ref{sub:prestaciones_dinamicas} \\
         Suelo de ruido y rango dinámico ($N_f$, $DR$) & Nivel mínimo detectable y cociente con el máximo, en decibelios & Sección~\ref{sec:limites_medida} \\
         Deriva térmica & Unidades por grado centígrado, fuera de las condiciones de referencia & Sección~\ref{sec:hoja_caracteristicas} \\
@@ -1035,9 +1072,9 @@ La Tabla~\ref{tab:caracteristicas_medida} recoge, como resumen del capítulo, la
 En este capítulo se ha fijado el vocabulario con el que se describe un sistema de medida, que es el que aparece después en las hojas de características, en los pliegos de condiciones y en los presupuestos de error del resto del libro:
 
 \begin{itemize}
-    \item \emph{Características estáticas} (Sección~\ref{sec:caract_estaticas}): la curva de calibración y su sensibilidad, la linealidad y la recta de referencia, la histéresis, la repetibilidad y la reproducibilidad, el rango y la saturación, y los dos defectos de la recta --error de cero y error de span (Figura~\ref{fig:errores_cero_span})--, junto con el efecto de carga, que aparece siempre que dos etapas con impedancias comparables se conectan entre sí.
-    \item \emph{Características dinámicas} (Sección~\ref{sec:caract_dinamicas}): la respuesta al escalón de los sistemas de orden cero, primero y segundo, con la constante de tiempo, la frecuencia natural y el amortiguamiento como parámetros; y las prestaciones con las que se especifican --tiempo de subida, sobreoscilación máxima, tiempo de establecimiento y ancho de banda (Figura~\ref{fig:prestaciones_dinamicas})--, con $\zeta \approx 0{,}7$ como el compromiso recomendado entre rapidez y estabilidad.
-    \item \emph{Límites de la medida} (Sección~\ref{sec:limites_medida}): el suelo de ruido, el rango dinámico y la relación señal-ruido, junto con la diferencia entre resolución nominal y resolución real (Figura~\ref{fig:noise_floor}), que es lo que fija hasta dónde se puede medir y no solo qué se puede medir.
+    \item \emph{Características estáticas} (Sección~\ref{sec:caract_estaticas}): la curva de calibración y su sensibilidad, la linealidad y la recta de referencia, la histéresis, la repetibilidad y la reproducibilidad, la banda muerta, el rango y la saturación, y los dos defectos de la recta --error de cero y error de span (Figura~\ref{fig:errores_cero_span})--, junto con el efecto de carga, que aparece siempre que dos etapas con impedancias comparables se conectan entre sí. La Tabla~\ref{tab:errores_estaticos} los reúne todos con su expresión cuantitativa y la forma de combatirlos.
+    \item \emph{Características dinámicas} (Sección~\ref{sec:caract_dinamicas}): la respuesta al escalón de los sistemas de orden cero, primero y segundo, con la constante de tiempo, la frecuencia natural y el amortiguamiento como parámetros; y las prestaciones con las que se especifican --tiempo de subida, sobreoscilación máxima, tiempo de establecimiento y ancho de banda (Figura~\ref{fig:prestaciones_dinamicas})--, con $\zeta \approx 0{,}7$ como el compromiso recomendado entre rapidez y estabilidad. La Tabla~\ref{tab:ordenes_sistemas} resume la ecuación, los parámetros y la respuesta de cada uno de los tres modelos.
+    \item \emph{Límites de la medida} (Sección~\ref{sec:limites_medida}): el suelo de ruido, el rango dinámico y la relación señal-ruido (Figura~\ref{fig:noise_floor}), junto con la diferencia entre resolución nominal y resolución real (Ecuación~\eqref{eq:resolucion_nominal} y Figura~\ref{fig:resolucion_real_vs_nominal}), que es lo que fija hasta dónde se puede medir y no solo qué se puede medir.
     \item \emph{Cómo se lee una hoja de características} (Sección~\ref{sec:hoja_caracteristicas}): si la especificación está referida a la lectura o al fondo de escala (ecuación~\eqref{eq:error_fs_lectura}), en qué condiciones de referencia se ha medido, si el valor es típico o garantizado y qué magnitudes de influencia hay que añadir en cada caso; la Tabla~\ref{tab:caracteristicas_medida} reúne todas las características del capítulo con su forma de especificarlas.
 \end{itemize}
 
